@@ -63,7 +63,7 @@
 				<ul>
 					<li class="left"><a href="#">개인정보취급방침</a></li>
 					<li><a href="#">이용약관</a></li>
-					<li class="left"><a href="#">이메일무단수집거부</a></li>
+					<li class="left"><a href="#">이메일무단수집거부 11</a></li>
 					<li><a href="#">고객센터</a></li>
 					<li class="left brand"><a href="#">쟈뎅 브랜드 사이트</a></li>
 				</ul>

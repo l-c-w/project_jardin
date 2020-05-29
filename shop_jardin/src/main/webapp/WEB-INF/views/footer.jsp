@@ -75,11 +75,11 @@
 					<ul>
 						<li>㈜쟈뎅</li>
 						<li>대표자 윤영노</li>
-						<li class="tnone">주소 서울시 강남구 논현동 4-21번지 영 빌딩 테스트테스트</li>
+						<li class="tnone">주소 서울시 강남구 논현동 4-21번지 영 빌딩</li>
 						<li class="webnone">소비자상담실 02)546-3881</li>
 						<li>사업자등록번호 211-81-24727</li>
 						<li class="tnone">통신판매신고 제 강남 – 1160호</li>
-						<li class="copy">COPYRIGHT © 2014 JARDIN <span>ALL RIGHTS RESERVED.</span></li>
+						<li class="copy">COPYRIGHT © 2014 JARDIN </li>
 					</ul>
 				</address>
 

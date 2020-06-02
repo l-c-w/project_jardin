@@ -383,10 +383,10 @@ $(document).ready(function() {
 											<li>
 												<ul class="baseQues">
 													<li>
-														<input type="radio" name=coffe_favor value="americano" id="partner" class="radio_t"/><label for="partner">아메리카노</label>
+														<input type="radio" name=coffee_favor value="americano" id="partner" class="radio_t"/><label for="partner">아메리카노</label>
 													</li>
 													<li>
-														<input type="radio" name="coffe_favor" value="latte" id="partner" class="radio_t" checked="checked"/><label for="general">라떼</label>
+														<input type="radio" name="coffee_favor" value="latte" id="partner" class="radio_t" checked="checked"/><label for="general">라떼</label>
 													</li>
 												</ul>
 											</li>

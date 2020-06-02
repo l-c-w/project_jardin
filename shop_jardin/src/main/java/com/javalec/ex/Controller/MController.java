@@ -14,8 +14,6 @@ import com.javalec.ex.Dto.MDto.Member_Dto;
 
 public class MController {
 	
-	
-	
 		@Autowired
 		private SqlSession sqlsession;
 		
@@ -24,8 +22,7 @@ public class MController {
 		public String register_ok(HttpServletRequest request, Member_Dto mdto, Model model) {
 		
 		MDao dao = sqlsession.getMapper(MDao.class); 
-		
-		dao.register();
+	
 		
 		return "member/step04";
 		

@@ -127,20 +127,31 @@ $(document).ready(function() {
 							<col width="*" />
 							</colgroup>
 							<tbody>
+							
 								<tr>
 									<th scope="row"><span>이름 *</span></th>
-									<td>김슬기</td>
+									<td><input type="text" name="name"></td>
 								</tr>
+								
+								
+								<tr>
+									<th scope="row"><span>추천인코드 *</span></th>
+									<td><input type="text" name="m_code"></td>
+								</tr>
+								
+								
 								<tr>
 									<th scope="row"><span>아이디 *</span></th>
 									<td>
 										<ul class="pta">
 											<li class="r10"><input type="text" class="w134" /></li>
-											<li><a href="idcheck" class="nbtnMini">중복확인</a></li>
+											<li><a href="#" onclick="idcheck()" class="nbtnMini">중복확인</a></li>
 											<li class="pt5"><span class="mvalign">첫 글자는 영문으로 4~16자 까지 가능, 영문, 숫자와 특수기호(_)만 사용 가능</span></li>
 										</ul>
 									</td>
 								</tr>
+								
+								
 								<tr>
 									<th scope="row"><span>비밀번호 *</span></th>
 									<td>
@@ -150,6 +161,8 @@ $(document).ready(function() {
 										</ul>
 									</td>
 								</tr>
+								
+								
 								<tr>
 									<th scope="row"><span>비밀번호 확인 *</span></th>
 									<td>
@@ -162,6 +175,8 @@ $(document).ready(function() {
 										</ul>
 									</td>
 								</tr>
+								
+								
 								<tr>
 									<th scope="row"><span>이메일</span></th>
 									<td>
@@ -192,6 +207,8 @@ $(document).ready(function() {
 										</ul>
 									</td>
 								</tr>
+								
+								
 								<tr>
 									<th scope="row"><span>이메일 수신여부 *</span></th>
 									<td>
@@ -222,6 +239,8 @@ $(document).ready(function() {
 										</ul>
 									</td>
 								</tr>
+								
+								
 								<tr>
 									<th scope="row"><span>휴대폰 *</span></th>
 									<td>
@@ -253,6 +272,7 @@ $(document).ready(function() {
 										</ul>
 									</td>
 								</tr>
+								
 								
 								<tr>
 									<th scope="row"><span>생년월일</span></th>
@@ -319,8 +339,15 @@ $(document).ready(function() {
 									</td>
 								</tr>
 								
+								
+								
 							</tbody>
+							
+							
+							
 							</table>
+							
+							
 						</div>
 						
 
@@ -332,7 +359,7 @@ $(document).ready(function() {
 						<div class="bCenter">
 							<ul>
 								<li><a href="#" class="nbtnbig">취소하기</a></li>
-								<li><a href="#" class="sbtnMini">가입하기</a></li>
+								<li><a href="#" onclick="document.getElementById()" class="sbtnMini">가입하기</a></li>
 							</ul>
 						</div>
 					</div>

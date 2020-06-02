@@ -14,9 +14,10 @@ import com.javalec.ex.Dto.Member_Dto;
 
 public class Member_Controller {
 	
+	
+	
 		@Autowired
 		private SqlSession sqlsession;
-
 		
 		@RequestMapping("register_ok") 
 		
@@ -29,6 +30,9 @@ public class Member_Controller {
 		return "member/step04";
 		
 		}
+		
+		
+		
 		
 		
 

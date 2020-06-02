@@ -111,9 +111,11 @@ $(document).ready(function() {
 							<li>* 표시된 항목은 필수 항목이므로 반드시 입력하셔야 회원가입이 진행됩니다.</li>
 						</ul>
 					</div>
+					
+					
 
 
-<form action="reg"></form>
+               <form action="reg"></form>
 
 
 

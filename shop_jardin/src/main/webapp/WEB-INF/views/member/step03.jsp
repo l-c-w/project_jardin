@@ -376,7 +376,6 @@ $(document).ready(function() {
 								
 								
 								
-								
 								<tr>
 									<th scope="row"><span>커피취향</span></th>
 									<td>
@@ -394,7 +393,6 @@ $(document).ready(function() {
 										</ul>
 									</td>
 								</tr>
-								
 								
 								
 								<tr>

@@ -397,23 +397,16 @@ $(document).ready(function() {
 								
 								
 								
-								
-								
-								
-								
 								<tr>
 									<th scope="row"><span>자기소개 *</span></th>
 									<td><textarea rows="3" cols="30" name="introduce"></textarea></td>
 								</tr>
 								
 								
-								
 							</tbody>
 							
 							
-							
 							</table>
-							
 							
 						</div><!--  //memberbd -->
 						

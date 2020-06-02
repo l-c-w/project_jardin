@@ -5,5 +5,17 @@
 
 <mapper namespace="com.javalec.ex.Dao.EDao">
 
+	<select id="event_list" resultType="com.javalec.ex.Dto.EDto.EventDto">
+		select * from event order by e_code desc
+	</select>
+	<select id="getListCount" resultType="Integer">
+		<choose>
+			<when test="">SELECT count(*) as count FROM event</when>
+			<when test="">SELECT count(*) as count FROM mvc_board WHERE bTitle LIKE ? OR bContent LIKE ?</when>
+		</choose>
+	</select>
+
+
+
 
 </mapper>

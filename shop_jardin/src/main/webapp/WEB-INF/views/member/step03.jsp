@@ -301,11 +301,13 @@ $(document).ready(function() {
 										<ul class="pta">
 											<li>
 												<select name="birth1">
+												
 													<option value='' selected="selected">선택하세요</option>
+													
 													<script type="text/javascript">
 													//<![CDATA[
 														for(var i=1930; i<=2020; i++){
-															document.write("<option value=''>" + i + "년"+ "</option>");	
+															document.write("<option value=''>" + i+ "</option>");	
 														};
 													//]]>
 													</script>
@@ -321,9 +323,9 @@ $(document).ready(function() {
 													//<![CDATA[
 														for(var i=1; i<=12; i++){
 															if(i<10){
-																document.write("<option value=''>0" + i + "월"+"</option>");
+																document.write("<option value=''>0" + i+"</option>");
 															}else{
-																document.write("<option value=''>" + i + "월"+ "</option>");
+																document.write("<option value=''>" + i+ "</option>");
 															};
 														};
 													//]]>
@@ -344,9 +346,9 @@ $(document).ready(function() {
 													//<![CDATA[
 														for(var i=1; i<=31; i++){
 															if(i<10){
-																document.write("<option value=''>0" + i + "일"+"</option>");
+																document.write("<option value=''>0" + i +"</option>");
 															}else{
-																document.write("<option value=''>" + i + "일"+ "</option>");
+																document.write("<option value=''>" + i + "</option>");
 															};
 														};
 													//]]>
@@ -378,20 +380,22 @@ $(document).ready(function() {
 								
 								<tr>
 									<th scope="row"><span>커피취향</span></th>
+									
 									<td>
 										<ul class="pta">
 											<li>
 												<ul class="baseQues">
 													<li>
-														<input type="radio" name=coffee_favor value="americano" id="partner" class="radio_t"/><label for="partner">아메리카노</label>
+														<input type="radio" name="coffee_favor" value="americano" id="partner" class="radio_t"><label for="partner">아메리카노</label>
 													</li>
 													<li>
-														<input type="radio" name="coffee_favor" value="latte" id="partner" class="radio_t" checked="checked"/><label for="general">라떼</label>
+														<input type="radio" name="coffee_favor" value="latte" id="partner" class="radio_t" checked="checked"><label for="partner">라떼</label>
 													</li>
 												</ul>
 											</li>
 										</ul>
 									</td>
+									
 								</tr>
 								
 								

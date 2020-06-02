@@ -1,6 +1,6 @@
 package com.javalec.ex.Dto.MDto;
 
-import java.security.Timestamp;
+import java.util.Date;
 
 public class Member_Dto {
 	
@@ -14,8 +14,7 @@ public class Member_Dto {
 	String m_code;
 	String pw;
 	String name;
-	String email1;
-	String email2;
+	String email;
 	String email_agree;
 	String sms_agree;
 	String post;
@@ -27,8 +26,29 @@ public class Member_Dto {
 
 	int phone;
 
-	Timestamp birth;
-	Timestamp join_date;
+	Date birth;
+	Date join_date;
+	
+
+	public Date getBirth() {
+		return birth;
+	}
+
+	public void setBirth(Date birth) {
+		this.birth = birth;
+	}
+
+	public Date getJoin_date() {
+		return join_date;
+	}
+
+	public void setJoin_date(Date join_date) {
+		this.join_date = join_date;
+	}
+
+	public void setEmail(String email) {
+		this.email = email;
+	}
 
 	public String getId() {
 		return id;
@@ -62,20 +82,12 @@ public class Member_Dto {
 		this.name = name;
 	}
 
-	public String getEmail1() {
-		return email1;
+	public String getEmail() {
+		return email;
 	}
 
 	public void setEmail1(String email1) {
-		this.email1 = email1;
-	}
-
-	public String getEmail2() {
-		return email2;
-	}
-
-	public void setEmail2(String email2) {
-		this.email2 = email2;
+		this.email = email1;
 	}
 
 	public String getEmail_agree() {
@@ -150,20 +162,6 @@ public class Member_Dto {
 		this.phone = phone;
 	}
 
-	public Timestamp getBirth() {
-		return birth;
-	}
-
-	public void setBirth(Timestamp birth) {
-		this.birth = birth;
-	}
-
-	public Timestamp getJoin_date() {
-		return join_date;
-	}
-
-	public void setJoin_date(Timestamp join_date) {
-		this.join_date = join_date;
-	}
+	
 
 }

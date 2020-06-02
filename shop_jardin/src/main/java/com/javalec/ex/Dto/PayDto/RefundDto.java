@@ -1,4 +1,4 @@
-package com.javalec.ex.Dto;
+package com.javalec.ex.Dto.PayDto;
 
 import java.sql.Timestamp;
 

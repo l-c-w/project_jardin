@@ -1,4 +1,4 @@
-package com.javalec.ex.Dto;
+package com.javalec.ex.Dto.MDto;
 
 import java.security.Timestamp;
 

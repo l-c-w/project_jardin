@@ -7,8 +7,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import com.javalec.ex.Dao.IDao;
-import com.javalec.ex.Dto.Member_Dto;
+import com.javalec.ex.Dao.Member_IDao;
+import com.javalec.ex.Dto.MDto.Member_Dto;
 
 @org.springframework.stereotype.Controller
 
@@ -22,7 +22,7 @@ public class Member_Controller {
 		
 		public String register_ok(HttpServletRequest request, Member_Dto mdto, Model model) {
 		
-		IDao dao = sqlsession.getMapper(IDao.class); 
+		Member_IDao dao = sqlsession.getMapper(Member_IDao.class); 
 		
 		dao.register();
 		

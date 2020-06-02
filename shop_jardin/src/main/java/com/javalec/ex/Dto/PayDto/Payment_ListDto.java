@@ -1,4 +1,4 @@
-package com.javalec.ex.Dto;
+package com.javalec.ex.Dto.PayDto;
 
 public class Payment_ListDto {
 

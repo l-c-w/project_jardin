@@ -1,4 +1,4 @@
-package com.javalec.ex.Dto;
+package com.javalec.ex.Dto.EDto;
 
 public class Winner_joinersDto {
 

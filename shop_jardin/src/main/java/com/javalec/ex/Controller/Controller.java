@@ -20,6 +20,7 @@ public class Controller {
 		IDao dao = sqlsession.getMapper(IDao.class); 
 		dao.register();
 		
+		
 		return "main/main";}
 		
 		

@@ -170,8 +170,6 @@ public class Temp_controller {
 		return "event/prizewinner_view";
 	}
 
-	
-	
 	// member
 
 	@RequestMapping("member/step01")
@@ -193,22 +191,7 @@ public class Temp_controller {
 	public String step04() {
 		return "member/step04";
 	}
-	
-	@RequestMapping("member/idcheck")
-	public String member_idcheck() {
-		return "member/idcheck";
-	}
-	
-	@RequestMapping("member/idcheck2")
-	public String member_idcheck2() {
-		return "member/idcheck2";
-	}
-	
-	@RequestMapping("member/address_search")
-	public String address_search() {
-		return "member/address_search";
-	}
-	
+
 	@RequestMapping("member/login")
 	public String login() {
 		return "member/login";
@@ -219,11 +202,10 @@ public class Temp_controller {
 		return "member/id_search";
 	}
 
-	
-	
-	
-	
-	
+	@RequestMapping("member/address_search")
+	public String address_search() {
+		return "member/address_search";
+	}
 	
 	//mypage
 	

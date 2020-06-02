@@ -2,15 +2,14 @@ package com.javalec.ex.Dto;
 
 import java.security.Timestamp;
 
-public class BDto {
+public class Member_Dto {
 	
 	
-	public BDto() {
+	public Member_Dto() {
 		
 		
 	}
 	
-
 	String id;
 	String m_code;
 	String pw;

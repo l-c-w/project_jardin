@@ -13,14 +13,15 @@ public class Controller {
 		@Autowired
 		private SqlSession sqlsession;
 
-		/*
-		 * @RequestMapping("register_ok") public String register_ok(Model model) {
-		 * 
-		 * IDao dao = sqlsession.getMapper(IDao.class); model.addAttribute("list",
-		 * dao.register(bId, bName, bTitle, bContent););
-		 * 
-		 * return "main/main"; }
-		 */
+		
+		@RequestMapping("register_ok") 
+		public String register_ok(Model model) {
+		
+		IDao dao = sqlsession.getMapper(IDao.class); 
+		dao.register();
+		
+		return "main/main";}
+		
 		
 		
 

@@ -3,7 +3,7 @@ package com.javalec.ex.Dao;
 public interface IDao {
 	
 
-	// public void register
+	public void register();
 
 	// public void faq_write
 	// public void p_r_write

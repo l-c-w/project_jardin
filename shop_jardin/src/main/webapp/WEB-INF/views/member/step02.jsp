@@ -492,7 +492,7 @@ $(document).ready(function() {
 						<div class="bCenter">
 							<ul>
 								<li><a href="#" class="nbtnbig">취소하기</a></li>
-								<li><a href="#" class="sbtnMini">가입하기</a></li>
+								<li><a href="step02" class="sbtnMini">가입하기</a></li>
 							</ul>
 						</div>
 					</div>

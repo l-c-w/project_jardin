@@ -33,7 +33,22 @@ $(document).ready(function() {
 
 
 });
+
+
 </script>
+
+
+<script type="text/javascript">
+
+	function idcheck() {
+
+		window.open("idcheck.jsp", "idc", "width=400, height=350");
+	}
+	
+</script>
+
+
+
 </head>
 <body>
 <!-- header 붙여넣기 -->
@@ -88,12 +103,18 @@ $(document).ready(function() {
 					</div>
 					<!-- //STEP -->
 						
+						
+						
 
 					<div class="attention">
 						<ul>
 							<li>* 표시된 항목은 필수 항목이므로 반드시 입력하셔야 회원가입이 진행됩니다.</li>
 						</ul>
 					</div>
+
+
+<form action="reg"></form>
+
 
 
 					<div class="memberbd">
@@ -113,7 +134,7 @@ $(document).ready(function() {
 									<td>
 										<ul class="pta">
 											<li class="r10"><input type="text" class="w134" /></li>
-											<li><a href="#" class="nbtnMini">중복확인</a></li>
+											<li><a href="idcheck" class="nbtnMini">중복확인</a></li>
 											<li class="pt5"><span class="mvalign">첫 글자는 영문으로 4~16자 까지 가능, 영문, 숫자와 특수기호(_)만 사용 가능</span></li>
 										</ul>
 									</td>
@@ -230,37 +251,7 @@ $(document).ready(function() {
 										</ul>
 									</td>
 								</tr>
-								<tr>
-									<th scope="row"><span>유선전화</span></th>
-									<td>
-										<ul class="pta">
-											<li>
-												<select>
-													<option value="02" selected="selected">02</option>
-													<option value="031">031</option>
-													<option value="032">032</option>
-													<option value="033">033</option>
-													<option value="041">041</option>
-													<option value="042">042</option>
-													<option value="043">043</option>
-													<option value="051">051</option>
-													<option value="052">052</option>
-													<option value="053">053</option>
-													<option value="054">054</option>
-													<option value="055">055</option>
-													<option value="061">061</option>
-													<option value="062">062</option>
-													<option value="063">063</option>
-													<option value="064">064</option>
-													<option value="070">070</option>
-												</select>
-											</li>
-											<li>&nbsp;<span class="valign">-</span>&nbsp;</li>
-											<li><input type="text" class="w74" maxlength="4" /> <span class="valign">-</span>&nbsp;</li>
-											<li><input type="text" class="w74" maxlength="4" /></li>
-										</ul>
-									</td>
-								</tr>
+								
 								<tr>
 									<th scope="row"><span>생년월일</span></th>
 									<td>
@@ -325,30 +316,7 @@ $(document).ready(function() {
 										</ul>
 									</td>
 								</tr>
-								<tr>
-									<th scope="row"><span>기업회원</span></th>
-									<td>
-										<ul class="pta">
-											<li>
-												<ul class="baseQues">
-													<li>
-														<input type="radio" name="business" id="partner" class="radio_t"/><label for="partner">예</label>
-													</li>
-													<li>
-														<input type="radio" name="business" id="general" class="radio_t" checked="checked"/><label for="general">아니오</label>
-													</li>
-												</ul>
-											</li>
-
-											<li class="cb">
-												<div class="businessTy">
-													<div><label for="">사업자번호</label> <input class="w134" type="text"></div>
-													<div><label for="">사업자등록증</label> <input class="fileType" type="file"></div>
-												</div>
-											<li>
-										</ul>
-									</td>
-								</tr>
+								
 							</tbody>
 							</table>
 						</div>
@@ -370,46 +338,8 @@ $(document).ready(function() {
 
 
 <script type="text/javascript" src="../js/jquery.fancybox-1.3.4.pack.js"></script>
+
 <link rel="stylesheet" type="text/css" href="../css/jquery.fancybox-1.3.4.css" />
-<script type="text/javascript">
-$(function(){
-
-	// business input
-	var firstchk = $("input:radio[name=business]:checked").attr("id");
-	$(".businessTy").css("display","none");
-	$("#partner").click(function(){
-		$(".businessTy").css("display","block");
-	});
-	$("#general").click(function(){
-		$(".businessTy").css("display","none");
-	});
-	$("#"+firstchk).click();
-	
-
-	// popup
-	var winWidth = $(window).width();
-	if(winWidth > 767){
-		var layerCheck = 540;
-	}else{
-		var layerCheck = 320;
-	}
-
-	$(".addressBtn").fancybox({
-		'autoDimensions'    : false,
-		'showCloseButton'	: false,
-		'width' : layerCheck,
-		'padding' : 0,
-		'type'			: 'iframe',
-		'onComplete' : function() {
-			$('#fancybox-frame').load(function() { // wait for frame to load and then gets it's height
-			$('#fancybox-content').height($(this).contents().find('body').height());
-			});
-		}
-	});
-
-
-});
-</script>
 
 
 				</div>

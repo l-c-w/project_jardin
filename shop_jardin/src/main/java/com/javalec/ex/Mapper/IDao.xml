@@ -6,9 +6,8 @@
 
 	
 	<insert id="register">
-		insert into member (ID, M_CODE, PW, NAME, EMAIL, EMAIL_AGREE, SMS_AGREE, POST, ADDRESS1, ADDRESS2, PHONE, BIRTH, SOL_LUN, INTRODUCE, COFFEE_FAVOR) 
-		
-		values (mvc_board_sequence.nextval,#{param1},#{param2},#{param3},0,mvc_board_sequence.currval,0,0)
+		insert into member (ID, M_CODE, PW, NAME, EMAIL, EMAIL_AGREE, SMS_AGREE, ADDRESS1, ADDRESS2, PHONE, BIRTH, SOL_LUN, INTRODUCE, COFFEE_FAVOR) 
+		values (#{param1},#{param2},#{param3},#{param4},#{param5},#{param6},#{param7},#{param8},#{param9},#{param10},#{param11},#{param12},#{param13},#{param14}) 
 	</insert>
 
 	

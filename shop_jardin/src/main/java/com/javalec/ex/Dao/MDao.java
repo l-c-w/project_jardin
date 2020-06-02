@@ -1,6 +1,6 @@
 package com.javalec.ex.Dao;
 
-public interface Member_IDao {
+public interface MDao {
 	
 
 	public void register();

@@ -5,7 +5,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 
 @Controller
-public class Payment_Controller {
+public class CController {
 
 	@Autowired
 	private SqlSession sqlsession;

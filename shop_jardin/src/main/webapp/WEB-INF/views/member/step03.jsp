@@ -376,7 +376,6 @@ $(document).ready(function() {
 								
 								
 								
-								
 								<tr>
 									<th scope="row"><span>커피취향</span></th>
 									<td>
@@ -384,10 +383,10 @@ $(document).ready(function() {
 											<li>
 												<ul class="baseQues">
 													<li>
-														<input type="radio" name=coffe_favor value="americano" id="partner" class="radio_t"/><label for="partner">아메리카노</label>
+														<input type="radio" name=coffee_favor value="americano" id="partner" class="radio_t"/><label for="partner">아메리카노</label>
 													</li>
 													<li>
-														<input type="radio" name="coffe_favor" value="latte" id="partner" class="radio_t" checked="checked"/><label for="general">라떼</label>
+														<input type="radio" name="coffee_favor" value="latte" id="partner" class="radio_t" checked="checked"/><label for="general">라떼</label>
 													</li>
 												</ul>
 											</li>
@@ -396,24 +395,16 @@ $(document).ready(function() {
 								</tr>
 								
 								
-								
-								
-								
-								
-								
 								<tr>
 									<th scope="row"><span>자기소개 *</span></th>
 									<td><textarea rows="3" cols="30" name="introduce"></textarea></td>
 								</tr>
 								
 								
-								
 							</tbody>
 							
 							
-							
 							</table>
-							
 							
 						</div><!--  //memberbd -->
 						

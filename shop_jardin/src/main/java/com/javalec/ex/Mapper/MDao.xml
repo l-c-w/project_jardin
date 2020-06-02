@@ -2,7 +2,7 @@
 
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<mapper namespace="com.javalec.ex.Dao.Memeber_IDao">
+<mapper namespace="com.javalec.ex.Dao.MDao">
 	
 	<insert id="register">
 		insert into member (ID, M_CODE, PW, NAME, EMAIL, EMAIL_AGREE, SMS_AGREE, ADDRESS1, ADDRESS2, PHONE, BIRTH, SOL_LUN, INTRODUCE, COFFEE_FAVOR) 
@@ -10,7 +10,6 @@
 	</insert>
 	
 </mapper>
-
 
 
 

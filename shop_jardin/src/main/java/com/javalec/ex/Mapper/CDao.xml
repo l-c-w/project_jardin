@@ -8,12 +8,16 @@
 	<select id="c_list" resultType="com.javalec.ex.Dto.CDto.C_ReviewDto">
 		select * from c_review
 	</select>
+	
+	
+	<select id="c_view" resultType="com.javalec.ex.Dto.CDto.C_ReviewDto">
+		select * from c_review where id=#{param1}
+	</select>
 
 
 	<insert id="c_insert">
 		insert into c_review (cr_num,id,p_code,cr_title,cr_content,cr_score)
-		values
-		(c_review_seq.nextval,#{param1},#{param2},#{param3},#{param4},#{param5})
+		values (c_review_seq.nextval,#{param1},#{param2},#{param3},#{param4},#{param5})
 	</insert>
 	
 

@@ -2,6 +2,8 @@ package com.javalec.ex.Controller;
 
 import java.util.ArrayList;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -34,10 +36,24 @@ public class CController {
 	
 	
 	
+	
 	@RequestMapping("community/comment_view")
-	public String comment_view() {
+	public String comment_view(HttpServletRequest request, Model model) {
+		
+		
+		String id = request.getParameter("id");
+		
+		CDao dao = sqlsession.getMapper(CDao.class);
+		
+		C_ReviewDto cdto = dao.c_view(id);
+		
+		model.addAttribute("c_view", cdto);
+		
 		return "community/comment_view";
 	}
+	
+	
+	
 	
 
 	@RequestMapping("community/comment_write")
@@ -49,7 +65,6 @@ public class CController {
 	
 	@RequestMapping("community/comment_write_ok")
 	public String comment_write_ok() {
-		
 		
 		
 		

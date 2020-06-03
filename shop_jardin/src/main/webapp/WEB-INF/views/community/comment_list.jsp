@@ -119,6 +119,9 @@ $(document).ready(function() {
 						
 						<tbody>
 						
+						
+						<!-- 일반상품평 리스트 불러오기  -->
+						
 						<c:forEach var="c_list" items="${clist}">
 						
 							<tr>
@@ -126,7 +129,12 @@ $(document).ready(function() {
 								<td>${c_list.p_code}</td>
 								<td class="left">
 									<a href="#">
-										<span class="orange">[먹어봤어요]</span> ${c_list.cr_title}
+										<span class="orange">[먹어봤어요]</span> 
+										
+										<a href="comment_view?id=${c_list.id}">
+										${c_list.cr_title}
+										</a>
+										
 										<img src="../images/ico/ico_new.gif" alt="new" />
 									</a>
 								</td>

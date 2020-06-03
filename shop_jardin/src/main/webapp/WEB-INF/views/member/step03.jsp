@@ -61,6 +61,9 @@ $(document).ready(function() {
 <!-- header 붙여넣기 -->
 	<jsp:include page="../header.jsp"/>
 	
+	
+	
+	
 	<!-- container -->
 	<div id="container">
 
@@ -482,6 +485,7 @@ $(document).ready(function() {
 								
 								
 								
+								
 								<tr>
 									<th scope="row"><span>커피취향</span></th>
 									
@@ -501,6 +505,7 @@ $(document).ready(function() {
 									</td>
 									
 								</tr>
+								
 								
 								
 								<tr>
@@ -532,13 +537,12 @@ $(document).ready(function() {
 							</ul>
 						</div>
 					</div>
+					
+					
 					<!-- //Btn Area -->
 
-
-<script type="text/javascript" src="../js/jquery.fancybox-1.3.4.pack.js"></script>
-
-<link rel="stylesheet" type="text/css" href="../css/jquery.fancybox-1.3.4.css" />
-
+                    <script type="text/javascript" src="../js/jquery.fancybox-1.3.4.pack.js"></script>
+                    <link rel="stylesheet" type="text/css" href="../css/jquery.fancybox-1.3.4.css" />
 
 				</div>
 			</div>

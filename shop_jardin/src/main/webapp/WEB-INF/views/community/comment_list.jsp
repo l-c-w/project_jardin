@@ -200,7 +200,9 @@ $(document).ready(function() {
 								<li class="web"><img src="../images/txt/txt_search.gif" alt="search" /></li>
 								<li class="se">
 									<select>
-										<option value="" />제목</option>
+										<option value="title">제목</option>
+										<option value="content">내용</option>
+										<option value="writer">글쓴이</option>
 									</select>
 								</li>
 								<li><input type="text" class="searchInput" /></li>

@@ -58,13 +58,19 @@ public class CController {
 
 	@RequestMapping("community/comment_write")
 	public String comment_write() {
+		
+		
+		
+		
 		return "community/comment_write";
 	}
 	
 	
 	
+	
 	@RequestMapping("community/comment_write_ok")
 	public String comment_write_ok() {
+		
 		
 		
 		

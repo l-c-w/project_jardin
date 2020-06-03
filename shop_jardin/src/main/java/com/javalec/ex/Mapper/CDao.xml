@@ -15,7 +15,7 @@
 	</select>
 
 
-	<insert id="c_insert">
+	<insert id="c_write">
 		insert into c_review (cr_num,id,p_code,cr_title,cr_content,cr_score)
 		values (c_review_seq.nextval,#{param1},#{param2},#{param3},#{param4},#{param5})
 	</insert>

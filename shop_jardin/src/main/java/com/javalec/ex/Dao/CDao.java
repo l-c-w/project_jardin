@@ -10,7 +10,7 @@ public interface CDao {
 	
 	public C_ReviewDto c_view(String id);
 	
-	public void c_insert(String id, String p_code, String cr_title, String cr_content, int cr_score);
+	public void c_write(String cr_title, String cr_content, int cr_score);
 	
 
 }

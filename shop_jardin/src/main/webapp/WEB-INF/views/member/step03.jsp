@@ -10,9 +10,20 @@
 <meta name="description" content="JARDIN SHOP" />
 <meta name="keywords" content="JARDIN SHOP" />
 <meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0,user-scaleable=no" />
+
+
+
 <link rel="stylesheet" type="text/css" href="../css/reset.css?v=Y" />
 <link rel="stylesheet" type="text/css" href="../css/layout.css?v=Y" />
 <link rel="stylesheet" type="text/css" href="../css/content.css?v=Y" />
+
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+
+<script src="https://t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
+
+
+
 <script type="text/javascript" src="../js/jquery.min.js"></script>
 <script type="text/javascript" src="../js/top_navi.js"></script>
 <script type="text/javascript" src="../js/left_navi.js"></script>
@@ -21,6 +32,10 @@
 <script type="text/javascript" src="../js/jquery.easing.1.3.js"></script>
 <script type="text/javascript" src="../js/idangerous.swiper-2.1.min.js"></script>
 <script type="text/javascript" src="../js/jquery.anchor.js"></script>
+
+
+
+
 
 <!--[if lt IE 9]>
 <script type="text/javascript" src="../js/html5.js"></script>
@@ -37,14 +52,7 @@ $(document).ready(function() {
 </script>
 
 
-<script type="text/javascript">
 
-	function idcheck() {
-
-		window.open("idcheck", "idc", "width=400, height=350");
-	}
-	
-</script>
 
 
 
@@ -152,9 +160,22 @@ $(document).ready(function() {
 										</ul>
 									</td>
 								</tr>
-								
-								
-								<tr>
+
+
+
+									<script type="text/javascript">
+										function idcheck() {
+
+											window.open("idcheck", "idc",
+													"width=400, height=350");
+										}
+										
+										
+									</script>
+
+
+
+									<tr>
 									<th scope="row"><span>비밀번호 *</span></th>
 									<td>
 										<ul class="pta">
@@ -253,24 +274,68 @@ $(document).ready(function() {
 								
 								
 								
+								
 								<tr>
 									<th scope="row"><span>주소 *</span></th>
 									<td>
 										<ul class="pta">
-											<li>
-												<input type="text" class="w134" name="address1" />&nbsp;
-											</li>
+										
+											<li><input type="text" class="w134" name="post" id="post"/>&nbsp;</li>
+
+												<li><input type="button" onclick="openDaumZipAddress()"
+													value="우편번호 찾기" class="addressBtn"
+													style="width: 100px; text-align: center; border: 0; font-weight: 600">
+
+													<!-- <a href="" onclick="openDaumZipAddress()" class="addressBtn"> -->
+
+													<!-- <span>우편번호 찾기</span> --> <!-- </a> --></li>
+
+												<li class="pt5"><input type="text" class="addressType" name="address1" id="address1"/></li>
 											
-											<li><a href="address_search" class="addressBtn"><span>우편번호 찾기</span></a></li>
-											
-											<li class="pt5"><input type="text" class="addressType" name="address2"/></li>
+											<li class="pt5"><input type="text" class="addressType" name="address2" id="address2" placeholder="상세주소를 입력해주세요"/></li>
 											
 											<li class="cb">
 												<span class="mvalign">※ 상품 배송 시 받으실 주소입니다. 주소를 정확히 적어 주세요.</span>
 											</li>
+											
 										</ul>
 									</td>
 								</tr>
+								
+								
+								<!-- 주소검색은 그냥 daum api 사용 -->
+
+									<script type="text/javascript">
+									
+										function openDaumZipAddress() {
+
+											new daum.Postcode({
+												
+												oncomplete : function(data) {
+
+													jQuery("#post").val(data.zonecode);
+													jQuery("#address1").val(data.address);
+													jQuery("#address2").focus;
+													
+												}
+											
+											}).open();
+
+										}
+										
+									</script>
+									
+
+                                   <!-- 
+
+									<script type="text/javascript">
+										function addcheck() {
+											
+											window.open("address_search", "idc", "width=700, height=450");
+										}
+									</script>
+								
+								 -->
 								
 								
 								<tr>

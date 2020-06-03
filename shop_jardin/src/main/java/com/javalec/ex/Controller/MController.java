@@ -4,16 +4,21 @@ import javax.servlet.http.HttpServletRequest;
 
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpRequest;
+import org.springframework.http.client.HttpComponentsAsyncClientHttpRequestFactory;
+import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.javalec.ex.Dao.MDao;
 import com.javalec.ex.Dto.MDto.Member_Dto;
 
 @Controller
 public class MController {
-
+	
 	@Autowired
 	private SqlSession sqlsession;
 
@@ -27,8 +32,7 @@ public class MController {
 
 		int phone = Integer.parseInt(phone1);
 
-		// String birth1 =
-		// request.getParameter("birth1")+request.getParameter("birth2")+request.getParameter("birth3");
+		// String birth1 = request.getParameter("birth1")+request.getParameter("birth2")+request.getParameter("birth3");
 
 		// java.sql.Date birth = java.sql.Date.valueOf(birth1);
 
@@ -68,9 +72,19 @@ public class MController {
 	public String idcheck() {
 		return "member/idcheck";
 	}
+	
 
 	@RequestMapping("member/idcheck2")
-	public String idcheck2() {
+	public String idcheck2(HttpServletRequest request, Model model) {
+		
+		String id = request.getParameter("id");
+		
+		MDao dao = sqlsession.getMapper(MDao.class);
+		
+		int cnt = dao.idcheck(id);
+		
+		model.addAttribute("idcheck", cnt);
+		
 		return "member/idcheck2";
 	}
 

@@ -77,8 +77,6 @@ public class CController {
 	}
 	
 	
-	
-	
 
 //	@RequestMapping("community/enjoy_list")
 //	public String enjoy_list() {
@@ -105,10 +103,6 @@ public class CController {
 //	public String expr_view() {
 //		return "community/expr_view";
 //	}
-	
-	
-	
-	
 	
 	
 	

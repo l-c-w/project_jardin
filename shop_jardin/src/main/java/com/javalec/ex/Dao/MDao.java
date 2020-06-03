@@ -8,5 +8,7 @@ public interface MDao {
 			String sms_agree, String address1, String address2, int phone, String sol_lun, String introduce,
 			String coffe_favor);
 	
-
+	
+	public int idcheck(String id);
+	
 }

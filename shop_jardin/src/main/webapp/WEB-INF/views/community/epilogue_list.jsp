@@ -65,6 +65,7 @@ $(document).ready(function() {
 			<script type="text/javascript">initSubmenu(2,0);</script>
 
 
+
 			<!-- contents -->
 			<div id="contents">
 				<div id="mypage">
@@ -76,6 +77,7 @@ $(document).ready(function() {
 							<li class="last"><a href="comment_list">상품평</a></li>
 						</ul>						
 					</div>
+					
 					
 
 					<!-- 포토 구매후기 -->
@@ -109,7 +111,7 @@ $(document).ready(function() {
 								</div>
 							</li>
 							<!-- //List -->
-
+							
 							<li>
 								<div class="img"><img src="../images/img/sample_epil.jpg" width="155" height="160" alt="" /></div>
 								<div class="txt">
@@ -136,59 +138,9 @@ $(document).ready(function() {
 								</div>
 							</li>
 
-							<li>
-								<div class="img"><img src="../images/img/sample_epil.jpg" width="155" height="160" alt="" /></div>
-								<div class="txt">
-									<div class="subject">
-										<a href="#"><span class="orange">[먹어봤어요]</span> 쟈뎅, 테이크아웃 카페모리 구매후기</a>
-									</div>
-									<div class="conf">
-										소문만큼 맛있었습니다.소문만큼 맛있었습니다.소문만큼 맛있었습니다.소문만큼 맛있었습니다.소문만큼 맛있었습니다.소문만큼 맛있었습니다.소문만큼 맛있었습니다.소문만큼 맛있었습니다.....
-									</div>
-									<div class="data">
-										<p>작성자 <span>dlsif***</span></p>
-										<p>등록일 <span>2014-03-24</span></p>
-										<p>조회수 <span>325</span></p>
-										<p>평점 
-											<span>
-												<img src="../images/ico/ico_star.gif" alt="별점" />
-												<img src="../images/ico/ico_star.gif" alt="별점" />
-												<img src="../images/ico/ico_star.gif" alt="별점" />
-												<img src="../images/ico/ico_star.gif" alt="별점" />
-												<img src="../images/ico/ico_star.gif" alt="별점" />
-											</span>
-										</p>
-									</div>
-								</div>
-							</li>
-
-							<li>
-								<div class="img"><img src="../images/img/sample_epil.jpg" width="155" height="160" alt="" /></div>
-								<div class="txt">
-									<div class="subject">
-										<a href="#"><span class="orange">[먹어봤어요]</span> 쟈뎅, 테이크아웃 카페모리 구매후기</a>
-									</div>
-									<div class="conf">
-										소문만큼 맛있었습니다.소문만큼 맛있었습니다.소문만큼 맛있었습니다.소문만큼 맛있었습니다.소문만큼 맛있었습니다.소문만큼 맛있었습니다.소문만큼 맛있었습니다.소문만큼 맛있었습니다.....
-									</div>
-									<div class="data">
-										<p>작성자 <span>dlsif***</span></p>
-										<p>등록일 <span>2014-03-24</span></p>
-										<p>조회수 <span>325</span></p>
-										<p>평점 
-											<span>
-												<img src="../images/ico/ico_star.gif" alt="별점" />
-												<img src="../images/ico/ico_star.gif" alt="별점" />
-												<img src="../images/ico/ico_star.gif" alt="별점" />
-												<img src="../images/ico/ico_star.gif" alt="별점" />
-												<img src="../images/ico/ico_star.gif" alt="별점" />
-											</span>
-										</p>
-									</div>
-								</div>
-							</li>
-
+						
 						</ul>
+						
 					</div>
 
 
@@ -198,6 +150,7 @@ $(document).ready(function() {
 								<li><a href="#" class="sbtnMini">글쓰기</a></li>
 							</ul>
 						</div>
+
 
 						<!-- 페이징이동1 -->
 						<div class="allPageMoving1">
@@ -212,6 +165,7 @@ $(document).ready(function() {
 
 						</div>
 						<!-- //페이징이동1 -->
+						
 					</div>
 
 					<div class="searchWrap">

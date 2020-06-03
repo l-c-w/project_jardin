@@ -2,6 +2,8 @@
     pageEncoding="UTF-8"%>
     
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
+
 
 <!DOCTYPE html>
 <html>
@@ -132,13 +134,18 @@ $(document).ready(function() {
 								<td>${c_list.id}</td>
 								
 								<td class="tnone">
+								
 									<img src="../images/ico/ico_star.gif" alt="별점" />
+									
 									<img src="../images/ico/ico_star.gif" alt="별점" />
+									
 									<img src="../images/ico/ico_star.gif" alt="별점" />
+									
 									<img src="../images/ico/ico_star.gif" alt="별점" />
+									
 									<img src="../images/ico/ico_star.gif" alt="별점" />
 
-									<br/>${c_list.cr_wdate}
+									<br/><fmt:formatDate pattern="yyyy-MM-dd" value="${c_list.cr_wdate}" /><%-- ${c_list.cr_wdate} --%>
 								</td>
 								
 								<td class="right tnone" style="text-align: center;">${c_list.cr_hit }</td>

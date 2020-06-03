@@ -31,7 +31,6 @@
 $(document).ready(function() {
 	
 
-
 });
 
 
@@ -42,7 +41,7 @@ $(document).ready(function() {
 
 	function idcheck() {
 
-		window.open("idcheck.jsp", "idc", "width=400, height=350");
+		window.open("idcheck", "idc", "width=400, height=350");
 	}
 	
 </script>
@@ -115,8 +114,7 @@ $(document).ready(function() {
 					
 
 
-               <form action="register_ok" id="register_ok">
-
+               <form action="register_ok" id="register_ok" name="join">
 
 
 					<div class="memberbd">

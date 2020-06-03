@@ -4,20 +4,11 @@
 
 <mapper namespace="com.javalec.ex.Dao.MDao">
 	
-
 	
 	<insert id="register" parameterType="map">
 		insert into member (ID,M_CODE,PW,NAME,EMAIL,EMAIL_AGREE,SMS_AGREE,ADDRESS1,ADDRESS2,PHONE,SOL_LUN, INTRODUCE, coffee_favor)
 		values (#{param1},#{param2},#{param3},#{param4},#{param5},#{param6},#{param7},#{param8},#{param9},#{param10},#{param11},#{param12},#{param13}) 
 	</insert> 
-	
-	
-<!-- 	<insert id="register" parameterType="map">
-		insert into member (ID,M_CODE,PW,NAME,EMAIL,EMAIL_AGREE,SMS_AGREE,ADDRESS1,ADDRESS2,PHONE,SOL_LUN,INTRODUCE)
-		values (#{param1},#{param2},#{param3},#{param4},#{param5},#{param6},#{param7},#{param8},#{param9},#{param10},#{param11},#{param12}) 
-	</insert>  -->
-	
-	
 	
 	
 </mapper>

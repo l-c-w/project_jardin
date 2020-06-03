@@ -34,13 +34,6 @@ public class MController {
 
 		MDao dao = sqlsession.getMapper(MDao.class);
 
-		// dao.register(id, m_code, pw, email, email_agree, sms_agree, address1,
-		// address2, phone, birth, sol_lun, introduce, coffee_favor);
-
-		// dao.register(mdto.getId(), mdto.getM_code(), mdto.getPw(), email,
-		// mdto.getEmail_agree(), mdto.getSms_agree(), mdto.getAddress1(),
-		// mdto.getAddress2(), phone, mdto.getSol_lun(), mdto.getIntroduce());
-
 		dao.register(mdto.getId(), mdto.getM_code(), mdto.getPw(), mdto.getName(), email, mdto.getEmail_agree()
 				,mdto.getSms_agree(),mdto.getAddress1(),mdto.getAddress2(), phone, mdto.getSol_lun(),
 				mdto.getIntroduce(), mdto.getCoffee_favor());

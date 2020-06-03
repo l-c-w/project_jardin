@@ -51,9 +51,7 @@ $(document).ready(function() {
 		
 		<div id="outbox">		
 			
-			
 			<jsp:include page="member2.jsp"/>
-			
 			
 			<script type="text/javascript">initSubmenu(2,0);</script>
 
@@ -103,8 +101,8 @@ $(document).ready(function() {
 					<div class="btnArea">
 						<div class="bCenter">
 							<ul>
-								<li><a href="#" class="nbtnbig">메인으로</a></li>
-								<li><a href="#" class="sbtnMini">로그인</a></li>
+								<li><a href="../main/main" class="nbtnbig">메인으로</a></li>
+								<li><a href="login" class="sbtnMini">로그인</a></li>
 							</ul>
 						</div>
 					</div>

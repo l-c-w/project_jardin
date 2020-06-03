@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+    
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 
 <!DOCTYPE html>
 <html>
@@ -67,21 +69,33 @@ $(document).ready(function() {
 
 			<!-- contents -->
 			<div id="contents">
+			
 				<div id="mypage">
+				
 					<h2><strong>사용 후기</strong><span>쟈뎅 제품을 구매하신 회원님들의 소중한 후기입니다.</span></h2>
 					
 					<div class="productTab normaltab">
+					
 						<ul>
 							<li><a href="#">포토 구매후기</a></li>
 							<li class="last"><a href="#" class="on">상품평</a></li>
-						</ul>						
+						</ul>		
+										
 					</div>
 
 
 					<!-- 상품평 -->
+					
+					
 					<div class="orderDiv">
+					
+					
 					<table summary="상품평 게시판으로 NO, 제품명, 제목, 작성자, 평점/등록일, 조회수 순으로 조회 하실수 있습니다." class="orderTable" border="1" cellspacing="0">
+						
+						
 						<caption>주문 제품 확인</caption>
+						
+						
 						<colgroup>
 						<col width="8%" class="tnone" />
 						<col width="12%" class="tw20" />
@@ -90,6 +104,8 @@ $(document).ready(function() {
 						<col width="14%" class="tnone" />
 						<col width="10%" class="tnone" />
 						</colgroup>
+						
+						
 						<thead>
 							<th scope="col" class="tnone">NO.</th>
 							<th scope="col">제품명</th>
@@ -98,17 +114,23 @@ $(document).ready(function() {
 							<th scope="col" class="tnone">평점/등록일</th>
 							<th scope="col" class="tnone">조회수</th>
 						</thead>
+						
 						<tbody>
+						
+						<c:forEach var="c_list" items="${clist}">
+						
 							<tr>
-								<td class="tnone">1</td>
-								<td>카페모리</td>
+								<td class="tnone">${c_list.cr_num}</td>
+								<td>${c_list.p_code}</td>
 								<td class="left">
 									<a href="#">
-										<span class="orange">[먹어봤어요]</span> 쟈뎅, 테이크아웃 카페모리...
+										<span class="orange">[먹어봤어요]</span> ${c_list.cr_title}
 										<img src="../images/ico/ico_new.gif" alt="new" />
 									</a>
 								</td>
-								<td>slseifh***</td>
+								
+								<td>${c_list.id}</td>
+								
 								<td class="tnone">
 									<img src="../images/ico/ico_star.gif" alt="별점" />
 									<img src="../images/ico/ico_star.gif" alt="별점" />
@@ -116,219 +138,30 @@ $(document).ready(function() {
 									<img src="../images/ico/ico_star.gif" alt="별점" />
 									<img src="../images/ico/ico_star.gif" alt="별점" />
 
-									<br/>14-01-28
+									<br/>${c_list.cr_wdate}
 								</td>
-								<td class="right tnone">9999</td>
+								
+								<td class="right tnone" style="text-align: center;">${c_list.cr_hit }</td>
+								
 							</tr>
-
-							<tr>
-								<td class="tnone">2</td>
-								<td>오리지널</td>
-								<td class="left">
-									<a href="#">
-										<span class="heavygray">[먹어봤어요]</span> 쟈뎅, 테이크아웃 카페모리...
-										<img src="../images/ico/ico_new.gif" alt="new" />
-									</a>
-								</td>
-								<td>slseifh***</td>
-								<td class="tnone">
-									<img src="../images/ico/ico_star.gif" alt="별점" />
-									<img src="../images/ico/ico_star.gif" alt="별점" />
-									<img src="../images/ico/ico_star.gif" alt="별점" />
-									<img src="../images/ico/ico_star.gif" alt="별점" />
-									<img src="../images/ico/ico_star.gif" alt="별점" />
-
-									<br/>14-01-28
-								</td>
-								<td class="right tnone">9999</td>
-							</tr>
-
-							<tr>
-								<td class="tnone">3</td>
-								<td>모히또파티</td>
-								<td class="left">
-									<a href="#">
-										<span class="heavygray">[먹어봤어요]</span> 쟈뎅, 테이크아웃 카페모리...
-										<img src="../images/ico/ico_new.gif" alt="new" />
-									</a>
-								</td>
-								<td>slseifh***</td>
-								<td class="tnone">
-									<img src="../images/ico/ico_star.gif" alt="별점" />
-									<img src="../images/ico/ico_star.gif" alt="별점" />
-									<img src="../images/ico/ico_star.gif" alt="별점" />
-									<img src="../images/ico/ico_star.gif" alt="별점" />
-									<img src="../images/ico/ico_star.gif" alt="별점" />
-
-									<br/>14-01-28
-								</td>
-								<td class="right tnone">9999</td>
-							</tr>
-
-							<tr>
-								<td class="tnone">4</td>
-								<td>카페모리</td>
-								<td class="left">
-									<a href="#">
-										<span class="heavygray">[먹어봤어요]</span> 쟈뎅, 테이크아웃 카페모리...
-										<img src="../images/ico/ico_new.gif" alt="new" />
-									</a>
-								</td>
-								<td>slseifh***</td>
-								<td class="tnone">
-									<img src="../images/ico/ico_star.gif" alt="별점" />
-									<img src="../images/ico/ico_star.gif" alt="별점" />
-									<img src="../images/ico/ico_star.gif" alt="별점" />
-									<img src="../images/ico/ico_star.gif" alt="별점" />
-									<img src="../images/ico/ico_star.gif" alt="별점" />
-
-									<br/>14-01-28
-								</td>
-								<td class="right tnone">9999</td>
-							</tr>
-
-							<tr>
-								<td class="tnone">5</td>
-								<td>카페모리</td>
-								<td class="left">
-									<a href="#">
-										<span class="heavygray">[먹어봤어요]</span> 쟈뎅, 테이크아웃 카페모리...
-										<img src="../images/ico/ico_new.gif" alt="new" />
-									</a>
-								</td>
-								<td>slseifh***</td>
-								<td class="tnone">
-									<img src="../images/ico/ico_star.gif" alt="별점" />
-									<img src="../images/ico/ico_star.gif" alt="별점" />
-									<img src="../images/ico/ico_star.gif" alt="별점" />
-									<img src="../images/ico/ico_star.gif" alt="별점" />
-									<img src="../images/ico/ico_star.gif" alt="별점" />
-
-									<br/>14-01-28
-								</td>
-								<td class="right tnone">9999</td>
-							</tr>
-
-							<tr>
-								<td class="tnone">6</td>
-								<td>카페모리</td>
-								<td class="left">
-									<a href="#">
-										<span class="heavygray">[먹어봤어요]</span> 쟈뎅, 테이크아웃 카페모리...
-										<img src="../images/ico/ico_new.gif" alt="new" />
-									</a>
-								</td>
-								<td>slseifh***</td>
-								<td class="tnone">
-									<img src="../images/ico/ico_star.gif" alt="별점" />
-									<img src="../images/ico/ico_star.gif" alt="별점" />
-									<img src="../images/ico/ico_star.gif" alt="별점" />
-									<img src="../images/ico/ico_star.gif" alt="별점" />
-									<img src="../images/ico/ico_star.gif" alt="별점" />
-
-									<br/>14-01-28
-								</td>
-								<td class="right tnone">9999</td>
-							</tr>
-
-							<tr>
-								<td class="tnone">7</td>
-								<td>카페모리</td>
-								<td class="left">
-									<a href="#">
-										<span class="heavygray">[먹어봤어요]</span> 쟈뎅, 테이크아웃 카페모리...
-										<img src="../images/ico/ico_new.gif" alt="new" />
-									</a>
-								</td>
-								<td>slseifh***</td>
-								<td class="tnone">
-									<img src="../images/ico/ico_star.gif" alt="별점" />
-									<img src="../images/ico/ico_star.gif" alt="별점" />
-									<img src="../images/ico/ico_star.gif" alt="별점" />
-									<img src="../images/ico/ico_star.gif" alt="별점" />
-									<img src="../images/ico/ico_star.gif" alt="별점" />
-
-									<br/>14-01-28
-								</td>
-								<td class="right tnone">9999</td>
-							</tr>
-
-							<tr>
-								<td class="tnone">8</td>
-								<td>카페모리</td>
-								<td class="left">
-									<a href="#">
-										<span class="heavygray">[먹어봤어요]</span> 쟈뎅, 테이크아웃 카페모리...
-										<img src="../images/ico/ico_new.gif" alt="new" />
-									</a>
-								</td>
-								<td>slseifh***</td>
-								<td class="tnone">
-									<img src="../images/ico/ico_star.gif" alt="별점" />
-									<img src="../images/ico/ico_star.gif" alt="별점" />
-									<img src="../images/ico/ico_star.gif" alt="별점" />
-									<img src="../images/ico/ico_star.gif" alt="별점" />
-									<img src="../images/ico/ico_star.gif" alt="별점" />
-
-									<br/>14-01-28
-								</td>
-								<td class="right tnone">9999</td>
-							</tr>
-
-							<tr>
-								<td class="tnone">9</td>
-								<td>카페모리</td>
-								<td class="left">
-									<a href="#">
-										<span class="heavygray">[먹어봤어요]</span> 쟈뎅, 테이크아웃 카페모리...
-										<img src="../images/ico/ico_new.gif" alt="new" />
-									</a>
-								</td>
-								<td>slseifh***</td>
-								<td class="tnone">
-									<img src="../images/ico/ico_star.gif" alt="별점" />
-									<img src="../images/ico/ico_star.gif" alt="별점" />
-									<img src="../images/ico/ico_star.gif" alt="별점" />
-									<img src="../images/ico/ico_star.gif" alt="별점" />
-									<img src="../images/ico/ico_star.gif" alt="별점" />
-
-									<br/>14-01-28
-								</td>
-								<td class="right tnone">9999</td>
-							</tr>
-
-							<tr>
-								<td class="tnone">10</td>
-								<td>카페모리</td>
-								<td class="left">
-									<a href="#">
-										<span class="heavygray">[먹어봤어요]</span> 쟈뎅, 테이크아웃 카페모리...
-										<img src="../images/ico/ico_new.gif" alt="new" />
-									</a>
-								</td>
-								<td>slseifh***</td>
-								<td class="tnone">
-									<img src="../images/ico/ico_star.gif" alt="별점" />
-									<img src="../images/ico/ico_star.gif" alt="별점" />
-									<img src="../images/ico/ico_star.gif" alt="별점" />
-									<img src="../images/ico/ico_star.gif" alt="별점" />
-									<img src="../images/ico/ico_star.gif" alt="별점" />
-
-									<br/>14-01-28
-								</td>
-								<td class="right tnone">9999</td>
-							</tr>
+							
+                          </c:forEach>
 						
 						</tbody>
+						
 					</table>
+					
 					</div>
 
+
 					<div class="btnAreaList">
+					
 						<div class="bwright">
 							<ul>
-								<li><a href="#" class="sbtnMini">글쓰기</a></li>
+								<li><a href="comment_write" class="sbtnMini">글쓰기</a></li>
 							</ul>
 						</div>
+						
 
 						<!-- 페이징이동1 -->
 						<div class="allPageMoving1">
@@ -344,6 +177,7 @@ $(document).ready(function() {
 						</div>
 						<!-- //페이징이동1 -->
 					</div>
+
 
 					<div class="searchWrap">
 						<div class="search">

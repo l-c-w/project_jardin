@@ -97,7 +97,7 @@ $(document).ready(function() {
 
 					<!-- Btn Area -->
 					<div class="btnAreaCenter">
-						<a href="step01" class="gbtn">휴대폰인증</a></li>
+						<a href="step02" class="gbtn">휴대폰인증</a></li>
 					</div>
 					<!-- //Btn Area -->
 

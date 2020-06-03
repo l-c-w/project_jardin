@@ -41,7 +41,7 @@ public class MController {
 
 		dao.register(mdto.getId(), mdto.getM_code(), mdto.getPw(), mdto.getName(), email, mdto.getEmail_agree()
 				,mdto.getSms_agree(),mdto.getAddress1(),mdto.getAddress2(), phone, mdto.getSol_lun(),
-				mdto.getIntroduce(), mdto.getCoffee_favor(),birth);
+				mdto.getIntroduce(), mdto.getCoffee_favor(),birth, mdto.getPost());
 		
 		return "member/step04";
 

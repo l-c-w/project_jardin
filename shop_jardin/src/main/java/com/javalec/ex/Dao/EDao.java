@@ -3,12 +3,19 @@ package com.javalec.ex.Dao;
 import java.util.ArrayList;
 
 import com.javalec.ex.Dto.EDto.EventDto;
+import com.javalec.ex.Dto.EDto.Event_commentDto;
 
 
 public interface EDao {
 
-	public ArrayList<EventDto> event_list(int page, int limit, String opt, String search);
+	public ArrayList<EventDto> event_list(int page, int limit);
 	
-	public int getListCount(String opt, String search);
+	public int getListCount();
+	
+	public int getCommentCount();
+	
+	public EventDto event_view(String e_code);
+	
+	public ArrayList<Event_commentDto> event_comment(int page, int limit);
 	
 }

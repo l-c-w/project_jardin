@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -53,9 +55,9 @@ $(document).ready(function() {
 			<div id="left">
 				<div id="title2">EVENT<span>이벤트</span></div>
 				<ul>	
-					<li><a href="#" id="leftNavi1">진행중 이벤트</a></li>
-					<li><a href="#" id="leftNavi2">종료된 이벤트</a></li>
-					<li class="last"><a href="#" id="leftNavi3">당첨자 발표</span></a></li>
+					<li><a href="event_list" id="leftNavi1">진행중 이벤트</a></li>
+					<li><a href="fin_event_list" id="leftNavi2">종료된 이벤트</a></li>
+					<li class="last"><a href="prizewinner_list" id="leftNavi3">당첨자 발표</span></a></li>
 				</ul>			
 			</div><script type="text/javascript">initSubmenu(1,0);</script>
 
@@ -69,11 +71,13 @@ $(document).ready(function() {
 						<div class="viewHead">
 							<div class="subject">
 								<ul>
-									<li>까페모리 봄바람 커피한잔 30% 할인 이벤트!!</li>
+									<li>${event_view.e_title }</li>
 								</ul>
 							</div>
 							<div class="day">
-								<p class="txt">이벤트 기간<span>2014-04-01 ~ 2014-04-29</span></p>
+								<fmt:formatDate var="e_start" value="${event_view.e_start }" pattern="YYYY/MM/dd" />
+								<fmt:formatDate var="e_end" value="${event_view.e_end }" pattern="YYYY/MM/dd" />
+								<p class="txt">이벤트 기간<span>${e_start } ~ ${e_end }</span></p>
 							</div>
 						</div>
 
@@ -95,7 +99,7 @@ $(document).ready(function() {
 							<tbody>
 								<tr>
 									<th class="pre">PREV</th>
-									<td><a href="#">상품 재입고는 언제 되나요?</a></td>
+									<td><a href="event_view?e_code=${event_view.e_code }">${event_view.e_title }</a></td>
 									<td>&nbsp;</td>
 								</tr>
 
@@ -112,27 +116,36 @@ $(document).ready(function() {
 
 					<!-- 댓글-->
 					<div class="replyWrite">
-						<ul>
-							<li class="in">
-								<p class="txt">총 <span class="orange">3</span> 개의 댓글이 달려있습니다.</p>
-								<p class="password">비밀번호&nbsp;&nbsp;<input type="password" class="replynum" /></p>
-								<textarea class="replyType"></textarea>
-							</li>
-							<li class="btn"><a href="#" class="replyBtn">등록</a></li>
-						</ul>
+						<form action="event_view?e_code=${event_view.e_code }" method="post">
+							<ul>
+								<li class="in">
+									<p class="txt">총 <span class="orange">${comment_listcount }</span> 개의 댓글이 달려있습니다.</p>
+									<p class="password">비밀번호&nbsp;&nbsp;
+										<input type="password" class="replynum" />
+									</p>
+									<textarea class="replyType"></textarea>
+								</li>
+								<li class="btn">
+									<input type="submit" class="replyBtn" value="등록">
+								</li>
+							</ul>
+						</form>
 						<p class="ntic">※ 비밀번호를 입력하시면 댓글이 비밀글로 등록 됩니다.</p>
 					</div>
 
 					<div class="replyBox">
 						<ul>
-							<li class="name">jjabcde <span>[2014-03-04&nbsp;&nbsp;15:01:59]</span></li>
+							<fmt:formatDate var="ec_wdate1" value="${event_comment.ec_wdate }" pattern="YYYY/MM/dd" />
+							<fmt:formatDate var="ec_wdate2" value="${event_comment.ec_wdate }" pattern="hh:mm:ss" />
+							<li class="name"> <span>[${ec_wdate1 }&nbsp;&nbsp;${ec_wdate2 }]</span></li>
 							<li class="txt"><textarea class="replyType"></textarea></li>
 							<li class="btn">
 								<a href="#" class="rebtn">수정</a>
 								<a href="#" class="rebtn">삭제</a>
 							</li>
 						</ul>
-
+						
+						<!-- 댓글 형식 참고 -->
 						<ul>
 							<li class="name">jjabcde <span>[2014-03-04&nbsp;&nbsp;15:01:59]</span></li>
 							<li class="txt">대박!!! 이거 저한테 완전 필요한 이벤트였어요!!</li>
@@ -141,15 +154,51 @@ $(document).ready(function() {
 								<a href="#" class="rebtn">삭제</a>
 							</li>
 						</ul>
-
-						<ul>
-							<li class="name">jjabcde <span>[2014-03-04&nbsp;&nbsp;15:01:59]</span></li>
-							<li class="txt">
-								<a href="password.html" class="passwordBtn"><span class="orange">※ 비밀글입니다.</span></a>
-							</li>
-						</ul>
+						
+						<!-- 비밀글, 없애기로 한 기능-->
+<!-- 						<ul> -->
+<!-- 							<li class="name">jjabcde <span>[2014-03-04&nbsp;&nbsp;15:01:59]</span></li> -->
+<!-- 							<li class="txt"> -->
+<!-- 								<a href="password.html" class="passwordBtn"><span class="orange">※ 비밀글입니다.</span></a> -->
+<!-- 							</li> -->
+<!-- 						</ul> -->
 					</div>
 					<!-- //댓글 -->
+
+					<!-- 페이징이동1(searchFlag가 없을때) -->
+						<div class="allPageMoving1">
+
+						<a href="event_comment?page=${startpage }" class="n"><img src="../images/btn/btn_pre2.gif" alt="처음으로"/></a>
+						<c:if test="${page <= 1 }">
+							<img src="../images/btn/btn_pre1.gif" alt="앞페이지로"/>
+						</c:if>
+						<c:if test="${page > 1 }">
+							<a href="event_comment?page=${page - 1 }" class="pre">
+							<img src="../images/btn/btn_pre1.gif" alt="앞페이지로"/></a>
+						</c:if>
+						
+						<c:forEach var="a" begin="${startpage }" end="${endpage }" step="1">
+						<c:choose>
+							<c:when test="${a == page }">
+								<strong>${a }</strong>
+							</c:when>
+							<c:when test="${a != page }">
+								<a href="event_comment?page=${a }">${a }</a>
+							</c:when>
+						</c:choose>						
+						</c:forEach>
+						
+						<c:if test="${page >= maxpage}">
+						<img src="../images/btn/btn_next1.gif" alt="뒤페이지로"/>
+						</c:if>
+						<c:if test="${page < maxpage}">
+						<a href="event_comment?page=${page + 1 }" class="next">
+						<img src="../images/btn/btn_next1.gif" alt="뒤페이지로"/></a>
+						</c:if>						
+						<a href="event_comment?page=${maxpage }" class="n"><img src="../images/btn/btn_next2.gif" alt="마지막페이지로"/></a>
+
+						</div>
+						<!-- //페이징이동1(searchFlag가 없을때) -->
 
 
 					<!-- Btn Area -->

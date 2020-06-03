@@ -7,6 +7,6 @@ import org.springframework.ui.Model;
 
 public interface EService {
 
-	void execute(SqlSession sqlSession, Model model);
+	void execute(HttpServletRequest request,SqlSession sqlSession, Model model);
 
 }

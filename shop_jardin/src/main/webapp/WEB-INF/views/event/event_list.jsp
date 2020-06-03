@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -71,11 +72,13 @@ $(document).ready(function() {
 							<c:forEach var="dto" items="${event_list }">
 							<li>
 								<div class="img">
-									<a href="#"><img src="../images/img/sample_event.jpg" alt="진행중 이벤트" /></a>
+									<a href="event_view?e_code=${dto.e_code }"><img src="../images/img/sample_event.jpg" alt="진행중 이벤트" /></a>
 								</div>
 								<div class="txt">
 									<div class="subject">${dto.e_title}</div>
-									<div class="day">이벤트 기간 : ${dto.e_start } ~ ${dto.e_end }</div>
+									<fmt:formatDate var="e_start" value="${dto.e_start }" pattern="YYYY/MM/dd" />
+									<fmt:formatDate var="e_end" value="${dto.e_end }" pattern="YYYY/MM/dd" />
+									<div class="day">이벤트 기간 : ${e_start } ~ ${dto.e_end }</div>
 								</div>
 							</li>
 							</c:forEach>
@@ -85,55 +88,55 @@ $(document).ready(function() {
 
 					<div class="btnAreaList">
 					<!-- 페이징이동1 -->
-					<c:choose>
-						<c:when test="${searchFlag != null }">
+<%-- 					<c:choose> --%>
+<%-- 						<c:when test="${searchFlag != null }"> --%>
 						
-						<div class="allPageMoving1">
+<!-- 						<div class="allPageMoving1"> -->
 
-						<a href="event/event_list?searchFlag=${searchFlag }&opt=${opt}&search=${search}&page=${startpage}" class="n">
-						<img src="../images/btn/btn_pre2.gif" alt="처음으로"/></a>
+<%-- 						<a href="event/event_list?searchFlag=${searchFlag }&opt=${opt}&search=${search}&page=${startpage}" class="n"> --%>
+<!-- 						<img src="../images/btn/btn_pre2.gif" alt="처음으로"/></a> -->
 						
-						<c:if test="${page <= 1 }">
-							<img src="../images/btn/btn_pre1.gif" alt="앞페이지로"/>
-						</c:if>
-						<c:if test="${page > 1 }">
-							<a href="event/event_list?searchFlag=${searchFlag }&opt=${opt}&search=${search}&page=${page - 1}" class="pre">
-							<img src="../images/btn/btn_pre1.gif" alt="앞페이지로"/></a>
-						</c:if>
+<%-- 						<c:if test="${page <= 1 }"> --%>
+<!-- 							<img src="../images/btn/btn_pre1.gif" alt="앞페이지로"/> -->
+<%-- 						</c:if> --%>
+<%-- 						<c:if test="${page > 1 }"> --%>
+<%-- 							<a href="event/event_list?searchFlag=${searchFlag }&opt=${opt}&search=${search}&page=${page - 1}" class="pre"> --%>
+<!-- 							<img src="../images/btn/btn_pre1.gif" alt="앞페이지로"/></a> -->
+<%-- 						</c:if> --%>
 						
-						<c:forEach var="a" begin="${startpage }" end="${endpage }" step="1">
-						<c:choose>
-							<c:when test="${a == page }">
-								<strong>${a }</strong>
-							</c:when>
-							<c:when test="${a != page }">
-								<a href="event/event_list?searchFlag=${searchFlag }&opt=${opt}&search=${search}&page=${a}"><strong>${a }</strong></a>						
-							</c:when>
-						</c:choose>						
-						</c:forEach>
+<%-- 						<c:forEach var="a" begin="${startpage }" end="${endpage }" step="1"> --%>
+<%-- 						<c:choose> --%>
+<%-- 							<c:when test="${a == page }"> --%>
+<%-- 								<strong>${a }</strong> --%>
+<%-- 							</c:when> --%>
+<%-- 							<c:when test="${a != page }"> --%>
+<%-- 								<a href="event/event_list?searchFlag=${searchFlag }&opt=${opt}&search=${search}&page=${a}"><strong>${a }</strong></a>						 --%>
+<%-- 							</c:when> --%>
+<%-- 						</c:choose>						 --%>
+<%-- 						</c:forEach> --%>
 						
-						<c:if test="${page >= maxpage}">
-						<img src="../images/btn/btn_next1.gif" alt="뒤페이지로"/>
-						</c:if>
-						<c:if test="${page < maxpage}">
-						<a href="event/event_list?searchFlag=${searchFlag }&opt=${opt}&search=${search}&page=${page + 1}" class="next"><img src="../images/btn/btn_next1.gif" alt="뒤페이지로"/></a>
-						</c:if>						
-						<a href="event/event_list?searchFlag=${searchFlag }&opt=${opt}&search=${search}&page=${maxpage}" class="n"><img src="../images/btn/btn_next2.gif" alt="마지막페이지로"/></a>
+<%-- 						<c:if test="${page >= maxpage}"> --%>
+<!-- 						<img src="../images/btn/btn_next1.gif" alt="뒤페이지로"/> -->
+<%-- 						</c:if> --%>
+<%-- 						<c:if test="${page < maxpage}"> --%>
+<%-- 						<a href="event/event_list?searchFlag=${searchFlag }&opt=${opt}&search=${search}&page=${page + 1}" class="next"><img src="../images/btn/btn_next1.gif" alt="뒤페이지로"/></a> --%>
+<%-- 						</c:if>						 --%>
+<%-- 						<a href="event/event_list?searchFlag=${searchFlag }&opt=${opt}&search=${search}&page=${maxpage}" class="n"><img src="../images/btn/btn_next2.gif" alt="마지막페이지로"/></a> --%>
 
-						</div>
+<!-- 						</div> -->
 						
-						</c:when>
+<%-- 						</c:when> --%>
 						<!-- //페이징이동1 -->
 						<!-- 페이징이동1(searchFlag가 없을때) -->
-						<c:otherwise>
+<%-- 						<c:otherwise> --%>
 						<div class="allPageMoving1">
 
-						<a href="event/event_list?page=${startpage }" class="n"><img src="../images/btn/btn_pre2.gif" alt="처음으로"/></a>
+						<a href="event_list?page=${startpage }" class="n"><img src="../images/btn/btn_pre2.gif" alt="처음으로"/></a>
 						<c:if test="${page <= 1 }">
 							<img src="../images/btn/btn_pre1.gif" alt="앞페이지로"/>
 						</c:if>
 						<c:if test="${page > 1 }">
-							<a href="event/event_list?page=${page - 1 }" class="pre">
+							<a href="event_list?page=${page - 1 }" class="pre">
 							<img src="../images/btn/btn_pre1.gif" alt="앞페이지로"/></a>
 						</c:if>
 						
@@ -143,7 +146,7 @@ $(document).ready(function() {
 								<strong>${a }</strong>
 							</c:when>
 							<c:when test="${a != page }">
-								<a href="event/event_list?page=${a }"><strong>${a }</strong></a>						
+								<a href="event_list?page=${a }">${a }</a>
 							</c:when>
 						</c:choose>						
 						</c:forEach>
@@ -152,33 +155,33 @@ $(document).ready(function() {
 						<img src="../images/btn/btn_next1.gif" alt="뒤페이지로"/>
 						</c:if>
 						<c:if test="${page < maxpage}">
-						<a href="event/event_list?page=${page + 1 }" class="next">
+						<a href="event_list?page=${page + 1 }" class="next">
 						<img src="../images/btn/btn_next1.gif" alt="뒤페이지로"/></a>
 						</c:if>						
-						<a href="event/event_list?page=${maxpage }" class="n"><img src="../images/btn/btn_next2.gif" alt="마지막페이지로"/></a>
+						<a href="event_list?page=${maxpage }" class="n"><img src="../images/btn/btn_next2.gif" alt="마지막페이지로"/></a>
 
 						</div>
-						</c:otherwise>
-					</c:choose>
+<%-- 						</c:otherwise> --%>
+<%-- 					</c:choose> --%>
 						<!-- //페이징이동1(searchFlag가 없을때) -->
 					</div>
 					
 					<!-- 검색 -->
-					<div class="searchWrap">
-						<div class="search">
-							<ul>
-								<li class="web"><img src="../images/txt/txt_search.gif" alt="search" /></li>
-								<li class="se">
-									<select>
-										<option value="" />제목</option>
-									</select>
-								</li>
-								<li><input type="text" class="searchInput" /></li>
-								<li class="web"><a href="#"><img src="../images/btn/btn_search.gif" alt="검색" /></a></li>
-								<li class="mobile"><a href="#"><img src="../images/btn/btn_search_m.gif" alt="검색" /></a></li>
-							</ul>
-						</div>
-					</div>
+<!-- 					<div class="searchWrap"> -->
+<!-- 						<div class="search"> -->
+<!-- 							<ul> -->
+<!-- 								<li class="web"><img src="../images/txt/txt_search.gif" alt="search" /></li> -->
+<!-- 								<li class="se"> -->
+<!-- 									<select> -->
+<!-- 										<option value="" />제목</option> -->
+<!-- 									</select> -->
+<!-- 								</li> -->
+<!-- 								<li><input type="text" class="searchInput" /></li> -->
+<!-- 								<li class="web"><a href="#"><img src="../images/btn/btn_search.gif" alt="검색" /></a></li> -->
+<!-- 								<li class="mobile"><a href="#"><img src="../images/btn/btn_search_m.gif" alt="검색" /></a></li> -->
+<!-- 							</ul> -->
+<!-- 						</div> -->
+<!-- 					</div> -->
 					<!-- //검색 -->
 
 				</div>

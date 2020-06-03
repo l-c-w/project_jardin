@@ -221,10 +221,10 @@ $(document).ready(function() {
 										<p>쟈뎅에서 진행되는 이벤트와 쇼핑에 대한 정보를 이메일로 받아보시겠습니까?</p>
 										<ul class="question">
 											<li>
-												<input type="radio" name="email_agree" value="receive_yes" id="receive_yes" class="radio_t" checked="checked"/><label for="receive_yes">예</label>
+												<input type="radio" name="email_agree" value="email_yes" id="receive_yes" class="radio_t" checked="checked"/><label for="receive_yes">예</label>
 											</li>
 											<li>
-												<input type="radio" name="email_agree" value="receive_no" id="receive_no" class="radio_t"/><label for="receive_no">아니오</label>
+												<input type="radio" name="email_agree" value="email_no" id="receive_no" class="radio_t"/><label for="receive_no">아니오</label>
 											</li>
 										</ul>
 										<p class="gray">* 거래관련 정보는 고객님의 거래안전을 위하여 이메일 수신거부와 관계없이 발송됩니다.</p>

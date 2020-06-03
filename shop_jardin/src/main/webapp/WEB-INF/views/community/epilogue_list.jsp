@@ -72,8 +72,8 @@ $(document).ready(function() {
 					
 					<div class="productTab normaltab">
 						<ul>
-							<li><a href="#" class="on">포토 구매후기</a></li>
-							<li class="last"><a href="#">상품평</a></li>
+							<li><a href="epilogue_list" class="on">포토 구매후기</a></li>
+							<li class="last"><a href="comment_list">상품평</a></li>
 						</ul>						
 					</div>
 					

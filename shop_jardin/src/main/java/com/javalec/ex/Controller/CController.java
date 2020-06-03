@@ -53,22 +53,13 @@ public class CController {
 		
 		
 		
+		
+		
 		return "community/comment_write_ok";
 	}
 	
 	
-	
-	
 
-	@RequestMapping("community/enjoy_list")
-	public String enjoy_list() {
-		return "community/enjoy_list";
-	}
-
-	@RequestMapping("community/enjoy_view")
-	public String enjoy_view() {
-		return "community/enjoy_view";
-	}
 
 	@RequestMapping("community/epilogue_list")
 	public String epilogue_list() {
@@ -84,21 +75,36 @@ public class CController {
 	public String epilogue_write() {
 		return "community/epilogue_write";
 	}
+	
+	
+	
+	
 
-	@RequestMapping("community/expr_list")
-	public String expr_list() {
-		return "community/expr_list";
-	}
+//	@RequestMapping("community/enjoy_list")
+//	public String enjoy_list() {
+//		return "community/enjoy_list";
+//	}
+//
+//	@RequestMapping("community/enjoy_view")
+//	public String enjoy_view() {
+//		return "community/enjoy_view";
+//	}	
 
-	@RequestMapping("community/expr_review")
-	public String expr_review() {
-		return "community/expr_review";
-	}
 
-	@RequestMapping("community/expr_view")
-	public String expr_view() {
-		return "community/expr_view";
-	}
+//	@RequestMapping("community/expr_list")
+//	public String expr_list() {
+//		return "community/expr_list";
+//	}
+//
+//	@RequestMapping("community/expr_review")
+//	public String expr_review() {
+//		return "community/expr_review";
+//	}
+//
+//	@RequestMapping("community/expr_view")
+//	public String expr_view() {
+//		return "community/expr_view";
+//	}
 	
 	
 	

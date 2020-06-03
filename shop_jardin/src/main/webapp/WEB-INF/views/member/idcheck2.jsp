@@ -34,7 +34,6 @@
 	
 		function apply(id) { // 중복확인 id를 부모창에 적용
 			
-			
 			opener.document.join.id.value = id; //부모창 opener
 			window.close(); //창닫기
 			

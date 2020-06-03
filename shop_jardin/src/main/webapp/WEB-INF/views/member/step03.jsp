@@ -114,7 +114,7 @@ $(document).ready(function() {
 					
 
 
-               <form action="register_ok" id="register_ok" name="join">
+               <form action="register_ok" id="register_ok" name="join" method="get">
 
 
 					<div class="memberbd">
@@ -185,11 +185,18 @@ $(document).ready(function() {
 									<th scope="row"><span>이메일</span></th>
 									<td>
 										<ul class="pta">
+											
 											<li><input type="text" class="w134" name="email1"/></li>
+											
 											<li><span class="valign">&nbsp;@&nbsp;</span></li>
-											<li class="r10"><input type="text" class="w134" /></li>
+											
+											
+											<li class="r10"><input type="text" class="w134" name="email3"/></li>
+											
 											<li>
-												<select id="emailList" name="email2">
+											
+												<select id="emailList" name="email2" onchange="mailcheck()">
+												
 													<option value="#" selected="selected">직접입력</option>
 													<option value="naver.com">naver.com</option>
 													<option value="daum.net">daum.net</option>
@@ -206,9 +213,24 @@ $(document).ready(function() {
 													<option value="chol.com">chol.com</option>    
 													<option value="gmail.com">gmail.com</option>    
 													<option value="empas.com">empas.com</option>
+													
 												</select>&nbsp;&nbsp;&nbsp;
+												
 											</li>
-										</ul>
+
+
+												<script type="text/javascript">
+												
+													function mailcheck() {
+														i = document.join.email2.selectedIndex // 선택항목의 인덱스 번호
+														var mail = document.join.email2.options[i].value // 선택항목 value
+														document.join.email3.value = mail
+													}
+													
+												</script>
+
+
+											</ul>
 									</td>
 								</tr>
 								
@@ -303,13 +325,19 @@ $(document).ready(function() {
 													<option value='' selected="selected">선택하세요</option>
 													
 													<script type="text/javascript">
+													
 													//<![CDATA[
+														
 														for(var i=1930; i<=2020; i++){
-															document.write("<option value=''>" + i+ "</option>");	
+															document.write("<option value='" + i+ "'>"+i+"</option>");	
 														};
+														
 													//]]>
+													
 													</script>
+													
 												</select>
+												
 											</li>
 											
 											<li>&nbsp;<span class="valign">년</span>&nbsp;&nbsp;&nbsp;</li>
@@ -317,45 +345,58 @@ $(document).ready(function() {
 											<li>
 												<select name="birth2">
 													<option value='' selected="selected">선택하세요</option>
+													
 													<script type="text/javascript">
+													
 													//<![CDATA[
 														for(var i=1; i<=12; i++){
 															if(i<10){
-																document.write("<option value=''>0" + i+"</option>");
+																document.write("<option value='0" + i +"'>"+"0"+i+"</option>");
 															}else{
-																document.write("<option value=''>" + i+ "</option>");
+																document.write("<option value='" + i+ "'>"+i+"</option>");
 															};
 														};
 													//]]>
+													
 													</script>
+													
 												</select>
 											</li>
-											
+										
 										
 											<li>&nbsp;<span class="valign">월</span>&nbsp;&nbsp;&nbsp;</li>
 											
+											
 											<li>
 											
-											
 												<select name="birth3">
+												
 													<option value='' selected="selected">선택하세요</option>
 													
+													
 													<script type="text/javascript">
+													
 													//<![CDATA[
 														for(var i=1; i<=31; i++){
 															if(i<10){
-																document.write("<option value=''>0" + i +"</option>");
+																document.write("<option value='0" + i +"'>"+"0"+i+"</option>");
 															}else{
-																document.write("<option value=''>" + i + "</option>");
+																document.write("<option value='" + i + "'>"+i+"</option>");
 															};
 														};
 													//]]>
+													
 													</script>
+													
+													
 												</select>
+												
 											</li>
 											
 											
+											
 											<li class="r20">&nbsp;<span class="valign">일</span></li>
+											
 											
 											
 											<li class="pt5">

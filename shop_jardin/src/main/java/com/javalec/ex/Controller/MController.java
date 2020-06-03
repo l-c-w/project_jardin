@@ -1,17 +1,14 @@
 package com.javalec.ex.Controller;
 
+import java.sql.Date;
+
 import javax.servlet.http.HttpServletRequest;
 
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpRequest;
-import org.springframework.http.client.HttpComponentsAsyncClientHttpRequestFactory;
-import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.javalec.ex.Dao.MDao;
 import com.javalec.ex.Dto.MDto.Member_Dto;
@@ -31,17 +28,21 @@ public class MController {
 				+ request.getParameter("phone3");
 
 		int phone = Integer.parseInt(phone1);
-
-		// String birth1 = request.getParameter("birth1")+request.getParameter("birth2")+request.getParameter("birth3");
-
-		// java.sql.Date birth = java.sql.Date.valueOf(birth1);
-
+		
+		String year = request.getParameter("birth1");
+		String month = request.getParameter("birth2");
+		String day = request.getParameter("birth3");
+		
+		String birth1 = year+"-"+month+"-"+day;
+		
+		Date birth = Date.valueOf(birth1);
+		
 		MDao dao = sqlsession.getMapper(MDao.class);
 
 		dao.register(mdto.getId(), mdto.getM_code(), mdto.getPw(), mdto.getName(), email, mdto.getEmail_agree()
 				,mdto.getSms_agree(),mdto.getAddress1(),mdto.getAddress2(), phone, mdto.getSol_lun(),
-				mdto.getIntroduce(), mdto.getCoffee_favor());
-
+				mdto.getIntroduce(), mdto.getCoffee_favor(),birth);
+		
 		return "member/step04";
 
 	}
@@ -73,6 +74,7 @@ public class MController {
 		return "member/idcheck";
 	}
 	
+	
 
 	@RequestMapping("member/idcheck2")
 	public String idcheck2(HttpServletRequest request, Model model) {
@@ -87,6 +89,8 @@ public class MController {
 		
 		return "member/idcheck2";
 	}
+	
+	
 
 	@RequestMapping("member/address_search")
 	public String address_search() {

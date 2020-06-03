@@ -527,7 +527,7 @@ $(document).ready(function() {
 					<div class="btnArea">
 						<div class="bCenter">
 							<ul>
-								<li><a href="#" class="nbtnbig">취소하기</a></li>
+								<li><a href="javascript:history.back()" class="nbtnbig">취소하기</a></li>
 								<li><a href="#" onclick="document.getElementById('register_ok').submit()" class="sbtnMini">가입하기</a></li>
 							</ul>
 						</div>

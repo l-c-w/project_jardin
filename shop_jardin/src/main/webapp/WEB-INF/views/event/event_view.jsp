@@ -82,7 +82,7 @@ $(document).ready(function() {
 						</div>
 
 						<div class="viewContents">
-							<img src="../images/img/sample_event_view.jpg" alt="" />
+							<img src="../images/img/sample_event_view.jpg" alt="" />${event_view.e_content }
 						</div>
 					</div>
 
@@ -134,16 +134,18 @@ $(document).ready(function() {
 					</div>
 
 					<div class="replyBox">
+						<c:forEach var="e_com" items="${event_comment }">
 						<ul>
-							<fmt:formatDate var="ec_wdate1" value="${event_comment.ec_wdate }" pattern="YYYY/MM/dd" />
-							<fmt:formatDate var="ec_wdate2" value="${event_comment.ec_wdate }" pattern="hh:mm:ss" />
-							<li class="name"> <span>[${ec_wdate1 }&nbsp;&nbsp;${ec_wdate2 }]</span></li>
+							<fmt:formatDate var="ec_wdate1" value="${e_com.ec_wdate }" pattern="YYYY/MM/dd" />
+							<fmt:formatDate var="ec_wdate2" value="${e_com.ec_wdate }" pattern="hh:mm:ss" />
+							<li class="name"> <span>[${e_com.ec_wdate1 }&nbsp;&nbsp;${e_com.ec_wdate2 }]</span></li>
 							<li class="txt"><textarea class="replyType"></textarea></li>
 							<li class="btn">
 								<a href="#" class="rebtn">수정</a>
 								<a href="#" class="rebtn">삭제</a>
 							</li>
 						</ul>
+						</c:forEach>
 						
 						<!-- 댓글 형식 참고 -->
 						<ul>

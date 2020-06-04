@@ -78,7 +78,7 @@ $(document).ready(function() {
 									<div class="subject">${dto.e_title}</div>
 									<fmt:formatDate var="e_start" value="${dto.e_start }" pattern="YYYY/MM/dd" />
 									<fmt:formatDate var="e_end" value="${dto.e_end }" pattern="YYYY/MM/dd" />
-									<div class="day">이벤트 기간 : ${e_start } ~ ${dto.e_end }</div>
+									<div class="day">이벤트 기간 : ${e_start } ~ ${e_end }</div>
 								</div>
 							</li>
 							</c:forEach>

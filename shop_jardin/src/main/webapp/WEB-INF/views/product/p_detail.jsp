@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -292,19 +293,21 @@ $(document).ready(function() {
 						<ul>
 
 							<!-- List -->
+							<c:forEach var="p_rev" items="${p_review }">
 							<li>
 								<div class="img"><img src="../images/img/sample_epil.jpg" width="155" height="160" alt="" /></div>
 								<div class="txt">
 									<div class="subject">
-										<a href="#"><span class="orange">[먹어봤어요]</span> 쟈뎅, 테이크아웃 카페모리 구매후기</a>
+										<a href="#"><span class="orange"></span>${p_rev.pr_title }</a>
 									</div>
 									<div class="conf">
-										소문만큼 맛있었습니다.소문만큼 맛있었습니다.소문만큼 맛있었습니다.소문만큼 맛있었습니다.소문만큼 맛있었습니다.소문만큼 맛있었습니다.소문만큼 맛있었습니다.소문만큼 맛있었습니다.....
+										${p_rev.pr_content }
 									</div>
 									<div class="data">
-										<p>작성자 <span>dlsif***</span></p>
-										<p>등록일 <span>2014-03-24</span></p>
-										<p>조회수 <span>325</span></p>
+										<p>작성자 <span>${p_rev.id }</span></p>
+										<fmt:formatDate var="pr_wdate" value="${p_rev.pr_wdate }" pattern="YYYY/MM/dd hh:mm:ss" />
+										<p>등록일 <span>${pr_wdate }</span></p>
+										<p>조회수 <span>${p_rev.pr_hit }</span></p>
 										<p>평점 
 											<span class="ty">
 												<img src="../images/ico/ico_star.gif" alt="별점" />
@@ -317,14 +320,15 @@ $(document).ready(function() {
 									</div>
 								</div>
 							</li>
+							</c:forEach>							
 							<!-- //List -->
 
-
+							<!-- 상품후기 참고 -->
 							<li>
 								<div class="img"><img src="../images/img/sample_epil.jpg" width="155" height="160" alt="" /></div>
 								<div class="txt">
 									<div class="subject">
-										<a href="#"><span class="orange">[먹어봤어요]</span> 쟈뎅, 테이크아웃 카페모리 구매후기</a>
+										<a href="#"><span class="orange">[먹어봤어요]</span>쟈뎅, 테이크아웃 카페모리 구매후기</a>
 									</div>
 									<div class="conf">
 										소문만큼 맛있었습니다.소문만큼 맛있었습니다.소문만큼 맛있었습니다.소문만큼 맛있었습니다.소문만큼 맛있었습니다.소문만큼 맛있었습니다.소문만큼 맛있었습니다.소문만큼 맛있었습니다.....
@@ -379,14 +383,16 @@ $(document).ready(function() {
 					<div class="accordion">
 						<ul>
 							<!-- 반복 -->
+							<c:forEach var="c_rev" items="${c_review }">
 							<li>
 								<div class="headArea">
 									<div class="subject">
-										<a href="javascript:;" class="accbtn">저렴한 가격에 커피맛과 향은 최고!!</a>
+										<a href="javascript:;" class="accbtn">${c_rev.cr_title }</a>
 									</div>
-									<div class="writer">[ezlin****]</div>
+									<div class="writer">${c_rev.id }</div>
 									<div class="day">
-										<p>2014-03-24</p>
+										<fmt:formatDate var="cr_wdate" value="${c_rev.cr_wdate }" pattern="YYYY/MM/dd" />
+										<p>{cr_wdate }</p>
 										<p>
 											<img src="../images/ico/ico_star.gif" alt="별점" />
 											<img src="../images/ico/ico_star.gif" alt="별점" />
@@ -397,7 +403,7 @@ $(document).ready(function() {
 
 								<div class="hideArea">
 									<div class="bodyArea">
-										너무 맛있어서 재주문 했습니다!<br/>쟈뎅 커피 너무 맛있어요!
+										${c_rev.cr_title }
 									</div>
 
 									<!-- 답변 -->
@@ -422,56 +428,14 @@ $(document).ready(function() {
 
 								</div>
 							</li>
+							</c:forEach>
 							<!-- //반복 -->
 
+							<!-- 글 리뷰 참고 -->
 							<li>
 								<div class="headArea">
 									<div class="subject">
 										<a href="javascript:;" class="accbtn">저렴한 가격에 커피맛과 향은 최고!!</a>
-									</div>
-									<div class="writer">[ezlin****]</div>
-									<div class="day">
-										<p>2014-03-24</p>
-										<p>
-											<img src="../images/ico/ico_star.gif" alt="별점" />
-											<img src="../images/ico/ico_star.gif" alt="별점" />
-											<img src="../images/ico/ico_star.gif" alt="별점" />
-										</p>
-									</div>
-								</div>
-
-								<div class="hideArea">
-									<div class="bodyArea">
-										너무 맛있어서 재주문 했습니다!<br/>쟈뎅 커피 너무 맛있어요!
-									</div>
-
-									<!-- 답변 -->
-									<div class="answer">
-										<div class="inbox">
-											<div class="aname">
-												<p>담당자</p>
-											</div>
-
-											<div class="atxt">
-												쟈뎅 커피를 사랑해주셔서 감사합니다. 앞으로도 노력하는 쟈뎅이 되겠습니다. 감사합니다.
-												쟈뎅 커피를 사랑해주셔서 감사합니다. 앞으로도 노력하는 쟈뎅이 되겠습니다. 감사합니다.
-											</div>
-										</div>
-									</div>
-									<!-- //답변 -->
-
-									<div class="modify">
-										<a href="#">수정</a>
-										<a href="#">삭제</a>
-									</div>
-
-								</div>
-							</li>
-
-							<li>
-								<div class="headArea">
-									<div class="subject">
-										<a href="javascript:;" class="accbtn">저렴한 가격에 커피맛과 향은 최고!!저렴한 가격에 커피맛과 향은 최고!!저렴한 가격에 커피맛과 향은 최고!!</a>
 									</div>
 									<div class="writer">[ezlin****]</div>
 									<div class="day">

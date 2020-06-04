@@ -59,91 +59,24 @@ $(document).ready(function() {
 			<h2 class="brand">쟈뎅 메뉴<span>더 신선한 커피, 더 맛있는 커피</span></h2>
 
 			<div class="brandTab">
-				<ul>
-					<li><a href="#" class="nav1">원두</a></li>
-					<li><a href="#" class="nav2">커피백</a></li>
-					<li><a href="#" class="nav3">아이스음료</a></li>
-					<li><a href="#" class="nav4">인스턴트 커피</a></li>
-					<li><a href="#" class="nav5">티 음료</a></li>
+				<ul class ="nav1">
+				 <c:forEach var= "dto" items="${list_category }">
+					<li ><a href="p_list?p_category=${dto.p_category}">${dto.p_category}</a></li>
+				 </c:forEach>
 				</ul>
 			</div>
 
 			<div class="brandList" id="list1">
 				<ul>
 					<!-- 반복 -->
-					<c:forEach var="dto" items="${list }">
+					<c:forEach var="dto2" items="${list2}">
 					<li>
 						<a href="#">
-							<div class="img"><img src="../images/img/sample_brand.jpg" alt="제품이미지" /></div>
-							<div class="name">${dto.p_name}</div>
-							<div class="price">${dto.price }</div>
+							<div class="img"><img src="../images/img/mcoffee1.png" alt="제품이미지" /></div>
+							<div class="name">${dto2.p_name}</div>
+							<div class="price">${dto2.price }</div>
 						</a>
 					</li>
-					</class>
-					</c:forEach>
-					<!-- //반복 -->
-				</ul>
-			</div>
-			<div class="brandList" id="list2">
-				<ul>
-					<!-- 반복 -->
-					<c:forEach var="dto" items="${list }">
-					<li>
-						<a href="#">
-							<div class="img"><img src="../images/img/sample_brand.jpg" alt="제품이미지" /></div>
-							<div class="name">${dto.p_name}</div>
-							<div class="price">${dto.price }</div>
-						</a>
-					</li>
-					</class>
-					</c:forEach>
-					<!-- //반복 -->
-				</ul>
-			</div>
-			<div class="brandList" id="list3">
-				<ul>
-					<!-- 반복 -->
-					<c:forEach var="dto" items="${list }">
-					<li>
-						<a href="#">
-							<div class="img"><img src="../images/img/sample_brand.jpg" alt="제품이미지" /></div>
-							<div class="name">${dto.p_name}</div>
-							<div class="price">${dto.price }</div>
-						</a>
-					</li>
-					</class>
-					</c:forEach>
-					<!-- //반복 -->
-				</ul>
-			</div>
-			<div class="brandList" id="list4">
-				<ul>
-					<!-- 반복 -->
-					<c:forEach var="dto" items="${list }">
-					<li>
-						<a href="#">
-							<div class="img"><img src="../images/img/sample_brand.jpg" alt="제품이미지" /></div>
-							<div class="name">${dto.p_name}</div>
-							<div class="price">${dto.price }</div>
-						</a>
-					</li>
-					</class>
-					</c:forEach>
-					<!-- //반복 -->
-				</ul>
-			</div>
-			<div class="brandList" id="list5">
-				<ul>
-					<!-- 반복 -->
-					<c:forEach var="dto" items="${list }">
-					<li>
-						<a href="#">
-							<div class="img"><img src="../images/img/sample_brand.jpg" alt="제품이미지" /></div>
-							<div class="name">${dto.p_name}</div>
-							<div class="price">${dto.price }</div>
-						</a>
-					</li>
-					</class>
 					</c:forEach>
 					<!-- //반복 -->
 				</ul>

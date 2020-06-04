@@ -4,11 +4,32 @@
 
 <mapper namespace="com.javalec.ex.Dao.PDao">
 
-	<select id="list" resultType="com.javalec.ex.Dto.PDto.ProductDto">
-		select * from product order by p_udate asc
+	<select id="list"
+		resultType="com.javalec.ex.Dto.PDto.ProductDto">
+		select * from product
 	</select>
-	<select id="productDetail" resultType="com.javalec.ex.Dto.PDto.ProductDto">
+
+	<select id="list2"
+		resultType="com.javalec.ex.Dto.PDto.ProductDto">
+		select * from product where p_category=#{param1}
+	</select>
+	<select id="list_category"
+		resultType="com.javalec.ex.Dto.PDto.ProductDto">
+		select * from product where p_category=#{param1}
+	</select>
+	<select id="productDetail"
+		resultType="com.javalec.ex.Dto.PDto.ProductDto">
 		select * from PRODUCT where P_CODE=#{param1}
+	</select>
+	<select id="p_review"
+		resultType="com.javalec.ex.Dto.CDto.P_ReviewDto">
+		select id, pr_title, pr_content, pr_file, pr_score, pr_hit, pr_wdate from
+		p_review where p_code=#{param1}
+	</select>
+	<select id="c_review"
+		resultType="com.javalec.ex.Dto.CDto.C_ReviewDto">
+		select id, cr_title, cr_content, cr_score, cr_wdate from c_review where
+		p_code=#{param1}
 	</select>
 
 

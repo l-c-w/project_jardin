@@ -7,7 +7,9 @@
 	<select id="list" resultType="com.javalec.ex.Dto.PDto.ProductDto">
 		select * from product order by p_udate asc
 	</select>
-	
+	<select id="productDetail" resultType="com.javalec.ex.Dto.PDto.ProductDto">
+		select * from PRODUCT where P_CODE=#{param1}
+	</select>
 
 
 

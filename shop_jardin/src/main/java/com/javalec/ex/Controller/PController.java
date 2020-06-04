@@ -9,6 +9,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.javalec.ex.Dao.PDao;
+import com.javalec.ex.Service.PService.PDetailService;
 import com.javalec.ex.Service.PService.PListService;
 import com.javalec.ex.Service.PService.PService;
 
@@ -33,10 +34,15 @@ public class PController {
 	}
 	
 	@RequestMapping("/p_detail")
-	public String p_detail() {
+	public String p_detail(HttpServletRequest request, Model model) {
 		
+		ps = new PDetailService();
+		ps.execute(request, sqlsession, model);
 		return "product/p_detail";
 	}
 	
-
+	
+	
+	
+	
 }

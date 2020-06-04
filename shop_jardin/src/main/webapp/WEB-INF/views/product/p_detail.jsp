@@ -106,10 +106,8 @@ $(document).ready(function() {
 							<li>
 								<div class="stit">평점</div> 
 								<div>
-									<c:forEach var="pro" items="${product }">
 									<img src="../images/ico/ico_star.gif" alt="별점" />
 									<img src="../images/ico/ico_star_off.gif" alt="별점" />									
-									</c:forEach>
 								</div>
 							</li>
 						</ul>

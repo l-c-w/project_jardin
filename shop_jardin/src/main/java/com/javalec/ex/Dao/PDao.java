@@ -8,4 +8,6 @@ import com.javalec.ex.Dto.PDto.ProductDto;
 public interface PDao {
 
 	public ArrayList<ProductDto> list ();
+	
+	public ProductDto productDetail(String p_code);
 }

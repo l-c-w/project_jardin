@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -71,127 +73,19 @@ $(document).ready(function() {
 			<div class="brandList">
 				<ul>
 					<!-- 반복 -->
+					<c:forEach var="dto" items="${list }">
 					<li>
 						<a href="#">
 							<div class="img"><img src="../images/img/sample_brand.jpg" alt="제품이미지" /></div>
-							<div class="name">쟈뎅 바리스타 벨벳<br/>에스프레소 원두커피</div>
-							<div class="price">5,600원</div>
+							<div class="name">${dto.p_name}</div>
+							<div class="price">${dto.price }</div>
 						</a>
 					</li>
 					<!-- //반복 -->
-
-					<li>
-						<a href="#">
-							<div class="img"><img src="../images/img/sample_brand.jpg" alt="제품이미지" /></div>
-							<div class="name">쟈뎅 바리스타 벨벳<br/>에스프레소 원두커피</div>
-							<div class="price">5,600원</div>
-						</a>
-					</li>
-
-					<li>
-						<a href="#">
-							<div class="img"><img src="../images/img/sample_brand.jpg" alt="제품이미지" /></div>
-							<div class="name">쟈뎅 바리스타 벨벳<br/>에스프레소 원두커피</div>
-							<div class="price">5,600원</div>
-						</a>
-					</li>
-
-					<li>
-						<a href="#">
-							<div class="img"><img src="../images/img/sample_brand.jpg" alt="제품이미지" /></div>
-							<div class="name">쟈뎅 바리스타 벨벳<br/>에스프레소 원두커피</div>
-							<div class="price">5,600원</div>
-						</a>
-					</li>
-
-					<li>
-						<a href="#">
-							<div class="img"><img src="../images/img/sample_brand.jpg" alt="제품이미지" /></div>
-							<div class="name">쟈뎅 바리스타 벨벳<br/>에스프레소 원두커피</div>
-							<div class="price">5,600원</div>
-						</a>
-					</li>
-
-					<li>
-						<a href="#">
-							<div class="img"><img src="../images/img/sample_brand.jpg" alt="제품이미지" /></div>
-							<div class="name">쟈뎅 바리스타 벨벳<br/>에스프레소 원두커피</div>
-							<div class="price">5,600원</div>
-						</a>
-					</li>
-
-					<li>
-						<a href="#">
-							<div class="img"><img src="../images/img/sample_brand.jpg" alt="제품이미지" /></div>
-							<div class="name">쟈뎅 바리스타 벨벳<br/>에스프레소 원두커피</div>
-							<div class="price">5,600원</div>
-						</a>
-					</li>
-
-					<li>
-						<a href="#">
-							<div class="img"><img src="../images/img/sample_brand.jpg" alt="제품이미지" /></div>
-							<div class="name">쟈뎅 바리스타 벨벳<br/>에스프레소 원두커피</div>
-							<div class="price">5,600원</div>
-						</a>
-					</li>
-
-					<li>
-						<a href="#">
-							<div class="img"><img src="../images/img/sample_brand.jpg" alt="제품이미지" /></div>
-							<div class="name">쟈뎅 바리스타 벨벳<br/>에스프레소 원두커피</div>
-							<div class="price">5,600원</div>
-						</a>
-					</li>
-
-					<li>
-						<a href="#">
-							<div class="img"><img src="../images/img/sample_brand.jpg" alt="제품이미지" /></div>
-							<div class="name">쟈뎅 바리스타 벨벳<br/>에스프레소 원두커피</div>
-							<div class="price">5,600원</div>
-						</a>
-					</li>
-
-					<li>
-						<a href="#">
-							<div class="img"><img src="../images/img/sample_brand.jpg" alt="제품이미지" /></div>
-							<div class="name">쟈뎅 바리스타 벨벳<br/>에스프레소 원두커피</div>
-							<div class="price">5,600원</div>
-						</a>
-					</li>
-
-					<li>
-						<a href="#">
-							<div class="img"><img src="../images/img/sample_brand.jpg" alt="제품이미지" /></div>
-							<div class="name">쟈뎅 바리스타 벨벳<br/>에스프레소 원두커피</div>
-							<div class="price">5,600원</div>
-						</a>
-					</li>
-
-					<li>
-						<a href="#">
-							<div class="img"><img src="../images/img/sample_brand.jpg" alt="제품이미지" /></div>
-							<div class="name">쟈뎅 바리스타 벨벳<br/>에스프레소 원두커피</div>
-							<div class="price">5,600원</div>
-						</a>
-					</li>
-
-					<li>
-						<a href="#">
-							<div class="img"><img src="../images/img/sample_brand.jpg" alt="제품이미지" /></div>
-							<div class="name">쟈뎅 바리스타 벨벳<br/>에스프레소 원두커피</div>
-							<div class="price">5,600원</div>
-						</a>
-					</li>
-
-					<li>
-						<a href="#">
-							<div class="img"><img src="../images/img/sample_brand.jpg" alt="제품이미지" /></div>
-							<div class="name">쟈뎅 바리스타 벨벳<br/>에스프레소 원두커피</div>
-							<div class="price">5,600원</div>
-						</a>
-					</li>
+					</c:forEach>
 				</ul>
+
+					
 			</div>
 
 			<!-- quickmenu -->

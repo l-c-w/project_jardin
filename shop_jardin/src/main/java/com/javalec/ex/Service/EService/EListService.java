@@ -63,6 +63,7 @@ public class EListService implements EService {
 		if(endpage > startpage + 10 - 1)
 			endpage = startpage + 10 - 1;
 		
+		
 		model.addAttribute("event_list", list);
 		
 		model.addAttribute("listcount", listcount);

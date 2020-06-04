@@ -41,8 +41,6 @@ public class EController {
 	public String event_view(HttpServletRequest request, Model model) {
 		es = new ECommentService();
 		es.execute( request,sqlSession, model);
-		EDao dao = sqlSession.getMapper(EDao.class);
-		model.addAttribute("event_view", dao.event_view(request.getParameter("e_code")));
 		return "event/event_view";
 	}
 	

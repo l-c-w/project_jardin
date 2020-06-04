@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -82,22 +83,22 @@ $(document).ready(function() {
 				<div class="info">
 					<p class="title">
 						<span>[오리지널]</span>
-						쟈뎅 오리지널 콜롬비아 페레이라 원두커피백 15p
+						관리자페이지에서 만든 제목이 표시됩니다 ${product.stock }p
 					</p>
 
 					<div class="priceInfo">
 						<ul>
 							<li>
-								<div class="stit">판매가</div> <div class="heavygray"><strong>4,330원</strong></div>
+								<div class="stit">판매가</div> <div class="heavygray"><strong>${product.price }</strong></div>
 							</li>
 							<li>
-								<div class="stit">포인트</div> <div class="orange"><strong>216 Point</strong></div>
+								<div class="stit">포인트</div> <div class="orange"><strong>${product.p_point }</strong></div>
 							</li>
 							<li>
-								<div class="stit">칼로리</div> <div>45kcal</div>
+								<div class="stit">칼로리</div> <div>${product.calorie }kcal</div>
 							</li>
 							<li>
-								<div class="stit">용량</div> <div>3.8kg+15p</div>
+								<div class="stit">용량</div> <div>${product.capacity }kg+${product.stock }p</div>
 							</li>
 							<li>
 								<div class="stit">수량</div> <div class="num"><input id="spinner" value="1" /></div>
@@ -105,11 +106,10 @@ $(document).ready(function() {
 							<li>
 								<div class="stit">평점</div> 
 								<div>
+									<c:forEach var="pro" items="${product }">
 									<img src="../images/ico/ico_star.gif" alt="별점" />
-									<img src="../images/ico/ico_star.gif" alt="별점" />
-									<img src="../images/ico/ico_star.gif" alt="별점" />
-									<img src="../images/ico/ico_star.gif" alt="별점" />
-									<img src="../images/ico/ico_star_off.gif" alt="별점" />
+									<img src="../images/ico/ico_star_off.gif" alt="별점" />									
+									</c:forEach>
 								</div>
 							</li>
 						</ul>
@@ -175,7 +175,7 @@ $(document).ready(function() {
 							<tbody>
 								<tr>
 									<th scope="row" class="info"><span>제조명</span></th>
-									<td>원두커피백</td>
+									<td>${product.p_name }</td>
 									<th scope="row" class="info"><span>내용량</u></span></th>
 									<td>일회용 원두커피 티백</td>
 								</tr>
@@ -196,7 +196,7 @@ $(document).ready(function() {
 
 								<tr>
 									<th scope="row" class="info"><span>식품의 <u>유형</u></span></th>
-									<td>인스턴트 커피</td>
+									<td>${product.p_category }</td>
 									<th scope="row" class="info"><span>유통전문<u>판매원</u></span></th>
 									<td></td>
 								</tr>
@@ -208,7 +208,7 @@ $(document).ready(function() {
 
 								<tr>
 									<th scope="row" class="info"><span>원재료명 <u>및 함량</u></span></th>
-									<td colspan="3">열량 95kcal, 탄수화물 16g, 당류 11g, 단백질 1g, 지방 2.9g, 포화지방 2.8, 트랜스지방 0g, 콜레스테롤 0mg</td>
+									<td colspan="3">열량 ${product.calorie }kcal, 탄수화물 16g, 당류 11g, 단백질 1g, 지방 2.9g, 포화지방 2.8, 트랜스지방 0g, 콜레스테롤 0mg</td>
 								</tr>
 
 								<tr>

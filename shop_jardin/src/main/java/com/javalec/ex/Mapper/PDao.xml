@@ -8,7 +8,6 @@
 		resultType="com.javalec.ex.Dto.PDto.ProductDto">
 		select * from product
 	</select>
-
 	<select id="list2"
 		resultType="com.javalec.ex.Dto.PDto.ProductDto">
 		select * from product where p_category=#{param1}

@@ -3,7 +3,6 @@
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="UTF-8">
 <title> JARDIN SHOP </title>
 <meta charset="UTF-8" />
 <meta http-equiv="X-UA-Compatible" content="IE=edge" />
@@ -26,12 +25,12 @@ $(function() {
 <div class="inputWrap">
 		
 	<div class="inputBody">
-		<div class="title">구매 후기 작성하기</div>
+		<div class="title">포토리뷰 작성하기</div>
 		<p class="close"><a onclick="parent.$.fancybox.close();" href="javascript:;"><img src="../images/btn/btn_input_close.gif" alt="닫기" /></a></p>
 			
 		<div class="checkDivMt">
-			<table summary="분류, 구매여부, 평가, 제목, 상세 내용 순으로 포토 리뷰를 작성 하실수 있습니다." class="checkTable" border="1" cellspacing="0">
-				<caption>구매 후기 작성</caption>
+			<table summary="분류, 구매여부, 작은이미지, 평가, 제목, 상세 내용 순으로 포토 리뷰를 작성 하실수 있습니다." class="checkTable" border="1" cellspacing="0">
+				<caption>포토 리뷰 작성</caption>
 				<colgroup>
 				<col width="19%" class="tw30" />
 				<col width="*" />
@@ -55,6 +54,12 @@ $(function() {
 							<select>
 								<option value="">구매했어요.</option>
 							</select>
+						</td>
+					</tr>
+					<tr>
+						<th scope="row"><span>작은이미지</span></th>
+						<td>
+							<input type="file" class="fileType" />
 						</td>
 					</tr>
 					<tr>

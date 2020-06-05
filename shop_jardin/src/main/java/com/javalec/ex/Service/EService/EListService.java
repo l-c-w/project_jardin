@@ -25,7 +25,7 @@ public class EListService implements EService {
 		
 		System.out.println("EListService - request : " + request);
 		
-		temp = request.getParameter("page");	
+		temp = request.getParameter("page");
 		System.out.println("temp : " + temp);
 		
 		if(temp == null) {
@@ -42,7 +42,6 @@ public class EListService implements EService {
 //		if(request.getParameter("page") != null) {
 //			page = Integer.parseInt(request.getParameter("page"));
 //		}
-		System.out.println("parameter - page : " + page);
 		
 		EDao dao = sqlSession.getMapper(EDao.class);
 		

@@ -134,28 +134,32 @@ $(document).ready(function() {
 					</div>
 
 					<div class="replyBox">
+						<!-- 댓글 수정 -->
+						<c:if test="">
+						<ul class="">
+							<li class="name">${e_com.id } </li>
+							<li class="txt"><textarea class="replyType">${e_com.ec_content }</textarea></li>
+							<li class="btn">
+								<a href="event_view?e_code=${e_code }&ec_content=${e_com.ec_content }" class="rebtn">등록</a>
+								<a href="#" class="rebtn">삭제</a>
+							</li>
+						</ul>
+						</c:if>
+						<!-- 댓글 표시 -->
+						<c:if test="">
 						<c:forEach var="e_com" items="${event_comment }">
 						<ul>
 							<fmt:formatDate var="ec_wdate1" value="${e_com.ec_wdate }" pattern="YYYY/MM/dd" />
 							<fmt:formatDate var="ec_wdate2" value="${e_com.ec_wdate }" pattern="hh:mm:ss" />
-							<li class="name"> <span>[${e_com.ec_wdate1 }&nbsp;&nbsp;${e_com.ec_wdate2 }]</span></li>
-							<li class="txt"><textarea class="replyType"></textarea></li>
+							<li class="name">${e_com.id } <span>[${ec_wdate1 }&nbsp;&nbsp;${ec_wdate2 }]</span></li>
+							<li class="txt">${e_com.ec_content }</li>
 							<li class="btn">
-								<a href="#" class="rebtn">수정</a>
+								<a href="javascript:" class="rebtn">수정</a>
 								<a href="#" class="rebtn">삭제</a>
 							</li>
 						</ul>
 						</c:forEach>
-						
-						<!-- 댓글 형식 참고 -->
-						<ul>
-							<li class="name">jjabcde <span>[2014-03-04&nbsp;&nbsp;15:01:59]</span></li>
-							<li class="txt">대박!!! 이거 저한테 완전 필요한 이벤트였어요!!</li>
-							<li class="btn">
-								<a href="#" class="rebtn">수정</a>
-								<a href="#" class="rebtn">삭제</a>
-							</li>
-						</ul>
+						</c:if>
 						
 						<!-- 비밀글, 없애기로 한 기능-->
 <!-- 						<ul> -->
@@ -168,14 +172,14 @@ $(document).ready(function() {
 					<!-- //댓글 -->
 
 					<!-- 페이징이동1(searchFlag가 없을때) -->
-						<div class="allPageMoving1">
+						<div class="allPageMoving1" style="margin-left: 250px;">
 
-						<a href="event_comment?page=${startpage }" class="n"><img src="../images/btn/btn_pre2.gif" alt="처음으로"/></a>
+						<a href="event_view?e_code=${e_code}&page=${startpage }" class="n"><img src="../images/btn/btn_pre2.gif" alt="처음으로"/></a>
 						<c:if test="${page <= 1 }">
 							<img src="../images/btn/btn_pre1.gif" alt="앞페이지로"/>
 						</c:if>
 						<c:if test="${page > 1 }">
-							<a href="event_comment?page=${page - 1 }" class="pre">
+							<a href="event_view?e_code=${e_code}&page=${page - 1 }" class="pre">
 							<img src="../images/btn/btn_pre1.gif" alt="앞페이지로"/></a>
 						</c:if>
 						
@@ -185,7 +189,7 @@ $(document).ready(function() {
 								<strong>${a }</strong>
 							</c:when>
 							<c:when test="${a != page }">
-								<a href="event_comment?page=${a }">${a }</a>
+								<a href="event_view?e_code=${e_code}&page=${a }">${a }</a>
 							</c:when>
 						</c:choose>						
 						</c:forEach>
@@ -194,10 +198,10 @@ $(document).ready(function() {
 						<img src="../images/btn/btn_next1.gif" alt="뒤페이지로"/>
 						</c:if>
 						<c:if test="${page < maxpage}">
-						<a href="event_comment?page=${page + 1 }" class="next">
+						<a href="event_view?e_code=${e_code}&page=${page + 1 }" class="next">
 						<img src="../images/btn/btn_next1.gif" alt="뒤페이지로"/></a>
 						</c:if>						
-						<a href="event_comment?page=${maxpage }" class="n"><img src="../images/btn/btn_next2.gif" alt="마지막페이지로"/></a>
+						<a href="event_view?e_code=${e_code}&page=${maxpage }" class="n"><img src="../images/btn/btn_next2.gif" alt="마지막페이지로"/></a>
 
 						</div>
 						<!-- //페이징이동1(searchFlag가 없을때) -->
@@ -207,7 +211,7 @@ $(document).ready(function() {
 					<div class="btnArea">
 						<div class="bRight">
 							<ul>
-								<li><a href="#" class="sbtnMini mw">목록</a></li>
+								<li><a href="event_list" class="sbtnMini mw">목록</a></li>
 							</ul>
 						</div>
 					</div>

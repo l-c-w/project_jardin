@@ -18,6 +18,7 @@ import com.javalec.ex.Dto.EDto.EventDto;
 import com.javalec.ex.Service.CService.CService;
 import com.javalec.ex.Service.EService.ECommentService;
 import com.javalec.ex.Service.EService.EListService;
+import com.javalec.ex.Service.EService.EModifyCommentController;
 import com.javalec.ex.Service.EService.EService;
 
 @Controller
@@ -40,16 +41,16 @@ public class EController {
 	@RequestMapping("/event_view")
 	public String event_view(HttpServletRequest request, Model model) {
 		es = new ECommentService();
-		es.execute( request,sqlSession, model);
+		es.execute(request, sqlSession, model);
 		return "event/event_view";
 	}
 	
-//	@RequestMapping("/event_comment")
-//	public String event_comment(HttpServletRequest request, Model model) {
-//		es = new EListService();
-//		es.execute( request,sqlSession, model);
-//		return "event/event_comment";
-//	}
+	@RequestMapping("/modify_comment")
+	public String modify_comment(HttpServletRequest request, Model model) {
+		es = new EModifyCommentController();
+		es.execute(request, sqlSession, model);
+		return "event/modify_comment";
+	}
 	
 	
 }

@@ -267,7 +267,7 @@ $(document).ready(function() {
 			<!-- //notice -->
 
 			<!-- quickmenu -->
-			<div id="quick">
+			<!-- <div id="quick">
 				<div class="cart"><a href="#">장바구니</a></div>
 				<div class="wish">
 					<p class="title">위시 리스트</p>
@@ -301,7 +301,7 @@ $(document).ready(function() {
 				</div>
 
 				<div class="top"><a href="#">TOP&nbsp;&nbsp;<img src="../images/ico/ico_top.gif" alt="" /></a></div>
-			</div>
+			</div> -->
 			<script type="text/javascript">
 			$(function(){
 				

@@ -12,10 +12,11 @@ public interface EDao {
 	
 	public int getListCount();
 	
-	public int getCommentCount();
+	public int getCommentCount(String e_code);
 	
 	public EventDto event_view(String e_code);
 	
 	public ArrayList<Event_commentDto> event_comment(String e_code, int page, int limit);
 	
+	public Event_commentDto eModify_comment(String e_code, String content);
 }

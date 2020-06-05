@@ -38,12 +38,6 @@ $(function() {
 				</colgroup>
 				<tbody>
 					<tr>
-						<th scope="row"><span>비밀번호</span></th>
-						<td>
-							<input type="password" class="w134" />
-						</td>
-					</tr>
-					<tr>
 						<th scope="row"><span>제목</span></th>
 						<td>
 							<input type="text" class="wlong" />

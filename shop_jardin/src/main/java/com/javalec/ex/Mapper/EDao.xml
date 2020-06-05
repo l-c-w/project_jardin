@@ -22,7 +22,7 @@
 		from (select * from event_comment ec where e_code=#{param1} order by ec_wdate desc))
         event where rnum>=#{param2} and rnum<=#{param3}]]>
 	</select>
-	<update id="eModify_comment" resultType="com.javalec.ex.Dto.EDto.Event_commentDto">
+	<update id="eModify_comment" >
 		update EVENT_COMMENT set EC_CONTENT=#{param2} where EC_NUM=#{param1}
 	</update>
 

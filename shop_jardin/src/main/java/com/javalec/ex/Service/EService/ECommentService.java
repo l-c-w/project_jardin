@@ -66,7 +66,7 @@ public class ECommentService implements EService {
 //		Event_commentDto ecdto = 
 				dao.eModify_comment(e_code, content);
 			
-		
+		// ↑ 이거를 따로 빼놔야할 것 같음
 		
 		
 

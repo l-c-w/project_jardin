@@ -111,7 +111,7 @@ $(document).ready(function() {
 
 							<!-- List -->
 							
-							<c:forEach var="p_list" items="${plist}">
+							<c:forEach var="p_list" items="${viewAll}">
 							
 							<li>
 							
@@ -217,31 +217,134 @@ $(document).ready(function() {
 						</div>
 
 
-						<!-- 페이징이동1 -->
-						
-						<div class="allPageMoving1">
 
-						<a href="#" class="n"><img src="../images/btn/btn_pre2.gif" alt="처음으로"/></a><a href="#" class="pre"><img src="../images/btn/btn_pre1.gif" alt="앞페이지로"/></a>
+
+
+						<!-- 페이징이동1 -->
+
+						<div class="allPageMoving1">
+						
+						<%-- 	<div style="float: right;">
+								<select id="cntPerPage" name="sel" onchange="selChange()">
+									<option value="5"
+										<c:if test="${paging.cntPerPage == 5}">selected</c:if>>5줄
+										보기</option>
+									<option value="10"
+										<c:if test="${paging.cntPerPage == 10}">selected</c:if>>10줄
+										보기</option>
+									<option value="15"
+										<c:if test="${paging.cntPerPage == 15}">selected</c:if>>15줄
+										보기</option>
+									<option value="20"
+										<c:if test="${paging.cntPerPage == 20}">selected</c:if>>20줄
+										보기</option>
+								</select>
+							</div>
+							<!-- 옵션선택 끝 --> --%>
+							
+						
+							<div style="display: block; text-align: center;">
+
+
+								<!-- 첫페이지 이동 -->
+								<a href="epilogue_list?nowPage=${paging.startPage}&cntPerPage=${paging.cntPerPage}" class="n">
+								<img src="../images/btn/btn_pre2.gif" alt="처음으로"/>
+								</a>
+
+
+								<!-- 이전페이지로 이동 -->
+
+								<c:if test="${paging.startPage != 1 }">
+									<a href="epilogue_list?nowPage=${paging.startPage - 1}&cntPerPage=${paging.cntPerPage}" class="pre">
+									<img src="../images/btn/btn_pre1.gif" alt="앞페이지로"/>
+									&lt;</a>
+								</c:if>
+								
+								
+								
+								<!-- 순차 -->
+								
+								<c:forEach begin="${paging.startPage}" end="${paging.endPage}" var="p">
+									
+									<c:choose>
+									
+										<c:when test="${p == paging.nowPage}">
+											<b>${p}</b>
+										</c:when>
+										
+										
+										<c:when test="${p != paging.nowPage }">
+											<a href="epilogue_list?nowPage=${p}&cntPerPage=${paging.cntPerPage}">${p}</a>
+										</c:when>
+										
+									</c:choose>
+									
+								</c:forEach>
+								
+								
+								
+								
+								<!-- 다음페이지 이동 -->
+							
+								<c:if test="${paging.endPage != paging.lastPage}" >
+									<a href="epilogue_list?nowPage=${paging.endPage+1}&cntPerPage=${paging.cntPerPage}" class="next">&gt;
+									<img src="../images/btn/btn_next1.gif" alt="뒤페이지로"/></a>
+								</c:if>
+
+
+						
+
+
+								<!-- 마지막 페이지 이동 -->
+								<a href="epilogue_list?nowPage=${paging.lastPage}" class="n" >
+								<img src="../images/btn/btn_next2.gif" alt="마지막페이지로"/>
+								</a>
+
+							</div>
+							
+							
+						</div>
+
+
+
+						<!-- <div class="allPageMoving1">
+
+						<a href="#" class="n"><img src="../images/btn/btn_pre2.gif" alt="처음으로"/></a>
+						<a href="#" class="pre"><img src="../images/btn/btn_pre1.gif" alt="앞페이지로"/></a>
+						
 						<strong>1</strong>
+						
 						<a href="#">2</a>
 						<a href="#">3</a>
 						<a href="#">4</a>
 						<a href="#">5</a>
-						<a href="#" class="next"><img src="../images/btn/btn_next1.gif" alt="뒤페이지로"/></a><a href="#" class="n"><img src="../images/btn/btn_next2.gif" alt="마지막페이지로"/></a>
+						
+						<a href="#" class="next"><img src="../images/btn/btn_next1.gif" alt="뒤페이지로"/></a>
+						<a href="#" class="n"><img src="../images/btn/btn_next2.gif" alt="마지막페이지로"/></a>
+
 
 						</div>
+						 -->
+						
+						
 						<!-- //페이징이동1 -->
 						
 						
 						
+						
 					</div>
+					
+					
+					
 
 					<div class="searchWrap">
 					
 						<div class="search">
 						
 							<ul>
+							
 								<li class="web"><img src="../images/txt/txt_search.gif" alt="search" /></li>
+								
 								
 								<li class="se">
 								
@@ -254,6 +357,7 @@ $(document).ready(function() {
 								</li>
 								
 								
+								
 								<li><input type="text" class="searchInput" /></li>
 								
 								<li class="web"><a href="#"><img src="../images/btn/btn_search.gif" alt="검색" /></a></li>
@@ -261,18 +365,31 @@ $(document).ready(function() {
 								<li class="mobile"><a href="#"><img src="../images/btn/btn_search_m.gif" alt="검색" /></a></li>
 								
 							</ul>
+							
 						</div>
 					</div>
 					<!-- //포토 구매후기 -->
 
 
+
+
+
+
 				</div>
 			</div>
 			<!-- //contents -->
+			
+			
+			
+			
 
 		</div>
 	</div>
 	<!-- //container -->
+	
+	
+	
+	
 
 <!-- footer 붙여넣기 -->
 	<jsp:include page="../footer.jsp"/>

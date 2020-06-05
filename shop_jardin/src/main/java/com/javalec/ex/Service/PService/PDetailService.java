@@ -28,6 +28,9 @@ public class PDetailService implements PService {
 		model.addAttribute("product", pdto);
 
 		// 관련상품
+		String category = request.getParameter("p_category");
+		ArrayList<ProductDto> list2 = new ArrayList<ProductDto>();
+		model.addAttribute("list2",dao.list2(category));
 
 		System.out.println("상품리뷰");
 		// 상품리뷰 포토 리뷰

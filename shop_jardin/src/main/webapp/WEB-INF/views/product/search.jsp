@@ -78,126 +78,16 @@ $(document).ready(function() {
 			<div class="brandList">
 				<ul>
 					<!-- 반복 -->
+					<c:forEach var="dto2" items="${list2}">
 					<li>
 						<a href="#">
-							<div class="img"><img src="../images/img/sample_brand.jpg" alt="제품이미지" /></div>
-							<div class="name">쟈뎅 바리스타 벨벳<br/>에스프레소 원두커피</div>
-							<div class="price">5,600원</div>
+							<div class="img"><img src="../images/img/mcoffee1.png" alt="제품이미지" /></div>
+							<div class="name">${dto2.p_name}</div>
+							<div class="price">${dto2.price }</div>
 						</a>
 					</li>
+					</c:forEach>
 					<!-- //반복 -->
-
-					<li>
-						<a href="#">
-							<div class="img"><img src="../images/img/sample_brand.jpg" alt="제품이미지" /></div>
-							<div class="name">쟈뎅 바리스타 벨벳<br/>에스프레소 원두커피</div>
-							<div class="price">5,600원</div>
-						</a>
-					</li>
-
-					<li>
-						<a href="#">
-							<div class="img"><img src="../images/img/sample_brand.jpg" alt="제품이미지" /></div>
-							<div class="name">쟈뎅 바리스타 벨벳<br/>에스프레소 원두커피</div>
-							<div class="price">5,600원</div>
-						</a>
-					</li>
-
-					<li>
-						<a href="#">
-							<div class="img"><img src="../images/img/sample_brand.jpg" alt="제품이미지" /></div>
-							<div class="name">쟈뎅 바리스타 벨벳<br/>에스프레소 원두커피</div>
-							<div class="price">5,600원</div>
-						</a>
-					</li>
-
-					<li>
-						<a href="#">
-							<div class="img"><img src="../images/img/sample_brand.jpg" alt="제품이미지" /></div>
-							<div class="name">쟈뎅 바리스타 벨벳<br/>에스프레소 원두커피</div>
-							<div class="price">5,600원</div>
-						</a>
-					</li>
-
-					<li>
-						<a href="#">
-							<div class="img"><img src="../images/img/sample_brand.jpg" alt="제품이미지" /></div>
-							<div class="name">쟈뎅 바리스타 벨벳<br/>에스프레소 원두커피</div>
-							<div class="price">5,600원</div>
-						</a>
-					</li>
-
-					<li>
-						<a href="#">
-							<div class="img"><img src="../images/img/sample_brand.jpg" alt="제품이미지" /></div>
-							<div class="name">쟈뎅 바리스타 벨벳<br/>에스프레소 원두커피</div>
-							<div class="price">5,600원</div>
-						</a>
-					</li>
-
-					<li>
-						<a href="#">
-							<div class="img"><img src="../images/img/sample_brand.jpg" alt="제품이미지" /></div>
-							<div class="name">쟈뎅 바리스타 벨벳<br/>에스프레소 원두커피</div>
-							<div class="price">5,600원</div>
-						</a>
-					</li>
-
-					<li>
-						<a href="#">
-							<div class="img"><img src="../images/img/sample_brand.jpg" alt="제품이미지" /></div>
-							<div class="name">쟈뎅 바리스타 벨벳<br/>에스프레소 원두커피</div>
-							<div class="price">5,600원</div>
-						</a>
-					</li>
-
-					<li>
-						<a href="#">
-							<div class="img"><img src="../images/img/sample_brand.jpg" alt="제품이미지" /></div>
-							<div class="name">쟈뎅 바리스타 벨벳<br/>에스프레소 원두커피</div>
-							<div class="price">5,600원</div>
-						</a>
-					</li>
-
-					<li>
-						<a href="#">
-							<div class="img"><img src="../images/img/sample_brand.jpg" alt="제품이미지" /></div>
-							<div class="name">쟈뎅 바리스타 벨벳<br/>에스프레소 원두커피</div>
-							<div class="price">5,600원</div>
-						</a>
-					</li>
-
-					<li>
-						<a href="#">
-							<div class="img"><img src="../images/img/sample_brand.jpg" alt="제품이미지" /></div>
-							<div class="name">쟈뎅 바리스타 벨벳<br/>에스프레소 원두커피</div>
-							<div class="price">5,600원</div>
-						</a>
-					</li>
-
-					<li>
-						<a href="#">
-							<div class="img"><img src="../images/img/sample_brand.jpg" alt="제품이미지" /></div>
-							<div class="name">쟈뎅 바리스타 벨벳<br/>에스프레소 원두커피</div>
-							<div class="price">5,600원</div>
-						</a>
-					</li>
-
-					<li>
-						<a href="#">
-							<div class="img"><img src="../images/img/sample_brand.jpg" alt="제품이미지" /></div>
-							<div class="name">쟈뎅 바리스타 벨벳<br/>에스프레소 원두커피</div>
-							<div class="price">5,600원</div>
-						</a>
-					</li>
-
-					<li>
-						<a href="#">
-							<div class="img"><img src="../images/img/sample_brand.jpg" alt="제품이미지" /></div>
-							<div class="name">쟈뎅 바리스타 벨벳<br/>에스프레소 원두커피</div>
-							<div class="price">5,600원</div>
-						</a>
-					</li>
 				</ul>
 			</div>
 

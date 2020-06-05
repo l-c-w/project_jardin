@@ -69,7 +69,7 @@ $(document).ready(function() {
 			<div class="brandList" id="list1">
 				<ul>
 					<!-- 반복 -->
-					<c:forEach var="dto2" items="${list}">
+					<c:forEach var="dto" items="${list}">
 					<li>
 						<a href="#">
 							<div class="img"><img src="../images/img/mcoffee1.png" alt="제품이미지" /></div>

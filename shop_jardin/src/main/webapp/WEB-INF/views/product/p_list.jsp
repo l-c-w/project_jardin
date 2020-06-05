@@ -58,23 +58,26 @@ $(document).ready(function() {
 
 			<div class="brandTab">
 				<ul>
-					<li><a href="p_list" class="hover">원두</a></li>
-					<li><a href="p_list2" >인스턴트 커피</a></li>
-					<li><a href="p_list3" >커피 백</a></li>
-					<li><a href="p_list4" >아이스 음료</a></li>
-					<li><a href="p_list5" >티 음료</a></li>
+				<c:forEach var="dto" items="${list_category}">
+					<c:if test="${dto.p_category == category}">
+						<li><a href="p_list?p_category=${dto.p_category}" class="hover">${dto.p_category }</a>
+					</c:if>
+					<c:if test="${dto.p_category != category}">
+						<li><a href="p_list?p_category=${dto.p_category}">${dto.p_category }</a>
+					</c:if>
+				</c:forEach>
 				</ul>
 			</div>
 
 			<div class="brandList" id="list1">
 				<ul>
 					<!-- 반복 -->
-					<c:forEach var="dto2" items="${list}">
+					<c:forEach var="dto2" items="${list2}">
 					<li>
 						<a href="#">
 							<div class="img"><img src="../images/img/mcoffee1.png" alt="제품이미지" /></div>
-							<div class="name">${dto.p_name}</div>
-							<div class="price">${dto.price }</div>
+							<div class="name">${dto2.p_name}</div>
+							<div class="price">${dto2.price }</div>
 						</a>
 					</li>
 					</c:forEach>

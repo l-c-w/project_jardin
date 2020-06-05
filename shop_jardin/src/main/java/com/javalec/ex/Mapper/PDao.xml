@@ -6,7 +6,16 @@
 
 	<select id="list"
 		resultType="com.javalec.ex.Dto.PDto.ProductDto">
-		select * from product 
+		select * from product
+	</select>
+
+	<select id="list2"
+		resultType="com.javalec.ex.Dto.PDto.ProductDto">
+		select * from product where p_category=#{param1}
+	</select>
+	<select id="list_category"
+		resultType="com.javalec.ex.Dto.PDto.ProductDto">
+		select * from product where p_category=#{param1}
 	</select>
 	<select id="productDetail"
 		resultType="com.javalec.ex.Dto.PDto.ProductDto">

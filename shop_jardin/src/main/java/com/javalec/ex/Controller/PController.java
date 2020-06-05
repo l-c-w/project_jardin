@@ -10,9 +10,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.javalec.ex.Dao.PDao;
 import com.javalec.ex.Dto.PDto.ProductDto;
+import com.javalec.ex.Service.MainService.MainListService;
 import com.javalec.ex.Service.PService.PDetailService;
 import com.javalec.ex.Service.PService.PListService;
 import com.javalec.ex.Service.PService.PService;
+import com.javalec.ex.Service.PService.PinquiryService;
+import com.javalec.ex.Service.PService.ReviewService;
 
 @Controller
 @RequestMapping("product")
@@ -22,6 +25,7 @@ public class PController {
 	private SqlSession sqlsession;
 
 	PService ps;
+	
 
 	@RequestMapping("/p_list")
 	public String p_list(HttpServletRequest request, Model model) {
@@ -33,53 +37,36 @@ public class PController {
 
 		return "product/p_list";
 	}
-	@RequestMapping("/p_list2")
-	public String p_list2(HttpServletRequest request, Model model) {
+	@RequestMapping("/review")
+	public String review(HttpServletRequest request, Model model) {
 
-		ps = new PListService();
+		ps = new ReviewService();
 		ps.execute(request, sqlsession, model);
 //		PDao dao = sqlsession.getMapper(PDao.class);
 //		model.addAttribute("list",dao.list());
 
-		return "product/p_list2";
+		return "product/review";
 	}
-	@RequestMapping("/p_list3")
-	public String p_list3(HttpServletRequest request, Model model) {
+	@RequestMapping("/photo")
+	public String photo(HttpServletRequest request, Model model) {
 
-		ps = new PListService();
+		ps = new PinquiryService();
 		ps.execute(request, sqlsession, model);
 //		PDao dao = sqlsession.getMapper(PDao.class);
 //		model.addAttribute("list",dao.list());
 
-		return "product/p_list3";
+		return "product/photo";
 	}
-	@RequestMapping("/p_list4")
-	public String p_list4(HttpServletRequest request, Model model) {
+	@RequestMapping("/p_inquiry")
+	public String p_inquiry(HttpServletRequest request, Model model) {
 
-		ps = new PListService();
+		ps = new PinquiryService();
 		ps.execute(request, sqlsession, model);
 //		PDao dao = sqlsession.getMapper(PDao.class);
 //		model.addAttribute("list",dao.list());
 
-		return "product/p_list4";
+		return "product/p_inquiry";
 	}
-	@RequestMapping("/p_list5")
-	public String p_list5(HttpServletRequest request, Model model) {
-
-		ps = new PListService();
-		ps.execute(request, sqlsession, model);
-//		PDao dao = sqlsession.getMapper(PDao.class);
-//		model.addAttribute("list",dao.list());
-
-		return "product/p_list5";
-	}
-//	@RequestMapping("/p_list")
-//	public String p_list(ProductDto PDto,Model model ) {
-//		PDao dao = sqlsession.getMapper(PDao.class);
-//		dao.p_list(PDto.getP_category());
-//		return "redirect:product/p_list";
-//	}
-	
 	@RequestMapping("/p_detail")
 	public String p_detail(HttpServletRequest request, Model model) {
 		
@@ -87,6 +74,7 @@ public class PController {
 		ps.execute(request, sqlsession, model);
 		return "product/p_detail";
 	}
+	
 	
 	
 	

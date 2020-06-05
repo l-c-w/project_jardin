@@ -244,14 +244,25 @@ $(document).ready(function() {
 							
 						
 							<div style="display: block; text-align: center;">
-							
-							
-							
-								<c:if test="${paging.startPage != 1 }">
-									<a href="epilogue_list?nowPage=${paging.startPage - 1}&cntPerPage=${paging.cntPerPage}">&lt;</a>
-								</c:if>
 
+
+								<!-- 첫페이지 이동 -->
+								<a href="epilogue_list?nowPage=${paging.startPage}&cntPerPage=${paging.cntPerPage}" class="n">
+								<img src="../images/btn/btn_pre2.gif" alt="처음으로"/>
+								</a>
+
+
+								<!-- 이전페이지로 이동 -->
+
+								<c:if test="${paging.startPage != 1 }">
+									<a href="epilogue_list?nowPage=${paging.startPage - 1}&cntPerPage=${paging.cntPerPage}" class="pre">
+									<img src="../images/btn/btn_pre1.gif" alt="앞페이지로"/>
+									&lt;</a>
+								</c:if>
 								
+								
+								
+								<!-- 순차 -->
 								
 								<c:forEach begin="${paging.startPage}" end="${paging.endPage}" var="p">
 									
@@ -272,18 +283,27 @@ $(document).ready(function() {
 								
 								
 								
-								<c:if test="${paging.endPage != paging.lastPage}">
-									<a href="epilogue_list?nowPage=${paging.endPage+1}&cntPerPage=${paging.cntPerPage}">&gt;</a>
+								
+								<!-- 다음페이지 이동 -->
+							
+								<c:if test="${paging.endPage != paging.lastPage}" >
+									<a href="epilogue_list?nowPage=${paging.endPage+1}&cntPerPage=${paging.cntPerPage}" class="next">&gt;
+									<img src="../images/btn/btn_next1.gif" alt="뒤페이지로"/></a>
 								</c:if>
-								
-								
+
+
+						
+
+
+								<!-- 마지막 페이지 이동 -->
+								<a href="epilogue_list?nowPage=${paging.lastPage}" class="n" >
+								<img src="../images/btn/btn_next2.gif" alt="마지막페이지로"/>
+								</a>
+
 							</div>
 							
 							
 						</div>
-
-
-
 
 
 

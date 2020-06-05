@@ -35,13 +35,46 @@ public class CController {
 	
 	
 	@RequestMapping("community/comment_list")
-	public String comment_list(Model model) {
+	public String comment_list(Model model,
+			PagingDto pagedto,
+			@RequestParam(value="nowPage", required=false) String nowPage,
+			@RequestParam(value="cntPerPage", required=false) String cntPerPage) {
+		
+		
+		
 		
 		CDao cao = sqlsession.getMapper(CDao.class);
 		
-		ArrayList<C_ReviewDto> cdto = cao.c_list();
 		
-		model.addAttribute("clist",cdto);
+		/*
+		 * ArrayList<C_ReviewDto> cdto = cao.c_list();
+		 * 
+		 * model.addAttribute("clist",cdto);
+		 */
+		
+		
+        int total = cao.c_countBoard();
+		
+		if (nowPage == null && cntPerPage == null) {
+			nowPage = "1";
+			cntPerPage = "5";
+		} 
+		
+		else if (nowPage == null) {
+			nowPage = "1";
+		} 
+		
+		else if (cntPerPage == null) { 
+			cntPerPage = "5";
+		}
+		
+		
+		pagedto = new PagingDto(total, Integer.parseInt(nowPage), Integer.parseInt(cntPerPage));
+		
+		model.addAttribute("paging", pagedto);
+			
+		model.addAttribute("viewAll", cao.c_selectBoard(pagedto));
+		
 		
 		return "community/comment_list";
 	}
@@ -93,7 +126,6 @@ public class CController {
 	
 
 	
-	
 
 	@RequestMapping("community/epilogue_list")
 	public String epilogue_list(Model model, 
@@ -109,10 +141,6 @@ public class CController {
 		 * 
 		 * model.addAttribute("plist",pdto);
 		 */
-		
-		
-		
-		//
 		
 		
 		
@@ -133,13 +161,11 @@ public class CController {
 		
 		
 		
-		
 		pagedto = new PagingDto(total, Integer.parseInt(nowPage), Integer.parseInt(cntPerPage));
 		
 		model.addAttribute("paging", pagedto);
 			
 		model.addAttribute("viewAll", cao.selectBoard(pagedto));
-		
 		
 		return "community/epilogue_list";
 		

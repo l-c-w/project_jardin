@@ -18,6 +18,16 @@ public interface CDao {
 	
 	public void c_write(String cr_title, String cr_content, int cr_score);
 	
+	// 게시물 총 갯수
+	public int c_countBoard();
+		
+	// 페이징 처리 게시글 조회
+	public ArrayList<C_ReviewDto> c_selectBoard(PagingDto pagingdto);
+	
+	
+	
+	
+	
 	
 	// 포토 상품평
 	
@@ -30,12 +40,19 @@ public interface CDao {
 	
 	
 	
+	
 	// 게시물 총 갯수
 	public int countBoard();
 	
-	
 	// 페이징 처리 게시글 조회
 	public ArrayList<P_ReviewDto> selectBoard(PagingDto pagingdto);
+	
+	
+	
+	
+	
+	
+	
 
 	
 	

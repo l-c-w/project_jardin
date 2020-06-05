@@ -269,9 +269,8 @@ $(document).ready(function() {
 									<c:choose>
 									
 										<c:when test="${p == paging.nowPage}">
-											<b>${p}</b>
+											<a href="#">${p}</a>
 										</c:when>
-										
 										
 										<c:when test="${p != paging.nowPage }">
 											<a href="epilogue_list?nowPage=${p}&cntPerPage=${paging.cntPerPage}">${p}</a>
@@ -283,7 +282,6 @@ $(document).ready(function() {
 								
 								
 								
-								
 								<!-- 다음페이지 이동 -->
 							
 								<c:if test="${paging.endPage != paging.lastPage}" >
@@ -291,9 +289,7 @@ $(document).ready(function() {
 									<img src="../images/btn/btn_next1.gif" alt="뒤페이지로"/></a>
 								</c:if>
 
-
 						
-
 
 								<!-- 마지막 페이지 이동 -->
 								<a href="epilogue_list?nowPage=${paging.lastPage}" class="n" >
@@ -301,7 +297,6 @@ $(document).ready(function() {
 								</a>
 
 							</div>
-							
 							
 						</div>
 
@@ -325,7 +320,6 @@ $(document).ready(function() {
 
 						</div>
 						 -->
-						
 						
 						<!-- //페이징이동1 -->
 						

@@ -27,6 +27,33 @@
 	
 	
 	
+	<!-- 총 게시글 갯수 출력 -->
+	<select id="c_countBoard" resultType="int">
+		SELECT COUNT(*) FROM c_review
+	</select>
+	
+	
+	<!-- 페이징 처리 후 게시글 조회 -->
+    <select id="c_selectBoard" resultType="com.javalec.ex.Dto.CDto.C_ReviewDto">
+       SELECT * 
+		FROM (
+			SELECT ROWNUM RN, A.* 
+				FROM (
+						SELECT * 
+						FROM c_review 
+						ORDER BY cr_num DESC 
+						) A
+				)
+	WHERE RN BETWEEN #{start} AND #{end}
+    </select>
+	
+	
+	
+	
+	
+	
+	
+	
 	
 	<!-- 포토 상품평  -->
 	
@@ -72,6 +99,17 @@
 				)
 	WHERE RN BETWEEN #{start} AND #{end}
     </select>
+
+
+
+
+
+
+
+
+
+
+
 
 
 

@@ -117,14 +117,12 @@ $(document).ready(function() {
 							<th scope="col" class="tnone">조회수</th>
 						</thead>
 						
-						
-						
 						<tbody>
 						
 						
 						<!-- 일반상품평 리스트 불러오기  -->
 						
-						<c:forEach var="c_list" items="${clist}">
+						<c:forEach var="c_list" items="${viewAll}">
 						
 							<tr>
 								<td class="tnone">${c_list.cr_num}</td>
@@ -174,40 +172,86 @@ $(document).ready(function() {
 						</div>
 						
 						
-						
-						
-						
-						
 
 						<!-- 페이징이동1 -->
-						
-						
-						
-						
+
 						<div class="allPageMoving1">
-
-
-
-						<a href="#" class="n"><img src="../images/btn/btn_pre2.gif" alt="처음으로"/></a><a href="#" class="pre"><img src="../images/btn/btn_pre1.gif" alt="앞페이지로"/></a>
 						
-						<strong>1</strong>
-						<a href="#">2</a>
-						<a href="#">3</a>
-						<a href="#">4</a>
-						<a href="#">5</a>
+						<%-- 	<div style="float: right;">
+								<select id="cntPerPage" name="sel" onchange="selChange()">
+									<option value="5"
+										<c:if test="${paging.cntPerPage == 5}">selected</c:if>>5줄
+										보기</option>
+									<option value="10"
+										<c:if test="${paging.cntPerPage == 10}">selected</c:if>>10줄
+										보기</option>
+									<option value="15"
+										<c:if test="${paging.cntPerPage == 15}">selected</c:if>>15줄
+										보기</option>
+									<option value="20"
+										<c:if test="${paging.cntPerPage == 20}">selected</c:if>>20줄
+										보기</option>
+								</select>
+							</div>
+							<!-- 옵션선택 끝 --> --%>
+							
 						
+							<div style="display: block; text-align: center;">
+
+
+								<!-- 첫페이지 이동 -->
+								<a href="epilogue_list?nowPage=${paging.startPage}&cntPerPage=${paging.cntPerPage}" class="n">
+								<img src="../images/btn/btn_pre2.gif" alt="처음으로"/>
+								</a>
+
+
+								<!-- 이전페이지로 이동 -->
+
+								<c:if test="${paging.startPage != 1 }">
+									<a href="epilogue_list?nowPage=${paging.startPage - 1}&cntPerPage=${paging.cntPerPage}" class="pre">
+									<img src="../images/btn/btn_pre1.gif" alt="앞페이지로"/>
+									&lt;</a>
+								</c:if>
+								
+								
+								<!-- 순차 -->
+								
+								<c:forEach begin="${paging.startPage}" end="${paging.endPage}" var="p">
+									
+									<c:choose>
+									
+										<c:when test="${p == paging.nowPage}">
+											<a href="#">${p}</a>
+										</c:when>
+										
+										
+										<c:when test="${p != paging.nowPage }">
+											<a href="epilogue_list?nowPage=${p}&cntPerPage=${paging.cntPerPage}">${p}</a>
+										</c:when>
+										
+									</c:choose>
+									
+								</c:forEach>
+								
+								
+								
+								<!-- 다음페이지 이동 -->
+							
+								<c:if test="${paging.endPage != paging.lastPage}" >
+									<a href="epilogue_list?nowPage=${paging.endPage+1}&cntPerPage=${paging.cntPerPage}" class="next">&gt;
+									<img src="../images/btn/btn_next1.gif" alt="뒤페이지로"/></a>
+								</c:if>
 						
-						<a href="#" class="next"><img src="../images/btn/btn_next1.gif" alt="뒤페이지로"/></a><a href="#" class="n"><img src="../images/btn/btn_next2.gif" alt="마지막페이지로"/></a>
 
 
+								<!-- 마지막 페이지 이동 -->
+								<a href="epilogue_list?nowPage=${paging.lastPage}" class="n" >
+								<img src="../images/btn/btn_next2.gif" alt="마지막페이지로"/>
+								</a>
 
+							</div>
+							
 						</div>
-						<!-- //페이징이동1 -->
-						
-						
-						
-						
-					</div>
 
 
 

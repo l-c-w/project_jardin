@@ -131,9 +131,7 @@ $(document).ready(function() {
 									<a href="#">
 										<span class="orange">[먹어봤어요]</span> 
 										
-										<a href="comment_view?id=${c_list.id}">
-										${c_list.cr_title}
-										</a>
+										<a href="comment_view?id=${c_list.id}">${c_list.cr_title}</a>
 										
 										<img src="../images/ico/ico_new.gif" alt="new" />
 									</a>
@@ -143,16 +141,12 @@ $(document).ready(function() {
 								
 								<td class="tnone">
 								
-									<img src="../images/ico/ico_star.gif" alt="별점" />
-									
-									<img src="../images/ico/ico_star.gif" alt="별점" />
-									
-									<img src="../images/ico/ico_star.gif" alt="별점" />
-									
-									<img src="../images/ico/ico_star.gif" alt="별점" />
-									
-									<img src="../images/ico/ico_star.gif" alt="별점" />
-
+										<c:forEach begin="1" end="${c_list.cr_score}" step="1">
+										
+										<img src="../images/ico/ico_star.gif" alt="별점" />
+										
+										</c:forEach>
+										
 									<br/><fmt:formatDate pattern="yyyy-MM-dd" value="${c_list.cr_wdate}" /><%-- ${c_list.cr_wdate} --%>
 								</td>
 								

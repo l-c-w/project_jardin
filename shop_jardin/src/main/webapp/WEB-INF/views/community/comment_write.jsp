@@ -82,14 +82,17 @@ $(document).ready(function() {
 					<div class="productTab normaltab">
 					
 						<ul>
-							<li><a href="#">포토 구매후기</a></li>
-							<li class="last"><a href="#" class="on">상품평</a></li>
+							<li><a href="epilogue_list">포토 구매후기</a></li>
+							<li class="last"><a href="comment_list" class="on">상품평</a></li>
 						</ul>						
 					</div>
 
 
 
 					<div class="checkDivTab">
+					
+					
+					<form action="comment_write_ok" method="post" name="cwo" id="cwo">
 					
 						
 						<table summary="분류, 구매여부, 평가, 제목, 상세 내용 순으로 상품평을 작성 하실수 있습니다." class="checkTable" border="1" cellspacing="0">
@@ -100,6 +103,7 @@ $(document).ready(function() {
 							<col width="19%" class="tw30" />
 							<col width="*" />
 							</colgroup>
+							
 							
 							<tbody>
 								<tr>
@@ -217,7 +221,11 @@ $(document).ready(function() {
 							
 						</table>
 						
+						</form>
+						
 					</div>
+
+
 
 
 					<!-- Btn Area -->
@@ -225,11 +233,14 @@ $(document).ready(function() {
 						<div class="bCenter">
 							<ul>																
 								<li><a href="javascript:history.back()" class="nbtnbig">취소</a></li>
-								<li><a href="comment_write_ok" class="sbtnMini">확인</a></li>
+								<li><a href="#" onclick="document.getElementById('cwo').submit();" class="sbtnMini">확인</a></li>
 							</ul>
 						</div>
 					</div>
 					<!-- //Btn Area -->
+					
+					
+					
 					
 				</div>
 			</div>

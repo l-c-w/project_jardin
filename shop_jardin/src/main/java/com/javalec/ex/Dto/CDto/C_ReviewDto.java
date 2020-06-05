@@ -28,10 +28,13 @@ public class C_ReviewDto {
 	private String p_code;
 	private String cr_title;
 	private String cr_content;
+	
 	private int cr_score;
 	private int cr_hit;
+	
 	private Timestamp cr_wdate;
 	private Timestamp cr_udate;
+	
 	private int cr_group;
 
 	public int getCr_num() {

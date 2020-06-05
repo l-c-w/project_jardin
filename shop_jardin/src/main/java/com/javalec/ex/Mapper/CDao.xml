@@ -5,8 +5,13 @@
 <mapper namespace="com.javalec.ex.Dao.CDao">
 
 
+
+     <!-- 일반 상품평 -->
+
+
+
 	<select id="c_list" resultType="com.javalec.ex.Dto.CDto.C_ReviewDto">
-		select * from c_review
+		select * from c_review order by cr_num desc
 	</select>
 	
 	
@@ -16,9 +21,34 @@
 
 
 	<insert id="c_write">
-		insert into c_review (cr_num,id,p_code,cr_title,cr_content,cr_score)
-		values (c_review_seq.nextval,#{param1},#{param2},#{param3},#{param4},#{param5})
+		insert into c_review (cr_num,id,p_code,cr_title,cr_content,cr_score, cr_hit)
+		values (c_review_seq.nextval,#{param1},#{param2},#{param3},#{param4},#{param5},#{param6})
 	</insert>
+	
+	
+	
+	<!-- 포토 상품평  -->
+	
+	
+	<select id="p_list" resultType="com.javalec.ex.Dto.CDto.P_ReviewDto">
+		select * from p_review order by pr_num desc
+	</select>
+	
+	
+	<select id="p_view" resultType="com.javalec.ex.Dto.CDto.P_ReviewDto">
+		select * from p_review where id=#{param1}
+	</select>
+
+
+	<insert id="p_write">
+		insert into p_review (pr_num, id, p_code, pr_title, pr_content, pr_file, pr_score, pr_hit)
+		values (p_review_seq.nextval,#{param1},#{param2},#{param3},#{param4},#{param5},#{param6},#{param7})
+	</insert>
+	
+	
+	
+	
+	
 	
 
 

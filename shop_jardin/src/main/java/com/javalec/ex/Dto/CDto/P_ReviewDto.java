@@ -8,12 +8,12 @@ public class P_ReviewDto {
 
 	}
 
-	public P_ReviewDto(int pr_num, String id, String pr_code, String pr_title, String pr_content, String pr_file,
+	public P_ReviewDto(int pr_num, String id, String p_code, String pr_title, String pr_content, String pr_file,
 			int pr_score, int pr_hit, Timestamp pr_wdate, Timestamp pr_udate) {
 
 		this.pr_num = pr_num;
 		this.id = id;
-		this.pr_code = pr_code;
+		this.p_code = p_code;
 		this.pr_title = pr_title;
 		this.pr_content = pr_content;
 		this.pr_file = pr_file;
@@ -24,13 +24,16 @@ public class P_ReviewDto {
 	}
 
 	private int pr_num;
+	
 	private String id;
-	private String pr_code;
+	private String p_code;
 	private String pr_title;
 	private String pr_content;
 	private String pr_file;
+	
 	private int pr_score;
 	private int pr_hit;
+	
 	private Timestamp pr_wdate;
 	private Timestamp pr_udate;
 
@@ -50,12 +53,13 @@ public class P_ReviewDto {
 		this.id = id;
 	}
 
-	public String getPr_code() {
-		return pr_code;
+
+	public String getP_code() {
+		return p_code;
 	}
 
-	public void setPr_code(String pr_code) {
-		this.pr_code = pr_code;
+	public void setP_code(String p_code) {
+		this.p_code = p_code;
 	}
 
 	public String getPr_title() {

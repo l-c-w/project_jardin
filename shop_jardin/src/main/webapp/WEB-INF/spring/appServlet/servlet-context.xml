@@ -3,7 +3,8 @@
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xmlns:beans="http://www.springframework.org/schema/beans"
 	xmlns:context="http://www.springframework.org/schema/context"
-	xsi:schemaLocation="http://www.springframework.org/schema/mvc https://www.springframework.org/schema/mvc/spring-mvc.xsd
+	xmlns:mvc="http://www.springframework.org/schema/mvc"
+	xsi:schemaLocation="http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc-4.3.xsd
 		http://www.springframework.org/schema/beans https://www.springframework.org/schema/beans/spring-beans.xsd
 		http://www.springframework.org/schema/context https://www.springframework.org/schema/context/spring-context.xsd">
 
@@ -17,6 +18,9 @@
 	<resources mapping="/css/**" location="/css/" />
 	<resources mapping="/js/**" location="/js/" />
 	<resources mapping="/images/**" location="/images/" />
+	<resources mapping="/img/**" location="/img/" />
+
+
 
 	<!-- Resolves views selected for rendering by @Controllers to .jsp resources in the /WEB-INF/views directory -->
 	<beans:bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
@@ -24,14 +28,26 @@
 		<beans:property name="suffix" value=".jsp" />
 	</beans:bean>
 	
+	
 	 <!-- dataSource -->
 
+     <!-- 
 	<beans:bean name="dataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
-      <beans:property name="driverClassName" value="oracle.jdbc.driver.OracleDriver" />
-      <beans:property name="url" value="jdbc:oracle:thin:@gongsam.dlinkddns.com:6666:orcl" />
-      <beans:property name="username" value="orauser" />
-      <beans:property name="password" value="1234" />
-   </beans:bean>
+		<beans:property name="driverClassName" value="oracle.jdbc.driver.OracleDriver" />
+		<beans:property name="url" value="jdbc:oracle:thin:@localhost:1521:orcle" />
+		<beans:property name="username" value="orauser" />
+		<beans:property name="password" value="1234" />
+	</beans:bean> 
+	-->
+	
+	
+   <beans:bean name="dataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
+        <beans:property name="driverClassName" value="oracle.jdbc.driver.OracleDriver" />
+        <beans:property name="url" value="jdbc:oracle:thin:@gongsam.dlinkddns.com:6666:orcl" />
+        <beans:property name="username" value="orauser" />
+        <beans:property name="password" value="1234" />
+	</beans:bean>
+	
 	
 	
 	<!-- mybatis    [* : 모든 거] -->
@@ -43,6 +59,7 @@
 	</beans:bean>
 	
 	
+	
 	<!-- mybatis template -->
 
 
@@ -51,8 +68,35 @@
 	</beans:bean>
 	
 	
-	<context:component-scan base-package="com.javalec.ex" />
 	
+	<context:component-scan base-package="com.javalec.ex"/>
+	
+	
+	
+	 <!-- file Upload -->
+    <beans:bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
+        <!-- max upload size in bytes -->
+        <beans:property name="maxUploadSize" value="5242880" /> <!-- 5MB -->
+        <!-- max size of file in memory (in bytes) -->
+        <beans:property name="maxInMemorySize" value="1048576" /> <!-- 1MB -->
+    </beans:bean>
+    
+    
+    
+    
+	
+	
+     <!--  파일업로드에 필요한 bean
+       <beans:bean id="mulitpartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
+           <beans:property name="maxUploadSize" value="10485760"/> 
+           <beans:property name="maxInMemorySize" value="10485760"/>
+           
+           <beans:property name="defaultEncoding" value="utf-8" />  이 부분 빼기 넣으면 에러남!
+           
+       </beans:bean>  -->
+       
+       
+       
 	
 	
 </beans:beans>

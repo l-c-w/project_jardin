@@ -15,12 +15,14 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 
 import com.javalec.ex.Dao.CDao;
 import com.javalec.ex.Dto.CDto.C_ReviewDto;
 import com.javalec.ex.Dto.CDto.P_ReviewDto;
+import com.javalec.ex.Dto.CDto.PagingDto;
 
 @Controller
 public class CController {
@@ -94,13 +96,50 @@ public class CController {
 	
 
 	@RequestMapping("community/epilogue_list")
-	public String epilogue_list(Model model) {
+	public String epilogue_list(Model model, 
+			//
+			PagingDto pagedto,
+			@RequestParam(value="nowPage", required=false) String nowPage,
+			@RequestParam(value="cntPerPage", required=false) String cntPerPage) {
 		
         CDao cao = sqlsession.getMapper(CDao.class);
 		
-		ArrayList<P_ReviewDto> pdto = cao.p_list();
+		/*
+		 * ArrayList<P_ReviewDto> pdto = cao.p_list();
+		 * 
+		 * model.addAttribute("plist",pdto);
+		 */
 		
-		model.addAttribute("plist",pdto);
+		
+		
+		//
+		
+		
+		
+		int total = cao.countBoard();
+		
+		if (nowPage == null && cntPerPage == null) {
+			nowPage = "1";
+			cntPerPage = "5";
+		} 
+		
+		else if (nowPage == null) {
+			nowPage = "1";
+		} 
+		
+		else if (cntPerPage == null) { 
+			cntPerPage = "5";
+		}
+		
+		
+		
+		
+		pagedto = new PagingDto(total, Integer.parseInt(nowPage), Integer.parseInt(cntPerPage));
+		
+		model.addAttribute("paging", pagedto);
+			
+		model.addAttribute("viewAll", cao.selectBoard(pagedto));
+		
 		
 		return "community/epilogue_list";
 		

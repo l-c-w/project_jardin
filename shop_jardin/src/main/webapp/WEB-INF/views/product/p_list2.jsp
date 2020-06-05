@@ -58,8 +58,8 @@ $(document).ready(function() {
 
 			<div class="brandTab">
 				<ul>
-					<li><a href="p_list" class="hover">원두</a></li>
-					<li><a href="p_list2" >인스턴트 커피</a></li>
+					<li><a href="p_list" >원두</a></li>
+					<li><a href="p_list2" class="hover">인스턴트 커피</a></li>
 					<li><a href="p_list3" >커피 백</a></li>
 					<li><a href="p_list4" >아이스 음료</a></li>
 					<li><a href="p_list5" >티 음료</a></li>

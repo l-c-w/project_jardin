@@ -28,12 +28,8 @@ public class PListService implements PService {
 //		ArrayList<ProductDto> list = new ArrayList<ProductDto>();
 //		model.addAttribute("list",dao.list());
 		
-		ArrayList<ProductDto> list2 = new ArrayList<ProductDto>();
-		model.addAttribute("list2",dao.list2(category));
-		
-		ArrayList<ProductDto> list_category = new ArrayList<ProductDto>();
-		list_category = dao.list();
-		model.addAttribute("list_category",list_category);
+		ArrayList<ProductDto> list = new ArrayList<ProductDto>();
+		model.addAttribute("list",dao.list(category));
 		
 	}
 

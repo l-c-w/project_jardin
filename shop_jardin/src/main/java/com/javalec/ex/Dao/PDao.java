@@ -9,13 +9,7 @@ import com.javalec.ex.Dto.PDto.ProductDto;
 
 public interface PDao {
 
-	public ArrayList<ProductDto> list();
-
-	public ArrayList<ProductDto> list2(String p_category);
-
-	public ArrayList<ProductDto> list_category(String p_category);
-
-	public void p_list(String p_category);
+	public ArrayList<ProductDto> list(String p_category);
 
 	public ProductDto productDetail(String p_code);
 

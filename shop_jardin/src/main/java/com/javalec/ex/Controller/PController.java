@@ -33,7 +33,46 @@ public class PController {
 
 		return "product/p_list";
 	}
-	
+	@RequestMapping("/p_list2")
+	public String p_list2(HttpServletRequest request, Model model) {
+
+		ps = new PListService();
+		ps.execute(request, sqlsession, model);
+//		PDao dao = sqlsession.getMapper(PDao.class);
+//		model.addAttribute("list",dao.list());
+
+		return "product/p_list2";
+	}
+	@RequestMapping("/p_list3")
+	public String p_list3(HttpServletRequest request, Model model) {
+
+		ps = new PListService();
+		ps.execute(request, sqlsession, model);
+//		PDao dao = sqlsession.getMapper(PDao.class);
+//		model.addAttribute("list",dao.list());
+
+		return "product/p_list3";
+	}
+	@RequestMapping("/p_list4")
+	public String p_list4(HttpServletRequest request, Model model) {
+
+		ps = new PListService();
+		ps.execute(request, sqlsession, model);
+//		PDao dao = sqlsession.getMapper(PDao.class);
+//		model.addAttribute("list",dao.list());
+
+		return "product/p_list4";
+	}
+	@RequestMapping("/p_list5")
+	public String p_list5(HttpServletRequest request, Model model) {
+
+		ps = new PListService();
+		ps.execute(request, sqlsession, model);
+//		PDao dao = sqlsession.getMapper(PDao.class);
+//		model.addAttribute("list",dao.list());
+
+		return "product/p_list5";
+	}
 //	@RequestMapping("/p_list")
 //	public String p_list(ProductDto PDto,Model model ) {
 //		PDao dao = sqlsession.getMapper(PDao.class);

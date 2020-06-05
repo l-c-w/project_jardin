@@ -49,7 +49,7 @@ public class EController {
 	public String modify_comment(HttpServletRequest request, Model model) {
 		es = new EModifyCommentController();
 		es.execute(request, sqlSession, model);
-		return "event/modify_comment";
+		return "event/event_view";
 	}
 	
 	

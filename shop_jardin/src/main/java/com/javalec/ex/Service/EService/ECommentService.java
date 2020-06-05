@@ -21,7 +21,9 @@ public class ECommentService implements EService {
 		EDao dao = sqlSession.getMapper(EDao.class);
 		String e_code = request.getParameter("e_code");
 		String temp = ""; // 페이징 임시변수 & 리퀘스트를 비교해서 page변수에 값을 할당하기 위함
+		String content = "";
 		temp = request.getParameter("page"); // 페이징 임시변수
+		content = request.getParameter("content");
 		int page = 0; // 페이징 임시변수
 		int limit = 3; // 1page = 게시글 10개
 
@@ -54,6 +56,19 @@ public class ECommentService implements EService {
 
 		// ECommentService
 		list = dao.event_comment(e_code, startrow, endrow);
+		
+		
+		// eModify_comment()
+		if (content == null) { // 페이징 임시변수 & 리퀘스트를 비교해서 page변수에 값을 할당하기 위함
+			content = ""; // 최초 기본 1페이지 세팅
+		}
+		System.out.println("content : " + content);
+//		Event_commentDto ecdto = 
+				dao.eModify_comment(e_code, content);
+			
+		
+		
+		
 
 		// model
 		model.addAttribute("event_comment", list);

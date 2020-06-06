@@ -16,9 +16,9 @@ import org.springframework.web.bind.annotation.RequestParam;
 import com.javalec.ex.Dao.EDao;
 import com.javalec.ex.Dto.EDto.EventDto;
 import com.javalec.ex.Service.CService.CService;
-import com.javalec.ex.Service.EService.ECommentService;
+import com.javalec.ex.Service.EService.EViewService;
 import com.javalec.ex.Service.EService.EListService;
-import com.javalec.ex.Service.EService.EModifyCommentController;
+import com.javalec.ex.Service.EService.EModifyCommentService;
 import com.javalec.ex.Service.EService.EService;
 
 @Controller
@@ -40,14 +40,14 @@ public class EController {
 	
 	@RequestMapping("/event_view")
 	public String event_view(HttpServletRequest request, Model model) {
-		es = new ECommentService();
+		es = new EViewService();
 		es.execute(request, sqlSession, model);
 		return "event/event_view";
 	}
 	
-	@RequestMapping("/modify_comment")
+	@RequestMapping("/event_commentOk")
 	public String modify_comment(HttpServletRequest request, Model model) {
-		es = new EModifyCommentController();
+		es = new EModifyCommentService();
 		es.execute(request, sqlSession, model);
 		return "event/event_view";
 	}

@@ -23,7 +23,7 @@
         event where rnum>=#{param2} and rnum<=#{param3}]]>
 	</select>
 	<update id="eModify_comment" >
-		update EVENT_COMMENT set EC_CONTENT=#{param2} where EC_NUM=#{param1}
+		update EVENT_COMMENT set EC_CONTENT=#{param2}, EC_UDATE=sysdate where EC_NUM=#{param1}
 	</update>
 
 </mapper>

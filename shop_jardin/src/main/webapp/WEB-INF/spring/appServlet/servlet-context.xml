@@ -41,12 +41,14 @@
 	-->
 	
 	
+   <!-- dataSource -->
+
    <beans:bean name="dataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
-        <beans:property name="driverClassName" value="oracle.jdbc.driver.OracleDriver" />
-        <beans:property name="url" value="jdbc:oracle:thin:@localhost:1521:orcl" />
-        <beans:property name="username" value="ora_user" />
-        <beans:property name="password" value="orcl" />
-	</beans:bean>
+      <beans:property name="driverClassName" value="oracle.jdbc.driver.OracleDriver" />
+      <beans:property name="url" value="jdbc:oracle:thin:@gongsam.dlinkddns.com:6666:orcl" />
+      <beans:property name="username" value="orauser" />
+      <beans:property name="password" value="1234" />
+   </beans:bean>
 	
 	
 	

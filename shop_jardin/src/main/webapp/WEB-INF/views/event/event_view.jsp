@@ -146,8 +146,8 @@ $(document).ready(function() {
 
 					<!-- 댓글 수정, 삭제 -->
 					<div class="replyBox">
+					<p id="test">테스트입니다</p>
 						<!-- 댓글 수정 -->
-						<c:forEach var="e_com" items="${event_comment }">
 						<form action="event_commentOk">
 							<ul id="coModi" class="comment_modifyM">
 								<li class="name">${e_com.id } </li>
@@ -165,6 +165,7 @@ $(document).ready(function() {
 						</form>
 						
 						<!-- 댓글 표시 -->
+						<c:forEach var="e_com" items="${event_comment }">
 						<ul id="coSub" class="comment_modifyV">
 							<fmt:formatDate var="ec_wdate1" value="${e_com.ec_wdate }" pattern="YYYY/MM/dd" />
 							<fmt:formatDate var="ec_wdate2" value="${e_com.ec_wdate }" pattern="hh:mm:ss" />

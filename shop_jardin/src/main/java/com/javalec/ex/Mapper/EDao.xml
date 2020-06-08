@@ -6,7 +6,7 @@
 
 	<select id="event_list" resultType="com.javalec.ex.Dto.EDto.EventDto">
 		<![CDATA[select * from (select rownum rnum, E_CODE,E_TYPE,E_APPLY,E_TITLE,E_CONTENT,E_FILE1,E_FILE2,E_FILE3,E_START,
-		E_END,E_WDATE,E_UDATE from (select * from event e order by E_CODE desc))  where rnum>=#{param1} and rnum<=#{param2}]]>
+		E_END,E_WDATE,E_UDATE from (select * from event e order by E_CODE desc)) where rnum>=#{param1} and rnum<=#{param2}]]>
 	</select>
 	<select id="getListCount" resultType="Integer">
 		SELECT count(*) as count FROM event

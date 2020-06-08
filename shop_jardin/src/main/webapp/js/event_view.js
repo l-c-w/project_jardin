@@ -3,18 +3,27 @@
  */
 
 $(document).ready(function() {
-	
-	$('#coModi').hide();
-	
-	$('#modi_btn').click(function(){
-		$('#coModi').show();
-		$('#coSub').hide();
+
+	$('.rebtn').click(function(){
+		
+		var index = $(".rebtn").index(this); // index 구하기
+		
+		$(".rebtn").eq(index).val(); // index로 불러오기
+		
+		$("#test").val('index');
+		
 	});
 	
-//	$('#sub_btn').click(function(){
-//		$('#coModi').hide();
-//		$('#coSub').show();
-//	});
-	
-	
 });
+
+// $('#coModi').hide();
+//	
+// $('#modi_btn').click(function(){
+// $('#coModi').show();
+// $('#coSub').hide();
+// });
+
+// $('#sub_btn').click(function(){
+// $('#coModi').hide();
+// $('#coSub').show();
+// });

@@ -9,8 +9,8 @@ import com.javalec.ex.Dto.CDto.PagingDto;
 public interface CDao {
 	
 	
-	// 일반 상품평
 	
+	// 일반 상품평
 	
 	public ArrayList<C_ReviewDto> c_list();
 	
@@ -29,7 +29,9 @@ public interface CDao {
 	
 	
 	
-	// 포토 상품평
+	
+	// 포토 상품평 //
+	
 	
 	
     public ArrayList<P_ReviewDto> p_list();
@@ -37,8 +39,6 @@ public interface CDao {
 	public P_ReviewDto p_view(String id);
 	
 	public void p_write(String id, String p_code, String pr_title, String pr_content, String pr_file, int pr_scroe, int pr_hit );
-	
-	
 	
 	
 	// 게시물 총 갯수

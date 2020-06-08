@@ -5,12 +5,12 @@ public class PagingDto {
 
 	             // 현재페이지, 시작페이지, 끝페이지, 게시글 총 갯수, 페이지당 글 갯수, 마지막페이지
 
+	
 	private int nowPage, startPage, endPage, total, cntPerPage, lastPage, start, end;
 
 	private int cntPage = 5; // 출력할 리스트 개수 1~5 , 6~10
 	
 	public PagingDto() {}
-
 	
 	public PagingDto(int total, int nowPage, int cntPerPage) {
 
@@ -29,11 +29,13 @@ public class PagingDto {
 	}
 
 	
+	
 	// 제일 마지막 페이지 계산      ex) 10개 있는데 한 페이지에 5개씩이면 마지막페이지는 2
 	public void calcLastPage(int total, int cntPerPage) {
 		setLastPage((int) Math.ceil((double) total / (double) cntPerPage));
 	}
 
+	
 	
 	
 	
@@ -49,7 +51,7 @@ public class PagingDto {
 		}
 		
 		
-		//end 끝, last 마지막
+		//end 끝(단위), last 마지막
 		
 		
 		//시작페이지
@@ -65,6 +67,8 @@ public class PagingDto {
 	
 	
 	
+	
+	
 	// DB 쿼리에서 사용할 start, end값 계산
 		public void calcStartEnd(int nowPage, int cntPerPage) {
 			
@@ -76,7 +80,9 @@ public class PagingDto {
 	
 	
 		
-	
+		
+		
+		
 	public int getNowPage() {
 		return nowPage;
 	}
@@ -136,6 +142,9 @@ public class PagingDto {
 	}
 	
 	
+	
+	
+	
 
 	public int getStart() {
 		return start;
@@ -156,6 +165,13 @@ public class PagingDto {
 		this.end = end;
 	}
 
+	
+	
+	
+	
+	
+	
+	
 
 	@Override
 	public String toString() {

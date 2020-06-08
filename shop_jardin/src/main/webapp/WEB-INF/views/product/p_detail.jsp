@@ -258,9 +258,12 @@ $(document).ready(function() {
 						<ul>
 							<c:forEach var="dto2" items="${list2}">
 								<li><a href="#">
-										<div class="img"><img src="../images/img/mcoffee1.png" alt="제품이미지" /></div>
+										<div class="img">
+											<img src="../images/img/mcoffee1.png" alt="제품이미지" />
+										</div>
 										<div class="name">${dto2.p_name}</div>
-										<div class="price">${dto2.price }</div></a></li>
+										<div class="price">${dto2.price }</div>
+								</a></li>
 							</c:forEach>
 						</ul>
 					</div>
@@ -318,7 +321,7 @@ $(document).ready(function() {
 												작성자 <span>${p_rev.id }</span>
 											</p>
 											<fmt:formatDate var="pr_wdate" value="${p_rev.pr_wdate }"
-												pattern="YYYY/MM/dd hh:mm:ss" />
+												pattern="YYYY/MM/dd" />
 											<p>
 												등록일 <span>${pr_wdate }</span>
 											</p>
@@ -385,14 +388,34 @@ $(document).ready(function() {
 						<!-- 페이징이동1 -->
 						<div class="allPageMoving1">
 
-							<a href="#" class="n"><img src="../images/btn/btn_pre2.gif"
-								alt="처음으로" /></a><a href="#" class="pre"><img
-								src="../images/btn/btn_pre1.gif" alt="앞페이지로" /></a> <strong>1</strong>
-							<a href="#">2</a> <a href="#">3</a> <a href="#">4</a> <a href="#">5</a>
-							<a href="#" class="next"><img
-								src="../images/btn/btn_next1.gif" alt="뒤페이지로" /></a><a href="#"
-								class="n"><img src="../images/btn/btn_next2.gif"
-								alt="마지막페이지로" /></a>
+							<a href="p_review?page=${startpage }" class="n"><img src="../images/btn/btn_pre2.gif" alt="처음으로"/></a>
+						<c:if test="${page <= 1 }">
+							<img src="../images/btn/btn_pre1.gif" alt="앞페이지로"/>
+						</c:if>
+						<c:if test="${page > 1 }">
+							<a href="p_review?page=${page - 1 }" class="pre">
+							<img src="../images/btn/btn_pre1.gif" alt="앞페이지로"/></a>
+						</c:if>
+						
+						<c:forEach var="a" begin="${startpage }" end="${endpage }" step="1">
+						<c:choose>
+							<c:when test="${a == page }">
+								<strong>${a }</strong>
+							</c:when>
+							<c:when test="${a != page }">
+								<a href="p_review?page=${a }">${a }</a>
+							</c:when>
+						</c:choose>						
+						</c:forEach>
+						
+						<c:if test="${page >= maxpage}">
+						<img src="../images/btn/btn_next1.gif" alt="뒤페이지로"/>
+						</c:if>
+						<c:if test="${page < maxpage}">
+						<a href="p_review?page=${page + 1 }" class="next">
+						<img src="../images/btn/btn_next1.gif" alt="뒤페이지로"/></a>
+						</c:if>						
+						<a href="p_review?page=${maxpage }" class="n"><img src="../images/btn/btn_next2.gif" alt="마지막페이지로"/></a>
 
 						</div>
 						<!-- //페이징이동1 -->
@@ -422,7 +445,7 @@ $(document).ready(function() {
 										<div class="day">
 											<fmt:formatDate var="cr_wdate" value="${c_rev.cr_wdate }"
 												pattern="YYYY/MM/dd" />
-											<p>{cr_wdate }</p>
+											<p>${cr_wdate }</p>
 											<p>
 												<img src="../images/ico/ico_star.gif" alt="별점" /> <img
 													src="../images/ico/ico_star.gif" alt="별점" /> <img
@@ -432,7 +455,9 @@ $(document).ready(function() {
 									</div>
 
 									<div class="hideArea">
-										<div class="bodyArea">${c_rev.cr_title }</div>
+										<div class="bodyArea">${c_rev.cr_title }
+											<p>${c_rev.cr_content }</p>
+										</div>
 
 										<!-- 답변 -->
 										<div class="answer">
@@ -458,6 +483,7 @@ $(document).ready(function() {
 							<!-- //반복 -->
 
 							<!-- 글 리뷰 참고 -->
+
 							<li>
 								<div class="headArea">
 									<div class="subject">
@@ -534,10 +560,51 @@ $(document).ready(function() {
 						</p>
 					</div>
 
-					<!-- 질문과 답변 -->
+					<!-- 질문과 답변 참고 -->
 					<div class="accordion">
 						<ul>
+							<c:forEach var="fnq" items="${fnq_review}">
+								<li>
+									<div class="headArea">
+										<div class="subject">
+											<a href="javascript:;" class="accbtn">${fnq.pf_title }</a>
+										</div>
+										<div class="writer">${fnq.id }</div>
+										<div class="day">
+										<fmt:formatDate var="pf_wdate" value="${fnq.pf_wdate }"
+												pattern="YYYY/MM/dd" />
+											<p>${pf_wdate}</p>
+											<p>
+												<span class="obtnMini iw70">답변완료</span>
+											</p>
+										</div>
+									</div>
 
+									<div class="hideArea">
+										<div class="bodyArea">
+											${fnq.pf_content }<br />
+										</div>
+
+								<!-- 답변 -->
+									<div class="answer">
+										<div class="inbox">
+											<div class="aname">
+												<p>담당자</p>
+											</div>
+
+											<div class="atxt">
+												${fnq.pf_answer }
+											</div>
+										</div>
+									</div>
+									<!-- //답변 -->
+										<div class="modify">
+											<a href="#">수정</a> <a href="#">삭제</a>
+										</div>
+									</div>
+
+								</li>
+							</c:forEach>
 							<li>
 								<div class="headArea">
 									<div class="subject">
@@ -654,7 +721,7 @@ $(document).ready(function() {
 
 						</ul>
 					</div>
-					<!-- //질문과 답변 -->
+					<!-- //질문과 답변  참고-->
 
 					<div class="btnAreaList">
 						<!-- 페이징이동1 -->

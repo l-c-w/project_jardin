@@ -84,7 +84,7 @@
 
 				<div id="search">
 					<input type="text" class="searchType" />
-					<input type="image" src="../images/btn/btn_main_search.gif" width="23" height="20" alt="검색하기" />
+					<input type="image" src="../images/btn/btn_main_search.gif" width="23" height="20" alt="검색하기" onclick="" />
 				</div>
 			</div>
 		</div>

@@ -11,13 +11,14 @@ import com.javalec.ex.Dao.PDao;
 import com.javalec.ex.Dto.CDto.C_ReviewDto;
 import com.javalec.ex.Dto.CDto.P_ReviewDto;
 import com.javalec.ex.Dto.EDto.EventDto;
+import com.javalec.ex.Dto.PDto.P_FnqDto;
 import com.javalec.ex.Dto.PDto.ProductDto;
 
 public class PDetailService implements PService {
 
 	@Override
 	public void execute(HttpServletRequest request, SqlSession sqlSession, Model model) {
-		
+
 		System.out.println("상품상세 정보");
 		// 상품상세 정보
 		String p_code = request.getParameter("p_code");
@@ -30,7 +31,7 @@ public class PDetailService implements PService {
 		// 관련상품
 		String category = request.getParameter("p_category");
 		ArrayList<ProductDto> list2 = new ArrayList<ProductDto>();
-		model.addAttribute("list2",dao.list2(category));
+		model.addAttribute("list2", dao.list2(category));
 
 		System.out.println("상품리뷰");
 		// 상품리뷰 포토 리뷰
@@ -39,8 +40,9 @@ public class PDetailService implements PService {
 		// 상품리뷰 글 리뷰
 		ArrayList<C_ReviewDto> crdto = dao.c_review(p_code);
 		model.addAttribute("c_review", crdto);
-		
-		
+
+		ArrayList<P_FnqDto> fnqdto = dao.pfnq_review(p_code);
+		model.addAttribute("fnq_review", fnqdto);
 
 		// ------------------------------------------------------------
 		for (int i = 0; i < prdto.size(); i++) {
@@ -57,6 +59,16 @@ public class PDetailService implements PService {
 			System.out.println("getCr_title : " + dto.getCr_title());
 			System.out.println("getCr_content : " + dto.getCr_content());
 			System.out.println("getCr_wdate : " + dto.getCr_wdate());
+
+		}
+		// ------------------------------------------------------------
+		for (int i = 0; i < fnqdto.size(); i++) {
+			P_FnqDto dto = (P_FnqDto) fnqdto.get(i);
+			System.out.println("getPf_num : " + dto.getPf_num());
+			System.out.println("getPf_title : " + dto.getPf_title());
+			System.out.println("getPf_content : " + dto.getPf_content());
+			System.out.println("getPf_answer : " + dto.getPf_answer());
+			System.out.println("getPf_wdate : " + dto.getPf_wdate());
 
 		}
 

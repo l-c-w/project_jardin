@@ -23,12 +23,19 @@
 	<select id="p_review"
 		resultType="com.javalec.ex.Dto.CDto.P_ReviewDto">
 		select id, pr_title, pr_content, pr_file, pr_score, pr_hit, pr_wdate from
-		p_review where p_code=#{param1}
+		p_review where p_code=#{param1} order by pr_wdate asc
 	</select>
 	<select id="c_review"
 		resultType="com.javalec.ex.Dto.CDto.C_ReviewDto">
 		select id, cr_title, cr_content, cr_score, cr_wdate from c_review where
-		p_code=#{param1}
+		p_code=#{param1} order by cr_wdate asc
+	</select>
+	<select id="pfnq_review" resultType="com.javalec.ex.Dto.PDto.P_FnqDto">
+		select id, pf_title, pf_content, pf_secret , pf_answer , pf_wdate from p_fnq
+		where p_code=#{param1} order by pf_wdate asc
+	</select>
+	<select id="getListCount" resultType="Integer">
+		SELECT count(*) as count FROM p_review
 	</select>
 
 

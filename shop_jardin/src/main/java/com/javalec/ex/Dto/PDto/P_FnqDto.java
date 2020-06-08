@@ -8,16 +8,16 @@ public class P_FnqDto {
 
 	}
 
-	public P_FnqDto(int pf_num, String p_code, String id, String pf_title, String pf_content, String secret,
-			String answer, Timestamp pf_wdate, Timestamp pf_udate, int pf_group) {
+	public P_FnqDto(int pf_num, String p_code, String id, String pf_title, String pf_content, String pf_secret,
+			String pf_answer, Timestamp pf_wdate, Timestamp pf_udate, int pf_group) {
 
 		this.pf_num = pf_num;
 		this.p_code = p_code;
 		this.id = id;
 		this.pf_title = pf_title;
 		this.pf_content = pf_content;
-		this.secret = secret;
-		this.answer = answer;
+		this.pf_secret = pf_secret;
+		this.pf_answer = pf_answer;
 		this.pf_wdate = pf_wdate;
 		this.pf_udate = pf_udate;
 		this.pf_group = pf_group;
@@ -28,8 +28,8 @@ public class P_FnqDto {
 	private String id;
 	private String pf_title;
 	private String pf_content;
-	private String secret;
-	private String answer;
+	private String pf_secret;
+	private String pf_answer;
 	private Timestamp pf_wdate;
 	private Timestamp pf_udate;
 	private int pf_group;
@@ -74,20 +74,20 @@ public class P_FnqDto {
 		this.pf_content = pf_content;
 	}
 
-	public String getSecret() {
-		return secret;
+	public String getPf_secret() {
+		return pf_secret;
 	}
 
-	public void setSecret(String secret) {
-		this.secret = secret;
+	public void setPf_secret(String pf_secret) {
+		this.pf_secret = pf_secret;
 	}
 
-	public String getAnswer() {
-		return answer;
+	public String getPf_answer() {
+		return pf_answer;
 	}
 
-	public void setAnswer(String answer) {
-		this.answer = answer;
+	public void setPf_answer(String pf_answer) {
+		this.pf_answer = pf_answer;
 	}
 
 	public Timestamp getPf_wdate() {

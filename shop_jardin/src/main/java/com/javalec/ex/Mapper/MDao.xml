@@ -16,6 +16,21 @@
 	</select> 
 	
 	
+	<select id="login1" resultType="com.javalec.ex.Dto.MDto.Member_Dto">
+	
+	select * from member where id=#{param1}
+	
+	</select>
+	
+	
+	<select id="login2" resultType="com.javalec.ex.Dto.MDto.Member_Dto">
+	
+	select * from member where id=#{param1} and pw=#{param2}
+	
+	</select>
+	
+	
+	
 </mapper>
 
 

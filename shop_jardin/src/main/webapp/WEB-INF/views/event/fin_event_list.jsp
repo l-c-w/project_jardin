@@ -1,5 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
+<jsp:useBean id="now" class="java.util.Date" scope="request"/>    
 <!DOCTYPE html>
 <html>
 <head>
@@ -64,49 +67,24 @@ $(document).ready(function() {
 					<div class="eventList">
 						<ul>
 							<!-- 반복 -->
+							<c:forEach var="dto" items="${event_list }">
+							<c:choose>
+							<c:when test="${dto.e_end lt now }">
 							<li>
 								<div class="img">
-									<a href="#"><img src="../images/img/sample_event.jpg" alt="진행중 이벤트" /></a>
+									<a href="event_view?e_code=${dto.e_code }"><img src="../images/img/sample_event.jpg" alt="진행중 이벤트" /></a>
 								</div>
 								<div class="txt">
-									<div class="subject">
-										<span class="finishbtn">종료</span>&nbsp;
-										까페모리 봄바람 커피한잔 30% 할인 이벤트!!까페모리 봄바람 커피한잔 30% 할인 이벤트!!
-									</div>
-									<div class="day">이벤트 기간 : 2014-04-01 ~ 2014-04-29</div>
+									<div class="subject">${dto.e_title}</div>
+									<fmt:formatDate var="e_start" value="${dto.e_start }" pattern="YYYY/MM/dd" />
+									<fmt:formatDate var="e_end" value="${dto.e_end }" pattern="YYYY/MM/dd" />
+									<div class="day">이벤트 기간 : ${e_start } ~ ${e_end }</div>
 								</div>
 							</li>
-							<!-- //반복 -->
-
-							<li>
-								<div class="img">
-									<a href="#"><img src="../images/img/sample_event.jpg" alt="진행중 이벤트" /></a>
-								</div>
-								<div class="txt">
-									<div class="subject"><span class="finishbtn">종료</span>&nbsp;까페모리 봄바람 커피한잔 30% 할인 이벤트!!</div>
-									<div class="day">이벤트 기간 : 2014-04-01 ~ 2014-04-29</div>
-								</div>
-							</li>
-
-							<li>
-								<div class="img">
-									<a href="#"><img src="../images/img/sample_event.jpg" alt="진행중 이벤트" /></a>
-								</div>
-								<div class="txt">
-									<div class="subject"><span class="finishbtn">종료</span>&nbsp;까페모리 봄바람 커피한잔 30% 할인 이벤트!!</div>
-									<div class="day">이벤트 기간 : 2014-04-01 ~ 2014-04-29</div>
-								</div>
-							</li>
-
-							<li>
-								<div class="img">
-									<a href="#"><img src="../images/img/sample_event.jpg" alt="진행중 이벤트" /></a>
-								</div>
-								<div class="txt">
-									<div class="subject"><span class="finishbtn">종료</span>&nbsp;까페모리 봄바람 커피한잔 30% 할인 이벤트!!</div>
-									<div class="day">이벤트 기간 : 2014-04-01 ~ 2014-04-29</div>
-								</div>
-							</li>
+							</c:when>
+							</c:choose>
+							</c:forEach>
+							<!-- 반복 끝 -->
 						</ul>
 					</div>
 					<!-- //list -->
@@ -115,13 +93,34 @@ $(document).ready(function() {
 						<!-- 페이징이동1 -->
 						<div class="allPageMoving1">
 
-						<a href="#" class="n"><img src="../images/btn/btn_pre2.gif" alt="처음으로"/></a><a href="#" class="pre"><img src="../images/btn/btn_pre1.gif" alt="앞페이지로"/></a>
-						<strong>1</strong>
-						<a href="#">2</a>
-						<a href="#">3</a>
-						<a href="#">4</a>
-						<a href="#">5</a>
-						<a href="#" class="next"><img src="../images/btn/btn_next1.gif" alt="뒤페이지로"/></a><a href="#" class="n"><img src="../images/btn/btn_next2.gif" alt="마지막페이지로"/></a>
+						<a href="fin_event_list?page=${startpage }" class="n"><img src="../images/btn/btn_pre2.gif" alt="처음으로"/></a>
+						<c:if test="${page <= 1 }">
+							<img src="../images/btn/btn_pre1.gif" alt="앞페이지로"/>
+						</c:if>
+						<c:if test="${page > 1 }">
+							<a href="fin_event_list?page=${page - 1 }" class="pre">
+							<img src="../images/btn/btn_pre1.gif" alt="앞페이지로"/></a>
+						</c:if>
+						
+						<c:forEach var="a" begin="${startpage }" end="${endpage }" step="1">
+						<c:choose>
+							<c:when test="${a == page }">
+								<strong>${a }</strong>
+							</c:when>
+							<c:when test="${a != page }">
+								<a href="fin_event_list?page=${a }">${a }</a>
+							</c:when>
+						</c:choose>						
+						</c:forEach>
+						
+						<c:if test="${page >= maxpage}">
+						<img src="../images/btn/btn_next1.gif" alt="뒤페이지로"/>
+						</c:if>
+						<c:if test="${page < maxpage}">
+						<a href="fin_event_list?page=${page + 1 }" class="next">
+						<img src="../images/btn/btn_next1.gif" alt="뒤페이지로"/></a>
+						</c:if>						
+						<a href="fin_event_list?page=${maxpage }" class="n"><img src="../images/btn/btn_next2.gif" alt="마지막페이지로"/></a>
 
 						</div>
 						<!-- //페이징이동1 -->

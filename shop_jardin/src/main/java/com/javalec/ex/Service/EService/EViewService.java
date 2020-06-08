@@ -56,7 +56,7 @@ public class EViewService implements EService {
 
 		// ECommentService
 		list = dao.event_comment(e_code, startrow, endrow);
-				
+		
 
 		// model
 		model.addAttribute("event_comment", list);

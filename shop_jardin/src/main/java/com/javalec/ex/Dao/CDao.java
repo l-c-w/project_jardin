@@ -16,15 +16,13 @@ public interface CDao {
 	
 	public C_ReviewDto c_view(String id);
 	
-	public void c_write(String cr_title, String cr_content, int cr_score);
+	public void c_write(String id, String p_code, String pr_title, String pr_content, int pr_scroe, int pr_hit );
 	
 	// 게시물 총 갯수
 	public int c_countBoard();
 		
 	// 페이징 처리 게시글 조회
 	public ArrayList<C_ReviewDto> c_selectBoard(PagingDto pagingdto);
-	
-	
 	
 	
 	
@@ -38,7 +36,7 @@ public interface CDao {
 	
 	public P_ReviewDto p_view(String id);
 	
-	public void p_write(String id, String p_code, String pr_title, String pr_content, String pr_file, int pr_scroe, int pr_hit );
+	public void p_write(String id, String p_code, String pr_title, String pr_content, String pr_file, int pr_scroe, int pr_hit);
 	
 	
 	// 게시물 총 갯수
@@ -46,7 +44,6 @@ public interface CDao {
 	
 	// 페이징 처리 게시글 조회
 	public ArrayList<P_ReviewDto> selectBoard(PagingDto pagingdto);
-	
 	
 	
 	

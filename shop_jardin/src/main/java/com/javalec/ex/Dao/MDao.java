@@ -2,6 +2,8 @@ package com.javalec.ex.Dao;
 
 import java.sql.Date;
 
+import com.javalec.ex.Dto.MDto.Member_Dto;
+
 //import org.apache.ibatis.annotations.Param;
 
 public interface MDao {
@@ -12,5 +14,10 @@ public interface MDao {
 	
 	
 	public int idcheck(String id);
+	
+	
+	public Member_Dto login1(String id);
+	
+	public Member_Dto login2(String id, String pw);
 	
 }

@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -43,7 +45,7 @@ $(document).ready(function() {
 
 		<div id="location">
 			<ol>
-				<li><a href="../main/main">HOME</a></li>
+				<li><a href="main">HOME</a></li>
 				<li><a href="event_list">EVENT</a></li>
 				<li class="last">종료된 이벤트</li>
 			</ol>
@@ -74,16 +76,18 @@ $(document).ready(function() {
 						<div class="viewHead">
 							<div class="subject">
 								<ul>
-									<li><span class="finishbtn">종료</span>&nbsp;까페모리 봄바람 커피한잔 30% 할인 이벤트!!</li>
+									<li>${event_view.e_title }</li>
 								</ul>
 							</div>
 							<div class="day">
-								<p class="txt">이벤트 기간<span>2014-04-01 ~ 2014-04-29</span></p>
+								<fmt:formatDate var="e_start" value="${event_view.e_start }" pattern="YYYY/MM/dd" />
+								<fmt:formatDate var="e_end" value="${event_view.e_end }" pattern="YYYY/MM/dd" />
+								<p class="txt">이벤트 기간<span>${e_start } ~ ${e_end }</span></p>
 							</div>
 						</div>
 
 						<div class="viewContents">
-							<img src="../images/img/sample_event_view.jpg" alt="" />
+							<img src="../images/img/sample_event_view.jpg" alt="" />${event_view.e_content }
 						</div>
 					</div>
 

@@ -754,7 +754,7 @@
 
 /* PAGING */
 .allPageMoving1{margin:30px 0 0 0;}
-.allPageMoving1 *{vertical-align:top;}
+/* .allPageMoving1 *{vertical-align:top;} */
 .allPageMoving1 a{display:inline-block;width:25px;height:25px;line-height:23px;color:#888;text-decoration:none; border:1px #c0c0c0 solid; background:#fff; font-size:12px;}
 .allPageMoving1 a.n{border:0;padding:0;}
 .allPageMoving1 a.pre{border:0;padding:0;}

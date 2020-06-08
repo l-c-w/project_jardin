@@ -9,11 +9,15 @@
 <!-- 제이쿼리 [다운받아서 링크 걸어놓기] -->
 <script type="text/javascript" src="../js/prefixfree.dynamic-dom.min.js"></script>
 <script type="text/javascript" src="../js/admin_mlist.js"></script>
-<link rel="stylesheet"
-	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css">
-<link rel="stylesheet" href="css/admin_account.css">
-<script type="text/javascript" src="js/admin_Leftmenu.js"></script>
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css">
+
+<link rel="stylesheet" href="../css/admin_account.css">
+
+<script type="text/javascript" src="../js/admin_Leftmenu.js"></script>
+
 <link rel="stylesheet" type="text/css" href="../css/admin_mlist.css">
+
 
 
 
@@ -75,7 +79,7 @@
 
 				<div class="list_Toolbar">
 					<div class="tit float_l">
-						<img src="images/bg_h3dot.png" title="타이틀"> 검색
+						<img src="../images/bg_h3dot.png" title="타이틀"> 검색
 					</div>
 				</div>
 
@@ -162,12 +166,12 @@
 									</select> <input type="text" name="Date1" id="KeyDate1"
 										style="width: 70px;" value="" class="mr_6 hasDatepicker"
 										onkeypress="if(event.keyCode==13) sch_Go();"> <img
-										class="ui-datepicker-trigger" src="images/icon_calen.gif"
+										class="ui-datepicker-trigger" src="../images/icon_calen.gif"
 										alt="..." title="..."> ~ <input type="text" name="Date2"
 										id="KeyDate2" style="width: 70px;" value=""
 										class="mr_6 hasDatepicker"
 										onkeypress="if(event.keyCode==13) sch_Go();"> <img
-										class="ui-datepicker-trigger" src="images/icon_calen.gif"
+										class="ui-datepicker-trigger" src="../images/icon_calen.gif"
 										alt="..." title="...">
 								</p>
 
@@ -250,13 +254,13 @@
 							<td><input type="radio" id="schRoute" name="schRoute"
 								value="" checked="checked"> 전체&nbsp;&nbsp; <input
 								type="radio" id="schRoute" name="schRoute" value="H"> <img
-								src="images/icon_JoinRouteH.png" title="홈페이지" alt="홈페이지">&nbsp;&nbsp;
+								src="../images/icon_JoinRouteH.png" title="홈페이지" alt="홈페이지">&nbsp;&nbsp;
 
 								<input type="radio" id="schRoute" name="schRoute" value="M">
-								<img src="images/icon_JoinRouteM.png" title="모바일" alt="모바일">&nbsp;&nbsp;
+								<img src="../images/icon_JoinRouteM.png" title="모바일" alt="모바일">&nbsp;&nbsp;
 
 								<input type="radio" id="schRoute" name="schRoute" value="A">
-								<img src="images/icon_JoinRouteA.png" title="관리자" alt="관리자">
+								<img src="../images/icon_JoinRouteA.png" title="관리자" alt="관리자">
 							</td>
 
 						</tr>
@@ -562,7 +566,7 @@
 								type="checkbox" id="LCheck_List" name="LCheck_List"></td>
 							<td rowspan="2">7</td>
 
-							<td rowspan="2"><img src="images/icon_JoinRouteH.png"
+							<td rowspan="2"><img src="../images/icon_JoinRouteH.png"
 								title="Homepage"></td>
 
 							<td rowspan="2">2019-03-25 13:23:05<br> -<br> (0회)
@@ -572,7 +576,7 @@
 
 							<td rowspan="2"><a href="#"
 								onclick="Student_Detail_pop('ST_IT46833'); return false;">
-									아이티맵99<br> [itmap99]<img src="images/icon_selcopy.png"
+									아이티맵99<br> [itmap99]<img src="../images/icon_selcopy.png"
 									class="ml_2 mb_2" title="자세히" alt="자세히">
 							</a></td>
 
@@ -636,7 +640,7 @@
 
 							<td rowspan="2">6</td>
 
-							<td rowspan="2"><img src="images/icon_JoinRouteH.png"
+							<td rowspan="2"><img src="../images/icon_JoinRouteH.png"
 								title="Homepage"></td>
 
 							<td rowspan="2">2019-03-23 17:03:34<br> -<br> (0회)
@@ -646,7 +650,7 @@
 
 							<td rowspan="2"><a href="#"
 								onclick="Student_Detail_pop('ST_IT00630'); return false;">
-									itmap4<br> [itmap4]<img src="images/icon_selcopy.png"
+									itmap4<br> [itmap4]<img src="../images/icon_selcopy.png"
 									class="ml_2 mb_2" title="자세히" alt="자세히">
 							</a></td>
 
@@ -661,7 +665,7 @@
 
 
 									<div class="BoxRed0">
-										<span>&nbsp;<img src="images/icon_point01W.png"
+										<span>&nbsp;<img src="../images/icon_point01W.png"
 											style="margin-bottom: 2px"> 적립 대기(2)
 										</span>
 									</div>
@@ -710,14 +714,14 @@
 								type="checkbox" id="LCheck_List" name="LCheck_List"></td>
 							<td rowspan="2">5</td>
 
-							<td rowspan="2"><img src="images/icon_JoinRouteH.png"
+							<td rowspan="2"><img src="../images/icon_JoinRouteH.png"
 								title="Homepage"></td>
 							<td rowspan="2">2019-03-23 16:57:15<br> -<br> (0회)
 							</td>
 							<td rowspan="2">[등급없음]</td>
 							<td rowspan="2"><a href="#"
 								onclick="Student_Detail_pop('ST_IT21512'); return false;">
-									아이티맵3<br> [itmap3]<img src="images/icon_selcopy.png"
+									아이티맵3<br> [itmap3]<img src="../images/icon_selcopy.png"
 									class="ml_2 mb_2" title="자세히" alt="자세히">
 							</a></td>
 							<td rowspan="2">1989-01-01(남)<br>010-0000-0000
@@ -726,7 +730,7 @@
 								<br> <a href="#"
 								onclick="WaitAccPoint_Chk('itmap3'); return false;"><div
 										class="BoxRed0">
-										<span>&nbsp;<img src="images/icon_point01W.png"
+										<span>&nbsp;<img src="../images/icon_point01W.png"
 											style="margin-bottom: 2px"> 적립 대기(1)
 										</span>
 									</div></a>
@@ -774,14 +778,14 @@
 								type="checkbox" id="LCheck_List" name="LCheck_List"></td>
 							<td rowspan="2">4</td>
 
-							<td rowspan="2"><img src="images/icon_JoinRouteH.png"
+							<td rowspan="2"><img src="../images/icon_JoinRouteH.png"
 								title="Homepage"></td>
 							<td rowspan="2">2019-03-23 16:50:27<br> -<br> (0회)
 							</td>
 							<td rowspan="2">[등급없음]</td>
 							<td rowspan="2"><a href="#"
 								onclick="Student_Detail_pop('ST_IT73479'); return false;">
-									아이티맵2<br> [itmap2]<img src="images/icon_selcopy.png"
+									아이티맵2<br> [itmap2]<img src="../images/icon_selcopy.png"
 									class="ml_2 mb_2" title="자세히" alt="자세히">
 							</a></td>
 							<td rowspan="2">1989-01-01(남)<br>010-0000-0000
@@ -832,14 +836,14 @@
 								type="checkbox" id="LCheck_List" name="LCheck_List"></td>
 							<td rowspan="2">3</td>
 
-							<td rowspan="2"><img src="images/icon_JoinRouteA.png"
+							<td rowspan="2"><img src="../images/icon_JoinRouteA.png"
 								title="Admin"></td>
 							<td rowspan="2">2019-03-22 19:44:50<br> -<br> (0회)
 							</td>
 							<td rowspan="2">[등급없음]</td>
 							<td rowspan="2"><a href="#"
 								onclick="Student_Detail_pop('ST_ST28683'); return false;">
-									회원3<br> [student3]<img src="images/icon_selcopy.png"
+									회원3<br> [student3]<img src="../images/icon_selcopy.png"
 									class="ml_2 mb_2" title="자세히" alt="자세히">
 							</a></td>
 							<td rowspan="2">1928-02-06(남)<br>010-0000-0000
@@ -886,14 +890,14 @@
 								type="checkbox" id="LCheck_List" name="LCheck_List"></td>
 							<td rowspan="2">2</td>
 
-							<td rowspan="2"><img src="images/icon_JoinRouteA.png"
+							<td rowspan="2"><img src="../images/icon_JoinRouteA.png"
 								title="Admin"></td>
 							<td rowspan="2">2019-03-22 15:14:45<br> -<br> (0회)
 							</td>
 							<td rowspan="2">[등급없음]</td>
 							<td rowspan="2"><a href="#"
 								onclick="Student_Detail_pop('ST_ST79236'); return false;">
-									회원1<br> [student1]<img src="images/icon_selcopy.png"
+									회원1<br> [student1]<img src="../images/icon_selcopy.png"
 									class="ml_2 mb_2" title="자세히" alt="자세히">
 							</a></td>
 							<td rowspan="2">1999-03-03(여)<br>010-0000-0000
@@ -902,7 +906,7 @@
 								<br> <a href="#"
 								onclick="WaitAccPoint_Chk('student1'); return false;"><div
 										class="BoxRed0">
-										<span>&nbsp;<img src="images/icon_point01W.png"
+										<span>&nbsp;<img src="../images/icon_point01W.png"
 											style="margin-bottom: 2px"> 적립 대기(1)
 										</span>
 									</div></a>
@@ -947,23 +951,22 @@
 								type="checkbox" id="LCheck_List" name="LCheck_List"></td>
 							<td rowspan="2">1</td>
 
-							<td rowspan="2"><img src="images/icon_JoinRouteA.png"
+							<td rowspan="2"><img src="../images/icon_JoinRouteA.png"
 								title="Admin"></td>
 							<td rowspan="2">2019-01-01 11:11:00<br> -<br> (0회)
 							</td>
 							<td rowspan="2">[등급없음]</td>
 							<td rowspan="2"><a href="#"
 								onclick="Student_Detail_pop('ST_ST79236'); return false;">
-									회원1<br> [student1]<img src="images/icon_selcopy.png"
+									회원1<br> [student1]<img src="../images/icon_selcopy.png"
 									class="ml_2 mb_2" title="자세히" alt="자세히">
 							</a></td>
 							<td rowspan="2">2004-03-03(여)<br>010-0000-0000
 							</td>
 							<td rowspan="2" class="amount align_r">0[\]<br> 556[P]
 								<br> <a href="#"
-								onclick="WaitAccPoint_Chk('student1'); return false;"><div
-										class="BoxRed0">
-										<span>&nbsp;<img src="images/icon_point01W.png"
+								onclick="WaitAccPoint_Chk('student1'); return false;"><div class="BoxRed0">
+										<span>&nbsp;<img src="../images/icon_point01W.png"
 											style="margin-bottom: 2px"> 적립 대기(1)
 										</span>
 									</div></a>

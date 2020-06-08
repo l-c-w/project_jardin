@@ -23,7 +23,7 @@
 
 <link rel="stylesheet" type="text/css" href="../css/reset.css?v=Y" />
 <link rel="stylesheet" type="text/css" href="../css/layout.css?v=Y" />
-<link rel="stylesheet" type="text/css" href="../css/content.css?v=Y" />
+<link rel="stylesheet" type="text/css" href="../css/content.css?ver=1" />
 
 
 <script type="text/javascript" src="../js/jquery.min.js"></script>
@@ -34,6 +34,8 @@
 <script type="text/javascript" src="../js/jquery.easing.1.3.js"></script>
 <script type="text/javascript" src="../js/idangerous.swiper-2.1.min.js"></script>
 <script type="text/javascript" src="../js/jquery.anchor.js"></script>
+
+
 <!--[if lt IE 9]>
 <script type="text/javascript" src="../js/html5.js"></script>
 <script type="text/javascript" src="../js/respond.min.js"></script>
@@ -253,13 +255,20 @@ $(document).ready(function() {
 
 
 								<!-- 이전페이지로 이동 -->
-
-								<c:if test="${paging.startPage != 1 }">
-									<a href="epilogue_list?nowPage=${paging.startPage - 1}&cntPerPage=${paging.cntPerPage}" class="pre">
-									<img src="../images/btn/btn_pre1.gif" alt="앞페이지로"/>
-									&lt;</a>
-								</c:if>
 								
+								<c:if test="${paging.nowPage != 1}">
+								<a href="epilogue_list?nowPage=${paging.nowPage - 1}&cntPerPage=${paging.cntPerPage}" class="pre">
+								<img src="../images/btn/btn_pre1.gif" alt="앞페이지로"/><!-- &lt; -->
+								</a>
+								</c:if>
+
+
+							<%-- 	<c:if test="${paging.startPage != 1}">
+									<a href="epilogue_list?nowPage=${paging.startPage - 1}&cntPerPage=${paging.cntPerPage}" class="pre">
+									<img src="../images/btn/btn_pre1.gif" alt="앞페이지로"/><!-- &lt; -->
+									</a>
+								</c:if>
+								 --%>
 								
 								
 								<!-- 순차 -->
@@ -269,7 +278,7 @@ $(document).ready(function() {
 									<c:choose>
 									
 										<c:when test="${p == paging.nowPage}">
-											<a href="#">${p}</a>
+											<a href="#" class="reviews"><strong>${p}</strong></a>
 										</c:when>
 										
 										<c:when test="${p != paging.nowPage }">
@@ -284,12 +293,19 @@ $(document).ready(function() {
 								
 								<!-- 다음페이지 이동 -->
 							
-								<c:if test="${paging.endPage != paging.lastPage}" >
-									<a href="epilogue_list?nowPage=${paging.endPage+1}&cntPerPage=${paging.cntPerPage}" class="next">&gt;
-									<img src="../images/btn/btn_next1.gif" alt="뒤페이지로"/></a>
+							<%-- 	<c:if test="${paging.endPage != paging.lastPage}" >
+									<a href="epilogue_list?nowPage=${paging.endPage+1}&cntPerPage=${paging.cntPerPage}" class="next"><!-- &gt; -->
+									<img src="../images/btn/btn_next1.gif" alt="뒤페이지로"/>
+									</a>
+								</c:if> --%>
+								
+								
+								<c:if test="${paging.nowPage != paging.lastPage}" >
+								<a href="epilogue_list?nowPage=${paging.nowPage+1}&cntPerPage=${paging.cntPerPage}" class="next"><!-- &gt; -->
+								<img src="../images/btn/btn_next1.gif" alt="뒤페이지로"/>
+								</a>
 								</c:if>
 
-						
 
 								<!-- 마지막 페이지 이동 -->
 								<a href="epilogue_list?nowPage=${paging.lastPage}" class="n" >

@@ -115,12 +115,14 @@ public class CController {
 	
 	
 	@RequestMapping("community/comment_write_ok")
-	public String comment_write_ok() {
+	public String comment_write_ok(Model model, C_ReviewDto cdto) {
 		
 		
+		CDao dao = sqlsession.getMapper(CDao.class);
 		
+		dao.c_write("test4", "2", cdto.getCr_title(), cdto.getCr_content(), cdto.getCr_score(), 0);
 		
-		return "community/comment_list";
+		return "redirect:comment_list";
 	}
 	
 	

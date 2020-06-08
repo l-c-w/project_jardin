@@ -1,5 +1,11 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+    
+    
+    
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>    
+
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -75,11 +81,33 @@
 				</ul>
 			</div>
 			<div id="snb">
+			
 				<ul>
-					<li><a href="../member/login">LOGIN</a></li>
+				
+				<c:if test="${member !=null}">
+				
+				    <li><a href="#">${member}님</a></li>
+					<li><a href="logout">로그아웃</a></li>
+					<li><a href="../mypage/ordercheck">MY PAGE</a></li>
+					<li><a href="../mypage/cart">CART</a></li>
+				
+				</c:if>
+				
+				<c:if test="${member == null}">
+				
+				    <li><a href="../member/login">LOGIN</a></li>
 					<li><a href="../member/step01">JOIN</a></li>
 					<li><a href="../mypage/ordercheck">MY PAGE</a></li>
 					<li><a href="../mypage/cart">CART</a></li>
+				
+				</c:if>
+				
+					<!-- <li><a href="../member/login">LOGIN</a></li>
+					<li><a href="../member/step01">JOIN</a></li>
+					<li><a href="../mypage/ordercheck">MY PAGE</a></li>
+					<li><a href="../mypage/cart">CART</a></li> -->
+					
+					
 				</ul>
 
 				<div id="search">

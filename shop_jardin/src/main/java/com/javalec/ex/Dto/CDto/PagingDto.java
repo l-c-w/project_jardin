@@ -11,6 +11,8 @@ public class PagingDto {
 	
 	public PagingDto() {}
 	
+	
+	
 	public PagingDto(int total, int nowPage, int cntPerPage) {
 
 		setNowPage(nowPage);
@@ -25,11 +27,19 @@ public class PagingDto {
 		calcStartEnd(getNowPage(), getCntPerPage());
 		
 		
+		System.out.println("startpage : "+getStartPage());
+		System.out.println("endpage : "+getEndPage());
+		System.out.println("lastpage : "+getLastPage());
+		
+		
+		
+		
 	}
 
 	// 제일 마지막 페이지 계산      ex) 10개 있는데 한 페이지에 5개씩이면 마지막페이지는 2
 	public void calcLastPage(int total, int cntPerPage) {
 		setLastPage((int) Math.ceil((double) total / (double) cntPerPage));
+		
 	}
 
 	
@@ -43,6 +53,9 @@ public class PagingDto {
 		if (getLastPage() < getEndPage()) {
 			setEndPage(getLastPage());
 		}
+		
+		
+			
 		
 		
 		//end 끝(단위), last 마지막

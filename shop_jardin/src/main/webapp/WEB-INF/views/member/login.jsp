@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+    
 <!DOCTYPE html>
 <html>
 <head>
@@ -25,6 +26,35 @@
 <script type="text/javascript" src="../js/html5.js"></script>
 <script type="text/javascript" src="../js/respond.min.js"></script>
 <![endif]-->
+
+
+
+<script type="text/javascript">
+
+	function idpw() {
+
+		var idfail = '${idfail}';
+
+		var pwfail = '${pwfail}';
+		
+
+		if (idfail == 'idfail') {
+			alert('아이디가 존재하지 않습니다');
+			return false;
+		}
+		
+
+		if (pwfail == 'pwfail') {
+			alert('비밀번호가 틀렸습니다');
+			return false;
+
+		}
+
+	}
+</script>
+
+
+
 <script type="text/javascript">
 $(document).ready(function() {
 	
@@ -33,7 +63,7 @@ $(document).ready(function() {
 });
 </script>
 </head>
-<body>
+<body onload="idpw();">
 
 <!-- header 붙여넣기 -->
 	<jsp:include page="../header.jsp"/>
@@ -71,29 +101,65 @@ $(document).ready(function() {
 
 			<!-- contents -->
 			<div id="contents">
+			
+			
+			<!-- <script type="text/javascript">
+			
+			if(${member == 'idfail'}){
+				alert('id가 틀렸습니다');
+				return false;
+			}
+			
+			
+			if(${member == 'pwfail'}){
+				alert('비밀번호가 틀렸습니다');
+				return false;
+			}
+			
+			</script> -->
+			
+			
 				<div id="member">
+				
 					<h2><strong>로그인</strong><span>로그인 후 주문하시면 다양한 혜택을 받으실 수 있습니다.</span></h2>
 					<h3>회원 로그인</h3>
+					
+					
+				
+					
+					
+					<form action="login_ok" method="post" id="login" name="login">
+					
 					<div class="informbox">
+					
 						<div class="inform">
+						
 							<ul>
-								<li><input type="text" class="loginType" onfocus="this.className='mfocus'" onblur="if (this.value.length==0) {this.className='loginType'}else {this.className='mfocusnot'}" style="ime-mode:inactive;" /></li>
-								<li><input type="password" class="passType" onfocus="this.className='mfocus'" onblur="if (this.value.length==0) {this.className='passType'}else {this.className='mfocusnot'}" style="ime-mode:inactive;" /></li>
+								<li><input type="text" name="id" class="loginType" onfocus="this.className='mfocus'" onblur="if (this.value.length==0) {this.className='loginType'}else {this.className='mfocusnot'}" style="ime-mode:inactive;" /></li>
+								<li><input type="password" name="pw" class="passType" onfocus="this.className='mfocus'" onblur="if (this.value.length==0) {this.className='passType'}else {this.className='mfocusnot'}" style="ime-mode:inactive;" /></li>
 							</ul>
 
-							<div class="btn"><a href="#" class="sbtn">로그인</a></div>
+							<div class="btn"><a href="#" onclick="document.getElementById('login').submit()" class="sbtn">로그인</a></div><br>
+							
 							<div class="chk"><input type="checkbox" id="idsave"/><label for="idsave">아이디 저장</label></div>							
+
 
 							<div class="point">
 								<p>아이디와 비밀번호를 잊으셨나요?</p>
 								<a href="#" class="nbtn">아이디/비밀번호 찾기</a>
 							</div>
+							
 						</div>
+						
 					</div>
+					
+					</form>
+					
 
 
 
 					<h3>비회원 주문 조회</h3>
+					
 					<div class="informbox">
 						<div class="inform">
 							<ul>
@@ -108,6 +174,8 @@ $(document).ready(function() {
 							</div>
 						</div>
 					</div>
+					
+					
 
 				</div>
 			</div>

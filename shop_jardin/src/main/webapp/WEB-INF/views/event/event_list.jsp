@@ -70,12 +70,15 @@ $(document).ready(function() {
 					<div class="eventList">
 						<ul>
 							<!-- 반복 -->
+<%-- 							<c:set var="count" value="<% int count = 0; %>"/> --%>
+							<% int count = 0; %>
 							<c:forEach var="dto" items="${event_list }">
+							<% count += 1; %>
 							<c:choose>
 							<c:when test="${dto.e_end gt now }">
 							<li>
 								<div class="img">
-									<a href="event_view?e_code=${dto.e_code }"><img src="../images/img/sample_event.jpg" alt="진행중 이벤트" /></a>
+									<a href="event_view?e_code=${dto.e_code }&count=<%= count %>"><img src="../images/img/sample_event.jpg" alt="진행중 이벤트" /></a>
 								</div>
 								<div class="txt">
 									<div class="subject">${dto.e_title}</div>

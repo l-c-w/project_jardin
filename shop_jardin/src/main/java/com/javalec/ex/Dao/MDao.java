@@ -1,6 +1,7 @@
 package com.javalec.ex.Dao;
 
 import java.sql.Date;
+import java.util.ArrayList;
 
 import com.javalec.ex.Dto.MDto.Member_Dto;
 
@@ -19,5 +20,9 @@ public interface MDao {
 	public Member_Dto login1(String id);
 	
 	public Member_Dto login2(String id, String pw);
+	
+	public ArrayList<Member_Dto> m_list();
+	
+	public int m_count();
 	
 }

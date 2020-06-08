@@ -1,5 +1,11 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+    
+    
+    
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>    
+
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -16,7 +22,7 @@
 
 <script type="text/javascript" src="../js/admin_Leftmenu.js"></script>
 
-<link rel="stylesheet" type="text/css" href="../css/admin_mlist.css">
+<link rel="stylesheet" type="text/css" href="../css/admin_mlist.css?ver=1">
 
 
 
@@ -114,8 +120,9 @@
 
 						<tr>
 							<th width="130">키워드&nbsp;검색</th>
-							<td width="*.*" colspan="3"><select name="schGubun"
-								class="NSelect25" onkeypress="if(event.keyCode==13) sch_Go();">
+							<td width="*.*" colspan="3">
+							
+							<select name="schGubun" class="NSelect25" onkeypress="if(event.keyCode==13) sch_Go();">
 									<option value="">검색&nbsp;항목</option>
 									<option value="schGubun_ID">아이디</option>
 									<option value="schGubun_NickName">닉네임</option>
@@ -127,9 +134,10 @@
 									<option value="schGubun_Email">이메일(@앞)</option>
 									<option value="schGubun_Phone">전화번호</option>
 									<option value="schGubun_Addr">주소</option>
-							</select> <input type="text" id="schText" value="" class="ml_2"
-								style="width: 300px;"
-								onkeypress="if(event.keyCode==13) sch_Go();"></td>
+							</select> 
+							
+							<input type="text" id="schText" value="" class="ml_2" style="width: 300px;" onkeypress="if(event.keyCode==13) sch_Go();"></td>
+						
 						</tr>
 
 					</thead>
@@ -165,8 +173,9 @@
 										<option value="F">최종&nbsp;로그인&nbsp;날짜</option>
 									</select> <input type="text" name="Date1" id="KeyDate1"
 										style="width: 70px;" value="" class="mr_6 hasDatepicker"
-										onkeypress="if(event.keyCode==13) sch_Go();"> <img
-										class="ui-datepicker-trigger" src="../images/icon_calen.gif"
+										onkeypress="if(event.keyCode==13) sch_Go();"> 
+										
+										<img class="ui-datepicker-trigger" src="../images/icon_calen.gif"
 										alt="..." title="..."> ~ <input type="text" name="Date2"
 										id="KeyDate2" style="width: 70px;" value=""
 										class="mr_6 hasDatepicker"
@@ -387,9 +396,12 @@
 				<div class="table_title  mt_50">
 
 					<div class="table_titleCnt">
-						<span>&nbsp; 전체 : <span class="fontredN">7</span> , 검색 : <span
-							class="fontredN">7</span>
+					
+						<span> &nbsp; 전체 : 
+						<span class="fontredN">${m_count}</span> 
+						<!-- , 검색 : <span class="fontredN">7</span> -->
 						</span>
+						
 					</div>
 
 					<div class="float_r">
@@ -543,9 +555,7 @@
 -->
 
 
-
 					<tbody>
-
 
 <!-- 
 ***************************************************************************
@@ -557,54 +567,70 @@
 
 
 						<!-- 1열 -->
-
+						
+						<c:forEach var="m_list" items="${m_list}" varStatus="status">
+						
 
 						<tr onmouseover="this.style.backgroundColor=&quot;#F2F6FF&quot;"
 							onmouseout="this.style.backgroundColor=&quot;&quot;" style="">
 
-							<td rowspan="2"><input value="ST_IT46833@ST_IT46833"
-								type="checkbox" id="LCheck_List" name="LCheck_List"></td>
-							<td rowspan="2">7</td>
+							<td rowspan="2"><input value="ST_IT46833@ST_IT46833" type="checkbox" id="LCheck_List" name="LCheck_List"></td>
+								
+							<td rowspan="2"> ${status.count} </td>
 
-							<td rowspan="2"><img src="../images/icon_JoinRouteH.png"
-								title="Homepage"></td>
+							<td rowspan="2"><img src="../images/icon_JoinRouteH.png" title="Homepage"></td>
 
-							<td rowspan="2">2019-03-25 13:23:05<br> -<br> (0회)
+							<td rowspan="2">
+							${m_list.join_date}<br>
+							 - <br>
+							 (0회)
 							</td>
 
 							<td rowspan="2">[등급없음]</td>
 
-							<td rowspan="2"><a href="#"
-								onclick="Student_Detail_pop('ST_IT46833'); return false;">
-									아이티맵99<br> [itmap99]<img src="../images/icon_selcopy.png"
-									class="ml_2 mb_2" title="자세히" alt="자세히">
-							</a></td>
+							<td rowspan="2">
+							<a href="#" onclick="Student_Detail_pop('ST_IT46833'); return false;"> 
+							${m_list.name}<br> 
+							${m_list.id}
+							<img src="../images/icon_selcopy.png" class="ml_2 mb_2" title="자세히" alt="자세히">
+							</a>
+							</td>
 
-							<td rowspan="2">1989-02-02(남)<br>010-0000-0000
+							<td rowspan="2">
+							${m_list.birth}<br>
+							${m_list.phone}
 							</td>
 
 
-							<td rowspan="2" class="amount align_r">0[\]<br>
-								1,100[P]
-
+							<td rowspan="2" class="amount align_r">
+							0[\]<br>
+							1,100[P]
 							</td>
 
 
-							<td rowspan="2"><input type="radio" value="ipin" id="">
-								아이핀<br> <input type="radio" name="" value="hp" id="hp">휴대폰</td>
+							<td rowspan="2">
+							<input type="radio" value="ipin" id="">아이핀<br>
+							<input type="radio" name="" value="hp" id="hp">휴대폰
+							</td>
 
 
-							<td><span class="">Yes</span></td>
+							<td>
+							<span class="">Yes</span>
+							</td>
 
 
 							<td><input type="checkbox" name="" value="1" id="open"></td>
 							<td><input type="checkbox" name="" value="1" id="mailling"></td>
 
-							<td rowspan="2" class="gg"><a href="#" class="b01">수정</a><br>
-								<a href="#" class="b02">그룹</a></td>
-
-
-
+							<td rowspan="2" class="gg">
+							<a href="#" class="b01">
+							수정
+							</a>
+							<br>
+							<a href="#" class="b02">
+							그룹
+							</a>
+							</td>
 
 						</tr>
 						
@@ -614,385 +640,11 @@
 						<tr>
 							<td><input type="checkbox" value="1" id="sms"></td>
 							<td><input type="checkbox" value="1" id="adult"></td>
-							<td><input type="checkbox" value="20200331"
-								id="mb_intercept_date_7"></td>
-
-
-
-
+							<td><input type="checkbox" value="20200331" id="mb_intercept_date_7"></td>
 						</tr>
 
 
-
-<!-- 
-***************************************************************************
-
-                                  1명
-                                     
-***************************************************************************
--->
-
-						<tr onmouseover="this.style.backgroundColor=&quot;#F2F6FF&quot;"
-							onmouseout="this.style.backgroundColor=&quot;&quot;" style="">
-
-							<td rowspan="2"><input value="ST_IT00630@ST_IT00630"
-								type="checkbox" id="LCheck_List" name="LCheck_List"></td>
-
-							<td rowspan="2">6</td>
-
-							<td rowspan="2"><img src="../images/icon_JoinRouteH.png"
-								title="Homepage"></td>
-
-							<td rowspan="2">2019-03-23 17:03:34<br> -<br> (0회)
-							</td>
-
-							<td rowspan="2">[등급없음]</td>
-
-							<td rowspan="2"><a href="#"
-								onclick="Student_Detail_pop('ST_IT00630'); return false;">
-									itmap4<br> [itmap4]<img src="../images/icon_selcopy.png"
-									class="ml_2 mb_2" title="자세히" alt="자세히">
-							</a></td>
-
-
-							<td rowspan="2">1989-01-01(남)<br>010-0000-0000
-							</td>
-
-
-							<td rowspan="2" class="amount align_r">0[\]<br> 0[P] <br>
-								<a href="#" onclick="WaitAccPoint_Chk('itmap4'); return false;">
-
-
-
-									<div class="BoxRed0">
-										<span>&nbsp;<img src="../images/icon_point01W.png"
-											style="margin-bottom: 2px"> 적립 대기(2)
-										</span>
-									</div>
-							</a>
-
-
-							</td>
-
-
-							<td rowspan="2"><input type="radio" value="ipin" id="">
-								아이핀<br> <input type="radio" name="" value="hp" id="hp">휴대폰</td>
-
-
-
-							<td><span class="">Yes</span></td>
-
-
-							<td><input type="checkbox" name="" value="1" id="open"></td>
-							<td><input type="checkbox" name="" value="1" id="mailling"></td>
-
-							<td rowspan="2" class="gg"><a href="#" class="b01">수정</a><br>
-								<a href="#" class="b02">그룹</a></td>
-
-
-						</tr>
-
-						<tr>
-							<td><input type="checkbox" value="1" id="sms"></td>
-							<td><input type="checkbox" value="1" id="adult"></td>
-							<td><input type="checkbox" value="20200331"
-								id="mb_intercept_date_7"></td>
-						</tr>
-
-
-<!-- 
-***************************************************************************
-
-                                  1명
-                                     
-***************************************************************************
--->
-
-						<tr onmouseover="this.style.backgroundColor=&quot;#F2F6FF&quot;"
-							onmouseout="this.style.backgroundColor=&quot;&quot;" style="">
-							<td rowspan="2"><input value="ST_IT21512@ST_IT21512"
-								type="checkbox" id="LCheck_List" name="LCheck_List"></td>
-							<td rowspan="2">5</td>
-
-							<td rowspan="2"><img src="../images/icon_JoinRouteH.png"
-								title="Homepage"></td>
-							<td rowspan="2">2019-03-23 16:57:15<br> -<br> (0회)
-							</td>
-							<td rowspan="2">[등급없음]</td>
-							<td rowspan="2"><a href="#"
-								onclick="Student_Detail_pop('ST_IT21512'); return false;">
-									아이티맵3<br> [itmap3]<img src="../images/icon_selcopy.png"
-									class="ml_2 mb_2" title="자세히" alt="자세히">
-							</a></td>
-							<td rowspan="2">1989-01-01(남)<br>010-0000-0000
-							</td>
-							<td rowspan="2" class="amount align_r">0[\]<br> 100[P]
-								<br> <a href="#"
-								onclick="WaitAccPoint_Chk('itmap3'); return false;"><div
-										class="BoxRed0">
-										<span>&nbsp;<img src="../images/icon_point01W.png"
-											style="margin-bottom: 2px"> 적립 대기(1)
-										</span>
-									</div></a>
-
-							</td>
-
-
-							<td rowspan="2"><input type="radio" value="ipin" id="">
-								아이핀<br> <input type="radio" name="" value="hp" id="hp">휴대폰</td>
-
-
-							<td><span class="">Yes</span></td>
-
-
-							<td><input type="checkbox" name="" value="1" id="open"></td>
-							<td><input type="checkbox" name="" value="1" id="mailling"></td>
-
-							<td rowspan="2" class="gg"><a href="#" class="b01">수정</a><br>
-								<a href="#" class="b02">그룹</a></td>
-
-
-						</tr>
-
-						<tr>
-							<td><input type="checkbox" value="1" id="sms"></td>
-							<td><input type="checkbox" value="1" id="adult"></td>
-							<td><input type="checkbox" value="20200331"
-								id="mb_intercept_date_7"></td>
-						</tr>
-
-
-
-<!-- 
-***************************************************************************
-
-                                  1명
-                                     
-***************************************************************************
--->
-
-
-						<tr onmouseover="this.style.backgroundColor=&quot;#F2F6FF&quot;"
-							onmouseout="this.style.backgroundColor=&quot;&quot;" style="">
-							<td rowspan="2"><input value="ST_IT73479@ST_IT73479"
-								type="checkbox" id="LCheck_List" name="LCheck_List"></td>
-							<td rowspan="2">4</td>
-
-							<td rowspan="2"><img src="../images/icon_JoinRouteH.png"
-								title="Homepage"></td>
-							<td rowspan="2">2019-03-23 16:50:27<br> -<br> (0회)
-							</td>
-							<td rowspan="2">[등급없음]</td>
-							<td rowspan="2"><a href="#"
-								onclick="Student_Detail_pop('ST_IT73479'); return false;">
-									아이티맵2<br> [itmap2]<img src="../images/icon_selcopy.png"
-									class="ml_2 mb_2" title="자세히" alt="자세히">
-							</a></td>
-							<td rowspan="2">1989-01-01(남)<br>010-0000-0000
-							</td>
-							<td rowspan="2" class="amount align_r">15,000[\]<br>
-								100[P]
-
-
-							</td>
-
-
-
-							<td rowspan="2"><input type="radio" value="ipin" id="">
-								아이핀<br> <input type="radio" name="" value="hp" id="hp">휴대폰</td>
-
-							<td><span class="">Yes</span></td>
-
-
-							<td><input type="checkbox" name="" value="1" id="open"></td>
-							<td><input type="checkbox" name="" value="1" id="mailling"></td>
-
-							<td rowspan="2" class="gg"><a href="#" class="b01">수정</a><br>
-								<a href="#" class="b02">그룹</a></td>
-
-						</tr>
-
-						<tr>
-							<td><input type="checkbox" value="1" id="sms"></td>
-							<td><input type="checkbox" value="1" id="adult"></td>
-							<td><input type="checkbox" value="20200331"
-								id="mb_intercept_date_7"></td>
-						</tr>
-
-
-
-<!-- 
-***************************************************************************
-
-                                  1명
-                                     
-***************************************************************************
--->
-
-
-						<tr onmouseover="this.style.backgroundColor=&quot;#F2F6FF&quot;"
-							onmouseout="this.style.backgroundColor=&quot;&quot;" style="">
-							<td rowspan="2"><input value="ST_ST28683@ST_ST28683"
-								type="checkbox" id="LCheck_List" name="LCheck_List"></td>
-							<td rowspan="2">3</td>
-
-							<td rowspan="2"><img src="../images/icon_JoinRouteA.png"
-								title="Admin"></td>
-							<td rowspan="2">2019-03-22 19:44:50<br> -<br> (0회)
-							</td>
-							<td rowspan="2">[등급없음]</td>
-							<td rowspan="2"><a href="#"
-								onclick="Student_Detail_pop('ST_ST28683'); return false;">
-									회원3<br> [student3]<img src="../images/icon_selcopy.png"
-									class="ml_2 mb_2" title="자세히" alt="자세히">
-							</a></td>
-							<td rowspan="2">1928-02-06(남)<br>010-0000-0000
-							</td>
-							<td rowspan="2" class="amount align_r">0[\]<br> 0[P]
-
-							</td>
-
-
-							<td rowspan="2"><input type="radio" value="ipin" id="">
-								아이핀<br> <input type="radio" name="" value="hp" id="hp">휴대폰</td>
-							<td><span class="">Yes</span></td>
-
-
-							<td><input type="checkbox" name="" value="1" id="open"></td>
-							<td><input type="checkbox" name="" value="1" id="mailling"></td>
-
-							<td rowspan="2" class="gg"><a href="#" class="b01">수정</a><br>
-								<a href="#" class="b02">그룹</a></td>
-
-
-						</tr>
-
-						<tr>
-							<td><input type="checkbox" value="1" id="sms"></td>
-							<td><input type="checkbox" value="1" id="adult"></td>
-							<td><input type="checkbox" value="20200331"
-								id="mb_intercept_date_7"></td>
-						</tr>
-
-
-
-<!-- 
-***************************************************************************
-
-                                  1명
-                                     
-***************************************************************************
--->
-
-						<tr onmouseover="this.style.backgroundColor=&quot;#F2F6FF&quot;"
-							onmouseout="this.style.backgroundColor=&quot;&quot;" style="">
-							<td rowspan="2"><input value="ST_ST79236@ST_ST79236"
-								type="checkbox" id="LCheck_List" name="LCheck_List"></td>
-							<td rowspan="2">2</td>
-
-							<td rowspan="2"><img src="../images/icon_JoinRouteA.png"
-								title="Admin"></td>
-							<td rowspan="2">2019-03-22 15:14:45<br> -<br> (0회)
-							</td>
-							<td rowspan="2">[등급없음]</td>
-							<td rowspan="2"><a href="#"
-								onclick="Student_Detail_pop('ST_ST79236'); return false;">
-									회원1<br> [student1]<img src="../images/icon_selcopy.png"
-									class="ml_2 mb_2" title="자세히" alt="자세히">
-							</a></td>
-							<td rowspan="2">1999-03-03(여)<br>010-0000-0000
-							</td>
-							<td rowspan="2" class="amount align_r">0[\]<br> 556[P]
-								<br> <a href="#"
-								onclick="WaitAccPoint_Chk('student1'); return false;"><div
-										class="BoxRed0">
-										<span>&nbsp;<img src="../images/icon_point01W.png"
-											style="margin-bottom: 2px"> 적립 대기(1)
-										</span>
-									</div></a>
-
-							</td>
-
-
-							<td rowspan="2"><input type="radio" value="ipin" id="">
-								아이핀<br> <input type="radio" name="" value="hp" id="hp">휴대폰</td>
-							<td><span class="">Yes</span></td>
-
-
-							<td><input type="checkbox" name="" value="1" id="open"></td>
-							<td><input type="checkbox" name="" value="1" id="mailling"></td>
-
-							<td rowspan="2" class="gg"><a href="#" class="b01">수정</a><br>
-								<a href="#" class="b02">그룹</a></td>
-
-						</tr>
-
-						<tr>
-							<td><input type="checkbox" value="1" id="sms"></td>
-							<td><input type="checkbox" value="1" id="adult"></td>
-							<td><input type="checkbox" value="20200331"
-								id="mb_intercept_date_7"></td>
-						</tr>
-
-
-
-<!-- 
-***************************************************************************
-
-                                  1명
-                                     
-***************************************************************************
--->
-
-
-						<tr onmouseover="this.style.backgroundColor=&quot;#F2F6FF&quot;"
-							onmouseout="this.style.backgroundColor=&quot;&quot;" style="">
-							<td rowspan="2"><input value="ST_ST79236@ST_ST79236"
-								type="checkbox" id="LCheck_List" name="LCheck_List"></td>
-							<td rowspan="2">1</td>
-
-							<td rowspan="2"><img src="../images/icon_JoinRouteA.png"
-								title="Admin"></td>
-							<td rowspan="2">2019-01-01 11:11:00<br> -<br> (0회)
-							</td>
-							<td rowspan="2">[등급없음]</td>
-							<td rowspan="2"><a href="#"
-								onclick="Student_Detail_pop('ST_ST79236'); return false;">
-									회원1<br> [student1]<img src="../images/icon_selcopy.png"
-									class="ml_2 mb_2" title="자세히" alt="자세히">
-							</a></td>
-							<td rowspan="2">2004-03-03(여)<br>010-0000-0000
-							</td>
-							<td rowspan="2" class="amount align_r">0[\]<br> 556[P]
-								<br> <a href="#"
-								onclick="WaitAccPoint_Chk('student1'); return false;"><div class="BoxRed0">
-										<span>&nbsp;<img src="../images/icon_point01W.png"
-											style="margin-bottom: 2px"> 적립 대기(1)
-										</span>
-									</div></a>
-
-							</td>
-
-							<td rowspan="2"><input type="radio" value="ipin" id="">
-								아이핀<br> <input type="radio" name="" value="hp" id="hp">휴대폰</td>
-							<td><span class="">Yes</span></td>
-
-
-							<td><input type="checkbox" name="" value="1" id="open"></td>
-							<td><input type="checkbox" name="" value="1" id="mailling"></td>
-
-							<td rowspan="2" class="gg"><a href="#" class="b01">수정</a><br>
-								<a href="#" class="b02">그룹</a></td>
-
-						</tr>
-
-						<tr>
-							<td><input type="checkbox" value="1" id="sms"></td>
-							<td><input type="checkbox" value="1" id="adult"></td>
-							<td><input type="checkbox" value="20200331"
-								id="mb_intercept_date_7"></td>
-						</tr>
-
+                    </c:forEach>
 
 
 

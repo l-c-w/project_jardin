@@ -18,5 +18,5 @@ public interface EDao {
 	
 	public ArrayList<Event_commentDto> event_comment(String e_code, int page, int limit);
 	
-	public int eModify_comment(String e_code, String content);
+	public void eModify_comment(String e_code, String ec_num);
 }

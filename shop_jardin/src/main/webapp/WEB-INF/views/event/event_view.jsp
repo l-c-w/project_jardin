@@ -148,15 +148,21 @@ $(document).ready(function() {
 					<div class="replyBox">
 						<!-- 댓글 수정 -->
 						<c:forEach var="e_com" items="${event_comment }">
-						
-						<ul id="coModi" class="comment_modifyM">
-							<li class="name">${e_com.id } </li>
-							<li class="txt"><textarea class="replyType">${e_com.ec_content }</textarea></li>
-							<li class="btn">
-								<a href="event_view?e_code=${e_code }&ec_content=${e_com.ec_content }" class="rebtn" id="sub_btn">등록</a>
-								<a href="#" class="rebtn">삭제</a>
-							</li>
-						</ul>
+						<form action="event_commentOk">
+							<ul id="coModi" class="comment_modifyM">
+								<li class="name">${e_com.id } </li>
+								<li class="txt">
+									<input type="text" class="replyType" value="${e_com.ec_content }" name="ec_content">
+									<input type="hidden" value="${e_com.ec_num }" name="ec_num">
+									<input type="hidden" value="${e_code }" name="e_code">
+								</li>
+								<li class="btn">
+									<input type="submit" value="등록" class="rebtn">
+<!-- 									<a href="event_commentOk" class="rebtn" id="sub_btn">등록</a> -->
+									<a href="#" class="rebtn">삭제</a>
+								</li>
+							</ul> 
+						</form>
 						
 						<!-- 댓글 표시 -->
 						<ul id="coSub" class="comment_modifyV">

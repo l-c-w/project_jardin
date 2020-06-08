@@ -49,8 +49,17 @@ public class EController {
 	public String modify_comment(HttpServletRequest request, Model model) {
 		es = new EModifyCommentService();
 		es.execute(request, sqlSession, model);
-		return "event/event_view";
+		return "redirect:event_view";
 	}
+	
+	@RequestMapping("/fin_event_list")
+	public String fin_event_view(HttpServletRequest request, Model model) {
+		es = new EListService();
+		es.execute(request, sqlSession, model);
+		return "event/fin_event_list";
+	}
+	
+	
 	
 	
 }

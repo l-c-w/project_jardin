@@ -37,36 +37,6 @@ public class PController {
 
 		return "product/p_list";
 	}
-	@RequestMapping("/review")
-	public String review(HttpServletRequest request, Model model) {
-
-		ps = new ReviewService();
-		ps.execute(request, sqlsession, model);
-//		PDao dao = sqlsession.getMapper(PDao.class);
-//		model.addAttribute("list",dao.list());
-
-		return "product/review";
-	}
-	@RequestMapping("/photo")
-	public String photo(HttpServletRequest request, Model model) {
-
-		ps = new PinquiryService();
-		ps.execute(request, sqlsession, model);
-//		PDao dao = sqlsession.getMapper(PDao.class);
-//		model.addAttribute("list",dao.list());
-
-		return "product/photo";
-	}
-	@RequestMapping("/p_inquiry")
-	public String p_inquiry(HttpServletRequest request, Model model) {
-
-		ps = new PinquiryService();
-		ps.execute(request, sqlsession, model);
-//		PDao dao = sqlsession.getMapper(PDao.class);
-//		model.addAttribute("list",dao.list());
-
-		return "product/p_inquiry";
-	}
 	@RequestMapping("/p_detail")
 	public String p_detail(HttpServletRequest request, Model model) {
 		

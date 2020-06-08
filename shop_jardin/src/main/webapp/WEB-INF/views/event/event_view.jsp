@@ -23,6 +23,7 @@
 <script type="text/javascript" src="../js/jquery.easing.1.3.js"></script>
 <script type="text/javascript" src="../js/idangerous.swiper-2.1.min.js"></script>
 <script type="text/javascript" src="../js/jquery.anchor.js"></script>
+<script type="text/javascript" src="../js/event_view.js"></script>
 <!--[if lt IE 9]>
 <script type="text/javascript" src="../js/html5.js"></script>
 <script type="text/javascript" src="../js/respond.min.js"></script>
@@ -30,10 +31,15 @@
 <script type="text/javascript">
 $(document).ready(function() {
 	
-
-
+	
 });
 </script>
+<style type="text/css">
+	.show {display:block} /*보여주기*/
+	.hide {display:none} /*숨기기*/
+	.comment_modifyM {display:block} 
+/* 	.comment_modifyV {} */
+</style>
 </head>
 <body>
 
@@ -114,7 +120,8 @@ $(document).ready(function() {
 					<!-- //이전다음글 -->
 
 
-					<!-- 댓글-->
+					<!-- 댓글 -->
+					<!-- 댓글 등록 -->
 					<div class="replyWrite">
 						<form action="event_view?e_code=${event_view.e_code }" method="post">
 							<ul>
@@ -132,34 +139,37 @@ $(document).ready(function() {
 						</form>
 						<p class="ntic">※ 비밀번호를 입력하시면 댓글이 비밀글로 등록 됩니다.</p>
 					</div>
+					
+					
+					
+					
 
+					<!-- 댓글 수정, 삭제 -->
 					<div class="replyBox">
 						<!-- 댓글 수정 -->
-						<c:if test="">
-						<ul class="">
+						<c:forEach var="e_com" items="${event_comment }">
+						
+						<ul id="coModi" class="comment_modifyM">
 							<li class="name">${e_com.id } </li>
 							<li class="txt"><textarea class="replyType">${e_com.ec_content }</textarea></li>
 							<li class="btn">
-								<a href="event_view?e_code=${e_code }&ec_content=${e_com.ec_content }" class="rebtn">등록</a>
+								<a href="event_view?e_code=${e_code }&ec_content=${e_com.ec_content }" class="rebtn" id="sub_btn">등록</a>
 								<a href="#" class="rebtn">삭제</a>
 							</li>
 						</ul>
-						</c:if>
+						
 						<!-- 댓글 표시 -->
-						<c:if test="">
-						<c:forEach var="e_com" items="${event_comment }">
-						<ul>
+						<ul id="coSub" class="comment_modifyV">
 							<fmt:formatDate var="ec_wdate1" value="${e_com.ec_wdate }" pattern="YYYY/MM/dd" />
 							<fmt:formatDate var="ec_wdate2" value="${e_com.ec_wdate }" pattern="hh:mm:ss" />
 							<li class="name">${e_com.id } <span>[${ec_wdate1 }&nbsp;&nbsp;${ec_wdate2 }]</span></li>
 							<li class="txt">${e_com.ec_content }</li>
 							<li class="btn">
-								<a href="javascript:" class="rebtn">수정</a>
+								<a class="rebtn" style="cursor: pointer;" id="modi_btn">수정</a>
 								<a href="#" class="rebtn">삭제</a>
 							</li>
 						</ul>
 						</c:forEach>
-						</c:if>
 						
 						<!-- 비밀글, 없애기로 한 기능-->
 <!-- 						<ul> -->

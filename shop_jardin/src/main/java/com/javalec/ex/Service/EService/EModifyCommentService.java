@@ -1,43 +1,45 @@
 package com.javalec.ex.Service.EService;
 
 import java.util.ArrayList;
+
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.ui.Model;
+
 import com.javalec.ex.Dao.EDao;
 import com.javalec.ex.Dto.EDto.EventDto;
 import com.javalec.ex.Dto.EDto.Event_commentDto;
 
-public class ECommentService implements EService {
+public class EModifyCommentService implements EService {
 
 	@Override
 	public void execute(HttpServletRequest request, SqlSession sqlSession, Model model) {
 
+		// EModifyCommentService
+		// 댓글 수정
+		String e_code = request.getParameter("e_code");
+		String content = request.getParameter("content");
+
+		// log
+		System.out.println("EModifyCommentService - e_code : " + e_code);
+		System.out.println("EModifyCommentService - content : " + content);
+
+		EDao dao = sqlSession.getMapper(EDao.class);
+		dao.eModify_comment(e_code, content);
+		
+		
+		// EViewService
 		// 변수 선언
 		EventDto edto = new EventDto(); // 본문 dto
 		ArrayList<Event_commentDto> list = new ArrayList<Event_commentDto>(); // 댓글 dto
-		EDao dao = sqlSession.getMapper(EDao.class);
-		String e_code = request.getParameter("e_code");
-		String temp = ""; // 페이징 임시변수 & 리퀘스트를 비교해서 page변수에 값을 할당하기 위함
-		String content = "";
-		temp = request.getParameter("page"); // 페이징 임시변수
-		content = request.getParameter("content");
-		int page = 0; // 페이징 임시변수
+		int page = 1; // 페이징 : 무조건 1페이지로 가게 한다
 		int limit = 3; // 1page = 게시글 10개
 
 		// EViewService
 		edto = dao.event_view(e_code);
 		model.addAttribute("event_view", edto);
-		System.out.println("temp : " + temp);
 
-		if (temp == null) { // 페이징 임시변수 & 리퀘스트를 비교해서 page변수에 값을 할당하기 위함
-			page = 1; // 최초 기본 1페이지 세팅
-
-		} else {
-			page = Integer.parseInt(temp); // 리퀘스트에 값이 있으면 page변수에 리퀘스트 값을 할당
-		}
 
 		// 페이지별 리스트 개수 가져오기
 		int startrow = (page - 1) * limit + 1; // (1 - 1) * 10 + 1 = 1
@@ -56,19 +58,6 @@ public class ECommentService implements EService {
 
 		// ECommentService
 		list = dao.event_comment(e_code, startrow, endrow);
-		
-		
-		// eModify_comment()
-		if (content == null) { // 페이징 임시변수 & 리퀘스트를 비교해서 page변수에 값을 할당하기 위함
-			content = ""; // 최초 기본 1페이지 세팅
-		}
-		System.out.println("content : " + content);
-//		Event_commentDto ecdto = 
-				dao.eModify_comment(e_code, content);
-			
-		// ↑ 이거를 따로 빼놔야할 것 같음
-		
-		
 
 		// model
 		model.addAttribute("event_comment", list);
@@ -95,23 +84,6 @@ public class ECommentService implements EService {
 			System.out.println("Event_commentDto : " + dto.getEc_wdate());
 			System.out.println("Event_commentDto : " + dto.getEc_content());
 		}
-
 	}
 
 }
-
-//		String searchFlag = null; // 검색체크	//였지만 검색기능을 빼기로 했기 때문에 쓰지않는기능이다
-//		System.out.println("searchFlag : " + searchFlag);
-
-//		if(request.getParameter("page") != null) {
-//			page = Integer.parseInt(request.getParameter("page"));
-//		}
-//		switch (page) {
-//		case 1:
-//			searchFlag = null;
-//			break;
-//		default:
-//			searchFlag = "1";
-//			model.addAttribute("searchFlag", searchFlag);
-//			break;
-//		}// 검색했을 때 페이지를 넘겨도 검색어를 유지시키는 기능	이었지만 검색기능을 빼기로 했기 때문에 쓰지않는기능이다

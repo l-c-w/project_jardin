@@ -31,6 +31,22 @@
 	
 	
 	
+	<select id="m_list" resultType="com.javalec.ex.Dto.MDto.Member_Dto">
+	
+	select * from member
+	
+	</select>
+	
+	
+	<select id="m_count" resultType="int">
+	
+	select count(*) from member
+	
+	</select>
+	
+	
+	
+	
 </mapper>
 
 

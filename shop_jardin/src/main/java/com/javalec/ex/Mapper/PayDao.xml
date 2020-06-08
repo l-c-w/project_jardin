@@ -5,7 +5,11 @@
 
 <mapper namespace="com.javalec.ex.Dao.PayDao">
 
-
+	<select id="cart_view" resultType="com.javalec.ex.Dto.PayDto.CartDto">
+		select product.p_code, product.p_name, product.p_category, product.price, product.p_point, cart.amount 
+		from cart, product
+		where cart.id='test4' and cart.p_code=product.p_code
+	</select>
 
 
 

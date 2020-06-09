@@ -25,17 +25,17 @@
 		from (select * from p_review ec where p_code=#{param1} order by pr_wdate desc))
         product where rnum>=#{param2} and rnum<=#{param3}]]>
 	</select>
-	<select id="c_review"
-		resultType="com.javalec.ex.Dto.CDto.C_ReviewDto">
-		select id, cr_title, cr_content, cr_score, cr_wdate from c_review where
-		p_code=#{param1} order by cr_wdate asc
+	<select id="c_review" resultType="com.javalec.ex.Dto.CDto.C_ReviewDto">
+		<![CDATA[select * from (select rownum rnum,cr_num,p_code,id,cr_title,cr_content,cr_score,cr_hit,cr_wdate
+		from (select * from c_review ec where p_code=#{param1} order by cr_wdate desc))
+        product where rnum>=#{param2} and rnum<=#{param3}]]>
 	</select>
 	<select id="pfnq_review" resultType="com.javalec.ex.Dto.PDto.P_FnqDto">
 		select id, pf_title, pf_content, pf_secret , pf_answer , pf_wdate from p_fnq
 		where p_code=#{param1} order by pf_wdate asc
 	</select>
 	<select id="getListCount" resultType="Integer">
-		select count(*) as count from product
+		select count(*) as count from p_review where p_code =#{param1}
 	</select>
 
 

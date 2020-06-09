@@ -1,5 +1,8 @@
 package com.javalec.ex.Controller;
 
+import java.util.List;
+import java.util.Map;
+
 import javax.servlet.http.HttpServletRequest;
 
 import org.apache.ibatis.session.SqlSession;
@@ -7,6 +10,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.ModelAndView;
 
 import com.javalec.ex.Dao.PDao;
 import com.javalec.ex.Dto.PDto.ProductDto;
@@ -15,7 +20,6 @@ import com.javalec.ex.Service.PService.PDetailService;
 import com.javalec.ex.Service.PService.PListService;
 import com.javalec.ex.Service.PService.PService;
 import com.javalec.ex.Service.PService.PinquiryService;
-import com.javalec.ex.Service.PService.ReviewService;
 
 @Controller
 @RequestMapping("product")
@@ -44,9 +48,9 @@ public class PController {
 		ps.execute(request, sqlsession, model);
 		return "product/p_detail";
 	}
-	
-	
-	
+
+
+
 	
 	
 	

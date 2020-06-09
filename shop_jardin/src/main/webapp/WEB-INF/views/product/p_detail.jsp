@@ -158,6 +158,8 @@ $(document).ready(function() {
 			<!-- //product -->
 
 
+
+
 			<!-- tab -->
 			<div class="detailTab">
 				<ul>
@@ -173,10 +175,16 @@ $(document).ready(function() {
 						onclick="return false;" id="goodsNotice">정책 및 공지</a></li>
 				</ul>
 			</div>
-			<script type="text/javascript">$(function(){$(".detailTab ul li a:eq(0)").click();});</script>
+			<!-- <script type="text/javascript">$(function(){$(".detailTab ul li a:eq(0)").click();});</script> -->
 			<!-- //tab -->
 
 
+			<script>
+			 	if( ${tabId } === 'goodsReview'){
+				$(function(){$(".detailTab ul li a:eq(2)").click();});					
+				} 
+			
+			</script>
 
 			<!-- detail content -->
 			<div id="detailContent">
@@ -349,58 +357,24 @@ $(document).ready(function() {
 						<div class="allPageMoving1">
 
 						<a href="#" class="n"><img src="../images/btn/btn_pre2.gif" alt="처음으로"/></a><a href="#" class="pre"><img src="../images/btn/btn_pre1.gif" alt="앞페이지로"/></a>
-						<strong>1</strong>
-						<a href="#">2</a>
-						<a href="#">3</a>
-						<a href="#">4</a>
-						<a href="#">5</a>
+						
+						<c:forEach var="j" items="${r_list }">
+							<c:choose>
+								<c:when test="${j == page }">
+									<strong>${j }</strong>
+								</c:when>
+							<c:when test="${j != page }">
+							    	<a href="p_detail?p_code=${product.p_code}&p_category=${product.p_category}&page=${j}&tabId='goodsReview'">${j}</a>
+							</c:when>
+							</c:choose>
+						</c:forEach>
 						<a href="#" class="next"><img src="../images/btn/btn_next1.gif" alt="뒤페이지로"/></a><a href="#" class="n"><img src="../images/btn/btn_next2.gif" alt="마지막페이지로"/></a>
 
 						</div>
 						<!-- //페이징이동1 -->
 					</div>
-					<%-- <div class="btnAreaList">
-						<!-- 페이징이동1 -->
-						<!-- 페이징이동1(searchFlag가 없을때) -->
-						<div class="allPageMoving1" style="margin-left: 250px;">
-
-						<a href="p_review?p_code=${p_code}&page=${startpage }" class="n"><img src="../images/btn/btn_pre2.gif" alt="처음으로"/></a>
-						<c:if test="${page <= 1 }">
-							<img src="../images/btn/btn_pre1.gif" alt="앞페이지로"/>
-						</c:if>
-						<c:if test="${page > 1 }">
-							<a href="p_review?p_code=${p_code}&page=${page - 1 }" class="pre">
-							<img src="../images/btn/btn_pre1.gif" alt="앞페이지로"/></a>
-						</c:if>
-						
-						<c:forEach var="a" begin="${startpage }" end="${endpage }" step="1">
-						<c:choose>
-							<c:when test="${a == page }">
-								<strong>${a }</strong>
-							</c:when>
-							<c:when test="${a != page }">
-								<a href="p_review?p_code=${p_code}&page=${a }">${a }</a>
-							</c:when>
-						</c:choose>						
-						</c:forEach>
-						
-						<c:if test="${page >= maxpage}">
-						<img src="../images/btn/btn_next1.gif" alt="뒤페이지로"/>
-						</c:if>
-						<c:if test="${page < maxpage}">
-						<a href="p_review?p_code=${p_code}&page=${page + 1 }" class="next">
-						<img src="../images/btn/btn_next1.gif" alt="뒤페이지로"/></a>
-						</c:if>						
-						<a href="p_review?p_code=${p_code}&page=${maxpage }" class="n"><img src="../images/btn/btn_next2.gif" alt="마지막페이지로"/></a>
-
-						</div>
-						<!-- //페이징이동1(searchFlag가 없을때) -->
-						<!-- //페이징이동1 -->
-					</div> --%>
 
 					<!-- //포토 구매후기 -->
-
-
 					<div class="headTitle depth">
 						<strong>상품리뷰&nbsp;</strong>상품리뷰는 상품 구매 후 작성하실 수 있습니다.
 						<p class="btn">

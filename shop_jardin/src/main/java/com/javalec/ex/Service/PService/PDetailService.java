@@ -1,6 +1,7 @@
 package com.javalec.ex.Service.PService;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -20,6 +21,34 @@ public class PDetailService implements PService {
 	private static final int PAGE_LIMIT = 5; // 한페이지에 글 몇개 보여줄건지
 	
 	
+    // 마지막 페이지 번호 계산
+    public int getlastNum(double cnt) {
+        return (int) (Math.ceil(cnt / PAGE_LIMIT));
+    }
+		
+	
+	//밑에 1,2,3,4,5 이거 구하는 함수
+    public List<Integer> getPageList(int pageNum, int totalCnt) {
+        List<Integer> pageList = new ArrayList<Integer>();
+
+        
+        // 마지막 페이지 번호 계산
+        int lastPageNum = getlastNum(totalCnt);
+
+        // 시작 페이지 번호 설정
+        int startPageNum = ((int) (Math.ceil((double) pageNum / ROW_LIMIT) - 1) * ROW_LIMIT) + 1;
+        // 현재 페이지를 기준으로 마지막 페이지 번호 조정
+        lastPageNum = (lastPageNum > startPageNum + ROW_LIMIT - 1) ? startPageNum + ROW_LIMIT - 1 : lastPageNum;
+
+        // 페이지 번호 할당
+        for (int val = startPageNum; val <= lastPageNum; val++) {
+            pageList.add(val);
+        }
+
+        return pageList;
+    }
+
+
 	
 	@Override
 	public void execute(HttpServletRequest request, SqlSession sqlSession, Model model) {
@@ -35,48 +64,48 @@ public class PDetailService implements PService {
 		ProductDto pdto = dao.productDetail(p_code);
 		model.addAttribute("product", pdto);
 
-//		// 관련상품
-//		String category = request.getParameter("p_category");
-//		ArrayList<ProductDto> list2 = new ArrayList<ProductDto>();
-//		model.addAttribute("list2", dao.list2(category));
+		
+		String temp = "";
 
-		int pr_num = Integer.parseInt(request.getParameter("pr_num"));
+		int page = 0;
+		System.out.println("PDetailService - request : " + request);
+		temp = request.getParameter("page");
+		if (temp == null) {
+			page = 1; // 최초 기본 1페이지 세팅
+		} else {
+			page = Integer.parseInt(temp);
+		}
+		
+		model.addAttribute("page",page);
 		
 		// 상품리뷰 포토 리뷰
 		
 		// 시작 글넘버
-		int startNum = (pr_num - 1) * PAGE_LIMIT + 1;
+		int startNum = (page - 1) * PAGE_LIMIT + 1;
 		int endNum = startNum + PAGE_LIMIT - 1;
-		
-		System.out.println("startNum:" + startNum);
-		System.out.println("endNum:" + endNum);
-		
+	
 		
 		//상품코드로 포토리뷰 갖고 오기
 		ArrayList<P_ReviewDto> prdto = dao.p_review(p_code, startNum , endNum);
 		model.addAttribute("p_review", prdto);
+		//상품코드로 상품리뷰 갖고 오기
+		ArrayList<C_ReviewDto> crdto = dao.c_review(p_code, startNum , endNum);
+		model.addAttribute("c_review", crdto);
 
+		////////////////////////////////////////////////////////////////////
 
-
-		// ------------------------------------------------------------
-//		for (int i = 0; i < crdto.size(); i++) {
-//			C_ReviewDto dto = (C_ReviewDto) crdto.get(i);
-//			System.out.println("getCr_num : " + dto.getCr_num());
-//			System.out.println("getCr_title : " + dto.getCr_title());
-//			System.out.println("getCr_content : " + dto.getCr_content());
-//			System.out.println("getCr_wdate : " + dto.getCr_wdate());
-//
-//		}
-//		// ------------------------------------------------------------
-//		for (int i = 0; i < fnqdto.size(); i++) {
-//			P_FnqDto dto = (P_FnqDto) fnqdto.get(i);
-//			System.out.println("getPf_num : " + dto.getPf_num());
-//			System.out.println("getPf_title : " + dto.getPf_title());
-//			System.out.println("getPf_content : " + dto.getPf_content());
-//			System.out.println("getPf_answer : " + dto.getPf_answer());
-//			System.out.println("getPf_wdate : " + dto.getPf_wdate());
-//
-//		}
+		//상품에 대한 총 리뷰 갯수
+		int rCount = dao.getListCount(p_code);
+		
+		model.addAttribute("r_list", getPageList(page, rCount));
+		
+		model.addAttribute("tabId", request.getParameter("tabId"));
+		
+		// 관련상품
+		String category = request.getParameter("p_category");
+		ArrayList<ProductDto> list2 = new ArrayList<ProductDto>();
+		model.addAttribute("list2", dao.list2(category));
+		
 
 	}
 

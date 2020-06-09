@@ -23,6 +23,7 @@
 <script type="text/javascript" src="../js/jquery.easing.1.3.js"></script>
 <script type="text/javascript" src="../js/idangerous.swiper-2.1.min.js"></script>
 <script type="text/javascript" src="../js/jquery.anchor.js"></script>
+<script type="text/javascript" src="../js/event_view.js"></script>
 <!--[if lt IE 9]>
 <script type="text/javascript" src="../js/html5.js"></script>
 <script type="text/javascript" src="../js/respond.min.js"></script>
@@ -121,24 +122,26 @@ $(document).ready(function() {
 
 					<!-- 댓글-->
 					<div class="replyBox finReply">
-						<ul>
-							<li class="name">jjabcde <span>[2014-03-04&nbsp;&nbsp;15:01:59]</span></li>
-							<li class="txt"><textarea class="replyType"></textarea></li>
+						<c:forEach var="fe_com" items="${fin_event_comment }">
+						<ul id="coModi" class="comment_modifyM">
+							<li class="name">${fe_com.id } </li>
+							<li class="txt"><textarea class="replyType">${fe_com.ec_content }</textarea></li>
 							<li class="btn">
-								<a href="#" class="rebtn">수정</a>
+								<a href="event_view?e_code=${fe_code }&ec_content=${fe_com.ec_content }" class="rebtn" id="sub_btn">등록</a>
 								<a href="#" class="rebtn">삭제</a>
 							</li>
 						</ul>
 						<ul>
-							<fmt:formatDate var="ec_wdate1" value="${fin_event_comment.ec_wdate }" pattern="YYYY/MM/dd" />
-							<fmt:formatDate var="ec_wdate2" value="${fin_event_comment.ec_wdate }" pattern="hh:mm:ss" />
-							<li class="name">${fin_event_comment.id } <span>[${ec_wdate1 }&nbsp;&nbsp;${ec_wdate2 }]</span></li>
-							<li class="txt">${fin_event_comment.ec_content }</li>
+							<fmt:formatDate var="fec_wdate1" value="${fe_com.ec_wdate }" pattern="YYYY/MM/dd" />
+							<fmt:formatDate var="fec_wdate2" value="${fe_com.ec_wdate }" pattern="hh:mm:ss" />
+							<li class="name">${fe_com.id } <span>[${fec_wdate1 }&nbsp;&nbsp;${fec_wdate2 }]</span></li>
+							<li class="txt">${fe_com.ec_content }</li>
 							<li class="btn">
-								<a href="#" class="rebtn">수정</a>
+								<a class="rebtn" style="cursor: pointer;" id="modi_btn">수정</a>
 								<a href="#" class="rebtn">삭제</a>
 							</li>
 						</ul>
+						</c:forEach>
 					</div>
 					<!-- //댓글 -->
 

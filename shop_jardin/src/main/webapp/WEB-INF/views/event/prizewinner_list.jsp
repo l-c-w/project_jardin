@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -86,117 +88,126 @@ $(document).ready(function() {
 								<th scope="col" class="tnone">조회수</th>
 							</thead>
 							<tbody>
+								<c:forEach var="dto" items="${winner_list }">
 								<tr>
-									<td class="tnone">1</td>
+									<td class="tnone">${dto.w_code }</td>
 									<td class="left">
-										<a href="#">까페모리 봄바람 커파힌잔 30% 할인 이벤트 당첨자 발표</a>
+										<a href="prizewinner_view?w_code=${dto.w_code }">${dto.w_title }</a>
 										<img src="../images/ico/ico_new.gif" alt="NEW" />
 									</td>
-									<td>14-01-28</td>
-									<td class="tnone right">9999</td>
+									<fmt:formatDate var="w_wdate" value="${dto.w_wdate }" pattern="YYYY-MM-dd" />
+									<td>${w_wdate }</td>
+									<td class="tnone right">${dto.w_hit }</td>
 								</tr>
-
-								<tr>
-									<td class="tnone">2</td>
-									<td class="left">
-										<a href="#" class="lightgray">[11월 체험단 발표] 까모리 홍차라떼 체험단</a>
-									</td>
-									<td>14-01-28</td>
-									<td class="tnone right">9999</td>
-								</tr>
-
-								<tr>
-									<td class="tnone">3</td>
-									<td class="left">
-										<a href="#" class="lightgray">[11월 체험단 발표] 까모리 홍차라떼 체험단</a>
-									</td>
-									<td>14-01-28</td>
-									<td class="tnone right">9999</td>
-								</tr>
-
-								<tr>
-									<td class="tnone">4</td>
-									<td class="left">
-										<a href="#" class="lightgray">[11월 체험단 발표] 까모리 홍차라떼 체험단</a>
-									</td>
-									<td>14-01-28</td>
-									<td class="tnone right">9999</td>
-								</tr>
-
-								<tr>
-									<td class="tnone">5</td>
-									<td class="left">
-										<a href="#" class="lightgray">[11월 체험단 발표] 까모리 홍차라떼 체험단</a>
-									</td>
-									<td>14-01-28</td>
-									<td class="tnone right">9999</td>
-								</tr>
-
-								<tr>
-									<td class="tnone">6</td>
-									<td class="left">
-										<a href="#" class="lightgray">[11월 체험단 발표] 까모리 홍차라떼 체험단</a>
-									</td>
-									<td>14-01-28</td>
-									<td class="tnone right">9999</td>
-								</tr>
-
-								<tr>
-									<td class="tnone">7</td>
-									<td class="left">
-										<a href="#" class="lightgray">[11월 체험단 발표] 까모리 홍차라떼 체험단</a>
-									</td>
-									<td>14-01-28</td>
-									<td class="tnone right">9999</td>
-								</tr>
-
-								<tr>
-									<td class="tnone">8</td>
-									<td class="left">
-										<a href="#" class="lightgray">[11월 체험단 발표] 까모리 홍차라떼 체험단</a>
-									</td>
-									<td>14-01-28</td>
-									<td class="tnone right">9999</td>
-								</tr>
-
-								<tr>
-									<td class="tnone">9</td>
-									<td class="left">
-										<a href="#" class="lightgray">[11월 체험단 발표] 까모리 홍차라떼 체험단</a>
-									</td>
-									<td>14-01-28</td>
-									<td class="tnone right">9999</td>
-								</tr>
-
-								<tr>
-									<td class="tnone">10</td>
-									<td class="left">
-										<a href="#" class="lightgray">[11월 체험단 발표] 까모리 홍차라떼 체험단</a>
-									</td>
-									<td>14-01-28</td>
-									<td class="tnone right">9999</td>
-								</tr>
+								</c:forEach>
 							</tbody>
 						</table>
 					</div>
 						
 
-
+				<!-- searchFlag가 있을때 -->
+		   		<c:choose>
+		   	 	<c:when test="${searchFlag != null }">
+			   	 <div class="pagination" id="pagination">
+			   	 
+			   	 	<!-- 첫 페이지 이동 -->
+			   	 	<a href="list.do?searchFlag=${searchFlag}&opt=${opt}&search=${search}&page=${startpage }">
+			   			<span class="page_num">
+			   	 		<strong>◁◁</strong>
+			   	 		</span>
+			   	 	</a>
+			   	 	
+			   	 	<!-- 이전 페이지 이동버튼 -->
+			   	 	<c:if test="${page <= 1 }">
+			   	 	<span class="page_num">
+			   	 		<strong>◁</strong>
+			   	 	</span>
+			   	 	</c:if>
+			   	 	<c:if test="${page > 1 }">
+			   			<span class="page_num">
+			   	 		<a href="list.do?searchFlag=${searchFlag}&opt=${opt}&search=${search}&page=${page - 1 }"><strong>◁</strong></a>
+			   	 		</span>
+			   	 	</c:if>
+			   	 	
+			   	 	<!-- 순차적으로 페이지 출력 -->
+			   	 	<c:forEach var="a" begin="${startpage }" end="${endpage }" step="1">
+				   	 	<span class="page_num">
+				   	 	<c:choose>
+					   	 	<c:when test="${a == page }">
+						   	 	<strong id="page_num2">${a}</strong>
+					   	 	</c:when>	
+					   	 	<c:when test="${a != page }">
+						   	 	<a href="list.do?searchFlag=${searchFlag}&opt=${opt}&search=${search}&page=${a}"><strong>${a}</strong></a>
+					   	 	</c:when>	
+				   	 	</c:choose>			   	 		   	 	
+				   	 	</span>
+			   	 	</c:forEach>
+				   	 	
+				   	<!-- 다음 페이지 이동버튼 -->
+			   	 	<c:if test="${page >= maxpage }">
+			   	 	<span class="page_num">
+			   	 		<strong>▷</strong>
+			   	 	</span>
+			   	 	</c:if>
+			   	 	<c:if test="${page < maxpage }">
+			   			<span class="page_num">
+			   	 		<a href="list.do?searchFlag=${searchFlag}&opt=${opt}&search=${search}&page=${page + 1 }"><strong>▷</strong></a>
+			   	 		</span>
+			   	 	</c:if>
+			   	 	
+			   	 	<!-- 마지막 페이지 이동 -->
+			   	 	<a href="list.do?page=${maxpage }">
+			   			<span class="page_num">
+			   	 		<strong>▷▷</strong>
+			   	 		</span>
+			   	 	</a>
+			   	 	
+			  	 </div>
+		   	 	
+		   	 	</c:when>
+		   	 	<!-- // searchFlag가 있을때 끝-->
+		   	 	
+		   	 	<!-- searchFlag가 없을때 -->
+		   	 	<c:otherwise>
 					<div class="btnAreaList">
-						<!-- 페이징이동1 -->
 						<div class="allPageMoving1">
 
-						<a href="#" class="n"><img src="../images/btn/btn_pre2.gif" alt="처음으로"/></a><a href="#" class="pre"><img src="../images/btn/btn_pre1.gif" alt="앞페이지로"/></a>
-						<strong>1</strong>
-						<a href="#">2</a>
-						<a href="#">3</a>
-						<a href="#">4</a>
-						<a href="#">5</a>
-						<a href="#" class="next"><img src="../images/btn/btn_next1.gif" alt="뒤페이지로"/></a><a href="#" class="n"><img src="../images/btn/btn_next2.gif" alt="마지막페이지로"/></a>
+						<a href="prizewinner_list?page=${startpage }" class="n"><img src="../images/btn/btn_pre2.gif" alt="처음으로"/></a>
+						<c:if test="${page <= 1 }">
+							<img src="../images/btn/btn_pre1.gif" alt="앞페이지로"/>
+						</c:if>
+						<c:if test="${page > 1 }">
+							<a href="prizewinner_list?page=${page - 1 }" class="pre">
+							<img src="../images/btn/btn_pre1.gif" alt="앞페이지로"/></a>
+						</c:if>
+						
+						<c:forEach var="a" begin="${startpage }" end="${endpage }" step="1">
+						<c:choose>
+							<c:when test="${a == page }">
+								<strong>${a }</strong>
+							</c:when>
+							<c:when test="${a != page }">
+								<a href="prizewinner_list?page=${a }">${a }</a>
+							</c:when>
+						</c:choose>						
+						</c:forEach>
+						
+						<c:if test="${page >= maxpage}">
+						<img src="../images/btn/btn_next1.gif" alt="뒤페이지로"/>
+						</c:if>
+						<c:if test="${page < maxpage}">
+						<a href="prizewinner_list?page=${page + 1 }" class="next">
+						<img src="../images/btn/btn_next1.gif" alt="뒤페이지로"/></a>
+						</c:if>						
+						<a href="prizewinner_list?page=${maxpage }" class="n"><img src="../images/btn/btn_next2.gif" alt="마지막페이지로"/></a>
 
 						</div>
-						<!-- //페이징이동1 -->
 					</div>
+					<!-- // searchFlag가 없을때 끝-->
+					</c:otherwise>
+					</c:choose>
+					<!-- //페이징이동1 끝-->
+					
 
 					<div class="searchWrap">
 						<div class="search">
@@ -204,7 +215,9 @@ $(document).ready(function() {
 								<li class="web"><img src="../images/txt/txt_search.gif" alt="search" /></li>
 								<li class="se">
 									<select>
-										<option value="" />제목</option>
+										<option value="all" >전체</option>
+										<option value="title" >제목</option>
+										<option value="content" >내용</option>
 									</select>
 								</li>
 								<li><input type="text" class="searchInput" /></li>

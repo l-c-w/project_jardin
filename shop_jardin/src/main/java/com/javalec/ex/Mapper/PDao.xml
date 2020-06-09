@@ -20,10 +20,9 @@
 		resultType="com.javalec.ex.Dto.PDto.ProductDto">
 		select * from PRODUCT where P_CODE=#{param1}
 	</select>
-	<select id="p_review"
-		resultType="com.javalec.ex.Dto.CDto.P_ReviewDto">
-		<![CDATA[select * from (select rownum rnum,p_code,id,pr_title,pr_content,pr_file,pr_score,pr_hit,pr_wdate
-		from (select * from p_review ec where p_code=#{param1} order by pr_wdate asc))
+	<select id="p_review" resultType="com.javalec.ex.Dto.CDto.P_ReviewDto">
+		<![CDATA[select * from (select rownum rnum,pr_num,p_code,id,pr_title,pr_content,pr_file,pr_score,pr_hit,pr_wdate
+		from (select * from p_review ec where p_code=#{param1} order by pr_wdate desc))
         product where rnum>=#{param2} and rnum<=#{param3}]]>
 	</select>
 	<select id="c_review"

@@ -348,12 +348,28 @@ $(document).ready(function() {
 						<!-- 페이징이동1 -->
 						<div class="allPageMoving1">
 
-							<a href="p_review?page=${startpage }" class="n"><img src="../images/btn/btn_pre2.gif" alt="처음으로"/></a>
+						<a href="#" class="n"><img src="../images/btn/btn_pre2.gif" alt="처음으로"/></a><a href="#" class="pre"><img src="../images/btn/btn_pre1.gif" alt="앞페이지로"/></a>
+						<strong>1</strong>
+						<a href="#">2</a>
+						<a href="#">3</a>
+						<a href="#">4</a>
+						<a href="#">5</a>
+						<a href="#" class="next"><img src="../images/btn/btn_next1.gif" alt="뒤페이지로"/></a><a href="#" class="n"><img src="../images/btn/btn_next2.gif" alt="마지막페이지로"/></a>
+
+						</div>
+						<!-- //페이징이동1 -->
+					</div>
+					<%-- <div class="btnAreaList">
+						<!-- 페이징이동1 -->
+						<!-- 페이징이동1(searchFlag가 없을때) -->
+						<div class="allPageMoving1" style="margin-left: 250px;">
+
+						<a href="p_review?p_code=${p_code}&page=${startpage }" class="n"><img src="../images/btn/btn_pre2.gif" alt="처음으로"/></a>
 						<c:if test="${page <= 1 }">
 							<img src="../images/btn/btn_pre1.gif" alt="앞페이지로"/>
 						</c:if>
 						<c:if test="${page > 1 }">
-							<a href="p_review?page=${page - 1 }" class="pre">
+							<a href="p_review?p_code=${p_code}&page=${page - 1 }" class="pre">
 							<img src="../images/btn/btn_pre1.gif" alt="앞페이지로"/></a>
 						</c:if>
 						
@@ -363,7 +379,7 @@ $(document).ready(function() {
 								<strong>${a }</strong>
 							</c:when>
 							<c:when test="${a != page }">
-								<a href="p_review?page=${a }">${a }</a>
+								<a href="p_review?p_code=${p_code}&page=${a }">${a }</a>
 							</c:when>
 						</c:choose>						
 						</c:forEach>
@@ -372,14 +388,15 @@ $(document).ready(function() {
 						<img src="../images/btn/btn_next1.gif" alt="뒤페이지로"/>
 						</c:if>
 						<c:if test="${page < maxpage}">
-						<a href="p_review?page=${page + 1 }" class="next">
+						<a href="p_review?p_code=${p_code}&page=${page + 1 }" class="next">
 						<img src="../images/btn/btn_next1.gif" alt="뒤페이지로"/></a>
 						</c:if>						
-						<a href="p_review?page=${maxpage }" class="n"><img src="../images/btn/btn_next2.gif" alt="마지막페이지로"/></a>
+						<a href="p_review?p_code=${p_code}&page=${maxpage }" class="n"><img src="../images/btn/btn_next2.gif" alt="마지막페이지로"/></a>
 
 						</div>
+						<!-- //페이징이동1(searchFlag가 없을때) -->
 						<!-- //페이징이동1 -->
-					</div>
+					</div> --%>
 
 					<!-- //포토 구매후기 -->
 

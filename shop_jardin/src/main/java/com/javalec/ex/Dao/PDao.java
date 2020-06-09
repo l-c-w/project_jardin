@@ -20,7 +20,7 @@ public interface PDao {
 
 	public ProductDto productDetail(String p_code);
 
-	public ArrayList<P_ReviewDto> p_review(String p_code,int page, int limit); // page, limit
+	public ArrayList<P_ReviewDto> p_review(String p_code,int page,int limit); // page, limit
 
 	public ArrayList<C_ReviewDto> c_review(String p_code);
 	

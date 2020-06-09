@@ -73,50 +73,85 @@ $(document).ready(function() {
 				<div id="customer">
 					<h2><strong>1:1문의</strong><span>쟈뎅에 궁금하신 사항을 남겨주시면 답변해드립니다.</span></h2>
 					
+					
 					<div class="checkMt">
+					
+					
+					<form action="inquiry_ok" name="inquiry" id="inquiry" method="post">
+					
 						<table summary="분류, 제목, 상세내용, 첨부파일 순으로 궁금하신 점을 문의 하실수 있습니다." class="checkTable" border="1" cellspacing="0">
+						
 							<caption>1:1문의</caption>
+							
 							<colgroup>
+							
 							<col width="19%" class="tw30" />
 							<col width="*" />
 							</colgroup>
+							
 							<tbody>
+							
 								<tr>
+								
 									<th scope="row"><span>분류</span></th>
+									
 									<td>
 										<select>
 											<option value="">선택해주세요.</option>
 										</select>
 									</td>
+									
 								</tr>
+								
+								
 								<tr>
 									<th scope="row"><span>제목</span></th>
+									
 									<td>
 										<input type="text" class="wlong" />
 									</td>
 								</tr>
+								
+								
 								<tr>
+								
 									<th scope="row"><span>상세 내용</span></th>
+									
 									<td>
 										<textarea class="tta"></textarea>
 									</td>
+									
 								</tr>
+								
+								
 								<tr>
+								
 									<th scope="row"><span>첨부파일</span></th>
+									
 									<td>
 										<input type="file" class="fileType" />
 									</td>
+									
 								</tr>
+								
+								
 							</tbody>
+							
 						</table>
-					</div>
+						
+						
+                  </form>
+						
+			</div>
+					
+
 
 					<!-- Btn Area -->
 					<div class="btnArea">
 						<div class="bCenter">
 							<ul>																
-								<li><a href="#" class="nbtnbig">취소</a></li>
-								<li><a href="#" class="sbtnMini">확인</a></li>
+								<li><a href="javascript:history.back()" class="nbtnbig">취소</a></li>
+								<li><a href="#" onclick="document.getElementById('inquiry').submit();" class="sbtnMini">확인</a></li>
 							</ul>
 						</div>
 					</div>

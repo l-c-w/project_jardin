@@ -37,6 +37,8 @@ public class PController {
 
 		return "product/p_list";
 	}
+	
+	
 	@RequestMapping("/review")
 	public String review(HttpServletRequest request, Model model) {
 

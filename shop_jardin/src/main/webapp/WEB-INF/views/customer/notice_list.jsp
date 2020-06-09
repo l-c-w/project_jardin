@@ -1,5 +1,13 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+    
+    
+    
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>    
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>    
+
+    
+    
 <!DOCTYPE html>
 <html>
 <head>
@@ -34,6 +42,7 @@ $(document).ready(function() {
 </script>
 </head>
 <body>
+
 
 <!-- header 붙여넣기 -->
 	<jsp:include page="../header.jsp"/>
@@ -76,112 +85,45 @@ $(document).ready(function() {
 					<h2><strong>NOTICE</strong><span>쟈뎅샵 소식을 전해드립니다.</span></h2>
 					
 					<div class="orderDivMt">
+					
 						<table summary="NO, 제목, 등록일, 조회수 순으로 공지사항을 조회 하실수 있습니다." class="orderTable2" border="1" cellspacing="0">
+							
 							<caption>공지사항 보기</caption>
+							
 							<colgroup>
 							<col width="10%" class="tnone" />
 							<col width="*" />
 							<col width="14%" class="tw25" />
 							<col width="14%" class="tnone" />
 							</colgroup>
+							
+							
 							<thead>
 								<th scope="col" class="tnone">NO.</th>
 								<th scope="col">제목</th>
 								<th scope="col">등록일</th>
 								<th scope="col" class="tnone">조회수</th>
 							</thead>
+							
 							<tbody>
+							
+							
+							<c:forEach items="${viewAll}" var="no">
+							
 								<tr>
-									<td class="tnone">1</td>
+									<td class="tnone">${no.n_num}</td>
 									<td class="left">
-										<a href="#">쟈뎅 전문 쇼핑몰 쟈뎅샵이 리뉴얼 오픈합니다.</a>
+										<a href="notice_view?n_num=${no.n_num}">${no.n_title}</a>
 										<img src="../images/ico/ico_new.gif" alt="NEW" />
 									</td>
-									<td>14-01-28</td>
-									<td class="tnone right">9999</td>
+									<td><fmt:formatDate pattern="yyyy-MM-dd" value="${no.n_wdate}" /></td>
+									<td class="tnone right" style="text-align: center;">${no.n_hit}</td>
 								</tr>
-
-								<tr>
-									<td class="tnone">2</td>
-									<td class="left">
-										<a href="#" class="lightgray">쟈뎅 전문 쇼핑몰 쟈뎅샵이 리뉴얼 오픈합니다.</a>
-									</td>
-									<td>14-01-28</td>
-									<td class="tnone right">9999</td>
-								</tr>
-
-								<tr>
-									<td class="tnone">3</td>
-									<td class="left">
-										<a href="#" class="lightgray">쟈뎅 전문 쇼핑몰 쟈뎅샵이 리뉴얼 오픈합니다.</a>
-									</td>
-									<td>14-01-28</td>
-									<td class="tnone right">9999</td>
-								</tr>
-
-								<tr>
-									<td class="tnone">4</td>
-									<td class="left">
-										<a href="#" class="lightgray">쟈뎅 전문 쇼핑몰 쟈뎅샵이 리뉴얼 오픈합니다.</a>
-									</td>
-									<td>14-01-28</td>
-									<td class="tnone right">9999</td>
-								</tr>
-
-								<tr>
-									<td class="tnone">5</td>
-									<td class="left">
-										<a href="#" class="lightgray">쟈뎅 전문 쇼핑몰 쟈뎅샵이 리뉴얼 오픈합니다.</a>
-									</td>
-									<td>14-01-28</td>
-									<td class="tnone right">9999</td>
-								</tr>
-
-								<tr>
-									<td class="tnone">6</td>
-									<td class="left">
-										<a href="#" class="lightgray">쟈뎅 전문 쇼핑몰 쟈뎅샵이 리뉴얼 오픈합니다.</a>
-									</td>
-									<td>14-01-28</td>
-									<td class="tnone right">9999</td>
-								</tr>
-
-								<tr>
-									<td class="tnone">7</td>
-									<td class="left">
-										<a href="#" class="lightgray">쟈뎅 전문 쇼핑몰 쟈뎅샵이 리뉴얼 오픈합니다.</a>
-									</td>
-									<td>14-01-28</td>
-									<td class="tnone right">9999</td>
-								</tr>
-
-								<tr>
-									<td class="tnone">8</td>
-									<td class="left">
-										<a href="#" class="lightgray">쟈뎅 전문 쇼핑몰 쟈뎅샵이 리뉴얼 오픈합니다.</a>
-									</td>
-									<td>14-01-28</td>
-									<td class="tnone right">9999</td>
-								</tr>
-
-								<tr>
-									<td class="tnone">9</td>
-									<td class="left">
-										<a href="#" class="lightgray">쟈뎅 전문 쇼핑몰 쟈뎅샵이 리뉴얼 오픈합니다.</a>
-									</td>
-									<td>14-01-28</td>
-									<td class="tnone right">9999</td>
-								</tr>
-
-								<tr>
-									<td class="tnone">10</td>
-									<td class="left">
-										<a href="#" class="lightgray">쟈뎅 전문 쇼핑몰 쟈뎅샵이 리뉴얼 오픈합니다.</a>
-									</td>
-									<td>14-01-28</td>
-									<td class="tnone right">9999</td>
-								</tr>
+								
+							</c:forEach>
+								
 							</tbody>
+							
 						</table>
 					</div>
 						
@@ -189,34 +131,102 @@ $(document).ready(function() {
 
 					<div class="btnAreaList">
 						<!-- 페이징이동1 -->
+						
+						<!-- 페이징이동1 -->
+
+						<!-- 페이징이동1 -->
+
 						<div class="allPageMoving1">
+						
+						
+							<div style="display: block; text-align: center;">
 
-						<a href="#" class="n"><img src="../images/btn/btn_pre2.gif" alt="처음으로"/></a><a href="#" class="pre"><img src="../images/btn/btn_pre1.gif" alt="앞페이지로"/></a>
-						<strong>1</strong>
-						<a href="#">2</a>
-						<a href="#">3</a>
-						<a href="#">4</a>
-						<a href="#">5</a>
-						<a href="#" class="next"><img src="../images/btn/btn_next1.gif" alt="뒤페이지로"/></a><a href="#" class="n"><img src="../images/btn/btn_next2.gif" alt="마지막페이지로"/></a>
 
+								<!-- 첫페이지 이동 -->
+								<a href="notice_list?nowPage=${paging.startPage}&cntPerPage=${paging.cntPerPage}" class="n">
+								<img src="../images/btn/btn_pre2.gif" alt="처음으로"/>
+								</a>
+
+
+								<!-- 이전페이지로 이동 -->
+								
+								<c:if test="${paging.nowPage != 1}">
+								<a href="notice_list?nowPage=${paging.nowPage - 1}&cntPerPage=${paging.cntPerPage}" class="pre">
+								<img src="../images/btn/btn_pre1.gif" alt="앞페이지로"/><!-- &lt; -->
+								</a>
+								</c:if>
+								
+								
+								<!-- 순차 -->
+								
+								<c:forEach begin="${paging.startPage}" end="${paging.endPage}" var="p">
+									
+									<c:choose>
+									
+										<c:when test="${p == paging.nowPage}">
+											<a href="#" class="reviews"><strong>${p}</strong></a>
+										</c:when>
+										
+										<c:when test="${p != paging.nowPage }">
+											<a href="notice_list?nowPage=${p}&cntPerPage=${paging.cntPerPage}">${p}</a>
+										</c:when>
+										
+									</c:choose>
+									
+								</c:forEach>
+								
+								
+								
+								<!-- 다음페이지 이동 -->
+							
+								
+								<c:if test="${paging.nowPage != paging.lastPage}" >
+								<a href="notice_list?nowPage=${paging.nowPage+1}&cntPerPage=${paging.cntPerPage}" class="next"><!-- &gt; -->
+								<img src="../images/btn/btn_next1.gif" alt="뒤페이지로"/>
+								</a>
+								</c:if>
+
+
+								<!-- 마지막 페이지 이동 -->
+								<a href="notice_list?nowPage=${paging.lastPage}" class="n" >
+								<img src="../images/btn/btn_next2.gif" alt="마지막페이지로"/>
+								</a>
+
+							</div>
+							
 						</div>
+						
+						
 						<!-- //페이징이동1 -->
+						
+						
 					</div>
 
+
 					<div class="searchWrap">
+					
 						<div class="search">
+						
 							<ul>
+								
 								<li class="web"><img src="../images/txt/txt_search.gif" alt="search" /></li>
+								
 								<li class="se">
 									<select>
 										<option value="" />제목</option>
 									</select>
 								</li>
+								
 								<li><input type="text" class="searchInput" /></li>
+								
 								<li class="web"><a href="#"><img src="../images/btn/btn_search.gif" alt="검색" /></a></li>
+								
 								<li class="mobile"><a href="#"><img src="../images/btn/btn_search_m.gif" alt="검색" /></a></li>
+								
 							</ul>
+							
 						</div>
+						
 					</div>
 					<!-- //포토 구매후기 -->
 

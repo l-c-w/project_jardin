@@ -84,16 +84,16 @@
 			
 				<ul>
 				
-				<c:if test="${member !=null}">
+				<c:if test="${session_mem !=null}">
 				
-				    <li><a href="#">${member}님</a></li>
+				    <li><a href="../mypage/change_info?id=${session_mem}">${session_mem}님</a></li>
 					<li><a href="logout">로그아웃</a></li>
 					<li><a href="../mypage/ordercheck">MY PAGE</a></li>
 					<li><a href="../mypage/cart">CART</a></li>
 				
 				</c:if>
 				
-				<c:if test="${member == null}">
+				<c:if test="${session_mem == null}">
 				
 				    <li><a href="../member/login">LOGIN</a></li>
 					<li><a href="../member/step01">JOIN</a></li>

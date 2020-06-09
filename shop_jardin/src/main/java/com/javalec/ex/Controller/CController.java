@@ -42,7 +42,6 @@ public class CController {
 		
 		
 		
-		
 		CDao cao = sqlsession.getMapper(CDao.class);
 		
 		
@@ -202,9 +201,9 @@ public class CController {
 	
 	
 	
-	@RequestMapping("community/epilogue_write")
+	@RequestMapping("/community/epilogue_write")
 	public String epilogue_write() {
-		return "community/epilogue_write";
+		return "/community/epilogue_write";
 	}
 	
 	
@@ -242,7 +241,7 @@ public class CController {
 			e.printStackTrace();
 		}
 		
-		return "redirect:epilogue_list"; //★★★ community 빼야함
+		return "redirect:/community/epilogue_write_ok"; //★★★ community 빼야함
 	}
 	
 	

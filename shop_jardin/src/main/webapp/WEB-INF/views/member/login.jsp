@@ -125,9 +125,6 @@ $(document).ready(function() {
 					<h3>회원 로그인</h3>
 					
 					
-				
-					
-					
 					<form action="login_ok" method="post" id="login" name="login">
 					
 					<div class="informbox">

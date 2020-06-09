@@ -9,7 +9,6 @@ import com.javalec.ex.Dto.CDto.PagingDto;
 public interface CDao {
 	
 	
-	
 	// 일반 상품평
 	
 	public ArrayList<C_ReviewDto> c_list();
@@ -23,7 +22,6 @@ public interface CDao {
 		
 	// 페이징 처리 게시글 조회
 	public ArrayList<C_ReviewDto> c_selectBoard(PagingDto pagingdto);
-	
 	
 	
 	
@@ -44,7 +42,6 @@ public interface CDao {
 	
 	// 페이징 처리 게시글 조회
 	public ArrayList<P_ReviewDto> selectBoard(PagingDto pagingdto);
-	
 	
 	
 	

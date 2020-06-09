@@ -2,7 +2,6 @@
     pageEncoding="UTF-8"%>
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
-<jsp:useBean id="now" class="java.util.Date" scope="request"/>
 <!DOCTYPE html>
 <html>
 <head>
@@ -71,8 +70,6 @@ $(document).ready(function() {
 						<ul>
 							<!-- 반복 -->
 							<c:forEach var="dto" items="${event_list }">
-							<c:choose>
-							<c:when test="${dto.e_end gt now }">
 							<li>
 								<div class="img">
 									<a href="event_view?e_code=${dto.e_code }"><img src="../images/img/sample_event.jpg" alt="진행중 이벤트" /></a>
@@ -84,8 +81,6 @@ $(document).ready(function() {
 									<div class="day">이벤트 기간 : ${e_start } ~ ${e_end }</div>
 								</div>
 							</li>
-							</c:when>
-							</c:choose>
 							</c:forEach>
 							<!-- 반복 끝 -->
 						</ul>

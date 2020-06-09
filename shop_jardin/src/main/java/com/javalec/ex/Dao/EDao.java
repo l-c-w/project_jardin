@@ -10,7 +10,11 @@ public interface EDao {
 
 	public ArrayList<EventDto> event_list(int page, int limit);
 	
+	public ArrayList<EventDto> fin_event_list(int page, int limit);
+	
 	public int getListCount();
+	
+	public int getFinListCount();
 	
 	public int getCommentCount(String e_code);
 	
@@ -18,5 +22,7 @@ public interface EDao {
 	
 	public ArrayList<Event_commentDto> event_comment(String e_code, int page, int limit);
 	
-	public void eModify_comment(String e_code, String ec_num);
+	public int eModify_comment(String e_code, String content);
+	
+	
 }

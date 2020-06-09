@@ -12,18 +12,18 @@ import com.javalec.ex.Dao.EDao;
 import com.javalec.ex.Dto.EDto.EventDto;
 import com.javalec.ex.Service.CService.CService;
 
-public class EListService implements EService {
+public class EFinListService implements EService {
 
 	@Override
 	public void execute(HttpServletRequest request, SqlSession sqlSession, Model model) {
 		
-		System.out.println("--------------------EListService--------------------");
+		System.out.println("--------------------EFinListService--------------------");
 
 		int page = 0;
 		
 		String temp = "";
 		
-		System.out.println("EListService - request : " + request);
+		System.out.println("EFinListService - request : " + request);
 		
 		temp = request.getParameter("page");
 		System.out.println("temp : " + temp);
@@ -33,15 +33,9 @@ public class EListService implements EService {
 		}else {
 			page = Integer.parseInt(temp);
 		}
-		System.out.println("page : " + page);
+//		
 		
 		int limit = 2;		// 1page = 게시글 10개
-//		String searchFlag = null; // 검색체크	//였지만 검색기능을 빼기로 했기 때문에 쓰지않는기능이다
-//		System.out.println("searchFlag : " + searchFlag);
-		
-//		if(request.getParameter("page") != null) {
-//			page = Integer.parseInt(request.getParameter("page"));
-//		}
 		
 		EDao dao = sqlSession.getMapper(EDao.class);
 		
@@ -50,9 +44,9 @@ public class EListService implements EService {
 		int startrow = (page - 1) * limit + 1;	// (1 - 1) * 10 + 1 = 1
 		int endrow = startrow + limit - 1;	//	1 + 10 - 1 = 10
 		
-		list = dao.event_list(startrow, endrow);
+		list = dao.fin_event_list(startrow, endrow);
 		// 전체 게시글 count(*)
-		int listcount = dao.getListCount(); // listcount -> 20 
+		int listcount = dao.getFinListCount(); // listcount -> 20 
 		// 최대 페이지 수
 		int maxpage = (int)((double)listcount / limit + 0.95); // 20/10 -> 2+0.95 -> (int)2.95 -> 2
 		// 처음 페이지
@@ -63,31 +57,20 @@ public class EListService implements EService {
 			endpage = startpage + 10 - 1;
 		
 		
-		model.addAttribute("event_list", list);
+		model.addAttribute("fin_event_list", list);
 		
-		model.addAttribute("listcount", listcount);
+		model.addAttribute("fin_listcount", listcount);
 		model.addAttribute("page", page);
 		model.addAttribute("maxpage", maxpage);
 		model.addAttribute("startpage", startpage);
 		model.addAttribute("endpage", endpage);
 
 		
-		System.out.println("listcount : " + listcount);
+		System.out.println("fin_listcount : " + listcount);
 		System.out.println("page : " + page);
 		System.out.println("maxpage : " + maxpage);
 		System.out.println("startpage : " + startpage);
-		System.out.println("endpage : " + endpage);
-		
-//		switch (page) {
-//		case 1:
-//			searchFlag = null;
-//			break;
-//		default:
-//			searchFlag = "1";
-//			model.addAttribute("searchFlag", searchFlag);
-//			break;
-//		}// 검색했을 때 페이지를 넘겨도 검색어를 유지시키는 기능	//이었지만 검색기능을 빼기로 했기 때문에 쓰지않는기능이다
-		
+		System.out.println("endpage : " + endpage);		
 		
 		//------------------------------------------------------------
 		for(int i=0; i<list.size(); i++) {

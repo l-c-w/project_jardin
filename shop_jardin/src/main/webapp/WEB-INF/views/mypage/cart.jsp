@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -114,6 +116,8 @@ $(document).ready(function() {
 								<th scope="col" class="tnone">주문</th>
 							</thead>
 							<tbody>
+								<c:forEach var="cart_list" items="${list }">
+						
 								<tr>
 									<td><input type="checkbox" /></td>
 									<td class="left">
@@ -121,13 +125,14 @@ $(document).ready(function() {
 
 										<ul class="goods">
 											<li>
-												<a href="#">쟈뎅 오리지널 콜롬비아 페레이라 원두커피백 15p</a>
+												<a href="../product/p_detail?p_code=${cart_list.p_code }&p_categry=${cart_list.p_category }">${cart_list.p_name }</a>
 											</li>
 										</ul>
 									</td>
-									<td class="tnone">1,123,400 원<br/><span class="pointscore">11,234 Point</span></td>
-									<td><input class="spinner" value="1" maxlength="3" /></td>
-									<td>1,123,400 원</td>
+									<td class="tnone"><fmt:formatNumber value="${cart_list.price }" pattern="#,###,###,###"/>원<br/>
+									<span class="pointscore"><fmt:formatNumber value="${cart_list.p_point }" pattern="#,###,###,###"/>Point</span></td>
+									<td><input class="spinner" value="${cart_list.amount }" maxlength="3" name="amount" /></td>
+									<td><fmt:formatNumber value="${cart_list.price*cart_list.amount }" pattern="#,###,###,###"/> 원</td>
 									<td class="tnone">
 										<ul class="order">	
 											<li><a href="#" class="obtnMini iw70">바로구매</a></li>
@@ -135,28 +140,7 @@ $(document).ready(function() {
 										</ul>
 									</td>
 								</tr>
-								
-								<tr>
-									<td><input type="checkbox" /></td>
-									<td class="left">
-										<p class="img"><img src="../images/img/sample_product.jpg" alt="상품" width="66" height="66" /></p>
-
-										<ul class="goods">
-											<li>
-												<a href="#">쟈뎅 오리지널 콜롬비아 페레이라 원두커피백 15p</a>
-											</li>
-										</ul>
-									</td>
-									<td class="tnone">1,123,400 원<br/><span class="pointscore">11,234 Point</span></td>
-									<td><input class="spinner" value="1" maxlength="3" /></td>
-									<td>1,123,400 원</td>
-									<td class="tnone">
-										<ul class="order">	
-											<li><a href="#" class="obtnMini iw70">바로구매</a></li>
-											<li><a href="#" class="nbtnMini iw70">상품삭제</a></li>
-										</ul>
-									</td>
-								</tr>
+								</c:forEach>
 							</tbody>
 						</table>
 					</div>

@@ -17,6 +17,8 @@ import com.javalec.ex.Dao.EDao;
 import com.javalec.ex.Dto.EDto.EventDto;
 import com.javalec.ex.Service.CService.CService;
 import com.javalec.ex.Service.EService.EViewService;
+import com.javalec.ex.Service.EService.EFinListService;
+import com.javalec.ex.Service.EService.EFinViewService;
 import com.javalec.ex.Service.EService.EListService;
 import com.javalec.ex.Service.EService.EModifyCommentService;
 import com.javalec.ex.Service.EService.EService;
@@ -38,6 +40,13 @@ public class EController {
 	}
 	//@RequestParam(value = "page", defaultValue = "0")String page 메모
 	
+	@RequestMapping("/fin_event_list")
+	public String fin_event_list(HttpServletRequest request, Model model) {
+		es = new EFinListService();
+		es.execute( request,sqlSession, model);
+		return "event/fin_event_list";
+	}
+	
 	@RequestMapping("/event_view")
 	public String event_view(HttpServletRequest request, Model model) {
 		es = new EViewService();
@@ -45,20 +54,19 @@ public class EController {
 		return "event/event_view";
 	}
 	
+	@RequestMapping("/fin_event_view")
+	public String fin_event_view(HttpServletRequest request, Model model) {
+		es = new EFinViewService();
+		es.execute(request, sqlSession, model);
+		return "event/fin_event_view";
+	}
+	
 	@RequestMapping("/event_commentOk")
 	public String modify_comment(HttpServletRequest request, Model model) {
 		es = new EModifyCommentService();
 		es.execute(request, sqlSession, model);
-		return "redirect:event_view";
+		return "event/event_view";
 	}
-	
-	@RequestMapping("/fin_event_list")
-	public String fin_event_view(HttpServletRequest request, Model model) {
-		es = new EListService();
-		es.execute(request, sqlSession, model);
-		return "event/fin_event_list";
-	}
-	
 	
 	
 	

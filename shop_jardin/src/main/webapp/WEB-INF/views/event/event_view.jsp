@@ -51,7 +51,7 @@ $(document).ready(function() {
 
 		<div id="location">
 			<ol>
-				<li><a href="../main/main">HOME</a></li>
+				<li><a href="main">HOME</a></li>
 				<li><a href="event_list">EVENT</a></li>
 				<li class="last">진행중 이벤트</li>
 			</ol>
@@ -146,26 +146,19 @@ $(document).ready(function() {
 
 					<!-- 댓글 수정, 삭제 -->
 					<div class="replyBox">
-					<p id="test">테스트입니다</p>
 						<!-- 댓글 수정 -->
-						<form action="event_commentOk">
-							<ul id="coModi" class="comment_modifyM">
-								<li class="name">${e_com.id } </li>
-								<li class="txt">
-									<input type="text" class="replyType" value="${e_com.ec_content }" name="ec_content">
-									<input type="hidden" value="${e_com.ec_num }" name="ec_num">
-									<input type="hidden" value="${e_code }" name="e_code">
-								</li>
-								<li class="btn">
-									<input type="submit" value="등록" class="rebtn">
-<!-- 									<a href="event_commentOk" class="rebtn" id="sub_btn">등록</a> -->
-									<a href="#" class="rebtn">삭제</a>
-								</li>
-							</ul> 
-						</form>
+						<c:forEach var="e_com" items="${event_comment }">
+						
+						<ul id="coModi" class="comment_modifyM">
+							<li class="name">${e_com.id } </li>
+							<li class="txt"><textarea class="replyType">${e_com.ec_content }</textarea></li>
+							<li class="btn">
+								<a href="event_view?e_code=${e_code }&ec_content=${e_com.ec_content }" class="rebtn" id="sub_btn">등록</a>
+								<a href="#" class="rebtn">삭제</a>
+							</li>
+						</ul>
 						
 						<!-- 댓글 표시 -->
-						<c:forEach var="e_com" items="${event_comment }">
 						<ul id="coSub" class="comment_modifyV">
 							<fmt:formatDate var="ec_wdate1" value="${e_com.ec_wdate }" pattern="YYYY/MM/dd" />
 							<fmt:formatDate var="ec_wdate2" value="${e_com.ec_wdate }" pattern="hh:mm:ss" />

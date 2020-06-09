@@ -76,18 +76,18 @@ $(document).ready(function() {
 						<div class="viewHead">
 							<div class="subject">
 								<ul>
-									<li>${event_view.e_title }</li>
+									<li><span class="finishbtn">종료</span>&nbsp;${fin_event_view.e_title }</li>
 								</ul>
 							</div>
 							<div class="day">
-								<fmt:formatDate var="e_start" value="${event_view.e_start }" pattern="YYYY/MM/dd" />
-								<fmt:formatDate var="e_end" value="${event_view.e_end }" pattern="YYYY/MM/dd" />
+								<fmt:formatDate var="e_start" value="${fin_event_view.e_start }" pattern="YYYY/MM/dd" />
+								<fmt:formatDate var="e_end" value="${fin_event_view.e_end }" pattern="YYYY/MM/dd" />
 								<p class="txt">이벤트 기간<span>${e_start } ~ ${e_end }</span></p>
 							</div>
 						</div>
 
 						<div class="viewContents">
-							<img src="../images/img/sample_event_view.jpg" alt="" />${event_view.e_content }
+							<img src="../images/img/sample_event_view.jpg" alt="" />${fin_event_view.e_content}
 						</div>
 					</div>
 
@@ -129,20 +129,14 @@ $(document).ready(function() {
 								<a href="#" class="rebtn">삭제</a>
 							</li>
 						</ul>
-
 						<ul>
-							<li class="name">jjabcde <span>[2014-03-04&nbsp;&nbsp;15:01:59]</span></li>
-							<li class="txt">대박!!! 이거 저한테 완전 필요한 이벤트였어요!!</li>
+							<fmt:formatDate var="ec_wdate1" value="${fin_event_comment.ec_wdate }" pattern="YYYY/MM/dd" />
+							<fmt:formatDate var="ec_wdate2" value="${fin_event_comment.ec_wdate }" pattern="hh:mm:ss" />
+							<li class="name">${fin_event_comment.id } <span>[${ec_wdate1 }&nbsp;&nbsp;${ec_wdate2 }]</span></li>
+							<li class="txt">${fin_event_comment.ec_content }</li>
 							<li class="btn">
 								<a href="#" class="rebtn">수정</a>
 								<a href="#" class="rebtn">삭제</a>
-							</li>
-						</ul>
-
-						<ul>
-							<li class="name">jjabcde <span>[2014-03-04&nbsp;&nbsp;15:01:59]</span></li>
-							<li class="txt">
-								<a href="password.html" class="passwordBtn"><span class="orange">※ 비밀글입니다.</span></a>
 							</li>
 						</ul>
 					</div>
@@ -153,7 +147,7 @@ $(document).ready(function() {
 					<div class="btnArea">
 						<div class="bRight">
 							<ul>
-								<li><a href="#" class="sbtnMini mw">목록</a></li>
+								<li><a href="fin_event_list" class="sbtnMini mw">목록</a></li>
 							</ul>
 						</div>
 					</div>

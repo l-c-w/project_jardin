@@ -5,11 +5,22 @@
 <mapper namespace="com.javalec.ex.Dao.EDao">
 
 	<select id="event_list" resultType="com.javalec.ex.Dto.EDto.EventDto">
-		<![CDATA[select * from (select rownum rnum, E_CODE,E_TYPE,E_APPLY,E_TITLE,E_CONTENT,E_FILE1,E_FILE2,E_FILE3,E_START,
-		E_END,E_WDATE,E_UDATE from (select * from event e order by E_CODE desc)) where rnum>=#{param1} and rnum<=#{param2}]]>
+		<![CDATA[select * from (select rownum rnum, E_CODE,E_TYPE,E_APPLY,E_TITLE,E_CONTENT,
+		E_FILE1,E_FILE2,E_FILE3,E_START,E_END,E_WDATE,E_UDATE from (SELECT * FROM 
+		(select * from EVENT where E_END >= (SELECT SYSDATE FROM DUAL)) order by E_CODE desc)) 
+		where rnum>=#{param1} and rnum<=#{param2}]]>
 	</select>
+	<select id="fin_event_list" resultType="com.javalec.ex.Dto.EDto.EventDto">
+		<![CDATA[select * from (select rownum rnum, E_CODE,E_TYPE,E_APPLY,E_TITLE,E_CONTENT,
+		E_FILE1,E_FILE2,E_FILE3,E_START,E_END,E_WDATE,E_UDATE from (SELECT * FROM 
+		(select * from EVENT where E_END <= (SELECT SYSDATE FROM DUAL)) order by E_CODE desc)) 
+		where rnum>=#{param1} and rnum<=#{param2}]]>
+	</select>	
 	<select id="getListCount" resultType="Integer">
-		SELECT count(*) as count FROM event
+		SELECT count(*) as count FROM (select * from EVENT where E_END >= (SELECT SYSDATE FROM DUAL))
+	</select>
+	<select id="getFinListCount" resultType="Integer">
+		<![CDATA[SELECT count(*) as count FROM (select * from EVENT where E_END <= (SELECT SYSDATE FROM DUAL))]]>
 	</select>
 	<select id="getCommentCount" resultType="Integer">
 		SELECT count(*) as count FROM event_comment where e_code=#{param1}

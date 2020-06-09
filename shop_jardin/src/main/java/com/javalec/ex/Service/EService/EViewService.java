@@ -53,10 +53,12 @@ public class EViewService implements EService {
 		int endpage = maxpage; // 1 ~ 10까지는 maxpage가 endpage가 됨
 		if (endpage > startpage + 10 - 1)
 			endpage = startpage + 10 - 1;
+		// EViewService 끝
+		
 
 		// ECommentService
 		list = dao.event_comment(e_code, startrow, endrow);
-		
+				
 
 		// model
 		model.addAttribute("event_comment", list);

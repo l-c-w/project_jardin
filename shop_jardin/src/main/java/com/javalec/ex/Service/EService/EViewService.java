@@ -15,6 +15,8 @@ public class EViewService implements EService {
 	@Override
 	public void execute(HttpServletRequest request, SqlSession sqlSession, Model model) {
 
+		System.out.println("--------------------EViewService--------------------");
+		
 		// 변수 선언
 		EventDto edto = new EventDto(); // 본문 dto
 		ArrayList<Event_commentDto> list = new ArrayList<Event_commentDto>(); // 댓글 dto

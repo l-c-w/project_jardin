@@ -148,13 +148,13 @@ $(document).ready(function() {
 					<div class="replyBox">
 						<!-- 댓글 수정 -->
 						<c:forEach var="e_com" items="${event_comment }">
-						
-						<ul id="coModi" class="comment_modifyM">
+						<form action="event_commentOk" method="post" >
+						<ul id="coModi" class="comment_modifyM" style="display: none;">
 							<li class="name">${e_com.id } </li>
 							<li class="txt"><textarea class="replyType">${e_com.ec_content }</textarea></li>
 							<li class="btn">
 								<a href="event_view?e_code=${e_code }&ec_content=${e_com.ec_content }" class="rebtn" id="sub_btn">등록</a>
-								<a href="#" class="rebtn">삭제</a>
+								<a class="rebtn reset_re">취소</a>
 							</li>
 						</ul>
 						
@@ -165,11 +165,38 @@ $(document).ready(function() {
 							<li class="name">${e_com.id } <span>[${ec_wdate1 }&nbsp;&nbsp;${ec_wdate2 }]</span></li>
 							<li class="txt">${e_com.ec_content }</li>
 							<li class="btn">
-								<a class="rebtn" style="cursor: pointer;" id="modi_btn">수정</a>
+								<a href="javascript:;" onclick="return false;" class="rebtn modi" style="cursor: pointer;" id="modi_btn">수정</a>
+<!-- 								<a href="javascript:;" onclick="return false;" class="rebtn modi" >수정2</a> -->
 								<a href="#" class="rebtn">삭제</a>
 							</li>
 						</ul>
+						</form>				
 						</c:forEach>
+						
+						<p>              
+						 <button type="button" class="replyUpdate" data-rno="${repList.rno}">수정</button>
+						 <button type="button" class="replyDelete" data-rno="${repList.rno}">삭제</button>
+						 
+						 <script>
+						  $(".replyUpdate").click(function(){
+						   self.location = "/board/replyUpdate?bno=${read.bno}"
+						    + "&page=${scri.page}"
+						    + "&perPageNum=${scri.perPageNum}"
+						    + "&searchType=${scri.searchType}"
+						    + "&keyword=${scri.keyword}"
+						    + "&rno=" + $(this).attr("data-rno");        
+						  });
+						  
+						  $(".replyDelete").click(function(){
+						   self.location = "/board/replyDelete?bno=${read.bno}"
+						    + "&page=${scri.page}"
+						    + "&perPageNum=${scri.perPageNum}"
+						    + "&searchType=${scri.searchType}"
+						    + "&keyword=${scri.keyword}"
+						    + "&rno=" + $(this).attr("data-rno"); 
+						  });       
+						 </script>
+						</p>
 						
 						<!-- 비밀글, 없애기로 한 기능-->
 <!-- 						<ul> -->

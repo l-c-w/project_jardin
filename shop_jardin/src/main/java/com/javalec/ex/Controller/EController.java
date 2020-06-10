@@ -17,6 +17,8 @@ import com.javalec.ex.Dao.EDao;
 import com.javalec.ex.Dto.EDto.EventDto;
 import com.javalec.ex.Service.CService.CService;
 import com.javalec.ex.Service.EService.EViewService;
+import com.javalec.ex.Service.EService.EWinnerListService;
+import com.javalec.ex.Service.EService.EWinnerViewService;
 import com.javalec.ex.Service.EService.EFinListService;
 import com.javalec.ex.Service.EService.EFinViewService;
 import com.javalec.ex.Service.EService.EListService;
@@ -68,6 +70,18 @@ public class EController {
 		return "event/event_view";
 	}
 	
+	@RequestMapping("/prizewinner_list")
+	public String prizewinner_list(HttpServletRequest request, Model model) {
+		es = new EWinnerListService();
+		es.execute( request,sqlSession, model);
+		return "event/prizewinner_list";
+	}
 	
+	@RequestMapping("/prizewinner_view")
+	public String prizewinner_view(HttpServletRequest request, Model model) {
+		es = new EWinnerViewService();
+		es.execute( request,sqlSession, model);
+		return "event/prizewinner_view";
+	}
 	
 }

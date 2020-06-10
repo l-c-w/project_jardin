@@ -2,19 +2,48 @@
  * 
  */
 
-$(document).ready(function() {
 
-	$('.rebtn').click(function(){
-		
-		var index = $(".rebtn").index(this); // index 구하기
-		
-		$(".rebtn").eq(index).val(); // index로 불러오기
-		
-		$("#test").val('index');
-		
+
+
+
+$(document).ready(function(){
+	//댓글수정열기
+	$(".modi").click(function(){
+		var index = $(".modi").index(this);
+		console.log(index);
+		$(this).parent().hide();
+		$(".comment_modifyM").eq(index).show();
+		$(".modi").not(index).parent().show();
+	});
+	$(".reset_re").click(function(){
+		var index2=$(".reset_re").index(this);
+		$(".comment_modifyM").eq(index2).hide();
+		$(".modi").eq(index2).parent().show();
 	});
 	
+	
 });
+
+
+//$(document).ready(function() {
+//
+//	$('a#modi_btn').click(function(){
+//		
+//		alert('testtest');
+//		$('p#test').val('hello');
+		
+//		var index = $('.rebtn').index(this); 
+		
+		
+//		$('.rebtn:eq(' + index + ')').attr('test','hello');
+		
+//		$(".rebtn").eq(index).val(); // index로 불러오기
+//		
+//		$("#test").val('index');
+		
+//	});
+//	
+//});
 
 // $('#coModi').hide();
 //	
@@ -27,3 +56,4 @@ $(document).ready(function() {
 // $('#coModi').hide();
 // $('#coSub').show();
 // });
+

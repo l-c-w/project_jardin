@@ -23,12 +23,24 @@
 <script type="text/javascript" src="../js/jquery.easing.1.3.js"></script>
 <script type="text/javascript" src="../js/idangerous.swiper-2.1.min.js"></script>
 <script type="text/javascript" src="../js/jquery.anchor.js"></script>
+<script>
+				
+								</script>
 <!--[if lt IE 9]>
 <script type="text/javascript" src="../js/html5.js"></script>
 <script type="text/javascript" src="../js/respond.min.js"></script>
 <![endif]-->
 <script type="text/javascript">
+
 $(document).ready(function() {
+	
+	function caltotal(pri,amo,total) {
+		var price = document.getElementById(pri);
+		var amount = document.getElementById(amo);
+		
+		$('#'+total).text(price.value*amount.value);
+		
+	}
 	
 
 
@@ -108,7 +120,7 @@ $(document).ready(function() {
 							<col width="14%" class="tnone" />
 							</colgroup>
 							<thead>
-								<th scope="col"><input type="checkbox" /></th>
+								<th scope="col"><input type="checkbox" name=cart_check/></th>
 								<th scope="col">상품명</th>
 								<th scope="col" class="tnone">가격/포인트</th>
 								<th scope="col">수량</th>
@@ -116,31 +128,39 @@ $(document).ready(function() {
 								<th scope="col" class="tnone">주문</th>
 							</thead>
 							<tbody>
+								<c:set var="check_num" value="0"/>
+								<c:set var="chage_price" value="0"/>
+								<c:set var="chage_" value="0"/>
+								<form action="../payment/payment" name="cart_order" method="post">
 								<c:forEach var="cart_list" items="${list }">
-						
+								
 								<tr>
-									<td><input type="checkbox" /></td>
+									
+									<td><input type="checkbox" name="cart_check" value="${cart_list.cart_code }"/></td>
 									<td class="left">
 										<p class="img"><img src="../images/img/sample_product.jpg" alt="상품" width="66" height="66" /></p>
 
 										<ul class="goods">
 											<li>
-												<a href="../product/p_detail?p_code=${cart_list.p_code }&p_categry=${cart_list.p_category }">${cart_list.p_name }</a>
+												<a href="../product/p_detail?p_code=${cart_list.p_code }&p_category=${cart_list.p_category }">${cart_list.p_name }</a>
 											</li>
 										</ul>
 									</td>
-									<td class="tnone"><fmt:formatNumber value="${cart_list.price }" pattern="#,###,###,###"/>원<br/>
+									<td class="tnone"><span id="${cart_list.p_code }price" name="${cart_list.p_code }price" >${cart_list.price }</span>원<br/>
 									<span class="pointscore"><fmt:formatNumber value="${cart_list.p_point }" pattern="#,###,###,###"/>Point</span></td>
-									<td><input class="spinner" value="${cart_list.amount }" maxlength="3" name="amount" /></td>
-									<td><fmt:formatNumber value="${cart_list.price*cart_list.amount }" pattern="#,###,###,###"/> 원</td>
+									<td><input type="number" class="spinner" id ="${cart_list.p_code }amount" value="${cart_list.amount }" maxlength="3" name="${cart_list.p_code }amount" onchange="caltotal('${cart_list.p_code }price','${cart_list.p_code }amount','${cart_list.p_code }total')"></td> 
+									<td><span id="${cart_list.p_code }total" name="${cart_list.p_code }total">${cart_list.price*cart_list.amount }</span>원</td>
 									<td class="tnone">
 										<ul class="order">	
-											<li><a href="#" class="obtnMini iw70">바로구매</a></li>
+											<li><a href="../payment/payment?cart_code=${cart_list.p_code }&amount=${cart_list.amount }" class="obtnMini iw70">바로구매</a></li>
 											<li><a href="#" class="nbtnMini iw70">상품삭제</a></li>
 										</ul>
 									</td>
 								</tr>
+								
+								
 								</c:forEach>
+								
 							</tbody>
 						</table>
 					</div>
@@ -148,7 +168,7 @@ $(document).ready(function() {
 					<div class="btnArea">
 						<div class="bRight">
 							<ul>
-								<li><a href="#" class="selectbtn">전체선택</a></li>
+								<li><a href="#" class="selectbtn" >전체선택</a></li>
 								<li><a href="#" class="selectbtn2">선택수정</a></li>
 								<li><a href="#" class="selectbtn2">선택삭제</a></li>
 							</ul>
@@ -180,12 +200,12 @@ $(document).ready(function() {
 
 					<div class="cartarea">
 						<ul>
-							<li><a href="#" class="ty1">선택상품 <span>주문하기</span></a></li>
+							<li style="cursor: pointer;" onclick="cart_order.submit()"><a class="ty1"  >선택상품 <span>주문하기</span></a></li>
 							<li><a href="#" class="ty2">전체상품 <span>주문하기</span></a></li>
 							<li class="last"><a href="#" class="ty3">쇼핑 <span>계속하기</span></a></li>
 						</ul>
 					</div>
-
+					</form>
 				<!-- //장바구니에 상품이 있을경우 -->
 
 
@@ -216,6 +236,10 @@ $(document).ready(function() {
 $(function() {
 	var spinner = $( ".spinner" ).spinner({ min: 1, max: 999 });
 });
+
+
+
+
 </script>
 
 

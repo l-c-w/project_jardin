@@ -20,6 +20,11 @@ public class CuController {
 	@Autowired
 	private SqlSession sqlsession;
 	
+	
+	
+	//공지사항
+	
+	
 
 	@RequestMapping("/customer/notice_list")
 	public String notice_list(Model model,
@@ -44,7 +49,6 @@ public class CuController {
 			else if (cntPerPage == null) { 
 				cntPerPage = "10";
 			}
-			
 			
 			pagedto = new PagingDto(total, Integer.parseInt(nowPage), Integer.parseInt(cntPerPage));
 			
@@ -81,17 +85,68 @@ public class CuController {
 	}
 	
 	
+	@RequestMapping("/customer/notice_write")
+	public String notice_write() {
+		return "/customer/notice_write";
+	}
+	
+	
+	@RequestMapping("/customer/notice_ok")
+	public String notice_ok() {
+		return "redirect:/customer/notice_list";
+	}
+	
+	
+	
+	
+	
+	
+	
+	// faq
+	
+	
 	
 	@RequestMapping("/customer/faq")
 	public String fag() {
+		
+		
 		return "/customer/faq";
 	}
 	
 	
-	@RequestMapping("/customer/guide")
-	public String guide() {
-		return "/customer/guide";
+	@RequestMapping("/customer/faq_write")
+	public String faq_write() {
+		
+		
+		return "/customer/faq_write";
 	}
+	
+	
+	@RequestMapping("/customer/faq_ok")
+	public String faq_ok() {
+		
+		
+		
+		
+		return "/customer/faq_ok";
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+
+	
+	
+	
+	// 1:1 문의 
+	
+	
 	
 	
 	@RequestMapping("/customer/inquiry")
@@ -100,6 +155,71 @@ public class CuController {
 	}
 	
 	
+
+	@RequestMapping("/mypage/inquiry_write")
+	public String inquiry_write() {
+		return "/mypage/inquiry_write";
+	}
+	
+	
+	
+	
+	@RequestMapping("/mypage/inquiry_ok")
+	public String inquiry_ok() {
+		
+		
+		
+		
+		return "redirect:/mypage/inquiry_list";
+	}
+	
+	
+	
+	
+	@RequestMapping("/mypage/inquiry_list")
+	public String inquiry_list() {
+		
+		
+		
+		return "/mypage/inquiry_list";
+	}
+	
+	
+	@RequestMapping("/mypage/inquiry_view")
+	public String inquiry_view() {
+		
+		
+		return "/mypage/inquiry_view";
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	@RequestMapping("/customer/guide")
+	public String guide() {
+		return "/customer/guide";
+	}
 	
 	
 	

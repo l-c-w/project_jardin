@@ -131,7 +131,7 @@ $(document).ready(function() {
 									<a href="#">
 										<span class="orange">[먹어봤어요]</span> 
 										
-										<a href="comment_view?id=${c_list.id}">${c_list.cr_title}</a>
+										<a href="comment_view?cr_num=${c_list.cr_num}">${c_list.cr_title}</a>
 										
 										<img src="../images/ico/ico_new.gif" alt="new" />
 									</a>
@@ -163,7 +163,11 @@ $(document).ready(function() {
 					</div>
 
 
+
 					<div class="btnAreaList">
+					
+					
+					<c:if test="${s_n != null}">
 					
 						<div class="bwright">
 							<ul>
@@ -171,9 +175,20 @@ $(document).ready(function() {
 							</ul>
 						</div>
 						
+						</c:if>
+						
+						
+				      <c:if test="${s_n == null}">
+					
+						<div class="bwright">
+						</div>
+						
+						</c:if>
+						
+						
 						
 
-						<!-- 페이징이동1 -->
+							<!-- 페이징이동1 -->
 
 						<div class="allPageMoving1">
 						
@@ -200,18 +215,26 @@ $(document).ready(function() {
 
 
 								<!-- 첫페이지 이동 -->
-								<a href="epilogue_list?nowPage=${paging.startPage}&cntPerPage=${paging.cntPerPage}" class="n">
+								<a href="comment_list?nowPage=${paging.startPage}&cntPerPage=${paging.cntPerPage}" class="n">
 								<img src="../images/btn/btn_pre2.gif" alt="처음으로"/>
 								</a>
 
 
 								<!-- 이전페이지로 이동 -->
-
-								<c:if test="${paging.startPage != 1 }">
-									<a href="epilogue_list?nowPage=${paging.startPage - 1}&cntPerPage=${paging.cntPerPage}" class="pre">
-									<img src="../images/btn/btn_pre1.gif" alt="앞페이지로"/>
-									&lt;</a>
+								
+								<c:if test="${paging.nowPage != 1}">
+								<a href="comment_list?nowPage=${paging.nowPage - 1}&cntPerPage=${paging.cntPerPage}" class="pre">
+								<img src="../images/btn/btn_pre1.gif" alt="앞페이지로"/><!-- &lt; -->
+								</a>
 								</c:if>
+
+
+							<%-- 	<c:if test="${paging.startPage != 1}">
+									<a href="comment_list?nowPage=${paging.startPage - 1}&cntPerPage=${paging.cntPerPage}" class="pre">
+									<img src="../images/btn/btn_pre1.gif" alt="앞페이지로"/><!-- &lt; -->
+									</a>
+								</c:if>
+								 --%>
 								
 								
 								<!-- 순차 -->
@@ -221,12 +244,11 @@ $(document).ready(function() {
 									<c:choose>
 									
 										<c:when test="${p == paging.nowPage}">
-											<a href="#">${p}</a>
+											<a href="#" class="reviews"><strong>${p}</strong></a>
 										</c:when>
 										
-										
 										<c:when test="${p != paging.nowPage }">
-											<a href="epilogue_list?nowPage=${p}&cntPerPage=${paging.cntPerPage}">${p}</a>
+											<a href="comment_list?nowPage=${p}&cntPerPage=${paging.cntPerPage}">${p}</a>
 										</c:when>
 										
 									</c:choose>
@@ -237,21 +259,52 @@ $(document).ready(function() {
 								
 								<!-- 다음페이지 이동 -->
 							
-								<c:if test="${paging.endPage != paging.lastPage}" >
-									<a href="epilogue_list?nowPage=${paging.endPage+1}&cntPerPage=${paging.cntPerPage}" class="next">&gt;
-									<img src="../images/btn/btn_next1.gif" alt="뒤페이지로"/></a>
+							<%-- 	<c:if test="${paging.endPage != paging.lastPage}" >
+									<a href="comment_list?nowPage=${paging.endPage+1}&cntPerPage=${paging.cntPerPage}" class="next"><!-- &gt; -->
+									<img src="../images/btn/btn_next1.gif" alt="뒤페이지로"/>
+									</a>
+								</c:if> --%>
+								
+								
+								<c:if test="${paging.nowPage != paging.lastPage}" >
+								<a href="comment_list?nowPage=${paging.nowPage+1}&cntPerPage=${paging.cntPerPage}" class="next"><!-- &gt; -->
+								<img src="../images/btn/btn_next1.gif" alt="뒤페이지로"/>
+								</a>
 								</c:if>
-						
 
 
 								<!-- 마지막 페이지 이동 -->
-								<a href="epilogue_list?nowPage=${paging.lastPage}" class="n" >
+								<a href="comment_list?nowPage=${paging.lastPage}" class="n" >
 								<img src="../images/btn/btn_next2.gif" alt="마지막페이지로"/>
 								</a>
 
 							</div>
 							
 						</div>
+
+
+
+
+						<!-- <div class="allPageMoving1">
+
+						<a href="#" class="n"><img src="../images/btn/btn_pre2.gif" alt="처음으로"/></a>
+						<a href="#" class="pre"><img src="../images/btn/btn_pre1.gif" alt="앞페이지로"/></a>
+						
+						<strong>1</strong>
+						
+						<a href="#">2</a>
+						<a href="#">3</a>
+						<a href="#">4</a>
+						<a href="#">5</a>
+						
+						<a href="#" class="next"><img src="../images/btn/btn_next1.gif" alt="뒤페이지로"/></a>
+						<a href="#" class="n"><img src="../images/btn/btn_next2.gif" alt="마지막페이지로"/></a>
+
+
+						</div>
+						 -->
+						
+						<!-- //페이징이동1 -->
 
 
 
@@ -282,6 +335,7 @@ $(document).ready(function() {
 					
 
 				</div>
+				
 			</div>
 			<!-- //contents -->
 

@@ -145,7 +145,7 @@ $(document).ready(function() {
 							
 								<tr>
 									<th scope="row"><span>이름 *</span></th>
-									<td><input type="text" name="name"></td>
+									<td><input type="text" name="name" required="required"></td>
 								</tr>
 								
 								
@@ -159,16 +159,88 @@ $(document).ready(function() {
 									<th scope="row"><span>아이디 *</span></th>
 									<td>
 										<ul class="pta">
-											<li class="r10"><input type="text" class="w134" name="id" /></li>
-											<li><a href="#" onclick="idcheck()" class="nbtnMini">중복확인</a></li>
+											<li class="r10"><input type="text" class="w134" name="id" id="id" required="required" /></li>
+											<!-- <li><a href="#" onclick="idcheck()" class="nbtnMini">중복확인</a></li> -->
 											<li class="pt5"><span class="mvalign">첫 글자는 영문으로 4~16자 까지 가능, 영문, 숫자와 특수기호(_)만 사용 가능</span></li>
+										    <div class="check_font" id="id_check"></div>
 										</ul>
 									</td>
 								</tr>
+								
+					
+								
+<script type="text/javascript">
+// 아이디 유효성 검사(1 = 중복 / 0 != 중복)
+	$("#id").blur(function() {
+		// id = "id_reg" / name = "userId"
+		var user_id = $('#id').val();
+		$.ajax({
+			url : '${pageContext.request.contextPath}/member/id_check?Id='+user_id,
+			type : 'get',
+			success : function(data) {
+				
+				console.log("1 = 중복o / 0 = 중복x : "+ data);		
+				
+				if (data == 1) {
+						// 1 : 아이디가 중복되는 문구
+						$("#id_check").text("사용중인 아이디입니다 ");
+						$("#id_check").css("color", "red");
+						$("#reg_submit").attr("disabled", true);
+					} else {
+						
+					      if(user_id == ""){
+							
+							$('#id_check').text('아이디를 입력해주세요 :)');
+							$('#id_check').css('color', 'red');
+							$("#reg_submit").attr("disabled", true);				
+							
+						} else {
+							
+							$('#id_check').text("사용가능한 아이디 입니다");
+							$('#id_check').css('color', 'blue');
+							$("#reg_submit").attr("disabled", false);
+						}
+						
+						
+						/* if(idJ.test(user_id)){
+							// 0 : 아이디 길이 / 문자열 검사
+							$("#id_check").text("");
+							$("#reg_submit").attr("disabled", false);
+							
+						} 
+						
+						else if(user_id == ""){
+							
+							$('#id_check').text('아이디를 입력해주세요 :)');
+							$('#id_check').css('color', 'red');
+							$("#reg_submit").attr("disabled", true);				
+							
+						} else {
+							
+							$('#id_check').text("아이디는 소문자와 숫자 4~12자리만 가능합니다 :) :)");
+							$('#id_check').css('color', 'red');
+							$("#reg_submit").attr("disabled", true);
+						} */
+						
+						
+						
+					}
+				}, error : function() {
+						console.log("실패");
+				}
+			});
+		});
+		
+		
+		
+		
+</script>
 
 
 
-									<script type="text/javascript">
+
+
+								<!-- 	<script type="text/javascript">
 										function idcheck() {
 
 											window.open("idcheck", "idc",
@@ -177,7 +249,7 @@ $(document).ready(function() {
 										
 										
 										
-									</script>
+									</script> -->
 
 
 
@@ -185,7 +257,7 @@ $(document).ready(function() {
 									<th scope="row"><span>비밀번호 *</span></th>
 									<td>
 										<ul class="pta">
-											<li class="r10"><input type="password" class="w134" name="pw" id="pw1"/></li>
+											<li class="r10"><input type="password" class="w134" name="pw" id="pw1" required="required"/></li>
 											<li><span class="mvalign">※ 영문 / 숫자 혼용으로 4~20자 까지 가능.</span></li>
 										</ul>
 									</td>
@@ -201,7 +273,7 @@ $(document).ready(function() {
 										
 											<li class="r10">
 											
-											<input type="password" class="w134" id="pw2"/></li>
+											<input type="password" class="w134" id="pw2" required="required"/></li>
 											
 											<li>
 												<span class="black" style="display: none;">* 비밀번호가 일치합니다.</span>
@@ -248,11 +320,11 @@ $(document).ready(function() {
 									<td>
 										<ul class="pta">
 											
-											<li><input type="text" class="w134" name="email1"/></li>
+											<li><input type="text" class="w134" name="email1" required="required"/></li>
 											
 											<li><span class="valign">&nbsp;@&nbsp;</span></li>
 											
-											<li class="r10"><input type="text" class="w134" name="email3"/></li>
+											<li class="r10"><input type="text" class="w134" name="email3" required="required"/></li>
 											
 											<li>
 											
@@ -328,7 +400,7 @@ $(document).ready(function() {
 									<td>
 										<ul class="pta">
 										
-											<li><input type="text" class="w134" name="post" id="post"/>&nbsp;</li>
+											<li><input type="text" class="w134" name="post" id="post" required="required"/>&nbsp;</li>
 
 												<li><input type="button" onclick="execDaumPostCode()" value="우편번호 찾기" class="addressBtn"
 													style="width: 100px; text-align: center; border: 0; font-weight: 600">
@@ -344,9 +416,9 @@ $(document).ready(function() {
 													
 													
 
-												<li class="pt5"><input type="text" class="addressType" name="address1" id="address1"/></li>
+												<li class="pt5"><input type="text" class="addressType" name="address1" id="address1" required="required"/></li>
 											
-											<li class="pt5"><input type="text" class="addressType" name="address2" id="address2" placeholder="상세주소를 입력해주세요"/></li>
+											<li class="pt5"><input type="text" class="addressType" name="address2" id="address2" placeholder="상세주소를 입력해주세요" required="required"/></li>
 											
 											
 											
@@ -460,6 +532,7 @@ $(document).ready(function() {
     
     
 </script>
+
 								
 								
                                   <!-- 
@@ -503,7 +576,7 @@ $(document).ready(function() {
 									<td>
 										<ul class="pta">
 											<li>
-												<select name="phone1">
+												<select name="phone1" required="required">
 													<option value="010" selected="selected" >010</option>
 													<option value="011">011</option>
 													<option value="016">016</option>
@@ -516,9 +589,9 @@ $(document).ready(function() {
 											
 											<li>&nbsp;<span class="valign">-</span>&nbsp;</li>
 										
-											<li><input type="text" class="w74" maxlength="4" name="phone2"/> <span class="valign">-</span>&nbsp;</li>
+											<li><input type="text" class="w74" maxlength="4" name="phone2" required="required"/> <span class="valign">-</span>&nbsp;</li>
 											
-											<li class="r10"><input type="text" class="w74" maxlength="4" name="phone3"/></li>
+											<li class="r10"><input type="text" class="w74" maxlength="4" name="phone3" required="required"/></li>
 											
 											<li class="cb pt5"><span class="mvalign">※ SMS 서비스를 받아보시겠습니까?</span></li>
 											
@@ -545,7 +618,7 @@ $(document).ready(function() {
 									<td>
 										<ul class="pta">
 											<li>
-												<select name="birth1">
+												<select name="birth1" required="required">
 												
 													<option value='' selected="selected">선택하세요</option>
 													
@@ -568,7 +641,7 @@ $(document).ready(function() {
 											<li>&nbsp;<span class="valign">년</span>&nbsp;&nbsp;&nbsp;</li>
 											
 											<li>
-												<select name="birth2">
+												<select name="birth2" required="required">
 													<option value='' selected="selected">선택하세요</option>
 													
 													<script type="text/javascript">
@@ -594,7 +667,7 @@ $(document).ready(function() {
 											
 											<li>
 											
-												<select name="birth3">
+												<select name="birth3" required="required">
 												
 													<option value='' selected="selected">선택하세요</option>
 													
@@ -667,7 +740,7 @@ $(document).ready(function() {
 								
 								<tr>
 									<th scope="row"><span>자기소개 *</span></th>
-									<td><textarea rows="3" cols="30" name="introduce"></textarea></td>
+									<td><textarea rows="3" cols="30" name="introduce" required="required"></textarea></td>
 								</tr>
 								
 								

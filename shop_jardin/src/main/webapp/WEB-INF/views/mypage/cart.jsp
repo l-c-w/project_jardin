@@ -34,11 +34,11 @@
 
 $(document).ready(function() {
 	
-	function caltotal(pri,amo,total) {
-		var price = document.getElementById(pri);
-		var amount = document.getElementById(amo);
+	function caltotal(p_code) {
+		var price = document.getElementById(p_code+'price');
+		var amount = document.getElementById(p_code+'amount');
 		
-		$('#'+total).text(price.value*amount.value);
+		$('#'+p_code+'total').text(price*amount);
 		
 	}
 	
@@ -148,7 +148,7 @@ $(document).ready(function() {
 									</td>
 									<td class="tnone"><span id="${cart_list.p_code }price" name="${cart_list.p_code }price" >${cart_list.price }</span>원<br/>
 									<span class="pointscore"><fmt:formatNumber value="${cart_list.p_point }" pattern="#,###,###,###"/>Point</span></td>
-									<td><input type="number" class="spinner" id ="${cart_list.p_code }amount" value="${cart_list.amount }" maxlength="3" name="${cart_list.p_code }amount" onchange="caltotal('${cart_list.p_code }price','${cart_list.p_code }amount','${cart_list.p_code }total')"></td> 
+									<td><input type="number" class="spinner" id ="${cart_list.p_code }amount" value="${cart_list.amount }" maxlength="3" name="${cart_list.p_code }amount" onchange="caltotal(${cart_list.p_code })"></td> 
 									<td><span id="${cart_list.p_code }total" name="${cart_list.p_code }total">${cart_list.price*cart_list.amount }</span>원</td>
 									<td class="tnone">
 										<ul class="order">	

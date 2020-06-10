@@ -27,7 +27,7 @@ public interface EDao {
 	public int getFinListCount(String search);
 	public int getFinListCountAll(String search);
 	public int getFinListCountTit(String search);
-	public int getFinListCountCon(String search);	
+	public int getFinListCountCon(String search);
 	
 	public int getCommentCount(String e_code);
 	
@@ -38,7 +38,7 @@ public interface EDao {
 	
 	public EventDto event_view(String e_code);	
 	public ArrayList<Event_commentDto> event_comment(String e_code, int page, int limit);	
-	public int eModify_comment(String e_code, String content);
+	public int eModify_comment(String ec_num, String content);
 	
 	public ArrayList<Winner_joinersDto> winner_list(int page, int limit, String search);
 	public ArrayList<Winner_joinersDto> winner_listAll(int page, int limit, String search);

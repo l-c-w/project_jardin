@@ -27,7 +27,7 @@
 		E_START,E_END,E_WDATE,E_UDATE from (SELECT * FROM(select * from EVENT where E_END >= (SELECT SYSDATE FROM DUAL) 
 		and (E_CONTENT like '%' || #{param3} || '%'))order by E_CODE desc)) where rnum>=#{param1} and rnum<=#{param2}]]>
 	</select>
-		
+	
 	
 	<select id="fin_event_list" resultType="com.javalec.ex.Dto.EDto.EventDto">
 		<![CDATA[select * from (select rownum rnum, E_CODE,E_TYPE,E_APPLY,E_TITLE,E_CONTENT,

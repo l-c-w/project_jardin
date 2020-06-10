@@ -1,26 +1,35 @@
 /**
  * 
  */
-
-
-
-
+function commentOk(){	
+	var form = document.getElementById('comm_modi');
+	form.submit();
+}
 
 $(document).ready(function(){
 	//댓글수정열기
 	$(".modi").click(function(){
 		var index = $(".modi").index(this);
-		console.log(index);
-		$(this).parent().hide();
+		var test = $(this).parents('ul');
+		$(this).parents('ul').hide();
 		$(".comment_modifyM").eq(index).show();
-		$(".modi").not(index).parent().show();
+		$(".modi").not(index).parent('ul').show();
 	});
 	$(".reset_re").click(function(){
-		var index2=$(".reset_re").index(this);
+		var index2 = $(".reset_re").index(this);
 		$(".comment_modifyM").eq(index2).hide();
-		$(".modi").eq(index2).parent().show();
+		var test2 = $(".modi").eq(index2).parents('ul');
+		$(".modi").eq(index2).parents('ul').show();
+	});	
+
+	// 수정 submit
+	$('.s_modi').click(function() {
+		var index = $(".s_modi").index(this);
+		var test = $(this).parents('ul');
+		$(this).parents('ul').hide();
+		
+		$('#target').submit();
 	});
-	
 	
 });
 

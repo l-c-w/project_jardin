@@ -129,6 +129,7 @@ $(document).ready(function() {
 						
 
 
+
 					<div class="btnAreaList">
 						<!-- 페이징이동1 -->
 						
@@ -203,6 +204,7 @@ $(document).ready(function() {
 					</div>
 
 
+
 					<div class="searchWrap">
 					
 						<div class="search">
@@ -228,6 +230,9 @@ $(document).ready(function() {
 						</div>
 						
 					</div>
+					
+					
+					
 					<!-- //포토 구매후기 -->
 
 

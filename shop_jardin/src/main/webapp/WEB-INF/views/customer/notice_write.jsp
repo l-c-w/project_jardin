@@ -57,18 +57,6 @@ $(document).ready(function() {
 		
 			<jsp:include page="custom1.jsp"/>
 			
-			
-			<!-- <div id="left">
-				<div id="title2">CUSTOMER<span>고객센터</span></div>
-				<ul>	
-					<li><a href="#" id="leftNavi1">NOTICE</a></li>
-					<li><a href="#" id="leftNavi2">1:1문의</a></li>
-					<li><a href="#" id="leftNavi3">FAQ</span></a></li>
-					<li class="last"><a href="#" id="leftNavi4">이용안내</a></li>
-				</ul>			
-			</div> -->
-			
-			
 			<script type="text/javascript">initSubmenu(2,0);</script>
 
 
@@ -77,15 +65,13 @@ $(document).ready(function() {
 			
 				<div id="customer">
 				
-					<h2><strong>1:1문의</strong><span>쟈뎅에 궁금하신 사항을 남겨주시면 답변해드립니다.</span></h2>
-					
+					<h2><strong>공지사항 등록</strong></h2>
 					
 					<div class="checkMt">
 					
-					<form action="../mypage/inquiry_ok" name="inquiry" id="inquiry" method="post" enctype="multipart/form-data">
+					<form action="notice_ok" name="notice" id="notice" method="post">
 					
-						<table summary="분류, 제목, 상세내용, 첨부파일 순으로 궁금하신 점을 문의 하실수 있습니다." class="checkTable" border="1" cellspacing="0">
-						
+						<table class="checkTable" border="1" cellspacing="0">
 						
 							<caption>1:1문의</caption>
 							
@@ -97,24 +83,12 @@ $(document).ready(function() {
 							
 							<tbody>
 							
-								<tr>
-								
-									<th scope="row"><span>분류</span></th>
-									
-									<td>
-										<select>
-											<option value="">선택해주세요.</option>
-										</select>
-									</td>
-									
-								</tr>
-								
 								
 								<tr>
 									<th scope="row"><span>제목</span></th>
 									
 									<td>
-										<input type="text" class="wlong" name="oo_title" />
+										<input type="text" class="wlong" name="n_title" />
 									</td>
 								</tr>
 								
@@ -124,18 +98,7 @@ $(document).ready(function() {
 									<th scope="row"><span>상세 내용</span></th>
 									
 									<td>
-										<textarea class="tta" name="oo_content"></textarea>
-									</td>
-									
-								</tr>
-								
-								
-								<tr>
-								
-									<th scope="row"><span>첨부파일</span></th>
-									
-									<td>
-										<input type="file" class="fileType" name="oo_file"/>
+										<textarea class="tta" name="n_content"></textarea>
 									</td>
 									
 								</tr>
@@ -151,13 +114,12 @@ $(document).ready(function() {
 			</div>
 					
 
-
 					<!-- Btn Area -->
 					<div class="btnArea">
 						<div class="bCenter">
 							<ul>																
 								<li><a href="javascript:history.back()" class="nbtnbig">취소</a></li>
-								<li><a href="#" onclick="document.getElementById('inquiry').submit();" class="sbtnMini">확인</a></li>
+								<li><a href="#" onclick="document.getElementById('notice').submit();" class="sbtnMini">확인</a></li>
 							</ul>
 						</div>
 					</div>
@@ -171,6 +133,8 @@ $(document).ready(function() {
 
 <!-- footer 붙여넣기 -->
 	<jsp:include page="../footer.jsp"/>
+	
+	
 
 </body>
 </html>

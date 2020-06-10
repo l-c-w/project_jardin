@@ -24,7 +24,9 @@ public class MainController {
 	 public String main(HttpServletRequest request,Model model) {
 		 ms = new MainListService();
 		 ms.execute(request, sqlSession, model);
-		 return "main/main";
+		 return "/main/main";
 	 }
+	 
+	 
 
 }

@@ -13,6 +13,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.SessionAttributes;
 
 import com.javalec.ex.Dao.MDao;
 import com.javalec.ex.Dto.MDto.Member_Dto;
@@ -56,34 +59,51 @@ public class MController {
 
 	}
 
-	// member
 
-	@RequestMapping("member/step01")
+	
+	@RequestMapping("/member/step01")
 	public String step01() {
 		return "member/step01";
 	}
 
-	@RequestMapping("member/step02")
+	@RequestMapping("/member/step02")
 	public String step02() {
 		return "member/step02";
 	}
 
-	@RequestMapping("member/step03")
+	@RequestMapping("/member/step03")
 	public String step03() {
 		return "member/step03";
 	}
 
-	@RequestMapping("member/step04")
+	@RequestMapping("/member/step04")
 	public String step04() {
 		return "member/step04";
 	}
 
-	@RequestMapping("member/idcheck")
+	
+	
+	@RequestMapping("/member/id_check")
+	@ResponseBody
+	public int id_check(@RequestParam("Id") String Id) {
+		
+		MDao dao = sqlsession.getMapper(MDao.class);
+		
+		int cnt = dao.idcheck(Id);
+		
+		return cnt;
+	}
+	
+	
+	
+	@RequestMapping("/member/idcheck")
 	public String idcheck() {
 		return "member/idcheck";
 	}
+	
+	
 
-	@RequestMapping("member/idcheck2")
+	@RequestMapping("/member/idcheck2")
 	public String idcheck2(HttpServletRequest request, Model model) {
 
 		String id = request.getParameter("id");
@@ -94,11 +114,13 @@ public class MController {
 
 		model.addAttribute("idcheck", cnt);
 
-		return "member/idcheck2";
+		return "/member/idcheck2";
 	}
 
 	
-	@RequestMapping("member/address_search")
+	
+	
+	@RequestMapping("/member/address_search")
 	public String address_search() {
 		return "member/address_search";
 	}
@@ -109,12 +131,12 @@ public class MController {
 	}
 	
 	
-	@RequestMapping("member/logout")
+	@RequestMapping("/member/logout")
 	public String logout(HttpSession session) {
 		
 		session.invalidate();
 		
-		return "main/main";
+		return "/main/main";
 	}
 	
 	
@@ -162,11 +184,13 @@ public class MController {
 	}
 	
 	
+	
 
 	@RequestMapping("member/id_search")
 	public String id_search() {
 		return "member/id_search";
 	}
+	
 	
 	
 	
@@ -238,6 +262,9 @@ public class MController {
 		return "/main/main";
 		
 	}
+	
+	
+	
 	
 
 }

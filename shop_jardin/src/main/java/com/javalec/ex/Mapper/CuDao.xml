@@ -6,6 +6,9 @@
 <mapper namespace="com.javalec.ex.Dao.CuDao">
 
 
+     <!-- 공지사항 -->
+
+
      <!-- 	
 
      <select id="c_list" resultType="com.javalec.ex.Dto.CDto.C_ReviewDto">
@@ -19,10 +22,14 @@
 	</select>
 
 
+
+
 	<insert id="n_write">
 		insert into notice (n_num,n_title,n_content,n_hit,n_wdate,n_update)
 		values (notice_seq.nextval,#{param1},#{param2},#{param3},#{param4},#{param5})
 	</insert>
+	
+	
 	
 	
 	<!-- 총 게시글 갯수 출력 -->
@@ -48,6 +55,7 @@
     
     
     
+    
    <select id="n_next" resultType="com.javalec.ex.Dto.MDto.NoticeDto">
    
     select n_title, n_num from notice where n_num = (select min(n_num) from notice where n_num > #{param1})
@@ -60,6 +68,75 @@
     <![CDATA[ select n_title, n_num from notice where n_num =(select max(n_num) from notice where n_num < #{param1}) ]]>
     
     </select>
+    
+    
+    
+    
+    <!-- 1:1 문의 -->
+    
+    <!-- oo_type 넣어야 하는데 나중에... -->
+    
+    
+    <select id="oo_list">
+    
+    select * from oo_fnq
+    
+    </select>
+    
+    
+    
+    <insert id="oo_write">
+    
+		insert into oo_fnq (oo_num,id,oo_title,oo_content,oo_file,oo_wdate)
+		values (notice_seq.nextval,#{param1},#{param2},#{param3},#{param4},#{param5})
+		
+	</insert>
+	
+	
+	 <delete id="oo_delete">
+	 
+	 delete oo_fnq where oo_num=#{param1}
+	 
+	 </delete>
+	 
+	
+	<update id="oo_update">
+	
+	update oo_fnq set oo_title=#{param1}, oo_content=#{param2}, oo_file=#{param3} where oo_num=#{param4}
+	 
+	</update>
+	
+	
+	
+	<update id="oo_update_admin"> 
+	
+	update oo_fnq set oo_answer=#{param1} where oo_num=#{param2}
+	 
+	</update>
+	
+	
+	<!-- 1:1문의는 본인만 보니까 조회수 up x -->
+	
+    
+    
+    
+    
+    <!-- fnq -->
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
 
 
 </mapper>

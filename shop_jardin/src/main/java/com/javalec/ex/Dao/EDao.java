@@ -9,12 +9,28 @@ import com.javalec.ex.Dto.EDto.Winner_joinersDto;
 
 public interface EDao {
 	
-	public ArrayList<EventDto> event_list(int page, int limit);	
-	public ArrayList<EventDto> fin_event_list(int page, int limit);
+	public ArrayList<EventDto> event_list(int page, int limit, String search);
+	public ArrayList<EventDto> event_listAll(int page, int limit, String search);
+	public ArrayList<EventDto> event_listTit(int page, int limit, String search);
+	public ArrayList<EventDto> event_listCon(int page, int limit, String search);
 	
-	public int getListCount();	
-	public int getFinListCount();	
+	public ArrayList<EventDto> fin_event_list(int page, int limit, String search);
+	public ArrayList<EventDto> fin_event_listAll(int page, int limit, String search);
+	public ArrayList<EventDto> fin_event_listTit(int page, int limit, String search);
+	public ArrayList<EventDto> fin_event_listCon(int page, int limit, String search);
+	
+	public int getListCount(String search);
+	public int getListCountAll(String search);
+	public int getListCountTit(String search);
+	public int getListCountCon(String search);
+	
+	public int getFinListCount(String search);
+	public int getFinListCountAll(String search);
+	public int getFinListCountTit(String search);
+	public int getFinListCountCon(String search);	
+	
 	public int getCommentCount(String e_code);
+	
 	public int getWinnerCount(String search);
 	public int getWinnerCountAll(String search);
 	public int getWinnerCountTit(String search);

@@ -11,12 +11,47 @@
 		(select * from EVENT where E_END >= (SELECT SYSDATE FROM DUAL)) order by E_CODE desc)) 
 		where rnum>=#{param1} and rnum<=#{param2}]]>
 	</select>
+	<select id="event_listAll" resultType="com.javalec.ex.Dto.EDto.EventDto">
+		<![CDATA[select * from (select rownum rnum, E_CODE,E_TYPE,E_APPLY,E_TITLE,E_CONTENT,E_FILE1,E_FILE2,E_FILE3,
+		E_START,E_END,E_WDATE,E_UDATE from (SELECT * FROM(select * from EVENT where E_END >= (SELECT SYSDATE FROM DUAL) 
+		and (E_TITLE like '%' || #{param3} || '%' or E_CONTENT like '%' || #{param3} || '%'))order by E_CODE desc)) 
+		where rnum>=#{param1} and rnum<=#{param2}]]>
+	</select>
+	<select id="event_listTit" resultType="com.javalec.ex.Dto.EDto.EventDto">
+		<![CDATA[select * from (select rownum rnum, E_CODE,E_TYPE,E_APPLY,E_TITLE,E_CONTENT,E_FILE1,E_FILE2,E_FILE3,
+		E_START,E_END,E_WDATE,E_UDATE from (SELECT * FROM(select * from EVENT where E_END >= (SELECT SYSDATE FROM DUAL) 
+		and (E_TITLE like '%' || #{param3} || '%'))order by E_CODE desc)) where rnum>=#{param1} and rnum<=#{param2}]]>
+	</select>
+	<select id="event_listCon" resultType="com.javalec.ex.Dto.EDto.EventDto">
+		<![CDATA[select * from (select rownum rnum, E_CODE,E_TYPE,E_APPLY,E_TITLE,E_CONTENT,E_FILE1,E_FILE2,E_FILE3,
+		E_START,E_END,E_WDATE,E_UDATE from (SELECT * FROM(select * from EVENT where E_END >= (SELECT SYSDATE FROM DUAL) 
+		and (E_CONTENT like '%' || #{param3} || '%'))order by E_CODE desc)) where rnum>=#{param1} and rnum<=#{param2}]]>
+	</select>
+		
+	
 	<select id="fin_event_list" resultType="com.javalec.ex.Dto.EDto.EventDto">
 		<![CDATA[select * from (select rownum rnum, E_CODE,E_TYPE,E_APPLY,E_TITLE,E_CONTENT,
 		E_FILE1,E_FILE2,E_FILE3,E_START,E_END,E_WDATE,E_UDATE from (SELECT * FROM 
 		(select * from EVENT where E_END <= (SELECT SYSDATE FROM DUAL)) order by E_CODE desc))
 		where rnum>=#{param1} and rnum<=#{param2}]]>
-	</select>	
+	</select>
+	<select id="fin_event_listAll" resultType="com.javalec.ex.Dto.EDto.EventDto">
+		<![CDATA[select * from (select rownum rnum, E_CODE,E_TYPE,E_APPLY,E_TITLE,E_CONTENT,E_FILE1,E_FILE2,E_FILE3,
+		E_START,E_END,E_WDATE,E_UDATE from (SELECT * FROM(select * from EVENT where E_END <= (SELECT SYSDATE FROM DUAL) 
+		and (E_TITLE like '%' || #{param3} || '%' or E_CONTENT like '%' || #{param3} || '%'))order by E_CODE desc)) 
+		where rnum>=#{param1} and rnum<=#{param2}]]>
+	</select>
+	<select id="fin_event_listTit" resultType="com.javalec.ex.Dto.EDto.EventDto">
+		<![CDATA[select * from (select rownum rnum, E_CODE,E_TYPE,E_APPLY,E_TITLE,E_CONTENT,E_FILE1,E_FILE2,E_FILE3,
+		E_START,E_END,E_WDATE,E_UDATE from (SELECT * FROM(select * from EVENT where E_END <= (SELECT SYSDATE FROM DUAL) 
+		and (E_TITLE like '%' || #{param3} || '%'))order by E_CODE desc)) where rnum>=#{param1} and rnum<=#{param2}]]>
+	</select>
+	<select id="fin_event_listCon" resultType="com.javalec.ex.Dto.EDto.EventDto">
+		<![CDATA[select * from (select rownum rnum, E_CODE,E_TYPE,E_APPLY,E_TITLE,E_CONTENT,E_FILE1,E_FILE2,E_FILE3,
+		E_START,E_END,E_WDATE,E_UDATE from (SELECT * FROM(select * from EVENT where E_END <= (SELECT SYSDATE FROM DUAL) 
+		and (E_CONTENT like '%' || #{param3} || '%'))order by E_CODE desc)) where rnum>=#{param1} and rnum<=#{param2}]]>
+	</select>
+	
 	
 	<select id="winner_list" resultType="com.javalec.ex.Dto.EDto.Winner_joinersDto">
 		<![CDATA[select * from (select rownum rnum, E_CODE,W_CODE,W_TITLE,W_CONTENT,W_HIT,W_WDATE,W_UDATE,W_STATE
@@ -41,12 +76,41 @@
 	<select id="getListCount" resultType="Integer">
 		SELECT count(*) as count FROM (select * from EVENT where E_END >= (SELECT SYSDATE FROM DUAL))
 	</select>
+	<select id="getListCountAll" resultType="Integer">
+		SELECT count(*) as count FROM EVENT where E_END >= (SELECT SYSDATE FROM DUAL) 
+		and (E_TITLE like '%' || #{param1} || '%' or E_CONTENT like '%' || #{param1} || '%')
+	</select>
+	<select id="getListCountTit" resultType="Integer">
+		SELECT count(*) as count FROM EVENT where E_END >= (SELECT SYSDATE FROM DUAL) 
+		and (E_TITLE like '%' || #{param1} || '%')
+	</select>
+	<select id="getListCountCon" resultType="Integer">
+		SELECT count(*) as count FROM EVENT where E_END >= (SELECT SYSDATE FROM DUAL) 
+		and (E_CONTENT like '%' || #{param1} || '%')
+	</select>
+	
+	
 	<select id="getFinListCount" resultType="Integer">
 		<![CDATA[SELECT count(*) as count FROM (select * from EVENT where E_END <= (SELECT SYSDATE FROM DUAL))]]>
 	</select>
+	<select id="getFinListCountAll" resultType="Integer">
+		<![CDATA[SELECT count(*) as count FROM EVENT where E_END <= (SELECT SYSDATE FROM DUAL) 
+		and (E_TITLE like '%' || #{param1} || '%' or E_CONTENT like '%' || #{param1} || '%')]]>
+	</select>
+	<select id="getFinListCountTit" resultType="Integer">
+		<![CDATA[SELECT count(*) as count FROM EVENT where E_END <= (SELECT SYSDATE FROM DUAL) 
+		and (E_TITLE like '%' || #{param1} || '%')]]>
+	</select>
+	<select id="getFinListCountCon" resultType="Integer">
+		<![CDATA[SELECT count(*) as count FROM EVENT where E_END <= (SELECT SYSDATE FROM DUAL) 
+		and (E_CONTENT like '%' || #{param1} || '%')]]>
+	</select>
+	
+	
 	<select id="getCommentCount" resultType="Integer">
 		SELECT count(*) as count FROM event_comment where e_code=#{param1}
 	</select>
+	
 	
 	<select id="getWinnerCount" resultType="Integer">
 		SELECT count(*) as count FROM winner_joiners

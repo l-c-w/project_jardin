@@ -46,12 +46,6 @@ public class EWinnerListService implements EService {
 		System.out.println("page : " + page);
 
 		int limit = 10; // 1page = 게시글 10개
-//		String searchFlag = null; // 검색체크	//였지만 검색기능을 빼기로 했기 때문에 쓰지않는기능이다
-//		System.out.println("searchFlag : " + searchFlag);
-
-//		if(request.getParameter("page") != null) {
-//			page = Integer.parseInt(request.getParameter("page"));
-//		}
 
 		EDao dao = sqlSession.getMapper(EDao.class);
 
@@ -105,7 +99,6 @@ public class EWinnerListService implements EService {
 			request.setAttribute("opt", opt);
 			request.setAttribute("search", search);
 		}
-		
 
 		System.out.println("listcount : " + listcount);
 		System.out.println("page : " + page);
@@ -114,17 +107,7 @@ public class EWinnerListService implements EService {
 		System.out.println("endpage : " + endpage);
 		System.out.println("searchFlag : " + searchFlag);
 
-//		switch (page) {
-//		case 1:
-//			searchFlag = null;
-//			break;
-//		default:
-//			searchFlag = "1";
-//			model.addAttribute("searchFlag", searchFlag);
-//			break;
-//		}// 검색했을 때 페이지를 넘겨도 검색어를 유지시키는 기능	//이었지만 검색기능을 빼기로 했기 때문에 쓰지않는기능이다
 
-		
 
 	}
 

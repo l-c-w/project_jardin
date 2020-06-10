@@ -20,10 +20,19 @@ public class EFinListService implements EService {
 		System.out.println("--------------------EFinListService--------------------");
 
 		int page = 0;
-		
+		int listcount = 0;
 		String temp = "";
 		
-		System.out.println("EFinListService - request : " + request);
+		String opt = request.getParameter("opt"); // 전체 제목 내용
+		String searchFlag = request.getParameter("searchFlag"); // 검색체크
+		String search = request.getParameter("search"); // 검색어	
+		System.out.println("search value : " + search);
+		if(opt == null) {
+			opt = "";
+		}
+		if(search == null) {
+			search = "";
+		}
 		
 		temp = request.getParameter("page");
 		System.out.println("temp : " + temp);
@@ -33,9 +42,9 @@ public class EFinListService implements EService {
 		}else {
 			page = Integer.parseInt(temp);
 		}
-//		
+		System.out.println("page : " + page);
 		
-		int limit = 2;		// 1page = 게시글 10개
+		int limit = 2;
 		
 		EDao dao = sqlSession.getMapper(EDao.class);
 		
@@ -44,9 +53,29 @@ public class EFinListService implements EService {
 		int startrow = (page - 1) * limit + 1;	// (1 - 1) * 10 + 1 = 1
 		int endrow = startrow + limit - 1;	//	1 + 10 - 1 = 10
 		
-		list = dao.fin_event_list(startrow, endrow);
-		// 전체 게시글 count(*)
-		int listcount = dao.getFinListCount(); // listcount -> 20 
+		switch (opt) {
+		case "":
+			list = dao.fin_event_list(startrow, endrow, search);
+			listcount = dao.getFinListCount(search);			
+			break;
+		case "all":
+			list = dao.fin_event_listAll(startrow, endrow, search);
+			listcount = dao.getFinListCountAll(search);
+			break;
+		case "tit":
+			list = dao.fin_event_listTit(startrow, endrow, search);
+			listcount = dao.getFinListCountTit(search);
+			break;
+		case "con":
+			list = dao.fin_event_listTit(startrow, endrow, search);
+			listcount = dao.getFinListCountCon(search);
+			break;
+		default:
+			break;
+		}
+		
+		
+						
 		// 최대 페이지 수
 		int maxpage = (int)((double)listcount / limit + 0.95); // 20/10 -> 2+0.95 -> (int)2.95 -> 2
 		// 처음 페이지
@@ -65,6 +94,12 @@ public class EFinListService implements EService {
 		model.addAttribute("startpage", startpage);
 		model.addAttribute("endpage", endpage);
 
+		if(search != null) {
+			searchFlag = "1";
+			request.setAttribute("searchFlag", searchFlag);
+			request.setAttribute("opt", opt);
+			request.setAttribute("search", search);
+		}
 		
 		System.out.println("fin_listcount : " + listcount);
 		System.out.println("page : " + page);

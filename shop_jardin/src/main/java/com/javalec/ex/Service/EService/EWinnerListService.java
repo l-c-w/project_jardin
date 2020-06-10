@@ -21,11 +21,20 @@ public class EWinnerListService implements EService {
 		System.out.println("--------------------EWinnerListService--------------------");
 
 		int page = 0;
-
+		int listcount = 0;
 		String temp = "";
-
-		System.out.println("EWinnerListService - request : " + request);
-
+		
+		String opt = request.getParameter("opt"); // 전체 제목 내용
+		String searchFlag = request.getParameter("searchFlag"); // 검색체크
+		String search = request.getParameter("search"); // 검색어	  where btitle like '%게%'
+		System.out.println("search value : " + search);
+		if(opt == null) {
+			opt = "";
+		}
+		if(search == null) {
+			search = "";
+		}
+		
 		temp = request.getParameter("page");
 		System.out.println("temp : " + temp);
 
@@ -50,10 +59,29 @@ public class EWinnerListService implements EService {
 		ArrayList<Winner_joinersDto> list = new ArrayList<Winner_joinersDto>();
 		int startrow = (page - 1) * limit + 1; // (1 - 1) * 10 + 1 = 1
 		int endrow = startrow + limit - 1; // 1 + 10 - 1 = 10
+		
+		switch (opt) {
+		case "":
+			list = dao.winner_list(startrow, endrow, search);
+			listcount = dao.getWinnerCount(search);
+			break;
+		case "all":
+			list = dao.winner_listAll(startrow, endrow, search);
+			listcount = dao.getWinnerCountAll(search);
+			break;
+		case "tit":
+			list = dao.winner_listTit(startrow, endrow, search);
+			listcount = dao.getWinnerCountTit(search);
+			break;
+		case "con":
+			list = dao.winner_listCon(startrow, endrow, search);
+			listcount = dao.getWinnerCountCon(search);
+			break;
+		default:
+			break;
+		}
 
-		list = dao.winner_list(startrow, endrow);
-		// 전체 게시글 count(*)
-		int listcount = dao.getWinnerCount(); // listcount -> 20
+
 		// 최대 페이지 수
 		int maxpage = (int) ((double) listcount / limit + 0.95); // 20/10 -> 2+0.95 -> (int)2.95 -> 2
 		// 처음 페이지
@@ -70,12 +98,21 @@ public class EWinnerListService implements EService {
 		model.addAttribute("maxpage", maxpage);
 		model.addAttribute("startpage", startpage);
 		model.addAttribute("endpage", endpage);
+		
+		if(search != null) {
+			searchFlag = "1";
+			request.setAttribute("searchFlag", searchFlag);
+			request.setAttribute("opt", opt);
+			request.setAttribute("search", search);
+		}
+		
 
 		System.out.println("listcount : " + listcount);
 		System.out.println("page : " + page);
 		System.out.println("maxpage : " + maxpage);
 		System.out.println("startpage : " + startpage);
 		System.out.println("endpage : " + endpage);
+		System.out.println("searchFlag : " + searchFlag);
 
 //		switch (page) {
 //		case 1:

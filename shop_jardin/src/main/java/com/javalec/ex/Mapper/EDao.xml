@@ -4,6 +4,7 @@
 
 <mapper namespace="com.javalec.ex.Dao.EDao">
 
+	<!-- list -->
 	<select id="event_list" resultType="com.javalec.ex.Dto.EDto.EventDto">
 		<![CDATA[select * from (select rownum rnum, E_CODE,E_TYPE,E_APPLY,E_TITLE,E_CONTENT,
 		E_FILE1,E_FILE2,E_FILE3,E_START,E_END,E_WDATE,E_UDATE from (SELECT * FROM 
@@ -17,7 +18,26 @@
 		where rnum>=#{param1} and rnum<=#{param2}]]>
 	</select>	
 	
+	<select id="winner_list" resultType="com.javalec.ex.Dto.EDto.Winner_joinersDto">
+		<![CDATA[select * from (select rownum rnum, E_CODE,W_CODE,W_TITLE,W_CONTENT,W_HIT,W_WDATE,W_UDATE,W_STATE
+		from (select * from winner_joiners wj order by w_wdate desc)) where rnum>=#{param1} and rnum<=#{param2}]]>
+	</select>
+	<select id="winner_listAll" resultType="com.javalec.ex.Dto.EDto.Winner_joinersDto">
+		<![CDATA[select * from (select rownum rnum, E_CODE,W_CODE,W_TITLE,W_CONTENT,W_HIT,W_WDATE,W_UDATE,W_STATE
+		from (select * from winner_joiners WHERE W_TITLE LIKE '%' || #{param3} || '%' OR W_CONTENT LIKE '%' || #{param3} || '%')) 
+		where rnum>=#{param1} and rnum<=#{param2}]]>
+	</select>
+	<select id="winner_listTit" resultType="com.javalec.ex.Dto.EDto.Winner_joinersDto">
+		<![CDATA[select * from (select rownum rnum, E_CODE,W_CODE,W_TITLE,W_CONTENT,W_HIT,W_WDATE,W_UDATE,W_STATE
+		from (select * from winner_joiners WHERE W_TITLE LIKE '%' || #{param3} || '%')) where rnum>=#{param1} and rnum<=#{param2}]]>
+	</select>
+	<select id="winner_listCon" resultType="com.javalec.ex.Dto.EDto.Winner_joinersDto">
+		<![CDATA[select * from (select rownum rnum, E_CODE,W_CODE,W_TITLE,W_CONTENT,W_HIT,W_WDATE,W_UDATE,W_STATE
+		from (select * from winner_joiners WHERE W_CONTENT LIKE '%' || #{param3} || '%')) where rnum>=#{param1} and rnum<=#{param2}]]>
+	</select>
 	
+	
+	<!-- count -->
 	<select id="getListCount" resultType="Integer">
 		SELECT count(*) as count FROM (select * from EVENT where E_END >= (SELECT SYSDATE FROM DUAL))
 	</select>
@@ -27,11 +47,21 @@
 	<select id="getCommentCount" resultType="Integer">
 		SELECT count(*) as count FROM event_comment where e_code=#{param1}
 	</select>
+	
 	<select id="getWinnerCount" resultType="Integer">
 		SELECT count(*) as count FROM winner_joiners
 	</select>
+	<select id="getWinnerCountAll" resultType="Integer">
+		SELECT count(*) as count FROM winner_joiners where w_title like '%' || #{param1} || '%' or w_content like '%' || #{param1} || '%'
+	</select>
+	<select id="getWinnerCountTit" resultType="Integer">
+		SELECT count(*) as count FROM winner_joiners where w_title like '%' || #{param1} || '%'
+	</select>
+	<select id="getWinnerCountCon" resultType="Integer">
+		SELECT count(*) as count FROM winner_joiners where w_content like '%' || #{param1} || '%'
+	</select>
 	
-	
+	<!-- view -->
 	<select id="event_view" resultType="com.javalec.ex.Dto.EDto.EventDto">
 		SELECT * FROM event WHERE e_code=#{param1}
 	</select>
@@ -43,17 +73,13 @@
 	<update id="eModify_comment" >
 		update EVENT_COMMENT set EC_CONTENT=#{param2}, EC_UDATE=sysdate where EC_NUM=#{param1}
 	</update>
+	<select id="winner_view" resultType="com.javalec.ex.Dto.EDto.Winner_joinersDto">
+		select * from winner_joiners where w_code=#{param1}
+	</select>	
 	
-	
-	<select id="winner_list" resultType="com.javalec.ex.Dto.EDto.Winner_joinersDto">
-		<![CDATA[select * from (select rownum rnum, E_CODE,W_CODE,W_TITLE,W_CONTENT,W_HIT,W_WDATE,W_UDATE,W_STATE
-		from (select * from winner_joiners wj order by w_wdate desc)) where rnum>=#{param1} and rnum<=#{param2}]]>
-	</select>
+	<!-- hit -->	
 	<update id="winnerUpHit">
 		update winner_joiners set w_hit=w_hit+1 where w_code=#{param1}
 	</update>
-	<select id="winner_view" resultType="com.javalec.ex.Dto.EDto.Winner_joinersDto">
-		select * from winner_joiners where w_code=#{param1}
-	</select>
 
 </mapper>

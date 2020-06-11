@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+    
 <!DOCTYPE html>
 <html>
 <head>
@@ -27,9 +28,11 @@
 <script type="text/javascript" src="../js/jquery.min.js"></script>
 <script type="text/javascript" src="../js/top_navi.js"></script>
 <script type="text/javascript" src="../js/left_navi.js"></script>
+
 <script type="text/javascript" src="../js/main.js"></script>
 <script type="text/javascript" src="../js/common.js"></script>
 <script type="text/javascript" src="../js/jquery.easing.1.3.js"></script>
+
 <script type="text/javascript" src="../js/idangerous.swiper-2.1.min.js"></script>
 <script type="text/javascript" src="../js/jquery.anchor.js"></script>
 
@@ -124,8 +127,7 @@ $(document).ready(function() {
 					
 					
 
-
-               <form action="register_ok" id="register_ok" name="join" method="get">
+               <form action="register_ok" id="register_ok" name="join" method="post">
 
 
 					<div class="memberbd">
@@ -143,7 +145,7 @@ $(document).ready(function() {
 							
 								<tr>
 									<th scope="row"><span>이름 *</span></th>
-									<td><input type="text" name="name"></td>
+									<td><input type="text" name="name" required="required"></td>
 								</tr>
 								
 								
@@ -157,16 +159,88 @@ $(document).ready(function() {
 									<th scope="row"><span>아이디 *</span></th>
 									<td>
 										<ul class="pta">
-											<li class="r10"><input type="text" class="w134" name="id" /></li>
-											<li><a href="#" onclick="idcheck()" class="nbtnMini">중복확인</a></li>
+											<li class="r10"><input type="text" class="w134" name="id" id="id" required="required" /></li>
+											<!-- <li><a href="#" onclick="idcheck()" class="nbtnMini">중복확인</a></li> -->
 											<li class="pt5"><span class="mvalign">첫 글자는 영문으로 4~16자 까지 가능, 영문, 숫자와 특수기호(_)만 사용 가능</span></li>
+										    <div class="check_font" id="id_check"></div>
 										</ul>
 									</td>
 								</tr>
+								
+					
+								
+<script type="text/javascript">
+// 아이디 유효성 검사(1 = 중복 / 0 != 중복)
+	$("#id").blur(function() {
+		// id = "id_reg" / name = "userId"
+		var user_id = $('#id').val();
+		$.ajax({
+			url : '${pageContext.request.contextPath}/member/id_check?Id='+user_id,
+			type : 'get',
+			success : function(data) {
+				
+				console.log("1 = 중복o / 0 = 중복x : "+ data);		
+				
+				if (data == 1) {
+						// 1 : 아이디가 중복되는 문구
+						$("#id_check").text("사용중인 아이디입니다 ");
+						$("#id_check").css("color", "red");
+						$("#reg_submit").attr("disabled", true);
+					} else {
+						
+					      if(user_id == ""){
+							
+							$('#id_check').text('아이디를 입력해주세요 :)');
+							$('#id_check').css('color', 'red');
+							$("#reg_submit").attr("disabled", true);				
+							
+						} else {
+							
+							$('#id_check').text("사용가능한 아이디 입니다");
+							$('#id_check').css('color', 'blue');
+							$("#reg_submit").attr("disabled", false);
+						}
+						
+						
+						/* if(idJ.test(user_id)){
+							// 0 : 아이디 길이 / 문자열 검사
+							$("#id_check").text("");
+							$("#reg_submit").attr("disabled", false);
+							
+						} 
+						
+						else if(user_id == ""){
+							
+							$('#id_check').text('아이디를 입력해주세요 :)');
+							$('#id_check').css('color', 'red');
+							$("#reg_submit").attr("disabled", true);				
+							
+						} else {
+							
+							$('#id_check').text("아이디는 소문자와 숫자 4~12자리만 가능합니다 :) :)");
+							$('#id_check').css('color', 'red');
+							$("#reg_submit").attr("disabled", true);
+						} */
+						
+						
+						
+					}
+				}, error : function() {
+						console.log("실패");
+				}
+			});
+		});
+		
+		
+		
+		
+</script>
 
 
 
-									<script type="text/javascript">
+
+
+								<!-- 	<script type="text/javascript">
 										function idcheck() {
 
 											window.open("idcheck", "idc",
@@ -174,7 +248,8 @@ $(document).ready(function() {
 										}
 										
 										
-									</script>
+										
+									</script> -->
 
 
 
@@ -182,7 +257,7 @@ $(document).ready(function() {
 									<th scope="row"><span>비밀번호 *</span></th>
 									<td>
 										<ul class="pta">
-											<li class="r10"><input type="password" class="w134" name="pw"/></li>
+											<li class="r10"><input type="password" class="w134" name="pw" id="pw1" required="required"/></li>
 											<li><span class="mvalign">※ 영문 / 숫자 혼용으로 4~20자 까지 가능.</span></li>
 										</ul>
 									</td>
@@ -190,14 +265,19 @@ $(document).ready(function() {
 								
 								
 								<tr>
+								
 									<th scope="row"><span>비밀번호 확인 *</span></th>
+									
 									<td>
 										<ul class="pta">
-											<li class="r10"><input type="password" class="w134" /></li>
+										
+											<li class="r10">
+											
+											<input type="password" class="w134" id="pw2" required="required"/></li>
 											
 											<li>
-												<span class="mvalign black">* 비밀번호가 일치입니다.</span>
-												<span class="mvalign orange">* 비밀번호가 일치하지 않습니다.</span>
+												<span class="black" style="display: none;">* 비밀번호가 일치합니다.</span>
+												<span class="orange" style="display: none;">* 비밀번호가 일치하지 않습니다.</span>
 											</li>
 											
 										</ul>
@@ -205,17 +285,46 @@ $(document).ready(function() {
 								</tr>
 								
 								
+  <script type="text/javascript">
+  
+    $('.w134').focusout(function () {
+    	
+        var pwd1 = $("#pw1").val();
+        var pwd2 = $("#pw2").val();
+ 
+        if ( pwd1 != '' && pwd2 == '' ) {
+        	 $(".black").css('display', 'none');
+             $(".orange").css('display', 'none');
+            
+        } else if (pwd1 != "" || pwd2 != "") {
+        	
+            if (pwd1 == pwd2) {
+                $(".black").css('display', 'inline-block');
+                $(".orange").css('display', 'none');
+            } 
+            
+            else {
+                $(".black").css('display', 'none');
+                $(".orange").css('display', 'inline-block');
+            }
+        }
+    });
+   </script>
+								
+								
+								
+								
+								
 								<tr>
 									<th scope="row"><span>이메일</span></th>
 									<td>
 										<ul class="pta">
 											
-											<li><input type="text" class="w134" name="email1"/></li>
+											<li><input type="text" class="w134" name="email1" required="required"/></li>
 											
 											<li><span class="valign">&nbsp;@&nbsp;</span></li>
 											
-											
-											<li class="r10"><input type="text" class="w134" name="email3"/></li>
+											<li class="r10"><input type="text" class="w134" name="email3" required="required"/></li>
 											
 											<li>
 											
@@ -243,6 +352,9 @@ $(document).ready(function() {
 											</li>
 
 
+
+
+
 												<script type="text/javascript">
 												
 													function mailcheck() {
@@ -252,6 +364,11 @@ $(document).ready(function() {
 													}
 													
 												</script>
+												
+												
+												
+												
+												
 
 
 											</ul>
@@ -283,19 +400,27 @@ $(document).ready(function() {
 									<td>
 										<ul class="pta">
 										
-											<li><input type="text" class="w134" name="post" id="post"/>&nbsp;</li>
+											<li><input type="text" class="w134" name="post" id="post" required="required"/>&nbsp;</li>
 
-												<li><input type="button" onclick="openDaumZipAddress()"
-													value="우편번호 찾기" class="addressBtn"
+												<li><input type="button" onclick="execDaumPostCode()" value="우편번호 찾기" class="addressBtn"
 													style="width: 100px; text-align: center; border: 0; font-weight: 600">
-
+													
 													<!-- <a href="" onclick="openDaumZipAddress()" class="addressBtn"> -->
 
 													<!-- <span>우편번호 찾기</span> --> <!-- </a> --></li>
+													
+													
+										<div id="layer" style="display:none;position:fixed;overflow:hidden;z-index:1;-webkit-overflow-scrolling:touch;">
+                                         <img src="//i1.daumcdn.net/localimg/localimages/07/postcode/320/close.png" id="btnCloseLayer" style="cursor:pointer;position:absolute;right:-3px;top:-3px;z-index:1" 
+                                         onclick="closeDaumPostcode()" alt="닫기 버튼"></div>
+													
+													
 
-												<li class="pt5"><input type="text" class="addressType" name="address1" id="address1"/></li>
+												<li class="pt5"><input type="text" class="addressType" name="address1" id="address1" required="required"/></li>
 											
-											<li class="pt5"><input type="text" class="addressType" name="address2" id="address2" placeholder="상세주소를 입력해주세요"/></li>
+											<li class="pt5"><input type="text" class="addressType" name="address2" id="address2" placeholder="상세주소를 입력해주세요" required="required"/></li>
+											
+											
 											
 											<li class="cb">
 												<span class="mvalign">※ 상품 배송 시 받으실 주소입니다. 주소를 정확히 적어 주세요.</span>
@@ -305,9 +430,112 @@ $(document).ready(function() {
 									</td>
 								</tr>
 								
+							
+							
+							
 								
-								<!-- 주소검색은 그냥 daum api 사용 -->
+								<!-- 주소검색은 그냥 daum api 사용 //레이어 팝업...하긴 했는데 어렵다 -->
+								
+								
+<script type="text/javascript">
 
+    // 우편번호 찾기 화면을 넣을 element
+    var element_layer = document.getElementById('layer');
+    
+
+    function closeDaumPostcode() {
+        // iframe을 넣은 element를 안보이게 한다.
+        element_layer.style.display = 'none';
+    }
+    
+    
+    
+    function execDaumPostCode() {
+    	
+        new daum.Postcode({
+            oncomplete: function(data) { // 검색결과 항목을 클릭했을때 실행할 코드를 작성하는 부분.
+
+                // 각 주소의 노출 규칙에 따라 주소를 조합한다.
+                
+                // 내려오는 변수가 값이 없는 경우엔 공백('')값을 가지므로, 이를 참고하여 분기 한다.
+                
+                var fullAddr = data.address; // 최종 주소 변수
+                
+                var extraAddr = ''; // 조합형 주소 변수
+
+                
+                // 기본 주소가 도로명 타입일때 조합한다.
+                if(data.addressType === 'R'){
+                	
+                	
+                    //법정동명이 있을 경우 추가한다.
+                    if(data.bname !== ''){
+                        extraAddr += data.bname;
+                    }
+                    
+                    
+                    // 건물명이 있을 경우 추가한다.
+                    if(data.buildingName !== ''){
+                        extraAddr += (extraAddr !== '' ? ', ' + data.buildingName : data.buildingName);
+                    }
+                    
+                    
+                    // 조합형주소의 유무에 따라 양쪽에 괄호를 추가하여 최종 주소를 만든다.
+                    fullAddr += (extraAddr !== '' ? ' ('+ extraAddr +')' : '');
+                    
+                }
+                
+                
+                // 우편번호와 주소 정보를 해당 필드에 넣는다.
+                document.getElementById('post').value = data.zonecode; //5자리 새우편번호 사용
+                document.getElementById('address1').value = fullAddr;
+                document.getElementById('address2').focus();
+                
+                // iframe을 넣은 element를 안보이게 한다.
+                
+                // (autoClose:false 기능을 이용한다면, 아래 코드를 제거해야 화면에서 사라지지 않는다.)
+                element_layer.style.display = 'none';
+            },
+            
+            
+            width : '100%',
+            height : '100%'
+            
+        }).embed(element_layer);
+
+        // iframe을 넣은 element를 보이게 한다.
+        element_layer.style.display = 'block';
+
+        // iframe을 넣은 element의 위치를 화면의 가운데로 이동시킨다.
+        initLayerPosition();
+    }
+
+    // 브라우저의 크기 변경에 따라 레이어를 가운데로 이동시키고자 하실때에는
+    // resize이벤트나, orientationchange이벤트를 이용하여 값이 변경될때마다 아래 함수를 실행 시켜 주시거나,
+    // 직접 element_layer의 top,left값을 수정해 주시면 됩니다.
+    
+    function initLayerPosition(){
+    	
+        var width = 300; //우편번호 서비스가 들어갈 element의 width
+        var height = 460; //우편번호 서비스가 들어갈 element의 height
+        var borderWidth = 5; //샘플에서 사용하는 border의 두께
+
+        // 위에서 선언한 값들을 실제 element에 넣는다.
+        element_layer.style.width = width + 'px';
+        element_layer.style.height = height + 'px';
+        element_layer.style.border = borderWidth + 'px solid';
+        
+        // 실행되는 순간의 화면 너비와 높이 값을 가져와서 중앙에 뜰 수 있도록 위치를 계산한다.
+        element_layer.style.left = (((window.innerWidth || document.documentElement.clientWidth) - width)/2 - borderWidth) + 'px';
+        element_layer.style.top = (((window.innerHeight || document.documentElement.clientHeight) - height)/2 - borderWidth) + 'px';
+    }
+    
+    
+</script>
+
+								
+								
+                                  <!-- 
 									<script type="text/javascript">
 									
 										function openDaumZipAddress() {
@@ -326,7 +554,9 @@ $(document).ready(function() {
 
 										}
 										
-									</script>
+									</script> -->
+									
+									
 									
 
                                    <!-- 
@@ -346,7 +576,7 @@ $(document).ready(function() {
 									<td>
 										<ul class="pta">
 											<li>
-												<select name="phone1">
+												<select name="phone1" required="required">
 													<option value="010" selected="selected" >010</option>
 													<option value="011">011</option>
 													<option value="016">016</option>
@@ -359,9 +589,9 @@ $(document).ready(function() {
 											
 											<li>&nbsp;<span class="valign">-</span>&nbsp;</li>
 										
-											<li><input type="text" class="w74" maxlength="4" name="phone2"/> <span class="valign">-</span>&nbsp;</li>
+											<li><input type="text" class="w74" maxlength="4" name="phone2" required="required"/> <span class="valign">-</span>&nbsp;</li>
 											
-											<li class="r10"><input type="text" class="w74" maxlength="4" name="phone3"/></li>
+											<li class="r10"><input type="text" class="w74" maxlength="4" name="phone3" required="required"/></li>
 											
 											<li class="cb pt5"><span class="mvalign">※ SMS 서비스를 받아보시겠습니까?</span></li>
 											
@@ -388,7 +618,7 @@ $(document).ready(function() {
 									<td>
 										<ul class="pta">
 											<li>
-												<select name="birth1">
+												<select name="birth1" required="required">
 												
 													<option value='' selected="selected">선택하세요</option>
 													
@@ -411,7 +641,7 @@ $(document).ready(function() {
 											<li>&nbsp;<span class="valign">년</span>&nbsp;&nbsp;&nbsp;</li>
 											
 											<li>
-												<select name="birth2">
+												<select name="birth2" required="required">
 													<option value='' selected="selected">선택하세요</option>
 													
 													<script type="text/javascript">
@@ -437,7 +667,7 @@ $(document).ready(function() {
 											
 											<li>
 											
-												<select name="birth3">
+												<select name="birth3" required="required">
 												
 													<option value='' selected="selected">선택하세요</option>
 													
@@ -510,7 +740,7 @@ $(document).ready(function() {
 								
 								<tr>
 									<th scope="row"><span>자기소개 *</span></th>
-									<td><textarea rows="3" cols="30" name="introduce"></textarea></td>
+									<td><textarea rows="3" cols="30" name="introduce" required="required"></textarea></td>
 								</tr>
 								
 								
@@ -542,6 +772,7 @@ $(document).ready(function() {
 					<!-- //Btn Area -->
 
                     <script type="text/javascript" src="../js/jquery.fancybox-1.3.4.pack.js"></script>
+                    
                     <link rel="stylesheet" type="text/css" href="../css/jquery.fancybox-1.3.4.css" />
 
 				</div>
@@ -550,7 +781,13 @@ $(document).ready(function() {
 
 
 		</div>
+		
 	</div>
+	
+	
+	
+	
+	
 	<!-- //container -->
 
 <!-- footer 붙여넣기 -->

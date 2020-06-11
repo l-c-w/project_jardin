@@ -23,6 +23,7 @@
 <script type="text/javascript" src="../js/jquery.easing.1.3.js"></script>
 <script type="text/javascript" src="../js/idangerous.swiper-2.1.min.js"></script>
 <script type="text/javascript" src="../js/jquery.anchor.js"></script>
+<script type="text/javascript" src="../js/event_view.js"></script>
 <!--[if lt IE 9]>
 <script type="text/javascript" src="../js/html5.js"></script>
 <script type="text/javascript" src="../js/respond.min.js"></script>
@@ -76,18 +77,18 @@ $(document).ready(function() {
 						<div class="viewHead">
 							<div class="subject">
 								<ul>
-									<li>${event_view.e_title }</li>
+									<li><span class="finishbtn">종료</span>&nbsp;${fin_event_view.e_title }</li>
 								</ul>
 							</div>
 							<div class="day">
-								<fmt:formatDate var="e_start" value="${event_view.e_start }" pattern="YYYY/MM/dd" />
-								<fmt:formatDate var="e_end" value="${event_view.e_end }" pattern="YYYY/MM/dd" />
+								<fmt:formatDate var="e_start" value="${fin_event_view.e_start }" pattern="YYYY/MM/dd" />
+								<fmt:formatDate var="e_end" value="${fin_event_view.e_end }" pattern="YYYY/MM/dd" />
 								<p class="txt">이벤트 기간<span>${e_start } ~ ${e_end }</span></p>
 							</div>
 						</div>
 
 						<div class="viewContents">
-							<img src="../images/img/sample_event_view.jpg" alt="" />${event_view.e_content }
+							<img src="../images/img/sample_event_view.jpg" alt="" />${fin_event_view.e_content}
 						</div>
 					</div>
 
@@ -121,30 +122,26 @@ $(document).ready(function() {
 
 					<!-- 댓글-->
 					<div class="replyBox finReply">
-						<ul>
-							<li class="name">jjabcde <span>[2014-03-04&nbsp;&nbsp;15:01:59]</span></li>
-							<li class="txt"><textarea class="replyType"></textarea></li>
+						<c:forEach var="fe_com" items="${fin_event_comment }">
+						<ul id="coModi" class="comment_modifyM">
+							<li class="name">${fe_com.id } </li>
+							<li class="txt"><textarea class="replyType">${fe_com.ec_content }</textarea></li>
 							<li class="btn">
-								<a href="#" class="rebtn">수정</a>
+								<a href="event_view?e_code=${fe_code }&ec_content=${fe_com.ec_content }" class="rebtn" id="sub_btn">등록</a>
 								<a href="#" class="rebtn">삭제</a>
 							</li>
 						</ul>
-
 						<ul>
-							<li class="name">jjabcde <span>[2014-03-04&nbsp;&nbsp;15:01:59]</span></li>
-							<li class="txt">대박!!! 이거 저한테 완전 필요한 이벤트였어요!!</li>
+							<fmt:formatDate var="fec_wdate1" value="${fe_com.ec_wdate }" pattern="YYYY/MM/dd" />
+							<fmt:formatDate var="fec_wdate2" value="${fe_com.ec_wdate }" pattern="hh:mm:ss" />
+							<li class="name">${fe_com.id } <span>[${fec_wdate1 }&nbsp;&nbsp;${fec_wdate2 }]</span></li>
+							<li class="txt">${fe_com.ec_content }</li>
 							<li class="btn">
-								<a href="#" class="rebtn">수정</a>
+								<a class="rebtn" style="cursor: pointer;" id="modi_btn">수정</a>
 								<a href="#" class="rebtn">삭제</a>
 							</li>
 						</ul>
-
-						<ul>
-							<li class="name">jjabcde <span>[2014-03-04&nbsp;&nbsp;15:01:59]</span></li>
-							<li class="txt">
-								<a href="password.html" class="passwordBtn"><span class="orange">※ 비밀글입니다.</span></a>
-							</li>
-						</ul>
+						</c:forEach>
 					</div>
 					<!-- //댓글 -->
 
@@ -153,7 +150,7 @@ $(document).ready(function() {
 					<div class="btnArea">
 						<div class="bRight">
 							<ul>
-								<li><a href="#" class="sbtnMini mw">목록</a></li>
+								<li><a href="fin_event_list" class="sbtnMini mw">목록</a></li>
 							</ul>
 						</div>
 					</div>

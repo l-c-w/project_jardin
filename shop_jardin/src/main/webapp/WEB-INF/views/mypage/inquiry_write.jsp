@@ -77,6 +77,7 @@ $(document).ready(function() {
 				<div id="mypage">
 					<h2><strong>1:1문의</strong><span>쟈뎅에 궁금하신 사항을 남겨주시면 답변해드립니다.</span></h2>
 					
+					
 					<div class="myInfo">
 						<ul>
 							<li class="info"><strong>가나다</strong> 님의 정보를 한눈에 확인하세요.</li>
@@ -85,15 +86,25 @@ $(document).ready(function() {
 							<li class="last">진행중인 주문<br/><span class="num">199</span> <span class="unit">건</span></li>
 						</ul>
 					</div>
+					
+					<form action="../mypage/inquiry_ok" name="inquiry" id="inquiry" method="post" enctype="multipart/form-data">
+					
 
 					<div class="checkDiv">
+					
 						<table summary="분류, 제목, 상세내용, 첨부파일 순으로 궁금하신 점을 문의 하실수 있습니다." class="checkTable" border="1" cellspacing="0">
+							
 							<caption>1:1문의</caption>
+							
 							<colgroup>
+							
 							<col width="19%" class="tw30" />
 							<col width="*" />
+							
 							</colgroup>
+							
 							<tbody>
+							
 								<tr>
 									<th scope="row"><span>분류</span></th>
 									<td>
@@ -102,40 +113,69 @@ $(document).ready(function() {
 										</select>
 									</td>
 								</tr>
+								
+								
+								
 								<tr>
 									<th scope="row"><span>제목</span></th>
+									
 									<td>
-										<input type="text" class="wlong" />
+										<input type="text" class="wlong" name="oo_title" />
 									</td>
 								</tr>
+								
+								
 								<tr>
+								
 									<th scope="row"><span>상세 내용</span></th>
+									
 									<td>
-										<textarea class="tta"></textarea>
+										<textarea class="tta" name="oo_content"></textarea>
 									</td>
+									
 								</tr>
+								
+								
 								<tr>
+								
 									<th scope="row"><span>첨부파일</span></th>
+									
 									<td>
-										<input type="file" class="fileType" />
+										<input type="file" class="fileType" name="oo_file"/>
 									</td>
+									
 								</tr>
+								
+								
 							</tbody>
+							
 						</table>
+						
 					</div>
+					
+					</form>
+
+
+
 
 					<!-- Btn Area -->
 					<div class="btnArea">
+					
 						<div class="bCenter">
+						
 							<ul>																
 								<li><a href="#" class="nbtnbig">취소</a></li>
 								<li><a href="#" class="sbtnMini">확인</a></li>
 							</ul>
+							
 						</div>
+						
 					</div>
 					<!-- //Btn Area -->
 					
+					
 				</div>
+				
 			</div>
 			<!-- //contents -->
 

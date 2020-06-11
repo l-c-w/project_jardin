@@ -146,7 +146,11 @@ $(document).ready(function() {
 
 					<!-- 답변 -->
 					<div class="answer">
+					
+					
 						<div class="inbox">
+						
+						
 							<div class="aname">
 								<p>담당자 <span>[2014-03-04&nbsp;&nbsp;15:01:59]</span></p>
 							</div>
@@ -154,34 +158,55 @@ $(document).ready(function() {
 							<div class="atxt">
 								쟈뎅 커피를 사랑해주셔서 감사합니다. 앞으로도 노력하는 쟈뎅이 되겠습니다. 감사합니다.
 							</div>
+							
 						</div>
+						
 					</div>
 					<!-- //답변 -->
 
 
 					<!-- 이전다음글 -->
 					<div class="pnDiv web">
+					
 						<table summary="이전다음글을 선택하여 보실 수 있습니다." class="preNext" border="1" cellspacing="0">
+							
+							
 							<caption>이전다음글</caption>
+							
+							
 							<colgroup>
+							
+							
 							<col width="100px" />
 							<col width="*" />
 							<col width="100px" />
+							
+							
 							</colgroup>
+							
+							
+							
 							<tbody>
+							
+							
 								<tr>
 									<th class="pre">PREV</th>
-									<td><a href="#">상품 재입고는 언제 되나요?</a></td>
+									<td><a href="comment_view?cr_num=${cdto_p.cr_num}">${cdto_p.cr_title}</a></td>
 									<td>&nbsp;</td>
 								</tr>
 
+
 								<tr>
 									<th class="next">NEXT</th>
-									<td>다음 글이 없습니다.</td>
+									<td><a href="comment_view?cr_num=${cdto_n.cr_num}">${cdto_n.cr_title}</a></td>
 									<td>&nbsp;</td>
 								</tr>
+								
+								
 							</tbody>
+							
 						</table>
+						
 					</div>
 					<!-- //이전다음글 -->
 
@@ -189,16 +214,58 @@ $(document).ready(function() {
 
 
 
-
 					<!-- Btn Area -->
 					<div class="btnArea">
+					
+					
+						<c:if test="${s_n == c_view.id}">
+					
 						<div class="bRight">
 							<ul>
 								<li><a href="#" class="nbtnbig mw">수정</a></li>
-								<li><a href="#" class="nbtnbig mw">삭제</a></li>
+								<li><a href="javascript:c_delete();" class="nbtnbig mw">삭제</a></li>
 								<li><a href="comment_list" class="sbtnMini mw">목록</a></li>
 							</ul>
 						</div>
+						
+						</c:if>
+						
+						<c:if test="${s_n == null or s_n != c_view.id }">
+						
+						 <div class="bRight">
+							<ul>
+								<li><a href="comment_list" class="sbtnMini mw">목록</a></li>
+							</ul>
+						</div>
+						
+						</c:if>
+						
+						
+						<script type="text/javascript">
+						
+						function c_delete() {
+
+							var result = confirm('데이터를 삭제 하시겠습니까?');
+							
+							var cr_num = ${c_view.cr_num};
+
+							if (result == true) {
+
+								alert("삭제하겠습니다");
+								window.location.href = 'comment_delete?cr_num=' + cr_num;
+								
+							} else {
+								alert("삭제를 취소합니다");
+							}
+
+						}
+					
+						
+						</script>
+						
+						
+						
+						
 					</div>
 					<!-- //Btn Area -->
 					

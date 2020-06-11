@@ -4,13 +4,28 @@
 
 
 <mapper namespace="com.javalec.ex.Dao.PayDao">
-
+	
+	<!-- 회원 장바구니 보기 -->
 	<select id="cart_view" resultType="com.javalec.ex.Dto.PayDto.CartDto">
-		select product.p_code, product.p_name, product.p_category, product.price, product.p_point, cart.amount 
+		select cart.cart_code, product.p_code, product.p_name, product.p_category, product.price, product.p_point, cart.amount 
 		from cart, product
 		where cart.id='test4' and cart.p_code=product.p_code
 	</select>
-
+	
+	<!-- 장바구니에서 주문페이지로 제품 넘기기-->
+	<select id="go_order" resultType="com.javalec.ex.Dto.PayDto.CartDto">
+		select cart.cart_code, product.p_code, product.p_name, product.p_category, product.price, product.p_point, cart.amount 
+		from cart, product
+		where cart.id='test4' and cart.cart_code=#{param1} and cart.p_code=product.p_code
+	</select>
+	
+	<!-- 주문페이지 주문서 작성 -->
+	<insert id="make_order">
+		insert into payment values(to_char(sysdate,'yyyyMMdd')||-payment_seq.nextval,
+		#{param1},'-',#{param2},'0','N',sysdate,#{param3},
+		'결제대기','-','-','-')
+	
+	</insert>
 
 
 </mapper>

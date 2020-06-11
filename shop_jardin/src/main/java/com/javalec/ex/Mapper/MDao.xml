@@ -6,8 +6,8 @@
 	
 	
 	<insert id="register" parameterType="map">
-		insert into member (ID,M_CODE,PW,NAME,EMAIL,EMAIL_AGREE,SMS_AGREE,ADDRESS1,ADDRESS2,PHONE,SOL_LUN, INTRODUCE, coffee_favor, birth, post)
-		values (#{param1},#{param2},#{param3},#{param4},#{param5},#{param6},#{param7},#{param8},#{param9},#{param10},#{param11},#{param12},#{param13},#{param14}, #{param15}) 
+		insert into member (ID,M_CODE,PW,NAME,EMAIL,EMAIL_AGREE,SMS_AGREE,ADDRESS1,ADDRESS2,SOL_LUN, INTRODUCE, coffee_favor, birth, post, phone1, phone2, phone3)
+		values (#{param1},#{param2},#{param3},#{param4},#{param5},#{param6},#{param7},#{param8},#{param9},#{param10},#{param11},#{param12},#{param13},#{param14},#{param15},#{param16},#{param17}) 
 	</insert>
 
 
@@ -45,6 +45,23 @@
 	</select>
 	
 	
+	
+	<select id="member_change" resultType="com.javalec.ex.Dto.MDto.Member_Dto">
+	
+	select * from member where id=#{param1}
+	
+	</select>
+	
+	
+	
+	<update id="change_ok">
+	
+	update member set pw=#{param1}, email=#{param2}, email_agree=#{param3},  
+	SMS_AGREE=#{param4},ADDRESS1=#{param5},ADDRESS2=#{param6}, SOL_LUN=#{param7}, INTRODUCE=#{param8}, 
+	coffee_favor=#{param9}, post=#{param10}, phone1=#{param11}, phone2=#{param12}, phone3=#{param13} 
+	where id=#{param14}
+	
+	</update>
 	
 	
 </mapper>

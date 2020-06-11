@@ -5,9 +5,11 @@
 <mapper namespace="com.javalec.ex.Dao.CDao">
 
 
-
-     <!-- 일반 상품평 -->
-
+     <!-- 
+     
+                                                       일반 상품평  
+     
+     -->
 
 
 <!-- 	<select id="c_list" resultType="com.javalec.ex.Dto.CDto.C_ReviewDto">
@@ -16,8 +18,10 @@
 	
 	
 	<select id="c_view" resultType="com.javalec.ex.Dto.CDto.C_ReviewDto">
-		select * from c_review where id=#{param1}
+		select * from c_review where cr_num=#{param1}
 	</select>
+
+
 
 
 	<insert id="c_write">
@@ -31,6 +35,14 @@
 	<select id="c_countBoard" resultType="int">
 		SELECT COUNT(*) FROM c_review
 	</select>
+	
+	
+	
+	<update id="c_upHit">
+		update c_review set cr_hit=cr_hit+1 where cr_num=#{param1}
+	</update>
+	
+	
 	
 	
 	<!-- 페이징 처리 후 게시글 조회 -->
@@ -50,12 +62,48 @@
 	
 	
 	
+	 <select id="cr_next" resultType="com.javalec.ex.Dto.CDto.C_ReviewDto">
+   
+    select cr_title, cr_num from c_review  where cr_num = (select min(cr_num) from c_review where cr_num > #{param1})
+   
+    </select>
+    
+    
+    
+    <select id="cr_pre" resultType="com.javalec.ex.Dto.CDto.C_ReviewDto">
+    
+    <![CDATA[ select cr_title, cr_num from c_review  where cr_num =(select max(cr_num) from c_review where cr_num < #{param1}) ]]>
+    
+    </select>
+
+
+
+	<delete id="cr_delete">
+	
+	delete c_review where cr_num=#{param1}
+
+	</delete>	
+	
+	
+	
+		
+	<update id="cr_update">
+	
+	update c_review set cr_title=#{param1}, cr_content=#{param2}, cr_score=#{param3} where cr_num=#{param4}
+	
+	</update>
 	
 	
 	
 	
 	
-	<!-- 포토 상품평  -->
+	
+	<!-- 
+	
+	                                                                   포토 상품평  
+	
+	-->
+	
 	
 	
 	
@@ -69,7 +117,7 @@
 	
 	
 	<select id="p_view" resultType="com.javalec.ex.Dto.CDto.P_ReviewDto">
-		select * from p_review where id=#{param1}
+		select * from p_review where pr_num=#{param1}
 	</select>
 
 
@@ -88,6 +136,15 @@
 	</select>
 	
 	
+	
+	
+	<update id="p_upHit">
+		update p_review set pr_hit=pr_hit+1 where pr_num=#{param1}
+	</update>
+	
+	
+	
+	
 	<!-- 페이징 처리 후 게시글 조회 -->
     <select id="selectBoard" resultType="com.javalec.ex.Dto.CDto.P_ReviewDto">
        SELECT * 
@@ -101,14 +158,41 @@
 				)
 	WHERE RN BETWEEN #{start} AND #{end}
     </select>
+    
+    
+    
+     <select id="pr_next" resultType="com.javalec.ex.Dto.CDto.P_ReviewDto">
+   
+    select pr_title, pr_num from p_review where pr_num = (select min(pr_num) from p_review where pr_num > #{param1})
+   
+    </select>
+    
+    
+    
+    
+    <select id="pr_pre" resultType="com.javalec.ex.Dto.CDto.P_ReviewDto">
+    
+    <![CDATA[ select pr_title, pr_num from p_review where pr_num =(select max(pr_num) from p_review  where pr_num < #{param1}) ]]>
+    
+    </select>
+    
+    
+    
+    
+    <delete id="pr_delete">
+	
+	delete p_review where pr_num=#{param1}
 
-
-
-
-
-
-
-
+	</delete>	
+	
+	
+	
+	<update id="pr_update">
+	
+	update p_review set pr_title=#{param1}, pr_content=#{param2}, pr_fifle=#{param3}, pr_score=#{param4} where pr_num=#{param5}
+	
+	</update>
+    
 
 
 </mapper>

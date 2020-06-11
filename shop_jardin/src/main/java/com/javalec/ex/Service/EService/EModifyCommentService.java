@@ -16,19 +16,21 @@ public class EModifyCommentService implements EService {
 	@Override
 	public void execute(HttpServletRequest request, SqlSession sqlSession, Model model) {
 
+		System.out.println("--------------------EModifyCommentService--------------------");
+		
 		// EModifyCommentService
 		// 댓글 수정
-		String e_code = request.getParameter("e_code");
 		String ec_num = request.getParameter("ec_num");
-		String ec_content = request.getParameter("ec_content");
+		String e_code = request.getParameter("e_code");
+		String content = request.getParameter("content");
 
 		// log
 		System.out.println("EModifyCommentService - ec_num : " + ec_num);
-		System.out.println("EModifyCommentService - ec_content : " + ec_content);
+		System.out.println("EModifyCommentService - content : " + content);
 
 		EDao dao = sqlSession.getMapper(EDao.class);
-		dao.eModify_comment(ec_num, ec_content);
-		//////////////////////////////////////////////////////////////////////////
+		dao.eModify_comment(ec_num, content);
+		
 		
 		// EViewService
 		// 변수 선언
@@ -85,7 +87,6 @@ public class EModifyCommentService implements EService {
 			System.out.println("Event_commentDto : " + dto.getEc_wdate());
 			System.out.println("Event_commentDto : " + dto.getEc_content());
 		}
-		
 	}
 
 }

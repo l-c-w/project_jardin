@@ -6,7 +6,8 @@
 	xmlns:mvc="http://www.springframework.org/schema/mvc"
 	xsi:schemaLocation="http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc-4.3.xsd
 		http://www.springframework.org/schema/beans https://www.springframework.org/schema/beans/spring-beans.xsd
-		http://www.springframework.org/schema/context https://www.springframework.org/schema/context/spring-context.xsd">
+		http://www.springframework.org/schema/context https://www.springframework.org/schema/context/spring-context.xsd"
+		>
 
 	<!-- DispatcherServlet Context: defines this servlet's request-processing infrastructure -->
 	
@@ -19,7 +20,8 @@
 	<resources mapping="/js/**" location="/js/" />
 	<resources mapping="/images/**" location="/images/" />
 	<resources mapping="/img/**" location="/img/" />
-
+	
+	
 
 
 	<!-- Resolves views selected for rendering by @Controllers to .jsp resources in the /WEB-INF/views directory -->
@@ -82,9 +84,9 @@
         <!-- max size of file in memory (in bytes) -->
         <beans:property name="maxInMemorySize" value="1048576" /> <!-- 1MB -->
     </beans:bean>
-    
-    
-	
+
+
+
 	
      <!--  파일업로드에 필요한 bean
        <beans:bean id="mulitpartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
@@ -94,7 +96,18 @@
            <beans:property name="defaultEncoding" value="utf-8" />  이 부분 빼기 넣으면 에러남!
            
        </beans:bean>  -->
-       
+
+
+
+	<mvc:interceptors>
+		<mvc:interceptor>
+			<mvc:mapping path="/**" />
+			
+			<beans:bean id="Interceptor" class="com.javalec.ex.Interceptor"></beans:bean>
+		</mvc:interceptor>
+	</mvc:interceptors>
+	
+       <!-- <mvc:exclude-mapping path="/add/**"/> -->
        
        
 	

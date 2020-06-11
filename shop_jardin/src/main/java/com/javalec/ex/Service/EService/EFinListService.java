@@ -12,12 +12,12 @@ import com.javalec.ex.Dao.EDao;
 import com.javalec.ex.Dto.EDto.EventDto;
 import com.javalec.ex.Service.CService.CService;
 
-public class EListService implements EService {
+public class EFinListService implements EService {
 
 	@Override
 	public void execute(HttpServletRequest request, SqlSession sqlSession, Model model) {
 		
-		System.out.println("--------------------EListService--------------------");
+		System.out.println("--------------------EFinListService--------------------");
 
 		int page = 0;
 		int listcount = 0;
@@ -25,7 +25,7 @@ public class EListService implements EService {
 		
 		String opt = request.getParameter("opt"); // 전체 제목 내용
 		String searchFlag = request.getParameter("searchFlag"); // 검색체크
-		String search = request.getParameter("search"); // 검색어 
+		String search = request.getParameter("search"); // 검색어	
 		System.out.println("search value : " + search);
 		if(opt == null) {
 			opt = "";
@@ -44,7 +44,7 @@ public class EListService implements EService {
 		}
 		System.out.println("page : " + page);
 		
-		int limit = 2;		// limit = 10 : 게시글 10개
+		int limit = 2;
 		
 		EDao dao = sqlSession.getMapper(EDao.class);
 		
@@ -55,26 +55,27 @@ public class EListService implements EService {
 		
 		switch (opt) {
 		case "":
-			list = dao.event_list(startrow, endrow, search);
-			listcount = dao.getListCount(search);
+			list = dao.fin_event_list(startrow, endrow, search);
+			listcount = dao.getFinListCount(search);			
 			break;
 		case "all":
-			list = dao.event_listAll(startrow, endrow, search);
-			listcount = dao.getListCountAll(search);
+			list = dao.fin_event_listAll(startrow, endrow, search);
+			listcount = dao.getFinListCountAll(search);
 			break;
 		case "tit":
-			list = dao.event_listTit(startrow, endrow, search);
-			listcount = dao.getListCountTit(search);
+			list = dao.fin_event_listTit(startrow, endrow, search);
+			listcount = dao.getFinListCountTit(search);
 			break;
 		case "con":
-			list = dao.event_listCon(startrow, endrow, search);
-			listcount = dao.getListCountCon(search);
+			list = dao.fin_event_listTit(startrow, endrow, search);
+			listcount = dao.getFinListCountCon(search);
 			break;
 		default:
 			break;
 		}
-				
 		
+		
+						
 		// 최대 페이지 수
 		int maxpage = (int)((double)listcount / limit + 0.95); // 20/10 -> 2+0.95 -> (int)2.95 -> 2
 		// 처음 페이지
@@ -85,14 +86,14 @@ public class EListService implements EService {
 			endpage = startpage + 10 - 1;
 		
 		
-		model.addAttribute("event_list", list);
+		model.addAttribute("fin_event_list", list);
 		
-		model.addAttribute("listcount", listcount);
+		model.addAttribute("fin_listcount", listcount);
 		model.addAttribute("page", page);
 		model.addAttribute("maxpage", maxpage);
 		model.addAttribute("startpage", startpage);
 		model.addAttribute("endpage", endpage);
-		
+
 		if(search != null) {
 			searchFlag = "1";
 			request.setAttribute("searchFlag", searchFlag);
@@ -100,13 +101,11 @@ public class EListService implements EService {
 			request.setAttribute("search", search);
 		}
 		
-		System.out.println("listcount : " + listcount);
+		System.out.println("fin_listcount : " + listcount);
 		System.out.println("page : " + page);
 		System.out.println("maxpage : " + maxpage);
 		System.out.println("startpage : " + startpage);
-		System.out.println("endpage : " + endpage);
-		
-		
+		System.out.println("endpage : " + endpage);		
 		
 		//------------------------------------------------------------
 		for(int i=0; i<list.size(); i++) {

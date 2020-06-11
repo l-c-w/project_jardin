@@ -2,7 +2,6 @@ package com.javalec.ex.Service.EService;
 
 import java.util.ArrayList;
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.ui.Model;
@@ -10,13 +9,12 @@ import com.javalec.ex.Dao.EDao;
 import com.javalec.ex.Dto.EDto.EventDto;
 import com.javalec.ex.Dto.EDto.Event_commentDto;
 
-public class EViewService implements EService {
+public class EFinViewService implements EService {
 
 	@Override
 	public void execute(HttpServletRequest request, SqlSession sqlSession, Model model) {
 
-		System.out.println("--------------------EViewService--------------------");
-		
+		System.out.println("--------------------EFinViewService--------------------");
 		// 변수 선언
 		EventDto edto = new EventDto(); // 본문 dto
 		ArrayList<Event_commentDto> list = new ArrayList<Event_commentDto>(); // 댓글 dto
@@ -31,7 +29,7 @@ public class EViewService implements EService {
 
 		// EViewService
 		edto = dao.event_view(e_code);
-		model.addAttribute("event_view", edto);
+		model.addAttribute("fin_event_view", edto);
 		System.out.println("temp : " + temp);
 
 		if (temp == null) { // 페이징 임시변수 & 리퀘스트를 비교해서 page변수에 값을 할당하기 위함
@@ -55,14 +53,14 @@ public class EViewService implements EService {
 		if (endpage > startpage + 10 - 1)
 			endpage = startpage + 10 - 1;
 		// EViewService 끝
-
-
+		
+		
 		// ECommentService
 		list = dao.event_comment(e_code, startrow, endrow);
 				
 
 		// model
-		model.addAttribute("event_comment", list);
+		model.addAttribute("fin_event_comment", list);
 
 		model.addAttribute("comment_listcount", listcount);
 		model.addAttribute("page", page);
@@ -78,7 +76,6 @@ public class EViewService implements EService {
 		System.out.println("maxpage : " + maxpage);
 		System.out.println("startpage : " + startpage);
 		System.out.println("endpage : " + endpage);
-		System.out.println("EventDto - e_end : " + edto.getE_end());
 
 		// ------------------------------------------------------------
 		for (int i = 0; i < list.size(); i++) {
@@ -91,3 +88,19 @@ public class EViewService implements EService {
 	}
 
 }
+
+//		String searchFlag = null; // 검색체크	//였지만 검색기능을 빼기로 했기 때문에 쓰지않는기능이다
+//		System.out.println("searchFlag : " + searchFlag);
+
+//		if(request.getParameter("page") != null) {
+//			page = Integer.parseInt(request.getParameter("page"));
+//		}
+//		switch (page) {
+//		case 1:
+//			searchFlag = null;
+//			break;
+//		default:
+//			searchFlag = "1";
+//			model.addAttribute("searchFlag", searchFlag);
+//			break;
+//		}// 검색했을 때 페이지를 넘겨도 검색어를 유지시키는 기능	이었지만 검색기능을 빼기로 했기 때문에 쓰지않는기능이다

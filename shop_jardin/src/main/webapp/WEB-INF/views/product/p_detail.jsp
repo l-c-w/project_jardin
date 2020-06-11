@@ -87,7 +87,7 @@ $(document).ready(function() {
 				<!-- info -->
 				<div class="info">
 					<p class="title">
-						<span>[오리지널]</span> 관리자페이지에서 만든 제목이 표시됩니다 ${product.stock }
+						<span>[오리지널]</span>${product.p_name }
 					</p>
 
 					<div class="priceInfo">
@@ -95,7 +95,7 @@ $(document).ready(function() {
 							<li>
 								<div class="stit">판매가</div>
 								<div class="heavygray">
-									<strong>${product.price }원</strong>
+									<strong>${product.p_price }원</strong>
 								</div>
 							</li>
 							<li>
@@ -106,11 +106,11 @@ $(document).ready(function() {
 							</li>
 							<li>
 								<div class="stit">칼로리</div>
-								<div>${product.calorie }kcal</div>
+								<div>95kcal</div>
 							</li>
 							<li>
 								<div class="stit">용량</div>
-								<div>${product.capacity }g</div>
+								<div>${product.p_capacity }</div>
 							</li>
 							<li>
 								<div class="stit">수량</div>
@@ -211,19 +211,19 @@ $(document).ready(function() {
 									<th scope="row" class="info"><span>제조명</span></th>
 									<td>${product.p_name }</td>
 									<th scope="row" class="info"><span>내용량</u></span></th>
-									<td>일회용 원두커피 티백</td>
+									<td>커피원두500g</td>
 								</tr>
 
 								<tr>
 									<th scope="row" class="info"><span>제조원</span></th>
-									<td>JARDIN</td>
+									<td>${product.p_producer }</td>
 									<th scope="row" class="info"><span>포장재질</span></th>
 									<td>폴리에틸렌(내면)</td>
 								</tr>
 
 								<tr>
 									<th scope="row" class="info"><span>유통기한</span></th>
-									<td>제조일로부터 OO개월</td>
+									<td>${product.p_expiry }</td>
 									<th scope="row" class="info"><span>고객<u>상담실</u></span></th>
 									<td>02-546-3881</td>
 								</tr>
@@ -237,18 +237,17 @@ $(document).ready(function() {
 
 								<tr>
 									<th scope="row" class="info"><span>영양성분</span></th>
-									<td colspan="3">인스턴트 커피, 합성 헤이즐넛향</td>
+									<td colspan="3">원두</td>
 								</tr>
 
 								<tr>
 									<th scope="row" class="info"><span>원재료명 <u>및 함량</u></span></th>
-									<td colspan="3">열량 ${product.calorie }kcal, 탄수화물 16g, 당류
-										11g, 단백질 1g, 지방 2.9g, 포화지방 2.8, 트랜스지방 0g, 콜레스테롤 0mg</td>
+									<td colspan="3">열량 ${product.p_detail }</td>
 								</tr>
 
 								<tr>
 									<th scope="row" class="info"><span>업소명 <u>및 소재지</u></span></th>
-									<td colspan="3">서울시 강남구 논현동 4-21번지 영 빌딩 (주)쟈뎅</td>
+									<td colspan="3">${product.p_location }</td>
 								</tr>
 							</tbody>
 						</table>
@@ -270,7 +269,7 @@ $(document).ready(function() {
 											<img src="../images/img/mcoffee1.png" alt="제품이미지" />
 										</div>
 										<div class="name">${dto2.p_name}</div>
-										<div class="price">${dto2.price }</div>
+										<div class="price">${dto2.p_price }</div>
 								</a></li>
 							</c:forEach>
 						</ul>
@@ -927,6 +926,7 @@ $(document).ready(function() {
 	relationChk();
 
 });
+}
 </script>
 
 

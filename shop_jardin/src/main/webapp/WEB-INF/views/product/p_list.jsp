@@ -74,10 +74,10 @@ $(document).ready(function() {
 					<!-- 반복 -->
 					<c:forEach var="dto2" items="${list2}">
 					<li>
-						<a href="#">
+						<a href="p_detail?p_code=${dto2.p_code }">
 							<div class="img"><img src="../images/img/mcoffee1.png" alt="제품이미지" /></div>
 							<div class="name">${dto2.p_name}</div>
-							<div class="price">${dto2.price }</div>
+							<div class="price">${dto2.p_price }</div>
 						</a>
 					</li>
 					</c:forEach>

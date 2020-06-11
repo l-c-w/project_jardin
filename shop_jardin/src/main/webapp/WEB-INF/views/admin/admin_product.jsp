@@ -74,7 +74,7 @@
 				<tr>
 					<th>상품명</th>
 					<td colspan="2"><span>HTML 입력이 불가합니다.</span>
-						<form action="" name="" method="get">
+						<form action="" name="" method="post">
 							<input type="text" name="product_name" id="product_name"
 								class="text_type2">
 						</form></td>

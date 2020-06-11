@@ -1,19 +1,18 @@
 /**
  * 
  */
-function commentOk(){	
-	var form = document.getElementById('comm_modi');
-	form.submit();
-}
+
 
 $(document).ready(function(){
 	//댓글수정열기
 	$(".modi").click(function(){
 		var index = $(".modi").index(this);
-		var test = $(this).parents('ul');
+		$(this).parents('ul');
 		$(this).parents('ul').hide();
-		$(".comment_modifyM").eq(index).show();
-		$(".modi").not(index).parent('ul').show();
+		$(".comment_modifyM").eq(index).show(); // 0
+//		$(".comment_modifyM").not(index).hide(); // 1, 2
+//		$(".modi").not(index).parent().show();
+
 	});
 	$(".reset_re").click(function(){
 		var index2 = $(".reset_re").index(this);
@@ -25,11 +24,35 @@ $(document).ready(function(){
 	// 수정 submit
 	$('.s_modi').click(function() {
 		var index = $(".s_modi").index(this);
-		var test = $(this).parents('ul');
-		$(this).parents('ul').hide();
-		
-		$('#target').submit();
+		var form = $(this).parents('form');
+		$(form).submit();
 	});
+	
+	// 삭제 submit
+	$('.delComm').click(function() {
+		var result = confirm('댓글을 삭제 하시겠습니까?');
+		if(result){
+			var index = $(".delComm").index(this);
+			var form = $(this).parents('form');
+			$(form).submit();			
+		}else{
+			
+		}	
+	});
+	
+	// 로그인하지 않고 댓글을 작성하려고 할 때
+	$('.emptySe').click(function(){
+		var result = confirm('댓글을 작성하시려면 로그인 하셔야 합니다. 로그인 하시겠습니까?');
+		if(result){
+			window.location.replace('member/login');
+		}else{
+			
+		}				
+	});
+	
+	
+	
+	
 	
 });
 

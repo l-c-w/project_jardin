@@ -116,7 +116,8 @@
 		SELECT count(*) as count FROM winner_joiners
 	</select>
 	<select id="getWinnerCountAll" resultType="Integer">
-		SELECT count(*) as count FROM winner_joiners where w_title like '%' || #{param1} || '%' or w_content like '%' || #{param1} || '%'
+		SELECT count(*) as count FROM winner_joiners where w_title like '%' || #{param1} || '%' 
+		or w_content like '%' || #{param1} || '%'
 	</select>
 	<select id="getWinnerCountTit" resultType="Integer">
 		SELECT count(*) as count FROM winner_joiners where w_title like '%' || #{param1} || '%'
@@ -145,5 +146,17 @@
 	<update id="winnerUpHit">
 		update winner_joiners set w_hit=w_hit+1 where w_code=#{param1}
 	</update>
-
+	
+	<!-- delete -->
+	<delete id="eDeleteComment">
+		delete from EVENT_COMMENT where EC_NUM=#{param1}
+	</delete>
+	
+	<!-- write -->
+	<insert id="eCommentWite">
+		insert into event_comment values (
+		EVENT_COMMENT_SEQ.nextval,#{param1},#{param2},'0',#{param3},sysdate,sysdate)
+	</insert>
+	
+	
 </mapper>

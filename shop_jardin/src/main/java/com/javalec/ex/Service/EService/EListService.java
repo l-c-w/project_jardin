@@ -44,7 +44,7 @@ public class EListService implements EService {
 		}
 		System.out.println("page : " + page);
 		
-		int limit = 2;		// limit = 10 : 게시글 10개
+		int limit = 3;		// limit = 10 : 게시글 10개
 		
 		EDao dao = sqlSession.getMapper(EDao.class);
 		

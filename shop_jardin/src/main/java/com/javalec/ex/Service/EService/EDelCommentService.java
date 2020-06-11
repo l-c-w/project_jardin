@@ -11,45 +11,43 @@ import com.javalec.ex.Dao.EDao;
 import com.javalec.ex.Dto.EDto.EventDto;
 import com.javalec.ex.Dto.EDto.Event_commentDto;
 
-public class EModifyCommentService implements EService {
+public class EDelCommentService implements EService {
 
 	@Override
 	public void execute(HttpServletRequest request, SqlSession sqlSession, Model model) {
 
-		System.out.println("--------------------EModifyCommentService--------------------");
+		System.out.println("--------------------EDelCommentService--------------------");
 
-		// EModifyCommentService
-		// 댓글 수정
+		// EDelCommentService
+		// 댓글 삭제
 		String ec_num = request.getParameter("ec_num");
 		String e_code = request.getParameter("e_code");
-		String content = request.getParameter("content");
-		String requestUser = request.getParameter("requestUser"); // 수정 버튼을 누른 유저(세션)
+		String requestUser = request.getParameter("requestUser"); // 삭제 버튼을 누른 유저(세션)
 		String authUser = request.getParameter("authUser"); // 댓글 작성자
 
 		// log
-		System.out.println("EModifyCommentService - ec_num : " + ec_num);
-		System.out.println("EModifyCommentService - content : " + content);
+		System.out.println("EDelCommentService - ec_num : " + ec_num);
 		System.out.println("requestUser : " + requestUser);
 		System.out.println("authUser : " + authUser);
 
 		if (authUser == null) {
-			//잘못된 접근
+			// 잘못된 접근
 			System.out.println("유효하지 않은 요청입니다. 1");
-		}else if(!(requestUser.equals(authUser))) {
-			//작성자의 아이디와 일치해야함
+		} else if (!(requestUser.equals(authUser))) {
+			// 작성자의 아이디와 일치해야함
 			System.out.println("유효하지 않은 요청입니다. 2");
-		}else {
+		} else {
 			EDao dao = sqlSession.getMapper(EDao.class);
-			dao.eModify_comment(ec_num, content);
+
+			dao.eDeleteComment(ec_num);
 
 			// EViewService
 			eventMethod eMethod = new eventMethod();
 			eMethod.eventView(request, sqlSession, model, e_code);
 			
-		}//else
-		
-		
-	}//execute
-	
 
-}//class
+		} // else
+
+	}
+
+}

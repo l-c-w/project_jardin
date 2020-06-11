@@ -44,7 +44,7 @@ public class EFinListService implements EService {
 		}
 		System.out.println("page : " + page);
 		
-		int limit = 2;
+		int limit = 3;
 		
 		EDao dao = sqlSession.getMapper(EDao.class);
 		

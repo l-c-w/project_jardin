@@ -1,5 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -81,7 +84,7 @@ $(document).ready(function() {
 						<ul>
 							<li class="info"><strong>가나다</strong> 님의 정보를 한눈에 확인하세요.</li>
 							<li>보유 쿠폰<br/><span class="num">199</span> <span class="unit">장</span></li>
-							<li class="point">내 포인트<br/><span class="num">100,000</span> <span class="unit">P</span></li>
+							<li class="point">내 포인트<br/><span class="num">${usable_point }</span> <span class="unit">P</span></li>
 							<li class="last">진행중인 주문<br/><span class="num">199</span> <span class="unit">건</span></li>
 						</ul>
 					</div>
@@ -99,7 +102,7 @@ $(document).ready(function() {
 				
 					<!-- Saving -->
 					<div class="tab_saving couponnone">
-						<div class="shortTxt">현재 총 누적 포인트는 <span class="orange">5,000</span> Point입니다.</div>
+						<div class="shortTxt">현재 총 누적 포인트는 <span class="orange">${point_sum }</span> Point입니다.</div>
 						<div class="orderDivNm">
 							<table summary="NO, 종류, 적립포인트, 적립날짜, 상태 순으로 현재 적립된 포인트를 조회 하실수 있습니다." class="orderTable2" border="1" cellspacing="0">
 								<caption>적립내역 보기</caption>
@@ -108,46 +111,34 @@ $(document).ready(function() {
 								<col width="*" />
 								<col width="15%" class="tw20" />
 								<col width="15%" class="tnone" />
-								<col width="15%" class="tw20" />
+								
 								</colgroup>
 								<thead>
 									<th scope="col" class="tnone">NO.</th>
 									<th scope="col">종류</th>
 									<th scope="col">적립 <span>포인트</span></th>
 									<th scope="col" class="tnone">적립날짜</th>
-									<th scope="col">상태</th>
 								</thead>
 								<tbody>
+								<c:if test="${not empty point_list }">
+								<c:set var="listlength" value="${fn:length(point_list) }"/>
+								<c:set var="listnum" value="1"/>
+									<c:forEach var="pointlist" items="${point_list }" varStatus="status">
 									<tr>
-										<td class="tnone">3</td>
-										<td class="left">[쟈뎅 카페모리] 구매 적립</td>
-										<td>90</td>
-										<td class="tnone">14-05-31</td>
-										<td><span class="heavygray">사용가능</span></td>
+										<td class="tnone">${listlength-status.index }</td>
+										<td class="left" style="text-align: center;">${pointlist.po_case }</td>
+										<td>${pointlist.po_point }</td>
+										<td class="tnone"><fmt:formatDate value="${pointlist.po_date }" pattern="yyyy/MM/dd"/> </td>
 									</tr>
-
-									<tr>
-										<td class="tnone">2</td>
-										<td class="left">[쟈뎅 카페모리] 구매 적립</td>
-										<td>100</td>
-										<td class="tnone">14-05-31</td>
-										<td><span class="heavygray">사용가능</span></td>
-									</tr>
-
-									<tr>
-										<td class="tnone">1</td>
-										<td class="left">회원가입 축하 포인트 적립</td>
-										<td>1,000</td>
-										<td class="tnone">14-05-31</td>
-										<td>기간만료</td>
-									</tr>
-
+									</c:forEach>
+								</c:if>
 								</tbody>
 							</table>
-
+							<c:if test="${empty point_list }">
 							<div class="noData">
-								등록된 상품이 없습니다.
+								적립된 포인트가 없습니다.
 							</div>
+							</c:if>
 						</div>
 						
 
@@ -172,7 +163,7 @@ $(document).ready(function() {
 
 					<!-- Usage -->
 					<div class="tab_usage couponnone">
-						<div class="shortTxt">현재까지 사용한 총 사용 포인트는 <span class="orange">5,000</span> Point입니다.</div>
+						<div class="shortTxt">현재까지 사용한 총 사용 포인트는 <span class="orange">${usepoint_sum }</span> Point입니다.</div>
 						<div class="orderDivNm">
 							<table summary="NO, 종류, 적립포인트, 적립날짜, 상태 순으로 현재 사용된 포인트를 조회 하실수 있습니다." class="orderTable2" border="1" cellspacing="0">
 								<caption>사용내역 보기</caption>
@@ -181,46 +172,34 @@ $(document).ready(function() {
 								<col width="*" />
 								<col width="15%" class="tw20" />
 								<col width="15%" class="tnone" />
-								<col width="15%" class="tw20" />
 								</colgroup>
 								<thead>
 									<th scope="col" class="tnone">NO.</th>
 									<th scope="col">종류</th>
 									<th scope="col">적립 <span>포인트</span></th>
 									<th scope="col" class="tnone">적립날짜</th>
-									<th scope="col">상태</th>
 								</thead>
 								<tbody>
+								<c:if test="${not empty usepoint_list }">
+								<c:set var="ulistlength" value="${fn:length(usepoint_list) }"/>
+									<c:forEach var="usepointlist" items="${usepoint_list }" varStatus="status">
 									<tr>
-										<td class="tnone">3</td>
-										<td class="left">[쟈뎅 카페모리] 구매 적립</td>
-										<td>90</td>
-										<td class="tnone">14-05-31</td>
-										<td><span class="heavygray">사용가능</span></td>
+										<td class="tnone">${ulistlength-status.index }</td>
+										<td class="left" style="text-align: center;">${usepointlist.u_case }</td>
+										<td>${usepointlist.u_point }</td>
+										<td class="tnone"><fmt:formatDate value="${usepointlist.u_date }" pattern="yyyy/MM/dd"/> </td>
 									</tr>
-
-									<tr>
-										<td class="tnone">2</td>
-										<td class="left">[쟈뎅 카페모리] 구매 적립</td>
-										<td>100</td>
-										<td class="tnone">14-05-31</td>
-										<td><span class="heavygray">사용가능</span></td>
-									</tr>
-
-									<tr>
-										<td class="tnone">1</td>
-										<td class="left">회원가입 축하 포인트 적립</td>
-										<td>1,000</td>
-										<td class="tnone">14-05-31</td>
-										<td>기간만료</td>
-									</tr>
+									</c:forEach>
+									</c:if>
+									
 
 								</tbody>
 							</table>
-
+							<c:if test="${empty usepoint_list }">
 							<div class="noData">
-								등록된 상품이 없습니다.
+								포인트 사용내역이 없습니다.
 							</div>
+							</c:if>
 						</div>
 						
 

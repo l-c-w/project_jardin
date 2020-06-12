@@ -33,7 +33,11 @@ public class Payment implements PayService {
 		}
 		String id = "test4";
 
+		// 주문목록
 		PaymentDto paymentDto = payDao.make_order(id, total);
+		// 주문자정보
+		// 쿠폰정보
+		// 포인트정보
 
 		// 보낼거 마저 만들기
 

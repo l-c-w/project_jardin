@@ -24,8 +24,29 @@
 		insert into payment values(to_char(sysdate,'yyyyMMdd')||-payment_seq.nextval,
 		#{param1},'-',#{param2},'0','N',sysdate,#{param3},
 		'결제대기','-','-','-')
-	
 	</insert>
-
+	
+	
+	
+	<!-- 포인트 적립 리스트,총액 가져오기 -->
+	<select id="point_list" resultType="com.javalec.ex.Dto.PayDto.PointDto">
+		select * from point where id=#{param1} order by po_date desc 
+	</select>
+	<select id="point_sum" resultType="int">
+		select sum(po_point) from point where id=#{param1}
+	</select>
+	
+	<!-- 포인트 사용 리스트,총액 가져오기 -->
+	<select id="upoint_list" resultType="com.javalec.ex.Dto.PayDto.Use_pointDto">
+		select * from use_point where id=#{param1} order by u_date desc
+	</select>
+	<select id="upoint_sum" resultType="int">
+		select sum(u_point) from use_point where id=#{param1}
+	</select>
+	<!-- 사용가능포인트-->
+	<select id="usable_point" resultType="int">
+		select pointsum-upointsum from (select sum(po_point) as pointsum from point where id=#{param1}),
+		(select sum(u_point) as upointsum from use_point where id=#{param1})
+	</select>
 
 </mapper>

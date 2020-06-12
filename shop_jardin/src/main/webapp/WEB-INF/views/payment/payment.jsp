@@ -74,7 +74,7 @@ $(document).ready(function() {
 								<th scope="col">합계</th>
 							</thead>
 							<tbody>
-								<c:forEach>
+								
 								<tr>
 									<td class="left">
 										<p class="img"><img src="../images/img/sample_product.jpg" alt="상품" width="66" height="66" /></p>
@@ -95,7 +95,7 @@ $(document).ready(function() {
 									<td>1 개</td>
 									<td>123,400 원</td>
 								</tr>
-								</c:forEach>
+								
 							</tbody>
 						</table>
 					</div>

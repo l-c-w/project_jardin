@@ -25,6 +25,6 @@ public class AServiceImpl implements AService {
 	@Override
 	public void write(ProductDto dto) throws Exception {
 
-		dao.write(dto);
+		 dao.write(dto);
 	}
 }

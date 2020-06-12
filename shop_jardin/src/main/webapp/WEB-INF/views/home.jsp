@@ -14,6 +14,6 @@
 <P>  The time on the server is ${serverTime}. </P>
 <p><a href="product/p_list">상품 목록</a></p>
 <p><a href="/admin/admin_product_list">상품 리스트</a></p>
-<p><a href="/admin/product_write">상품 작성</a></p>
+<p><a href="/admin/admin_product_write">상품 작성</a></p>
 </body>
 </html>

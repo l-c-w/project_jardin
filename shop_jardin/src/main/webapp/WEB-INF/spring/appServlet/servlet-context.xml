@@ -23,6 +23,9 @@
 	<resources mapping="/js/**" location="/js/" />
 	<resources mapping="/images/**" location="/images/" />
 	<resources mapping="/img/**" location="/img/" />
+	<resources mapping="/admin/css/**" location="/admin/css/" />
+	<resources mapping="/admin/js/**" location="/admin/js/" />
+	<resources mapping="/admin/images/**" location="/admin/images/" />
 
 
 

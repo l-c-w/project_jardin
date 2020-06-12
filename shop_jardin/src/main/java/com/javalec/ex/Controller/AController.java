@@ -60,17 +60,40 @@ public class AController {
 	}
 
 	// 상품 작성
-	@RequestMapping(value = "/admin_product_write")
+	@RequestMapping(value = "/write")
 	public void getwrite() throws Exception {
 
 	}
 
+	// 상품 작성 뷰
+	@RequestMapping(value = "/admin_product_write")
+	public String writeview() throws Exception {
+
+		return "admin/admin_product_write";
+	}
+
 	// 상품 작성
-	@RequestMapping(value = "/write")
+	@RequestMapping(value = "/product_write")
 	public String posttWirte(ProductDto dto) throws Exception {
-	  aservice.write(dto);
-	  
-	  return "redirect:/admin/admin_product_list";
+		aservice.write(dto);
+
+		return "redirect:/admin_product_list";
+	}
+
+	// 상품 수정
+	@RequestMapping(value = "/product_update")
+	public String product_update(ProductDto dto) throws Exception {
+		
+		aservice.modify(dto);
+		return "redirect:/admin_product_list";
+	}
+
+	// 상품 삭제
+	@RequestMapping(value = "/product_delete")
+	public int product_delete(int p_code) throws Exception {
+		int success= aservice.delete(p_code);
+		
+		return success;
 	}
 
 }

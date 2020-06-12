@@ -133,7 +133,7 @@
 				    if($(this).val()=="${map.p_case2}"){
 				      $(this).attr("selected","selected"); // attr적용안될경우 prop으로 
 				      id = $(this).attr("id");
-				      $("#step1 option").each(function(){
+				      $("#case1 option").each(function(){
 				    	  if($(this).val() == id){
 				    		  $(this).attr("selected","selected");
 				    		  }
@@ -148,7 +148,7 @@
 		});
 </script>
 <style type="text/css">
-.step2 {
+.case2 {
 	display: none;
 }
 
@@ -178,7 +178,6 @@
 		<div id="main_list">
 			<div id="main_user_list">
 				<h2>임시로 놔두기</h2>
-				<div class="list_count">임시로 놔두기(총 게시물 수 등등 표시?)</div>
 				<div id="search_form">
 					<form action="product_searchList" name="inputform" method="post">
 						<table border="1">
@@ -188,12 +187,12 @@
 							</tr>
 							<tr id="search_date">
 								<td>기간검색</td>
-								<td><fmt:formatDate var="sys" value="${sysdate}"pattern="yyyy-MM-dd" /> 
+								<td>
 								<select name="dateType">
 										<option value="p_sysdate">등록일</option>
 								</select> 
-								<input type="date" name="e_start_day" value="${sys}"id="e_start_day" onchange="date_chk2()"> ~ 
-								<input type="date" name="e_end_day" id="e_end_day" value="${sys}"onchange="date_chk2()">
+								<input type="date" name="e_start_day" id="e_start_day" onchange="date_chk2()"> ~ 
+								<input type="date" name="e_end_day" id="e_end_day" onchange="date_chk2()">
 									<button type="button" onclick="search_date('today')">오늘</button>
 									<button type="button" onclick="search_date('7day')">7일</button>
 									<button type="button" onclick="search_date('15day')">15일</button>
@@ -205,29 +204,29 @@
 							<tr>
 								<td>분류</td>
 								<td>
-								<select name="step1" id="category"	onchange="aa(this.value)">
+								<select name="case1" id="case1"	onchange="aa(this.value)">
 										<option value="원두">원두</option>
 										<option value="커피 백">커피 백</option>
 										<option value="아이스 음료">아이스 음료</option>
 										<option value="인스턴트 커피">인스턴트 커피</option>
 										<option value="티 음료">티 음료</option>
 								</select> 
-								<select id="원두" name="p_step2" class="step2"	style="display: inline;">
+								<select id="원두" name="p_case2" class="case2" style="display: inline;">
 										<option value="클래스">클래스</option>
 										<option value="바리스타">바리스타</option>
 										<option value="미스터즈">미스터즈</option>
 										<option value="데일리 로스팅">데일리 로스팅</option>
 								</select> 
-								<select id="인스턴트 커피" class="step2">
+								<select id="인스턴트 커피" class="case2">
 										<option value="카페모리">오리지널 카페모리</option>
 										<option value="에스프레소 스틱">에스프레소 스틱 커피백</option>
 								</select> 
-								<select id="커피 백" class="step2">
+								<select id="커피 백" class="case2">
 										<option value="커피 백">커피 백</option>
 										<option value="핸드 드립">핸드 드립</option>
 										<option value="마일드 커피 백">마일드 커피 백</option>
 								</select> 
-								<select id="아이스 음료" class="step2">
+								<select id="아이스 음료" class="case2">
 										<option value="시그니처">시그니처</option>
 										<option value="카페리얼">카페리얼</option>
 								</select> 
@@ -236,14 +235,11 @@
 										<option value="에스프레소 스틱라떼">에스프레소 스틱라떼</option>
 										<option value="에스프레소 스틱">에스프레소 스틱</option>
 								</select> 
-								<select id="티 음료" class="step2">
+								<select id="티 음료" class="case2">
 										<option value="아워 티">아워 티</option>
 										<option value="아워 티 pet">아워 티 pet</option>
 										<option value="카페리얼 티 라떼">카페리얼 티 라떼</option>
 								</select> 
-								<select id="용품" class="step2">
-										<option value="커피용품">커피용품</option>
-								</select></td>
 							</tr>
 							<tr>
 								<td colspan="2"><button type="submit">검색</button></td>
@@ -304,15 +300,12 @@
 								<!--<td><button type="button" onclick="스크립트()">수정</button></td> -->
 								<td>
 									<button type="button"
-										onclick="location.href='product_updateForm?p_num=${pro.p_code}'">수정</button>
+										onclick="location.href='product_updateForm?p_p_code=${pro.p_code}'">수정</button>
 									<button type="button" onclick="delProduct(${pro.p_code})">삭제</button>
 								</td>
 							</tr>
 						</c:forEach>
 					</table>
-					<div class="detail_btn">
-						<a href="product_insertForm">임시버튼</a>
-					</div>
 				</div>
 			</div>
 		</div>

@@ -9,11 +9,20 @@
 		select * from product
 	</select>
 
-	<!-- 게시물 작성 -->
+	<!-- 관리자 상품 등록 -->
 	<insert id="write" parameterType="com.javalec.ex.Dto.PDto.ProductDto">
-		insert into product	values(PRODUCT_SEQ.nextval,#{p_category},#{p_case},#{p_case2},#{p_name},#{p_price},#{p_point},#{p_producer},#{p_expiry},
-		#{p_type},#{p_capacity},#{p_detail},#{p_location},#{p_gene},#{p_import},#{p_stock},#{p_img1},#{p_img2},#{p_img3},#{p_content_img},sysdate,sysdate,'N')
+		insert into product	values(PRODUCT_SEQ.nextval,#{p_category},#{p_case},#{p_case2},#{p_name},#{p_price},#{p_point},#{p_producer},#{p_expiry},#{p_type},#{p_capacity},#{p_detail},#{p_location},#{p_gene},#{p_import},#{p_stock},#{p_img1},#{p_img2},#{p_img3},#{p_content_img},sysdate,sysdate,#{p_delflag})
 	</insert>
+	<!-- 관리자 상품 수정 -->
+	<update id="updateProduct" parameterType="com.javalec.ex.dto.ProductDto">
+		update product set p_category=#{p_category},p_case2=#{p_case2},p_name=#{p_name},p_price=#{p_price},p_point=#{p_point},p_producer=#{p_producer},p_expiry=#{p_expiry},p_type=#{p_type},
+		p_capacity=#{p_capacity},p_detail=#{p_detail},p_location=#{p_location},p_gene=#{p_gene},p_import=#{p_import},p_stock=#{p_stock},
+		p_img1=#{p_img1},p_img2=#{p_img2},p_img3=#{p_img3},p_content_img=#{p_content_img},p_udate=sysdate where p_code = #{p_code}
+	</update>
 
+	<!-- 상품 삭제처리 -->
+	<update id="deleteProduct" parameterType="Integer">
+		update product set p_delflag='Y' where p_code = #{p_code}
+	</update>
 
 </mapper>

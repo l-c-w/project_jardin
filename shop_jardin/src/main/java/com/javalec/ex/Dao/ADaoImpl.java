@@ -30,4 +30,14 @@ public class ADaoImpl implements ADao {
 		sql.insert(namespace + ".write", dto);
 	}
 
+	@Override
+	public void modify(ProductDto dto) throws Exception {
+		sql.update(namespace + ".modify", dto);
+	}
+
+	@Override
+	public void delete(int p_code) throws Exception {
+		sql.delete(namespace+ ".delete", p_code);
+	}
+
 }

@@ -1,5 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -79,8 +82,8 @@ $(document).ready(function() {
 					<div class="myInfo">
 						<ul>
 							<li class="info"><strong>가나다</strong> 님의 정보를 한눈에 확인하세요.</li>
-							<li>보유 쿠폰<br/><span class="num">199</span> <span class="unit">장</span></li>
-							<li class="point">내 포인트<br/><span class="num">100,000</span> <span class="unit">P</span></li>
+							<li>보유 쿠폰<br/><span class="num">${usable_coupon }</span> <span class="unit">장</span></li>
+							<li class="point">내 포인트<br/><span class="num">${usable_point }</span> <span class="unit">P</span></li>
 							<li class="last">진행중인 주문<br/><span class="num">199</span> <span class="unit">건</span></li>
 						</ul>
 					</div>
@@ -98,7 +101,7 @@ $(document).ready(function() {
 				
 					<!-- Serviceable -->
 					<div class="tab_serviceable couponnone">
-						<div class="shortTxt">현재 사용 가능한 쿠폰은 <span class="orange">3</span>장입니다.</div>
+						<div class="shortTxt">현재 사용 가능한 쿠폰은 <span class="orange">${usable_coupon }</span>장입니다.</div>
 						<div class="orderDivNm">
 							<table summary="사용가능 한 쿠폰으로 No, 종류, 쿠폰명, 사용기한, 상태를 조회 하실수 있습니다." class="orderTable2" border="1" cellspacing="0">
 								<caption>사용 가능 쿠폰 보기</caption>
@@ -117,35 +120,31 @@ $(document).ready(function() {
 									<th scope="col">상태</th>
 								</thead>
 								<tbody>
+									<c:set var="list_count" value="${fn:length(coupon_list) }"/>
+									<c:if test="${not empty coupon_list }">
+									<c:forEach var="couponlist" items="${coupon_list }" varStatus="status">
+									<c:if test="${couponlist.exp_check>0 }">
+									<c:if test="${empty couponlist.cou_state }">
 									<tr>
-										<td class="tnone">1</td>
-										<td>10% 할인쿠폰</td>
-										<td class="tnone">쟈뎅샵 1주년 기념 쿠폰</td>
-										<td>14-01-28 ~ 14-05-31</td>
+										<td class="tnone">${status.index }</td>
+										<c:if test="${couponlist.reward<0 }"><td>${couponlist.reward*100 } 할인</td></c:if>
+										<c:if test="${couponlist.reward>0 }"><td>${couponlist.reward }원 할인</td></c:if>
+										<td class="tnone">${couponlist.cou_name }</td>
+										<td>${couponlist.issue_date } ~ ${couponlist.exp_date }</td>
 										<td><span class="heavygray">사용가능</span></td>
 									</tr>
-
-									<tr>
-										<td class="tnone">2</td>
-										<td>원두 전품목 5%</td>
-										<td class="tnone">쟈뎅샵 오픈기념 이벤트 쿠폰</td>
-										<td>14-01-28 ~ 14-05-31</td>
-										<td><span class="heavygray">사용가능</span></td>
-									</tr>
-
-									<tr>
-										<td class="tnone">3</td>
-										<td>회원가입 감사 쿠폰</td>
-										<td class="tnone">회원가입 기념 전품목 5% 할인 쿠폰</td>
-										<td>14-01-28 ~ 14-05-31</td>
-										<td><span class="heavygray">사용가능</span></td>
-									</tr>
+										</c:if>
+									</c:if>
+									</c:forEach>
+									
 								</tbody>
+								</c:if>
 							</table>
-
+							<c:if test="${empty coupon_list }">
 							<div class="noData">
-								등록된 상품이 없습니다.
+								사용가능한 쿠폰이 없습니다.
 							</div>
+							</c:if>
 						</div>
 						
 
@@ -189,30 +188,16 @@ $(document).ready(function() {
 									<th scope="col">상태</th>
 								</thead>
 								<tbody>
+									<c:forEach var="ncouponlist" items="${coupon_list }" varStatus="status">
 									<tr>
-										<td class="tnone">1</td>
+										<td class="tnone">${ }</td>
 										<td>10% 할인쿠폰</td>
 										<td class="tnone">쟈뎅샵 1주년 기념 쿠폰</td>
 										<td>14-01-28 ~ 14-05-31</td>
 										<td><span class="heavygray">사용완료</span></td>
 									</tr>
-
-									<tr>
-										<td class="tnone">2</td>
-										<td>원두 전품목 5%</td>
-										<td class="tnone">쟈뎅샵 오픈기념 이벤트 쿠폰</td>
-										<td>14-01-28 ~ 14-05-31</td>
-										<td><span class="heavygray">사용완료</span></td>
-									</tr>
-
-									<tr>
-										<td class="tnone">3</td>
-										<td>회원가입 감사 쿠폰</td>
-										<td class="tnone">회원가입 기념 전품목 5% 할인 쿠폰</td>
-										<td>14-01-28 ~ 14-05-31</td>
-										<td><span class="heavygray">기간만료</span></td>
-									</tr>
-								</tbody>
+									</c:forEach>
+																	</tbody>
 							</table>
 
 							<div class="noData">

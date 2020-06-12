@@ -2,8 +2,8 @@ package com.javalec.ex.Dao;
 
 import java.util.ArrayList;
 
-import com.javalec.ex.Dto.EDto.CouponDto;
 import com.javalec.ex.Dto.PayDto.CartDto;
+import com.javalec.ex.Dto.PayDto.Coupon_listDto;
 import com.javalec.ex.Dto.PayDto.PaymentDto;
 import com.javalec.ex.Dto.PayDto.PointDto;
 import com.javalec.ex.Dto.PayDto.Use_pointDto;
@@ -32,8 +32,8 @@ public interface PayDao {
 	public int usable_point(String id);
 
 	// 쿠폰리스트
-	public ArrayList<CouponDto> cou_list(String id);
+	public ArrayList<Coupon_listDto> cou_list(String id);
 
 	// 사용가능 쿠폰갯수
-	public int used_coupon(String id);
+	public int usable_coupon(String id);
 }

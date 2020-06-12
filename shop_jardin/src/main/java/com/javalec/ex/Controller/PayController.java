@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.javalec.ex.Dao.PayDao;
+import com.javalec.ex.Service.PayService.CouponService;
 import com.javalec.ex.Service.PayService.PayService;
 import com.javalec.ex.Service.PayService.Payment;
 import com.javalec.ex.Service.PayService.PointService;
@@ -49,6 +50,16 @@ public class PayController {
 		pays.execute(sqlSession, model);
 
 		return "mypage/point";
+	}
+
+	@RequestMapping("mypage/coupon")
+	public String coupon_list(Model model) {
+		model.addAttribute("id", "test4");
+		pays = new CouponService();
+		pays.execute(sqlSession, model);
+
+		return "mypage/coupon";
+
 	}
 
 }

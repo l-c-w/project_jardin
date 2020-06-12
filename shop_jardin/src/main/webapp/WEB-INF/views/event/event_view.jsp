@@ -89,6 +89,8 @@ $(document).ready(function() {
 
 						<div class="viewContents">
 							<img src="../images/img/sample_event_view.jpg" alt="" />${event_view.e_content }
+							<br><br>
+							<a href="myCouponOk?userId${userId }&cou_code=${cou_code }"> ${coupons.coupon } 쿠폰발급</a>
 						</div>
 					</div>
 
@@ -175,7 +177,8 @@ $(document).ready(function() {
 								<input type="hidden" value="${sessionScope.session_mem }" name="requestUser">
 								<input type="hidden" value="${e_com.id }" name="authUser">
 								<input type="hidden" value="${event_view.e_code }" name="e_code">
-								<input type="hidden" value="${e_com.ec_num }" name="ec_num">														
+								<input type="hidden" value="${e_com.ec_num }" name="ec_num">
+								<input type="hidden" value="${page }" name="page">
 								<ul id="coModi" class="comment_modifyM" style="display: none;">
 									<li class="name">${e_com.id }</li>
 									<li class="txt">

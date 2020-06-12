@@ -6,7 +6,9 @@ public class CartDto {
 
 	}
 
-	public CartDto(String p_code, String p_name, String p_category, int price, int p_point, int amount) {
+	public CartDto(String cart_code, String p_code, String p_name, String p_category, int price, int p_point,
+			int amount) {
+		this.cart_code = cart_code;
 		this.p_code = p_code;
 		this.p_name = p_name;
 		this.p_category = p_category;
@@ -15,7 +17,7 @@ public class CartDto {
 		this.amount = amount;
 	}
 
-	private String p_code, p_name, p_category;
+	private String cart_code, p_code, p_name, p_category;
 	private int price, p_point, amount;
 
 	public String getP_code() {
@@ -64,6 +66,14 @@ public class CartDto {
 
 	public void setAmount(int amount) {
 		this.amount = amount;
+	}
+
+	public String getCart_code() {
+		return cart_code;
+	}
+
+	public void setCart_code(String cart_code) {
+		this.cart_code = cart_code;
 	}
 
 }

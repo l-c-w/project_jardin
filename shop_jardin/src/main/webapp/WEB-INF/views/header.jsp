@@ -70,30 +70,30 @@
 	<div id="header">
 		
 		<div id="snbBox">
-			<h1><img src="../images/txt/logo.gif" alt="JARDIN SHOP" /></h1>
+			<h1><a href="../main/main"><img src="../images/txt/logo.gif" alt="JARDIN SHOP" /></a></h1>
 			<div id="quickmenu">
 				<div id="mnaviOpen"><img src="../images/btn/btn_mnavi.gif" width="33" height="31" alt="메뉴열기" /></div>
 				<div id="mnaviClose"><img src="../images/btn/btn_mnavi_close.gif" width="44" height="43" alt="메뉴닫기" /></div>
 				<ul>
-					<li><a href="event">이벤트</a></li>
+					<li><a href="../event/event_list">이벤트</a></li>
 					<li><a href="../customer/notice_list">CUSTOMER</a></li>
-					<li><a href="../community/expr_list">커뮤니티</a></li>
+					<li><a href="../community/comment_list">커뮤니티</a></li>
 				</ul>
 			</div>
 			<div id="snb">
 			
 				<ul>
 				
-				<c:if test="${member !=null}">
+				<c:if test="${session_mem !=null}">
 				
-				    <li><a href="#">${member}님</a></li>
-					<li><a href="logout">로그아웃</a></li>
+				    <li><a href="../mypage/change_info?id=${session_mem}">${session_mem}님</a></li>
+					<li><a href="../member/logout">로그아웃</a></li>
 					<li><a href="../mypage/ordercheck">MY PAGE</a></li>
 					<li><a href="../mypage/cart">CART</a></li>
 				
 				</c:if>
 				
-				<c:if test="${member == null}">
+				<c:if test="${session_mem == null}">
 				
 				    <li><a href="../member/login">LOGIN</a></li>
 					<li><a href="../member/step01">JOIN</a></li>

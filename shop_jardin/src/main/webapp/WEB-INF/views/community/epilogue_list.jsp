@@ -135,7 +135,7 @@ $(document).ready(function() {
 								<div class="txt">
 								
 									<div class="subject">
-										<a href="epilogue_view?id=${p_list.id}"><span class="orange">[먹어봤어요]</span>${p_list.pr_title}</a>
+										<a href="epilogue_view?pr_num=${p_list.pr_num}"><span class="orange">[먹어봤어요]</span>${p_list.pr_title}</a>
 									</div>
 									
 									<div class="conf">
@@ -166,6 +166,7 @@ $(document).ready(function() {
 									
 								</div>
 							</li>
+							
 							
 							
 							</c:forEach>
@@ -212,13 +213,27 @@ $(document).ready(function() {
 
 
 					<div class="btnAreaList">
-						<div class="bwright">
-							<ul>
-								<li><a href="epilogue_write" class="sbtnMini">글쓰기</a></li>
-							</ul>
-						</div>
 
 
+						<c:if test="${s_n != null }">
+
+							<div class="bwright">
+								<ul>
+									<li><a href="epilogue_write" class="sbtnMini">글쓰기</a></li>
+								</ul>
+							</div>
+
+						</c:if>
+
+
+						<c:if test="${s_n == null }">
+
+							<div class="bwright">
+								<ul>
+								</ul>
+							</div>
+
+						</c:if>
 
 
 

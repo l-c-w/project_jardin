@@ -24,8 +24,10 @@ public class Member_Dto {
 	String introduce;
 	String coffee_favor;
 
-	int phone;
-
+	
+	int phone1, phone2, phone3;
+	
+	
 	Date birth;
 	Date join_date;
 	
@@ -154,14 +156,38 @@ public class Member_Dto {
 		this.coffee_favor = coffee_favor;
 	}
 
-	public int getPhone() {
-		return phone;
+	
+	
+
+	public int getPhone1() {
+		return phone1;
 	}
 
-	public void setPhone(int phone) {
-		this.phone = phone;
+	public void setPhone1(int phone1) {
+		this.phone1 = phone1;
 	}
 
+	public int getPhone2() {
+		return phone2;
+	}
+
+	public void setPhone2(int phone2) {
+		this.phone2 = phone2;
+	}
+
+	public int getPhone3() {
+		return phone3;
+	}
+
+	public void setPhone3(int phone3) {
+		this.phone3 = phone3;
+	}
+
+	
+	
+	
+	
+	
 	
 
 }

@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-    
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -125,9 +125,6 @@ $(document).ready(function() {
 					<h3>회원 로그인</h3>
 					
 					
-				
-					
-					
 					<form action="login_ok" method="post" id="login" name="login">
 					
 					<div class="informbox">
@@ -138,7 +135,7 @@ $(document).ready(function() {
 								<li><input type="text" name="id" class="loginType" onfocus="this.className='mfocus'" onblur="if (this.value.length==0) {this.className='loginType'}else {this.className='mfocusnot'}" style="ime-mode:inactive;" /></li>
 								<li><input type="password" name="pw" class="passType" onfocus="this.className='mfocus'" onblur="if (this.value.length==0) {this.className='passType'}else {this.className='mfocusnot'}" style="ime-mode:inactive;" /></li>
 							</ul>
-
+							
 							<div class="btn"><a href="#" onclick="document.getElementById('login').submit()" class="sbtn">로그인</a></div><br>
 							
 							<div class="chk"><input type="checkbox" id="idsave"/><label for="idsave">아이디 저장</label></div>							

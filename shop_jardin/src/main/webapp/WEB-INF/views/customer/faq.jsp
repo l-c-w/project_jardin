@@ -50,6 +50,7 @@ $(document).ready(function() {
 		</div>
 		
 		
+		
 		<div id="outbox">	
 		
 			<jsp:include page="custom1.jsp"/>
@@ -74,14 +75,24 @@ $(document).ready(function() {
 				<div id="customer">
 					<h2><strong>FAQ</strong><span>회원님들께서 자주 묻는 질문들을 모아 놓았습니다.</span></h2>
 					
+					
+					
 					<div class="faqTab">
+					
 						<ul>
 							<li><a href="#" class="on">전체</a></li>
+							
 							<li class="dep"><a href="#">회원가입</a></li>
+							
 							<li><a href="#">상품</a></li>
+							
 							<li class="last"><a href="#">주문</a></li>
-						</ul>						
+							
+						</ul>	
+											
 					</div>	
+					
+					
 					
 					<!-- FAQ -->
 					<div class="faqList">
@@ -89,12 +100,14 @@ $(document).ready(function() {
 							<!-- list -->
 							<li>
 								<a href="javascript:;" class="faqbtn">
+								
 									<div class="question">
 										<div class="blet">Q</div>
 										<div class="category">상품</div>
 										<div class="title">주문 상품의 수량을 변경하고 싶어요.</div>
 									</div>
 								</a>
+								
 
 								<div class="faqanswer">
 									<div class="faqbox">
@@ -105,6 +118,8 @@ $(document).ready(function() {
 									</div>
 								</div>
 							</li>
+							
+							
 							<!-- //list -->
 
 							<li>
@@ -126,6 +141,7 @@ $(document).ready(function() {
 								</div>
 							</li>
 
+
 							<li>
 								<a href="javascript:;" class="faqbtn">
 									<div class="question">
@@ -134,6 +150,7 @@ $(document).ready(function() {
 										<div class="title">회원가입을 하면 어떤 혜택이 있나요?</div>
 									</div>
 								</a>
+
 
 								<div class="faqanswer">
 									<div class="faqbox">
@@ -144,6 +161,7 @@ $(document).ready(function() {
 									</div>
 								</div>
 							</li>
+							
 
 							<li>
 								<a href="javascript:;" class="faqbtn">
@@ -164,6 +182,7 @@ $(document).ready(function() {
 								</div>
 							</li>
 
+
 							<li>
 								<a href="javascript:;" class="faqbtn">
 									<div class="question">
@@ -172,6 +191,7 @@ $(document).ready(function() {
 										<div class="title">비밀번호를 잊어버렸습니다.</div>
 									</div>
 								</a>
+
 
 								<div class="faqanswer">
 									<div class="faqbox">
@@ -182,6 +202,7 @@ $(document).ready(function() {
 									</div>
 								</div>
 							</li>
+
 
 							<li>
 								<a href="javascript:;" class="faqbtn">
@@ -192,6 +213,7 @@ $(document).ready(function() {
 									</div>
 								</a>
 
+
 								<div class="faqanswer">
 									<div class="faqbox">
 										<div class="blet">A</div>
@@ -201,6 +223,7 @@ $(document).ready(function() {
 									</div>
 								</div>
 							</li>
+
 
 							<li>
 								<a href="javascript:;" class="faqbtn">
@@ -260,7 +283,10 @@ $(document).ready(function() {
 						<!-- //페이징이동1 -->
 					</div>
 
+
+
 					<div class="searchWrap">
+						
 						<div class="search">
 							<ul>
 								<li class="web"><img src="../images/txt/txt_search.gif" alt="search" /></li>
@@ -274,13 +300,18 @@ $(document).ready(function() {
 								<li class="mobile"><a href="#"><img src="../images/btn/btn_search_m.gif" alt="검색" /></a></li>
 							</ul>
 						</div>
+						
 					</div>
 
 				</div>
+				
+				
 			</div>
 			<!-- //contents -->
+			
 
 		</div>
+		
 	</div>
 	<!-- //container -->
 

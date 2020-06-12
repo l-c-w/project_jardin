@@ -6,6 +6,7 @@ public class FnqDto {
 		
 	}
 
+	
 	public FnqDto(String f_num, String f_type, String f_title, String f_content) {
 		this.f_num=f_num;
 		this.f_type=f_type;

@@ -15,26 +15,24 @@ public class EViewService implements EService {
 	@Override
 	public void execute(HttpServletRequest request, SqlSession sqlSession, Model model) {
 
+		System.out.println("--------------------EViewService--------------------");
+		
 		// 변수 선언
 		EventDto edto = new EventDto(); // 본문 dto
 		ArrayList<Event_commentDto> list = new ArrayList<Event_commentDto>(); // 댓글 dto
 		EDao dao = sqlSession.getMapper(EDao.class);
 		String e_code = request.getParameter("e_code");
 		String temp = ""; // 페이징 임시변수 & 리퀘스트를 비교해서 page변수에 값을 할당하기 위함
-		String content = "";
 		temp = request.getParameter("page"); // 페이징 임시변수
-		content = request.getParameter("content");
 		int page = 0; // 페이징 임시변수
 		int limit = 3; // 1page = 게시글 10개
 
 		// EViewService
 		edto = dao.event_view(e_code);
 		model.addAttribute("event_view", edto);
-		System.out.println("temp : " + temp);
 
 		if (temp == null) { // 페이징 임시변수 & 리퀘스트를 비교해서 page변수에 값을 할당하기 위함
 			page = 1; // 최초 기본 1페이지 세팅
-
 		} else {
 			page = Integer.parseInt(temp); // 리퀘스트에 값이 있으면 page변수에 리퀘스트 값을 할당
 		}
@@ -53,10 +51,12 @@ public class EViewService implements EService {
 		int endpage = maxpage; // 1 ~ 10까지는 maxpage가 endpage가 됨
 		if (endpage > startpage + 10 - 1)
 			endpage = startpage + 10 - 1;
+		// EViewService 끝
+
 
 		// ECommentService
 		list = dao.event_comment(e_code, startrow, endrow);
-		
+				
 
 		// model
 		model.addAttribute("event_comment", list);
@@ -75,6 +75,7 @@ public class EViewService implements EService {
 		System.out.println("maxpage : " + maxpage);
 		System.out.println("startpage : " + startpage);
 		System.out.println("endpage : " + endpage);
+		System.out.println("EventDto - e_end : " + edto.getE_end());
 
 		// ------------------------------------------------------------
 		for (int i = 0; i < list.size(); i++) {
@@ -87,19 +88,3 @@ public class EViewService implements EService {
 	}
 
 }
-
-//		String searchFlag = null; // 검색체크	//였지만 검색기능을 빼기로 했기 때문에 쓰지않는기능이다
-//		System.out.println("searchFlag : " + searchFlag);
-
-//		if(request.getParameter("page") != null) {
-//			page = Integer.parseInt(request.getParameter("page"));
-//		}
-//		switch (page) {
-//		case 1:
-//			searchFlag = null;
-//			break;
-//		default:
-//			searchFlag = "1";
-//			model.addAttribute("searchFlag", searchFlag);
-//			break;
-//		}// 검색했을 때 페이지를 넘겨도 검색어를 유지시키는 기능	이었지만 검색기능을 빼기로 했기 때문에 쓰지않는기능이다

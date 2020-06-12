@@ -1,5 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
+<jsp:useBean id="now" class="java.util.Date"/>
 <!DOCTYPE html>
 <html>
 <head>
@@ -48,15 +51,17 @@ $(function() {
 						<th scope="col">합계</th>
 					</thead>
 					<tbody>
+						<c:forEach var="order_product" items="${order_st }">
 						<tr>
 							<td class="left">
-								쟈뎅 오리지널 콜롬비아 페레이라 원두커피백 15p
+								 ${order_product.p_name }
 							</td>
-							<td class="pnone">1개</td>
-							<td class="pnone">14,400 원</td>
+							<td class="pnone">${order_product.amount }</td>
+							<td class="pnone"><fmt:formatNumber value="${order_product.price }" pattern="#,###,###,###"/> 원</td>
 							<td class="pnone">0 원</td>
-							<td>250,000 원</td>
+							<td><fmt:formatNumber value="${order_product.price*order_product.amount }" pattern="#,###,###,###"/> 원</td>
 						</tr>
+						</c:forEach>
 					</tbody>
 				</table>
 			</div>
@@ -74,11 +79,11 @@ $(function() {
 					<tbody>
 						<tr>
 							<th scope="row"><span>주문일</span></th>
-							<td>2014-04-30</td>
+							<td><fmt:formatDate value="${now }" pattern="yyyy/MM/dd"/> </td>
 						</tr>
 						<tr>
 							<th scope="row"><span>결제총액</span></th>
-							<td>27,250 원</td>
+							<td> 원</td>
 						</tr>
 						<tr>
 							<th scope="row"><span>결제수단</span></th>

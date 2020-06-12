@@ -28,7 +28,7 @@ public class AController {
 	private SqlSession sql;
 
 	@Inject
-	AService service;
+	AService aservice;
 
 	@RequestMapping("admin/admin_main")
 	public String admin_main(Model model) {
@@ -54,7 +54,7 @@ public class AController {
 	public void getlist(Model model) throws Exception {
 
 		List<ProductDto> list = null;
-		list = service.list();
+		list = aservice.list();
 
 		model.addAttribute("list", list);
 	}
@@ -68,7 +68,7 @@ public class AController {
 	// 상품 작성
 	@RequestMapping(value = "/write")
 	public String posttWirte(ProductDto dto) throws Exception {
-	  service.write(dto);
+	  aservice.write(dto);
 	  
 	  return "redirect:/admin/admin_product_list";
 	}

@@ -34,7 +34,7 @@ public class ReviewService implements PService {
 
 		System.out.println("상품리뷰");
 		// 상품리뷰 글 리뷰
-		ArrayList<C_ReviewDto> crdto = dao.c_review(p_code);
+		ArrayList<C_ReviewDto> crdto = dao.c_review(p_code, 0, 0);
 		model.addAttribute("c_review", crdto);
 
 

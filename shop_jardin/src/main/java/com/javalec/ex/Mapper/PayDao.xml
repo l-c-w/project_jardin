@@ -44,14 +44,22 @@
 	</select>
 	
 	
-	<!-- 쿠폰리스트 가져오기-->
-	<select id="cou_list" resultType="com.javalec.ex.Dto.PayDto.Coupon_listDto">
-		select coupon.cou_name,coupon.cou_reward,coupon_list.issue_date,coupon_list.exp_date, coupon_list.cou_state
-		from coupon, coupon_list where id=#{param1} and coupon.cou_code=coupon_list.cou_code
+	<!-- 사용가능 쿠폰리스트 가져오기-->
+	<select id="ucou_list" resultType="com.javalec.ex.Dto.PayDto.Coupon_listDto">
+		select coupon.cou_name,coupon.cou_reward,coupon_list.issue_date,coupon_list.exp_date, coupon_list.cou_state   
+		from coupon, coupon_list 
+		where id=#{param1} and coupon.cou_code=coupon_list.cou_code and (coupon_list.exp_date-sysdate)>0 and coupon_list.cou_state is null
+	</select>
+	
+	<!-- 사용불가능 쿠폰리스트 가져오기-->
+	<select id="ncou_list" resultType="com.javalec.ex.Dto.PayDto.Coupon_listDto">
+		<![CDATA[select coupon.cou_name,coupon.cou_reward,coupon_list.issue_date,coupon_list.exp_date, coupon_list.cou_state   
+		from coupon, coupon_list 
+		where id=#{param1} and coupon.cou_code=coupon_list.cou_code and ((coupon_list.exp_date-sysdate)<0 or coupon_list.cou_state is not null)]]>
 	</select>
 	
 	<!-- 사용가능한 쿠폰 갯수 -->
-	<select id="used_coupon" resultType="int">
+	<select id="usable_coupon" resultType="int">
 		select count(*) from coupon_list where id=#{param1}
 	</select>
 	

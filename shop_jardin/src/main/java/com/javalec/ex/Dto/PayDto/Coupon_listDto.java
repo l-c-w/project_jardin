@@ -5,48 +5,37 @@ import java.sql.Timestamp;
 public class Coupon_listDto {
 
 	public Coupon_listDto() {
-		
+
 	}
 
-	public Coupon_listDto(String cou_num, String cou_code, String id, Timestamp issue_date, Timestamp exp_date,
+	public Coupon_listDto(int exp_check, String cou_name, int cou_reward, Timestamp issue_date, Timestamp exp_date,
 			Timestamp cou_state) {
-		this.cou_num=cou_num;
-		this.cou_code=cou_code;
-		this.id=id;
-		this.issue_date=issue_date;
-		this.exp_date=exp_date;
-		this.cou_state=exp_date;
-	}
-	
-	private String cou_num;
-	private String cou_code;
-	private String id;
-	private Timestamp issue_date;
-	private Timestamp exp_date;
-	private Timestamp cou_state;
-	
-	public String getCou_num() {
-		return cou_num;
+		this.exp_check = exp_check;
+		this.cou_name = cou_name;
+		this.cou_reward = cou_reward;
+		this.issue_date = issue_date;
+		this.exp_date = exp_date;
+		this.cou_state = cou_state;
 	}
 
-	public void setCou_num(String cou_num) {
-		this.cou_num = cou_num;
+	private String cou_name;
+	private int cou_reward, exp_check;
+	private Timestamp issue_date, exp_date, cou_state;
+
+	public String getCou_name() {
+		return cou_name;
 	}
 
-	public String getCou_code() {
-		return cou_code;
+	public void setCou_name(String cou_name) {
+		this.cou_name = cou_name;
 	}
 
-	public void setCou_code(String cou_code) {
-		this.cou_code = cou_code;
+	public int getCou_reward() {
+		return cou_reward;
 	}
 
-	public String getId() {
-		return id;
-	}
-
-	public void setId(String id) {
-		this.id = id;
+	public void setCou_reward(int cou_reward) {
+		this.cou_reward = cou_reward;
 	}
 
 	public Timestamp getIssue_date() {
@@ -72,6 +61,13 @@ public class Coupon_listDto {
 	public void setCou_state(Timestamp cou_state) {
 		this.cou_state = cou_state;
 	}
-	
-	
+
+	public int getExp_check() {
+		return exp_check;
+	}
+
+	public void setExp_check(int exp_check) {
+		this.exp_check = exp_check;
+	}
+
 }

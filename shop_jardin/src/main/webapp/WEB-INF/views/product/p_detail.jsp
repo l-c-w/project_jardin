@@ -87,7 +87,7 @@ $(document).ready(function() {
 				<!-- info -->
 				<div class="info">
 					<p class="title">
-						<span>[오리지널]</span> 관리자페이지에서 만든 제목이 표시됩니다 ${product.stock }
+						<span>[오리지널]</span>${product.p_name }
 					</p>
 
 					<div class="priceInfo">
@@ -95,7 +95,7 @@ $(document).ready(function() {
 							<li>
 								<div class="stit">판매가</div>
 								<div class="heavygray">
-									<strong>${product.price }원</strong>
+									<strong>${product.p_price }원</strong>
 								</div>
 							</li>
 							<li>
@@ -106,11 +106,11 @@ $(document).ready(function() {
 							</li>
 							<li>
 								<div class="stit">칼로리</div>
-								<div>${product.calorie }kcal</div>
+								<div>95kcal</div>
 							</li>
 							<li>
 								<div class="stit">용량</div>
-								<div>${product.capacity }g</div>
+								<div>${product.p_capacity }</div>
 							</li>
 							<li>
 								<div class="stit">수량</div>
@@ -158,6 +158,8 @@ $(document).ready(function() {
 			<!-- //product -->
 
 
+
+
 			<!-- tab -->
 			<div class="detailTab">
 				<ul>
@@ -173,10 +175,16 @@ $(document).ready(function() {
 						onclick="return false;" id="goodsNotice">정책 및 공지</a></li>
 				</ul>
 			</div>
-			<script type="text/javascript">$(function(){$(".detailTab ul li a:eq(0)").click();});</script>
+			<!-- <script type="text/javascript">$(function(){$(".detailTab ul li a:eq(0)").click();});</script> -->
 			<!-- //tab -->
 
 
+			<script>
+			 	if( ${tabId } === 'goodsReview'){
+				$(function(){$(".detailTab ul li a:eq(2)").click();});					
+				} 
+			
+			</script>
 
 			<!-- detail content -->
 			<div id="detailContent">
@@ -203,19 +211,19 @@ $(document).ready(function() {
 									<th scope="row" class="info"><span>제조명</span></th>
 									<td>${product.p_name }</td>
 									<th scope="row" class="info"><span>내용량</u></span></th>
-									<td>일회용 원두커피 티백</td>
+									<td>커피원두500g</td>
 								</tr>
 
 								<tr>
 									<th scope="row" class="info"><span>제조원</span></th>
-									<td>JARDIN</td>
+									<td>${product.p_producer }</td>
 									<th scope="row" class="info"><span>포장재질</span></th>
 									<td>폴리에틸렌(내면)</td>
 								</tr>
 
 								<tr>
 									<th scope="row" class="info"><span>유통기한</span></th>
-									<td>제조일로부터 OO개월</td>
+									<td>${product.p_expiry }</td>
 									<th scope="row" class="info"><span>고객<u>상담실</u></span></th>
 									<td>02-546-3881</td>
 								</tr>
@@ -229,18 +237,17 @@ $(document).ready(function() {
 
 								<tr>
 									<th scope="row" class="info"><span>영양성분</span></th>
-									<td colspan="3">인스턴트 커피, 합성 헤이즐넛향</td>
+									<td colspan="3">원두</td>
 								</tr>
 
 								<tr>
 									<th scope="row" class="info"><span>원재료명 <u>및 함량</u></span></th>
-									<td colspan="3">열량 ${product.calorie }kcal, 탄수화물 16g, 당류
-										11g, 단백질 1g, 지방 2.9g, 포화지방 2.8, 트랜스지방 0g, 콜레스테롤 0mg</td>
+									<td colspan="3">열량 ${product.p_detail }</td>
 								</tr>
 
 								<tr>
 									<th scope="row" class="info"><span>업소명 <u>및 소재지</u></span></th>
-									<td colspan="3">서울시 강남구 논현동 4-21번지 영 빌딩 (주)쟈뎅</td>
+									<td colspan="3">${product.p_location }</td>
 								</tr>
 							</tbody>
 						</table>
@@ -262,7 +269,7 @@ $(document).ready(function() {
 											<img src="../images/img/mcoffee1.png" alt="제품이미지" />
 										</div>
 										<div class="name">${dto2.p_name}</div>
-										<div class="price">${dto2.price }</div>
+										<div class="price">${dto2.p_price }</div>
 								</a></li>
 							</c:forEach>
 						</ul>
@@ -349,58 +356,24 @@ $(document).ready(function() {
 						<div class="allPageMoving1">
 
 						<a href="#" class="n"><img src="../images/btn/btn_pre2.gif" alt="처음으로"/></a><a href="#" class="pre"><img src="../images/btn/btn_pre1.gif" alt="앞페이지로"/></a>
-						<strong>1</strong>
-						<a href="#">2</a>
-						<a href="#">3</a>
-						<a href="#">4</a>
-						<a href="#">5</a>
+						
+						<c:forEach var="j" items="${r_list }">
+							<c:choose>
+								<c:when test="${j == page }">
+									<strong>${j }</strong>
+								</c:when>
+							<c:when test="${j != page }">
+							    	<a href="p_detail?p_code=${product.p_code}&p_category=${product.p_category}&page=${j}&tabId='goodsReview'">${j}</a>
+							</c:when>
+							</c:choose>
+						</c:forEach>
 						<a href="#" class="next"><img src="../images/btn/btn_next1.gif" alt="뒤페이지로"/></a><a href="#" class="n"><img src="../images/btn/btn_next2.gif" alt="마지막페이지로"/></a>
 
 						</div>
 						<!-- //페이징이동1 -->
 					</div>
-					<%-- <div class="btnAreaList">
-						<!-- 페이징이동1 -->
-						<!-- 페이징이동1(searchFlag가 없을때) -->
-						<div class="allPageMoving1" style="margin-left: 250px;">
-
-						<a href="p_review?p_code=${p_code}&page=${startpage }" class="n"><img src="../images/btn/btn_pre2.gif" alt="처음으로"/></a>
-						<c:if test="${page <= 1 }">
-							<img src="../images/btn/btn_pre1.gif" alt="앞페이지로"/>
-						</c:if>
-						<c:if test="${page > 1 }">
-							<a href="p_review?p_code=${p_code}&page=${page - 1 }" class="pre">
-							<img src="../images/btn/btn_pre1.gif" alt="앞페이지로"/></a>
-						</c:if>
-						
-						<c:forEach var="a" begin="${startpage }" end="${endpage }" step="1">
-						<c:choose>
-							<c:when test="${a == page }">
-								<strong>${a }</strong>
-							</c:when>
-							<c:when test="${a != page }">
-								<a href="p_review?p_code=${p_code}&page=${a }">${a }</a>
-							</c:when>
-						</c:choose>						
-						</c:forEach>
-						
-						<c:if test="${page >= maxpage}">
-						<img src="../images/btn/btn_next1.gif" alt="뒤페이지로"/>
-						</c:if>
-						<c:if test="${page < maxpage}">
-						<a href="p_review?p_code=${p_code}&page=${page + 1 }" class="next">
-						<img src="../images/btn/btn_next1.gif" alt="뒤페이지로"/></a>
-						</c:if>						
-						<a href="p_review?p_code=${p_code}&page=${maxpage }" class="n"><img src="../images/btn/btn_next2.gif" alt="마지막페이지로"/></a>
-
-						</div>
-						<!-- //페이징이동1(searchFlag가 없을때) -->
-						<!-- //페이징이동1 -->
-					</div> --%>
 
 					<!-- //포토 구매후기 -->
-
-
 					<div class="headTitle depth">
 						<strong>상품리뷰&nbsp;</strong>상품리뷰는 상품 구매 후 작성하실 수 있습니다.
 						<p class="btn">
@@ -953,6 +926,7 @@ $(document).ready(function() {
 	relationChk();
 
 });
+}
 </script>
 
 

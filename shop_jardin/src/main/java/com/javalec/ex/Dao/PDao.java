@@ -22,10 +22,11 @@ public interface PDao {
 
 	public ArrayList<P_ReviewDto> p_review(String p_code,int page,int limit); // page, limit
 
-	public ArrayList<C_ReviewDto> c_review(String p_code);
+	public ArrayList<C_ReviewDto> c_review(String p_code,int page,int limit);
 	
 	public ArrayList<P_FnqDto> pfnq_review(String p_code);
 	
-	public int getListCount();
+	//해당 상품에 대한 모든 리뷰 카운트
+	public int getListCount(String p_code);
 
 }

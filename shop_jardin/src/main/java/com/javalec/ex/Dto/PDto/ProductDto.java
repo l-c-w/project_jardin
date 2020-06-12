@@ -5,74 +5,69 @@ import java.sql.Timestamp;
 public class ProductDto {
 
 	public ProductDto() {
-
+		super();
 	}
 
-	public ProductDto(String p_code, String p_name, String p_category, String p_case, int unit_cost, String p_event,
-			String dis_code, int price, int p_delcost, String p_delfree, int p_point, int calorie, int capacity,
-			int stock, String p_file1, String p_file2, String p_file3, String p_file4, String p_file5, String p_file6,
-			Timestamp p_wdate, Timestamp p_udate, String p_main) {
+	public ProductDto(int p_code, String p_case, String p_case2, String p_name, int p_price, int p_point,
+			String p_producer, String p_expiry, String p_type, String p_capacity, String p_detail, String p_location,
+			String p_gene, String p_import, int p_stock, String p_img1, String p_img2, String p_img3,
+			String p_content_img, Timestamp p_wdate, Timestamp p_udate, String p_delflag) {
+
+		super();
 		this.p_code = p_code;
-		this.p_name = p_name;
-		this.p_category = p_category;
 		this.p_case = p_case;
-		this.unit_cost = unit_cost;
-		this.p_event = p_event;
-		this.dis_code = dis_code;
-		this.price = price;
-		this.p_delcost = p_delcost;
-		this.p_delfree = p_delfree;
+		this.p_case2 = p_case2;
+		this.p_name = p_name;
+		this.p_price = p_price;
 		this.p_point = p_point;
-		this.calorie = calorie;
-		this.stock = stock;
-		this.p_file1 = p_file1;
-		this.p_file2 = p_file2;
-		this.p_file3 = p_file3;
-		this.p_file4 = p_file4;
-		this.p_file5 = p_file5;
-		this.p_file6 = p_file6;
+		this.p_producer = p_producer;
+		this.p_expiry = p_expiry;
+		this.p_type = p_type;
+		this.p_capacity = p_capacity;
+		this.p_detail = p_detail;
+		this.p_location = p_location;
+		this.p_gene = p_gene;
+		this.p_import = p_import;
+		this.p_stock = p_stock;
+		this.p_img1 = p_img1;
+		this.p_img2 = p_img2;
+		this.p_img3 = p_img3;
+		this.p_content_img = p_content_img;
 		this.p_wdate = p_wdate;
 		this.p_udate = p_udate;
-		this.p_main = p_main;
+		this.p_delflag = p_delflag;
 	}
 
-	private String p_code;
-	private String p_name;
-	private String p_category;
-	private String p_case;
-	private int unit_cost;
-	private String p_event;
-	private String dis_code;
-	private int price;
-	private int p_delcost;
-	private String p_delfree;
-	private int p_point;
-	private int calorie;
-	private int capacity;
-	private int stock;
-	private String p_file1;
-	private String p_file2;
-	private String p_file3;
-	private String p_file4;
-	private String p_file5;
-	private String p_file6;
-	private Timestamp p_wdate, p_udate;
-	private String p_main;
+	private int p_code; // 상품 코드
+	private String p_category; // 상품 카테고리
+	private String p_case; // 상품 분류
+	private String p_case2; // 상품 분류2
+	private String p_name; // 상품명
+	private int p_price; // 상품 가격
+	private int p_point; // 상품 포인트
+	private String p_producer; // 제조원
+	private String p_expiry; // 유통기한
+	private String p_type; // 상품유형
+	private String p_capacity; // 용량
+	private String p_detail; // 원재료명
+	private String p_location; // 소재지
+	private String p_gene; // 유전자 재조합 유무
+	private String p_import; // 수입식품
+	private int p_stock; // 재고
+	private String p_img1; // 제품 이미지1
+	private String p_img2; // 제품 이미지2
+	private String p_img3; // 제품 이미지3
+	private String p_content_img; // 상제 이미지
+	private Timestamp p_wdate; // 등록일
+	private Timestamp p_udate; // 수정일
+	private String p_delflag; // 삭제유무
 
-	public String getP_code() {
+	public int getP_code() {
 		return p_code;
 	}
 
-	public void setP_code(String p_code) {
+	public void setP_code(int p_code) {
 		this.p_code = p_code;
-	}
-
-	public String getP_name() {
-		return p_name;
-	}
-
-	public void setP_name(String p_name) {
-		this.p_name = p_name;
 	}
 
 	public String getP_category() {
@@ -91,52 +86,28 @@ public class ProductDto {
 		this.p_case = p_case;
 	}
 
-	public int getUnit_cost() {
-		return unit_cost;
+	public String getP_case2() {
+		return p_case2;
 	}
 
-	public void setUnit_cost(int unit_cost) {
-		this.unit_cost = unit_cost;
+	public void setP_case2(String p_case2) {
+		this.p_case2 = p_case2;
 	}
 
-	public String getP_event() {
-		return p_event;
+	public String getP_name() {
+		return p_name;
 	}
 
-	public void setP_event(String p_event) {
-		this.p_event = p_event;
+	public void setP_name(String p_name) {
+		this.p_name = p_name;
 	}
 
-	public String getDis_code() {
-		return dis_code;
+	public int getP_price() {
+		return p_price;
 	}
 
-	public void setDis_code(String dis_code) {
-		this.dis_code = dis_code;
-	}
-
-	public int getPrice() {
-		return price;
-	}
-
-	public void setPrice(int price) {
-		this.price = price;
-	}
-
-	public int getP_delcost() {
-		return p_delcost;
-	}
-
-	public void setP_delcost(int p_delcost) {
-		this.p_delcost = p_delcost;
-	}
-
-	public String getP_delfree() {
-		return p_delfree;
-	}
-
-	public void setP_delfree(String p_delfree) {
-		this.p_delfree = p_delfree;
+	public void setP_price(int p_price) {
+		this.p_price = p_price;
 	}
 
 	public int getP_point() {
@@ -147,76 +118,108 @@ public class ProductDto {
 		this.p_point = p_point;
 	}
 
-	public int getCalorie() {
-		return calorie;
+	public String getP_producer() {
+		return p_producer;
 	}
 
-	public void setCalorie(int calorie) {
-		this.calorie = calorie;
+	public void setP_producer(String p_producer) {
+		this.p_producer = p_producer;
 	}
 
-	public int getCapacity() {
-		return capacity;
+	public String getP_expiry() {
+		return p_expiry;
 	}
 
-	public void setCapacity(int capacity) {
-		this.capacity = capacity;
+	public void setP_expiry(String p_expiry) {
+		this.p_expiry = p_expiry;
 	}
 
-	public int getStock() {
-		return stock;
+	public String getP_type() {
+		return p_type;
 	}
 
-	public void setStock(int stock) {
-		this.stock = stock;
+	public void setP_type(String p_type) {
+		this.p_type = p_type;
 	}
 
-	public String getP_file1() {
-		return p_file1;
+	public String getP_capacity() {
+		return p_capacity;
 	}
 
-	public void setP_file1(String p_file1) {
-		this.p_file1 = p_file1;
+	public void setP_capacity(String p_capacity) {
+		this.p_capacity = p_capacity;
 	}
 
-	public String getP_file2() {
-		return p_file2;
+	public String getP_detail() {
+		return p_detail;
 	}
 
-	public void setP_file2(String p_file2) {
-		this.p_file2 = p_file2;
+	public void setP_detail(String p_detail) {
+		this.p_detail = p_detail;
 	}
 
-	public String getP_file3() {
-		return p_file3;
+	public String getP_location() {
+		return p_location;
 	}
 
-	public void setP_file3(String p_file3) {
-		this.p_file3 = p_file3;
+	public void setP_location(String p_location) {
+		this.p_location = p_location;
 	}
 
-	public String getP_file4() {
-		return p_file4;
+	public String getP_gene() {
+		return p_gene;
 	}
 
-	public void setP_file4(String p_file4) {
-		this.p_file4 = p_file4;
+	public void setP_gene(String p_gene) {
+		this.p_gene = p_gene;
 	}
 
-	public String getP_file5() {
-		return p_file5;
+	public String getP_import() {
+		return p_import;
 	}
 
-	public void setP_file5(String p_file5) {
-		this.p_file5 = p_file5;
+	public void setP_import(String p_import) {
+		this.p_import = p_import;
 	}
 
-	public String getP_file6() {
-		return p_file6;
+	public int getP_stock() {
+		return p_stock;
 	}
 
-	public void setP_file6(String p_file6) {
-		this.p_file6 = p_file6;
+	public void setP_stock(int p_stock) {
+		this.p_stock = p_stock;
+	}
+
+	public String getP_img1() {
+		return p_img1;
+	}
+
+	public void setP_img1(String p_img1) {
+		this.p_img1 = p_img1;
+	}
+
+	public String getP_img2() {
+		return p_img2;
+	}
+
+	public void setP_img2(String p_img2) {
+		this.p_img2 = p_img2;
+	}
+
+	public String getP_img3() {
+		return p_img3;
+	}
+
+	public void setP_img3(String p_img3) {
+		this.p_img3 = p_img3;
+	}
+
+	public String getP_content_img() {
+		return p_content_img;
+	}
+
+	public void setP_content_img(String p_content_img) {
+		this.p_content_img = p_content_img;
 	}
 
 	public Timestamp getP_wdate() {
@@ -235,12 +238,12 @@ public class ProductDto {
 		this.p_udate = p_udate;
 	}
 
-	public String getP_main() {
-		return p_main;
+	public String getP_delflag() {
+		return p_delflag;
 	}
 
-	public void setP_main(String p_main) {
-		this.p_main = p_main;
+	public void setP_delflag(String p_delflag) {
+		this.p_delflag = p_delflag;
 	}
 
 }

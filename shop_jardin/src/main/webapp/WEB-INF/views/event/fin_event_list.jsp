@@ -45,7 +45,7 @@ $(document).ready(function() {
 
 		<div id="location">
 			<ol>
-				<li><a href="main">HOME</a></li>
+				<li><a href="../main/main">HOME</a></li>
 				<li><a href="event_list">EVENT</a></li>
 				<li class="last">종료된 이벤트</li>
 			</ol>

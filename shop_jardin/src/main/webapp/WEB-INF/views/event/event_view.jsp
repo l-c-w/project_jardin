@@ -51,7 +51,7 @@ $(document).ready(function() {
 
 		<div id="location">
 			<ol>
-				<li><a href="main">HOME</a></li>
+				<li><a href="../main/main">HOME</a></li>
 				<li><a href="event_list">EVENT</a></li>
 				<li class="last">진행중 이벤트</li>
 			</ol>
@@ -156,7 +156,7 @@ $(document).ready(function() {
 									<input type="text" class="replyType emptySe" placeholder=" 댓글을 작성하려면 로그인을 해주세요." readonly>
 								</li>
 								<li class="btn">
-									<input type="button" class="replyBtn" value="등록">
+									<input type="button" class="replyBtn emptySe" value="등록">
 								</li>
 							</ul>
 						</form>

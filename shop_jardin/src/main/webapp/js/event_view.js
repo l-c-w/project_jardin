@@ -44,13 +44,14 @@ $(document).ready(function(){
 	$('.emptySe').click(function(){
 		var result = confirm('댓글을 작성하시려면 로그인 하셔야 합니다. 로그인 하시겠습니까?');
 		if(result){
-			window.location.replace('member/login');
+//			window.location.replace('/ex/member/login');
+			location.href='../member/login?returnUrl=' + encodeURIComponent(location);
 		}else{
 			
 		}				
 	});
 	
-	
+//	<a href="#none" onclick="location.href='/member/login.html?returnUrl=' + encodeURIComponent(location) ">로그인</a>	
 	
 	
 	

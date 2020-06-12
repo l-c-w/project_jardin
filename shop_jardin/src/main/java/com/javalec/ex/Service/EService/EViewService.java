@@ -23,16 +23,13 @@ public class EViewService implements EService {
 		EDao dao = sqlSession.getMapper(EDao.class);
 		String e_code = request.getParameter("e_code");
 		String temp = ""; // 페이징 임시변수 & 리퀘스트를 비교해서 page변수에 값을 할당하기 위함
-		String content = "";
 		temp = request.getParameter("page"); // 페이징 임시변수
-		content = request.getParameter("content");
 		int page = 0; // 페이징 임시변수
 		int limit = 3; // 1page = 게시글 10개
 
 		// EViewService
 		edto = dao.event_view(e_code);
 		model.addAttribute("event_view", edto);
-		System.out.println("temp : " + temp);
 
 		if (temp == null) { // 페이징 임시변수 & 리퀘스트를 비교해서 page변수에 값을 할당하기 위함
 			page = 1; // 최초 기본 1페이지 세팅

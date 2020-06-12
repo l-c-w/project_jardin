@@ -14,16 +14,25 @@ import com.javalec.ex.Dto.EDto.Event_commentDto;
 public class eventMethod {
 
 	
-	public void eventView(HttpServletRequest request, SqlSession sqlSession, Model model, String e_code) {
+	public void eventView(HttpServletRequest request, SqlSession sqlSession, Model model, String e_code, int page) {
 		EventDto edto = new EventDto(); // 본문 dto
 		ArrayList<Event_commentDto> list = new ArrayList<Event_commentDto>(); // 댓글 dto
 		EDao dao = sqlSession.getMapper(EDao.class);
-		int page = 1; // 페이징 : 무조건 1페이지로 가게 한다
+		String temp = ""; // 페이징 임시변수 & 리퀘스트를 비교해서 page변수에 값을 할당하기 위함
+		temp = request.getParameter("page"); // 페이징 임시변수
+		System.out.println("temp : " + temp);
+		page = 0; // 페이징 임시변수
 		int limit = 3; // 1page = 게시글 10개
-
+		
 		// EViewService
 		edto = dao.event_view(e_code);
 		model.addAttribute("event_view", edto);
+		
+		if (temp == null) { // 페이징 임시변수 & 리퀘스트를 비교해서 page변수에 값을 할당하기 위함
+			page = 1; // 최초 기본 1페이지 세팅
+		} else {
+			page = Integer.parseInt(temp); // 리퀘스트에 값이 있으면 page변수에 리퀘스트 값을 할당
+		}
 
 		// 페이지별 리스트 개수 가져오기
 		int startrow = (page - 1) * limit + 1; // (1 - 1) * 10 + 1 = 1

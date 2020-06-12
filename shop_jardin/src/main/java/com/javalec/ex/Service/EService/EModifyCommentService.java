@@ -25,12 +25,14 @@ public class EModifyCommentService implements EService {
 		String content = request.getParameter("content");
 		String requestUser = request.getParameter("requestUser"); // 수정 버튼을 누른 유저(세션)
 		String authUser = request.getParameter("authUser"); // 댓글 작성자
+		int page = Integer.parseInt(request.getParameter("page"));
 
 		// log
 		System.out.println("EModifyCommentService - ec_num : " + ec_num);
 		System.out.println("EModifyCommentService - content : " + content);
 		System.out.println("requestUser : " + requestUser);
 		System.out.println("authUser : " + authUser);
+		System.out.println("page : " + page);
 
 		if (authUser == null) {
 			//잘못된 접근
@@ -44,7 +46,7 @@ public class EModifyCommentService implements EService {
 
 			// EViewService
 			eventMethod eMethod = new eventMethod();
-			eMethod.eventView(request, sqlSession, model, e_code);
+			eMethod.eventView(request, sqlSession, model, e_code, page);
 			
 		}//else
 		

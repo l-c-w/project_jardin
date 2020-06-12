@@ -1,14 +1,14 @@
-package com.javalec.ex.Dto.EDto;
+package com.javalec.ex.Dto.PayDto;
 
 import java.sql.Timestamp;
 
-public class coupon_listDto {
+public class Coupon_listDto {
 
-	public coupon_listDto() {
+	public Coupon_listDto() {
 		
 	}
 
-	public coupon_listDto(String cou_num, String cou_code, String id, Timestamp issue_date, Timestamp exp_date,
+	public Coupon_listDto(String cou_num, String cou_code, String id, Timestamp issue_date, Timestamp exp_date,
 			Timestamp cou_state) {
 		this.cou_num=cou_num;
 		this.cou_code=cou_code;

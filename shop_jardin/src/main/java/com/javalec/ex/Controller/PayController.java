@@ -54,7 +54,7 @@ public class PayController {
 
 	@RequestMapping("mypage/coupon")
 	public String coupon_list(Model model) {
-		model.addAttribute("id", "test4");
+		model.addAttribute("id", "qwer");
 		pays = new CouponService();
 		pays.execute(sqlSession, model);
 

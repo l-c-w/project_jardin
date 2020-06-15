@@ -31,16 +31,16 @@
 		
 		
 		function aa(val) {
-		//step1의 value와 step2의 id와 일치한 애들을 class를 빼준다.(일단 전부 넣어주고 나서)
-		var case2= document.getElementsByClassName("case2");
+		//category의 value와 case의 id와 일치한 애들을 class를 빼준다.(일단 전부 넣어주고 나서)
+		var case = document.getElementsByClassNames("case");
 		var option = document.getElementById(val);
 		
 		
-		$(".case2").css("display", "none");
-		$(".case2").removeAttr("name");
+		$(".case").css("display", "none");
+		$(".case").removeAttr("name");
 		
 		$(option).css("display", "block");
-		$(option).attr("name", "p_case2")
+		$(option).attr("name", "p_case")
 		}
 		
 		function point_change(val) {
@@ -53,7 +53,7 @@
 			#input_form{
 			margin: 20px;	
 			}
-			table {
+			table {                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         
 				margin:0 auto;
 				 min-width: 1000px;
 			}
@@ -64,7 +64,7 @@
 			#btn_div{
 			 text-align: center;
 			}
-			.case2{
+			.case{
  				display : none;
 			}
 		</style>
@@ -79,38 +79,40 @@
 				<table border="1">
 					<tr>
 						<td>카테고리</td>
-						<td><select name="p_category" onchange="aa(this.value)">
+						<td>
+						<select name="p_category" onchange="aa(this.value)">
 								<option value="원두">원두</option>
 								<option value="커피 백">커피 백</option>
 								<option value="아이스 음료">아이스 음료</option>
 								<option value="인스턴트 커피">인스턴트 커피</option>
 								<option value="티 음료">티 음료</option>
-						</select></td>
+						</select>
+						</td>
 					</tr>
 					<tr>
 						<td>분류</td>
 						<td>
-						<select id="원두" class="case2" name="p_case2" style="display: inline;">
+						<select id="원두" class="case" name="p_case" style="display: inline;">
 								<option value="클래스">클래스</option>
 								<option value="바리스타">바리스타</option>
 								<option value="미스터즈">미스터즈</option>
 								<option value="데일리 로스팅">데일리 로스팅</option>
 						</select> 
-						<select id="인스턴트 커피" class="case2">
+						<select id="인스턴트 커피" class="case">
 								<option value="카페모리">카페모리</option>
 								<option value="에스프레소 스틱라떼">에스프레소 스틱라떼</option>
 								<option value="에스프레소 스틱">에스프레소 스틱</option>
 						</select> 
-						<select id="커피 백" class="case2">
+						<select id="커피 백" class="case">
 								<option value="커피 백">커피 백</option>
 								<option value="핸드 드립">핸드 드립</option>
 								<option value="마일드 커피 백">마일드 커피 백</option>
 						</select> 
-						<select id="아이스 음료" class="case2">
+						<select id="아이스 음료" class="case">
 								<option value="시그니처">시그니처</option>
 								<option value="카페리얼">카페리얼</option>
 						</select> 
-						<select id="티 음료" class="case2">
+						<select id="티 음료" class="case">
 								<option value="아워 티">아워 티</option>
 								<option value="아워 티 pet">아워 티 pet</option>
 								<option value="카페리얼 티 라떼">카페리얼 티 라떼</option>

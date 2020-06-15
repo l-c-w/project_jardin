@@ -129,6 +129,7 @@ $(document).ready(function() {
 						<form action="event_eWite" method="post">
 							<input type="hidden" value="${sessionScope.session_mem }" name="requestUser">
 							<input type="hidden" value="${event_view.e_code }" name="e_code">
+							<input type="hidden" value="${page }" name="page">
 							<ul>
 								<li class="in">
 									<p class="txt">총 <span class="orange">${comment_listcount }</span> 개의 댓글이 달려있습니다.</p>
@@ -197,6 +198,7 @@ $(document).ready(function() {
 								<input type="hidden" value="${e_com.id }" name="authUser">
 								<input type="hidden" value="${event_view.e_code }" name="e_code">
 								<input type="hidden" value="${e_com.ec_num }" name="ec_num">
+								<input type="hidden" value="${page }" name="page">
 								<ul id="coSub" class="comment_modifyV">
 									<fmt:formatDate var="ec_wdate1" value="${e_com.ec_wdate }" pattern="yyyy/MM/dd" />
 									<fmt:formatDate var="ec_wdate2" value="${e_com.ec_wdate }" pattern="HH:mm:ss" />

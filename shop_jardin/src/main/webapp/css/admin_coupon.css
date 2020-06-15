@@ -1,0 +1,22 @@
+@charset "UTF-8";
+
+.discount {width:50px; }
+
+.maxprice{width:70px;}
+
+#persent, #price, #cou_exp_div, #cou_exp_div2{display: inline;}
+
+.coupon_table {border-collapse: collapse;}
+
+.coupon_name {width: 400px;}
+
+.coupon_table tr td:nth-child(1){width: 142px;}
+.coupon_table tr td:nth-child(2){width: 600px;}
+
+.notice{font-size: 14px; line-height: 50%;}
+
+.submit_tr {text-align: right; margin-top: 5px;}
+
+table select { height: 21px;}
+
+.coupon_div {width: 745px;}

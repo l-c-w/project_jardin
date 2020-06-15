@@ -74,18 +74,18 @@
 	
 	<!-- count -->
 	<select id="getListCount" resultType="Integer">
-		SELECT count(*) as count FROM (select * from EVENT where E_END >= (SELECT SYSDATE FROM DUAL))
+		SELECT count(*) FROM (select * from EVENT where E_END >= (SELECT SYSDATE FROM DUAL))
 	</select>
 	<select id="getListCountAll" resultType="Integer">
-		SELECT count(*) as count FROM EVENT where E_END >= (SELECT SYSDATE FROM DUAL) 
+		SELECT count(*) FROM EVENT where E_END >= (SELECT SYSDATE FROM DUAL) 
 		and (E_TITLE like '%' || #{param1} || '%' or E_CONTENT like '%' || #{param1} || '%')
 	</select>
 	<select id="getListCountTit" resultType="Integer">
-		SELECT count(*) as count FROM EVENT where E_END >= (SELECT SYSDATE FROM DUAL) 
+		SELECT count(*) FROM EVENT where E_END >= (SELECT SYSDATE FROM DUAL) 
 		and (E_TITLE like '%' || #{param1} || '%')
 	</select>
 	<select id="getListCountCon" resultType="Integer">
-		SELECT count(*) as count FROM EVENT where E_END >= (SELECT SYSDATE FROM DUAL) 
+		SELECT count(*) FROM EVENT where E_END >= (SELECT SYSDATE FROM DUAL) 
 		and (E_CONTENT like '%' || #{param1} || '%')
 	</select>
 	

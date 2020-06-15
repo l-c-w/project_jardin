@@ -96,5 +96,11 @@ public class AController {
 		
 		return success;
 	}
+	
+	@RequestMapping("admin/admin_coupon")
+	public String admin_coupon(Model model) {
+
+		return "admin/admin_coupon";
+	}
 
 }

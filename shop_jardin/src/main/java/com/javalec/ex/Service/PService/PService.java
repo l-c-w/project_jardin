@@ -7,6 +7,5 @@ import org.springframework.ui.Model;
 
 public interface PService {
 
-	void execute(HttpServletRequest request,SqlSession sqlSession, Model model);
 
 }

@@ -2,6 +2,7 @@ package com.javalec.ex.Dao;
 
 import java.sql.Timestamp;
 import java.util.ArrayList;
+import java.util.List;
 
 import com.javalec.ex.Dto.CDto.C_ReviewDto;
 import com.javalec.ex.Dto.CDto.P_ReviewDto;
@@ -28,5 +29,22 @@ public interface PDao {
 	
 	//해당 상품에 대한 모든 리뷰 카운트
 	public int getListCount(String p_code);
+	
+	// 관리자
+	
+	// 상품 리스트 목록
+	public List<ProductDto> list3() throws Exception;
+
+	// 상품 작성
+	public void write(ProductDto dto) throws Exception;
+
+	// 상품 하나의 정보
+	ProductDto getProductInfo(int p_code) throws Exception;
+	
+	// 상품 수정
+	public void modify(ProductDto dto) throws Exception;
+	
+	// 상품 삭제
+	public int deleteProduct(int p_code) throws Exception;
 
 }

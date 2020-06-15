@@ -11,9 +11,9 @@ import com.javalec.ex.Dto.PDto.ProductDto;
 
 public interface PDao {
 
-	public ArrayList<ProductDto> list();
+	public ArrayList<ProductDto> Plist();
 
-	public ArrayList<ProductDto> list2(String p_category);
+	public ArrayList<ProductDto> Plist2(String p_category);
 
 	public ArrayList<ProductDto> list_category(String p_category);
 	
@@ -30,21 +30,7 @@ public interface PDao {
 	//해당 상품에 대한 모든 리뷰 카운트
 	public int getListCount(String p_code);
 	
-	// 관리자
-	
-	// 상품 리스트 목록
-	public List<ProductDto> list3() throws Exception;
 
-	// 상품 작성
-	public void write(ProductDto dto) throws Exception;
 
-	// 상품 하나의 정보
-	ProductDto getProductInfo(int p_code) throws Exception;
-	
-	// 상품 수정
-	public void modify(ProductDto dto) throws Exception;
-	
-	// 상품 삭제
-	public int deleteProduct(int p_code) throws Exception;
 
 }

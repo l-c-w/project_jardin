@@ -17,8 +17,8 @@ import com.javalec.ex.Dto.PDto.ProductDto;
 
 public class PhotoService implements PService {
 
-//	@Override
-//	public void execute(HttpServletRequest request, SqlSession sqlSession, Model model) {
-//
-//	}
+	@Override
+	public void execute(HttpServletRequest request, SqlSession sqlSession, Model model) {
+
+	}
 }

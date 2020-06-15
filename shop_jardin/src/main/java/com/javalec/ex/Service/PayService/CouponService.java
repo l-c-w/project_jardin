@@ -16,8 +16,9 @@ public class CouponService implements PayService {
 
 		PayDao payDao = sqlSession.getMapper(PayDao.class);
 
-		model.addAttribute("coupon_list", payDao.cou_list(id));
+		model.addAttribute("ucoupon_list", payDao.ucou_list(id));
 		model.addAttribute("usable_coupon", payDao.usable_coupon(id));
+		model.addAttribute("ncoupon_list", payDao.ncou_list(id));
 		model.addAttribute("usable_point", payDao.usable_point(id));
 	}
 

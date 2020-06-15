@@ -8,7 +8,7 @@ public class Coupon_listDto {
 
 	}
 
-	public Coupon_listDto(int exp_check, String cou_name, int cou_reward, Timestamp issue_date, Timestamp exp_date,
+	public Coupon_listDto(int exp_check, String cou_name, float cou_reward, Timestamp issue_date, Timestamp exp_date,
 			Timestamp cou_state) {
 		this.exp_check = exp_check;
 		this.cou_name = cou_name;
@@ -19,7 +19,8 @@ public class Coupon_listDto {
 	}
 
 	private String cou_name;
-	private int cou_reward, exp_check;
+	private int exp_check;
+	private float cou_reward;
 	private Timestamp issue_date, exp_date, cou_state;
 
 	public String getCou_name() {
@@ -30,11 +31,11 @@ public class Coupon_listDto {
 		this.cou_name = cou_name;
 	}
 
-	public int getCou_reward() {
+	public float getCou_reward() {
 		return cou_reward;
 	}
 
-	public void setCou_reward(int cou_reward) {
+	public void setCou_reward(float cou_reward) {
 		this.cou_reward = cou_reward;
 	}
 

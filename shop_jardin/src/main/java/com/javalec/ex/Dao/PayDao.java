@@ -31,9 +31,12 @@ public interface PayDao {
 	// 사용가능 포인트
 	public int usable_point(String id);
 
-	// 쿠폰리스트
-	public ArrayList<Coupon_listDto> cou_list(String id);
+	// 사용가능한 쿠폰리스트
+	public ArrayList<Coupon_listDto> ucou_list(String id);
 
 	// 사용가능 쿠폰갯수
 	public int usable_coupon(String id);
+
+	// 사용불가능한 쿠폰리스트
+	public ArrayList<Coupon_listDto> ncou_list(String id);
 }

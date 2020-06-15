@@ -1,6 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -21,6 +23,8 @@
 <script type="text/javascript" src="../js/common.js"></script>
 <script type="text/javascript" src="../js/jquery.easing.1.3.js"></script>
 <script type="text/javascript" src="../js/idangerous.swiper-2.1.min.js"></script>
+<script type="text/javascript" src="js/jquery-3.4.1.min.js"></script>
+<script src="https://t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 <script type="text/javascript" src="../js/jquery.anchor.js"></script>
 <!--[if lt IE 9]>
 <script type="text/javascript" src="../js/html5.js"></script>
@@ -28,6 +32,23 @@
 <![endif]-->
 <script type="text/javascript">
 $(document).ready(function() {
+	function openDaumZipAddress1() {
+		new daum.Postcode({
+			oncomplete: function(data) {
+				jQuery("#post").val(data.zonecode);	
+				jQuery("#address1").val(data.address);
+			}
+		}).open();
+	}
+	
+	function openDaumZipAddress2() {
+		new daum.Postcode({
+			oncomplete: function(data) {
+				jQuery("#del_post").val(data.zonecode);
+				jQuery("#del_address1").val(data.address);
+			}
+		}).open();
+	}
 	
 
 
@@ -74,36 +95,39 @@ $(document).ready(function() {
 								<th scope="col">합계</th>
 							</thead>
 							<tbody>
-								
+								<form action="payment/coupon_list" method="post" name="product_infos">
+								<c:forEach var="fromcart" items="${from_cart }">
 								<tr>
+									<input type="hidden" name="cart_code" value="${fromcart.cart_code }">
 									<td class="left">
 										<p class="img"><img src="../images/img/sample_product.jpg" alt="상품" width="66" height="66" /></p>
 
 										<ul class="goods">
 											<li>
-												<a href="#">쟈뎅 오리지널 콜롬비아 페레이라 원두커피백 15p</a>
+												<a href="#">${fromcart.p_name }</a>
 											</li>
 										</ul>
 									</td>
 									<td class="tnone">
-										123,400 원
+										<fmt:formatNumber value="${fromcart.price }" pattern="#,###,###,###"/> 
 
 										<!-- 회원일 시 -->
-										<br/><span class="pointscore">1,234 Point</span>
+										<br/><span class="pointscore"><fmt:formatNumber value="${fromcart.p_point }" pattern="#,###,###,###"/> </span>
 										<!-- //회원일 시 -->
 									</td>
-									<td>1 개</td>
-									<td>123,400 원</td>
+									<td>${fromcart.amount } 개</td>
+									<td>${fromcart.price*fromcart.amount } 원</td>
 								</tr>
-								
+								</c:forEach>
+								</form>
 							</tbody>
 						</table>
 					</div>
 					<div class="poroductTotal">
 						<ul>	
-							<li>상품 합계금액 <strong>1,132,310</strong> 원</li>
+							<li>상품 합계금액 <strong>${get_order.total_price }</strong> 원</li>
 							<li>+ 배송비 <strong>2,500</strong> 원</li>
-							<li>= 총 합계 <strong>1,134,810</strong> 원</li>
+							<li>= 총 합계 <strong>${get_order.total_price+2500 }</strong> 원</li>
 						</ul>
 					</div>
 					<!-- //주문 상품 -->
@@ -128,7 +152,7 @@ $(document).ready(function() {
 							<tbody>
 								<tr>
 									<th scope="row"><span>이름</span></th>
-									<td><input type="text" class="w134" value="홍길동" /></td>
+									<td><input type="text" class="w134" value="${buyer_info.name }" name="name"/></td>
 								</tr>
 
 								<tr>
@@ -136,11 +160,11 @@ $(document).ready(function() {
 									<td>
 										<ul class="pta">
 											<li>
-												<input type="text" class="w134" />&nbsp;
+												<input type="text" class="w134" value="${buyer_info.post }" name="post">
 											</li>
-											<li><a href="../member/zip.html" class="addressBtn"><span>우편번호 찾기</span></a></li>
-											<li class="pt5"><input type="text" class="addressType2" /></li>
-											<li class="pt5"><input type="text" class="addressType2" /></li>
+											<li><a class="addressBtn" onclick="openDaumZipAddress1()"><span>우편번호 찾기</span></a></li>
+											<li class="pt5"><input type="text" class="addressType2" value="${buyer_info.address1 }" name="address1"/></li>
+											<li class="pt5"><input type="text" class="addressType2" value="${address1.address2 }" name="address2"/></li>
 										</ul>
 									</td>
 								</tr>
@@ -148,9 +172,11 @@ $(document).ready(function() {
 									<th scope="row"><span>이메일</span></th>
 									<td>
 										<ul class="pta">
-											<li><input type="text" class="w134" /></li>
+										<c:set var="email_front" value="${fn:substring(${buyer_info.email},0,fn:indexOf(${buyer_info.email},'@')) }"/>
+										<c:set var="email_end" value="${fn:substring(${buyer_info.email},fn:indexOf(${buyer_info.email},'@')+1,fn:length(${buyer_info.email})) }"/>
+											<li><input type="text" class="w134" value="${email_front }" name="email1"/></li>
 											<li><span class="valign">&nbsp;@&nbsp;</span></li>
-											<li class="r10"><input type="text" class="w134" /></li>
+											<li class="r10"><input type="text" class="w134" value="${email_end }" name="email2"/></li>
 											<li>
 												<select id="emailList">
 													<option value="#" selected="selected">직접입력</option>
@@ -179,7 +205,7 @@ $(document).ready(function() {
 									<td>
 										<ul class="pta">
 											<li>
-												<select>
+												<select name="phone1">
 													<option value="010" selected="selected">010</option>
 													<option value="011">011</option>
 													<option value="016">016</option>
@@ -189,45 +215,15 @@ $(document).ready(function() {
 												</select>
 											</li>
 											<li>&nbsp;<span class="valign">-</span>&nbsp;</li>
-											<li><input type="text" class="w74" maxlength="4" /> <span class="valign">-</span>&nbsp;</li>
-											<li class="r10"><input type="text" class="w74" maxlength="4" /></li>
+											<li><input type="text" class="w74" maxlength="4" value="${buyer_info.phone2}" name="phone2"/> <span class="valign">-</span>&nbsp;</li>
+											<li class="r10"><input type="text" class="w74" maxlength="4" value="${buyer_info.phone3}" name="phone3"/></li>
 										</ul>
 									</td>
 								</tr>
-								<tr>
-									<th scope="row"><span>전화번호</span></th>
-									<td>
-										<ul class="pta">
-											<li>
-												<select>
-													<option value="02" selected="selected">02</option>
-													<option value="031">031</option>
-													<option value="032">032</option>
-													<option value="033">033</option>
-													<option value="041">041</option>
-													<option value="042">042</option>
-													<option value="043">043</option>
-													<option value="051">051</option>
-													<option value="052">052</option>
-													<option value="053">053</option>
-													<option value="054">054</option>
-													<option value="055">055</option>
-													<option value="061">061</option>
-													<option value="062">062</option>
-													<option value="063">063</option>
-													<option value="064">064</option>
-													<option value="070">070</option>
-												</select>
-											</li>
-											<li>&nbsp;<span class="valign">-</span>&nbsp;</li>
-											<li><input type="text" class="w74" maxlength="4" /> <span class="valign">-</span>&nbsp;</li>
-											<li><input type="text" class="w74" maxlength="4" /></li>
-										</ul>
-									</td>
-								</tr>
+								
 								<tr>
 									<th scope="row"><span>비밀번호</span></th>
-									<td><input type="password" class="w134" /></td>
+									<td><input type="password" class="w134" name="nom_password"/> *비회원 주문시 입력</td>
 								</tr>
 							</tbody>
 						</table>
@@ -241,7 +237,7 @@ $(document).ready(function() {
 						
 						<input type="checkbox" id="infosame"/>
 						<label for="infosame">회원정보와 동일</label>
-					</h3>
+					</h3>	
 					<div class="checkDiv">
 						<table summary="수취자 주소를 입력할 수 있는 란으로 이름, 주소, 이메일, 휴대폰 번호, 전화번호 순으로 입력 하실수 있습니다." class="checkTable" border="1" cellspacing="0">
 							<caption>수취자 주소 입력</caption>
@@ -250,9 +246,12 @@ $(document).ready(function() {
 							<col width="*" />
 							</colgroup>
 							<tbody>
+								<form action="save_delinfo" method="post" name="save_delinfo">
+								<input type="hidden" name="pay_code" value="${get_order.pay_code }">
+								<input type="hidden" name="id" value="${get_order.id }">
 								<tr>
 									<th scope="row"><span>이름</span></th>
-									<td><input type="text" class="w134" value="홍길동" /></td>
+									<td><input type="text" class="w134" name="name"/></td>
 								</tr>
 
 								<tr>
@@ -260,11 +259,11 @@ $(document).ready(function() {
 									<td>
 										<ul class="pta">
 											<li>
-												<input type="text" class="w134" />&nbsp;
+												<input type="text" class="w134" name="del_post"/>
 											</li>
-											<li><a href="../member/zip.html" class="addressBtn"><span>우편번호 찾기</span></a></li>
-											<li class="pt5"><input type="text" class="addressType2" /></li>
-											<li class="pt5"><input type="text" class="addressType2" /></li>
+											<li><a onclick="openDaumZipAddress2()" class="addressBtn"><span>우편번호 찾기</span></a></li>
+											<li class="pt5"><input type="text" class="addressType2" name="del_address1" /></li>
+											<li class="pt5"><input type="text" class="addressType2" name="del_address2"/></li>
 										</ul>
 									</td>
 								</tr>
@@ -273,7 +272,7 @@ $(document).ready(function() {
 									<td>
 										<ul class="pta">
 											<li>
-												<select>
+												<select name="del_phone1">
 													<option value="010" selected="selected">010</option>
 													<option value="011">011</option>
 													<option value="016">016</option>
@@ -283,46 +282,16 @@ $(document).ready(function() {
 												</select>
 											</li>
 											<li>&nbsp;<span class="valign">-</span>&nbsp;</li>
-											<li><input type="text" class="w74" maxlength="4" /> <span class="valign">-</span>&nbsp;</li>
-											<li class="r10"><input type="text" class="w74" maxlength="4" /></li>
-										</ul>
-									</td>
-								</tr>
-								<tr>
-									<th scope="row"><span>전화번호</span></th>
-									<td>
-										<ul class="pta">
-											<li>
-												<select>
-													<option value="02" selected="selected">02</option>
-													<option value="031">031</option>
-													<option value="032">032</option>
-													<option value="033">033</option>
-													<option value="041">041</option>
-													<option value="042">042</option>
-													<option value="043">043</option>
-													<option value="051">051</option>
-													<option value="052">052</option>
-													<option value="053">053</option>
-													<option value="054">054</option>
-													<option value="055">055</option>
-													<option value="061">061</option>
-													<option value="062">062</option>
-													<option value="063">063</option>
-													<option value="064">064</option>
-													<option value="070">070</option>
-												</select>
-											</li>
-											<li>&nbsp;<span class="valign">-</span>&nbsp;</li>
-											<li><input type="text" class="w74" maxlength="4" /> <span class="valign">-</span>&nbsp;</li>
-											<li><input type="text" class="w74" maxlength="4" /></li>
+											<li><input type="text" class="w74" maxlength="4" name="del_phone2"/> <span class="valign">-</span>&nbsp;</li>
+											<li class="r10"><input type="text" class="w74" maxlength="4" name="del_phone3"/></li>
 										</ul>
 									</td>
 								</tr>
 								<tr>
 									<th scope="row"><span>배송시 <u>요구사항</u></span></th>
-									<td><textarea class="demandtta"></textarea></td>
+									<td><textarea class="demandtta" name="del_require"></textarea></td>
 								</tr>
+								</form>
 							</tbody>
 						</table>
 					</div>
@@ -341,7 +310,7 @@ $(document).ready(function() {
 							<tbody>
 								<tr>
 									<th scope="row"><span>총 주문금액</span></th>
-									<td>1,132,310 원</td>
+									<td>${get_order.total_price } 원</td>
 								</tr>
 								<tr>
 									<th scope="row"><span>배송비</span></th>
@@ -352,11 +321,11 @@ $(document).ready(function() {
 									<td>
 										<ul class="pta">
 											<li class="r10">
-												<input type="text" class="w134" />&nbsp;&nbsp;
+												<input type="text" class="w134" name="cou_code" />&nbsp;&nbsp;
 												<span class="valign"><strong>원</strong></span>
 											</li>
-											<li class="r10"><span class="valign">( 보유 쿠폰 내역 : 7장 )&nbsp;</span></li>
-											<li><a href="coupon_list.html" class="nbtn">쿠폰목록</a></li>
+											<li class="r10"><span class="valign">( 보유 쿠폰 내역 : ${usable_coupon }장 )&nbsp;</span></li>
+											<li onclick="product_infos.submit()"><a class="nbtn">쿠폰목록</a></li>
 										</ul>
 									</td>
 								</tr>

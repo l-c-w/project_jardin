@@ -34,15 +34,6 @@ public class PayController {
 		return "mypage/cart";
 	}
 
-	@PostMapping("payment/payment")
-	public String pay_statement(HttpServletRequest request, Model model) {
-		model.addAttribute("request", request);
-		pays = new Payment();
-		pays.execute(sqlSession, model);
-
-		return "payment/payment";
-	}
-
 	@RequestMapping("mypage/point")
 	public String point(Model model) {
 		model.addAttribute("id", "test4");
@@ -59,6 +50,24 @@ public class PayController {
 		pays.execute(sqlSession, model);
 
 		return "mypage/coupon";
+	}
+
+	@PostMapping("payment/payment")
+	public String pay_statement(HttpServletRequest request, Model model) {
+		model.addAttribute("request", request);
+		model.addAttribute("id", "qwer");
+		pays = new Payment();
+		pays.execute(sqlSession, model);
+
+		return "payment/payment";
+	}
+
+	@PostMapping("payment/coupon_list")
+	public String use_coupon(HttpServletRequest request, Model model) {
+		model.addAttribute("id", "qwer");
+		pays = new CouponService();
+		pays.execute(sqlSession, model);
+		return "payment/coupon_list";
 
 	}
 

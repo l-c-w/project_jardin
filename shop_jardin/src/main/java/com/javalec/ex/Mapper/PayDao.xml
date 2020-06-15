@@ -68,12 +68,22 @@
 	</select>
 	
 	
-	
-	<!-- 주문페이지 주문서 작성 
+	<!-- 주문페이지 주문서 작성--> 
 	<insert id="make_order">
 		insert into payment values(to_char(sysdate,'yyyyMMdd')||-payment_seq.nextval,
-		#{param1},'-',#{param2},'0','N',sysdate,#{param3},
-		'결제대기','-','-','-')
-	</insert>-->
+		#{param1},'-',0,'N',sysdate,#{param2},
+		'주문서작성','-','-','-')
+	</insert>
+	
+	<!-- 주문서 가져오기 -->
+	<select id="get_order" resultType="com.javalec.ex.Dto.PayDto.Payment_ListDto">
+		select * from(select * from payment where id=#{param1} and pay_state='주문서작성' order by pay_date desc) where ROWNUM=1
+	</select>
+	
+	<!-- 주문서작성중 취소된 주문건 찾아오기 -->
+	<select id="order_check" resultType="String">
+		select pay_state from payment where id='qwer' and pay_state='주문서작성'
+	</select>
+	
 	
 </mapper>

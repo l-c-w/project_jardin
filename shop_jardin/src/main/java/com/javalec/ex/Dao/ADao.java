@@ -16,5 +16,5 @@ public interface ADao {
 	public void modify(ProductDto dto) throws Exception;
 
 	// 상품 삭제
-	public void delete(int p_code) throws Exception;
+	public int delete(int p_code) throws Exception;
 }

@@ -27,4 +27,16 @@ public class AServiceImpl implements AService {
 
 		 dao.write(dto);
 	}
+
+	@Override
+	public void modify(ProductDto dto) throws Exception {
+		
+		dao.modify(dto);
+	}
+
+	@Override
+	public int delete(int p_code) throws Exception {
+		
+		return dao.delete(p_code);
+	}
 }

@@ -91,6 +91,7 @@ public class AController {
 	// 상품 삭제
 	@RequestMapping(value = "/product_delete")
 	public int product_delete(int p_code) throws Exception {
+		
 		int success= aservice.delete(p_code);
 		
 		return success;

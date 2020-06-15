@@ -300,7 +300,7 @@
 								<!--<td><button type="button" onclick="스크립트()">수정</button></td> -->
 								<td>
 									<button type="button"
-										onclick="location.href='product_updateForm?p_p_code=${pro.p_code}'">수정</button>
+										onclick="location.href='product_updateForm?p_code=${pro.p_code}'">수정</button>
 									<button type="button" onclick="delProduct(${pro.p_code})">삭제</button>
 								</td>
 							</tr>

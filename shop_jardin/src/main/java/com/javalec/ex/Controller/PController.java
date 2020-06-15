@@ -14,6 +14,8 @@ import com.javalec.ex.Service.PService.PListService;
 
 import com.javalec.ex.Dao.PDao;
 import com.javalec.ex.Service.PService.PService;
+import com.javalec.ex.Service.PService.PinquiryService;
+import com.javalec.ex.Service.PService.ReviewService;
 
 @Controller
 @RequestMapping("/product/*")

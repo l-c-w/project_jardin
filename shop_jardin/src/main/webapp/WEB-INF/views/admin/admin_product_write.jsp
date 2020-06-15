@@ -32,7 +32,7 @@
 		
 		function aa(val) {
 		//category의 value와 case의 id와 일치한 애들을 class를 빼준다.(일단 전부 넣어주고 나서)
-		var case = document.getElementsByClassNames("case");
+		var case2 = document.getElementsByClassNames("case");
 		var option = document.getElementById(val);
 		
 		
@@ -193,8 +193,8 @@
 					</tr>
 				</table>
 				<div id="btn_div">
-					<button type="button" onclick="#">취소</button>
-					<button type="button" onclick="#">등록</button>
+					<button type="button" onclick="">취소</button>
+					<button type="button" onclick="">등록</button>
 				</div>
 			</div>
 		</form>

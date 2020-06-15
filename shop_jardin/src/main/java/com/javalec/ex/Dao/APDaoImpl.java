@@ -33,7 +33,7 @@ public class APDaoImpl implements APDao {
 	@Override
 	public ProductDto getProductInfo(int p_code) throws Exception {
 		
-		return null;
+		return sql.selectOne(namespace + ".getProductInfo" , p_code);
 	}
 
 	@Override

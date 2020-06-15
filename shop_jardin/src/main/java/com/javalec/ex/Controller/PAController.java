@@ -24,7 +24,6 @@ public class PAController {
 	@Inject
 	APService aps;
 	// 관리자 
-	
 
 		// 상품 리스트
 		@RequestMapping(value = "admin/admin_product_list")

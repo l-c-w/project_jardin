@@ -65,7 +65,7 @@
 	</update>
 
 	<!-- 상품 삭제처리 -->
-	<delete id="deleteProduct" parameterType="com.javalec.ex.Dto.PDto.ProductDto">
+	<delete id="delete">
 		delete from product where p_delflag='Y' and  p_code = #{p_code}
 	</delete>
 

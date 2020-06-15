@@ -7,6 +7,7 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <link rel="stylesheet" type="text/css" href="../css/admin_coupon.css" />
+<link rel="stylesheet" type="text/css" href="../css/admin_main.css" />
 <script type="text/javascript" src="../js/jquery.min.js"></script>
 <script type="text/javascript" src="../js/jquery.easing.1.3.js"></script>
 <script type="text/javascript" src="../js/idangerous.swiper-2.1.min.js"></script>
@@ -14,6 +15,8 @@
 <script type="text/javascript" src="../js/admin_coupon.js"></script>
 </head>
 <body>
+	<jsp:include page="admin_header.jsp" />
+
 	<section >
 		<div class="coupon_div">
 			<h2>쿠폰등록</h2>
@@ -29,17 +32,22 @@
 					<tr>
 						<td>혜택구분</td>
 						<td>
-							<select id="reward_sel" name="benefit">
+							<select name="benefit" id="reward_sel">
 								<option value="dis_per">할인율</option>
 								<option value="dis_pri">할인금액</option>
 							</select>
 							<div id="persent">
-								<input type="text" name="" class="discount" maxlength="6" value="">
+								<input type="text" name="persent" class="discount" maxlength="6" value="">
 								<span>%</span>
 							</div>
 							<div id="price">
+								<span>할인금액</span>
+								<input type="text" name="price" class="dis_price" maxlength="7" value="">
+								<span>원</span>
+							</div>
+							<div id="benefit_max">
 								<span>최대금액</span>
-								<input type="text" name="" class="maxprice" maxlength="7" value="">
+								<input type="text" name="price" class="maxprice" maxlength="7" value="">
 								<span>원</span>
 							</div>
 						</td>
@@ -76,13 +84,13 @@
 											<option value="${time }">${time }:00</option>
 										</c:if>
 									</c:forEach>
-								</select>	
+								</select>
 							</div>
 							
 							<div id="cou_exp_div2">
 								<!-- 실제 발급된 일시를 기준으로 입력한 일수의 기간까지 이용할 수 있습니다 -->
-								<input type="date" name="cou_end1">
-								<select name="cou_end2">
+								<input type="date" name="cou_end2_1">
+								<select name="cou_end2_2">
 									<c:forEach var="time" begin="0" end="23" step="1">
 										<c:if test="${time <= 9 }">
 											<option value="${time }">0${time }:00</option>

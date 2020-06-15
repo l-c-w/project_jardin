@@ -39,7 +39,7 @@ public class EController {
 	@RequestMapping("/event_list")	// 진행중 이벤트 리스트
 	public String event_list(HttpServletRequest request, Model model) {
 		es = new EListService();
-		es.execute( request,sqlSession, model);
+		es.execute(request,sqlSession, model);
 		return "event/event_list";
 	}
 	@RequestMapping("/event_view")	// 진행중 이벤트 뷰 (댓글 뷰 포함)

@@ -2,9 +2,9 @@
 
 .discount {width:50px; }
 
-.maxprice{width:70px;}
+.dis_price{width:70px;}
 
-#persent, #price, #cou_exp_div, #cou_exp_div2{display: inline;}
+#persent, #price, #cou_exp_div, #cou_exp_div2, #benefit_max{display: inline;}
 
 .coupon_table {border-collapse: collapse;}
 

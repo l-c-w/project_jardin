@@ -6,37 +6,124 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<link rel="stylesheet" type="text/css" href="../css/admin_coupon.css" />
+<script type="text/javascript" src="../js/jquery.min.js"></script>
+<script type="text/javascript" src="../js/jquery.easing.1.3.js"></script>
+<script type="text/javascript" src="../js/idangerous.swiper-2.1.min.js"></script>
+<script type="text/javascript" src="../js/jquery.anchor.js"></script>
+<script type="text/javascript" src="../js/admin_coupon.js"></script>
 </head>
 <body>
-	<section>
-		<div>
+	<section >
+		<div class="coupon_div">
 			<h2>쿠폰등록</h2>
 			<hr>
 			<form action="" method="post">
-				<table border="1">
+				<table border="1" class="coupon_table">
 					<tr>
-						<td>쿠폰이름<span>필수(이미지)</span></td>
+						<td>쿠폰이름<span> (필수)</span></td>
 						<td>
-							<input type="text" name="cou_name">
-						</td>
-					</tr>
-					<tr>
-						<td>쿠폰설명</td>
-						<td>
-							<input type="text" name="cou_info">
+							<input type="text" name="cou_name" class="coupon_name" required>
 						</td>
 					</tr>
 					<tr>
 						<td>혜택구분</td>
 						<td>
-							<select name="">
-								<option value="">할인율</option>
-								<option value="">할인율</option>
+							<select id="reward_sel" name="benefit">
+								<option value="dis_per">할인율</option>
+								<option value="dis_pri">할인금액</option>
 							</select>
-							<input type="text" name="">%
-							최대금액<input type="text" name="">원
+							<div id="persent">
+								<input type="text" name="" class="discount" maxlength="6" value="">
+								<span>%</span>
+							</div>
+							<div id="price">
+								<span>최대금액</span>
+								<input type="text" name="" class="maxprice" maxlength="7" value="">
+								<span>원</span>
+							</div>
 						</td>
 					</tr>
+					<tr>
+						<td>사용 기간</td>
+						<td>
+							<select name="cou_exp" id="cou_exp">
+								<option value="period">기간설정</option>
+								<option value="issued">쿠폰 발급일 기준</option>
+							</select>
+							
+							<div id="cou_exp_div">
+								<!-- 실제 발급된 일시에 관계없이 지정된 기간 및 시간 내에만 이용할 수 있습니다 -->
+								<input type="date" name="cou_start1">
+								<select name="cou_start2">
+									<c:forEach var="time" begin="0" end="23" step="1">
+										<c:if test="${time <= 9 }">
+											<option value="${time }">0${time }:00</option>
+										</c:if>
+										<c:if test="${time >= 10 }">
+											<option value="${time }">${time }:00</option>
+										</c:if>
+									</c:forEach>
+								</select>
+								<span> ~ </span>								
+								<input type="date" name="cou_end1">
+								<select name="cou_end2">
+									<c:forEach var="time" begin="0" end="23" step="1">
+										<c:if test="${time <= 9 }">
+											<option value="${time }">0${time }:00</option>
+										</c:if>
+										<c:if test="${time >= 10 }">
+											<option value="${time }">${time }:00</option>
+										</c:if>
+									</c:forEach>
+								</select>	
+							</div>
+							
+							<div id="cou_exp_div2">
+								<!-- 실제 발급된 일시를 기준으로 입력한 일수의 기간까지 이용할 수 있습니다 -->
+								<input type="date" name="cou_end1">
+								<select name="cou_end2">
+									<c:forEach var="time" begin="0" end="23" step="1">
+										<c:if test="${time <= 9 }">
+											<option value="${time }">0${time }:00</option>
+										</c:if>
+										<c:if test="${time >= 10 }">
+											<option value="${time }">${time }:00</option>
+										</c:if>
+									</c:forEach>
+								</select>
+							</div>
+							<p class="notice">기간설정 : 실제 발급된 일시에 관계없이 지정된 기간 및 시간 내에만 이용할 수 있습니다.</p>
+							<p class="notice">쿠폰 발급일 기준 : 실제 발급된 일시를 기준으로 입력한 일수의 기간까지 이용할 수 있습니다.</p>
+						</td>
+					</tr>
+					<tr>
+						<td>쿠폰적용 상품 선택</td>
+						<td>
+							<select name="p_category">
+								<option value="p_ca_all">모두적용</option>
+								<c:forEach var="pdto" items="${pdto }">
+									<option value="${pdto.p_category }">원두</option>
+								</c:forEach>
+							</select>
+						</td>
+					</tr>
+				</table>
+				<div class="submit_tr">
+					<input type="submit" value="등록">
+				</div>
+			</form>
+	
+	
+	
+		</div>
+	</section>
+	
+</body>
+</html>
+
+<!-- 
+
 					<tr>
 						<td>쿠폰사용<span></span></td>
 						<td>
@@ -53,47 +140,5 @@
 							</select>
 						</td>
 					</tr>
-					<tr>
-						<td>사용 기간</td>
-						<td>
-							<select name="">
-								<option value="">기간설정</option>
-								<option value="">기간설정</option>
-							</select>
-							
-							<input type="date" name="cou_start1">
-							<select name="cou_start2">
-								<option value="0">00:00</option>
-								<option value="1">01:00</option>
-							</select>
-							
-							<span> ~ </span>
-							
-							<input type="date" name="cou_end1">
-							<select name="cou_end2">
-								<option value="0">00:00</option>
-								<option value="1">01:00</option>
-							</select>
-						</td>
-					</tr>
-					<tr>
-						<td>쿠폰적용 상품 선택</td>
-						<td>
-							<select name="">
-								<option value="">모두적용</option>
-								<option value="">원두</option>
-								<option value="">커피믹스</option>
-								<option value="">드립커피</option>
-							</select>
-						</td>
-					</tr>
-				</table>
-			</form>
-	
-	
-	
-		</div>
-	</section>
-	
-</body>
-</html>
+					
+ -->

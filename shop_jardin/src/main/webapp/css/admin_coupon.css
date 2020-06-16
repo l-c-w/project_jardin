@@ -10,13 +10,14 @@
 
 .coupon_name {width: 400px;}
 
-.coupon_table tr td:nth-child(1){width: 142px;}
-.coupon_table tr td:nth-child(2){width: 600px;}
+.coupon_table tr td *{font-size: 14px; }
+.coupon_table tr td:nth-child(1){width: 162px; font-size: 14px;}
+.coupon_table tr td:nth-child(2){width: 1100px;}
 
-.notice{font-size: 14px; line-height: 50%;}
+.notice{font-size: 13px; line-height: 100%;}
 
 .submit_tr {text-align: right; margin-top: 5px;}
 
-table select { height: 21px;}
+table select { height: 21px; font-size: 14px;}
 
-.coupon_div {width: 745px;}
+.coupon_div {width: 1100px; text-align: left; padding: 10px;}

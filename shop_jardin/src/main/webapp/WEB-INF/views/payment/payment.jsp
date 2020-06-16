@@ -16,41 +16,26 @@
 <link rel="stylesheet" type="text/css" href="../css/reset.css?v=Y" />
 <link rel="stylesheet" type="text/css" href="../css/layout.css?v=Y" />
 <link rel="stylesheet" type="text/css" href="../css/content.css?v=Y" />
-<script type="text/javascript" src="../js/jquery.min.js"></script>
-<script type="text/javascript" src="../js/top_navi.js"></script>
+<script  src="http://code.jquery.com/jquery-latest.min.js"></script>
+<script src="http://code.jquery.com/jquery-migrate-1.2.1.js"></script>
+<!-- <script type="text/javascript" src="../js/jquery.min.js"></script> -->
+ <script type="text/javascript" src="../js/top_navi.js"></script>
 <script type="text/javascript" src="../js/left_navi.js"></script>
 <script type="text/javascript" src="../js/main.js"></script>
 <script type="text/javascript" src="../js/common.js"></script>
-<script type="text/javascript" src="../js/jquery.easing.1.3.js"></script>
+<!-- <script type="text/javascript" src="../js/jquery.easing.1.3.js"></script> -->
 <script type="text/javascript" src="../js/idangerous.swiper-2.1.min.js"></script>
-<script type="text/javascript" src="js/jquery-3.4.1.min.js"></script>
 <script src="https://t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
-<script type="text/javascript" src="../js/jquery.anchor.js"></script>
+<!-- <script type="text/javascript" src="../js/jquery.anchor.js"></script> -->
 <!--[if lt IE 9]>
 <script type="text/javascript" src="../js/html5.js"></script>
 <script type="text/javascript" src="../js/respond.min.js"></script>
 <![endif]-->
-<script type="text/javascript">
-$(document).ready(function() {
-	function openDaumZipAddress1() {
-		new daum.Postcode({
-			oncomplete: function(data) {
-				jQuery("#post").val(data.zonecode);	
-				jQuery("#address1").val(data.address);
-			}
-		}).open();
-	}
-	
-	function openDaumZipAddress2() {
-		new daum.Postcode({
-			oncomplete: function(data) {
-				jQuery("#del_post").val(data.zonecode);
-				jQuery("#del_address1").val(data.address);
-			}
-		}).open();
-	}
-	
 
+<script type="text/javascript">
+	
+$(document).ready(function() {
+	
 
 });
 </script>
@@ -109,14 +94,14 @@ $(document).ready(function() {
 										</ul>
 									</td>
 									<td class="tnone">
-										<fmt:formatNumber value="${fromcart.price }" pattern="#,###,###,###"/> 
+										<fmt:formatNumber value="${fromcart.p_price }" pattern="#,###,###,###"/> 
 
 										<!-- 회원일 시 -->
 										<br/><span class="pointscore"><fmt:formatNumber value="${fromcart.p_point }" pattern="#,###,###,###"/> </span>
 										<!-- //회원일 시 -->
 									</td>
 									<td>${fromcart.amount } 개</td>
-									<td>${fromcart.price*fromcart.amount } 원</td>
+									<td>${fromcart.p_price*fromcart.amount } 원</td>
 								</tr>
 								</c:forEach>
 								</form>
@@ -152,7 +137,7 @@ $(document).ready(function() {
 							<tbody>
 								<tr>
 									<th scope="row"><span>이름</span></th>
-									<td><input type="text" class="w134" value="${buyer_info.name }" name="name"/></td>
+									<td><input type="text" class="w134" value="${buyer_info.name }" name="name" id="name"/></td>
 								</tr>
 
 								<tr>
@@ -160,11 +145,11 @@ $(document).ready(function() {
 									<td>
 										<ul class="pta">
 											<li>
-												<input type="text" class="w134" value="${buyer_info.post }" name="post">
+												<input type="text" class="w134" value="${buyer_info.post }" name="post" id="post">
 											</li>
-											<li><a class="addressBtn" onclick="openDaumZipAddress1()"><span>우편번호 찾기</span></a></li>
-											<li class="pt5"><input type="text" class="addressType2" value="${buyer_info.address1 }" name="address1"/></li>
-											<li class="pt5"><input type="text" class="addressType2" value="${address1.address2 }" name="address2"/></li>
+											<li style="cursor: pointer;" name="openDaumZipAddress1" onclick="openDaumZipAddress1()"><a class="addressBtn"><span>우편번호 찾기</span></a></li>
+											<li class="pt5"><input type="text" class="addressType2" value="${buyer_info.address1 }" name="address1" id="address1"></li>
+											<li class="pt5"><input type="text" class="addressType2" value="${buyer_info.address2 }" name="address2" id="address2"></li>
 										</ul>
 									</td>
 								</tr>
@@ -172,11 +157,12 @@ $(document).ready(function() {
 									<th scope="row"><span>이메일</span></th>
 									<td>
 										<ul class="pta">
-										<c:set var="email_front" value="${fn:substring(${buyer_info.email},0,fn:indexOf(${buyer_info.email},'@')) }"/>
-										<c:set var="email_end" value="${fn:substring(${buyer_info.email},fn:indexOf(${buyer_info.email},'@')+1,fn:length(${buyer_info.email})) }"/>
-											<li><input type="text" class="w134" value="${email_front }" name="email1"/></li>
+										<c:set var="email" value="${buyer_info.email }"/>
+										<c:set var="email_front" value="${fn:substringBefore(email,'@') }"/>
+										<c:set var="email_end" value="${fn:substringAfter(email,'@') }"/>
+											<li><input type="text" class="w134" value="${email_front }" name="email1"/ id="email1"></li>
 											<li><span class="valign">&nbsp;@&nbsp;</span></li>
-											<li class="r10"><input type="text" class="w134" value="${email_end }" name="email2"/></li>
+											<li class="r10"><input type="text" class="w134" value="${email_end }" name="email2" id="email2"/></li>
 											<li>
 												<select id="emailList">
 													<option value="#" selected="selected">직접입력</option>
@@ -205,7 +191,7 @@ $(document).ready(function() {
 									<td>
 										<ul class="pta">
 											<li>
-												<select name="phone1">
+												<select name="phone1" id="phone1">
 													<option value="010" selected="selected">010</option>
 													<option value="011">011</option>
 													<option value="016">016</option>
@@ -215,8 +201,8 @@ $(document).ready(function() {
 												</select>
 											</li>
 											<li>&nbsp;<span class="valign">-</span>&nbsp;</li>
-											<li><input type="text" class="w74" maxlength="4" value="${buyer_info.phone2}" name="phone2"/> <span class="valign">-</span>&nbsp;</li>
-											<li class="r10"><input type="text" class="w74" maxlength="4" value="${buyer_info.phone3}" name="phone3"/></li>
+											<li><input type="text" class="w74" maxlength="4" value="${buyer_info.phone2}" name="phone2" id="phone2"/> <span class="valign">-</span>&nbsp;</li>
+											<li class="r10"><input type="text" class="w74" maxlength="4" value="${buyer_info.phone3}" name="phone3" id="phone3"/></li>
 										</ul>
 									</td>
 								</tr>
@@ -235,7 +221,7 @@ $(document).ready(function() {
 					<h3 class="dep">
 						수취자 주소 입력
 						
-						<input type="checkbox" id="infosame"/>
+						<input type="checkbox" id="infosame" name="infosame"/>
 						<label for="infosame">회원정보와 동일</label>
 					</h3>	
 					<div class="checkDiv">
@@ -251,7 +237,7 @@ $(document).ready(function() {
 								<input type="hidden" name="id" value="${get_order.id }">
 								<tr>
 									<th scope="row"><span>이름</span></th>
-									<td><input type="text" class="w134" name="name"/></td>
+									<td><input type="text" class="w134" name="del_name" id="del_name"/></td>
 								</tr>
 
 								<tr>
@@ -259,11 +245,11 @@ $(document).ready(function() {
 									<td>
 										<ul class="pta">
 											<li>
-												<input type="text" class="w134" name="del_post"/>
+												<input type="text" class="w134" name="del_post" id="del_post"/>
 											</li>
-											<li><a onclick="openDaumZipAddress2()" class="addressBtn"><span>우편번호 찾기</span></a></li>
-											<li class="pt5"><input type="text" class="addressType2" name="del_address1" /></li>
-											<li class="pt5"><input type="text" class="addressType2" name="del_address2"/></li>
+											<li style="cursor: pointer; name="openDaumZipAddress2" onclick="openDaumZipAddress2()"><a class="addressBtn"><span>우편번호 찾기</span></a></li>
+											<li class="pt5"><input type="text" class="addressType2" name="del_address1" id="del_address1"/></li>
+											<li class="pt5"><input type="text" class="addressType2" name="del_address2" id="del_address2"/></li>
 										</ul>
 									</td>
 								</tr>
@@ -272,7 +258,7 @@ $(document).ready(function() {
 									<td>
 										<ul class="pta">
 											<li>
-												<select name="del_phone1">
+												<select name="del_phone1" id="del_phone1">
 													<option value="010" selected="selected">010</option>
 													<option value="011">011</option>
 													<option value="016">016</option>
@@ -282,8 +268,8 @@ $(document).ready(function() {
 												</select>
 											</li>
 											<li>&nbsp;<span class="valign">-</span>&nbsp;</li>
-											<li><input type="text" class="w74" maxlength="4" name="del_phone2"/> <span class="valign">-</span>&nbsp;</li>
-											<li class="r10"><input type="text" class="w74" maxlength="4" name="del_phone3"/></li>
+											<li><input type="text" class="w74" maxlength="4" name="del_phone2" id="del_phone2"/> <span class="valign">-</span>&nbsp;</li>
+											<li class="r10"><input type="text" class="w74" maxlength="4" name="del_phone3" id="del_phone3"/></li>
 										</ul>
 									</td>
 								</tr>
@@ -651,19 +637,6 @@ $(function(){
 		var couponCheck = 320;
 	}
 
-	$(".addressBtn").fancybox({
-		'autoDimensions'    : false,
-		'showCloseButton'	: false,
-		'width' : layerCheck,
-		'padding' : 0,
-		'type'			: 'iframe',
-		'onComplete' : function() {
-			$('#fancybox-frame').load(function() { // wait for frame to load and then gets it's height
-			$('#fancybox-content').height($(this).contents().find('body').height());
-			});
-		}
-	});
-
 	$(".nbtn").fancybox({
 		'autoDimensions'    : false,
 		'showCloseButton'	: false,
@@ -679,8 +652,36 @@ $(function(){
 		}
 	});
 
-
+	
+	
+		
+	
+	
 });
+
+function openDaumZipAddress1() {
+	new daum.Postcode({
+		oncomplete: function(data) {
+			jQuery("#post").val(data.zonecode);	
+			jQuery("#address1").val(data.address);
+		}
+	}).open();
+}
+
+function openDaumZipAddress2() {
+	new daum.Postcode({
+		oncomplete: function(data) {
+			jQuery("#del_post").val(data.zonecode);	
+			jQuery("#del_address1").val(data.address);
+		}
+	}).open();
+}
+
+
+
+	
+/* document.form1.email2.value =document.form1.lstMail[document.form1.lstMail.selectedIndex].value; */
+
 </script>
 
 

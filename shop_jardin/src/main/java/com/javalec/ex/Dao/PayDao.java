@@ -14,7 +14,7 @@ public interface PayDao {
 	public ArrayList<CartDto> cart_view(String id);
 
 	// 장바구니선택상품 주문페이지로 이동하기
-	public CartDto go_order(String cart);
+	public CartDto go_order(String id, String cart);
 
 	// 적립포인트 리스트,총액
 	public ArrayList<PointDto> point_list(String id);

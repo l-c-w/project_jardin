@@ -14,7 +14,7 @@ $(document).ready(function(){
 //		$(".modi").not(index).parent().show();
 
 	});
-	$(".reset_re").click(function(){
+	$(".reset_re").click(function(){	
 		var index2 = $(".reset_re").index(this);
 		$(".comment_modifyM").eq(index2).hide();
 		var test2 = $(".modi").eq(index2).parents('ul');

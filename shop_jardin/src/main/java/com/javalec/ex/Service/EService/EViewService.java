@@ -19,6 +19,8 @@ public class EViewService implements EService {
 		
 		// 변수 선언
 		EventDto edto = new EventDto(); // 본문 dto
+		EventDto edtoNext = new EventDto(); // 다음글 dto
+		EventDto edtoPrev = new EventDto(); // 이전글 dto
 		ArrayList<Event_commentDto> list = new ArrayList<Event_commentDto>(); // 댓글 dto
 		EDao dao = sqlSession.getMapper(EDao.class);
 		String e_code = request.getParameter("e_code");
@@ -29,7 +31,6 @@ public class EViewService implements EService {
 
 		// EViewService
 		edto = dao.event_view(e_code);
-		model.addAttribute("event_view", edto);
 
 		if (temp == null) { // 페이징 임시변수 & 리퀘스트를 비교해서 page변수에 값을 할당하기 위함
 			page = 1; // 최초 기본 1페이지 세팅
@@ -52,22 +53,37 @@ public class EViewService implements EService {
 		if (endpage > startpage + 10 - 1)
 			endpage = startpage + 10 - 1;
 		// EViewService 끝
-
+		
+		// eNextView, ePrevView
+		edtoNext = dao.eNextView(e_code);
+		edtoPrev = dao.ePrevView(e_code);
 
 		// ECommentService
 		list = dao.event_comment(e_code, startrow, endrow);
 				
 
 		// model
+		model.addAttribute("event_view", edto);
 		model.addAttribute("event_comment", list);
-
 		model.addAttribute("comment_listcount", listcount);
 		model.addAttribute("page", page);
 		model.addAttribute("maxpage", maxpage);
 		model.addAttribute("startpage", startpage);
 		model.addAttribute("endpage", endpage);
-		model.addAttribute("e_code", e_code);
+		model.addAttribute("e_code", e_code);		
+		
+		if(edtoNext == null) {
+			System.out.println("edtoNext : 데이터가 없습니다.");
+		}else {
+			model.addAttribute("edtoNext", edtoNext);
+		}
+		if(edtoPrev == null) {
+			System.out.println("edtoPrev : 데이터가 없습니다.");
+		}else {
+			model.addAttribute("edtoPrev", edtoPrev);
+		}
 
+		
 		// log
 		System.out.println("e_code : " + e_code);
 		System.out.println("listcount : " + listcount);
@@ -75,7 +91,8 @@ public class EViewService implements EService {
 		System.out.println("maxpage : " + maxpage);
 		System.out.println("startpage : " + startpage);
 		System.out.println("endpage : " + endpage);
-		System.out.println("EventDto - e_end : " + edto.getE_end());
+//		System.out.println("edtoPrev : " + edtoPrev.getE_code());
+//		System.out.println("edtoPrev : " + edtoPrev.getE_title());
 
 		// ------------------------------------------------------------
 		for (int i = 0; i < list.size(); i++) {

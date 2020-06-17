@@ -33,24 +33,22 @@
 </style>
 <script type="text/javascript">
 		function delProduct(num){
-			
+	
 			if(confirm("해당 상품을 삭제처리 하시겠습니까? (해당 데이터는 삭제제품에서 확인/변경 가능합니다.)")){
 				$.ajax({
-				      url : "product_delete",
+				      url : 'product_delete?num='+num,
 				      method : "POST",
-				      data: JSON.stringify(num),
-				      dataType : "json",
-				      contentType: "application/json",
 				      success : function(val){
 				    	  if(val == 1){ //리턴값이 1이면 (=성공)
 					         alert("삭제처리 완료되었습니다.");
-// 							location.href="product_list";
-					         location.reload(); //페이지 새로고침
+ 							location.href="admin_product_list";
+					        // location.reload(); //페이지 새로고침
 				    	  }else{ // 0이면 실패
 				    		  alert("삭제처리 실패.");
 				    	  }
 				      },
-				      error : function(){
+				      error : function(err){
+				    	 
 				         alert("서버통신실패");
 				      }
 				   });
@@ -169,6 +167,7 @@
 	font-size: 13px;
 	display: inline-block;
 }
+#img {width: 20px; margin: 20px 0;}
 </style>
 </head>
 <body>
@@ -177,7 +176,6 @@
 		<h1>제품 리스트</h1>
 		<div id="main_list">
 			<div id="main_user_list">
-				<h2>임시로 놔두기</h2>
 				<div id="search_form">
 					<form action="product_searchList" name="inputform" method="post">
 						<table border="1">
@@ -285,7 +283,10 @@
 								<td><input type="checkbox"></td>
 								<td>${status.count}</td>
 								<td>${pro.p_code}</td>
-								<td>${pro.p_img1}${pro.p_img2}${pro.p_img3}
+								<td id="img">
+								<img src="../${pro.p_img1}"/>
+								<img src="../${pro.p_img2}"/>
+								<img src="../${pro.p_img3}"/>
 									<%--<img alt="썸네일" src="${pro.p_img1}"> --%>
 									<%--<img alt="상단이미지1" src="${pro.p_img1}"> --%>
 								    <%--<img alt="상단이미지2" src="${pro.p_img2}"> --%>
@@ -299,8 +300,8 @@
 								<td>${pro.p_delflag}</td>
 								<!--<td><button type="button" onclick="스크립트()">수정</button></td> -->
 								<td>
-									<button type="button" onclick="location.href='product_updateForm?p_code=${pro.p_code}'">수정</button>
-									<button type="button" onclick="delProduct(${pro.p_code})">삭제</button>
+								<button type="button" onclick="location.href='product_updateForm?p_code=${pro.p_code}'">수정</button>
+								<button type="button" onclick="delProduct(${pro.p_code})">삭제</button>
 								</td>
 							</tr>
 						</c:forEach>

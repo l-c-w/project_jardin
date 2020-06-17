@@ -43,8 +43,8 @@ public class APServiceImpl implements APService {
 	}
 	//상품 삭제
 	@Override
-	public int deleteProduct(int p_code) throws Exception {
+	public void deleteProduct(String p_code) throws Exception {
 		
-		return dao.delete(p_code);
+		dao.delete(p_code);
 	}
 }

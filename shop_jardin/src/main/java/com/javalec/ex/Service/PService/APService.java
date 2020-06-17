@@ -19,5 +19,5 @@ public interface APService {
 		public void modify(ProductDto dto) throws Exception;
 
 		// 상품 삭제
-		public int deleteProduct(int p_code) throws Exception;
+		public void deleteProduct(String p_code) throws Exception;
 }

@@ -44,9 +44,9 @@ public class APDaoImpl implements APDao {
 	}
 
 	@Override
-	public int delete(int p_code) throws Exception {
+	public void delete(String p_code) throws Exception {
 		
-		return sql.delete(namespace+ ".delete", p_code);
+		sql.delete(namespace+ ".delete", p_code);
 	}
 
 }

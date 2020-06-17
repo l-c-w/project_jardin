@@ -21,24 +21,24 @@
 <!-- <!-- 페이지 로딩시 초기화 --> 
 		<script>
 		
-		$(document).ready(function(){ //페이지 로딩시 실행
+		 $(document).ready(function(){ //페이지 로딩시 실행
 				
 			//넘어온 value 넣어주기		
 			//case
 			
 			//#p_category = select id
 			$("#p_category option").each(function(){ //select box의 옵션을 전부 들고와서 for문처럼 돌림
-			    if($(this).val()=="${dto.p_category}"){ //이 옵션의 값이 넘어온 값과 같다면
-			      $(this).attr("selected","selected"); // attr적용안될경우 prop으로 
+			    if($(this).val()=="${p_category}"){ //이 옵션의 값이 넘어온 값과 같다면
+			      $(this).prop("selected","selected"); // attr적용안될경우 prop으로 
 			      $(".case").css("display", "none");
-					$("#${dto.p_category}").css("display", "block");
+					$("#${p_category}").css("display", "block");
 			    }
 			});
 			
 			//case2
 			$(".case option").each(function(){
-			    if($(this).val()=="${dto.p_case}"){
-			      $(this).attr("selected","selected"); // attr적용안될경우 prop으로 
+			    if($(this).val()=="${p_case}"){
+			      $(this).prop("selected","selected"); // attr적용안될경우 prop으로 
 			    }
 			});
 			
@@ -55,7 +55,7 @@
 		$(".case").css("display", "none");
 		$(".case").removeAttr("name");
 		
-		$(option).css("display", "block");
+		$(option).css("display", "inherit");
 		$(option).attr("name", "p_case")
 		}
 		
@@ -71,10 +71,11 @@
 			}
 			table {
 				margin:0 auto;
-				 min-width: 1000px;
+			    min-width: 1000px;
 			}
+			
 			table tr td:NTH-OF-TYPE(1) {
-				width: 100px;
+				width: 200px;
 				height: 30px;
 			}
 			#btn_div{
@@ -82,15 +83,16 @@
 			}
 			.case{
  				display : none;
+ 				text-align: center;
 			}
+			.select_img img { margin: 20px 0;}
 		</style>
 </head>
 <body>
 	<jsp:include page="admin_header.jsp" />
 	<section>
-		<h1>제품 등록</h1>
-		<form action="product_update" name="inputform" method="get"
-			enctype="multipart/form-data">
+		<h1>상품 수정</h1>
+		<form action="admin_product_update" name="inputform" method="post" enctype="multipart/form-data">
 			<div id="input_form">
 				<table border="1">
 					<tr>
@@ -111,7 +113,7 @@
 						<select id="원두" class="case" name="p_case" style="display: inline;">
 								<option value="클래스">클래스</option>
 								<option value="바리스타">바리스타</option>
-								<option value="미스터즈">미스터즈</option>
+								<option value="마스터즈">마스터즈</option>
 								<option value="데일리 로스팅">데일리 로스팅</option>
 						</select> 
 						<select id="인스턴트 커피" class="case">
@@ -132,7 +134,19 @@
 								<option value="아워 티">아워 티</option>
 								<option value="아워 티 pet">아워 티 pet</option>
 								<option value="카페리얼 티 라떼">카페리얼 티 라떼</option>
-						</select></td>
+						</select>
+						</td>
+					</tr>
+					<tr>
+					<td>분류2</td>
+						<td>
+						<select id="유형" class="case2" name="p_case2" style="display: inline;">
+								<option value="인기상품">인기상품</option>
+								<option value="신상품">신상품</option>
+								<option value="테스트">미스터즈</option>
+								<option value="테스트">데일리 로스팅</option>
+						</select> 
+						</td>
 					</tr>
 					<tr>
 						<td>제품명</td>
@@ -190,30 +204,64 @@
 					</tr>
 					<tr>
 						<td>제품 대표이미지</td>
-						<!--<td><input type="file" name="p_img1"></td> -->
-						<td><input type="text" name="p_img1" value="${dto.p_img1}"></td>
+						<td><input type="file" id="p_img1" name="p_img1" value="${dto.p_img1}"><div class="select_img" ><img src=""></div></td>
 					</tr>
 					<tr>
 						<td>제품 이미지1</td>
-						<!--<td><input type="file" name="p_img2"></td> -->
-						<td><input type="text" name="p_img2" value="${dto.p_img2}"></td>
+						<td><input type="file" id="p_img2" name="p_img2" value="${dto.p_img2}"><div class="select_img2" ><img src=""></div></td>
 					</tr>
 					<tr>
 						<td>제품 이미지2</td>
-						<!--<td><input type="file" name="p_img3"></td> -->
-						<td><input type="text" name="p_img3" value="${dto.p_img3}"></td>
+						<td><input type="file" id="p_img3" name="p_img3" value="${dto.p_img3}"><div class="select_img3" ><img src=""></div></td>
 					</tr>
 					<tr>
 						<td>상세내용 이미지</td>
-						<!--<td><input type="file" name="p_content_img"></td> -->
-						<td><input type="text" name="p_content_img" value="${dto.p_content_img}"></td>
+						<td><input type="file" id="p_content_img" name="p_content_img" value="${dto.p_content_img}"><div class="select_img4" ><img src=""></div></td>
 					</tr>
 				</table>
+					<script>
+			  $("#p_img1").change(function(){
+			   if(this.files && this.files[0]) {
+			    var reader = new FileReader;
+			    reader.onload = function(data) {
+			     $(".select_img img").attr("src", data.target.result).width(100);        
+			    }
+			    reader.readAsDataURL(this.files[0]);
+			   }
+			  });
+			  $("#p_img2").change(function(){
+				   if(this.files && this.files[0]) {
+				    var reader = new FileReader;
+				    reader.onload = function(data) {
+				     $(".select_img2 img").attr("src", data.target.result).width(100);        
+				    }
+				    reader.readAsDataURL(this.files[0]);
+				   }
+				  });
+			  $("#p_img3").change(function(){
+				   if(this.files && this.files[0]) {
+				    var reader = new FileReader;
+				    reader.onload = function(data) {
+				     $(".select_img3 img").attr("src", data.target.result).width(100);        
+				    }
+				    reader.readAsDataURL(this.files[0]);
+				   }
+				  });
+			  $("#p_content_img").change(function(){
+				   if(this.files && this.files[0]) {
+				    var reader = new FileReader;
+				    reader.onload = function(data) {
+				     $(".select_img4 img").attr("src", data.target.result).width(100);        
+				    }
+				    reader.readAsDataURL(this.files[0]);
+				   }
+				  });
+			 </script>
+			 <%=request.getSession().getServletContext().getRealPath("/resources/imgUpload") %>
 				<div id="btn_div">
-						<input type="hidden" value="${dto.p_code}" name="p_code">
-						<button type="button" onclick="location.href="입력전페이지 이동">취소</button>
-						<button type="button" onclick="location.href="유효성 검사">등록</button>
-					</div>
+						<button type="button" onclick="history.back(-1)">취소</button>
+						<button type="submit" value="등록">등록</button>
+				</div>
 			</div>
 		</form>
 	</section>

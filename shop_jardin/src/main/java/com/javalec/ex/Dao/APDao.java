@@ -21,7 +21,7 @@ public interface APDao {
 		public void modify(ProductDto dto) throws Exception;
 		
 		// 상품 삭제
-		public int delete(int p_code) throws Exception;
+		public void delete(String p_code) throws Exception;
 		
 	}
 

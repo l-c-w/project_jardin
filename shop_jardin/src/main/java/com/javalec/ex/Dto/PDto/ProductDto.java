@@ -5,7 +5,6 @@ import java.sql.Timestamp;
 public class ProductDto {
 
 	public ProductDto() {
-		super();
 	}
 
 	public ProductDto(int p_code, String p_case, String p_case2, String p_name, int p_price, int p_point,
@@ -13,7 +12,6 @@ public class ProductDto {
 			String p_gene, String p_import, int p_stock, String p_img1, String p_img2, String p_img3,
 			String p_content_img, Timestamp p_wdate, Timestamp p_udate, String p_delflag) {
 
-		super();
 		this.p_code = p_code;
 		this.p_case = p_case;
 		this.p_case2 = p_case2;

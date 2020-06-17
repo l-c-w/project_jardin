@@ -111,7 +111,7 @@ $(document).ready(function() {
 							<col width="14%" class="tnone" />
 							</colgroup>
 							<thead>
-								<th scope="col"><input type="checkbox" name=cart_check/></th>
+								<th scope="col"><input type="checkbox" id="select_all" onclick="select_all()"/></th>
 								<th scope="col">상품명</th>
 								<th scope="col" class="tnone">가격/포인트</th>
 								<th scope="col">수량</th>
@@ -123,11 +123,10 @@ $(document).ready(function() {
 								<form action="../payment/payment" name="cart_order" method="post">
 								
 								<c:forEach var="cart_list" items="${list }">
-								
 									<c:set var="init_cost" value="0"/>
-								<tr>
+								<tr id="tr${cart_list.cart_code }">
 									
-									<td><input type="checkbox" id="cart${cart_list.p_code }" class="cart_check" name="cart_check" value="${cart_list.cart_code }"/></td>
+									<td><input type="checkbox" id="cart${cart_list.cart_code }" class="cart_check" name="cart_check" value="${cart_list.cart_code }" onclick="get_total()"/></td>
 									<td class="left">
 										<p class="img"><img src="../images/img/sample_product.jpg" alt="상품" width="66" height="66" /></p>
 
@@ -137,23 +136,23 @@ $(document).ready(function() {
 											</li>
 										</ul>
 									</td>
-									<td class="tnone"><span id="${cart_list.p_code }price" name="${cart_list.p_code }price" >${cart_list.p_price }</span>원<br/>
+									<td class="tnone"><span id="${cart_list.cart_code }price" name="${cart_list.cart_code }price" >${cart_list.p_price }</span>원<br/>
 									<span class="pointscore"><fmt:formatNumber value="${cart_list.p_point }" pattern="#,###,###,###"/>Point</span></td>
-									<td><input type="number" class="spinner" id ="${cart_list.p_code }" value="${cart_list.amount }" maxlength="3" name="${cart_list.p_code }amount" ></td> 
-									<td><span id="${cart_list.p_code }total" name="${cart_list.p_code }total">${cart_list.p_price*cart_list.amount }</span>원</td>
+									<td onchange="get_total()"><input type="number" class="spinner" id ="${cart_list.cart_code }" value="${cart_list.amount }" maxlength="3" name="${cart_list.p_code }amount"></td> 
+									<td><span id="${cart_list.cart_code }total" name="${cart_list.p_code }total">${cart_list.p_price*cart_list.amount }</span>원</td>
 									<c:set var="total_cost" value="${total_cost+init_cost+cart_list.p_price*cart_list.amount }"/>
 									
 									<td class="tnone">
 										<ul class="order">	
 											<li id="test"><a href="../payment/payment?cart_code=${cart_list.p_code }&amount=${cart_list.amount }" class="obtnMini iw70">바로구매</a></li>
-											<li><a href="#" class="nbtnMini iw70">상품삭제</a></li>
+											<li onclick="product_del('${cart_list.cart_code }')" ><a class="nbtnMini iw70">상품삭제</a></li>
 										</ul>
 									</td>
 								</tr>
 								
 								
 								</c:forEach>
-								
+								</form>
 							</tbody>
 						</table>
 					</div>
@@ -161,9 +160,8 @@ $(document).ready(function() {
 					<div class="btnArea">
 						<div class="bRight">
 							<ul>
-								<li><a href="#" class="selectbtn" >전체선택</a></li>
-								<li><a href="#" class="selectbtn2">선택수정</a></li>
-								<li><a href="#" class="selectbtn2">선택삭제</a></li>
+								<li onclick="select_all2()" style="cursor: pointer;"><a class="selectbtn" >전체선택</a></li>
+								<li onclick="sel_del()" style="cursor: pointer;"><a class="selectbtn2" >선택삭제</a></li>
 							</ul>
 						</div>
 					</div>
@@ -198,7 +196,7 @@ $(document).ready(function() {
 							<li class="last"><a href="#" class="ty3">쇼핑 <span>계속하기</span></a></li>
 						</ul>
 					</div>
-					</form>
+					
 				<!-- //장바구니에 상품이 있을경우 -->
 
 
@@ -226,74 +224,54 @@ $(document).ready(function() {
 </style>
 
 <script type="text/javascript">
+//스피너 생성
+$(function() {var spinner = $( ".spinner" ).spinner({ min: 1, max: 999});});
+
+//수량변화 총액변화+DB 수량 수정
 $(function() {
-	var spinner = $( ".spinner" ).spinner({ min: 1, max: 999});
-	
-	var total=0;
-	var del= $("#del_cost").text();
-	var del_cost = Number(del);
-	
-
-		
-	
 	$('.spinner').on("spinstop", function(){
+		
 		var spinid= $(this).attr("id");
-		var spinamount="#"+spinid;
-		var spinprice="#"+spinid+"price";
-		var spintotal="#"+spinid+"total";
+		var amountid="#"+spinid;
+		var priceid="#"+spinid+"price";
+		var totalid="#"+spinid+"total";
 		
-		var price=$(spinprice).text();
+		var price=$(priceid).text();
 		var amount=$(this).spinner('value');
+		$(totalid).text(Number(price)*Number(amount));
+		get_total();
 		
-		var chbArr = new Array;
-		
-		$("input[name='cart_check']:checked").each(function(){
-		chbArr.push($(this).attr("id"));
-
-		if(chbArr!=null){
-			
-			for (var i = 0; i < chbArr.length; i++) {
-				
-				var amountid="#"+chbArr[i].substring(4);
-				var productid="#"+chbArr[i].substring(4)+"price";
-				
-				var amount= $(amountid).spinner('value');
-				var product= $(productid).text();
-				
-				
-				ch_total+=Number(amount)*Number(product);
-				
+		var data =JSON.stringify({cart_code:spinid,amount_:amount});
+		console.log(data);
+		$.ajax({
+			method:"POST",
+			url:"cart_change",
+			data:data,
+			contentType:"application/json;charset=UTF-8",
+			error: function(data) {
+				alert("수정에 실패하였습니다.")
 			}
-				$("#product_cost").text(total);
-				$("#total_cost").text(total+del_cost);
-				ch_total=0;
-			
-		}
-		});
-		
-		$(spintotal).text(Number(price)*Number(amount));
-		$(this).blur();
-		
-		});
+		});  
+	});
 	
 	
-	$("input:checkbox[name='cart_check']").click(function name() {
-		/**var getpid=$(this).attr("id");
-		var getid= "#"+getpid.substring(4)+"total";
-		
-		var amountid="#"+getpid.substring(4);
-		var productid="#"+getpid.substring(4)+"price";
-		
-		var amount = $(amountid).text();
-		var product = $(productid).text();**/
+	
+});
+//계산용변수
+var total=0;
+var del= $("#del_cost").text();
+var del_cost = Number(del);
 
+//총액계산
+function get_total() {
 		var chbArr = new Array;
-		
-		$("input[name='cart_check']:checked").each(function(){
+	if($("input[name='cart_check']:checked").length==0){
+		$("#product_cost").text("0");
+		$("#total_cost").text("0");
+	}else{
+	$("input[name='cart_check']:checked").each(function(){
 		chbArr.push($(this).attr("id"));
 
-		if(chbArr!=null){
-			
 			for (var i = 0; i < chbArr.length; i++) {
 				
 				var amountid="#"+chbArr[i].substring(4);
@@ -301,23 +279,97 @@ $(function() {
 				
 				var amount= $(amountid).spinner('value');
 				var product= $(productid).text();
-				
 				
 				total+=Number(amount)*Number(product);
-				
 			}
 				$("#product_cost").text(total);
 				$("#total_cost").text(total+del_cost);
-				ch_total=0;
-			
-		}
+				total=0;
 		});
+	}
+}
+
+//전체선택 체크박스 총액계산
+function select_all() {
+	if($("#select_all").prop("checked")){
+		$("input[name='cart_check']").prop("checked",true);
+		get_total();
+	}else{
+		$("input[name='cart_check']").prop("checked",false);
+		get_total();
+	}
+}
+
+//전체선택 버튼 총액계산
+function select_all2() {
+	if($("#select_all").prop("checked")){
+	$("#select_all").prop("checked",false);
+	$("input[name='cart_check']").prop("checked",false);
+	get_total();
+	}else{
+		$("#select_all").prop("checked",true);
+		$("input[name='cart_check']").prop("checked",true);
+		get_total();
+	}
+}
+
+//선택삭제
+function sel_del() {
+	var chbArr = new Array;
+	if($("input[name='cart_check']:checked").length==0){
+		alert("선택된 상품이 없습니다.");
+		return;
+	}else{
+	$("input[name='cart_check']:checked").each(function(){
+		var trim = $(this).attr("id");
+		var off_select="#"+trim;
+		$(off_select).prop("checked",false);
+		get_total();
+		chbArr.push(trim.substring(4));
 	});
-		
+	var cart_code=JSON.stringify({cart_code:chbArr});
+	$.ajax({
+		type:"POST",
+		url:"cart_del",
+		data:cart_code,
+		contentType:"application/json;charset=UTF-8",
+		success: function() {
+			for (var i = 0; i < chbArr.length; i++) {
+				var go_text="#cart"+chbArr[i];
+				var go_hide="#tr"+chbArr[i];
+				alert(go_text);
+				$(go_text).prop("type","text");
+				$(go_hide).hide();
+				
+			}
+		},error: function(request,status,error) {
+			alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
+		}
+	});
+	}
+}
 
-	 
-
-});
+//상품삭제
+function product_del(code) {
+	var cart_code=JSON.stringify({cart_code:code});
+	alert(cart_code);
+	$.ajax({
+		type:"POST",
+		url:"cart_del",
+		data:cart_code,
+		contentType:"application/json;charset=UTF-8",
+		success: function() {
+				var go_text="#cart"+code;
+				var go_hide="#tr"+code;
+				alert(go_text);
+				$(go_text).prop("type","text");
+				$(go_hide).hide();
+			},
+		error: function(request,status,error) {
+			alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
+		}
+	});
+}
 
 
 

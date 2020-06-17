@@ -170,17 +170,18 @@ $(function(){
 			$("#del_phone2").val($("#phone2").val());
 			$("#del_phone3").val($("#phone3").val());
 			
-		}else{
-			$("#del_name").val("");
-			$("#del_post").val("");
-			$("#del_address1").val("");
-			$("#del_address2").val("");
-			$("#del_email1").val("");
-			$("#del_email2").val("");
-			$("#del_phone1").val("");
-			$("#del_phone2").val("");
-			$("#del_phone3").val("");
 		}
+//		else{
+//			$("#del_name").val("");
+//			$("#del_post").val("");
+//			$("#del_address1").val("");
+//			$("#del_address2").val("");
+//			$("#del_email1").val("");
+//			$("#del_email2").val("");
+//			$("#del_phone1").val("");
+//			$("#del_phone2").val("");
+//			$("#del_phone3").val("");
+//		}
 	});
 	
 	//장바구니 총액

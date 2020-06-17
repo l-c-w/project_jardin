@@ -12,6 +12,16 @@
 		where cart.id=#{param1} and cart.p_code=product.p_code
 	</select>
 	
+	<!-- 장바구니 수량변경 -->
+	<update id="change_amount">
+		update cart set amount=#{p1} where cart_code=#{p2}
+	</update>
+	
+	<!-- 장바구니 삭제 -->
+	<delete id="cart_del">
+		delete from cart where cart_code=#{param1}
+	</delete>
+	
 	<!-- 장바구니에서 주문페이지로 제품 넘기기-->
 	<select id="go_order" resultType="com.javalec.ex.Dto.PayDto.CartDto">
 		select cart.cart_code, product.p_code, product.p_name, product.p_category, product.p_price, product.p_point, cart.amount 

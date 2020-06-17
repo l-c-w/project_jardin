@@ -55,20 +55,22 @@
 	
 	<select id="winner_list" resultType="com.javalec.ex.Dto.EDto.Winner_joinersDto">
 		<![CDATA[select * from (select rownum rnum, E_CODE,W_CODE,W_TITLE,W_CONTENT,W_HIT,W_WDATE,W_UDATE,W_STATE
-		from (select * from winner_joiners wj order by w_wdate desc)) where rnum>=#{param1} and rnum<=#{param2}]]>
+		from (select * from winner_joiners wj order by w_code desc)) where rnum>=#{param1} and rnum<=#{param2}]]>
 	</select>
 	<select id="winner_listAll" resultType="com.javalec.ex.Dto.EDto.Winner_joinersDto">
 		<![CDATA[select * from (select rownum rnum, E_CODE,W_CODE,W_TITLE,W_CONTENT,W_HIT,W_WDATE,W_UDATE,W_STATE
-		from (select * from winner_joiners WHERE W_TITLE LIKE '%' || #{param3} || '%' OR W_CONTENT LIKE '%' || #{param3} || '%')) 
-		where rnum>=#{param1} and rnum<=#{param2}]]>
+		from (select * from winner_joiners WHERE W_TITLE LIKE '%' || #{param3} || '%' OR W_CONTENT LIKE 
+		'%' || #{param3} || '%' order by w_code desc)) where rnum>=#{param1} and rnum<=#{param2}]]>
 	</select>
 	<select id="winner_listTit" resultType="com.javalec.ex.Dto.EDto.Winner_joinersDto">
 		<![CDATA[select * from (select rownum rnum, E_CODE,W_CODE,W_TITLE,W_CONTENT,W_HIT,W_WDATE,W_UDATE,W_STATE
-		from (select * from winner_joiners WHERE W_TITLE LIKE '%' || #{param3} || '%')) where rnum>=#{param1} and rnum<=#{param2}]]>
+		from (select * from winner_joiners WHERE W_TITLE LIKE '%' || #{param3} || '%' order by w_code desc)) 
+		where rnum>=#{param1} and rnum<=#{param2}]]>
 	</select>
 	<select id="winner_listCon" resultType="com.javalec.ex.Dto.EDto.Winner_joinersDto">
 		<![CDATA[select * from (select rownum rnum, E_CODE,W_CODE,W_TITLE,W_CONTENT,W_HIT,W_WDATE,W_UDATE,W_STATE
-		from (select * from winner_joiners WHERE W_CONTENT LIKE '%' || #{param3} || '%')) where rnum>=#{param1} and rnum<=#{param2}]]>
+		from (select * from winner_joiners WHERE W_CONTENT LIKE '%' || #{param3} || '%' order by w_code desc)) 
+		where rnum>=#{param1} and rnum<=#{param2}]]>
 	</select>
 	
 	
@@ -157,6 +159,36 @@
 		insert into event_comment values (
 		EVENT_COMMENT_SEQ.nextval,#{param1},#{param2},'0',#{param3},sysdate,sysdate)
 	</insert>
+	
+	<!-- event_view next, prev -->
+	<select id="eNextView" resultType="com.javalec.ex.Dto.EDto.EventDto">
+		<![CDATA[select E_CODE, E_TITLE from EVENT where E_CODE=
+		(select min(E_CODE) from EVENT where E_CODE > #{param1} and E_END >= (SELECT SYSDATE FROM DUAL))]]>
+	</select>
+	<select id="ePrevView" resultType="com.javalec.ex.Dto.EDto.EventDto">
+		<![CDATA[select E_CODE, E_TITLE from EVENT where E_CODE=
+		(select max(E_CODE) from EVENT where E_CODE < #{param1} and E_END >= (SELECT SYSDATE FROM DUAL))]]>
+	</select>
+	
+	<!-- fin_event_view next, prev -->
+	<select id="eFNextView" resultType="com.javalec.ex.Dto.EDto.EventDto">
+		<![CDATA[select E_CODE, E_TITLE from EVENT where E_CODE=
+		(select min(E_CODE) from EVENT where E_CODE > #{param1} and E_END <= (SELECT SYSDATE FROM DUAL))]]>
+	</select>
+	<select id="eFPrevView" resultType="com.javalec.ex.Dto.EDto.EventDto">
+		<![CDATA[select E_CODE, E_TITLE from EVENT where E_CODE=
+		(select max(E_CODE) from EVENT where E_CODE < #{param1} and E_END <= (SELECT SYSDATE FROM DUAL))]]>
+	</select>
+	
+	<!-- winner_joiners next, prev -->
+	<select id="eWinNextView" resultType="com.javalec.ex.Dto.EDto.Winner_joinersDto">
+		<![CDATA[select w_code, w_title from winner_joiners where w_code=
+		(select min(w_code) from winner_joiners where w_code > #{param1})]]>
+	</select>
+	<select id="eWinPrevView" resultType="com.javalec.ex.Dto.EDto.Winner_joinersDto">
+		<![CDATA[select w_code, w_title from winner_joiners where w_code=
+		(select max(w_code) from winner_joiners where w_code < #{param1})]]>
+	</select>
 	
 	
 </mapper>

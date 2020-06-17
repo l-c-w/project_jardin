@@ -55,4 +55,16 @@ public interface EDao {
 	
 	public int eCommentWite(String e_code, String id, String comment_content); // 비밀글 만들거면 매개변수 추가해야됨
 	
+	// 진행중 이벤트 게시글 다음글, 이전글
+	public EventDto eNextView(String e_code);
+	public EventDto ePrevView(String e_code);
+	
+	// 종료된 이벤트 게시글 다음글, 이전글
+	public EventDto eFNextView(String e_code);
+	public EventDto eFPrevView(String e_code);
+	
+	// 당첨자 게시글 다음글, 이전글
+	public Winner_joinersDto eWinNextView(String w_code);
+	public Winner_joinersDto eWinPrevView(String w_code);
+	
 }

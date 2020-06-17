@@ -7,16 +7,16 @@
 	
 	<!-- 회원 장바구니 보기 -->
 	<select id="cart_view" resultType="com.javalec.ex.Dto.PayDto.CartDto">
-		select cart.cart_code, product.p_code, product.p_name, product.p_category, product.price, product.p_point, cart.amount 
+		select cart.cart_code, product.p_code, product.p_name, product.p_category, product.p_price, product.p_point, cart.amount 
 		from cart, product
-		where cart.id='test4' and cart.p_code=product.p_code
+		where cart.id=#{param1} and cart.p_code=product.p_code
 	</select>
 	
 	<!-- 장바구니에서 주문페이지로 제품 넘기기-->
 	<select id="go_order" resultType="com.javalec.ex.Dto.PayDto.CartDto">
-		select cart.cart_code, product.p_code, product.p_name, product.p_category, product.price, product.p_point, cart.amount 
+		select cart.cart_code, product.p_code, product.p_name, product.p_category, product.p_price, product.p_point, cart.amount 
 		from cart, product
-		where cart.id='test4' and cart.cart_code=#{param1} and cart.p_code=product.p_code
+		where cart.id=#{param1} and cart.cart_code=#{param2} and cart.p_code=product.p_code
 	</select>
 		
 	
@@ -68,12 +68,22 @@
 	</select>
 	
 	
-	
-	<!-- 주문페이지 주문서 작성 
+	<!-- 주문페이지 주문서 작성--> 
 	<insert id="make_order">
 		insert into payment values(to_char(sysdate,'yyyyMMdd')||-payment_seq.nextval,
-		#{param1},'-',#{param2},'0','N',sysdate,#{param3},
-		'결제대기','-','-','-')
-	</insert>-->
+		#{param1},'-',0,'N',sysdate,#{param2},
+		'주문서작성','-','-','-')
+	</insert>
+	
+	<!-- 주문서 가져오기 -->
+	<select id="get_order" resultType="com.javalec.ex.Dto.PayDto.PaymentDto">
+		select * from(select * from payment where id=#{param1} and pay_state='주문서작성' order by pay_date desc) where ROWNUM=1
+	</select>
+	
+	<!-- 주문서작성중 취소된 주문건 찾아오기 -->
+	<select id="order_check" resultType="String">
+		select pay_state from payment where id='qwer' and pay_state='주문서작성'
+	</select>
+	
 	
 </mapper>

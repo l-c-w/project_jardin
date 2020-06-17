@@ -11,7 +11,7 @@ import com.javalec.ex.Dao.EDao;
 import com.javalec.ex.Dto.EDto.EventDto;
 import com.javalec.ex.Dto.EDto.Event_commentDto;
 
-public class EDelCommentService implements EService {
+public class EFinDelCommentService implements EService {
 
 	@Override
 	public void execute(HttpServletRequest request, SqlSession sqlSession, Model model) {
@@ -30,7 +30,6 @@ public class EDelCommentService implements EService {
 		System.out.println("EDelCommentService - ec_num : " + ec_num);
 		System.out.println("requestUser : " + requestUser);
 		System.out.println("authUser : " + authUser);
-		System.out.println("e_code : " + e_code);
 		System.out.println("page : " + page);
 		
 		
@@ -47,7 +46,7 @@ public class EDelCommentService implements EService {
 
 			// EViewService
 			eventMethod eMethod = new eventMethod();
-			eMethod.eventView(request, sqlSession, model, e_code, page);
+			eMethod.fin_eventView(request, sqlSession, model, e_code, page);
 			
 
 		} // else

@@ -14,9 +14,7 @@ public interface PayDao {
 	public ArrayList<CartDto> cart_view(String id);
 
 	// 장바구니선택상품 주문페이지로 이동하기
-	public CartDto go_order(String cart);
-
-	public PaymentDto make_order(String id, int total);
+	public CartDto go_order(String id, String cart);
 
 	// 적립포인트 리스트,총액
 	public ArrayList<PointDto> point_list(String id);
@@ -39,4 +37,14 @@ public interface PayDao {
 
 	// 사용불가능한 쿠폰리스트
 	public ArrayList<Coupon_listDto> ncou_list(String id);
+
+	// 작성중인 주문서 있는지 확인
+	public String order_check(String id);
+
+	// 주문서 생성
+	public void make_order(String id, int total);
+
+	// 주문서 가져오기(작성중인 리스트)
+	public PaymentDto get_order(String id);
+
 }

@@ -10,7 +10,7 @@ import com.javalec.ex.Dao.EDao;
 import com.javalec.ex.Dto.EDto.EventDto;
 import com.javalec.ex.Dto.EDto.Event_commentDto;
 
-public class EViewService implements EService {
+public class EFinViewService implements EService {
 
 	@Override
 	public void execute(HttpServletRequest request, SqlSession sqlSession, Model model) {
@@ -19,8 +19,8 @@ public class EViewService implements EService {
 		
 		// 변수 선언
 		EventDto edto = new EventDto(); // 본문 dto
-		EventDto edtoNext = new EventDto(); // 다음글 dto
-		EventDto edtoPrev = new EventDto(); // 이전글 dto
+		EventDto edtoNext = new EventDto(); // 
+		EventDto edtoPrev = new EventDto(); // 
 		ArrayList<Event_commentDto> list = new ArrayList<Event_commentDto>(); // 댓글 dto
 		EDao dao = sqlSession.getMapper(EDao.class);
 		String e_code = request.getParameter("e_code");
@@ -55,8 +55,8 @@ public class EViewService implements EService {
 		// EViewService 끝
 		
 		// eNextView, ePrevView
-		edtoNext = dao.eNextView(e_code);
-		edtoPrev = dao.ePrevView(e_code);
+		edtoNext = dao.eFNextView(e_code);
+		edtoPrev = dao.eFPrevView(e_code);
 
 		// ECommentService
 		list = dao.event_comment(e_code, startrow, endrow);

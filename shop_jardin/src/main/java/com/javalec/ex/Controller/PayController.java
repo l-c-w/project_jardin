@@ -30,7 +30,27 @@ public class PayController {
 
 	PayService pays = null;
 
-	// 카트 뷰 보기
+	// 내 포인트 목록보기
+	@RequestMapping("mypage/point")
+	public String point(Model model) {
+		model.addAttribute("id", "test4");
+		pays = new PointService();
+		pays.execute(sqlSession, model);
+
+		return "mypage/point";
+	}
+
+	// 내 쿠폰목록 보기
+	@RequestMapping("mypage/coupon")
+	public String coupon_list(Model model) {
+		model.addAttribute("id", "qwer");
+		pays = new CouponService();
+		pays.execute(sqlSession, model);
+
+		return "mypage/coupon";
+	}
+
+	// 카트 리스트보기
 	@RequestMapping("mypage/cart")
 	public String cart_view(HttpServletRequest request, Model model) {
 
@@ -56,38 +76,31 @@ public class PayController {
 		pays.execute(sqlSession, model);
 	}
 
+	// 카트 한개 삭제
+	@RequestMapping("mypage/cart_del2")
+	@ResponseBody
+	public void cart_del2(@RequestBody HashMap<String, String> map, Model model) {
+		model.addAttribute("del_type", "del_one");
+		model.addAttribute("cart_code2", map.get("cart_code"));
+		pays = new Cart_delService();
+		pays.execute(sqlSession, model);
+	}
+
 	// 카트 선택목록 삭제
 	@RequestMapping("mypage/cart_del")
 	@ResponseBody
 	public void cart_del(@RequestBody HashMap<String, String[]> map, Model model) {
-		model.addAttribute("cart_code", map.get("cart_code"));
-		System.out.println("여긴 오니?");
-		model.addAttribute("cart_code2", map.get("code_"));
+		model.addAttribute("del_type", "sel_del");
+		model.addAttribute("cart_code1", map.get("cart_code"));
 		pays = new Cart_delService();
 		pays.execute(sqlSession, model);
 
 	}
 
-	@RequestMapping("mypage/point")
-	public String point(Model model) {
-		model.addAttribute("id", "test4");
-		pays = new PointService();
-		pays.execute(sqlSession, model);
-
-		return "mypage/point";
-	}
-
-	@RequestMapping("mypage/coupon")
-	public String coupon_list(Model model) {
-		model.addAttribute("id", "qwer");
-		pays = new CouponService();
-		pays.execute(sqlSession, model);
-
-		return "mypage/coupon";
-	}
-
-	@PostMapping("payment/payment")
-	public String pay_statement(HttpServletRequest request, Model model) {
+	// 상품구매 주문페이지로
+	@RequestMapping("payment/payment")
+	public String buy_selected(HttpServletRequest request, Model model) {
+		System.out.println("오니?");
 		model.addAttribute("request", request);
 		model.addAttribute("id", "qwer");
 		pays = new Payment();
@@ -96,6 +109,7 @@ public class PayController {
 		return "payment/payment";
 	}
 
+	// 쿠폰리스트 가져오기
 	@PostMapping("payment/coupon_list")
 	public String use_coupon(HttpServletRequest request, Model model) {
 		model.addAttribute("id", "qwer");

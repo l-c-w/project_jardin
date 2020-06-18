@@ -19,18 +19,44 @@ public class Payment implements PayService {
 
 		Map<String, Object> map = model.asMap();
 		HttpServletRequest request = (HttpServletRequest) map.get("request");
-		String id = (String) map.get("id");
 		PayDao payDao = sqlSession.getMapper(PayDao.class);
 		MDao mDao = sqlSession.getMapper(MDao.class);
-		String[] cart = request.getParameterValues("cart_check");
+
+		String id = (String) map.get("id");
+		String buy_type = request.getParameter("buy_type");
+		System.out.println(buy_type);
 
 		ArrayList<CartDto> list = new ArrayList<CartDto>();
+		CartDto cartDto = new CartDto();
 		int total = 0;
-		for (int i = 0; i < cart.length; i++) {
-			CartDto cartDto = payDao.go_order(id, cart[i]);
+
+		switch (buy_type) {
+
+		case "buy_product":
+
+			break;
+
+		case "buy_one":
+			String cart_one = request.getParameter("cart_code");
+			System.out.println(cart_one);
+			cartDto = payDao.go_order(id, cart_one);
 			list.add(cartDto);
-			total = total + cartDto.getP_price() * cartDto.getAmount();
+			total = cartDto.getP_price() * cartDto.getAmount();
+			break;
+
+		case "buy_selected":
+			String[] cart_selected = request.getParameterValues("cart_check");
+			for (int i = 0; i < cart_selected.length; i++) {
+				cartDto = payDao.go_order(id, cart_selected[i]);
+				list.add(cartDto);
+				total = total + cartDto.getP_price() * cartDto.getAmount();
+			}
+			break;
+
+		default:
+			break;
 		}
+
 		// 장바구니에서 넘어온 제품정보
 		model.addAttribute("from_cart", list);
 		// 주문서 생성

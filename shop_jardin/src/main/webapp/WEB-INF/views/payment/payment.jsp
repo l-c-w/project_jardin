@@ -140,7 +140,7 @@ $(document).ready(function() {
 							<tbody>
 								<tr>
 									<th scope="row"><span>이름</span></th>
-									<td><input type="text" class="w134" value="${buyer_info.name }" name="name" id="name"/></td>
+									<td><input type="text" class="w134" value="${buyer_info.name }" name="name" id="name" readonly="readonly"/></td>
 								</tr>
 
 								<tr>

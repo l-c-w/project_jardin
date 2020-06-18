@@ -15,9 +15,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.javalec.ex.Dao.PayDao;
+import com.javalec.ex.Dto.MDto.Member_Dto;
 import com.javalec.ex.Service.PayService.Cart_delService;
 import com.javalec.ex.Service.PayService.Cart_upddateService;
 import com.javalec.ex.Service.PayService.CouponService;
+import com.javalec.ex.Service.PayService.MemCService;
 import com.javalec.ex.Service.PayService.PayService;
 import com.javalec.ex.Service.PayService.Payment;
 import com.javalec.ex.Service.PayService.PointService;
@@ -70,7 +72,6 @@ public class PayController {
 
 		Map<String, Object> map2 = model.asMap();
 		String cart_code = (String) map2.get("cart_code");
-		System.out.println(cart_code);
 
 		pays = new Cart_upddateService();
 		pays.execute(sqlSession, model);
@@ -100,13 +101,23 @@ public class PayController {
 	// 상품구매 주문페이지로
 	@RequestMapping("payment/payment")
 	public String buy_selected(HttpServletRequest request, Model model) {
-		System.out.println("오니?");
 		model.addAttribute("request", request);
 		model.addAttribute("id", "qwer");
 		pays = new Payment();
 		pays.execute(sqlSession, model);
 
 		return "payment/payment";
+	}
+
+	// 주문자 정보 회원정보에 반영
+	@RequestMapping("payment/change_member")
+	@ResponseBody
+	public void change_member(Member_Dto member_Dto, Model model) {
+		model.addAttribute("member_info", member_Dto);
+		model.addAttribute("id", "test10");
+
+		pays = new MemCService();
+		pays.execute(sqlSession, model);
 	}
 
 	// 쿠폰리스트 가져오기

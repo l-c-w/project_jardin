@@ -94,14 +94,16 @@ $(document).ready(function() {
 										</ul>
 									</td>
 									<td class="tnone">
-										<fmt:formatNumber value="${fromcart.p_price }" pattern="#,###,###,###"/> 
+										<fmt:formatNumber value="${fromcart.p_price }" pattern="#,###,###,###"/> 원
 
 										<!-- 회원일 시 -->
-										<br/><span class="pointscore"><fmt:formatNumber value="${fromcart.p_point }" pattern="#,###,###,###"/> </span>
+										<c:if test="${get_order.nomem_check eq 'N'}">
+										<br/><span class="pointscore"><fmt:formatNumber value="${fromcart.p_point }" pattern="#,###,###,###"/>Point </span>
+										</c:if>
 										<!-- //회원일 시 -->
 									</td>
 									<td>${fromcart.amount } 개</td>
-									<td>${fromcart.p_price*fromcart.amount } 원</td>
+									<td><fmt:formatNumber pattern="#,###,###,###">${fromcart.p_price*fromcart.amount }</fmt:formatNumber>  원</td>
 								</tr>
 								</c:forEach>
 								</form>
@@ -110,20 +112,21 @@ $(document).ready(function() {
 					</div>
 					<div class="poroductTotal">
 						<ul>	
-							<li>상품 합계금액 <strong>${get_order.total_price }</strong> 원</li>
+							<li>상품 합계금액 <strong><fmt:formatNumber pattern="#,###,###,###">${get_order.total_price }</fmt:formatNumber> </strong> 원</li>
 							<li>+ 배송비 <strong>2,500</strong> 원</li>
-							<li>= 총 합계 <strong>${get_order.total_price+2500 }</strong> 원</li>
+							<li>= 총 합계 <strong><fmt:formatNumber pattern="#,###,###,###">${get_order.total_price+2500 }</fmt:formatNumber></strong> 원</li>
 						</ul>
 					</div>
 					<!-- //주문 상품 -->
 					
 
 			<!-- 주문자 주소 입력 -->
+			<form name="mem_change" id="mem_change">
 					<h3 class="diviLeft">주문자 주소 입력</h3>
 					<div class="diviRight">
 						<ul>
 							<li>수정 내용을 회원정보에도 반영합니다.&nbsp;&nbsp;</li>
-							<li><a href="#">회원정보반영</a></li>
+							<li onclick="change_member()" style="cursor: pointer;"><a >회원정보반영</a></li>
 						</ul>
 					</div>
 
@@ -162,9 +165,9 @@ $(document).ready(function() {
 										<c:set var="email_end" value="${fn:substringAfter(email,'@') }"/>
 											<li><input type="text" class="w134" value="${email_front }" name="email1"/ id="email1"></li>
 											<li><span class="valign">&nbsp;@&nbsp;</span></li>
-											<li class="r10"><input type="text" class="w134" value="${email_end }" name="email2" id="email2"/></li>
+											<li class="r10"><input type="text" class="w134" value="${email_end }" name="introduce" id="email2"/></li>
 											<li>
-												<select id="emailList">
+												<select id="introduce" >
 													<option value="#" selected="selected">직접입력</option>
 													<option value="naver.com">naver.com</option>
 													<option value="daum.net">daum.net</option>
@@ -206,14 +209,16 @@ $(document).ready(function() {
 										</ul>
 									</td>
 								</tr>
-								
+								<c:if test="${get_order.nomem_check eq 'Y'}">
 								<tr>
 									<th scope="row"><span>비밀번호</span></th>
 									<td><input type="password" class="w134" name="nom_password"/> *비회원 주문시 입력</td>
 								</tr>
+								</c:if>
 							</tbody>
 						</table>
 					</div>
+					</form>
 			<!-- //주문자 주소 입력 -->
 
 
@@ -675,6 +680,24 @@ function openDaumZipAddress2() {
 			jQuery("#del_address1").val(data.address);
 		}
 	}).open();
+}
+
+function change_member() {
+	var member = $("form[name=mem_change]").serialize();
+	var email_tail = $("#emailList").text();
+	$.ajax({
+		type:"post",
+		url:"change_member",
+		data:member,
+		dataType:"json",
+		success: function () {
+			alert("정보가 반영되었습니다.");
+		},
+		error: function () {
+			alert("반영에 실패하였습니다.");
+		}
+	})
+	
 }
 
 

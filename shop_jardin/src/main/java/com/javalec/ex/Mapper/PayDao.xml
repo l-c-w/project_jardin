@@ -82,7 +82,7 @@
 	<insert id="make_order">
 		insert into payment values(to_char(sysdate,'yyyyMMdd')||-payment_seq.nextval,
 		#{param1},'-',0,'N',sysdate,#{param2},
-		'주문서작성','-','-','-')
+		'주문서작성','-',#{param3},'-')
 	</insert>
 	
 	<!-- 주문서 가져오기 -->
@@ -95,5 +95,9 @@
 		select pay_state from payment where id='qwer' and pay_state='주문서작성'
 	</select>
 	
+	<!-- 회원정보 반영 -->
+	<update id="update_member" parameterType="com.javalec.ex.Dto.MDto.Member_Dto">
+		update member set email=#{email},post=#{post},address1=#{address1},address2=#{address2},phone1=#{phone1},phone2=#{phone2},phone3=#{phone3} where id=#{id}
+	</update>
 	
 </mapper>

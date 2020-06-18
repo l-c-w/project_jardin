@@ -137,10 +137,10 @@ $(document).ready(function() {
 											</li>
 										</ul>
 									</td>
-									<td class="tnone"><span id="${cart_list.cart_code }price" name="${cart_list.cart_code }price" >${cart_list.p_price }</span>원<br/>
-									<span class="pointscore" id="${cart_list.cart_code }point">${cart_list.p_point }</span><span class="pointscore">Point</span></td>
+									<td class="tnone"><span id="${cart_list.cart_code }price" name="${cart_list.cart_code }price" ><fmt:formatNumber pattern="#,###,###,###">${cart_list.p_price }</fmt:formatNumber> </span>원<br/>
+									<span class="pointscore" id="${cart_list.cart_code }point"><fmt:formatNumber pattern="#,###,###,###">${cart_list.p_point }</fmt:formatNumber></span><span class="pointscore">Point</span></td>
 									<td onchange="get_total()"><input type="number" class="spinner" id ="${cart_list.cart_code }" value="${cart_list.amount }" maxlength="3" name="${cart_list.p_code }amount"></td> 
-									<td><span id="${cart_list.cart_code }total" name="${cart_list.p_code }total">${cart_list.p_price*cart_list.amount }</span>원</td>
+									<td><span id="${cart_list.cart_code }total" name="${cart_list.p_code }total"><fmt:formatNumber pattern="#,###,###,###">${cart_list.p_price*cart_list.amount }</fmt:formatNumber></span>원</td>
 									<c:set var="total_cost" value="${total_cost+init_cost+cart_list.p_price*cart_list.amount }"/>
 									
 									<td class="tnone">
@@ -179,7 +179,7 @@ $(document).ready(function() {
 							</li>
 							<li>
 								<span class="title" >배송비</span>
-								<span class="won" id="del_span"><strong id="del_cost">2500</strong>원</span>
+								<span class="won" id="del_span"><strong id="del_cost">2,500</strong>원</span>
 							</li>
 						</ul>
 						<ul class="total">
@@ -237,9 +237,9 @@ $(function() {
 		var priceid="#"+spinid+"price";
 		var totalid="#"+spinid+"total";
 		
-		var price=$(priceid).text();
+		var price=uncomma($(priceid).text());
 		var amount=$(this).spinner('value');
-		$(totalid).text(Number(price)*Number(amount));
+		$(totalid).text(comma(Number(price)*Number(amount)));
 		get_total();
 		
 		var data =JSON.stringify({cart_code:spinid,amount_:amount});
@@ -250,7 +250,6 @@ $(function() {
 			data:data,
 			contentType:"application/json;charset=UTF-8",
 			error: function(data) {
-				alert("수정에 실패하였습니다.")
 			}
 		});  
 	});
@@ -271,6 +270,7 @@ function get_total() {
 		$("#product_cost").text("0");
 		$("#point_total").text("0")
 		$("#total_cost").text("0");
+		$("#del_span").text("2,500원");
 	}else{
 	$("input[name='cart_check']:checked").each(function(){
 		chbArr.push($(this).attr("id"));
@@ -281,21 +281,21 @@ function get_total() {
 				var productid="#"+chbArr[i].substring(4)+"price";
 				var pointid="#"+chbArr[i].substring(4)+"point";
 				var amount= $(amountid).spinner('value');
-				var product= $(productid).text();
-				var point= $(pointid).text();
+				var product= uncomma($(productid).text());
+				var point= uncomma($(pointid).text());
 				total+=Number(amount)*Number(product);
 				point_total+=Number(amount)*Number(point);
 				
 			}
-				$("#product_cost").text(total);
-				if (total>30000) {
-					$("#total_cost").text(total);
-					$("#del_span").text("30000원 이상 배송비 면제");
+				$("#product_cost").text(comma(total));
+				if (total>=30000) {
+					$("#del_span").text("30,000원 이상 배송비 면제");
+					$("#total_cost").text(comma(total));
 				}else{
-				$("#total_cost").text(total+del_cost);
-				$("#del_span").text("2500원");
+				$("#total_cost").text(comma(total+del_cost));
+				$("#del_span").text("2,500원");
 				}
-				$("#point_total").text(point_total);
+				$("#point_total").text(comma(point_total));
 				total=0;
 				point_total=0;
 		});
@@ -387,6 +387,16 @@ function product_del(code) {
 function buy_all() {
 	$("input[name='cart_check']").prop("checked",true);
 	cart_order.submit();
+}
+//콤마찍기
+function comma(str) {
+    str = String(str);
+    return str.replace(/(\d)(?=(?:\d{3})+(?!\d))/g, '$1,');
+}
+//콤마풀기
+function uncomma(str) {
+    str = String(str);
+    return str.replace(/[^\d]+/g, '');
 }
 
 

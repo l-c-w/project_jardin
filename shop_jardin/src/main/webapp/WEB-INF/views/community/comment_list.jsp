@@ -139,7 +139,9 @@ $(document).ready(function() {
 								
 								<td>${c_list.id}</td>
 								
+								
 								<td class="tnone">
+								
 								
 										<c:forEach begin="1" end="${c_list.cr_score}" step="1">
 										
@@ -147,8 +149,11 @@ $(document).ready(function() {
 										
 										</c:forEach>
 										
+									
 									<br/><fmt:formatDate pattern="yyyy-MM-dd" value="${c_list.cr_wdate}" /><%-- ${c_list.cr_wdate} --%>
 								</td>
+								
+								
 								
 								<td class="right tnone" style="text-align: center;">${c_list.cr_hit }</td>
 								

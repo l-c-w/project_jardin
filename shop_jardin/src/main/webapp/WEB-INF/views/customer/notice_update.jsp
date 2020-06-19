@@ -1,6 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-        
 <!DOCTYPE html>
 <html>
 <head>
@@ -66,14 +65,16 @@ $(document).ready(function() {
 			
 				<div id="customer">
 				
-					<h2><strong>faq 등록</strong></h2>
+					<h2><strong>공지사항 등록</strong></h2>
 					
 					<div class="checkMt">
 					
-					<form action="../customer/faq_ok" name="notice" id="notice" method="post">
+					<form action="../customer/notice_up_ok" name="notice" id="notice" method="post">
 					
 						<table class="checkTable" border="1" cellspacing="0">
 						
+							<caption>1:1문의</caption>
+							
 							<colgroup>
 							
 							<col width="19%" class="tw30" />
@@ -81,46 +82,23 @@ $(document).ready(function() {
 							</colgroup>
 							
 							<tbody>
-
-									<tr>
-										<th scope="row"><span>분류</span></th>
-										
-										<td>
-										
-										<select name="f_type">
-										
-										<option value="" selected="selected">선택해주세요.</option>
-										<option value="product">상품</option>
-										<option value="order">주문</option>
-										<option value="join">회원가입</option>
-										
-										</select>
-										
-										</td>
-										
-									</tr>
-
-
-									<tr>
+							
 								
+								<tr>
 									<th scope="row"><span>제목</span></th>
 									
-									
 									<td>
-										<input type="text" class="wlong" name="f_title" />
+									    <input type="hidden" name="n_num" value="${ndto.n_num}">
+										<input type="text" class="wlong" name="n_title" value="${ndto.n_title}" />
 									</td>
-									
 								</tr>
 								
 								
 								<tr>
-								
 									<th scope="row"><span>상세 내용</span></th>
-									
 									<td>
-										<textarea class="tta" name="f_content"></textarea>
+										<textarea class="tta" name="n_content">${ndto.n_content}</textarea>
 									</td>
-									
 								</tr>
 								
 								

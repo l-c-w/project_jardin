@@ -1,6 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-        
 <!DOCTYPE html>
 <html>
 <head>
@@ -70,7 +69,7 @@ $(document).ready(function() {
 					
 					<div class="checkMt">
 					
-					<form action="../customer/faq_ok" name="notice" id="notice" method="post">
+					<form action="../customer/faq_up_ok" name="faq" id="faq" method="post">
 					
 						<table class="checkTable" border="1" cellspacing="0">
 						
@@ -84,20 +83,15 @@ $(document).ready(function() {
 
 									<tr>
 										<th scope="row"><span>분류</span></th>
+
+										<td><select name="f_type">
 										
-										<td>
-										
-										<select name="f_type">
-										
-										<option value="" selected="selected">선택해주세요.</option>
-										<option value="product">상품</option>
-										<option value="order">주문</option>
-										<option value="join">회원가입</option>
-										
-										</select>
-										
-										</td>
-										
+												<option value="product" <c:if test="${fdto.f_type eq 'product'}">selected</c:if>>상품</option>
+												<option value="order"  <c:if test="${fdto.f_type eq 'order'}">selected</c:if>>주문</option>
+												<option value="join"  <c:if test="${fdto.f_type eq 'join'}">selected</c:if>>회원가입</option>
+
+										</select></td>
+
 									</tr>
 
 
@@ -107,7 +101,7 @@ $(document).ready(function() {
 									
 									
 									<td>
-										<input type="text" class="wlong" name="f_title" />
+										<input type="text" class="wlong" name="f_title" value="${fdto.f_title}"/>
 									</td>
 									
 								</tr>
@@ -118,7 +112,7 @@ $(document).ready(function() {
 									<th scope="row"><span>상세 내용</span></th>
 									
 									<td>
-										<textarea class="tta" name="f_content"></textarea>
+										<textarea class="tta" name="f_content">${fdto.f_content}</textarea>
 									</td>
 									
 								</tr>
@@ -136,12 +130,14 @@ $(document).ready(function() {
 
 					<!-- Btn Area -->
 					<div class="btnArea">
+					
 						<div class="bCenter">
 							<ul>																
 								<li><a href="javascript:history.back()" class="nbtnbig">취소</a></li>
-								<li><a href="#" onclick="document.getElementById('notice').submit();" class="sbtnMini">확인</a></li>
+								<li><a href="#" onclick="document.getElementById('faq').submit();" class="sbtnMini">확인</a></li>
 							</ul>
 						</div>
+						
 					</div>
 					<!-- //Btn Area -->
 					

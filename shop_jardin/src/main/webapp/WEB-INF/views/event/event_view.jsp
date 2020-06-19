@@ -19,7 +19,6 @@
 <script type="text/javascript" src="../js/top_navi.js"></script>
 <script type="text/javascript" src="../js/left_navi.js"></script>
 <script type="text/javascript" src="../js/main.js"></script>
-<script type="text/javascript" src="../js/common.js"></script>
 <script type="text/javascript" src="../js/jquery.easing.1.3.js"></script>
 <script type="text/javascript" src="../js/idangerous.swiper-2.1.min.js"></script>
 <script type="text/javascript" src="../js/jquery.anchor.js"></script>
@@ -90,7 +89,7 @@ $(document).ready(function() {
 						<div class="viewContents">
 							<img src="../images/img/sample_event_view.jpg" alt="" />${event_view.e_content }
 							<br><br>
-							<a href="myCouponOk?userId${userId }&cou_code=${cou_code }"> ${coupons.coupon } 쿠폰발급</a>
+							<a href="myCouponOk?userId${userId }&cou_code=${cdto.cou_code }">${cdto.cou_name } 쿠폰발급</a>
 						</div>
 					</div>
 
@@ -105,17 +104,35 @@ $(document).ready(function() {
 							<col width="100px" />
 							</colgroup>
 							<tbody>
-								<tr>
-									<th class="pre">PREV</th>
-									<td><a href="event_view?e_code=${event_view.e_code }">${event_view.e_title }</a></td>
-									<td>&nbsp;</td>
-								</tr>
+								<c:if test="${not empty edtoNext }">
+									<tr>
+										<th class="next">NEXT</th>
+										<td><a href="event_view?e_code=${edtoNext.e_code }">${edtoNext.e_title }</a></td>
+										<td>&nbsp;</td>
+									</tr>
+								</c:if>
+								<c:if test="${empty edtoNext }">
+									<tr>
+										<th class="next">NEXT</th>
+										<td>다음 글이 없습니다.</a></td>
+										<td>&nbsp;</td>
+									</tr>
+								</c:if>
 
-								<tr>
-									<th class="next">NEXT</th>
-									<td>다음 글이 없습니다.</td>
-									<td>&nbsp;</td>
-								</tr>
+								<c:if test="${not empty edtoPrev }">
+									<tr>
+										<th class="pre">PREV</th>
+										<td><a href="event_view?e_code=${edtoPrev.e_code }">${edtoPrev.e_title }</a></td>
+										<td>&nbsp;</td>
+									</tr>
+								</c:if>
+								<c:if test="${empty edtoPrev }">
+									<tr>
+										<th class="pre">PREV</th>
+										<td>이전 글이 없습니다.</td>
+										<td>&nbsp;</td>
+									</tr>
+								</c:if>
 							</tbody>
 						</table>
 					</div>

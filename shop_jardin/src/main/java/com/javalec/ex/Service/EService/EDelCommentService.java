@@ -30,6 +30,7 @@ public class EDelCommentService implements EService {
 		System.out.println("EDelCommentService - ec_num : " + ec_num);
 		System.out.println("requestUser : " + requestUser);
 		System.out.println("authUser : " + authUser);
+		System.out.println("e_code : " + e_code);
 		System.out.println("page : " + page);
 		
 		
@@ -42,8 +43,6 @@ public class EDelCommentService implements EService {
 		} else {
 			EDao dao = sqlSession.getMapper(EDao.class);
 			
-			page = page - 1; // delete만 페이지 -1 할당 : 맨 뒷 페이지에서 하나만 남은 댓글을 삭제할 경우에 삭제 한 후 아무것도 표시되지 않는 문제점 때문
-			System.out.println("page = page - 1 : " + page);
 			dao.eDeleteComment(ec_num);
 
 			// EViewService

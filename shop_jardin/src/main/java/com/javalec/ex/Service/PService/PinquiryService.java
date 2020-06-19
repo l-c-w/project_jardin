@@ -30,7 +30,7 @@ public class PinquiryService implements PService {
 		// 관련상품
 		String category = request.getParameter("p_category");
 		ArrayList<ProductDto> list2 = new ArrayList<ProductDto>();
-		model.addAttribute("list2", dao.list2(category));
+		model.addAttribute("list2", dao.Plist2(category));
 
 		ArrayList<P_FnqDto> fnqdto = dao.pfnq_review(p_code);
 		model.addAttribute("fnq_review", fnqdto);

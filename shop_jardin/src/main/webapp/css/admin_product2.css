@@ -1,19 +1,21 @@
 @charset "UTF-8";
 section{
-	min-width:600px;
+	min-width:500px;
 	width:100%;
 	padding:50px 0 0 200px;
 	border-bottom: 1px solid #ddd;
 }
 section>h1{
 	height: 51px;
-	border-bottom: 1px solid #dfdfdf;
-	padding: 10px 0 10px 10px;
+	padding: 10px 0 10px 300px;
 	font-size: 18px;
+	text-align: center;
 }
 
 #main_list{
+	width: 1600px;
 	padding: 20px;
+	padding-left: 100px;
 	height:1800px;
 }
 

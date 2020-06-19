@@ -15,11 +15,12 @@
 <link rel="stylesheet" type="text/css" href="../css/reset.css?v=Y" />
 <link rel="stylesheet" type="text/css" href="../css/layout.css?v=Y" />
 <link rel="stylesheet" type="text/css" href="../css/content.css?v=Y" />
-<script type="text/javascript" src="../js/jquery.min.js"></script>
+<script  src="http://code.jquery.com/jquery-latest.min.js"></script>
+<script type="text/javascript" src="../js/common.js"></script>
+<script src="http://code.jquery.com/jquery-migrate-1.2.1.js"></script>
 <script type="text/javascript" src="../js/top_navi.js"></script>
 <script type="text/javascript" src="../js/left_navi.js"></script>
 <script type="text/javascript" src="../js/main.js"></script>
-<script type="text/javascript" src="../js/common.js"></script>
 <script type="text/javascript" src="../js/jquery.easing.1.3.js"></script>
 <script type="text/javascript" src="../js/idangerous.swiper-2.1.min.js"></script>
 <script type="text/javascript" src="../js/jquery.anchor.js"></script>
@@ -33,16 +34,6 @@
 <script type="text/javascript">
 
 $(document).ready(function() {
-	
-	function caltotal(p_code) {
-		var price = document.getElementById(p_code+'price');
-		var amount = document.getElementById(p_code+'amount');
-		
-		$('#'+p_code+'total').text(price*amount);
-		
-	}
-	
-
 
 });
 </script>
@@ -120,7 +111,7 @@ $(document).ready(function() {
 							<col width="14%" class="tnone" />
 							</colgroup>
 							<thead>
-								<th scope="col"><input type="checkbox" name=cart_check/></th>
+								<th scope="col"><input type="checkbox" id="select_all" onclick="select_all()"/></th>
 								<th scope="col">상품명</th>
 								<th scope="col" class="tnone">가격/포인트</th>
 								<th scope="col">수량</th>
@@ -128,15 +119,15 @@ $(document).ready(function() {
 								<th scope="col" class="tnone">주문</th>
 							</thead>
 							<tbody>
-								<c:set var="check_num" value="0"/>
-								<c:set var="chage_price" value="0"/>
-								<c:set var="chage_" value="0"/>
-								<form action="../payment/payment" name="cart_order" method="post">
-								<c:forEach var="cart_list" items="${list }">
 								
-								<tr>
+								<form action="../payment/payment" name="cart_order" method="post">
+								<input type="hidden" name="buy_type" value="buy_selected">
+								
+								<c:forEach var="cart_list" items="${list }">
+									<c:set var="init_cost" value="0"/>
+								<tr id="tr${cart_list.cart_code }">
 									
-									<td><input type="checkbox" name="cart_check" value="${cart_list.cart_code }"/></td>
+									<td><input type="checkbox" id="cart${cart_list.cart_code }" class="cart_check" name="cart_check" value="${cart_list.cart_code }" onclick="get_total()"/></td>
 									<td class="left">
 										<p class="img"><img src="../images/img/sample_product.jpg" alt="상품" width="66" height="66" /></p>
 
@@ -146,21 +137,23 @@ $(document).ready(function() {
 											</li>
 										</ul>
 									</td>
-									<td class="tnone"><span id="${cart_list.p_code }price" name="${cart_list.p_code }price" >${cart_list.price }</span>원<br/>
-									<span class="pointscore"><fmt:formatNumber value="${cart_list.p_point }" pattern="#,###,###,###"/>Point</span></td>
-									<td><input type="number" class="spinner" id ="${cart_list.p_code }amount" value="${cart_list.amount }" maxlength="3" name="${cart_list.p_code }amount" onchange="caltotal(${cart_list.p_code })"></td> 
-									<td><span id="${cart_list.p_code }total" name="${cart_list.p_code }total">${cart_list.price*cart_list.amount }</span>원</td>
+									<td class="tnone"><span id="${cart_list.cart_code }price" name="${cart_list.cart_code }price" ><fmt:formatNumber pattern="#,###,###,###">${cart_list.p_price }</fmt:formatNumber> </span>원<br/>
+									<span class="pointscore" id="${cart_list.cart_code }point"><fmt:formatNumber pattern="#,###,###,###">${cart_list.p_point }</fmt:formatNumber></span><span class="pointscore">Point</span></td>
+									<td onchange="get_total()"><input type="number" class="spinner" id ="${cart_list.cart_code }" value="${cart_list.amount }" maxlength="3" name="${cart_list.p_code }amount"></td> 
+									<td><span id="${cart_list.cart_code }total" name="${cart_list.p_code }total"><fmt:formatNumber pattern="#,###,###,###">${cart_list.p_price*cart_list.amount }</fmt:formatNumber></span>원</td>
+									<c:set var="total_cost" value="${total_cost+init_cost+cart_list.p_price*cart_list.amount }"/>
+									
 									<td class="tnone">
 										<ul class="order">	
-											<li><a href="../payment/payment?cart_code=${cart_list.p_code }&amount=${cart_list.amount }" class="obtnMini iw70">바로구매</a></li>
-											<li><a href="#" class="nbtnMini iw70">상품삭제</a></li>
+											<li id="test"><a href="../payment/payment?buy_type=buy_one&cart_code=${cart_list.cart_code }" class="obtnMini iw70">바로구매</a></li>
+											<li onclick="product_del('${cart_list.cart_code }')" style="cursor: pointer;"><a class="nbtnMini iw70">상품삭제</a></li>
 										</ul>
 									</td>
 								</tr>
 								
 								
 								</c:forEach>
-								
+								</form>
 							</tbody>
 						</table>
 					</div>
@@ -168,9 +161,8 @@ $(document).ready(function() {
 					<div class="btnArea">
 						<div class="bRight">
 							<ul>
-								<li><a href="#" class="selectbtn" >전체선택</a></li>
-								<li><a href="#" class="selectbtn2">선택수정</a></li>
-								<li><a href="#" class="selectbtn2">선택삭제</a></li>
+								<li onclick="select_all2()" style="cursor: pointer;"><a class="selectbtn" >전체선택</a></li>
+								<li onclick="sel_del()" style="cursor: pointer;"><a class="selectbtn2" >선택삭제</a></li>
 							</ul>
 						</div>
 					</div>
@@ -182,18 +174,18 @@ $(document).ready(function() {
 						<h4>총 주문금액</h4>
 						<ul class="info">
 							<li>
-								<span class="title">상품 합계금액</span>
-								<span class="won"><strong>1,132,310</strong> 원</span>
+								<span class="title" >상품 합계금액</span>
+								<span class="won"><strong id="product_cost">0</strong>  원</span>
 							</li>
 							<li>
-								<span class="title">배송비</span>
-								<span class="won"><strong>2,500</strong> 원</span>
+								<span class="title" >배송비</span>
+								<span class="won" id="del_span"><strong id="del_cost">2,500</strong>원</span>
 							</li>
 						</ul>
 						<ul class="total">
-							<li class="mileage">(적립 마일리지 <strong>11,324</strong> Point) </li>
+							<li class="mileage">(적립 마일리지 <strong id="point_total">0</strong> Point) </li>
 							<li class="txt"><strong>결제 예정 금액</strong></li>
-							<li class="money"><span>1,134,810</span> 원</li>
+							<li class="money"><span id="total_cost">0</span> 원</li>
 						</ul>
 					</div>
 					<!-- //총 주문금액 -->
@@ -201,11 +193,11 @@ $(document).ready(function() {
 					<div class="cartarea">
 						<ul>
 							<li style="cursor: pointer;" onclick="cart_order.submit()"><a class="ty1"  >선택상품 <span>주문하기</span></a></li>
-							<li><a href="#" class="ty2">전체상품 <span>주문하기</span></a></li>
+							<li onclick="buy_all()" style="cursor: pointer;"><a href="#" class="ty2">전체상품 <span>주문하기</span></a></li>
 							<li class="last"><a href="#" class="ty3">쇼핑 <span>계속하기</span></a></li>
 						</ul>
 					</div>
-					</form>
+					
 				<!-- //장바구니에 상품이 있을경우 -->
 
 
@@ -233,9 +225,179 @@ $(document).ready(function() {
 </style>
 
 <script type="text/javascript">
+//스피너 생성
+$(function() {var spinner = $( ".spinner" ).spinner({ min: 1, max: 999});});
+
+//수량변화 총액변화+DB 수량 수정
 $(function() {
-	var spinner = $( ".spinner" ).spinner({ min: 1, max: 999 });
+	$('.spinner').on("spinstop", function(){
+		
+		var spinid= $(this).attr("id");
+		var amountid="#"+spinid;
+		var priceid="#"+spinid+"price";
+		var totalid="#"+spinid+"total";
+		
+		var price=uncomma($(priceid).text());
+		var amount=$(this).spinner('value');
+		$(totalid).text(comma(Number(price)*Number(amount)));
+		get_total();
+		
+		var data =JSON.stringify({cart_code:spinid,amount_:amount});
+		console.log(data);
+		$.ajax({
+			method:"POST",
+			url:"cart_change",
+			data:data,
+			contentType:"application/json;charset=UTF-8",
+			error: function(data) {
+			}
+		});  
+	});
+	
+	
+	
 });
+//계산용변수
+var total=0;
+var point_total=0;
+var del= $("#del_cost").text();
+var del_cost = 2500;
+
+//총액계산
+function get_total() {
+		var chbArr = new Array;
+	if($("input[name='cart_check']:checked").length==0){
+		$("#product_cost").text("0");
+		$("#point_total").text("0")
+		$("#total_cost").text("0");
+		$("#del_span").text("2,500원");
+	}else{
+	$("input[name='cart_check']:checked").each(function(){
+		chbArr.push($(this).attr("id"));
+
+			for (var i = 0; i < chbArr.length; i++) {
+				
+				var amountid="#"+chbArr[i].substring(4);
+				var productid="#"+chbArr[i].substring(4)+"price";
+				var pointid="#"+chbArr[i].substring(4)+"point";
+				var amount= $(amountid).spinner('value');
+				var product= uncomma($(productid).text());
+				var point= uncomma($(pointid).text());
+				total+=Number(amount)*Number(product);
+				point_total+=Number(amount)*Number(point);
+				
+			}
+				$("#product_cost").text(comma(total));
+				if (total>=30000) {
+					$("#del_span").text("30,000원 이상 배송비 면제");
+					$("#total_cost").text(comma(total));
+				}else{
+				$("#total_cost").text(comma(total+del_cost));
+				$("#del_span").text("2,500원");
+				}
+				$("#point_total").text(comma(point_total));
+				total=0;
+				point_total=0;
+		});
+	}
+}
+
+//전체선택 체크박스 총액계산
+function select_all() {
+	if($("#select_all").prop("checked")){
+		$("input[name='cart_check']").prop("checked",true);
+		get_total();
+	}else{
+		$("input[name='cart_check']").prop("checked",false);
+		get_total();
+	}
+}
+
+//전체선택 버튼 총액계산
+function select_all2() {
+	if($("#select_all").prop("checked")){
+	$("#select_all").prop("checked",false);
+	$("input[name='cart_check']").prop("checked",false);
+	get_total();
+	}else{
+		$("#select_all").prop("checked",true);
+		$("input[name='cart_check']").prop("checked",true);
+		get_total();
+	}
+}
+
+//선택삭제
+function sel_del() {
+	var chbArr = new Array;
+	if($("input[name='cart_check']:checked").length==0){
+		alert("선택된 상품이 없습니다.");
+		return;
+	}else{
+	$("input[name='cart_check']:checked").each(function(){
+		var trim = $(this).attr("id");
+		var off_select="#"+trim;
+		$(off_select).prop("checked",false);
+		get_total();
+		chbArr.push(trim.substring(4));
+	});
+	var cart_code=JSON.stringify({cart_code:chbArr});
+	$.ajax({
+		type:"POST",
+		url:"cart_del",
+		data:cart_code,
+		contentType:"application/json;charset=UTF-8",
+		success: function() {
+			for (var i = 0; i < chbArr.length; i++) {
+				var go_text="#cart"+chbArr[i];
+				var go_hide="#tr"+chbArr[i];
+				$(go_text).prop("type","text");
+				$(go_hide).hide();
+				
+			}
+		},error: function(request,status,error) {
+			alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
+		}
+	});
+	}
+}
+
+//상품삭제
+function product_del(code) {
+	var cart_code=JSON.stringify({cart_code:code});
+	
+	$.ajax({
+		type:"POST",
+		url:"cart_del2",
+		data:cart_code,
+		contentType:"application/json;charset=UTF-8",
+		success: function() {
+				var go_text="#cart"+code;
+				var go_hide="#tr"+code;
+				$(go_text).prop("type","text");
+				$(go_hide).hide();
+			},
+		error: function(request,status,error) {
+			alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
+		}
+	});
+}
+
+//전체구매
+
+function buy_all() {
+	$("input[name='cart_check']").prop("checked",true);
+	cart_order.submit();
+}
+//콤마찍기
+function comma(str) {
+    str = String(str);
+    return str.replace(/(\d)(?=(?:\d{3})+(?!\d))/g, '$1,');
+}
+//콤마풀기
+function uncomma(str) {
+    str = String(str);
+    return str.replace(/[^\d]+/g, '');
+}
 
 
 

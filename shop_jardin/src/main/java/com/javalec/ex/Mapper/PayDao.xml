@@ -7,16 +7,26 @@
 	
 	<!-- 회원 장바구니 보기 -->
 	<select id="cart_view" resultType="com.javalec.ex.Dto.PayDto.CartDto">
-		select cart.cart_code, product.p_code, product.p_name, product.p_category, product.price, product.p_point, cart.amount 
+		select cart.cart_code, product.p_code, product.p_name, product.p_category, product.p_price, product.p_point, cart.amount 
 		from cart, product
-		where cart.id='test4' and cart.p_code=product.p_code
+		where cart.id=#{param1} and cart.p_code=product.p_code
 	</select>
+	
+	<!-- 장바구니 수량변경 -->
+	<update id="change_amount">
+		update cart set amount=#{p1} where cart_code=#{p2}
+	</update>
+	
+	<!-- 장바구니 삭제 -->
+	<delete id="cart_del">
+		delete from cart where cart_code=#{param1}
+	</delete>
 	
 	<!-- 장바구니에서 주문페이지로 제품 넘기기-->
 	<select id="go_order" resultType="com.javalec.ex.Dto.PayDto.CartDto">
-		select cart.cart_code, product.p_code, product.p_name, product.p_category, product.price, product.p_point, cart.amount 
+		select cart.cart_code, product.p_code, product.p_name, product.p_category, product.p_price, product.p_point, cart.amount 
 		from cart, product
-		where cart.id='test4' and cart.cart_code=#{param1} and cart.p_code=product.p_code
+		where cart.id=#{param1} and cart.cart_code=#{param2} and cart.p_code=product.p_code
 	</select>
 		
 	
@@ -39,36 +49,57 @@
 	
 	<!-- 사용가능포인트-->
 	<select id="usable_point" resultType="int">
-		select pointsum-upointsum from (select sum(po_point) as pointsum from point where id=#{param1}),
+		select pointsum-nvl(upointsum,0) from (select sum(po_point) as pointsum from point where id=#{param1}),
 		(select sum(u_point) as upointsum from use_point where id=#{param1})
 	</select>
 	
 	
 	<!-- 사용가능 쿠폰리스트 가져오기-->
 	<select id="ucou_list" resultType="com.javalec.ex.Dto.PayDto.Coupon_listDto">
-		select coupon.cou_name,coupon.cou_reward,coupon_list.issue_date,coupon_list.exp_date, coupon_list.cou_state   
+		<![CDATA[select coupon.cou_name,coupon.cou_reward,coupon_list.issue_date,coupon_list.exp_date, coupon_list.cou_state   
 		from coupon, coupon_list 
 		where id=#{param1} and coupon.cou_code=coupon_list.cou_code and (coupon_list.exp_date-sysdate)>0 and coupon_list.cou_state is null
+		order by coupon_list.exp_date asc]]>
+	</select>
+	
+	<!-- 사용가능한 쿠폰 갯수 -->
+	<select id="usable_coupon" resultType="Integer">
+		<![CDATA[select count(*) as count
+		from coupon, coupon_list 
+		where id=#{param1} and coupon.cou_code=coupon_list.cou_code and (coupon_list.exp_date-sysdate)>0 and coupon_list.cou_state is null]]>
 	</select>
 	
 	<!-- 사용불가능 쿠폰리스트 가져오기-->
 	<select id="ncou_list" resultType="com.javalec.ex.Dto.PayDto.Coupon_listDto">
 		<![CDATA[select coupon.cou_name,coupon.cou_reward,coupon_list.issue_date,coupon_list.exp_date, coupon_list.cou_state   
 		from coupon, coupon_list 
-		where id=#{param1} and coupon.cou_code=coupon_list.cou_code and ((coupon_list.exp_date-sysdate)<0 or coupon_list.cou_state is not null)]]>
-	</select>
-	
-	<!-- 사용가능한 쿠폰 갯수 -->
-	<select id="usable_coupon" resultType="int">
-		select count(*) from coupon_list where id=#{param1}
+		where id=#{param1} and coupon.cou_code=coupon_list.cou_code and ((coupon_list.exp_date-sysdate)<0 or coupon_list.cou_state is not null)
+		order by coupon_list.exp_date asc]]>
 	</select>
 	
 	
-	<!-- 주문페이지 주문서 작성 -->
+	<!-- 주문페이지 주문서 작성--> 
 	<insert id="make_order">
 		insert into payment values(to_char(sysdate,'yyyyMMdd')||-payment_seq.nextval,
-		#{param1},'-',#{param2},'0','N',sysdate,#{param3},
-		'결제대기','-','-','-')
+		#{param1},'-',0,'N',sysdate,#{param2},
+		'주문서작성','-',#{param3},'-')
 	</insert>
+	
+	<!-- 주문서 가져오기 -->
+	<select id="get_order" resultType="com.javalec.ex.Dto.PayDto.PaymentDto">
+		select * from(select * from payment where id=#{param1} and pay_state='주문서작성' order by pay_date desc) where ROWNUM=1
+	</select>
+	
+	<!-- 주문서작성중 취소된 주문건 찾아오기 -->
+	<select id="order_check" resultType="String">
+		select pay_state from payment where id='qwer' and pay_state='주문서작성'
+	</select>
+	
+	<!-- 회원정보 반영 -->
+	<update id="update_member" parameterType="com.javalec.ex.Dto.MDto.Member_Dto">
+		update member 
+		set name=#{name},email=#{email},post=#{post},address1=#{address1},address2=#{address2},
+		phone1=#{phone1},phone2=#{phone2},phone3=#{phone3} where id=#{id}
+	</update>
 	
 </mapper>

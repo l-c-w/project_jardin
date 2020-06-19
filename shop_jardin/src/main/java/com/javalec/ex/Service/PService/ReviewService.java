@@ -30,7 +30,7 @@ public class ReviewService implements PService {
 		// 관련상품
 		String category = request.getParameter("p_category");
 		ArrayList<ProductDto> list2 = new ArrayList<ProductDto>();
-		model.addAttribute("list2", dao.list2(category));
+		model.addAttribute("list2", dao.Plist2(category));
 
 		System.out.println("상품리뷰");
 		// 상품리뷰 글 리뷰

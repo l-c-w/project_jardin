@@ -120,7 +120,7 @@ $(function(){
 	});
 
 	// 위시리스트
-	var wishnum = $('.wish ul li').size();
+	var wishnum = $('.wish ul li').length;
 	var sum = Math.ceil(wishnum / 3);
 	var count = 1;
 	$('.sum').text(sum);
@@ -150,7 +150,45 @@ $(function(){
 		$('html').animate({scrollTop: 0}, 500);
 			$('body').animate({scrollTop: 0}, 500);
 	});
-
+	//이메일 도메인 변경
+	$("#emailList").on("change",function() {
+		$("#email2").val($(this).val());		
+	});
+	
+	//회원정보 수취자로 넘기기
+	$("#infosame").click(function() {
+		if($(this).is(":checked")){
+			$("#del_name").val($("#name").val());
+			$("#del_post").val($("#post").val());
+			$("#del_address1").val($("#address1").val());
+			$("#del_address2").val($("#address2").val());
+			$("#del_email1").val($("#email1").val());
+			$("#del_email2").val($("#email2").val());
+			var phone1 = $("#phone1 option:selected").val();
+			
+			$("#del_phone1").val($("#phone1 option:selected").val()).change();
+			$("#del_phone2").val($("#phone2").val());
+			$("#del_phone3").val($("#phone3").val());
+			
+		}
+//		else{
+//			$("#del_name").val("");
+//			$("#del_post").val("");
+//			$("#del_address1").val("");
+//			$("#del_address2").val("");
+//			$("#del_email1").val("");
+//			$("#del_email2").val("");
+//			$("#del_phone1").val("");
+//			$("#del_phone2").val("");
+//			$("#del_phone3").val("");
+//		}
+	});
+	
+	//장바구니 총액
+	
+	
+	
+	
 
 
 

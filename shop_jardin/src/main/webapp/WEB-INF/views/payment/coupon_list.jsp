@@ -82,57 +82,6 @@ $(function() {
 				</div>
 			</div>
 
-
-			<div class="orderDiv">
-				<table summary="상품 게시판으로 주문하신 상품명, 수량, 판매가, 배송순으로 조회 하시고 쿠폰을 적용하실 수 있습니다." class="orderTable" border="1" cellspacing="0">
-					<caption>상품 게시판</caption>
-					<colgroup>
-					<col width="*" />
-					<col width="16%" />
-					<col width="14%" class="tw30" />
-					<col width="16%" class="pnone" />
-					</colgroup>
-					<thead>
-						<th scope="col">상품명</th>
-						<th scope="col">수량</th>
-						<th scope="col">판매가</th>
-						<th scope="col" class="pnone">배송비</th>
-					</thead>
-					<tbody>
-						<tr>
-							<td class="left">
-								<p class="img"><img src="../images/img/sample_product.jpg" alt="상품" width="66" height="66" /></p>
-
-								<ul class="goods">
-									<li>
-										<a href="#">쟈뎅 오리지널 콜롬비아 페레이라 원두커피백 15p</a>
-									</li>
-								</ul>
-							</td>
-							<td>1개</td>
-							<td>14,400 원</td>
-							<td class="pnone">0 원</td>
-						</tr>
-					</tbody>
-				</table>
-			</div>
-
-			<div class="popGraybox">
-				<div class="choose">
-					쿠폰선택&nbsp;&nbsp;
-					<select>
-						<option value="">쿠폰선택</option>
-					</select>
-				</div>
-
-				<div class="result">
-					<div class="point">* 옵션가와 배송비는 제외</div>
-					<div class="discount">
-						쿠폰 할인 금액 : <span>0</span> 원
-					</div>
-				</div>
-			</div>
-
 			<!-- 쿠폰할인 금액 합계 -->
 			<div class="amount popamount">
 				<ul class="coupon">

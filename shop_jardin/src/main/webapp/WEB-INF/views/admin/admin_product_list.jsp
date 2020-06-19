@@ -33,24 +33,22 @@
 </style>
 <script type="text/javascript">
 		function delProduct(num){
-			
+	
 			if(confirm("해당 상품을 삭제처리 하시겠습니까? (해당 데이터는 삭제제품에서 확인/변경 가능합니다.)")){
 				$.ajax({
-				      url : "product_delete",
+				      url : 'product_delete?num='+num,
 				      method : "POST",
-				      data: JSON.stringify(num),
-				      dataType : "json",
-				      contentType: "application/json",
 				      success : function(val){
 				    	  if(val == 1){ //리턴값이 1이면 (=성공)
 					         alert("삭제처리 완료되었습니다.");
-// 							location.href="product_list";
-					         location.reload(); //페이지 새로고침
+ 							location.href="admin_product_list";
+					        // location.reload(); //페이지 새로고침
 				    	  }else{ // 0이면 실패
 				    		  alert("삭제처리 실패.");
 				    	  }
 				      },
-				      error : function(){
+				      error : function(err){
+				    	 
 				         alert("서버통신실패");
 				      }
 				   });
@@ -114,23 +112,23 @@
 		
 		//step1선택에 따른 step2띄워주기
 		function aa(val) {
-			var case2= document.getElementsByClassName("case2");
+			var case2 = document.getElementsByClassName("case");
 			var option = document.getElementById(val);
 			
-			$(".case2").css("display", "none");
-			$(".case2").removeAttr("name");
+			$(".case").css("display", "none");
+			$(".case").removeAttr("name");
 			
 			$(option).css("display", "inline-block");
-			$(option).attr("name", "p_case2")
+			$(option).attr("name", "p_case")
 		}
 		
 		//페이지 로딩시
 		$(document).ready(function(){
 			var id;
 			if(${not empty map}){
-				//step2
-				$(".case2 option").each(function(){
-				    if($(this).val()=="${map.p_case2}"){
+				//case
+				$(".case option").each(function(){
+				    if($(this).val()=="${map.p_case}"){
 				      $(this).attr("selected","selected"); // attr적용안될경우 prop으로 
 				      id = $(this).attr("id");
 				      $("#case1 option").each(function(){
@@ -148,7 +146,7 @@
 		});
 </script>
 <style type="text/css">
-.case2 {
+.case {
 	display: none;
 }
 
@@ -169,6 +167,7 @@
 	font-size: 13px;
 	display: inline-block;
 }
+#img {width: 20px; margin: 20px 0;}
 </style>
 </head>
 <body>
@@ -177,7 +176,6 @@
 		<h1>제품 리스트</h1>
 		<div id="main_list">
 			<div id="main_user_list">
-				<h2>임시로 놔두기</h2>
 				<div id="search_form">
 					<form action="product_searchList" name="inputform" method="post">
 						<table border="1">
@@ -189,7 +187,7 @@
 								<td>기간검색</td>
 								<td>
 								<select name="dateType">
-										<option value="p_sysdate">등록일</option>
+										<option value="p_wdate">등록일</option>
 								</select> 
 								<input type="date" name="e_start_day" id="e_start_day" onchange="date_chk2()"> ~ 
 								<input type="date" name="e_end_day" id="e_end_day" onchange="date_chk2()">
@@ -204,38 +202,38 @@
 							<tr>
 								<td>분류</td>
 								<td>
-								<select name="case1" id="case1"	onchange="aa(this.value)">
+								<select name="category" id="category"	onchange="aa(this.value)">
 										<option value="원두">원두</option>
 										<option value="커피 백">커피 백</option>
 										<option value="아이스 음료">아이스 음료</option>
 										<option value="인스턴트 커피">인스턴트 커피</option>
 										<option value="티 음료">티 음료</option>
 								</select> 
-								<select id="원두" name="p_case2" class="case2" style="display: inline;">
+								<select id="원두" name="p_case" class="case" style="display: inline;">
 										<option value="클래스">클래스</option>
 										<option value="바리스타">바리스타</option>
 										<option value="미스터즈">미스터즈</option>
 										<option value="데일리 로스팅">데일리 로스팅</option>
 								</select> 
-								<select id="인스턴트 커피" class="case2">
+								<select id="인스턴트 커피" class="case">
 										<option value="카페모리">오리지널 카페모리</option>
 										<option value="에스프레소 스틱">에스프레소 스틱 커피백</option>
 								</select> 
-								<select id="커피 백" class="case2">
+								<select id="커피 백" class="case">
 										<option value="커피 백">커피 백</option>
 										<option value="핸드 드립">핸드 드립</option>
 										<option value="마일드 커피 백">마일드 커피 백</option>
 								</select> 
-								<select id="아이스 음료" class="case2">
+								<select id="아이스 음료" class="case">
 										<option value="시그니처">시그니처</option>
 										<option value="카페리얼">카페리얼</option>
 								</select> 
-								<select id="인스턴트 커피" class="step2">
+								<select id="인스턴트 커피" class="case">
 										<option value="카페모리">카페모리</option>
 										<option value="에스프레소 스틱라떼">에스프레소 스틱라떼</option>
 										<option value="에스프레소 스틱">에스프레소 스틱</option>
 								</select> 
-								<select id="티 음료" class="case2">
+								<select id="티 음료" class="case">
 										<option value="아워 티">아워 티</option>
 										<option value="아워 티 pet">아워 티 pet</option>
 										<option value="카페리얼 티 라떼">카페리얼 티 라떼</option>
@@ -285,7 +283,10 @@
 								<td><input type="checkbox"></td>
 								<td>${status.count}</td>
 								<td>${pro.p_code}</td>
-								<td>${pro.p_img1}${pro.p_img2}${pro.p_img3}
+								<td id="img">
+								<img src="../${pro.p_img1}"/>
+								<img src="../${pro.p_img2}"/>
+								<img src="../${pro.p_img3}"/>
 									<%--<img alt="썸네일" src="${pro.p_img1}"> --%>
 									<%--<img alt="상단이미지1" src="${pro.p_img1}"> --%>
 								    <%--<img alt="상단이미지2" src="${pro.p_img2}"> --%>
@@ -299,9 +300,8 @@
 								<td>${pro.p_delflag}</td>
 								<!--<td><button type="button" onclick="스크립트()">수정</button></td> -->
 								<td>
-									<button type="button"
-										onclick="location.href='product_updateForm?p_code=${pro.p_code}'">수정</button>
-									<button type="button" onclick="delProduct(${pro.p_code})">삭제</button>
+								<button type="button" onclick="location.href='product_updateForm?p_code=${pro.p_code}'">수정</button>
+								<button type="button" onclick="delProduct(${pro.p_code})">삭제</button>
 								</td>
 							</tr>
 						</c:forEach>

@@ -598,7 +598,7 @@
 
 							<td rowspan="2">
 							${m_list.birth}<br>
-							${m_list.phone}
+							0${m_list.phone1}-${m_list.phone2}-${m_list.phone3}
 							</td>
 
 

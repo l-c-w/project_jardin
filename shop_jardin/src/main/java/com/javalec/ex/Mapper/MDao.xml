@@ -16,6 +16,11 @@
 	</select> 
 	
 	
+	<select id="emailcheck" resultType="int">
+		select count(*) from member where email=#{param1}
+	</select> 
+	
+	
 	<select id="login1" resultType="com.javalec.ex.Dto.MDto.Member_Dto">
 	
 	select * from member where id=#{param1}
@@ -23,11 +28,29 @@
 	</select>
 	
 	
+		
 	<select id="login2" resultType="com.javalec.ex.Dto.MDto.Member_Dto">
 	
 	select * from member where id=#{param1} and pw=#{param2}
 	
 	</select>
+	
+	
+	
+	<select id="login_search" resultType="com.javalec.ex.Dto.MDto.Member_Dto">
+	
+	select * from member where name=#{param1} and email=#{param2}
+	
+	</select>
+	
+	
+	
+	<select id="login_pw_search" resultType="com.javalec.ex.Dto.MDto.Member_Dto">
+	
+	select * from member where id=#{param1} and email=#{param2}
+	
+	</select>
+	
 	
 	
 	
@@ -62,6 +85,27 @@
 	where id=#{param14}
 	
 	</update>
+	
+	
+	<delete id="withdrawal">
+
+		<![CDATA[
+			DELETE member
+			WHERE id=#{param1} and pw=#{param2}
+		]]>
+		
+	</delete>
+	
+	
+	
+	<select id="idpwch" resultType="int">
+	
+	select count(*) from member where id=#{param1} and pw=#{param2}
+	
+	</select>
+	
+	
+	
 	
 	
 </mapper>

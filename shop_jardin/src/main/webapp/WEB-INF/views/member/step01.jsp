@@ -65,7 +65,7 @@ $(document).ready(function() {
 					<div class="stepWrap">
 						<div class="step stepon">
 							<p class="web">STEP 01</p>
-							<p class="txt">실명확인</p>
+							<p class="txt">이메일인증</p>
 							<p class="ck"><img src="../images/bg/bg_step.png" alt="현재위치" /></p>
 						</div>
 
@@ -89,22 +89,57 @@ $(document).ready(function() {
 
 					<div class="alertBox">
 						<ul>
-							<li>회원님의 실명확인 및 가입 여부를 확인하는 절차입니다.</li>
-							<li>회원님의 개인 정보 보호를 위해 실명확인을 실시하고 있습니다.</li>
+							<li>이메일을 인증 받아야 다음 단계로 넘어갈 수 있습니다.</li>
 						</ul>
 					</div>
+					
+					
+				   <form action="../member/auth" method="post" name="step01_2" id="step01_2">
+				   
+					<div class="alertBox">
+						
+						<input type="email" name="email" id="email" placeholder="이메일주소를 입력하세요."  style="width: 400px; height: 50px;">
+					</div>
+					
+					</form>
 
 
 					<!-- Btn Area -->
 					<div class="btnAreaCenter">
-						<a href="step02" class="gbtn">휴대폰인증</a></li>
+						
+						<a href="#" onclick="validate()" class="gbtn">이메일발송</a>
+					
 					</div>
+					
 					<!-- //Btn Area -->
+					
+					
+					
+			<script type="text/javascript">
+					
+			function validate() {
+						 
+				if(step01_2.email.value=="") {
+					alert("이메일을 입력해 주세요");
+					step01_2.email.focus();
+					return false;
+					}
+				
+					       
+				step01_2.submit();
+				
+			}
+					       
+			</script>
 
 
 				</div>
+				
 			</div>
 			<!-- //contents -->
+			
+			
+			
 
 
 		</div>

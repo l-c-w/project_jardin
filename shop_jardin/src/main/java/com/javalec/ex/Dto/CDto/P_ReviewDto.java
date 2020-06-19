@@ -36,6 +36,19 @@ public class P_ReviewDto {
 	
 	private Timestamp pr_wdate;
 	private Timestamp pr_udate;
+	
+	
+	private String pr_answer;
+	
+	
+
+	public String getPr_answer() {
+		return pr_answer;
+	}
+
+	public void setPr_answer(String pr_answer) {
+		this.pr_answer = pr_answer;
+	}
 
 	public int getPr_num() {
 		return pr_num;

@@ -107,7 +107,7 @@ $(document).ready(function() {
 					
 					
 					
-					<form action="../mypage/inquiry_ok" name="inquiry" id="inquiry" method="post">
+					<form action="../mypage/inquiry_up_ok" name="inquiry" id="inquiry" method="post">
 
 					<div class="checkDiv">
 					
@@ -124,13 +124,45 @@ $(document).ready(function() {
 							
 							<tbody>
 							
+							
+							
 								<tr>
 									<th scope="row"><span>분류</span></th>
+									
 									<td>
 										<select name="oo_type">
-											<option value="product">상품</option>
-											<option value="order">주문</option>
-											<option value="delivery">배송</option>
+										
+									<c:choose>
+									
+									<c:when test="${oo_view.oo_type == 'product'}">
+									
+									<option value="product" selected="selected">상품</option>
+									<option value="order">주문</option>
+									<option value="delivery">배송</option>
+									
+									</c:when>
+									
+									<c:when test="${oo_view.oo_type == 'order'}">
+									
+									<option value="product" >상품</option>
+									<option value="order" selected="selected">주문</option>
+									<option value="delivery">배송</option>
+									
+									</c:when>
+									
+									
+									<c:otherwise>
+									
+									<option value="product">상품</option>
+									<option value="order">주문</option>
+									<option value="delivery" selected="selected">배송</option>
+									
+									</c:otherwise>
+									
+									
+									</c:choose>
+									
+											
 										</select>
 									</td>
 								</tr>
@@ -141,7 +173,8 @@ $(document).ready(function() {
 									<th scope="row"><span>제목</span></th>
 									
 									<td>
-										<input type="text" class="wlong" name="oo_title" />
+										<input type="hidden" class="wlong" name="oo_num" value="${oo_view.oo_num}" />
+										<input type="text" class="wlong" name="oo_title" value="${oo_view.oo_title}" />
 									</td>
 								</tr>
 								
@@ -151,7 +184,7 @@ $(document).ready(function() {
 									<th scope="row"><span>상세 내용</span></th>
 									
 									<td>
-										<textarea class="tta" name="oo_content"></textarea>
+										<textarea class="tta" name="oo_content">${oo_view.oo_content}</textarea>
 									</td>
 									
 								</tr>

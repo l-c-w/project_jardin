@@ -204,20 +204,20 @@
 					</tr>
 					<tr>
 						<td>제품 대표이미지</td>
-						<td><input type="file" id="p_img1" name="p_img1" value="${dto.p_img1}"><div class="select_img" ><img src=""></div></td>
+						<td><input type="file" id="p_img1" name="file" value="${dto.p_img1}"><div class="select_img" ><img src=""></div></td>
 					</tr>
 					<tr>
 						<td>제품 이미지1</td>
-						<td><input type="file" id="p_img2" name="p_img2" value="${dto.p_img2}"><div class="select_img2" ><img src=""></div></td>
+						<td><input type="file" id="p_img2" name="file" value="${dto.p_img2}"><div class="select_img2" ><img src=""></div></td>
 					</tr>
 					<tr>
 						<td>제품 이미지2</td>
-						<td><input type="file" id="p_img3" name="p_img3" value="${dto.p_img3}"><div class="select_img3" ><img src=""></div></td>
+						<td><input type="file" id="p_img3" name="file" value="${dto.p_img3}"><div class="select_img3" ><img src=""></div></td>
 					</tr>
 					<tr>
 						<td>상세내용 이미지</td>
-						<td><input type="file" id="p_content_img" name="p_content_img" value="${dto.p_content_img}"><div class="select_img4" ><img src=""></div></td>
-					</tr>
+						<td><input type="file" id="p_content_img" name="file" value="${dto.p_content_img}"><div class="select_img4" ><img src=""></div></td>
+					</tr> 
 				</table>
 					<script>
 			  $("#p_img1").change(function(){

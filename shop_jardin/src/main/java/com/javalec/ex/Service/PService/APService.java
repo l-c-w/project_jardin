@@ -20,4 +20,5 @@ public interface APService {
 
 		// 상품 삭제
 		public void deleteProduct(String p_code) throws Exception;
+
 }

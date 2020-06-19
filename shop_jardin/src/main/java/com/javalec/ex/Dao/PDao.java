@@ -10,25 +10,33 @@ import com.javalec.ex.Dto.PDto.P_FnqDto;
 import com.javalec.ex.Dto.PDto.ProductDto;
 
 public interface PDao {
-
-	public ArrayList<ProductDto> Plist();
-
-	public ArrayList<ProductDto> Plist2(String p_category);
-
-	public ArrayList<ProductDto> list_category(String p_category);
 	
-	public void p_list(String p_category);
+	//상품 전체 리스트
+		
+	public List<ProductDto> Plist() throws Exception;
 
-	public ProductDto productDetail(String p_code);
-
-	public ArrayList<P_ReviewDto> p_review(String p_code,int page,int limit); // page, limit
-
-	public ArrayList<C_ReviewDto> c_review(String p_code,int page,int limit);
+	public List<String> Plist2() throws Exception;
 	
-	public ArrayList<P_FnqDto> pfnq_review(String p_code);
+	public ProductDto productDetail(int p_code) throws Exception;
 	
-	//해당 상품에 대한 모든 리뷰 카운트
-	public int getListCount(String p_code);
+
+//	public ArrayList<ProductDto> Plist() throws Exception;
+//
+//	public ArrayList<ProductDto> Plist2(String p_category) throws Exception;
+//
+//	public ArrayList<ProductDto> list_category(String p_category) throws Exception;
+//	
+//	public void p_list(String p_category) throws Exception;
+//
+//
+//	public ArrayList<P_ReviewDto> p_review(String p_code,int page,int limit) throws Exception; // page, limit
+//
+//	public ArrayList<C_ReviewDto> c_review(String p_code,int page,int limit) throws Exception;
+//	
+//	public ArrayList<P_FnqDto> pfnq_review(String p_code) throws Exception;
+//	
+//	//해당 상품에 대한 모든 리뷰 카운트
+//	public int getListCount(String p_code) throws Exception;
 	
 
 

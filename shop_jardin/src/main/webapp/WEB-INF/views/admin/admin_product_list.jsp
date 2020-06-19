@@ -178,6 +178,7 @@
 			<div id="main_user_list">
 				<div id="search_form">
 					<form action="product_searchList" name="inputform" method="post">
+					<input type="hidden" name="n" value = ${dto.p_code }/>
 						<table border="1">
 							<tr>
 								<td>상품명</td>
@@ -268,6 +269,7 @@
 							<th><input type="checkbox"></th>
 							<th>번호</th>
 							<th>상품코드</th>
+							<th>상품유형</th>
 							<th>이미지</th>
 							<th>상품명</th>
 							<th>판매가</th>
@@ -283,6 +285,7 @@
 								<td><input type="checkbox"></td>
 								<td>${status.count}</td>
 								<td>${pro.p_code}</td>
+								<td>${pro.p_category }</td>
 								<td id="img">
 								<img src="../${pro.p_img1}"/>
 								<img src="../${pro.p_img2}"/>

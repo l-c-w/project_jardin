@@ -23,5 +23,9 @@ public interface APDao {
 		// 상품 삭제
 		public void delete(String p_code) throws Exception;
 		
+		
+
+
+		
 	}
 

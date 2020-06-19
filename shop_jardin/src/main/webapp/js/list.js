@@ -1,5 +1,6 @@
 $(document).ready(function(){
-   
+   if
+	
    $('#DashBoard').hide();
    $('#PaymentList').hide();
    $('#AccumulatedList').hide();
@@ -18,7 +19,7 @@ $(document).ready(function(){
       
    });
    
-   $('.nav2').click(function(){
+   $('.Tab').click(function(){
       
       $('.nav1').removeClass('listClick');
       $('.nav3').removeClass('listClick');

@@ -64,19 +64,19 @@ $(document).ready(function() {
 				<div class="imgSlide">
 					<div class="img">
 						<ul>
-							<li><img src="../images/img/sample_brand.jpg" alt="제품이미지" /></li>
-							<li><img src="../images/img/sample_brand.jpg" alt="제품이미지" /></li>
-							<li><img src="../images/img/sample_brand.jpg" alt="제품이미지" /></li>
+							<li><img src="../${productDetail.p_img1}" width="350px;" alt="제품이미지" /></li>
+							<li><img src="../${productDetail.p_img2}" alt="제품이미지" /></li>
+							<li><img src="../${productDetail.p_img3}" alt="제품이미지" /></li>
 						</ul>
 					</div>
 
 					<div class="thum">
 						<ul>
-							<li><img src="../images/img/sample_brand.jpg"
+							<li><img src="../${productDetail.p_img1}"
 								alt="썸네일 제품이미지" /></li>
-							<li><img src="../images/img/sample_brand.jpg"
+							<li><img src="../${productDetail.p_img2}"
 								alt="썸네일 제품이미지" /></li>
-							<li><img src="../images/img/sample_brand.jpg"
+							<li><img src="../${productDetail.p_img3}"
 								alt="썸네일 제품이미지" /></li>
 						</ul>
 					</div>
@@ -87,7 +87,7 @@ $(document).ready(function() {
 				<!-- info -->
 				<div class="info">
 					<p class="title">
-						<span>[오리지널]</span>${product.p_name }
+						<span>${productDetail.p_case2}</span>${productDetail.p_name }
 					</p>
 
 					<div class="priceInfo">
@@ -95,13 +95,13 @@ $(document).ready(function() {
 							<li>
 								<div class="stit">판매가</div>
 								<div class="heavygray">
-									<strong>${product.p_price }원</strong>
+									<strong>${productDetail.p_price }원</strong>
 								</div>
 							</li>
 							<li>
 								<div class="stit">포인트</div>
 								<div class="orange">
-									<strong>${product.p_point }point</strong>
+									<strong>${productDetail.p_point }point</strong>
 								</div>
 							</li>
 							<li>
@@ -110,7 +110,7 @@ $(document).ready(function() {
 							</li>
 							<li>
 								<div class="stit">용량</div>
-								<div>${product.p_capacity }</div>
+								<div>${productDetail.p_capacity }</div>
 							</li>
 							<li>
 								<div class="stit">수량</div>
@@ -180,7 +180,7 @@ $(document).ready(function() {
 
 
 			<script>
-			 	if( ${tabId } === 'goodsReview'){
+				if( ${tabId } === 'goodsReview'){
 				$(function(){$(".detailTab ul li a:eq(2)").click();});					
 				} 
 			
@@ -209,28 +209,28 @@ $(document).ready(function() {
 							<tbody>
 								<tr>
 									<th scope="row" class="info"><span>제조명</span></th>
-									<td>${product.p_name }</td>
+									<td>${productDetail.p_name }</td>
 									<th scope="row" class="info"><span>내용량</u></span></th>
-									<td>커피원두500g</td>
+									<td>${productDetail.p_capacity }</td>
 								</tr>
 
 								<tr>
 									<th scope="row" class="info"><span>제조원</span></th>
-									<td>${product.p_producer }</td>
+									<td>${productDetail.p_producer }</td>
 									<th scope="row" class="info"><span>포장재질</span></th>
 									<td>폴리에틸렌(내면)</td>
 								</tr>
 
 								<tr>
 									<th scope="row" class="info"><span>유통기한</span></th>
-									<td>${product.p_expiry }</td>
+									<td>${productDetail.p_expiry }</td>
 									<th scope="row" class="info"><span>고객<u>상담실</u></span></th>
 									<td>02-546-3881</td>
 								</tr>
 
 								<tr>
 									<th scope="row" class="info"><span>식품의 <u>유형</u></span></th>
-									<td>${product.p_category }</td>
+									<td>${productDetail.p_category }</td>
 									<th scope="row" class="info"><span>유통전문<u>판매원</u></span></th>
 									<td></td>
 								</tr>
@@ -242,12 +242,12 @@ $(document).ready(function() {
 
 								<tr>
 									<th scope="row" class="info"><span>원재료명 <u>및 함량</u></span></th>
-									<td colspan="3">열량 ${product.p_detail }</td>
+									<td colspan="3">열량 ${productDetail.p_detail }</td>
 								</tr>
 
 								<tr>
 									<th scope="row" class="info"><span>업소명 <u>및 소재지</u></span></th>
-									<td colspan="3">${product.p_location }</td>
+									<td colspan="3">${productDetail.p_location }</td>
 								</tr>
 							</tbody>
 						</table>
@@ -263,10 +263,10 @@ $(document).ready(function() {
 
 					<div class="relationList">
 						<ul>
-							<c:forEach var="dto2" items="${list2}">
+							<c:forEach var="dto2" items="${Plist}">
 								<li><a href="#">
 										<div class="img">
-											<img src="../images/img/mcoffee1.png" alt="제품이미지" />
+											<img src="../${dto2.p_img1 }" alt="제품이미지" />
 										</div>
 										<div class="name">${dto2.p_name}</div>
 										<div class="price">${dto2.p_price }</div>
@@ -363,7 +363,7 @@ $(document).ready(function() {
 									<strong>${j }</strong>
 								</c:when>
 							<c:when test="${j != page }">
-							    	<a href="p_detail?p_code=${product.p_code}&p_category=${product.p_category}&page=${j}&tabId='goodsReview'">${j}</a>
+							    	<a href="p_detail?p_code=${productDetail.p_code}&p_category=${productDetail.p_category}&page=${j}&tabId='goodsReview'">${j}</a>
 							</c:when>
 							</c:choose>
 						</c:forEach>

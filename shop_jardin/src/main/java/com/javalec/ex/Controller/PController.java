@@ -1,88 +1,58 @@
 package com.javalec.ex.Controller;
 
 
-import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Logger;
 
 import javax.inject.Inject;
-import javax.servlet.http.HttpServletRequest;
 
-import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 
-import com.javalec.ex.Service.PService.PDetailService;
-import com.javalec.ex.Service.PService.PListService;
-import com.javalec.ex.Dao.MDao;
-import com.javalec.ex.Dao.PDao;
-import com.javalec.ex.Dto.MDto.Member_Dto;
 import com.javalec.ex.Dto.PDto.ProductDto;
 import com.javalec.ex.Service.PService.PService;
-import com.javalec.ex.Service.PService.PinquiryService;
-import com.javalec.ex.Service.PService.ReviewService;
 
 @Controller
 @RequestMapping("/product/*")
 public class PController {
 
+			
 	@Autowired
-	private SqlSession sql;
-
 	PService ps;
 	
 
-	@RequestMapping("/product/p_list")
-	public String p_list(HttpServletRequest request, Model model){
-
-		ps = new PListService();
-		ps.execute(request, sql, model);
-//		PDao dao = sqlsession.getMapper(PDao.class);
-//		model.addAttribute("list",dao.list());
-
-		return "product/p_list";
-	}
-
-	
-	@RequestMapping("/review")
-	public String review(HttpServletRequest request, Model model) {
-
-		ps = new ReviewService();
-		ps.execute(request, sql, model);
-//		PDao dao = sqlsession.getMapper(PDao.class);
-//		model.addAttribute("list",dao.list());
-
-		return "product/review";
-	}
-	@RequestMapping("/photo")
-	public String photo(HttpServletRequest request, Model model) {
-
-		ps = new PinquiryService();
-		ps.execute(request, sql, model);
-//		PDao dao = sqlsession.getMapper(PDao.class);
-//		model.addAttribute("list",dao.list());
-
-		return "product/photo";
-	}
-	@RequestMapping("/p_inquiry")
-	public String p_inquiry(HttpServletRequest request, Model model) {
-
-		ps = new PinquiryService();
-		ps.execute(request, sql, model);
-//		PDao dao = sqlsession.getMapper(PDao.class);
-//		model.addAttribute("list",dao.list());
-
-		return "product/p_inquiry";
-	}
-
-	@RequestMapping("/product/p_detail")
-	public String p_detail(HttpServletRequest request, Model model) {
+	//상품 리스트
+	@RequestMapping(value = "/product/p_list" , method = RequestMethod.GET)
+	public void p_list(@RequestParam(value="c", defaultValue = "") String pc, Model model) throws Exception{
 		
-		ps = new PDetailService();
-		ps.execute(request, sql, model);
-		return "product/p_detail";
+		List<ProductDto> Plist = null;
+		Plist = ps.Plist();
+
+		List<String> plist2 = ps.Plist2();
+		if(pc.equals("")) {
+			pc = plist2.get(0);
+		}
+	
+		model.addAttribute("pc",pc);
+		model.addAttribute("plist2",plist2);
+		model.addAttribute("Plist", Plist);
+	
 	}
+	
+	//상품 상세정보
+	@RequestMapping(value = "/product/p_detail", method = RequestMethod.GET)
+	public void p_detail(Model model,int p_code) throws Exception{
+		
+		ProductDto productDetail = null;
+		productDetail = ps.productDetail(p_code);
+		model.addAttribute("productDetail",productDetail);
+	}
+	
+	
 	
 
 

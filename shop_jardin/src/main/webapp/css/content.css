@@ -70,7 +70,7 @@
 #pDetail .imgSlide{float:left; width:350px; margin:0 40px 0 0;}
 #pDetail .imgSlide .img{position:relative; width:348px; height:348px; border:1px #dedede solid; overflow:hidden;}
 #pDetail .imgSlide .img ul{position:relative; left:0; top:0;}
-#pDetail .imgSlide .img ul li{float:left; padding:33px 0; background:#fff;}
+#pDetail .imgSlide .img ul li{float:left;  background:#fff;}
 #pDetail .imgSlide .thum{width:100%; margin:10px 0 0 0; overflow:hidden;}
 #pDetail .imgSlide .thum ul li{float:left; width:57px; height:57px; background:url('../images/bg/bg_thum_off.gif') left top no-repeat; margin:0 10px 0 0; padding:3px 0 0 3px; cursor:pointer;}
 #pDetail .imgSlide .thum ul li img{width:54px; height:44px; padding:5px 0 0 0;}
@@ -324,6 +324,7 @@
 /* BRANDLIST */
 .brandList{width:100%; margin:20px 0 0 0; overflow:hidden;}
 .brandList ul li{float:left; padding:0 0 43px 0;}
+.brandList ul li p{text-align: center; font-weight: bold; font-size: 20px;}
 .brandList ul li .img{border:7px #fff solid;}
 .brandList ul li .img img{width:286px; height:231px;}
 .brandList ul li .name{height:32px; line-height:1.2; color:#666; text-align:center; padding:4px 0 0 0;}

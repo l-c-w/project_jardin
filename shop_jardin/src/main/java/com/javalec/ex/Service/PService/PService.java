@@ -1,17 +1,20 @@
 package com.javalec.ex.Service.PService;
 
+import java.util.ArrayList;
 import java.util.List;
-
-import javax.servlet.http.HttpServletRequest;
-
-import org.apache.ibatis.session.SqlSession;
-import org.springframework.ui.Model;
 
 import com.javalec.ex.Dto.PDto.ProductDto;
 
 public interface PService {
 
-	public void execute(HttpServletRequest request, SqlSession sql, Model model);
+	// 상품 전체 리스트
+	public List<ProductDto> Plist() throws Exception;
+	
+	// 상품 카테고리
+	public List<String> Plist2() throws Exception;
+	
+	// 상품 상세정보
+	public ProductDto productDetail(int p_code) throws Exception;
 
 
 }

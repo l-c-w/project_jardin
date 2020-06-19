@@ -5,6 +5,7 @@ import java.util.List;
 import javax.inject.Inject;
 
 import org.apache.ibatis.session.SqlSession;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.javalec.ex.Dto.PDto.ProductDto;
@@ -13,7 +14,7 @@ import com.javalec.ex.Dto.PDto.ProductDto;
 public class APDaoImpl implements APDao {
 
 	
-	@Inject
+	@Autowired
 	private SqlSession sql;
 	
 	private static String namespace = "com.javalec.ex.Dao.PDao";
@@ -37,16 +38,17 @@ public class APDaoImpl implements APDao {
 	}
 
 	@Override
-	public void modify(ProductDto dto) throws Exception {
+	public void modify(ProductDto dto ) throws Exception {
 		
-		sql.update(namespace + ".modify", dto);
+		sql.update(namespace + ".modify" , dto);
 
 	}
 
 	@Override
 	public void delete(String p_code) throws Exception {
 		
-		sql.delete(namespace+ ".delete", p_code);
+		sql.delete(namespace + ".delete", p_code);
 	}
+
 
 }

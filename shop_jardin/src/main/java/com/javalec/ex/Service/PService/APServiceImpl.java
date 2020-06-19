@@ -4,6 +4,7 @@ import java.util.List;
 
 import javax.inject.Inject;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.javalec.ex.Dao.APDao;
@@ -12,7 +13,8 @@ import com.javalec.ex.Dto.PDto.ProductDto;
 
 @Service
 public class APServiceImpl implements APService {
-	@Inject
+	
+	@Autowired
 	private APDao dao;
 	
 	//상품 전체 리스트

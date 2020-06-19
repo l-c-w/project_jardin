@@ -97,9 +97,7 @@
 	
 	<!-- 회원정보 반영 -->
 	<update id="update_member" parameterType="com.javalec.ex.Dto.MDto.Member_Dto">
-		update member 
-		set name=#{name},email=#{email},post=#{post},address1=#{address1},address2=#{address2},
-		phone1=#{phone1},phone2=#{phone2},phone3=#{phone3} where id=#{id}
+		update member set email=#{email},post=#{post},address1=#{address1},address2=#{address2},phone1=#{phone1},phone2=#{phone2},phone3=#{phone3} where id=#{id}
 	</update>
 	
 </mapper>

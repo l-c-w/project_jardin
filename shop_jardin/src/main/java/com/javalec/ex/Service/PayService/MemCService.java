@@ -21,12 +21,6 @@ public class MemCService implements PayService {
 		System.out.println(email);
 		member_Dto.setEmail(email);
 		member_Dto.setId(id);
-		System.out.println(member_Dto.getM_code());
-		System.out.println(member_Dto.getPw());
-		System.out.println(member_Dto.getName());
-		System.out.println(member_Dto.getId());
-		System.out.println(member_Dto.getEmail());
-		System.out.println(member_Dto.getPhone2());
 		payDao.update_member(member_Dto);
 
 	}

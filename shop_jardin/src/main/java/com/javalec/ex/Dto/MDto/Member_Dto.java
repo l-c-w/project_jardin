@@ -10,19 +10,19 @@ public class Member_Dto {
 		
 	}
 	
-	private String id;
-	private String m_code;
-	private String pw;
-	private String name;
-	private String email;
-	private String email_agree;
-	private String sms_agree;
-	private String post;
-	private String address1;
-	private String address2;
-	private String sol_lun;
-	private String introduce;
-	private String coffee_favor;
+	String id;
+	String m_code;
+	String pw;
+	String name;
+	String email;
+	String email_agree;
+	String sms_agree;
+	String post;
+	String address1;
+	String address2;
+	String sol_lun;
+	String introduce;
+	String coffee_favor;
 
 	
 	int phone1, phone2, phone3;

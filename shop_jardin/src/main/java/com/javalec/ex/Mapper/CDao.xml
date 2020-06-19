@@ -96,6 +96,18 @@
 	
 	
 	
+	<update id="cr_answer">
+	
+	update c_review set cr_answer=#{param1} where cr_num=#{param2}
+	
+	</update>
+	
+	
+	
+	
+	
+	
+	
 	
 	
 	<!-- 
@@ -103,6 +115,10 @@
 	                                                                   포토 상품평  
 	
 	-->
+	
+	
+	
+	
 	
 	
 	
@@ -192,7 +208,15 @@
 	update p_review set pr_title=#{param1}, pr_content=#{param2}, pr_fifle=#{param3}, pr_score=#{param4} where pr_num=#{param5}
 	
 	</update>
-    
+	
+	
+	
+	<update id="pr_answer">
+	
+	update c_review set pr_answer=#{param1} where pr_num=#{param2}
+	
+	</update>
+	
 
 
 </mapper>

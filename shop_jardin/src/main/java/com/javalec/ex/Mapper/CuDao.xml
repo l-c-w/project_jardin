@@ -25,10 +25,9 @@
 
 
 	<insert id="n_write">
-		insert into notice (n_num,n_title,n_content,n_hit,n_wdate,n_update)
-		values (notice_seq.nextval,#{param1},#{param2},#{param3},#{param4},#{param5})
+		insert into notice (n_num,n_title,n_content,n_hit)
+		values (notice_seq.nextval,#{param1},#{param2},#{param3})
 	</insert>
-	
 	
 	
 	
@@ -44,15 +43,13 @@
        SELECT * 
 		FROM (
 			SELECT ROWNUM RN, A.* 
-				FROM (
-						SELECT * 
+				FROM (SELECT * 
 						FROM notice 
 						ORDER BY n_num DESC 
 						) A
 				)
 	WHERE RN BETWEEN #{start} AND #{end}
     </select>
-    
     
     
     
@@ -71,26 +68,63 @@
     
     
     
+	 <delete id="n_delete">
+	 
+	 delete notice where n_num=#{param1}
+	 
+	 </delete>
+	 
+	 
+	 
+	 <update id="n_update">
+	
+	update notice set n_title=#{param1}, n_content=#{param2} where n_num=#{param3}
+	 
+	</update>
+	 
+    
+    
     
     <!-- 1:1 문의 -->
     
-    <!-- oo_type 넣어야 하는데 나중에... -->
     
     
-    <select id="oo_list">
+    <!-- 총 게시글 갯수 출력 -->
+	<select id="o_countBoard" resultType="int">
+		SELECT COUNT(*) FROM oo_fnq where id=#{param1}
+	</select>
+	
+	
+	
+	<!-- 페이징 처리 후 게시글 조회 -->
+    <select id="o_selectBoard" resultType="com.javalec.ex.Dto.MDto.Oo_fnqDto">
     
-    select * from oo_fnq
-    
+       SELECT * 
+		FROM (
+			SELECT ROWNUM RN, A.* 
+				FROM (SELECT * 
+						FROM oo_fnq where id=#{id}
+						ORDER BY oo_num DESC 
+						) A
+				)
+	WHERE RN BETWEEN #{start} AND #{end} 
+	
     </select>
+    
+    
+    <select id="oo_view" resultType="com.javalec.ex.Dto.MDto.Oo_fnqDto">
+		select * from oo_fnq where oo_num=#{param1}
+	</select>
     
     
     
     <insert id="oo_write">
     
-		insert into oo_fnq (oo_num,id,oo_title,oo_content,oo_file,oo_wdate)
-		values (notice_seq.nextval,#{param1},#{param2},#{param3},#{param4},#{param5})
+		insert into oo_fnq (oo_num,id,oo_type,oo_title,oo_content)
+		values (oo_fnq_seq.nextval,#{param1},#{param2},#{param3},#{param4})
 		
 	</insert>
+	
 	
 	
 	 <delete id="oo_delete">
@@ -100,23 +134,24 @@
 	 </delete>
 	 
 	
+	
 	<update id="oo_update">
 	
-	update oo_fnq set oo_title=#{param1}, oo_content=#{param2}, oo_file=#{param3} where oo_num=#{param4}
+	update oo_fnq set oo_type=#{param1}, oo_title=#{param2}, oo_content=#{param3} where oo_num=#{param4}
 	 
 	</update>
 	
 	
 	
-	<update id="oo_update_admin"> 
 	
-	update oo_fnq set oo_answer=#{param1} where oo_num=#{param2}
+	<update id="oo_answer"> 
+	
+	update oo_fnq set oo_answer=#{param1} oo_udate=#{param2} where oo_num=#{param2}
 	 
 	</update>
-	
 	
 	<!-- 1:1문의는 본인만 보니까 조회수 up x -->
-	
+    
     
     
     
@@ -124,6 +159,7 @@
     <!-- fnq -->
     
     
+    <!--  ; 빼기 -->
     
     
     
@@ -137,6 +173,152 @@
     
     
     
+    
+    
+    
+    <select id="f_list" resultType="com.javalec.ex.Dto.MDto.FnqDto">
+    
+    select * from fnq order by f_num desc
+    
+    </select>
+    
+    
+    <select id="f_view" resultType="com.javalec.ex.Dto.MDto.FnqDto">
+		select * from fnq where f_num=#{param1}
+	</select>
+    
+    
+    
+    <!-- 총 게시글 갯수 출력 -->
+	<select id="f_countBoard" resultType="int">
+		SELECT COUNT(*) FROM fnq
+	</select>
+	
+	
+	
+	
+	<!-- 페이징 처리 후 게시글 조회 -->
+    <select id="f_selectBoard" resultType="com.javalec.ex.Dto.MDto.FnqDto">
+    
+       SELECT * 
+		FROM (
+			SELECT ROWNUM RN, A.* 
+				FROM (
+						SELECT * 
+						FROM fnq 
+						ORDER BY f_num DESC 
+						) A
+				)
+	WHERE RN BETWEEN #{start} AND #{end}
+    </select>
+    
+    
+    
+    <select id="f_type_list" resultType="com.javalec.ex.Dto.MDto.FnqDto">
+    
+    select * from fnq where f_type=#{param1} order by f_num desc
+    
+    </select>
+    
+    
+    
+    <insert id="f_write">
+    
+		insert into fnq (f_num,f_type,f_title,f_content)
+		values (fnq_seq.nextval,#{param1},#{param2},#{param3})
+		
+	</insert>
+	
+	
+	
+	
+	 <delete id="f_delete">
+	 
+	 delete fnq where f_num=#{param1}
+	 
+	 </delete>
+	 
+	 
+	 
+	
+	<update id="f_update">
+	
+	update fnq set f_type=#{param1}, f_title=#{param2} f_content=#{param3} where f_num=#{param4}
+	 
+	</update>
+
+
+
+
+
+
+	<select id="f_getBoardList" 	resultType="com.javalec.ex.Dto.MDto.FnqDto">
+
+		SELECT * FROM fnq
+
+		<trim prefix="WHERE" prefixOverrides="AND|OR">
+
+			<if
+				test="searchType=='title' and keyword != null and keyword != '' ">
+
+				AND f_TITLE like '%' || #{keyword} || '%'
+
+
+			</if>
+
+			<if
+				test="searchType=='content' and keyword != null and keyword != '' ">
+
+				AND f_CONTENT like '%' || #{keyword} || '%'
+
+			</if>
+
+
+
+		</trim>
+
+
+	</select>
+
+
+
+	<select id="f_getBoardListCnt" resultType="int">
+
+		SELECT count(*) as listCnt
+
+		FROM fnq
+
+		<trim prefix="WHERE" prefixOverrides="AND|OR">
+
+
+			<if test="keyword != null and keyword != '' ">
+
+				<if test="searchType=='title'">
+
+					AND f_TITLE like '%' || #{keyword} || '%'
+
+				</if>
+
+
+				<if test="searchType=='content'">
+
+					AND f_CONTENT like '%' || #{keyword} || '%'
+
+				</if>
+
+
+
+			</if>
+
+		</trim>
+
+	</select>
+	
+	
+	
+	
+	
+	
 
 
 </mapper>

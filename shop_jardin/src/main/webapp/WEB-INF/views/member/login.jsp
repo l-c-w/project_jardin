@@ -29,7 +29,7 @@
 
 
 
-<script type="text/javascript">
+<!-- <script type="text/javascript">
 
 	function idpw() {
 
@@ -51,7 +51,7 @@
 		}
 
 	}
-</script>
+</script> -->
 
 
 
@@ -63,7 +63,10 @@ $(document).ready(function() {
 });
 </script>
 </head>
-<body onload="idpw();">
+
+<!-- <body onload="idpw();"> -->
+
+<body>
 
 <!-- header 붙여넣기 -->
 	<jsp:include page="../header.jsp"/>
@@ -136,14 +139,14 @@ $(document).ready(function() {
 								<li><input type="password" name="pw" class="passType" onfocus="this.className='mfocus'" onblur="if (this.value.length==0) {this.className='passType'}else {this.className='mfocusnot'}" style="ime-mode:inactive;" /></li>
 							</ul>
 							
-							<div class="btn"><a href="#" onclick="document.getElementById('login').submit()" class="sbtn">로그인</a></div><br>
+							<div class="btn"><a href="#" onclick="validate()" class="sbtn">로그인</a></div><br>
 							
-							<div class="chk"><input type="checkbox" id="idsave"/><label for="idsave">아이디 저장</label></div>							
+							<!-- <div class="chk"><input type="checkbox" id="idsave"/><label for="idsave">아이디 저장</label></div>							 -->
 
 
 							<div class="point">
 								<p>아이디와 비밀번호를 잊으셨나요?</p>
-								<a href="#" class="nbtn">아이디/비밀번호 찾기</a>
+								<a href="../member/id_search" class="nbtn">아이디/비밀번호 찾기</a>
 							</div>
 							
 						</div>
@@ -151,6 +154,34 @@ $(document).ready(function() {
 					</div>
 					
 					</form>
+					
+					
+			<script type="text/javascript">
+					
+			     function validate() {
+			 			 
+				if(login.id.value=="") {
+					alert("아이디를 입력해 주세요");
+					login.id.focus();
+					return false;
+					}
+				
+				
+				if(login.pw.value=="") {
+					alert("비밀번호를 입력해 주세요");
+					login.pw.focus();
+					return false;
+					}
+				
+					       
+				login.submit();
+				
+			}
+					       
+			</script>
+					
+					
+					
 					
 
 

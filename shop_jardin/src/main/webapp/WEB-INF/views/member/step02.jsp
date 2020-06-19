@@ -62,7 +62,7 @@ $(document).ready(function() {
 			
 			
 			
-			<form action="step03" method="post" id="step02">
+			<form action="step03" id="step02" name="step02" method="post">
 
 
 			<!-- contents -->
@@ -74,7 +74,7 @@ $(document).ready(function() {
 					<div class="stepWrap">
 						<div class="step">
 							<p class="web">STEP 01</p>
-							<p class="txt">실명확인</p>							
+							<p class="txt">이메일확인</p>							
 						</div>
 
 						<div class="step stepon">
@@ -105,8 +105,8 @@ $(document).ready(function() {
 
 
 					<div class="agreeWrap">
+					
 						<div class="agreeTxt">이용약관 동의 <span>(필수동의)</span></div>
-
 
 						<div class="agreeBox">
 						<div class="agreeContent">
@@ -497,11 +497,51 @@ $(document).ready(function() {
 						<div class="bCenter">
 							<ul>
 								<li><a href="#" class="nbtnbig">취소하기</a></li>
-								<li><a href="#" onclick="document.getElementById('step02').submit()" class="sbtnMini">가입하기</a></li>
+								<li><a href="#" onclick="CheckForm()" class="sbtnMini">가입하기</a></li>
 							</ul>
 						</div>
 					</div>
 					<!-- //Btn Area -->
+
+
+
+					<script type="text/javascript">
+					
+						function CheckForm() {
+
+							//체크박스 체크여부 확인 [하나]
+							
+							var chk1 = step02.agree1.checked;
+							
+							var chk2 = step02.agree2.checked;
+							
+							var chk3 = step02.agree3.checked;
+
+							if (!chk1) {
+								alert('약관1에 동의해 주세요');
+								return false;
+							}
+							
+							if (!chk2) {
+								alert('약관2에 동의해 주세요');
+								return false;
+							}
+							
+							if (!chk3) {
+								alert('약관3에 동의해 주세요');
+								return false;
+							}
+							
+							step02.submit();
+
+						}
+					</script>
+
+
+
+
+
+
 
 
 

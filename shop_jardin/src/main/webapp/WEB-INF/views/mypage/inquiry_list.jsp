@@ -86,7 +86,9 @@ $(document).ready(function() {
 					<li class="last"><a href="#" id="leftNavi9">회원 탈퇴</a></li>
 				</ul>			
 			</div>
-			 --><script type="text/javascript">initSubmenu(7,0);</script>
+			 -->
+			 
+			<script type="text/javascript">initSubmenu(7,0);</script>
 
 
 			<!-- contents -->
@@ -98,15 +100,18 @@ $(document).ready(function() {
 					
 					<div class="myInfo">
 						<ul>
-							<li class="info"><strong>가나다</strong> 님의 정보를 한눈에 확인하세요.</li>
+							<li class="info"><strong>${s_n}</strong> 님의 정보를 한눈에 확인하세요.</li>
 							<li>보유 쿠폰<br/><span class="num">199</span> <span class="unit">장</span></li>
 							<li class="point">내 포인트<br/><span class="num">100,000</span> <span class="unit">P</span></li>
 							<li class="last">진행중인 주문<br/><span class="num">199</span> <span class="unit">건</span></li>
 						</ul>
 					</div>
-
+					
+					
+				
 
 					<div class="orderDivNm">
+					
 						<table summary="NO, 종류, 적립포인트, 적립날짜, 상태 순으로 현재 적립된 포인트를 조회 하실수 있습니다." class="orderTable2" border="1" cellspacing="0">
 							
 							<caption>적립내역 보기</caption>
@@ -118,6 +123,7 @@ $(document).ready(function() {
 							<col width="*" />
 							<col width="15%" class="tnone" />
 							<col width="15%" class="tw30" />
+							
 							</colgroup>
 							
 							
@@ -132,34 +138,36 @@ $(document).ready(function() {
 							
 							<tbody>
 							
+						    <c:if test="${not empty viewAll}">
+							
+							<c:forEach var="oo_list" items="${viewAll}">
 							
 								<tr>
-									<td class="tnone">4</td>
+								
+									<td class="tnone">${oo_list.oo_num}</td>
 									
-									<td>배송</td>
+									<td>${oo_list.oo_type}</td>
 									
-									<td class="left"><a href="#">배송문의 드립니다!</a></td>
+									<td class="left"><a href="inquiry_view?oo_num=${oo_list.oo_num}">${oo_list.oo_title}</a></td>
 									
-									<td class="tnone">14-05-31</td>
+									<td class="tnone"><fmt:formatDate pattern="yyyy-MM-dd" value="${oo_list.oo_wdate}"/></td>
+									
+									
+									
+									
+									<c:if test="${oo_list.oo_answer == null }">
 									
 									<td>
 										<ul class="state">
 											<li><div class="nbtnMini iw83">답변대기</div></li>
 										</ul>
 									</td>
-								</tr>
-								
-								
-
-								<tr>
 									
-									<td class="tnone">3</td>
+									</c:if>
 									
-									<td>상품</td>
 									
-									<td class="left"><a href="#">상품 재입고 언제 되나요? (1)</a></td>
 									
-									<td class="tnone">14-05-31</td>
+									<c:if test="${oo_list.oo_answer != null }">
 									
 									<td>
 										<ul class="state">
@@ -167,76 +175,127 @@ $(document).ready(function() {
 										</ul>
 									</td>
 									
+									</c:if>
+									
 								</tr>
 								
+						     </c:forEach>
+						 
+						 	</c:if>
+						 	
+								
+							<!-- 	
+							
+								
+								<div class="nbtnMini iw83">답변대기</div></li>
+								<div class="obtnMini iw83">답변완료</div></li>
+								
+								 -->
+								 
+								 
 
 							</tbody>
 							
 						</table>
-
-						<div class="noData">
-							문의 하신 내용이 없습니다.
-						</div>
+						
 					</div>
 					
-
-					<div class="btnAreaList">
+					
+					<c:if test="${empty viewAll}">
+					
+					 <div class="noData">   문의 하신 내용이 없습니다.
+					  </div>
 						
+				       </c:if>
+				       
+				       
+				       
+				         <div class="btnAreaList">
+					
 						<div class="bwright">
 							<ul>
 								<li><a href="../mypage/inquiry_write" class="writeBtn">글쓰기</a></li>
 							</ul>
 						</div>
+				       
+				       
+				       
+				       <c:if test="${not empty viewAll}">
 
+							<!-- 페이징이동1 -->
 
-
-
-						<!-- 페이징이동1 -->
 						<div class="allPageMoving1">
+						
+						
+							<div style="display: block; text-align: center;">
 
-						<a href="#" class="n"><img src="../images/btn/btn_pre2.gif" alt="처음으로"/></a><a href="#" class="pre"><img src="../images/btn/btn_pre1.gif" alt="앞페이지로"/></a>
-						<strong>1</strong>
-						<a href="#">2</a>
-						<a href="#">3</a>
-						<a href="#">4</a>
-						<a href="#">5</a>
-						<a href="#" class="next"><img src="../images/btn/btn_next1.gif" alt="뒤페이지로"/></a><a href="#" class="n"><img src="../images/btn/btn_next2.gif" alt="마지막페이지로"/></a>
 
+								<!-- 첫페이지 이동 -->
+								<a href="inquiry_list?nowPage=${paging.startPage}&cntPerPage=${paging.cntPerPage}" class="n">
+								<img src="../images/btn/btn_pre2.gif" alt="처음으로"/>
+								</a>
+
+
+								<!-- 이전페이지로 이동 -->
+								
+								<c:if test="${paging.nowPage != 1}">
+								<a href="inquiry_list?nowPage=${paging.nowPage - 1}&cntPerPage=${paging.cntPerPage}" class="pre">
+								<img src="../images/btn/btn_pre1.gif" alt="앞페이지로"/><!-- &lt; -->
+								</a>
+								</c:if>
+								
+								
+								<!-- 순차 -->
+								
+								<c:forEach begin="${paging.startPage}" end="${paging.endPage}" var="p">
+									
+									<c:choose>
+									
+										<c:when test="${p == paging.nowPage}">
+											<a href="#" class="reviews"><strong>${p}</strong></a>
+										</c:when>
+										
+										<c:when test="${p != paging.nowPage }">
+											<a href="inquiry_list?nowPage=${p}&cntPerPage=${paging.cntPerPage}">${p}</a>
+										</c:when>
+										
+									</c:choose>
+									
+								</c:forEach>
+								
+								
+								
+								<!-- 다음페이지 이동 -->
+							
+								
+								<c:if test="${paging.nowPage != paging.lastPage}" >
+								<a href="inquiry_list?nowPage=${paging.nowPage+1}&cntPerPage=${paging.cntPerPage}" class="next"><!-- &gt; -->
+								<img src="../images/btn/btn_next1.gif" alt="뒤페이지로"/>
+								</a>
+								</c:if>
+
+
+								<!-- 마지막 페이지 이동 -->
+								<a href="inquiry_list?nowPage=${paging.lastPage}" class="n" >
+								<img src="../images/btn/btn_next2.gif" alt="마지막페이지로"/>
+								</a>
+
+							</div>
+							
 						</div>
-						
-						
-						
 						
 						
 						<!-- //페이징이동1 -->
 						
 						
+						</c:if>
+						
+						
+						
+						
 					</div>
 					
 					
-					
-					<!-- 1:1문의 검색기능 삭제 (불필요)-->
-					
-					
-
-			<!-- 		<div class="searchWrap">
-					
-						<div class="search">
-							<ul>
-								<li class="web"><img src="../images/txt/txt_search.gif" alt="search" /></li>
-								<li class="se">
-									<select>
-										<option value="" />제목</option>
-									</select>
-								</li>
-								
-								<li><input type="text" class="searchInput" /></li>
-								<li class="web"><a href="#"><img src="../images/btn/btn_search.gif" alt="검색" /></a></li>
-								<li class="mobile"><a href="#"><img src="../images/btn/btn_search_m.gif" alt="검색" /></a></li>
-							</ul>
-						</div>
-					</div>
-					 -->
 					
 
 				</div>

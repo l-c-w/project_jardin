@@ -75,30 +75,94 @@ $(document).ready(function() {
 				<div id="member">
 					<h2><strong>아이디/비밀번호 찾기</strong><span>회원님께서 가입하신 아이디와 비밀번호를 찾아드립니다.</span></h2>
 					<h3>아이디 찾기</h3>
+					
+					<form action="../member/id_search_go" id="id_search" name="id_search" method="post">
+					
 					<div class="informbox">
 						<div class="inform">
 							<ul>
-								<li><input type="text" class="nameType" onfocus="this.className='mfocus'" onblur="if (this.value.length==0) {this.className='nameType'}else {this.className='mfocusnot'}" style="ime-mode:inactive;" /></li>
-								<li><input type="password" class="emailType" onfocus="this.className='mfocus'" onblur="if (this.value.length==0) {this.className='emailType'}else {this.className='mfocusnot'}" style="ime-mode:inactive;" /></li>
+								<li><input type="text" name="name_s" id="name_s" class="nameType" onfocus="this.className='mfocus'" onblur="if (this.value.length==0) {this.className='nameType'}else {this.className='mfocusnot'}" style="ime-mode:inactive;" /></li>
+								<li><input type="text" name="email_s" id="email_s" class="emailType" onfocus="this.className='mfocus'" onblur="if (this.value.length==0) {this.className='emailType'}else {this.className='mfocusnot'}" style="ime-mode:inactive;" /></li>
 							</ul>
 
-							<div class="btn"><a href="#" class="gbtn">아이디 찾기</a></div>
+							<div class="btn"><a href="#" onclick="id_checkForm()" class="gbtn">아이디 찾기</a></div>
+							
 						</div>
 					</div>
+					
+					</form>
+					
+					
+					<script type="text/javascript">
+					
+					function id_checkForm() {
+						
+					    if(id_search.name_s.value == '') {
+					        alert("아이디를 입력해주세오");
+					        id_search.name_s.focus();
+					        id_search.name_s.select();
+					        return false; //
+					    }
+					    
+					    if(id_search.email_s.value == ''){
+					        alert('이메일을 입력하세요.');
+					        id_search.email_s.focus();
+					        return false;
+					    }
+					    
+					    
+					    id_search.submit();
+					    
+					    
+					}
+					
+					</script>
+					
+					
+					
 
 
-
+                   <form action="../member/pw_search_go" id="pw_search" name="pw_search" method="post">
+                   
 					<h3>비밀번호 찾기</h3>
 					<div class="informbox">
 						<div class="inform">
 							<ul>
-								<li><input type="text" class="loginType" onfocus="this.className='mfocus'" onblur="if (this.value.length==0) {this.className='loginType'}else {this.className='mfocusnot'}" /></li>
-								<li><input type="text" class="emailType" onfocus="this.className='mfocus'" onblur="if (this.value.length==0) {this.className='emailType'}else {this.className='mfocusnot'}" /></li>
+								<li><input type="text" name="id_s" id="id_s" class="loginType" onfocus="this.className='mfocus'" onblur="if (this.value.length==0) {this.className='loginType'}else {this.className='mfocusnot'}" /></li>
+								<li><input type="text" name="email_s" id="email_s" class="emailType" onfocus="this.className='mfocus'" onblur="if (this.value.length==0) {this.className='emailType'}else {this.className='mfocusnot'}" /></li>
 							</ul>
 
-							<div class="btn"><a href="#" class="gbtn">비밀번호 찾기</a></div>
+							<div class="btn"><a href="#" onclick="pw_checkForm()" class="gbtn">비밀번호 찾기</a></div>
 						</div>
 					</div>
+					
+					</form>
+					
+					
+					
+				   <script type="text/javascript">
+				   
+				   function pw_checkForm() {
+						
+					    if(pw_search.id_s.value == '') {
+					        alert("아이디를 입력해주세오");
+					        pw_search.id_s.focus();
+					        pw_search.id_s.select();
+					        return false; //
+					    }
+					    
+					    if(pw_search.email_s.value == ''){
+					        alert('이메일을 입력해주세요.');
+					        pw_search.email_s.focus();
+					        return false;
+					    }
+					    
+					    pw_search.submit();
+					    
+					}
+					
+					</script>
+					
 
 
 					<p class="alert">쟈뎅 온라인 쇼핑몰에서는 2012년 8월 18일로 시행되는 정보통신망 이용 촉진 및 정보 보호 등에 관한 법률 “주민등록번호의 <span>사용 제한”과 관련하여 주민등록번호를 수집하지 않습니다.</span></p>

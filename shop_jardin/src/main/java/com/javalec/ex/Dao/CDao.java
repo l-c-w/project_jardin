@@ -32,11 +32,16 @@ public interface CDao {
 
 	public void cr_delete(String cr_num);
 
-	public void cr_update(String cr_num);
+	public void cr_update(String cr_title, String cr_content, int cr_score, String cr_num);
 	
+	public void cr_answer(String cr_answer, String cr_num);
 	
 
+	
+	
 	// 포토 상품평 //
+	
+	
 	
 	
 	
@@ -60,6 +65,8 @@ public interface CDao {
 
 	public void pr_delete(String pr_num);
 
-	public void pr_update(String pr_num);
+	public void pr_update(String pr_title, String pr_content, String pr_file, int pr_score, String pr_num);
+	
+	public void pr_answer(String pr_answer, String pr_num);
 
 }

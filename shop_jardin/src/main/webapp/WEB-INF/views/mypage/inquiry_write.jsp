@@ -87,8 +87,27 @@ $(document).ready(function() {
 						</ul>
 					</div>
 					
-					<form action="../mypage/inquiry_ok" name="inquiry" id="inquiry" method="post" enctype="multipart/form-data">
 					
+					
+					
+					<!-- enctype="multipart/form-data"
+					
+					
+					<tr>
+								
+						<th scope="row"><span>첨부파일</span></th>
+									
+						<td>
+						<input type="file" class="fileType" name="oo_file"/>
+						</td>
+									
+						</tr>
+					
+					 -->
+					
+					
+					
+					<form action="../mypage/inquiry_ok" name="inquiry" id="inquiry" method="post">
 
 					<div class="checkDiv">
 					
@@ -108,8 +127,10 @@ $(document).ready(function() {
 								<tr>
 									<th scope="row"><span>분류</span></th>
 									<td>
-										<select>
-											<option value="">선택해주세요.</option>
+										<select name="oo_type">
+											<option value="product">상품</option>
+											<option value="order">주문</option>
+											<option value="delivery">배송</option>
 										</select>
 									</td>
 								</tr>
@@ -136,15 +157,7 @@ $(document).ready(function() {
 								</tr>
 								
 								
-								<tr>
 								
-									<th scope="row"><span>첨부파일</span></th>
-									
-									<td>
-										<input type="file" class="fileType" name="oo_file"/>
-									</td>
-									
-								</tr>
 								
 								
 							</tbody>
@@ -164,8 +177,8 @@ $(document).ready(function() {
 						<div class="bCenter">
 						
 							<ul>																
-								<li><a href="#" class="nbtnbig">취소</a></li>
-								<li><a href="#" class="sbtnMini">확인</a></li>
+								<li><a href="javascript:history.back()" class="nbtnbig">취소하기</a></li>
+								<li><a href="#" onclick="document.getElementById('inquiry').submit()" class="sbtnMini">등록하기</a></li>
 							</ul>
 							
 						</div>

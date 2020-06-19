@@ -127,7 +127,7 @@ $(document).ready(function() {
 					
 					
 
-               <form action="register_ok" id="register_ok" name="join" method="post">
+               <form action="register_ok" id="join" name="join" method="post">
 
 
 					<div class="memberbd">
@@ -145,13 +145,13 @@ $(document).ready(function() {
 							
 								<tr>
 									<th scope="row"><span>이름 *</span></th>
-									<td><input type="text" name="name" required="required"></td>
+									<td><input type="text" name="name" id="name" required="required"></td>
 								</tr>
 								
 								
 								<tr>
 									<th scope="row"><span>추천인코드 *</span></th>
-									<td><input type="text" name="m_code"></td>
+									<td><input type="text" id="m_code" name="m_code" value="jardin"></td>
 								</tr>
 								
 								
@@ -163,6 +163,7 @@ $(document).ready(function() {
 											<!-- <li><a href="#" onclick="idcheck()" class="nbtnMini">중복확인</a></li> -->
 											<li class="pt5"><span class="mvalign">첫 글자는 영문으로 4~16자 까지 가능, 영문, 숫자와 특수기호(_)만 사용 가능</span></li>
 										    <div class="check_font" id="id_check"></div>
+										    <input type="hidden" id="id_checked" value="N">
 										</ul>
 									</td>
 								</tr>
@@ -170,6 +171,7 @@ $(document).ready(function() {
 					
 								
 <script type="text/javascript">
+
 // 아이디 유효성 검사(1 = 중복 / 0 != 중복)
 	$("#id").blur(function() {
 		// id = "id_reg" / name = "userId"
@@ -185,71 +187,49 @@ $(document).ready(function() {
 						// 1 : 아이디가 중복되는 문구
 						$("#id_check").text("사용중인 아이디입니다 ");
 						$("#id_check").css("color", "red");
-						$("#reg_submit").attr("disabled", true);
-					} else {
-						
-					      if(user_id == ""){
+						$("#id_checked").val("n");
+					} 
+				
+				else {
+					
+					if(user_id == ""){
 							
 							$('#id_check').text('아이디를 입력해주세요 :)');
 							$('#id_check').css('color', 'red');
-							$("#reg_submit").attr("disabled", true);				
 							
 						} else {
 							
 							$('#id_check').text("사용가능한 아이디 입니다");
 							$('#id_check').css('color', 'blue');
-							$("#reg_submit").attr("disabled", false);
+							$("#id_checked").val("y");
 						}
 						
-						
-						/* if(idJ.test(user_id)){
-							// 0 : 아이디 길이 / 문자열 검사
-							$("#id_check").text("");
-							$("#reg_submit").attr("disabled", false);
-							
-						} 
-						
-						else if(user_id == ""){
-							
-							$('#id_check').text('아이디를 입력해주세요 :)');
-							$('#id_check').css('color', 'red');
-							$("#reg_submit").attr("disabled", true);				
-							
-						} else {
-							
-							$('#id_check').text("아이디는 소문자와 숫자 4~12자리만 가능합니다 :) :)");
-							$('#id_check').css('color', 'red');
-							$("#reg_submit").attr("disabled", true);
-						} */
-						
-						
-						
 					}
-				}, error : function() {
+				
+				}, 
+				
+				error : function() {
 						console.log("실패");
 				}
+				
+				
 			});
 		});
-		
-		
 		
 		
 </script>
 
 
-
-
-
-								<!-- 	<script type="text/javascript">
+								<!-- 	
+								<script type="text/javascript">
 										function idcheck() {
 
 											window.open("idcheck", "idc",
 													"width=400, height=350");
 										}
 										
-										
-										
-									</script> -->
+									</script> 
+									-->
 
 
 
@@ -312,23 +292,20 @@ $(document).ready(function() {
    </script>
 								
 								
-								
-								
-								
 								<tr>
 									<th scope="row"><span>이메일</span></th>
 									<td>
 										<ul class="pta">
 											
-											<li><input type="text" class="w134" name="email1" required="required"/></li>
+											<li><input type="text" class="w134" name="email1" id="email1" required="required"/></li>
 											
 											<li><span class="valign">&nbsp;@&nbsp;</span></li>
 											
-											<li class="r10"><input type="text" class="w134" name="email3" required="required"/></li>
+											<li class="r10"><input type="text" class="w134_2" name="email3" id="email3" required="required"/></li>
 											
 											<li>
 											
-												<select id="emailList" name="email2" onchange="mailcheck()">
+												<select id="emailList" class="w134_2" name="email2" onchange="mailcheck()">
 												
 													<option value="#" selected="selected">직접입력</option>
 													<option value="naver.com">naver.com</option>
@@ -350,10 +327,9 @@ $(document).ready(function() {
 												</select>&nbsp;&nbsp;&nbsp;
 												
 											</li>
-
-
-
-
+											
+											 <div class="check_font" id="email_check"></div>
+                                             <input type="hidden" id="email_checked" value="N">
 
 												<script type="text/javascript">
 												
@@ -367,13 +343,74 @@ $(document).ready(function() {
 												
 												
 												
+							
+												<script type="text/javascript">
+
+// 이메일 유효성 검사(1 = 중복 / 0 != 중복)
+	$('.w134_2').focusout(function () {
+		var email = $('#email1').val() + "@" + $('#email3').val();
+		$.ajax({
+			url : '${pageContext.request.contextPath}/member/email_check?email='+email,
+			type : 'get',
+			success : function(data) {
+				
+				console.log("1 = 중복o / 0 = 중복x : "+ data);		
+				
+				if (data == 1) {
+						// 1 : 아이디가 중복되는 문구
+						$("#email_check").text("사용중인 이메일입니다 ");
+						$("#email_check").css("color", "red");
+						$("#email_checked").val("n");
+					} 
+				
+				else {
+					
+					if(email == ""){
+							
+							$('#email_check').text('이메일을 입력해주세요 :)');
+							$('#email_check').css('color', 'red');
+							
+						} else {
+							
+							$('#email_check').text("사용가능한 이메일 입니다");
+							$('#email_check').css('color', 'blue');
+							$("#email_checked").val("y");
+						}
+						
+					}
+				
+				}, 
+				
+				error : function() {
+						console.log("실패");
+				}
+				
+				
+			});
+		});
+		
+		
+</script>
+												
+												
+												
+												
+												
+												
+												
+												
+												
+												
 												
 												
 
 
 											</ul>
 									</td>
+									
 								</tr>
+								
+								
 								
 								
 								<tr>
@@ -576,8 +613,8 @@ $(document).ready(function() {
 									<td>
 										<ul class="pta">
 											<li>
-												<select name="phone1" required="required">
-													<option value="010" selected="selected" >010</option>
+												<select name="phone1" required="required" id="phone1">
+													<option value="010" selected="selected">010</option>
 													<option value="011">011</option>
 													<option value="016">016</option>
 													<option value="017">017</option>
@@ -589,9 +626,9 @@ $(document).ready(function() {
 											
 											<li>&nbsp;<span class="valign">-</span>&nbsp;</li>
 										
-											<li><input type="text" class="w74" maxlength="4" name="phone2" required="required"/> <span class="valign">-</span>&nbsp;</li>
+											<li><input type="text" class="w74" maxlength="4" name="phone2" id="phone2" required="required"/> <span class="valign">-</span>&nbsp;</li>
 											
-											<li class="r10"><input type="text" class="w74" maxlength="4" name="phone3" required="required"/></li>
+											<li class="r10"><input type="text" class="w74" maxlength="4" name="phone3" id="phone3" required="required"/></li>
 											
 											<li class="cb pt5"><span class="mvalign">※ SMS 서비스를 받아보시겠습니까?</span></li>
 											
@@ -618,7 +655,7 @@ $(document).ready(function() {
 									<td>
 										<ul class="pta">
 											<li>
-												<select name="birth1" required="required">
+												<select name="birth1" id="birth1" required="required">
 												
 													<option value='' selected="selected">선택하세요</option>
 													
@@ -641,7 +678,7 @@ $(document).ready(function() {
 											<li>&nbsp;<span class="valign">년</span>&nbsp;&nbsp;&nbsp;</li>
 											
 											<li>
-												<select name="birth2" required="required">
+												<select name="birth2" id="birth2" required="required">
 													<option value='' selected="selected">선택하세요</option>
 													
 													<script type="text/javascript">
@@ -667,7 +704,7 @@ $(document).ready(function() {
 											
 											<li>
 											
-												<select name="birth3" required="required">
+												<select name="birth3" id="birth3" required="required">
 												
 													<option value='' selected="selected">선택하세요</option>
 													
@@ -740,7 +777,7 @@ $(document).ready(function() {
 								
 								<tr>
 									<th scope="row"><span>자기소개 *</span></th>
-									<td><textarea rows="3" cols="30" name="introduce" required="required"></textarea></td>
+									<td><textarea rows="3" cols="30" name="introduce" required="required" id="introduce"></textarea></td>
 								</tr>
 								
 								
@@ -763,10 +800,150 @@ $(document).ready(function() {
 						<div class="bCenter">
 							<ul>
 								<li><a href="javascript:history.back()" class="nbtnbig">취소하기</a></li>
-								<li><a href="#" onclick="document.getElementById('register_ok').submit()" class="sbtnMini">가입하기</a></li>
+								<li><a href="#" onclick="validate()" class="sbtnMini">가입하기</a></li>
 							</ul>
 						</div>
 					</div>
+					
+					
+					
+					<script type="text/javascript">
+					
+					 function validate() {
+						 
+						
+					       
+					       if(join.name.value=="") {
+					           alert("이름을 입력해 주세요");
+					           join.name.focus();
+					           return false;
+					       }
+					       
+					       
+					       var nameRegExp = /^[가-힣]{2,}$/; //아이디 유효성 검사
+					        if (!nameRegExp.test(join.name.value)) {
+					            alert("이름은 한글만 입력 가능합니다");
+					            join.name.value = "";
+					            join.name.focus();
+					            return false;
+					        }
+					       
+					       
+					       
+					       if(join.id.value=="") {
+					           alert("아이디를 입력해 주세요");
+					           join.id.focus();
+					           return false;
+					       }
+					       
+					       
+					        var idRegExp = /^[a-zA-z0-9]{4,12}$/; //아이디 유효성 검사
+					        if (!idRegExp.test( join.id.value)) {
+					            alert("아이디는 영문 대소문자와 숫자 4~12자리로 입력해야합니다!");
+					            join.id.value = "";
+					            join.id.focus();
+					            return false;
+					        }
+					        
+					        
+					        if(join.id_checked.value == "n"){
+								 alert('아이디 중복체크를 해주세요');
+								 join.id.focus();
+								 return false;
+							 }
+					       
+					        
+					       
+					       if(join.pw1.value != join.pw2.value) {
+					           alert("비밀번호가 다릅니다. 다시 확인해 주세요.");
+					           join.pw2.value = "";
+					           join.pw2.focus();
+					           return false;
+					       }
+					       
+					       
+					       var pwRegExp = /^[a-zA-z0-9]{4,20}$/; 
+					        if (!pwRegExp.test(join.pw1.value)) {
+					            alert("비밀번호는  영문 / 숫자 혼용으로 4~20자 까지 가능.");
+					            join.pw1.value = "";
+					            join.pw.focus();
+					            return false;
+					        }
+					       
+					       
+					       
+					       if(join.email1.value=="" || join.email3.value=="") {
+					           alert("이메일을 입력해 주세요");
+					           join.email1.focus();
+					           return false;
+					       }
+					       
+					       
+					        var emailRegExp = /^[a-zA-z]{1,}$/; 
+					        if (!emailRegExp.test(join.email1.value)) {
+					            alert("이메일은 영어만 입력가능합니다.");
+					            join.email1.value = "";
+					            join.email1.focus();
+					            return false;
+					        }
+					        
+					        
+					        
+					        if(join.email_checked.value == "n"){
+								 alert('이메일 중복체크를 해주세요');
+								 join.email1.focus();
+								 return false;
+							 }
+					        
+					        
+					        
+					        
+					       
+					       
+					       if(join.post.value=="" || join.address1.value=="" || join.address2.value=="") {
+					           alert("주소를 입력해 주세요");
+					           join.address2.focus();
+					           return false;
+					       }
+					       
+					       
+					       
+					       if(join.phone1.value=="" || join.phone2.value=="" || join.phone3.value=="") {
+					           alert("휴대폰번호를 입력해 주세요");
+					           join.phone2.focus();
+					           return false;
+					       }
+					       
+					       
+					       
+					       var  phoneRegExp = /^[0-9]{1,}$/; 
+					        if (!phoneRegExp.test(join.phone2.value)  ||  !phoneRegExp.test(join.phone3.value)  ) {
+					            alert("휴대폰번호는 숫자만 입력가능합니다.");
+					            join.phone2.value = "";
+					            join.phone2.focus();
+					            return false;
+					        }
+					       
+					       
+					       
+					       if(join.introduce.value=="") {
+					           alert("자기소개를 적어주세요");
+					           join.introduce.focus();
+					           return false;
+					       }
+					       
+					      
+					       join.submit();
+					       
+					   }
+					 
+					
+					
+					</script>
+					
+					
+					
+					
 					
 					
 					<!-- //Btn Area -->

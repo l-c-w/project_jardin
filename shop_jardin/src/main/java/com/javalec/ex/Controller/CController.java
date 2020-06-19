@@ -36,7 +36,6 @@ public class CController {
 	
 	
 	
-	
 	@RequestMapping("/community/comment_list")
 	public String comment_list(Model model,
 			PagingDto pagedto,
@@ -164,15 +163,14 @@ public class CController {
 	
 	
 	@RequestMapping("/community/comment_update_ok")
-	public String comment_update_ok(HttpServletRequest request, Model model) {
+	public String comment_update_ok(HttpServletRequest request, Model model, C_ReviewDto cdto) {
 		
 		CDao dao = sqlsession.getMapper(CDao.class);
 		
+		String cr_num = request.getParameter("cr_num");
 		
-		
-		
-		
-		
+		dao.cr_update(cdto.getCr_title(), cdto.getCr_content(), cdto.getCr_score(), cr_num);
+		//dao.cr_update(cr_title, cr_content, cr_score, cr_num);
 		
 		
 		return "redirect:/community/comment_list";
@@ -231,7 +229,6 @@ public class CController {
 		 */
 		
 		
-		
 		int total = cao.countBoard();
 		
 		if (nowPage == null && cntPerPage == null) {
@@ -246,7 +243,6 @@ public class CController {
 		else if (cntPerPage == null) { 
 			cntPerPage = "5";
 		}
-		
 		
 		
 		pagedto = new PagingDto(total, Integer.parseInt(nowPage), Integer.parseInt(cntPerPage));
@@ -330,9 +326,13 @@ public class CController {
 
 		String safeFile = path + originFileName;
 		
+		
+		
         CDao dao = sqlsession.getMapper(CDao.class);
         
         String p_id = (String) session.getAttribute("s_n");
+        
+        
 		
 		dao.p_write(p_id, "2", pdto.getPr_title(), pdto.getPr_content(), originFileName, pdto.getPr_score(), 0);
 
@@ -357,7 +357,6 @@ public class CController {
 	@RequestMapping("/community/epilogue_update")
 	public String epilogue_update(HttpServletRequest request, Model model) {
 		
-		
 		CDao dao = sqlsession.getMapper(CDao.class);
 		
 		String pr_num = request.getParameter("pr_num");
@@ -377,11 +376,47 @@ public class CController {
 	
 	
 	@RequestMapping("/community/epilogue_update_ok")
-	public String epilogue_update_ok(HttpServletRequest request, Model model) {
+	public String epilogue_update_ok(HttpServletRequest request, Model model, MultipartHttpServletRequest mtfRequest, P_ReviewDto pdto) {
 		
 		CDao dao = sqlsession.getMapper(CDao.class);
 		
+		String pr_num = request.getParameter("pr_num");
 		
+		String pre_file = request.getParameter("pre_file");
+		
+		MultipartFile mf = mtfRequest.getFile("file");
+		
+
+//		String path = "C:\\upload\\";
+		
+		String path = "C:\\Users\\koitt01a\\Documents\\GitHub\\project_jardin\\shop_jardin\\src\\main\\webapp\\img\\";
+
+		File file = new File(path+pre_file);
+		
+		if(file.exists() == true)
+			
+		{file.delete();}
+		
+		String originFileName = mf.getOriginalFilename(); // 원본 파일 명
+		
+		long fileSize = mf.getSize(); // 파일 사이즈
+		
+		System.out.println("originFileName : " + originFileName);
+		
+		System.out.println("fileSize : " + fileSize);
+
+		String safeFile = path + originFileName;
+		
+		dao.pr_update(pdto.getPr_title(), pdto.getPr_content(), originFileName , pdto.getPr_score(), pr_num);
+		//dao.pr_update(pr_title, pr_content, pr_file, pr_score, pr_num);
+		
+		try {
+			mf.transferTo(new File(safeFile));
+		} catch (IllegalStateException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 		
 		
 		
@@ -418,18 +453,6 @@ public class CController {
 
 		return "redirect:/community/epilogue_list";
 	}
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
 	
 	
 	

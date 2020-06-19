@@ -1,5 +1,12 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+    
+    
+
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>   
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>      
+    
+    
 <!DOCTYPE html>
 <html>
 <head>
@@ -106,6 +113,7 @@ $(document).ready(function() {
 							
 							
 							<tbody>
+							
 								<tr>
 									<th scope="row"><span>분류</span></th>
 									<td>
@@ -143,11 +151,40 @@ $(document).ready(function() {
 								
 								
 								<tr>
+									<th scope="row"><span>현재 평점 </span></th>
+									
+									
+									<td>
+									
+									<ul class="pta">
+									
+								        <li>
+									
+										<c:forEach begin="1" end="${c_view.cr_score}" step="1">
+										
+										<img src="../images/ico/ico_star.gif" alt="별점" />
+										
+										</c:forEach>
+										
+										</li>
+										
+										</ul>
+										
+										</td>
+									
+										
+									</tr>
+								
+								
+								
+								<tr>
 									<th scope="row"><span>평가</span></th>
 									
 									<td>
+									
 										<ul class="pta">
 										
+									
 											<li>
 												<input type="radio" name="cr_score" id="starFive" checked="checked" value="5"/>
 												<label for="starFive" class="star">
@@ -159,6 +196,7 @@ $(document).ready(function() {
 												</label>
 												
 											</li>
+
 
 											<li>
 												<input type="radio" name="cr_score" id="starFour" value="4"/>
@@ -181,6 +219,7 @@ $(document).ready(function() {
 												
 											</li>
 
+
 											<li>
 												<input type="radio" name="cr_score" id="startwo" value="2"/>
 												<label for="startwo" class="star">
@@ -188,6 +227,8 @@ $(document).ready(function() {
 													<img src="../images/ico/ico_star.gif" alt="별점" />
 												</label>
 											</li>
+											
+											
 
 											<li>
 												<input type="radio" name="cr_score" id="starOne" value="1"/>
@@ -204,7 +245,12 @@ $(document).ready(function() {
 								<tr>
 									<th scope="row"><span>제목</span></th>
 									<td>
-										<input type="text" class="wlong" name="cr_title"/>
+										<input type="text" class="wlong" name="cr_title" value="${c_view.cr_title}"/>
+										
+										
+										<input type="hidden" name="cr_num" value="${c_view.cr_num}">
+										
+										
 									</td>
 								</tr>
 								
@@ -212,7 +258,7 @@ $(document).ready(function() {
 								<tr>
 									<th scope="row"><span>상세 내용</span></th>
 									<td>
-										<textarea class="tta" name="cr_content"></textarea>
+										<textarea class="tta" name="cr_content">${c_view.cr_content}</textarea>
 									</td>
 								</tr>	
 								

@@ -158,9 +158,40 @@ $(document).ready(function() {
 								<tr>
 									<th scope="row"><span>이미지</span></th>
 									<td>
+										<input type="file" class="fileType" name="pre_file" value="${p_view.pr_file}"/>
 										<input type="file" class="fileType" name="file" value="${p_view.pr_file}"/>
 									</td>
 								</tr>
+								
+								
+								
+								
+								<tr>
+									<th scope="row"><span>현재 평점 </span></th>
+									
+									
+									
+									<td>
+									
+									<ul class="pta">
+									
+								        <li>
+									
+										<c:forEach begin="1" end="${p_view.pr_score}" step="1">
+										
+										<img src="../images/ico/ico_star.gif" alt="별점" />
+										
+										</c:forEach>
+										
+										</li>
+										
+										</ul>
+										
+										</td>
+									
+										
+									</tr>
+								
 								
 								
 								
@@ -170,10 +201,8 @@ $(document).ready(function() {
 									<td>
 										<ul class="pta">
 										
-										
 											<li>
 												<input type="radio" name="pr_score" id="starFive" value="5" checked="checked"/>
-												
 												<label for="starFive" class="star">
 													<img src="../images/ico/ico_star.gif" alt="별점" />
 													<img src="../images/ico/ico_star.gif" alt="별점" />
@@ -235,6 +264,10 @@ $(document).ready(function() {
 									<th scope="row"><span>제목</span></th>
 									<td>
 										<input type="text" class="wlong" name="pr_title" value="${p_view.pr_title}" />
+										
+										
+										<input type="hidden" name="pr_num" value="${p_view.pr_num}">
+										
 									</td>
 								</tr>
 								
@@ -247,6 +280,11 @@ $(document).ready(function() {
 										<textarea class="tta" name="pr_content">${p_view.pr_content}</textarea>
 									</td>
 								</tr>	
+								
+								
+								
+								
+								
 								
 															
 							</tbody>

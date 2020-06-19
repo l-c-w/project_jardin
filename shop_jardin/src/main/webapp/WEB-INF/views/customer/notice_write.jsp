@@ -69,7 +69,7 @@ $(document).ready(function() {
 					
 					<div class="checkMt">
 					
-					<form action="notice_ok" name="notice" id="notice" method="post">
+					<form action="../customer/notice_ok" name="notice" id="notice" method="post">
 					
 						<table class="checkTable" border="1" cellspacing="0">
 						

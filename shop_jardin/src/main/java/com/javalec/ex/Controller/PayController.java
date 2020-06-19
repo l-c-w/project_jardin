@@ -9,7 +9,6 @@ import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -121,9 +120,14 @@ public class PayController {
 	}
 
 	// 쿠폰리스트 가져오기
-	@PostMapping("payment/coupon_list")
+	@RequestMapping("payment/coupon_list")
 	public String use_coupon(HttpServletRequest request, Model model) {
 		model.addAttribute("id", "qwer");
+		String[] cart_code = request.getParameterValues("name");
+		for (int i = 0; i < cart_code.length; i++) {
+			System.out.println(cart_code[i]);
+		}
+		model.addAttribute(cart_code);
 		pays = new CouponService();
 		pays.execute(sqlSession, model);
 		return "payment/coupon_list";

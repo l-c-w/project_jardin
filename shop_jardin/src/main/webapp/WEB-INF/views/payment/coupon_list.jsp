@@ -18,6 +18,10 @@
 $(function() {
 
 });
+
+
+
+alert(${cart_code});
 </script>
 </head>
 <body>

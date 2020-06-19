@@ -70,6 +70,8 @@ $(document).ready(function() {
 					
 					<!-- 주문 상품 -->
 					<h3 class="dep">주문 제품 확인</h3>
+										
+					</script>
 					<div class="orderDivNm">
 						<table summary="주문 제품 확인 게시판으로 상품명, 가격, 수량, 합계순으로 조회 하실수 있습니다." class="orderTable" border="1" cellspacing="0">
 							<caption>주문 제품 확인</caption>
@@ -86,7 +88,7 @@ $(document).ready(function() {
 								<th scope="col">합계</th>
 							</thead>
 							<tbody>
-								<form action="payment/coupon_list" method="post" name="product_infos">
+								<form action="payment/order_confirmation" method="post" name="product_infos">
 								<c:set var="total" value="0"/>
 								<c:set var="point_total" value="0"/>
 								<c:forEach var="fromcart" items="${from_cart }">
@@ -338,7 +340,8 @@ $(document).ready(function() {
 												<span class="valign"><strong>원</strong></span>
 											</li>
 											<li class="r10"><span class="valign">( 보유 쿠폰 내역 : ${usable_coupon }장 )&nbsp;</span></li>
-											<li><a class="nbtn">쿠폰목록</a></li>
+											<li onclick="get_coupon()" class="nbtn">쿠폰목록</li>
+											
 										</ul>
 									</td>
 								</tr>
@@ -661,30 +664,44 @@ $(function(){
 
 
 
-	// layer popup
-	var winWidth = $(window).width();
-	if(winWidth > 767){
-		var layerCheck = 540;
-		var couponCheck = 760;
-	}else{
-		var layerCheck = 320;
-		var couponCheck = 320;
-	}
-
-	$(".nbtn").fancybox({
-		'autoDimensions'    : false,
-		'showCloseButton'	: false,
-		'width' : couponCheck,
-		'padding' : 0,
-		'type'			: 'iframe',
-		'onComplete' : function() {
-			$('#fancybox-frame').load(function() { // wait for frame to load and then gets it's height
-			$('#fancybox-content').height($(this).contents().find('body').height());
-			$('#fancybox-wrap').css('top','400px');
-			$('html,body').animate({ scrollTop: 400 }, 500);
-			});
+	
+	
+	
+	//이메일 도메인 변경
+	$("#introduce").on("change",function() {
+		alert("dkdk");
+		$("#email2").val($(this).val());		
+	});
+	
+	//회원정보 수취자로 넘기기
+	$("#infosame").click(function() {
+		if($(this).is(":checked")){
+			$("#del_name").val($("#name").val());
+			$("#del_post").val($("#post").val());
+			$("#del_address1").val($("#address1").val());
+			$("#del_address2").val($("#address2").val());
+			$("#del_email1").val($("#email1").val());
+			$("#del_email2").val($("#email2").val());
+			var phone1 = $("#phone1 option:selected").val();
+			
+			$("#del_phone1").val($("#phone1 option:selected").val()).change();
+			$("#del_phone2").val($("#phone2").val());
+			$("#del_phone3").val($("#phone3").val());
+			
+		}
+		else{
+			$("#del_name").val("");
+			$("#del_post").val("");
+			$("#del_address1").val("");
+			$("#del_address2").val("");
+			$("#del_email1").val("");
+			$("#del_email2").val("");
+			$("#del_phone1").val("");
+			$("#del_phone2").val("");
+			$("#del_phone3").val("");
 		}
 	});
+	
 	$("#point_wrap").hide();
 	$("#cou_wrap").hide();
 
@@ -720,6 +737,7 @@ $(function(){
 	
 });
 
+//우편번호찾기 위
 function openDaumZipAddress1() {
 	new daum.Postcode({
 		oncomplete: function(data) {
@@ -729,6 +747,7 @@ function openDaumZipAddress1() {
 	}).open();
 }
 
+//우편번호찾기 아래
 function openDaumZipAddress2() {
 	new daum.Postcode({
 		oncomplete: function(data) {
@@ -738,9 +757,10 @@ function openDaumZipAddress2() {
 	}).open();
 }
 
+
+//회원정보에 반영
 function change_member() {
 	var member = $("form[name=mem_change]").serialize();
-	var email_tail = $("#emailList").text();
 	$.ajax({
 		type:"post",
 		url:"change_member",
@@ -755,7 +775,7 @@ function change_member() {
 	})
 	
 }
-
+//결제예정금액 구하기
 function get_total() {
 	var total=uncomma($("#_total").text());
 	var del_price=uncomma($("#_del_price").text());
@@ -769,6 +789,60 @@ function get_total() {
 	
 	
 }
+
+function get_coupon() {
+	var get_code= new Array;
+	$("input[name='cart_code']").each(function () {
+		get_code.push(this.value);
+	});
+	var cart_code={"name":get_code};
+	jQuery.ajaxSettings.traditional = true;
+	
+	$.ajax({
+		type: "post",
+		url:"coupon_list",
+		datatype:"json",
+		data:cart_code,
+		success: function () {
+			
+		
+		},
+		error: function () {
+			alert("전송실패");
+		}
+	});
+	
+	
+}
+
+//layer popup
+var winWidth = $(window).width();
+if(winWidth > 767){
+	var layerCheck = 540;
+	var couponCheck = 760;
+}else{
+	var layerCheck = 320;
+	var couponCheck = 320;
+}
+
+
+$(".nbtn").fancybox({
+	'autoDimensions'    : false,
+	'showCloseButton'	: false,
+	'width' : couponCheck,
+	'padding' : 0,
+	'type'			: 'iframe',
+	'href':'coupon_list',
+	'onComplete' : function() {
+		$('#fancybox-frame').load(function() { // wait for frame to load and then gets it's height
+		$('#fancybox-content').height($(this).contents().find('body').height());
+		$('#fancybox-wrap').css('top','1100px');
+		$('html,body').animate({ scrollTop: 1100 }, 500);
+		}).click();
+	}
+});
+
+
 
 
 //콤마찍기

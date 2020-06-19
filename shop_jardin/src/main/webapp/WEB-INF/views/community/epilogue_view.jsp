@@ -135,13 +135,16 @@ $(document).ready(function() {
 								
 							</div>
 							
+							
 						</div>
+						
 						
 						
 						<div class="img" style="padding: 10px;">
 						   <%--   <img src="<c:url value="/img/${p_view.pr_file}"/>" width="300" height="300"/> --%>
 						     <img src="/ex/img/${p_view.pr_file}" width="300" height="300"/>
 						</div>
+						
 
 						<div class="viewContents" style="padding: 10px;">
 							${p_view.pr_content}
@@ -150,6 +153,9 @@ $(document).ready(function() {
 					</div>
 
 
+
+
+                  <c:if test="${p_view.pr_answer ne null }">
 
 					<!-- 답변 -->
 					<div class="answer">
@@ -165,7 +171,7 @@ $(document).ready(function() {
 					</div>
 					<!-- //답변 -->
 
-
+                   </c:if>
 
 
 					<!-- 이전다음글 -->
@@ -214,7 +220,7 @@ $(document).ready(function() {
 						<div class="bRight">
 						
 							<ul>
-								<li><a href="#" class="nbtnbig mw">수정</a></li>
+								<li><a href="epilogue_update?pr_num=${p_view.pr_num}" class="nbtnbig mw">수정</a></li>
 								<li><a href="javascript:p_delete()" class="nbtnbig mw">삭제</a></li>
 								<li><a href="epilogue_list" class="sbtnMini mw">목록</a></li>
 							</ul>

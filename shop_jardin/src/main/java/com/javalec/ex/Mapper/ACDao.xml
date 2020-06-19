@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.javalec.ex.Dao.ACDao">
+
+	<select id="pCategory_search" resultType="com.javalec.ex.Dto.PDto.ProductDto">
+		select P_CATEGORY from PRODUCT
+	</select>
+	<select id="eCode_search" resultType="com.javalec.ex.Dto.EDto.EventDto">
+		select E_CODE, E_TITLE from EVENT
+	</select>
+	<insert id="coupon_write">
+		insert into COUPON values ('cou'||COUPON_SEQ.nextval, #{param1}, #{param2}, #{param3}, #{param4},
+		to_date(#{param5}, 'yyyymmddhh24miss'), to_date(#{param6}, 'yyyymmddhh24miss'), #{param7})
+	</insert>
+	
+
+
+</mapper>

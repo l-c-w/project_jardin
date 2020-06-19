@@ -2,6 +2,7 @@ package com.javalec.ex.Dao;
 
 import java.sql.Timestamp;
 import java.util.ArrayList;
+import java.util.List;
 
 import com.javalec.ex.Dto.CDto.C_ReviewDto;
 import com.javalec.ex.Dto.CDto.P_ReviewDto;
@@ -10,9 +11,9 @@ import com.javalec.ex.Dto.PDto.ProductDto;
 
 public interface PDao {
 
-	public ArrayList<ProductDto> list();
+	public ArrayList<ProductDto> Plist();
 
-	public ArrayList<ProductDto> list2(String p_category);
+	public ArrayList<ProductDto> Plist2(String p_category);
 
 	public ArrayList<ProductDto> list_category(String p_category);
 	
@@ -28,5 +29,8 @@ public interface PDao {
 	
 	//해당 상품에 대한 모든 리뷰 카운트
 	public int getListCount(String p_code);
+	
+
+
 
 }

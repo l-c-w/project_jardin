@@ -19,7 +19,6 @@
 <script type="text/javascript" src="../js/top_navi.js"></script>
 <script type="text/javascript" src="../js/left_navi.js"></script>
 <script type="text/javascript" src="../js/main.js"></script>
-<script type="text/javascript" src="../js/common.js"></script>
 <script type="text/javascript" src="../js/jquery.easing.1.3.js"></script>
 <script type="text/javascript" src="../js/idangerous.swiper-2.1.min.js"></script>
 <script type="text/javascript" src="../js/jquery.anchor.js"></script>
@@ -103,17 +102,35 @@ $(document).ready(function() {
 							<col width="100px" />
 							</colgroup>
 							<tbody>
-								<tr>
-									<th class="pre">PREV</th>
-									<td><a href="#">상품 재입고는 언제 되나요?</a></td>
-									<td>&nbsp;</td>
-								</tr>
+								<c:if test="${not empty edtoNext }">
+									<tr>
+										<th class="pre">NEXT</th>
+										<td><a href="fin_event_view?e_code=${edtoNext.e_code }">${edtoNext.e_title }</a></td>
+										<td>&nbsp;</td>
+									</tr>
+								</c:if>
+								<c:if test="${empty edtoNext }">
+									<tr>
+										<th class="pre">NEXT</th>
+										<td>다음 글이 없습니다.</a></td>
+										<td>&nbsp;</td>
+									</tr>
+								</c:if>
 
-								<tr>
-									<th class="next">NEXT</th>
-									<td>다음 글이 없습니다.</td>
-									<td>&nbsp;</td>
-								</tr>
+								<c:if test="${not empty edtoPrev }">
+									<tr>
+										<th class="pre">PREV</th>
+										<td><a href="fin_event_view?e_code=${edtoPrev.e_code }">${edtoPrev.e_title }</a></td>
+										<td>&nbsp;</td>
+									</tr>
+								</c:if>
+								<c:if test="${empty edtoPrev }">
+									<tr>
+										<th class="next">PREV</th>
+										<td>이전 글이 없습니다.</td>
+										<td>&nbsp;</td>
+									</tr>
+								</c:if>
 							</tbody>
 						</table>
 					</div>
@@ -127,6 +144,7 @@ $(document).ready(function() {
 						<form action="fin_event_eWite" method="post">
 							<input type="hidden" value="${sessionScope.session_mem }" name="requestUser">
 							<input type="hidden" value="${event_view.e_code }" name="e_code">
+							<input type="hidden" value="${page }" name="page">
 							<ul>
 								<li class="in">
 									<p class="txt">총 <span class="orange">${comment_listcount }</span> 개의 댓글이 달려있습니다.</p>
@@ -175,7 +193,8 @@ $(document).ready(function() {
 								<input type="hidden" value="${sessionScope.session_mem }" name="requestUser">
 								<input type="hidden" value="${e_com.id }" name="authUser">
 								<input type="hidden" value="${event_view.e_code }" name="e_code">
-								<input type="hidden" value="${e_com.ec_num }" name="ec_num">														
+								<input type="hidden" value="${e_com.ec_num }" name="ec_num">	
+								<input type="hidden" value="${page }" name="page">													
 								<ul id="coModi" class="comment_modifyM" style="display: none;">
 									<li class="name">${e_com.id }</li>
 									<li class="txt">
@@ -194,6 +213,7 @@ $(document).ready(function() {
 								<input type="hidden" value="${e_com.id }" name="authUser">
 								<input type="hidden" value="${event_view.e_code }" name="e_code">
 								<input type="hidden" value="${e_com.ec_num }" name="ec_num">
+								<input type="hidden" value="${page }" name="page">
 								<ul id="coSub" class="comment_modifyV">
 									<fmt:formatDate var="ec_wdate1" value="${e_com.ec_wdate }" pattern="yyyy/MM/dd" />
 									<fmt:formatDate var="ec_wdate2" value="${e_com.ec_wdate }" pattern="HH:mm:ss" />

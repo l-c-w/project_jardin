@@ -23,7 +23,7 @@ public class EventDto {
 		this.e_wdate=e_wdate;
 		this.e_udate=e_udate;
 	}
-	
+		
 	private String e_code;
 	private String e_type;
 	private String e_apply;

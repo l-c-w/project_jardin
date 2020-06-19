@@ -106,6 +106,6 @@
 
 			</div>
 		
-</body>
 </header>
+</body>
 </html>

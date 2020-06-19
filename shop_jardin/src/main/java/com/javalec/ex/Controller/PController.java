@@ -1,6 +1,10 @@
 package com.javalec.ex.Controller;
 
 
+import java.util.ArrayList;
+import java.util.List;
+
+import javax.inject.Inject;
 import javax.servlet.http.HttpServletRequest;
 
 import org.apache.ibatis.session.SqlSession;
@@ -11,8 +15,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.javalec.ex.Service.PService.PDetailService;
 import com.javalec.ex.Service.PService.PListService;
-
+import com.javalec.ex.Dao.MDao;
 import com.javalec.ex.Dao.PDao;
+import com.javalec.ex.Dto.MDto.Member_Dto;
+import com.javalec.ex.Dto.PDto.ProductDto;
 import com.javalec.ex.Service.PService.PService;
 import com.javalec.ex.Service.PService.PinquiryService;
 import com.javalec.ex.Service.PService.ReviewService;
@@ -22,7 +28,7 @@ import com.javalec.ex.Service.PService.ReviewService;
 public class PController {
 
 	@Autowired
-	private SqlSession sqlsession;
+	private SqlSession sql;
 
 	PService ps;
 	
@@ -31,7 +37,7 @@ public class PController {
 	public String p_list(HttpServletRequest request, Model model){
 
 		ps = new PListService();
-		ps.execute(request, sqlsession, model);
+		ps.execute(request, sql, model);
 //		PDao dao = sqlsession.getMapper(PDao.class);
 //		model.addAttribute("list",dao.list());
 
@@ -43,7 +49,7 @@ public class PController {
 	public String review(HttpServletRequest request, Model model) {
 
 		ps = new ReviewService();
-		ps.execute(request, sqlsession, model);
+		ps.execute(request, sql, model);
 //		PDao dao = sqlsession.getMapper(PDao.class);
 //		model.addAttribute("list",dao.list());
 
@@ -53,7 +59,7 @@ public class PController {
 	public String photo(HttpServletRequest request, Model model) {
 
 		ps = new PinquiryService();
-		ps.execute(request, sqlsession, model);
+		ps.execute(request, sql, model);
 //		PDao dao = sqlsession.getMapper(PDao.class);
 //		model.addAttribute("list",dao.list());
 
@@ -63,7 +69,7 @@ public class PController {
 	public String p_inquiry(HttpServletRequest request, Model model) {
 
 		ps = new PinquiryService();
-		ps.execute(request, sqlsession, model);
+		ps.execute(request, sql, model);
 //		PDao dao = sqlsession.getMapper(PDao.class);
 //		model.addAttribute("list",dao.list());
 
@@ -74,9 +80,10 @@ public class PController {
 	public String p_detail(HttpServletRequest request, Model model) {
 		
 		ps = new PDetailService();
-		ps.execute(request, sqlsession, model);
+		ps.execute(request, sql, model);
 		return "product/p_detail";
 	}
+	
 
 
 

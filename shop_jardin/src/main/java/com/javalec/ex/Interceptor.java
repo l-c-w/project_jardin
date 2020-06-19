@@ -17,21 +17,27 @@ public class Interceptor extends HandlerInterceptorAdapter {
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler)
             throws Exception {
-     
+    	
     	// session 객체를 가져옴
         HttpSession session = request.getSession();
         
         // login처리를 담당하는 사용자 정보를 담고 있는 객체를 가져옴
+        
         Object obj = session.getAttribute("session_mem");
         
+        if(obj != null) {
+        	
         String s_n = (String) obj;
         
-        session.setAttribute("s_n", s_n);     
+        session.setAttribute("s_n", s_n);    
+        
+        }
         
         // session.setAttribute("session_mem", s_n);     
         
         // preHandle의return은 컨트롤러 요청 uri로 가도 되냐 안되냐를 허가하는 의미임
         // 따라서 true로하면 컨트롤러 uri로 가게 됨. 
+        
         
         return true;
         

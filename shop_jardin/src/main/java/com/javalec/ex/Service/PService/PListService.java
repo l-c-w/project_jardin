@@ -1,6 +1,7 @@
 package com.javalec.ex.Service.PService;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -28,15 +29,16 @@ public class PListService implements PService {
 //		ArrayList<ProductDto> list = new ArrayList<ProductDto>();
 //		model.addAttribute("list",dao.list());
 		
-		ArrayList<ProductDto> list2 = new ArrayList<ProductDto>();
-		model.addAttribute("list2",dao.list2(category));
+		ArrayList<ProductDto> Plist2 = new ArrayList<ProductDto>();
+		model.addAttribute("list2",dao.Plist2(category));
 		
 		ArrayList<ProductDto> list_category = new ArrayList<ProductDto>();
-		list_category = dao.list();
+		list_category = dao.Plist();
 		model.addAttribute("list_category",list_category);
 		model.addAttribute("category",category);
 		
 		
 	}
+
 
 }

@@ -21,6 +21,7 @@ public class C_ReviewDto {
 		this.cr_wdate = cr_wdate;
 		this.cr_udate = cr_udate;
 		this.cr_group = cr_group;
+		
 	}
 
 	private int cr_num;
@@ -36,6 +37,19 @@ public class C_ReviewDto {
 	private Timestamp cr_udate;
 	
 	private int cr_group;
+	
+	private String cr_answer;
+	
+
+	public String getCr_answer() {
+		return cr_answer;
+	}
+
+	public void setCr_answer(String cr_answer) {
+		this.cr_answer = cr_answer;
+	}
+	
+	
 
 	public int getCr_num() {
 		return cr_num;

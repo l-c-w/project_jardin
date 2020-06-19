@@ -82,7 +82,7 @@ $(document).ready(function() {
 					<div class="myInfo">
 						<ul>
 							<li class="info"><strong>가나다</strong> 님의 정보를 한눈에 확인하세요.</li>
-							<li>보유 쿠폰<br/><span class="num">${usable_coupon }</span> <span class="unit">장</span></li>
+							<li>보유 쿠폰<br/><span class="num"><!--  -->${usable_coupon }</span> <span class="unit">장</span></li>
 							<li class="point">내 포인트<br/><span class="num">${usable_point }</span> <span class="unit">P</span></li>
 							<li class="last">진행중인 주문<br/><span class="num">199</span> <span class="unit">건</span></li>
 						</ul>
@@ -120,27 +120,24 @@ $(document).ready(function() {
 									<th scope="col">상태</th>
 								</thead>
 								<tbody>
-									<c:set var="list_count" value="${fn:length(coupon_list) }"/>
-									<c:if test="${not empty coupon_list }">
-									<c:forEach var="couponlist" items="${coupon_list }" varStatus="status">
-									<c:if test="${couponlist.exp_check>0 }">
-									<c:if test="${empty couponlist.cou_state }">
+									<c:set var="list_count" value="${fn:length(ucoupon_list) }"/>
+									<c:if test="${not empty ucoupon_list }">
+									<c:forEach var="ucouponlist" items="${ucoupon_list }" varStatus="status">
 									<tr>
-										<td class="tnone">${status.index }</td>
-										<c:if test="${couponlist.reward<0 }"><td>${couponlist.reward*100 } 할인</td></c:if>
-										<c:if test="${couponlist.reward>0 }"><td>${couponlist.reward }원 할인</td></c:if>
-										<td class="tnone">${couponlist.cou_name }</td>
-										<td>${couponlist.issue_date } ~ ${couponlist.exp_date }</td>
+										<td class="tnone">${list_count-status.index }</td>
+										<c:if test="${ucouponlist.cou_reward<1 }"><td><fmt:parseNumber value="${ucouponlist.cou_reward*100 }" integerOnly="true"/>% 할인</td></c:if>
+										<c:if test="${ucouponlist.cou_reward>1 }"><td><fmt:parseNumber value="${ucouponlist.cou_reward }" integerOnly="true"/>원 할인</td></c:if>
+										<td class="tnone">${ucouponlist.cou_name }</td>
+										<td><fmt:formatDate value="${ucouponlist.issue_date }" pattern="yyyy/MM/dd"/>  ~ <fmt:formatDate value="${ucouponlist.exp_date }" pattern="yyyy/MM/dd"/> </td>
 										<td><span class="heavygray">사용가능</span></td>
 									</tr>
-										</c:if>
-									</c:if>
 									</c:forEach>
+										</c:if>
 									
 								</tbody>
-								</c:if>
+
 							</table>
-							<c:if test="${empty coupon_list }">
+							<c:if test="${empty ucoupon_list }">
 							<div class="noData">
 								사용가능한 쿠폰이 없습니다.
 							</div>
@@ -184,25 +181,32 @@ $(document).ready(function() {
 									<th scope="col" class="tnone">NO.</th>
 									<th scope="col">종류</th>
 									<th scope="col" class="tnone">쿠폰명</th>
-									<th scope="col">사용기한</th>
+									<th scope="col">사용일자</th>
 									<th scope="col">상태</th>
 								</thead>
 								<tbody>
-									<c:forEach var="ncouponlist" items="${coupon_list }" varStatus="status">
+									<c:set var="nlist_count" value="${fn:length(ncoupon_list) }"/>
+									<c:if test="${not empty ncoupon_list }">
+									<c:forEach var="ncouponlist" items="${ncoupon_list }" varStatus="status">
 									<tr>
-										<td class="tnone">${ }</td>
-										<td>10% 할인쿠폰</td>
-										<td class="tnone">쟈뎅샵 1주년 기념 쿠폰</td>
-										<td>14-01-28 ~ 14-05-31</td>
-										<td><span class="heavygray">사용완료</span></td>
+										<td class="tnone">${nlist_count-status.index }</td>
+										<c:if test="${ncouponlist.cou_reward<1 }"><td><fmt:parseNumber value="${ncouponlist.cou_reward*100 }" integerOnly="true"/>% 할인</td></c:if>
+										<c:if test="${ncouponlist.cou_reward>1 }"><td><fmt:parseNumber value="${ncouponlist.cou_reward }" integerOnly="true"/>원 할인</td></c:if>
+										<td class="tnone">${ncouponlist.cou_name }</td>
+										<c:if test="${empty ncouponlist.cou_state }"><td><fmt:formatDate value="${ncouponlist.issue_date }" pattern="yyyy/MM/dd"/>  ~ <fmt:formatDate value="${ncouponlist.exp_date }" pattern="yyyy/MM/dd"/> </td>
+																					<td><span class="heavygray">기간만료</span></td></c:if>
+										<c:if test="${not empty ncouponlist.cou_state }"><td><fmt:formatDate value="${ncouponlist.cou_state }" pattern="yyyy/MM/dd"/></td>
+																						<td><span class="heavygray">사용완료</span></td></c:if>
 									</tr>
 									</c:forEach>
-																	</tbody>
+									</c:if>
+									</tbody>
 							</table>
-
+							<c:if test="${empty ncoupon_list }">
 							<div class="noData">
 								등록된 상품이 없습니다.
 							</div>
+							</c:if>
 						</div>
 						
 

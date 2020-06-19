@@ -13,17 +13,32 @@ public interface MDao {
 			String sms_agree, String address1, String address2, String sol_lun, String introduce,
 			String coffe_favor, Date birth, String post, int phone1, int phone2, int phone3);
 	
+	
 	public int idcheck(String id);
+	
+	public int emailcheck(String email);
+	
 	
 	public Member_Dto login1(String id);
 	
 	public Member_Dto login2(String id, String pw);
+	
+	
+	
+	public Member_Dto login_search(String name, String email);
+	
+	public Member_Dto login_pw_search(String id, String email);
+	
+	
+	public int idpwch (String id, String pw);
 	
 	public ArrayList<Member_Dto> m_list();
 	
 	public int m_count();
 	
 	public Member_Dto member_change(String id);
+	
+	public void withdrawal(String id, String pw);
 	
 	public void change_ok(String pw, String email, String email_agree,
 			String sms_agree, String address1, String address2, String sol_lun, String introduce,

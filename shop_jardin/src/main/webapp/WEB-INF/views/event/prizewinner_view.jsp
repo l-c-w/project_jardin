@@ -100,15 +100,35 @@ $(document).ready(function() {
 							<col width="*" />
 							</colgroup>
 							<tbody>
-								<tr>
-									<th class="pre">PREV</th>
-									<td><a href="#">상품 재입고는 언제 되나요?</a></td>
-								</tr>
+								<c:if test="${not empty ewdtoNext }">
+									<tr>
+										<th class="next">NEXT</th>
+										<td><a href="prizewinner_view?w_code=${ewdtoNext.w_code }">${ewdtoNext.w_title }</a></td>
+										<td>&nbsp;</td>
+									</tr>
+								</c:if>
+								<c:if test="${empty ewdtoNext }">
+									<tr>
+										<th class="next">NEXT</th>
+										<td>다음 글이 없습니다.</td>
+										<td>&nbsp;</td>
+									</tr>
+								</c:if>
 
-								<tr>
-									<th class="next">NEXT</th>
-									<td>다음 글이 없습니다.</td>
-								</tr>
+								<c:if test="${not empty ewdtoPrev }">
+									<tr>
+										<th class="pre">PREV</th>
+										<td><a href="prizewinner_view?w_code=${ewdtoPrev.w_code }">${ewdtoPrev.w_title }</a></td>
+										<td>&nbsp;</td>
+									</tr>
+								</c:if>
+								<c:if test="${empty ewdtoPrev }">
+									<tr>
+										<th class="pre">PREV</th>
+										<td>이전 글이 없습니다.</td>
+										<td>&nbsp;</td>
+									</tr>
+								</c:if>
 							</tbody>
 						</table>
 					</div>

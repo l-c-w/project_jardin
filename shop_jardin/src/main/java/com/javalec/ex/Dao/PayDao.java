@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 import org.apache.ibatis.annotations.Param;
 
+import com.javalec.ex.Dto.MDto.Member_Dto;
 import com.javalec.ex.Dto.PayDto.CartDto;
 import com.javalec.ex.Dto.PayDto.Coupon_listDto;
 import com.javalec.ex.Dto.PayDto.PaymentDto;
@@ -50,9 +51,12 @@ public interface PayDao {
 	public String order_check(String id);
 
 	// 주문서 생성
-	public void make_order(String id, int total);
+	public void make_order(String id, int total, int pay_del);
 
 	// 주문서 가져오기(작성중인 리스트)
 	public PaymentDto get_order(String id);
+
+	// 회원변경정보 반영
+	public void update_member(Member_Dto member_Dto);
 
 }

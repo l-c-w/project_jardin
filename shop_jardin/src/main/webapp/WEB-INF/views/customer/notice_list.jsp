@@ -2,12 +2,6 @@
     pageEncoding="UTF-8"%>
     
     
-    
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>    
-<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>    
-
-    
-    
 <!DOCTYPE html>
 <html>
 <head>
@@ -63,7 +57,9 @@ $(document).ready(function() {
 			<jsp:include page="custom1.jsp"/>
 			
 			
-			<!-- <div id="left">
+			<!-- 
+			
+			<div id="left">
 				<div id="title2">CUSTOMER<span>고객센터</span></div>
 				<ul>	
 					<li><a href="#" id="leftNavi1">NOTICE</a></li>
@@ -71,8 +67,9 @@ $(document).ready(function() {
 					<li><a href="#" id="leftNavi3">FAQ</span></a></li>
 					<li class="last"><a href="#" id="leftNavi4">이용안내</a></li>
 				</ul>			
-			</div> -->
+			</div> 
 			
+			-->
 			
 			
 			
@@ -131,9 +128,7 @@ $(document).ready(function() {
 
 
 					<div class="btnAreaList">
-						<!-- 페이징이동1 -->
 						
-						<!-- 페이징이동1 -->
 
 						<!-- 페이징이동1 -->
 
@@ -204,6 +199,7 @@ $(document).ready(function() {
 					</div>
 
 
+             <form action="../customer/notice_search" method="get" name="notice_search" id="notice_search">
 
 					<div class="searchWrap">
 					
@@ -214,16 +210,21 @@ $(document).ready(function() {
 								<li class="web"><img src="../images/txt/txt_search.gif" alt="search" /></li>
 								
 								<li class="se">
-									<select>
-										<option value="" />제목</option>
+								
+									<select id="searchType" name="searchType">
+									
+									     <option value="title">제목</option>
+									     <option value="content">내용</option>
+									     
 									</select>
+									
 								</li>
 								
-								<li><input type="text" class="searchInput" /></li>
+								<li><input type="text" class="searchInput" id="keyword" name="keyword"/></li>
 								
-								<li class="web"><a href="#"><img src="../images/btn/btn_search.gif" alt="검색" /></a></li>
+								<li class="web" id="searchBtn"><a href="#" onclick="document.getElementById('notice_search').submit()"><img src="../images/btn/btn_search.gif" alt="검색" /></a></li>
 								
-								<li class="mobile"><a href="#"><img src="../images/btn/btn_search_m.gif" alt="검색" /></a></li>
+								<li class="mobile"><a href="#" onclick="document.getElementById('notice_search').submit()"><img src="../images/btn/btn_search_m.gif" alt="검색" /></a></li>
 								
 							</ul>
 							
@@ -231,12 +232,38 @@ $(document).ready(function() {
 						
 					</div>
 					
+					</form>
 					
 					
-					<!-- //포토 구매후기 -->
+					
+					
+<!-- onclick="document.getElementById('notice_search').submit()" -->
+					
 
+   <!--  <script type="text/javascript">
+    
+    $(document).on('click', '#notice_search', function(e){
+
+		e.preventDefault();
+
+		var url = "${pageContext.request.contextPath}/customer/notice_search";
+
+		url = url + "?searchType=" + $('#searchType').val();
+
+		url = url + "&keyword=" + $('#keyword').val();
+
+		location.href = url;
+
+		console.log(url);
+
+	});	
+
+    </script>  
+    
+    -->
 
 				</div>
+				
 			</div>
 			<!-- //contents -->
 
@@ -245,7 +272,10 @@ $(document).ready(function() {
 	<!-- //container -->
 
 <!-- footer 붙여넣기 -->
+
 	<jsp:include page="../footer.jsp"/>
 
 </body>
+
+
 </html>

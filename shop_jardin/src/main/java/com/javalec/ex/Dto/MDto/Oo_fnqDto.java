@@ -6,6 +6,7 @@ public class Oo_fnqDto {
 
 	public Oo_fnqDto() {
 		
+		
 	}
 
 	public Oo_fnqDto(String oo_num, String id, String oo_type, String oo_title, String oo_content, String oo_file,
@@ -21,6 +22,7 @@ public class Oo_fnqDto {
 		this.oo_answer=oo_answer;
 	}
 
+	
 	private String oo_num;
 	private String id;
 	private String oo_type;

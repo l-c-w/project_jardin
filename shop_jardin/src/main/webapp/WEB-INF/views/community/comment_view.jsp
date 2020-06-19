@@ -144,6 +144,11 @@ $(document).ready(function() {
 					</div>
 
 
+
+
+                   <c:if test="${c_view.cr_answer ne null }">
+
+
 					<!-- 답변 -->
 					<div class="answer">
 					
@@ -163,6 +168,8 @@ $(document).ready(function() {
 						
 					</div>
 					<!-- //답변 -->
+					
+					</c:if>
 
 
 					<!-- 이전다음글 -->
@@ -222,7 +229,7 @@ $(document).ready(function() {
 					
 						<div class="bRight">
 							<ul>
-								<li><a href="#" class="nbtnbig mw">수정</a></li>
+								<li><a href="comment_update?cr_num=${c_view.cr_num}" class="nbtnbig mw">수정</a></li>
 								<li><a href="javascript:c_delete();" class="nbtnbig mw">삭제</a></li>
 								<li><a href="comment_list" class="sbtnMini mw">목록</a></li>
 							</ul>

@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+        
 <!DOCTYPE html>
 <html>
 <head>
@@ -83,11 +84,20 @@ $(document).ready(function() {
 
 									<tr>
 										<th scope="row"><span>분류</span></th>
+										
 										<td>
-										<select>
-										<option value="">선택해주세요.</option>
+										
+										<select name="f_type">
+										
+										<option value="" selected="selected">선택해주세요.</option>
+										<option value="product">상품</option>
+										<option value="order">주문</option>
+										<option value="join">회원가입</option>
+										
 										</select>
+										
 										</td>
+										
 									</tr>
 
 

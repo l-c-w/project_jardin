@@ -2,9 +2,6 @@
     pageEncoding="UTF-8"%>
     
     
-    
-<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>    
-    
 <!DOCTYPE html>
 <html>
 <head>
@@ -135,15 +132,48 @@ $(document).ready(function() {
 					<!-- //이전다음글 -->
 
 
+
 					<!-- Btn Area -->
 					<div class="btnArea btline">
 						<div class="bRight">
 							<ul>
+							    <li><a href="notice_update?n_num=${ndto.n_num}" class="nbtnbig mw">수정</a></li>
+								<li><a href="javascript:n_delete()" class="nbtnbig mw">삭제</a></li>
 								<li><a href="notice_list" class="sbtnMini mw">목록</a></li>
 							</ul>
 						</div>
 					</div>
 					<!-- //Btn Area -->
+					
+					
+					
+					<script type="text/javascript">
+						
+						function n_delete() {
+
+							var result = confirm('데이터를 삭제 하시겠습니까?');
+							
+							var n_num = ${ndto.n_num};
+
+							if (result == true) {
+
+								alert("삭제하겠습니다");
+								window.location.href = 'notice_delete?n_num=' + n_num;
+								
+								
+							} else {
+								
+								alert("삭제를 취소합니다");
+							}
+							
+
+						}
+						
+						</script>
+					
+					
+					
+					
 					
 				</div>
 			</div>

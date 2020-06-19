@@ -296,30 +296,14 @@ $(document).ready(function() {
 										<ul class="question">
 										
 										
-										
-										<c:if test="${mdto.email_agree == 'email_yes'}">
-										
 											<li>
-												<input type="radio" name="email_agree" value="email_yes" id="receive_yes" class="radio_t" checked="checked"/><label for="receive_yes">예</label>
-											</li>
-											<li>
-												<input type="radio" name="email_agree" value="email_no" id="receive_no" class="radio_t"/><label for="receive_no">아니오</label>
-											</li>
-											
-										
-										</c:if>
-										
-										
-										<c:if test="${mdto.email_agree == 'email_no'}">
-										
-											<li>
-												<input type="radio" name="email_agree" value="email_yes" id="receive_yes" class="radio_t" /><label for="receive_yes">예</label>
-											</li>
-											<li>
-												<input type="radio" name="email_agree" value="email_no" id="receive_no" class="radio_t" checked="checked"/><label for="receive_no">아니오</label>
+												<input type="radio" name="email_agree" value="email_yes" id="receive_yes" class="radio_t" <c:if test="${mdto.email_agree == 'email_yes'}"> checked="checked" </c:if>><label for="receive_yes">예</label>
 											</li>
 										
-										</c:if>
+										
+											<li>
+												<input type="radio" name="email_agree" value="email_no" id="receive_no" class="radio_t" <c:if test="${mdto.email_agree == 'email_no'}"> checked="checked" </c:if>><label for="receive_no">아니오</label>
+											</li>
 											
 											
 										</ul>
@@ -547,11 +531,11 @@ $(document).ready(function() {
 												<ul class="baseQues">
 												
 													<li>
-														<input type="radio" name="sms_agree" value="sms_yes" id="sms_yes" class="radio_t" checked="checked"/><label for="sms_yes">예</label>
+														<input type="radio" name="sms_agree" value="sms_yes" id="sms_yes" class="radio_t" <c:if test="${mdto.sms_agree eq 'sms_yes'}">checked="checked"</c:if>><label for="sms_yes">예</label>
 													</li>
 													
 													<li>
-														<input type="radio" name="sms_agree" value="sms_no" id="sms_no" class="radio_t"/><label for="sms_no">아니오</label>
+														<input type="radio" name="sms_agree" value="sms_no" id="sms_no" class="radio_t" <c:if test="${mdto.sms_agree eq 'sms_no'}">checked="checked"</c:if>><label for="sms_no">아니오</label>
 													</li>
 													
 												</ul>
@@ -614,52 +598,30 @@ $(document).ready(function() {
 											
 											
 											
-											
-											
-											
 											<li class="pt5">
 											
 												<ul class="baseQues">
 												
 												
-												<c:if test="${mdto.sol_lun == 'solar'}">
-												
 												    <li>
-														<input type="radio" name="sol_lun" value="solar" id="solar" class="radio_t" checked="checked"/><label for="solar">양력</label>
+														<input type="radio" name="sol_lun" value="solar" id="solar" class="radio_t" <c:if test="${mdto.sol_lun == 'solar'}">checked="checked"</c:if>><label for="solar">양력</label>
 													</li>
-													
+											
 													<li>
-														<input type="radio" name="sol_lun" value="lunar" id="lunar" class="radio_t"/><label for="lunar">음력</label>
+														<input type="radio" name="sol_lun" value="lunar" id="lunar" <c:if test="${mdto.sol_lun == 'lunar'}">checked="checked"</c:if> class="radio_t"><label for="lunar">음력</label>
 													</li>
 												
-												</c:if>
 												
-												
-												
-												<c:if test="${mdto.sol_lun == 'lunar'}">
-												
-												<li>
-														<input type="radio" name="sol_lun" value="solar" id="solar" class="radio_t" /><label for="solar">양력</label>
-													</li>
-													
-													<li>
-														<input type="radio" name="sol_lun" value="lunar" id="lunar" checked="checked" class="radio_t"/><label for="lunar">음력</label>
-													</li>
-												
-												</c:if>
-												
-												
-													
 													
 												</ul>
 												
 											</li>
 											
-											
 										</ul>
+										
 									</td>
+									
 								</tr>
-								
 								
 								
 								
@@ -674,47 +636,25 @@ $(document).ready(function() {
 										<ul class="pta">
 										
 										
-											<li>
+									    <li>
 											
 											
-												<ul class="baseQues">
-
-
-								 	    <c:if test="${mdto.coffee_favor == 'americano'}">
+										<ul class="baseQues">
+								 	   
 														
-                                                <li>
-											       <input type="radio" name="coffee_favor" value="americano" id="partner" class="radio_t" checked="checked"><label for="partner">아메리카노</label>
-												 </li>
-													
-													
-													
-													<li>
-													<input type="radio" name="coffee_favor" value="latte" id="partner" class="radio_t"><label for="partner">라떼</label>
-													</li>
-
-								         </c:if>
-														
-														
-																											
-							        	<c:if test="${mdto.coffee_favor == 'latte'}">
-															
-										<li>
-										 <input type="radio" name="coffee_favor" value="americano" id="partner" class="radio_t"><label for="partner">아메리카노</label>
+                                        <li>
+										   <input type="radio" name="coffee_favor" value="americano" id="partner" class="radio_t" <c:if test="${mdto.coffee_favor == 'americano'}"> checked="checked" </c:if>><label for="partner">아메리카노</label>
 										</li>
-													
+									
 													
 										<li>
-										<input type="radio" name="coffee_favor" value="latte" id="partner" class="radio_t" checked="checked"><label for="partner">라떼</label>
+										  <input type="radio" name="coffee_favor" value="latte" id="partner" class="radio_t" <c:if test="${mdto.coffee_favor == 'latte'}"> checked="checked" </c:if>><label for="partner">라떼</label>
 										</li>
 
-								        </c:if>
-								
-														
 
-								    </ul>
+								       </ul>
 												
-												
-								</li>
+								        </li>
 											
 											
 										</ul>

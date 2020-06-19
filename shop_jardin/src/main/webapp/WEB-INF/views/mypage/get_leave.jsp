@@ -25,13 +25,17 @@
 <script type="text/javascript" src="../js/html5.js"></script>
 <script type="text/javascript" src="../js/respond.min.js"></script>
 <![endif]-->
+
 <script type="text/javascript">
 $(document).ready(function() {
 	
 
 
 });
+
 </script>
+
+
 </head>
 <body>
 
@@ -52,22 +56,7 @@ $(document).ready(function() {
 		<div id="outbox">		
 		<jsp:include page="mypage1.jsp"></jsp:include>
 		
-			
-			<!-- <div id="left">
-				<div id="title">MY PAGE<span>마이페이지</span></div>
-				<ul>	
-					<li><a href="#" id="leftNavi1">주문/배송 조회</a></li>
-					<li><a href="#" id="leftNavi2">반품/배송 현황</a></li>
-					<li><a href="#" id="leftNavi3">장바구니</a></li>
-					<li><a href="#" id="leftNavi4">위시리스트</a></li>
-					<li><a href="#" id="leftNavi5">나의 쿠폰</a></li>
-					<li><a href="#" id="leftNavi6">나의 포인트</a></li>
-					<li><a href="#" id="leftNavi7">1:1문의</a></li>
-					<li><a href="#" id="leftNavi8">회원정보 수정</a></li>
-					<li class="last"><a href="#" id="leftNavi9">회원 탈퇴</a></li>
-				</ul>			
-			</div>
-			 --><script type="text/javascript">initSubmenu(9,0);</script>
+		<script type="text/javascript">initSubmenu(9,0);</script>
 
 
 			<!-- contents -->
@@ -77,7 +66,7 @@ $(document).ready(function() {
 					
 					<div class="myInfo">
 						<ul>
-							<li class="info"><strong>가나다</strong> 님의 정보를 한눈에 확인하세요.</li>
+							<li class="info"><strong>${s_n}</strong> 님의 정보를 한눈에 확인하세요.</li>
 							<li>보유 쿠폰<br/><span class="num">199</span> <span class="unit">장</span></li>
 							<li class="point">내 포인트<br/><span class="num">100,000</span> <span class="unit">P</span></li>
 							<li class="last">진행중인 주문<br/><span class="num">199</span> <span class="unit">건</span></li>
@@ -95,37 +84,125 @@ $(document).ready(function() {
 					</div>
 
 
+
+
 					<h3 class="dep">회원정보 입력</h3>
+					
+					<form action="../mypage/withdrawal" id="withdrawal" name="withdrawal" method="post">
+					
 					<div class="checkDiv">
+					
 						<table summary="반품/교환 분류선택, 기간별, 단어검색별로 주문/배송 조회를 하실수 있습니다." class="checkTable" border="1" cellspacing="0">
+						
 							<caption>주문/배송 조회</caption>
+							
 							<colgroup>
 							<col width="22%" class="tw30" />
 							<col width="*" />
 							</colgroup>
+							
 							<tbody>
+							
 								<tr>
 									<th scope="row"><span>아이디</span></th>
-									<td><input type="text" class="w186" /></td>
+									<td><input type="text" class="w186" id="w_id" name="w_id"/></td>
 								</tr>
+								
 								<tr>
 									<th scope="row"><span>비밀번호</span></th>
-									<td><input type="password" class="w186" /></td>
+									<td><input type="password" class="w186" id="w_pw" name="w_pw" /></td>
 								</tr>
-								<tr>
+								
+								
+								<!-- <tr>
 									<th scope="row"><span>탈퇴사유</span></th>
-									<td>
+									<td><input type="text" class="w186" id="w_con" name="w_con"/></td>
 										<select>
 											<option value="">선택해주세요.</option>
 										</select>
-									</td>
-								</tr>
+								</tr> -->
+								
+								
 							</tbody>
+							
 						</table>
+						
 					</div>
+					
+					</form>
+					
+					
+						<!-- Btn Area -->
+					<div class="btnArea">
+					
+						<div class="bCenter">
+							<ul>																
+								<li><a href="javascript:history.back()" class="nbtnbig">취소</a></li>
+								<!-- <li><a href="#" onclick="document.getElementById('notice').submit();" class="sbtnMini">확인</a></li> -->
+								<li><a href="#" id="w_click" class="sbtnMini">확인</a></li>
+							</ul>
+						</div>
+						
+					</div>
+					<!-- //Btn Area -->
+					
+					
+					
+<script type="text/javascript">
+	$(document).ready(function(e){
+		$('#w_click').click(function(){
+			
+			
+			//아이디, 비밀번호 입력확인
+			if($('#w_id').val() == ''){
+				alert("아이디를 입력해 주세요.");
+				$('#w_id').focus();
+				return;
+			}
+			
+			else if($('#w_pw').val() == ''){
+				alert("패스워드를 입력해 주세요.");
+				$('#w_pw').focus();
+				return;
+			}
+			
+			
+			$.ajax({
+				url: "${pageContext.request.contextPath}/mypage/withdrawal_check",
+				type: "POST",
+				data: $('#withdrawal').serializeArray(),
+				success: function(data){
+					
+					
+					if(data == 0){
+						alert("아이디 또는 패스워드가 틀렸습니다.");
+						return;
+					}
+					
+					
+					else{
+						           //탈퇴
+						var result = confirm('정말 탈퇴 하시겠습니까?');
+						if(result){
+							$('#withdrawal').submit();
+						}
+					}
+				},
+				error: function(){
+					alert("서버 에러.");
+				}
+			});
+		});
+	});
+</script>
+					
+					
+					
+					
 
 
 				</div>
+				
 			</div>
 			<!-- //contents -->
 

@@ -31,7 +31,13 @@
 <script type="text/javascript" src="../js/html5.js"></script>
 <script type="text/javascript" src="../js/respond.min.js"></script>
 <![endif]-->
-
+<style type="text/css">
+input[type="number"]::-webkit-outer-spin-button,
+input[type="number"]::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+</style>
 <script type="text/javascript">
 	
 $(document).ready(function() {
@@ -64,6 +70,8 @@ $(document).ready(function() {
 					
 					<!-- 주문 상품 -->
 					<h3 class="dep">주문 제품 확인</h3>
+										
+					</script>
 					<div class="orderDivNm">
 						<table summary="주문 제품 확인 게시판으로 상품명, 가격, 수량, 합계순으로 조회 하실수 있습니다." class="orderTable" border="1" cellspacing="0">
 							<caption>주문 제품 확인</caption>
@@ -80,7 +88,9 @@ $(document).ready(function() {
 								<th scope="col">합계</th>
 							</thead>
 							<tbody>
-								<form action="payment/coupon_list" method="post" name="product_infos">
+								<form action="payment/order_confirmation" method="post" name="product_infos">
+								<c:set var="total" value="0"/>
+								<c:set var="point_total" value="0"/>
 								<c:forEach var="fromcart" items="${from_cart }">
 								<tr>
 									<input type="hidden" name="cart_code" value="${fromcart.cart_code }">
@@ -94,15 +104,18 @@ $(document).ready(function() {
 										</ul>
 									</td>
 									<td class="tnone">
-										<fmt:formatNumber value="${fromcart.p_price }" pattern="#,###,###,###"/> 
-
-										<!-- 회원일 시 -->
-										<br/><span class="pointscore"><fmt:formatNumber value="${fromcart.p_point }" pattern="#,###,###,###"/> </span>
+										<fmt:formatNumber value="${fromcart.p_price }" pattern="#,###,###,###"/> 원
+										<!-- 회원일 시 (세션 넣을것)-->
+										<c:if test="">
+										<br/><span class="pointscore"><fmt:formatNumber value="${fromcart.p_point }" pattern="#,###,###,###"/>Point </span>
+										</c:if>
 										<!-- //회원일 시 -->
 									</td>
 									<td>${fromcart.amount } 개</td>
-									<td>${fromcart.p_price*fromcart.amount } 원</td>
+									<td><fmt:formatNumber pattern="#,###,###,###">${fromcart.p_price*fromcart.amount }</fmt:formatNumber>  원</td>
 								</tr>
+									<c:set var="total" value="${total+fromcart.p_price*fromcart.amount }"/>
+									<c:set var="point_total" value="${point_total+ (fromcart.p_price/100)*fromcart.amount}"/>
 								</c:forEach>
 								</form>
 							</tbody>
@@ -110,20 +123,35 @@ $(document).ready(function() {
 					</div>
 					<div class="poroductTotal">
 						<ul>	
-							<li>상품 합계금액 <strong>${get_order.total_price }</strong> 원</li>
-							<li>+ 배송비 <strong>2,500</strong> 원</li>
-							<li>= 총 합계 <strong>${get_order.total_price+2500 }</strong> 원</li>
+							<li>상품 합계금액 <strong><fmt:formatNumber pattern="#,###,###,###">${total }</fmt:formatNumber> </strong> 원</li>
+							<c:set var="del_price" value="2500"/>
+							<li>+ 배송비 
+							<c:choose>
+							<c:when test="${total>=30000 }">
+									<c:set var="del_price" value="0"/>
+							<strong>0
+								</strong>
+							</c:when>
+							<c:otherwise>
+								<strong>
+							<fmt:formatNumber pattern="#,###,###,###">${del_price }</fmt:formatNumber></strong>
+								</c:otherwise>					
+							</c:choose>
+							원
+							 </li>
+							<li>= 총 합계 <strong><fmt:formatNumber pattern="#,###,###,###">${total+del_price }</fmt:formatNumber></strong> 원</li>
 						</ul>
 					</div>
 					<!-- //주문 상품 -->
 					
 
 			<!-- 주문자 주소 입력 -->
+			<form name="mem_change" id="mem_change">
 					<h3 class="diviLeft">주문자 주소 입력</h3>
 					<div class="diviRight">
 						<ul>
 							<li>수정 내용을 회원정보에도 반영합니다.&nbsp;&nbsp;</li>
-							<li><a href="#">회원정보반영</a></li>
+							<li onclick="change_member()" style="cursor: pointer;"><a >회원정보반영</a></li>
 						</ul>
 					</div>
 
@@ -162,9 +190,9 @@ $(document).ready(function() {
 										<c:set var="email_end" value="${fn:substringAfter(email,'@') }"/>
 											<li><input type="text" class="w134" value="${email_front }" name="email1"/ id="email1"></li>
 											<li><span class="valign">&nbsp;@&nbsp;</span></li>
-											<li class="r10"><input type="text" class="w134" value="${email_end }" name="email2" id="email2"/></li>
+											<li class="r10"><input type="text" class="w134" value="${email_end }" name="introduce" id="email2"/></li>
 											<li>
-												<select id="emailList">
+												<select id="introduce" >
 													<option value="#" selected="selected">직접입력</option>
 													<option value="naver.com">naver.com</option>
 													<option value="daum.net">daum.net</option>
@@ -206,14 +234,16 @@ $(document).ready(function() {
 										</ul>
 									</td>
 								</tr>
-								
+								<c:if test="${get_order.nomem_check eq 'Y'}">
 								<tr>
 									<th scope="row"><span>비밀번호</span></th>
 									<td><input type="password" class="w134" name="nom_password"/> *비회원 주문시 입력</td>
 								</tr>
+								</c:if>
 							</tbody>
 						</table>
 					</div>
+					</form>
 			<!-- //주문자 주소 입력 -->
 
 
@@ -233,8 +263,6 @@ $(document).ready(function() {
 							</colgroup>
 							<tbody>
 								<form action="save_delinfo" method="post" name="save_delinfo">
-								<input type="hidden" name="pay_code" value="${get_order.pay_code }">
-								<input type="hidden" name="id" value="${get_order.id }">
 								<tr>
 									<th scope="row"><span>이름</span></th>
 									<td><input type="text" class="w134" name="del_name" id="del_name"/></td>
@@ -296,22 +324,24 @@ $(document).ready(function() {
 							<tbody>
 								<tr>
 									<th scope="row"><span>총 주문금액</span></th>
-									<td>${get_order.total_price } 원</td>
+									<td> <fmt:formatNumber pattern="#,###,###,###">${total }</fmt:formatNumber>  원</td>
 								</tr>
 								<tr>
 									<th scope="row"><span>배송비</span></th>
-									<td>2,500 원 (선불)</td>
+									<td><fmt:formatNumber pattern="#,###,###,###">${del_price }</fmt:formatNumber> 원 (선불)</td>
+									
 								</tr>
 								<tr>
 									<th scope="row"><span>쿠폰 할인</span></th>
 									<td>
 										<ul class="pta">
 											<li class="r10">
-												<input type="text" class="w134" name="cou_code" />&nbsp;&nbsp;
+												<input type="text" class="w134" name="cou_input" id="cou_input" />&nbsp;&nbsp;
 												<span class="valign"><strong>원</strong></span>
 											</li>
 											<li class="r10"><span class="valign">( 보유 쿠폰 내역 : ${usable_coupon }장 )&nbsp;</span></li>
-											<li onclick="product_infos.submit()"><a class="nbtn">쿠폰목록</a></li>
+											<li onclick="get_coupon()" class="nbtn">쿠폰목록</li>
+											
 										</ul>
 									</td>
 								</tr>
@@ -322,12 +352,12 @@ $(document).ready(function() {
 									<td>
 										<ul class="pta">
 											<li class="r10">
-												<input type="text" class="w134" />&nbsp;&nbsp;
+												<input type="number" class="w134" id="point_input"/>&nbsp;&nbsp;
 												<span class="valign"><strong>Point</strong></span>
 											</li>
 											<li>
 												<span class="valign">( 사용 가능 포인트 : </span>
-												<span class="orange">15,000</span>
+												<span class="orange" id="point_max">${usable_point }</span>
 												<span class="valign"> Point)</span>
 											</li>
 										</ul>
@@ -339,7 +369,12 @@ $(document).ready(function() {
 									<th scope="row"><span>총 결제금액</span></th>
 									<td>
 										<ul class="pta">
-											<li><span class="valign"><strong>1,133,810 원</strong> (총주문금액 1,132,310원 + 배송비 2500원 - 포인트 1,000 = 1,133,801원)</li>
+											<li><span class="valign"><strong class="total_price"><fmt:formatNumber pattern="#,###,###,###">${total+del_price }</fmt:formatNumber></strong><strong>원</strong> 
+											(총주문금액 <span><fmt:formatNumber pattern="#,###,###,###">${total }</fmt:formatNumber></span>원 + 
+											배송비 <span>${del_price }</span>원
+											<span id="point_wrap">- 포인트 <span id="point_1"></span></span>
+											<span id="cou_wrap">- 쿠폰할인 <span id="cou_1"></span></span>
+											= <spanclass="total_price"><fmt:formatNumber pattern="#,###,###,###">${total+del_price }</fmt:formatNumber></span>원)</li>
 										</ul>
 									</td>
 								</tr>
@@ -355,38 +390,40 @@ $(document).ready(function() {
 
 						<!-- 회원 일때 -->
 						<h4 class="member">총 주문금액</h4>
+						<input type="hidden" value="${total }">
+						<input type="hidden" value="${del_price }">
 						<!-- 회원 일때 -->
 						<!-- 비회원 일때  <h4>총 주문금액</h4> //비회원 일때 -->
 
 						<ul class="info">
 							<li>
 								<span class="title">상품 합계금액</span>
-								<span class="won"><strong>1,132,310</strong> 원</span>
+								<span class="won"><strong id="_total"><fmt:formatNumber pattern="#,###,###,###">${total }</fmt:formatNumber></strong> 원</span>
 							</li>
 							<li>
 								<span class="title">배송비</span>
-								<span class="won"><strong>2,500</strong> 원</span>
+								<span class="won"><strong id="_del_price"><fmt:formatNumber pattern="#,###,###,###">${del_price }</fmt:formatNumber></strong> 원</span>
 							</li>
 
 							<!-- 회원 일때만 -->
 							<li>
 								<span class="title">포인트 할인</span>
-								<span class="won"><strong>- 1,000</strong> P</span>
+								<span class="won"><strong id="point_2">0</strong> P</span>
 							</li>
 							<li>
 								<span class="title">쿠폰 할인</span>
-								<span class="won"><strong>- 1,000</strong> 원</span>
+								<span class="won"><strong id="cou_2">0</strong> 원</span>
 							</li>
 							<!-- //회원 일떄만 -->
 						</ul>
 
 						<ul class="total">
 							<!-- 회원 일때만 -->
-							<li class="mileage">(적립 포인트 <strong>11,324</strong> Point) </li>
+							<li class="mileage">(적립 포인트 <strong><fmt:formatNumber pattern="#,###,###,###"><fmt:parseNumber integerOnly="true" value="${point_total }"/></fmt:formatNumber></strong> Point) </li>
 							<!-- //회원 일때만 -->
 
 							<li class="txt"><strong>결제 예정 금액</strong></li>
-							<li class="money"><span>1,134,810</span> 원</li>
+							<li class="money"><span class="total_price"><fmt:formatNumber pattern="#,###,###,###">${total+del_price }</fmt:formatNumber></span> 원</li>
 						</ul>
 					</div>
 			<!-- //총 주문금액 -->
@@ -627,38 +664,80 @@ $(function(){
 
 
 
-	// layer popup
-	var winWidth = $(window).width();
-	if(winWidth > 767){
-		var layerCheck = 540;
-		var couponCheck = 760;
-	}else{
-		var layerCheck = 320;
-		var couponCheck = 320;
-	}
-
-	$(".nbtn").fancybox({
-		'autoDimensions'    : false,
-		'showCloseButton'	: false,
-		'width' : couponCheck,
-		'padding' : 0,
-		'type'			: 'iframe',
-		'onComplete' : function() {
-			$('#fancybox-frame').load(function() { // wait for frame to load and then gets it's height
-			$('#fancybox-content').height($(this).contents().find('body').height());
-			$('#fancybox-wrap').css('top','400px');
-			$('html,body').animate({ scrollTop: 400 }, 500);
-			});
+	
+	
+	
+	//이메일 도메인 변경
+	$("#introduce").on("change",function() {
+		alert("dkdk");
+		$("#email2").val($(this).val());		
+	});
+	
+	//회원정보 수취자로 넘기기
+	$("#infosame").click(function() {
+		if($(this).is(":checked")){
+			$("#del_name").val($("#name").val());
+			$("#del_post").val($("#post").val());
+			$("#del_address1").val($("#address1").val());
+			$("#del_address2").val($("#address2").val());
+			$("#del_email1").val($("#email1").val());
+			$("#del_email2").val($("#email2").val());
+			var phone1 = $("#phone1 option:selected").val();
+			
+			$("#del_phone1").val($("#phone1 option:selected").val()).change();
+			$("#del_phone2").val($("#phone2").val());
+			$("#del_phone3").val($("#phone3").val());
+			
+		}
+		else{
+			$("#del_name").val("");
+			$("#del_post").val("");
+			$("#del_address1").val("");
+			$("#del_address2").val("");
+			$("#del_email1").val("");
+			$("#del_email2").val("");
+			$("#del_phone1").val("");
+			$("#del_phone2").val("");
+			$("#del_phone3").val("");
 		}
 	});
+	
+	$("#point_wrap").hide();
+	$("#cou_wrap").hide();
 
+	//포인트 입력 반영
+	$("#point_input").on("input", function() {
+		var point_max = $("#point_max").text();
+		 
+		if(this.value!=null){
+		if(Number(this.value)>Number(point_max)){
+			$(this).val(point_max);
+		}
+		$("#point_1").text(comma(this.value));
+		$("#point_wrap").show();	
+		$("#point_2").text(comma(this.value));
+		}
+		
+		get_total();
+	});
 	
-	
+	//쿠폰입력반영
+	$("#cou_input").on("input", function() {
+		 
+		if(this.value!=null){
+		$("#cou_1").text(comma(this.value));
+		$("#cou_wrap").show();	
+		$("#cou_2").text(comma(this.value));
+		}
+		
+		get_total();
+	});
 		
 	
 	
 });
 
+//우편번호찾기 위
 function openDaumZipAddress1() {
 	new daum.Postcode({
 		oncomplete: function(data) {
@@ -668,6 +747,7 @@ function openDaumZipAddress1() {
 	}).open();
 }
 
+//우편번호찾기 아래
 function openDaumZipAddress2() {
 	new daum.Postcode({
 		oncomplete: function(data) {
@@ -675,6 +755,105 @@ function openDaumZipAddress2() {
 			jQuery("#del_address1").val(data.address);
 		}
 	}).open();
+}
+
+
+//회원정보에 반영
+function change_member() {
+	var member = $("form[name=mem_change]").serialize();
+	$.ajax({
+		type:"post",
+		url:"change_member",
+		data:member,
+		dataType:"json",
+		success: function () {
+			alert("정보가 반영되었습니다.");
+		},
+		error: function () {
+			alert("반영에 실패하였습니다.");
+		}
+	})
+	
+}
+//결제예정금액 구하기
+function get_total() {
+	var total=uncomma($("#_total").text());
+	var del_price=uncomma($("#_del_price").text());
+	var point=uncomma($("#point_2").text());
+	var coupon=uncomma($("#cou_2").text());
+	
+	var tttt=comma(Number(total)+Number(del_price)-Number(point)-Number(coupon));
+	
+	$(".total_price").text(comma(Number(total)+Number(del_price)-Number(point)-Number(coupon)));
+	
+	
+	
+}
+
+function get_coupon() {
+	var get_code= new Array;
+	$("input[name='cart_code']").each(function () {
+		get_code.push(this.value);
+	});
+	var cart_code={"name":get_code};
+	jQuery.ajaxSettings.traditional = true;
+	
+	$.ajax({
+		type: "post",
+		url:"coupon_list",
+		datatype:"json",
+		data:cart_code,
+		success: function () {
+			
+		
+		},
+		error: function () {
+			alert("전송실패");
+		}
+	});
+	
+	
+}
+
+//layer popup
+var winWidth = $(window).width();
+if(winWidth > 767){
+	var layerCheck = 540;
+	var couponCheck = 760;
+}else{
+	var layerCheck = 320;
+	var couponCheck = 320;
+}
+
+
+$(".nbtn").fancybox({
+	'autoDimensions'    : false,
+	'showCloseButton'	: false,
+	'width' : couponCheck,
+	'padding' : 0,
+	'type'			: 'iframe',
+	'href':'coupon_list',
+	'onComplete' : function() {
+		$('#fancybox-frame').load(function() { // wait for frame to load and then gets it's height
+		$('#fancybox-content').height($(this).contents().find('body').height());
+		$('#fancybox-wrap').css('top','1100px');
+		$('html,body').animate({ scrollTop: 1100 }, 500);
+		}).click();
+	}
+});
+
+
+
+
+//콤마찍기
+function comma(str) {
+    str = String(str);
+    return str.replace(/(\d)(?=(?:\d{3})+(?!\d))/g, '$1,');
+}
+//콤마풀기
+function uncomma(str) {
+    str = String(str);
+    return str.replace(/[^\d]+/g, '');
 }
 
 
@@ -688,7 +867,7 @@ function openDaumZipAddress2() {
 		</div>
 	</div>
 	<!-- //container -->
-	
+
 
 <!-- footer 붙여넣기 -->
 	<jsp:include page="../footer.jsp"/>

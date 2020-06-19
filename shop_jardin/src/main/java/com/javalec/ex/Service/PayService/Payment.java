@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.ui.Model;
@@ -21,6 +22,7 @@ public class Payment implements PayService {
 		HttpServletRequest request = (HttpServletRequest) map.get("request");
 		PayDao payDao = sqlSession.getMapper(PayDao.class);
 		MDao mDao = sqlSession.getMapper(MDao.class);
+		HttpSession session = request.getSession();
 
 		ArrayList<CartDto> list = new ArrayList<CartDto>();
 		CartDto cartDto = new CartDto();
@@ -69,10 +71,6 @@ public class Payment implements PayService {
 
 		// 장바구니에서 넘어온 제품정보
 		model.addAttribute("from_cart", list);
-		// 주문서 생성
-		payDao.make_order(id, total, pay_del);
-		// 주문서 가져오기
-		model.addAttribute("get_order", payDao.get_order(id));
 		// 주문자정보
 		model.addAttribute("buyer_info", mDao.login1(id));
 		// 사용가능한 쿠폰 갯수

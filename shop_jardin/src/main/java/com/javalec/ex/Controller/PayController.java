@@ -1,7 +1,6 @@
 package com.javalec.ex.Controller;
 
 import java.util.HashMap;
-import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -18,6 +17,7 @@ import com.javalec.ex.Dto.MDto.Member_Dto;
 import com.javalec.ex.Service.PayService.Cart_delService;
 import com.javalec.ex.Service.PayService.Cart_upddateService;
 import com.javalec.ex.Service.PayService.CouponService;
+import com.javalec.ex.Service.PayService.Get_coupon;
 import com.javalec.ex.Service.PayService.MemCService;
 import com.javalec.ex.Service.PayService.PayService;
 import com.javalec.ex.Service.PayService.Payment;
@@ -68,9 +68,6 @@ public class PayController {
 	public void change_amount(@RequestBody HashMap<String, String> map, Model model) {
 		model.addAttribute("cart_code", map.get("cart_code"));
 		model.addAttribute("amount_", map.get("amount_"));
-
-		Map<String, Object> map2 = model.asMap();
-		String cart_code = (String) map2.get("cart_code");
 
 		pays = new Cart_upddateService();
 		pays.execute(sqlSession, model);
@@ -123,15 +120,12 @@ public class PayController {
 	@RequestMapping("payment/coupon_list")
 	public String use_coupon(HttpServletRequest request, Model model) {
 		model.addAttribute("id", "qwer");
-		String[] cart_code = request.getParameterValues("name");
-		for (int i = 0; i < cart_code.length; i++) {
-			System.out.println(cart_code[i]);
-		}
-		model.addAttribute(cart_code);
-		pays = new CouponService();
+		String[] cart_code = request.getParameterValues("cart_code");
+		model.addAttribute("cart_code", cart_code);
+		pays = new Get_coupon();
 		pays.execute(sqlSession, model);
-		return "payment/coupon_list";
 
+		return "payment/coupon_list";
 	}
 
 }

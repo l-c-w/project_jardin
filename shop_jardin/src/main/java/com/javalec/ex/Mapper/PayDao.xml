@@ -27,9 +27,7 @@
 		select cart.cart_code, product.p_code, product.p_name, product.p_category, product.p_price, product.p_point, cart.amount 
 		from cart, product
 		where cart.id=#{param1} and cart.cart_code=#{param2} and cart.p_code=product.p_code
-	</select>
-		
-	
+	</select>	
 	
 	<!-- 포인트 적립 리스트,총액 가져오기 -->
 	<select id="point_list" resultType="com.javalec.ex.Dto.PayDto.PointDto">
@@ -56,7 +54,7 @@
 	
 	<!-- 사용가능 쿠폰리스트 가져오기-->
 	<select id="ucou_list" resultType="com.javalec.ex.Dto.PayDto.Coupon_listDto">
-		<![CDATA[select coupon.cou_name,coupon.cou_reward,coupon_list.issue_date,coupon_list.exp_date, coupon_list.cou_state   
+		<![CDATA[select coupon.cou_code,coupon.cou_name,coupon_list.cou_num,coupon.cou_reward, coupon.cou_limit, coupon_list.issue_date,coupon_list.exp_date, coupon_list.cou_state   
 		from coupon, coupon_list 
 		where id=#{param1} and coupon.cou_code=coupon_list.cou_code and (coupon_list.exp_date-sysdate)>0 and coupon_list.cou_state is null
 		order by coupon_list.exp_date asc]]>

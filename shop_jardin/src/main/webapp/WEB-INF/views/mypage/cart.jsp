@@ -192,7 +192,7 @@ $(document).ready(function() {
 
 					<div class="cartarea">
 						<ul>
-							<li style="cursor: pointer;" onclick="cart_order.submit()"><a class="ty1"  >선택상품 <span>주문하기</span></a></li>
+							<li style="cursor: pointer;" onclick="buy_select()"><a class="ty1"  >선택상품 <span>주문하기</span></a></li>
 							<li onclick="buy_all()" style="cursor: pointer;"><a href="#" class="ty2">전체상품 <span>주문하기</span></a></li>
 							<li class="last"><a href="#" class="ty3">쇼핑 <span>계속하기</span></a></li>
 						</ul>
@@ -382,6 +382,16 @@ function product_del(code) {
 	});
 }
 
+//선택상품 구매
+function buy_select() {
+	if($("input[name='cart_check']:checked").length==0){
+		alert("선택된 상품이 없습니다.");
+		return;		
+	}
+	
+	cart_order.submit();
+}
+
 //전체구매
 
 function buy_all() {
@@ -400,9 +410,9 @@ function uncomma(str) {
 }
 
 
-
-
 </script>
+
+
 
 
 

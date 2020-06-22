@@ -35,7 +35,6 @@ public class Payment implements PayService {
 
 		// 구매방법별 분기
 		String buy_type = request.getParameter("buy_type");
-		System.out.println(buy_type);
 		switch (buy_type) {
 		// 제품상세에서 바로 구매
 		case "buy_product":
@@ -77,7 +76,6 @@ public class Payment implements PayService {
 		model.addAttribute("usable_coupon", payDao.usable_coupon(id));
 		// 포인트정보
 		model.addAttribute("usable_point", payDao.usable_point(id));
-		// 보낼거 마저 만들기
 
 	}
 

@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -16,12 +18,9 @@
 <script type="text/javascript" src="../js/common.js"></script>
 <script type="text/javascript">
 $(function() {
+	$('input:radio[name=select_coupon]').eq(0).attr("checked", true);
 
 });
-
-
-
-alert(${cart_code});
 </script>
 </head>
 <body>
@@ -32,7 +31,7 @@ alert(${cart_code});
 		
 	<div class="inputBody">
 		<div class="title">쿠폰 조회</div>
-		<p class="close"><a onclick="parent.$.fancybox.close();" href="javascript:;"><img src="../images/btn/btn_input_close.gif" alt="닫기" /></a></p>
+		<p class="close" style="cursor: pointer;" onclick="parent.window.close();"><img src="../images/btn/btn_input_close.gif" alt="닫기" /></p>
 
 		<div id="member">
 			<h3 class="dep">쿠폰 적용</h3>
@@ -49,39 +48,41 @@ alert(${cart_code});
 						<th scope="col">상품명</th>
 						<th scope="col">수량</th>
 						<th scope="col">판매가</th>
-						<th scope="col" class="pnone">배송비</th>
+						<th scope="col" class="pnone">합계</th>
 					</thead>
 					<tbody>
+					<c:set var="total" value="0"/>
+					<c:forEach var="cartcode" items="${cart_code }">
 						<tr>
 							<td class="left">
 								<p class="img"><img src="../images/img/sample_product.jpg" alt="상품" width="66" height="66" /></p>
 
 								<ul class="goods">
 									<li>
-										<a href="#">쟈뎅 오리지널 콜롬비아 페레이라 원두커피백 15p</a>
+										<a href="#"> ${cartcode.p_name }</a>
 									</li>
 								</ul>
 							</td>
-							<td>1개</td>
-							<td>14,400 원</td>
-							<td class="pnone">0 원</td>
+							<td><fmt:formatNumber pattern="#,###,###,###">${cartcode.amount }</fmt:formatNumber> 개</td>
+							<td><fmt:formatNumber pattern="#,###,###,###">${cartcode.p_price }</fmt:formatNumber> 원</td>
+							<td class="pnone"><fmt:formatNumber pattern="#,###,###,###">${cartcode.p_price*cartcode.amount }</fmt:formatNumber> 원</td>
+							<c:set var="total" value="${total+cartcode.p_price*cartcode.amount }"/>
 						</tr>
+						</c:forEach>
 					</tbody>
 				</table>
 			</div>
-
-			<div class="popGraybox">
-				<div class="choose">
-					쿠폰선택&nbsp;&nbsp;
-					<select>
-						<option value="">쿠폰선택</option>
-					</select>
+				<div class="popGraybox">
+				<div class="result">
+					<div class="discount">
+						총액 : <span><fmt:formatNumber pattern="#,###,###,###">${total }</fmt:formatNumber></span> 원
+					</div>
 				</div>
-
 				<div class="result">
 					<div class="point">* 옵션가와 배송비는 제외</div>
 					<div class="discount">
-						쿠폰 할인 금액 : <span>0</span> 원
+						쿠폰 할인 금액 : <span id="discount">
+						0</span> 원
 					</div>
 				</div>
 			</div>
@@ -89,7 +90,7 @@ alert(${cart_code});
 			<!-- 쿠폰할인 금액 합계 -->
 			<div class="amount popamount">
 				<ul class="coupon">
-					<li>쿠폰 할인 금액 합계 : <span class="orange">0</span> 원</li>
+					<li>쿠폰 할인 금액 합계 : <span class="orange" id="total">0</span> 원</li>
 				</ul>
 			</div>
 			<!-- //쿠폰할인 금액 합계 -->
@@ -99,50 +100,34 @@ alert(${cart_code});
 			<h3 class="dep">나의 쿠폰 내역</h3>
 			<div class="couponrDiv">
 				<table summary="No, 쿠폰번호/쿠폰내용, 등록날짜/사용기간, 할인금액, 상태, 적용순으로 쿠폰내역을 조회하실 수 있습니다." class="orderTable3" border="1" cellspacing="0">
-					<caption>나의 쿠폰 내역</caption>
+					<caption>적용가능 쿠폰</caption>
 					<colgroup>
 					<col width="8%" class="tnone" />
 					<col width="*" class="tw40" />
 					<col width="26%" class="tw40" />
 					<col width="12%" class="tnone" />
-					<col width="10%" class="tw20" />
-					<col width="10%" class="tnone" />
 					</colgroup>
 					<thead>
-						<th scope="col" class="tnone">NO.</th>
+						<th scope="col" class="tnone">선택</th>
 						<th scope="col">쿠폰번호 / <span>쿠폰내용</span></th>
 						<th scope="col">등록날짜 / <span>사용기간</span></th>
 						<th scope="col" class="tnone">할인금액</th>
-						<th scope="col">상태</th>
-						<th scope="col" class="tnone">적용</th>
 					</thead>
 					<tbody>
+						<c:forEach var="coupon_list" items="${ucoupon_list }">
+						<c:if test="${cartcode.p_price*amount < coupon_list.cou_limit}"></c:if>
 						<tr>
-							<td class="tnone">3</td>
-							<td class="left">MSCP110109883615<br/><span>10% 할인 쿠폰 (가격제한 없음)</span></td>
-							<td>2014-04-20 <u>18:36:24</u><br/><span>(2014-01-10 ~ 2014-04-30)</span></td>
-							<td class="tnone">1,000원</td>
-							<td><span class="orange">사용<u>가능</u></span></td>
-							<td class="tnone"><span class="heavygray">적용중</span></td>
+							<td class="tnone"><input type="radio" name="select_coupon" id="${coupon_list.cou_reward }" value="${coupon_list.cou_code }"> </td>
+							<td class="tnone">${coupon_list.cou_num }<br/><span>${coupon_list.cou_name }</span></td>
+							<td>${coupon_list.issue_date }<br/><span>(<fmt:formatDate value="${coupon_list.issue_date }" pattern="yyyy/MM/dd"/>  ~
+								<fmt:formatDate value="${coupon_list.exp_date }" pattern="yyyy/MM/dd"/>  )</span></td>
+							<td class="tnone" name="${coupon_list.cou_code }reward" id="${coupon_list.cou_reward }">
+							<c:if test="${coupon_list.cou_reward<1 }"><fmt:parseNumber value="${coupon_list.cou_reward*100 }" integerOnly="true"/>% 할인</c:if>
+										<c:if test="${coupon_list.cou_reward>1 }"><fmt:parseNumber value="${coupon_list.cou_reward }" integerOnly="true"/>원 할인</c:if>
+							
+							</td>
 						</tr>
-
-						<tr>
-							<td class="tnone">2</td>
-							<td class="left">MSCP110109883615<br/><span>무료배송 (20,000원 이상 구매시)</span></td>
-							<td>2014-04-20 <u>18:36:24</u><br/><span>(2014-01-10 ~ 2014-04-30)</span></td>
-							<td class="tnone">2,000원</td>
-							<td>사용<u>불가</u></td>
-							<td class="tnone">사용완료</td>
-						</tr>
-
-						<tr>
-							<td class="tnone">1</td>
-							<td class="left">MSCP110109883615<br/><span>무료배송 (50,000원 이상 구매시)</span></td>
-							<td>2014-04-20 <u>18:36:24</u><br/><span>(2014-01-10 ~ 2014-04-30)</span></td>
-							<td class="tnone">1,000원</td>
-							<td><span class="orange">사용<u>가능</u></span></td>
-							<td class="tnone"><span class="orange">미사용</span></td>
-						</tr>
+						</c:forEach>
 					</tbody>
 				</table>
 			</div>
@@ -152,8 +137,8 @@ alert(${cart_code});
 			<div class="btnArea">
 				<div class="bCenter">
 					<ul>								
-						<li><a href="#" class="sbtnMini">확인</a></li>
-						<li><a onclick="parent.$.fancybox.close();" href="javascript:;" class="nbtnbig">취소</a></li>
+						<li onclick="send_coupon()" style="cursor: pointer;"><a class="sbtnMini">확인</a></li>
+						<li onclick="parent.window.close();" style="cursor: pointer;"><a class="nbtnbig">취소</a></li>
 					</ul>
 				</div>
 			</div>
@@ -167,6 +152,43 @@ alert(${cart_code});
 
 
 </div>
+<script>
 
+$("input:radio[name='select_coupon']").change(function() {
+	var reward = $(this).attr("id");
+	var total= ${total};
+	
+	if (reward<1) {
+		$("#discount").text(comma(total*reward));
+		$("#total").text(comma(total-total*reward));
+	}else{
+		$("#discount").text(comma(Math.floor(reward)));
+		$("#total").text(comma(total-reward));
+	}
+});
+
+//콤마찍기
+function comma(str) {
+    str = String(str);
+    return str.replace(/(\d)(?=(?:\d{3})+(?!\d))/g, '$1,');
+}
+//콤마풀기
+function uncomma(str) {
+    str = String(str);
+    return str.replace(/[^\d]+/g, '');
+}
+
+//할인값 쿠폰코드 보내기
+function send_coupon() {
+	var checked_coupon =$("input:radio[name='select_coupon']:checked").val();
+	var discount = $("#discount").text();
+	 opener.document.getElementById("cou_input").value= comma(discount);
+	 opener.document.getElementById("cou_code").value= checked_coupon;
+	 
+	opener.get_total();
+	window.close();
+	
+}
+</script>
 </body>
 </html>

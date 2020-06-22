@@ -6,11 +6,10 @@ public class Payment_ListDto {
 
 	}
 
-	public Payment_ListDto(String pay_code, String p_code, String cou_code, String id, int amount) {
+	public Payment_ListDto(String pay_code, String p_code, String id, int amount) {
 
 		this.pay_code = pay_code;
 		this.p_code = p_code;
-		this.cou_code = cou_code;
 		this.id = id;
 		this.amount = amount;
 
@@ -18,7 +17,6 @@ public class Payment_ListDto {
 
 	private String pay_code;
 	private String p_code;
-	private String cou_code;
 	private String id;
 	private int amount;
 
@@ -36,14 +34,6 @@ public class Payment_ListDto {
 
 	public void setP_code(String p_code) {
 		this.p_code = p_code;
-	}
-
-	public String getCou_code() {
-		return cou_code;
-	}
-
-	public void setCou_code(String cou_code) {
-		this.cou_code = cou_code;
 	}
 
 	public String getId() {

@@ -88,7 +88,7 @@ $(document).ready(function() {
 								<th scope="col">합계</th>
 							</thead>
 							<tbody>
-								<form action="payment/order_confirmation" method="post" name="product_infos">
+								<form action="" method="post" name="product_infos" id="product_infos">
 								<c:set var="total" value="0"/>
 								<c:set var="point_total" value="0"/>
 								<c:forEach var="fromcart" items="${from_cart }">
@@ -336,11 +336,12 @@ $(document).ready(function() {
 									<td>
 										<ul class="pta">
 											<li class="r10">
-												<input type="text" class="w134" name="cou_input" id="cou_input" />&nbsp;&nbsp;
+												<input type="text" class="w134" name="cou_input" id="cou_input" readonly="readonly"/>&nbsp;&nbsp;
+												<input type="hidden" name="cou_code" id="cou_code">
 												<span class="valign"><strong>원</strong></span>
 											</li>
 											<li class="r10"><span class="valign">( 보유 쿠폰 내역 : ${usable_coupon }장 )&nbsp;</span></li>
-											<li onclick="get_coupon()" class="nbtn">쿠폰목록</li>
+											<li onclick="get_coupon('product_infos')" class="nbtn" style="cursor: pointer;">쿠폰목록</li>
 											
 										</ul>
 									</td>
@@ -721,9 +722,8 @@ $(function(){
 		get_total();
 	});
 	
-	//쿠폰입력반영
-	$("#cou_input").on("input", function() {
-		 
+	/* //쿠폰입력반영
+	$("#cou_input").on("input",function() {
 		if(this.value!=null){
 		$("#cou_1").text(comma(this.value));
 		$("#cou_wrap").show();	
@@ -731,7 +731,7 @@ $(function(){
 		}
 		
 		get_total();
-	});
+	}); */
 		
 	
 	
@@ -775,13 +775,17 @@ function change_member() {
 	})
 	
 }
+
 //결제예정금액 구하기
 function get_total() {
 	var total=uncomma($("#_total").text());
 	var del_price=uncomma($("#_del_price").text());
 	var point=uncomma($("#point_2").text());
-	var coupon=uncomma($("#cou_2").text());
 	
+	$("#cou_1").text(comma($("#cou_input").val())+"원");
+	$("#cou_wrap").show();	
+	$("#cou_2").text(comma($("#cou_input").val()));
+	var coupon=uncomma($("#cou_input").val());
 	var tttt=comma(Number(total)+Number(del_price)-Number(point)-Number(coupon));
 	
 	$(".total_price").text(comma(Number(total)+Number(del_price)-Number(point)-Number(coupon)));
@@ -790,30 +794,61 @@ function get_total() {
 	
 }
 
-function get_coupon() {
+function get_coupon(name) {
+	var popupX = (window.screen.width / 2) - (1000 / 2);
+	var popupY= (window.screen.height /2) - (700 / 2);
+	
+	frm = document.getElementById(name);
+	
+	window.open('','viewer', 'width=1000, height=700,left='+ popupX + ', top='+ popupY + ', screenX='+ popupX + ', screenY= '+ popupY);
+	frm.action = "coupon_list";
+	frm.target = "viewer";
+	frm.method = "post";
+	frm.submit();
+}
+
+
+
+/*  function test() {
 	var get_code= new Array;
 	$("input[name='cart_code']").each(function () {
 		get_code.push(this.value);
 	});
-	var cart_code={"name":get_code};
-	jQuery.ajaxSettings.traditional = true;
-	
+	alert(get_code);
+	//var w = window.open("about:blank","_blank","width=600, height=700, top=0,left=0,scrollbars=no");
+	var cart_code = JSON.stringify({cart_code:get_code});
 	$.ajax({
-		type: "post",
-		url:"coupon_list",
-		datatype:"json",
+		type: "POST",
+		url:"get_list",
 		data:cart_code,
-		success: function () {
+		contentType:"application/json;charset=UTF-8",
+		dataType:"json",
+		success: function (data) {
 			
-		
+			
 		},
-		error: function () {
-			alert("전송실패");
+		error: function (request, status, error) {
+			alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
 		}
 	});
 	
+	$(".nbtn").fancybox({
+		'autoDimensions'    : false,
+		'showCloseButton'	: false,
+		'width' : couponCheck,
+		'padding' : 0,
+		'type'			: 'iframe',
+		'href':'coupon_list',
+		'onComplete' : function() {
+			$('#fancybox-frame').load(function() { // wait for frame to load and then gets it's height
+			$('#fancybox-content').height($(this).contents().find('body').height());
+			$('#fancybox-wrap').css('top','1100px');
+			$('html,body').animate({ scrollTop: 1100 }, 500);
+			});
+		}
+	}); 
 	
-}
+} */
 
 //layer popup
 var winWidth = $(window).width();
@@ -826,21 +861,6 @@ if(winWidth > 767){
 }
 
 
-$(".nbtn").fancybox({
-	'autoDimensions'    : false,
-	'showCloseButton'	: false,
-	'width' : couponCheck,
-	'padding' : 0,
-	'type'			: 'iframe',
-	'href':'coupon_list',
-	'onComplete' : function() {
-		$('#fancybox-frame').load(function() { // wait for frame to load and then gets it's height
-		$('#fancybox-content').height($(this).contents().find('body').height());
-		$('#fancybox-wrap').css('top','1100px');
-		$('html,body').animate({ scrollTop: 1100 }, 500);
-		}).click();
-	}
-});
 
 
 

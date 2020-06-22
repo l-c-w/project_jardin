@@ -5,11 +5,11 @@
 
 $(document).ready(function(){
 	//댓글수정열기
-	$(".modi").click(function(){
+	$("${e_com.ec_num }").click(function(){
 		var index = $(".modi").index(this);
 		$(this).parents('ul');
 		$(this).parents('ul').hide();
-		$(".comment_modifyM").eq(index).show(); // 0
+		$("${e_com.ec_num }").eq(index).show(); // 0
 //		$(".comment_modifyM").not(index).hide(); // 1, 2
 //		$(".modi").not(index).parent().show();
 

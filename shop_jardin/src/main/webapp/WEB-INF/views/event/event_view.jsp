@@ -22,7 +22,6 @@
 <script type="text/javascript" src="../js/jquery.easing.1.3.js"></script>
 <script type="text/javascript" src="../js/idangerous.swiper-2.1.min.js"></script>
 <script type="text/javascript" src="../js/jquery.anchor.js"></script>
-<script type="text/javascript" src="../js/event_view.js"></script>
 <!--[if lt IE 9]>
 <script type="text/javascript" src="../js/html5.js"></script>
 <script type="text/javascript" src="../js/respond.min.js"></script>
@@ -197,7 +196,19 @@ $(document).ready(function() {
 								<input type="hidden" value="${event_view.e_code }" name="e_code">
 								<input type="hidden" value="${e_com.ec_num }" name="ec_num">
 								<input type="hidden" value="${page }" name="page">
-								<ul id="coModi" class="comment_modifyM" style="display: none;">
+								
+<!-- 								if(data.length>0){ -->
+			<!-- 					for(var i=0; i<data.length; i++){ -->
+			<%-- 						html += '<tr><td colspan="2"><h5 id="">작성자 : ' + data[i].cName + '</h5></td></tr>'; --%>
+			<!-- 						html += "<tr id='updateForm" + data[i].cId + "'><td>내용 : " + data[i].cContent + "</td>"; -->
+			<!-- 						// 				 updateForm0, updateForm1, updateForm2...... -->
+			<!-- 						html += "<td><a href='#' onclick='comment_updateForm(" + data[i].cId + ",\""  + data[i].cContent + "\")'>수정 </a>"; -->
+			<!-- 						//								  comment_updateForm(1, '댓글을 입력') -->
+			<!-- 						html += "<a href='#' onclick='comment_delete(" + data[i].cId + ")'> 삭제</a></td></tr>"; -->
+			<!-- 					}					 -->
+			<!-- 				} -->
+			
+								<ul id="${e_com.ec_num }" class="comment_modifyM" style="display: none;">
 									<li class="name">${e_com.id }</li>
 									<li class="txt">
 										<input type="text" name="content" value="${e_com.ec_content }" class="replyType">
@@ -207,6 +218,7 @@ $(document).ready(function() {
 										<a class="rebtn reset_re" style="cursor: pointer;">취소</a>
 									</li>
 								</ul>
+								
 							</form>
 							
 							<!-- 댓글 표시 -->
@@ -223,7 +235,7 @@ $(document).ready(function() {
 									<li class="txt">${e_com.ec_content }</li>
 									<li class="btn">
 										<c:if test="${sessionScope.session_mem eq e_com.id }">
-											<a class="rebtn modi" style="cursor: pointer;" id="modi_btn">수정</a>
+											<a class="rebtn ${e_com.ec_num }" style="cursor: pointer;" id="modi_btn">수정</a>
 											<a class="rebtn delComm" style="cursor: pointer;">삭제</a>
 										</c:if>
 									</li>
@@ -333,6 +345,63 @@ $(function(){
 
 
 });
+
+
+	$(document).ready(function(){
+	//댓글수정열기
+	$("${e_com.ec_num }").click(function(){
+		var index = $(".modi").index(this);
+		$(this).parents('ul');
+		$(this).parents('ul').hide();
+		$("${e_com.ec_num }").eq(index).show(); // 0
+//		$(".comment_modifyM").not(index).hide(); // 1, 2
+//		$(".modi").not(index).parent().show();
+
+	});
+	$(".reset_re").click(function(){	
+		var index2 = $(".reset_re").index(this);
+		$(".comment_modifyM").eq(index2).hide();
+		var test2 = $(".modi").eq(index2).parents('ul');
+		$(".modi").eq(index2).parents('ul').show();
+	});	
+
+	// 수정 submit
+	$('.s_modi').click(function() {
+		var index = $(".s_modi").index(this);
+		var form = $(this).parents('form');
+		$(form).submit();
+	});
+	
+	// 삭제 submit
+	$('.delComm').click(function() {
+		var result = confirm('댓글을 삭제 하시겠습니까?');
+		if(result){
+			var index = $(".delComm").index(this);
+			var form = $(this).parents('form');
+			$(form).submit();			
+		}else{
+			
+		}	
+	});
+	
+	// 로그인하지 않고 댓글을 작성하려고 할 때
+	$('.emptySe').click(function(){
+		var result = confirm('댓글을 작성하시려면 로그인 하셔야 합니다. 로그인 하시겠습니까?');
+		if(result){
+//			window.location.replace('/ex/member/login');
+			location.href='../member/login?returnUrl=' + encodeURIComponent(location);
+		}else{
+			
+		}				
+	});
+	
+//	<a href="#none" onclick="location.href='/member/login.html?returnUrl=' + encodeURIComponent(location) ">로그인</a>	
+	
+	
+	
+});
+
+
 </script>
 
 		</div>

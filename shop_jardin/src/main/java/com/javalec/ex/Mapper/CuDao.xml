@@ -6,7 +6,7 @@
 <mapper namespace="com.javalec.ex.Dao.CuDao">
 
 
-     <!-- 공지사항 -->
+     <!-- 공지사항   ★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★-->
 
 
      <!-- 	
@@ -60,9 +60,6 @@
     
     
     
-    
-    
-    
    <select id="n_next" resultType="com.javalec.ex.Dto.MDto.NoticeDto">
    
     select n_title, n_num from notice where n_num = (select min(n_num) from notice where n_num > #{param1})
@@ -95,7 +92,7 @@
     
     
     
-    <!-- 1:1 문의 -->
+    <!-- 1:1 문의  ★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★ ★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★ -->
     
     
     
@@ -166,31 +163,23 @@
     
     
     
-    <!-- fnq -->
+    
+    <!-- FNQ  ★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★ ★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★ -->
     
     
     <!--  ; 빼기 -->
     
     
     
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    <select id="f_list" resultType="com.javalec.ex.Dto.MDto.FnqDto">
+   <!--  
+   
+   <select id="f_list" resultType="com.javalec.ex.Dto.MDto.FnqDto">
     
     select * from fnq order by f_num desc
     
-    </select>
+    </select> 
+    
+    -->
     
     
     <select id="f_view" resultType="com.javalec.ex.Dto.MDto.FnqDto">
@@ -253,16 +242,14 @@
 	
 	<update id="f_update">
 	
-	update fnq set f_type=#{param1}, f_title=#{param2} f_content=#{param3} where f_num=#{param4}
+	update fnq set f_type=#{f_type}, f_title=#{f_title}, f_content=#{f_content} where f_num=#{f_num}
 	 
 	</update>
 
 
 
 
-
-
-	<select id="f_getBoardList" 	resultType="com.javalec.ex.Dto.MDto.FnqDto">
+	<select id="f_getBoardList" resultType="com.javalec.ex.Dto.MDto.FnqDto">
 
 		SELECT * FROM fnq
 
@@ -316,18 +303,11 @@
 
 				</if>
 
-
-
 			</if>
 
 		</trim>
 
 	</select>
-	
-	
-	
-	
-	
 	
 
 

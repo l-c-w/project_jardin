@@ -25,68 +25,155 @@
 <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/admin_mlist.css?ver=1">
 
 
+<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/reset.css?v=Y" />
+<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/layout.css?v=Y" />
+<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/content.css?v=Y" />
+
+
+
+
 <body>
 <!-- 리스트 붙여넣기 -->
 	<jsp:include page="../admin_header.jsp"/>
 	<!------------------------------------------------------------------------------------------------------------------------------->
-	<section>
 	<p>FAQ</p>
 	<div class="notice_conts" id="contentArea">
-				<div class="searching">
-				<form action="" name="" method="post">
 				
-				<select name="">
-					<option value="all">전체</option>
-					<option value="title">제목</option>
-					<option value="content">내용</option>
-					<option value="categry">분류</option>
-				</select>
 				
-				<input type="text" name="" >
+					<!-- FAQ -->
+					<div class="faqList">
+					
+						<ul>
+						
+							<!-- list -->
+							
+							<c:forEach var="f_list" items="${viewAll}">
+							
+							<li>
+							
+								<a href="javascript:;" class="faqbtn">
+								
+									<div class="question">
+									
+									
+										<div class="blet">Q</div>
+								
+										<c:if test="${f_list.f_type == 'order'}">
+										<div class="category">주문</div>
+										</c:if>
+										
+										<c:if test="${f_list.f_type == 'join'}">
+										<div class="category">회원가입</div>
+										</c:if>
+										
+										<c:if test="${f_list.f_type == 'product'}">
+										<div class="category">상품</div>
+										</c:if>
+										
+										
+										<%-- <div class="category">${f_list.f_type}</div> --%>
+										
+										
+										<a href="admin_faq_view?f_num=${f_list.f_num}"><div class="title">${f_list.f_title}</div></a>
+										
+									</div>
+									
+								</a>
+								
+							</li>
+							
+							
+							</c:forEach>
+							
+
+						</ul>
+						
+					</div>
+					<!-- //FAQ -->
+
+
+
+
+					<!-- 페이징이동1 -->
+
+						<div class="allPageMoving1">
+						
+						
+							<div style="display: block; text-align: center;">
+
+
+								<!-- 첫페이지 이동 -->
+								<a href="admin_faq_list?nowPage=${paging.startPage}&cntPerPage=${paging.cntPerPage}" class="n">
+								<img src="${pageContext.request.contextPath}/images/btn/btn_pre2.gif" alt="처음으로"/>
+								</a>
+
+
+								<!-- 이전페이지로 이동 -->
+								
+								<c:if test="${paging.nowPage != 1}">
+								<a href="admin_faq_list?nowPage=${paging.nowPage - 1}&cntPerPage=${paging.cntPerPage}" class="pre">
+								<img src="${pageContext.request.contextPath}/images/btn/btn_pre1.gif" alt="앞페이지로"/><!-- &lt; -->
+								</a>
+								</c:if>
+								
+								
+								<!-- 순차 -->
+								
+								<c:forEach begin="${paging.startPage}" end="${paging.endPage}" var="p">
+									
+									<c:choose>
+									
+										<c:when test="${p == paging.nowPage}">
+											<a href="#" class="reviews"><strong>${p}</strong></a>
+										</c:when>
+										
+										<c:when test="${p != paging.nowPage }">
+											<a href="admin_faq_list?nowPage=${p}&cntPerPage=${paging.cntPerPage}">${p}</a>
+										</c:when>
+										
+									</c:choose>
+									
+								</c:forEach>
+								
+								
+								
+								<!-- 다음페이지 이동 -->
+							
+								
+								<c:if test="${paging.nowPage != paging.lastPage}" >
+								<a href="admin_faq_list?nowPage=${paging.nowPage+1}&cntPerPage=${paging.cntPerPage}" class="next"><!-- &gt; -->
+								<img src="${pageContext.request.contextPath}/images/btn/btn_next1.gif" alt="뒤페이지로"/>
+								</a>
+								</c:if>
+
+
+								<!-- 마지막 페이지 이동 -->
+								<a href="admin_faq_list?nowPage=${paging.lastPage}" class="n" >
+								<img src="${pageContext.request.contextPath}/images/btn/btn_next2.gif" alt="마지막페이지로"/>
+								</a>
+
+							</div>
+							
+						</div>
+						
+						
+						<!-- //페이징이동1 -->
+					
 				
-				<input type="submit" value="검색">
 				
-				</form>
+				
+				
 				</div>
 				
 				
-				<div class="tb_row">
-					<table id="notice_list">
-						<colgroup>
-							<col width="10%">
-							<col width="20%">
-							<col width="45%">
-							<col width="10%">
-							<col width="15%">
-						</colgroup>
-						<thead>
-							<tr>
-								<th>번호</th>
-								<th>분류</th>
-								<th>제목</th>
-								<th>작성자</th>
-								<th>등록일</th>
-							</tr>
-						</thead>
-						<tr class="notice_tr" onclick="">
-							<td>1</td>						
-							<td>회원가입</td>
-							<td>질문있어요</td>
-							<td>관리자</td>
-							<td>2020/05/27</td>
-						</tr>
-					</table>
-				</div>
-				<div id="write_notice">
-					<button type="button" onclick="">글작성</button>
-				</div>
 				
-				<div class="pagination" id="pagination">
+				 <div class="bwright">
+							<ul>
+								<li><a href="admin_faq_write" class="sbtnMini">글작성</a></li>
+							</ul>
+						</div>
 				
 				
-				</div>
 				
-			</div>
-			</section>
 </body>
 </html>

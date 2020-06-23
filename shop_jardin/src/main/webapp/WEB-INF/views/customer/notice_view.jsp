@@ -34,13 +34,19 @@
 <script type="text/javascript" src="../js/html5.js"></script>
 <script type="text/javascript" src="../js/respond.min.js"></script>
 <![endif]-->
+
+
+
 <script type="text/javascript">
 $(document).ready(function() {
 	
 
 
 });
+
 </script>
+
+
 </head>
 <body>
 

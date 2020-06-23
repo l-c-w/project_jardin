@@ -21,7 +21,15 @@
 
 <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/admin_mlist.css?ver=1">
 
+
+<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/reset.css?v=Y" />
+<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/layout.css?v=Y" />
+<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/content.css?v=Y" />
+
+
+
 </head>
+
 <body>
 <!-- 리스트 붙여넣기 -->
 	<jsp:include page="../admin_header.jsp"/>

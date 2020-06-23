@@ -13,6 +13,7 @@ import org.springframework.ui.Model;
 import com.javalec.ex.Dao.CuDao;
 import com.javalec.ex.Dao.MDao;
 import com.javalec.ex.Dto.CDto.PagingDto;
+import com.javalec.ex.Dto.MDto.FnqDto;
 import com.javalec.ex.Dto.MDto.Member_Dto;
 import com.javalec.ex.Dto.MDto.NoticeDto;
 
@@ -23,6 +24,7 @@ public class AMServiceImpl implements AMService {
 	
 	@Autowired
 	private SqlSession sqlsession;
+	
 	
 	
 	@Override
@@ -43,6 +45,7 @@ public class AMServiceImpl implements AMService {
 
 
 	// 공지사항 ★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★
+	
 	
 	
 	
@@ -97,7 +100,99 @@ public class AMServiceImpl implements AMService {
 		
 		
 	}
+
+
+	@Override
+	public void a_notice_delete(String num) {
+		
+		 CuDao cdao = sqlsession.getMapper(CuDao.class);
+			
+		 cdao.n_delete(num);
+		
+	}
+
 	
+
+	@Override
+	public void a_faq_list(Model model, String nowPage, String cntPerPage, PagingDto pagedto) {
+		
+		CuDao cdao = sqlsession.getMapper(CuDao.class);
+		  
+		/*
+		 * ArrayList<FnqDto> fdtos = cdao.f_list();
+		 * 
+		 * model.addAttribute("f_list", fdtos);
+		 */
+		
+		int total = cdao.f_countBoard();
+		
+		if (nowPage == null && cntPerPage == null) {
+			nowPage = "1";
+			cntPerPage = "10";
+		} 
+		
+		else if (nowPage == null) {
+			nowPage = "1";
+		} 
+		
+		else if (cntPerPage == null) { 
+			cntPerPage = "10";
+		}
+		
+		pagedto = new PagingDto(total, Integer.parseInt(nowPage), Integer.parseInt(cntPerPage));
+		
+		model.addAttribute("paging", pagedto);
+			
+		model.addAttribute("viewAll", cdao.f_selectBoard(pagedto));
+		
+	}
+
+
+	
+	
+	@Override
+	public void a_faq_write(String f_type, String f_title, String f_content) {
+		
+		 CuDao cdao = sqlsession.getMapper(CuDao.class);
+			
+		 cdao.f_write(f_type, f_title,f_content);
+		
+	}
+
+	
+	
+
+	@Override
+	public void a_faq_view(Model model, String num) {
+		// TODO Auto-generated method stub
+		
+		 CuDao cdao = sqlsession.getMapper(CuDao.class);
+		 
+		 FnqDto fdto = cdao.f_view(num);
+		 
+		 model.addAttribute("fdto", fdto);
+		
+	}
+
+
+	@Override
+	public void a_faq_delete(String num) {
+		
+		CuDao cdao = sqlsession.getMapper(CuDao.class);
+		
+		cdao.f_delete(num);
+		
+	}
+
+
+	@Override
+	public void a_faq_update(FnqDto fdto) {
+		
+        CuDao cdao = sqlsession.getMapper(CuDao.class);
+		
+		cdao.f_update(fdto);
+		
+	}
 	
 	
 	

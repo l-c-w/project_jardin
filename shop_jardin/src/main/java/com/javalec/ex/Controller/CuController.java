@@ -162,20 +162,14 @@ public class CuController {
 	
 	
 	
-	
-	
-	
 	 
 	// faq  ★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★
 	
 	
 	
 	
-	
-	
 	@RequestMapping("/customer/faq")
-	public String fag(HttpServletRequest request, Model model,
-		    PagingDto pagedto,
+	public String fag(Model model, PagingDto pagedto,
 			@RequestParam(value="nowPage", required=false) String nowPage,
 			@RequestParam(value="cntPerPage", required=false) String cntPerPage) {
   
@@ -256,7 +250,6 @@ public class CuController {
 	
 	
 	
-	
 	@RequestMapping("/customer/faq_update")
 	public String faq_update(HttpServletRequest request, Model model,
 			@RequestParam("f_num") String f_num) {
@@ -307,11 +300,8 @@ public class CuController {
 		
 		cuservice.notice_search(model, pagedto, nowPage, cntPerPage, searchType, keyword);
 		
-		
 		return "/customer/faq";
 	}
-	
-	
 	
 	
 	
@@ -327,7 +317,6 @@ public class CuController {
 	public String inquiry() {
 		return "/customer/inquiry";
 	}
-	
 	
 	
 	

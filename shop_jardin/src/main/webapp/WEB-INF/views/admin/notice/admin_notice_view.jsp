@@ -29,7 +29,6 @@
 
 
 
-
 </head>
 <body>
 <!-- 리스트 붙여넣기 -->
@@ -104,8 +103,8 @@
 						<div class="bRight">
 							<ul>
 							    <li><a href="admin_notice_update?n_num=${ndto.n_num}" class="nbtnbig mw">수정</a></li>
-								<li><a href="javascript:n_delete()" class="nbtnbig mw">삭제</a></li>
-								<li><a href="notice_list" class="sbtnMini mw">목록</a></li>
+								<li><a href="javascript:admin_n_delete()" class="nbtnbig mw">삭제</a></li>
+								<li><a href="admin_notice_list" class="sbtnMini mw">목록</a></li>
 							</ul>
 						</div>
 					</div>
@@ -115,7 +114,7 @@
 					
 					<script type="text/javascript">
 						
-						function n_delete() {
+						function admin_n_delete() {
 
 							var result = confirm('데이터를 삭제 하시겠습니까?');
 							
@@ -131,7 +130,6 @@
 								
 								alert("삭제를 취소합니다");
 							}
-							
 
 						}
 						

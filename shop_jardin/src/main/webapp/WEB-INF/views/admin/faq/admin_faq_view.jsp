@@ -22,39 +22,92 @@
 
 <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/admin_mlist.css?ver=1">
 
+
+
+<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/reset.css?v=Y" />
+<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/layout.css?v=Y" />
+<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/content.css?v=Y" />
+
+
+
 </head>
 <body>
 <!-- 리스트 붙여넣기 -->
 	<jsp:include page="../admin_header.jsp"/>
 	<!----------------------------------------------------------------------------------------------------------------------------- -->
-	<section>
-		<div id="contentArea">
-		<table id="nview_table">
-			<tr id="tr02">
-				<td >FAQ작성</td>
-				<td>회원가입(분류)</td>
-			</tr>
-			<tr id="tr02">
-				<td>관리자</td>
-				<td>2020/05/27</td>
-			</tr>
-			<tr id="tr03">
-				<td colspan="2">코로나 조심</td>
-			</tr>
-			<tr id="tr04" onclick="">
-				<td colspan="2">이전글: ?????</td>
-			</tr>
-			<tr id="tr05" onclick="">
-				<td colspan="2">다음글: ?????</td>
-				</tr>
-		</table>
-			<div id="nivew_btn">
-			<button type="button" onclick="">목록</button>
-			<button type="button" onclick="">댓글작성</button>
-			<button type="button" onclick="">수정</button>
-			<button type="button" onclick="">삭제</button>
+	<div id="contentArea">
+		<!-- contents -->
+			<div id="contents">
+				<div id="customer">
+				
+					<h2><strong>NOTICE</strong><span>쟈뎅샵 소식을 전해드립니다.</span></h2>
+
+					<div class="viewDivMt">
+					
+					
+						<div class="viewHead">
+						
+							<div class="subject">
+							
+								<ul>
+									<li>${fdto.f_title}</li>
+								</ul>
+							</div>
+							
+						</div>
+
+						<div class="viewContents">
+							${fdto.f_content}<br/><br/>
+						</div>
+						
+					</div>
+					
+
+					<!-- Btn Area -->
+					<div class="btnArea btline">
+						<div class="bRight">
+							<ul>
+							    <li><a href="admin_faq_update?f_num=${fdto.f_num}" class="nbtnbig mw">수정</a></li>
+								<li><a href="javascript:admin_f_delete()" class="nbtnbig mw">삭제</a></li>
+								<li><a href="admin_faq_list" class="sbtnMini mw">목록</a></li>
+							</ul>
+						</div>
+					</div>
+					<!-- //Btn Area -->
+					
+					
+					
+					<script type="text/javascript">
+						
+						function admin_f_delete() {
+
+							var result = confirm('데이터를 삭제 하시겠습니까?');
+							
+							var f_num = ${fdto.f_num};
+
+							if (result == true) {
+
+								alert("삭제하겠습니다");
+								window.location.href = 'admin_faq_delete?f_num=' + f_num;
+								
+								
+							} else {
+								
+								alert("삭제를 취소합니다");
+							}
+
+						}
+						
+						</script>
+					
+				</div>
+				
 			</div>
+			<!-- //contents -->
+		
+		
+		
+		
 		</div>
-		</section>
 </body>
 </html>

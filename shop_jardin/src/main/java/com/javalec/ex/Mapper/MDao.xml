@@ -107,6 +107,66 @@
 	
 	
 	
+	<!-- 댓글  ★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★   --> 
+	
+	
+	<select id="comment_list" resultType="com.javalec.ex.Dto.MDto.CommentDto">
+	
+	select * from c_comment order by c_date desc
+	
+	</select>
+	
+	
+	
+	<insert id="comment_insert" parameterType="com.javalec.ex.Dto.MDto.CommentDto">
+		<![CDATA[
+		insert into c_comment values(mvc_comment_sequence.nextval, #{bid}, #{c_content}, #{c_name}, sysdate)
+		]]>
+	</insert>
+	
+	
+	
+	
+	<delete id="comment_delete" parameterType="com.javalec.ex.Dto.MDto.CommentDto">
+	
+	delete c_comment where cid= #{cid}
+	
+	</delete>
+	
+	
+	
+	<update id="comment_update" parameterType="com.javalec.ex.Dto.MDto.CommentDto">
+	
+	update c_comment set c_content = #{c_content} where cid= #{cid}
+	
+	</update>
+	
+	
+	
+	
+	
+	<select id="ex_check" resultType="com.javalec.ex.Dto.MDto.CommentDto" parameterType="com.javalec.ex.Dto.MDto.CommentDto">
+	
+	select * from c_comment where cid= #{cid}
+	
+	</select>
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 	
 </mapper>
 

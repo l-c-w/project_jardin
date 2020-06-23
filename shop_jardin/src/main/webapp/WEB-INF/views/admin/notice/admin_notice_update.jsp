@@ -24,6 +24,10 @@
 <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/admin_mlist.css?ver=1">
 
 
+<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/reset.css?v=Y" />
+<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/layout.css?v=Y" />
+<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/content.css?v=Y" />
+
 
 </head>
 
@@ -39,7 +43,7 @@
 			
 				<div id="customer">
 				
-					<h2><strong>공지사항 등록</strong></h2>
+					<h2><strong>공지사항 수정</strong></h2>
 					
 					<div class="checkMt">
 					

@@ -25,6 +25,7 @@
 
 <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/admin_mlist.css?ver=1">
 
+
 <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/reset.css?v=Y" />
 <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/layout.css?v=Y" />
 <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/content.css?v=Y" />
@@ -112,11 +113,12 @@
 						
 				
 				
-				<div id="write_notice">
+				     <div class="bwright">
+							<ul>
+								<li><a href="../notice/admin_notice_write" class="sbtnMini">글작성</a></li>
+							</ul>
+						</div>
 				
-					<a href="../notice/admin_notice_write"><button type="button">글작성</button></a>
-					
-				</div>
 				
 				
 				

@@ -53,6 +53,16 @@
     
     
     
+    <update id="n_upHit">
+		update notice set n_hit=n_hit+1 where n_num=#{param1}
+	</update>
+    
+    
+    
+    
+    
+    
+    
    <select id="n_next" resultType="com.javalec.ex.Dto.MDto.NoticeDto">
    
     select n_title, n_num from notice where n_num = (select min(n_num) from notice where n_num > #{param1})

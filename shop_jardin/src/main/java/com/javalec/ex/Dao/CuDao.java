@@ -1,6 +1,7 @@
 package com.javalec.ex.Dao;
 
 import java.security.Timestamp;
+import java.sql.Date;
 import java.util.ArrayList;
 
 import com.javalec.ex.Dto.CDto.PagingDto;
@@ -25,6 +26,8 @@ public interface CuDao {
 	
 	public ArrayList<NoticeDto> n_selectBoard(PagingDto pdto);
 	
+	public void n_upHit(String cr_num);
+	
 	public NoticeDto n_next(String n_num);
 	
 	public NoticeDto n_pre(String n_num);
@@ -34,7 +37,6 @@ public interface CuDao {
     public void n_update(String n_title, String n_content, String n_num);
 	
 	
-    
     
     
 	

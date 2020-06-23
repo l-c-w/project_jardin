@@ -23,14 +23,6 @@ import com.javalec.ex.Dto.MDto.FnqDto;
 import com.javalec.ex.Dto.MDto.NoticeDto;
 import com.javalec.ex.Dto.MDto.Oo_fnqDto;
 import com.javalec.ex.Service.CUService.CuService;
-import com.javalec.ex.Service.CUService.FnqView;
-import com.javalec.ex.Service.CUService.NoticeUpdate;
-import com.javalec.ex.Service.CUService.NoticeWriteOk;
-import com.javalec.ex.Service.CUService.OOFnqDelete;
-import com.javalec.ex.Service.CUService.OOFnqList;
-import com.javalec.ex.Service.CUService.OOFnqUpdate;
-import com.javalec.ex.Service.CUService.OOFnqView;
-import com.javalec.ex.Service.CUService.OOFnqWrite;
 
 @Controller
 public class CuController {
@@ -40,15 +32,17 @@ public class CuController {
 	private SqlSession sqlsession;
 	
 	
+	@Inject
+	CuService cservice;
 	
-	//공지사항
 	
+	
+	//공지사항 ★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★
 	
 
 	@RequestMapping("/customer/notice_list")
-	public String notice_list(Model model,
-			PagingDto pagedto,
-			@RequestParam(value="nowPage", required=false) String nowPage,
+	public String notice_list(Model model,PagingDto pagedto,
+			@RequestParam(value="nowPage" , required=false) String nowPage,
 			@RequestParam(value="cntPerPage", required=false) String cntPerPage) {
 		
 		
@@ -91,6 +85,8 @@ public class CuController {
 		
 		CuDao cuao = sqlsession.getMapper(CuDao.class);
 		
+		cuao.n_upHit(num);
+		
 		NoticeDto ndto1 = cuao.n_view(num);
 		
 		NoticeDto ndto_n = cuao.n_next(num);
@@ -117,13 +113,10 @@ public class CuController {
 	
 	
 	
-	
 	@RequestMapping("/customer/notice_ok")
 	public String notice_ok(Model model, NoticeDto ndto) {
 		
-		NoticeWriteOk nwrite = new NoticeWriteOk();
-		
-		nwrite.n_write(sqlsession, model, ndto.getN_title(), ndto.getN_content(), 0);
+		cservice.n_write(model, ndto.getN_title(), ndto.getN_content(), 0);
 		
 		return "redirect:/customer/notice_list";
 	}
@@ -131,14 +124,11 @@ public class CuController {
 	
 	
 	
-	
 	@RequestMapping("/customer/notice_update")
-	public String notice_update(Model model, HttpServletRequest request) {
+	public String notice_update(Model model, HttpServletRequest request,
+			@RequestParam("n_num") String n_num) {
 		
-		NoticeUpdate nupdate = new NoticeUpdate();
-		
-		nupdate.n_update_view(sqlsession, model, request.getParameter("n_num"));
-		
+		cservice.n_update_view(model, n_num);
 		
 		return "/customer/notice_update";
 	}
@@ -146,16 +136,14 @@ public class CuController {
 	
 	
 	
-	
 	@RequestMapping("/customer/notice_up_ok")
 	public String notice_up_ok(Model model, NoticeDto ndto) {
 		
-		NoticeUpdate nupdate = new NoticeUpdate();
-		
-		nupdate.n_update(sqlsession, model, ndto.getN_title(), ndto.getN_content(), ndto.getN_num());
+		cservice.n_update(model, ndto.getN_title(), ndto.getN_content(), ndto.getN_num());
 		
 		return "redirect:/customer/notice_list";
 	}
+	
 	
 	
 	
@@ -177,9 +165,8 @@ public class CuController {
 	
 	
 	
-	
-	
-	// faq
+	 
+	// faq  ★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★
 	
 	
 	
@@ -262,12 +249,8 @@ public class CuController {
 		
 		cdao.f_write(fdto.getF_type(), fdto.getF_title(), fdto.getF_content());
 		
-		//cdao.f_write(f_type, f_title, f_content);
-		
 		return "redirect:/customer/faq";
 	}
-	
-	
 	
 	
 	
@@ -278,17 +261,17 @@ public class CuController {
 	public String faq_update(HttpServletRequest request, Model model,
 			@RequestParam("f_num") String f_num) {
 		
-		FnqView f_view = new FnqView();
-		f_view.f_view(sqlsession, f_num, model);
+		cservice.f_view(f_num, model);
 		
 		return "/customer/faq_update";
 	}
 	
 	
 	
+	
+	
 	@RequestMapping("/customer/faq_up_ok")
 	public String faq_up_ok(HttpServletRequest request, Model model) {
-		
 		
 		
 		
@@ -301,6 +284,8 @@ public class CuController {
 	
 	@RequestMapping("/customer/faq_delete")
 	public String faq_delete(HttpServletRequest request, Model model) {
+		
+		
 		
 		
 		return "redirect:/customer/faq";
@@ -333,7 +318,7 @@ public class CuController {
 	
 	
 	
-	// 1:1 문의 
+	// 1:1 문의 ★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★
 	
 	
 	
@@ -348,25 +333,21 @@ public class CuController {
 	
 	
 	@RequestMapping("/mypage/inquiry_list")
-	public String inquiry_list(Model model,
-			PagingDto pagedto,
+	public String inquiry_list(Model model,PagingDto pagedto,
 			@RequestParam(value="nowPage", required=false) String nowPage,
 			@RequestParam(value="cntPerPage", required=false) String cntPerPage, HttpSession session) {
 		
-		OOFnqList list = new OOFnqList();
-		
 		String id = (String) session.getAttribute("session_mem");
 		
-		list.list(sqlsession, model, nowPage, cntPerPage, pagedto, id);
+		cservice.o_list(model, nowPage, cntPerPage, pagedto, id);
+		
 		
 		return "/mypage/inquiry_list";
 	}
 	
 	
 	
-	
 
-	
 	@RequestMapping("/mypage/inquiry_write")
 	public String inquiry_write() {
 		return "/mypage/inquiry_write";
@@ -376,15 +357,9 @@ public class CuController {
 	
 	
 	@RequestMapping("/mypage/inquiry_ok")
-	public String inquiry_ok(
-			Model model, 
-			Oo_fnqDto odto, 
-			HttpSession session
-			) {
+	public String inquiry_ok(Model model, Oo_fnqDto odto, HttpSession session) {
 		
-		OOFnqWrite owrite = new OOFnqWrite();
-		
-		owrite.oo_write(sqlsession, session, model, odto.getOo_type(), odto.getOo_title(), odto.getOo_content());
+		cservice.oo_write(session, model, odto.getOo_type(), odto.getOo_title(), odto.getOo_content());
 		
 		return "redirect:/mypage/inquiry_list";
 	}
@@ -396,9 +371,7 @@ public class CuController {
 	@RequestMapping("/mypage/inquiry_view")
 	public String inquiry_view(HttpServletRequest request, Model model) {
 		
-		OOFnqView o_view = new OOFnqView();
-		
-		o_view.o_view(sqlsession, model, request.getParameter("oo_num"));
+		cservice.o_view(model, request.getParameter("oo_num"));
 		
 		return "/mypage/inquiry_view";
 	}
@@ -408,12 +381,10 @@ public class CuController {
 	
 	
 	@RequestMapping("/mypage/inquiry_update")
-	public String inquiry_update(HttpServletRequest request, Model model,
-			@RequestParam(value="oo_num") String oo_num) {
+	public String inquiry_update(Model model,
+			@RequestParam("oo_num") String oo_num) {
 		
-		OOFnqView o_view = new OOFnqView();
-		o_view.o_view(sqlsession, model, oo_num);
-		
+		cservice.o_view(model, oo_num);
 		
 		return "/mypage/inquiry_update";
 	}
@@ -429,8 +400,7 @@ public class CuController {
 			@RequestParam("oo_title") String oo_title,
 			@RequestParam("oo_content") String oo_content) {
 		
-		OOFnqUpdate o_update = new OOFnqUpdate();
-		o_update.o_update(sqlsession, oo_type, oo_title, oo_content, oo_num);
+		cservice.o_update(oo_type, oo_title, oo_content, oo_num);
 		
 		return "redirect:/mypage/inquiry_list";
 	}
@@ -440,15 +410,17 @@ public class CuController {
 	
 	@RequestMapping("/mypage/inquiry_delete")
 	public String inquiry_delete(HttpServletRequest request,
-			@RequestParam(value="oo_num") String oo_num) {
+			@RequestParam("oo_num") String oo_num) {
 		
-		OOFnqDelete o_del = new OOFnqDelete();
-		o_del.o_delete(sqlsession, oo_num);
+		cservice.o_delete(oo_num);
 		
 		return "redirect:/mypage/inquiry_list";
 	}
 	
 	
+	
+	 
+	// 기타 ★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★
 	
 	
 	
@@ -456,7 +428,6 @@ public class CuController {
 	public String guide() {
 		return "/customer/guide";
 	}
-	
 	
 	
 	

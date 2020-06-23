@@ -22,7 +22,7 @@
 <script type="text/javascript" src="../js/jquery.easing.1.3.js"></script>
 <script type="text/javascript" src="../js/idangerous.swiper-2.1.min.js"></script>
 <script type="text/javascript" src="../js/jquery.anchor.js"></script>
-<script type="text/javascript" src="../js/event_view.js"></script>
+<script type="text/javascript" src="js/event_view.js"></script>
 <!--[if lt IE 9]>
 <script type="text/javascript" src="../js/html5.js"></script>
 <script type="text/javascript" src="../js/respond.min.js"></script>
@@ -91,9 +91,6 @@ $(document).ready(function() {
 							<br><br>
 							<a href="myCouponOk?userId${userId }&cou_code=${cdto.cou_code }">${cdto.cou_name } 쿠폰발급</a>
 						</div>
-						<p>page : ${page }, e_code : ${event_view.e_code }</p>
-						<input type="hidden" name="page" id="page" value="${page }">
-						<input type="hidden" name="e_code" id="e_code" value="${event_view.e_code }">
 					</div>
 
 
@@ -152,7 +149,7 @@ $(document).ready(function() {
 							<input type="hidden" value="${page }" name="page">
 							<ul>
 								<li class="in">
-									<p class="txt">총 <span class="orange"></span> 개의 댓글이 달려있습니다.</p>
+									<p class="txt">총 <span class="orange">${comment_listcount }</span> 개의 댓글이 달려있습니다.</p>
 									<p class="password">비밀번호&nbsp;&nbsp;
 										<input type="password" class="replynum" name="pw" />
 									</p>
@@ -172,7 +169,7 @@ $(document).ready(function() {
 						<form action="" method="post">
 							<ul>
 								<li class="in">
-									<p class="txt">총 <span class="orange"></span> 개의 댓글이 달려있습니다.</p>
+									<p class="txt">총 <span class="orange">${comment_listcount }</span> 개의 댓글이 달려있습니다.</p>
 									<p class="password">비밀번호&nbsp;&nbsp;
 										<input type="password" class="replynum" />
 									</p>
@@ -193,6 +190,7 @@ $(document).ready(function() {
 					<!-- 댓글 수정, 삭제 -->
 					<div class="replyBox">
 						<!-- 댓글 수정 -->
+						<c:forEach var="e_com" items="${event_comment }">
 							<form action="event_commentOk" method="post" class="comm_modi">
 								<input type="hidden" value="${sessionScope.session_mem }" name="requestUser">
 								<input type="hidden" value="${e_com.id }" name="authUser">
@@ -225,7 +223,7 @@ $(document).ready(function() {
 							</form>
 							
 							<!-- 댓글 표시 -->
-							<form action="event_eDeleteComment" method="post" class="comm_modi2" id="commentViewForm">
+							<form action="event_eDeleteComment" method="post" class="comm_modi2">
 								<input type="hidden" value="${sessionScope.session_mem }" name="requestUser">
 								<input type="hidden" value="${e_com.id }" name="authUser">
 								<input type="hidden" value="${event_view.e_code }" name="e_code">
@@ -244,6 +242,7 @@ $(document).ready(function() {
 									</li>
 								</ul>
 							</form>
+						</c:forEach>
 						
 						
 						
@@ -258,6 +257,7 @@ $(document).ready(function() {
 					<!-- //댓글 -->
 					
 					<!-- 페이징이동 -->
+					<c:if test="${not empty event_comment}">
 					<div class="btnAreaList">
 						<div class="allPageMoving1">
 							<!-- 첫 페이지 이동 -->
@@ -301,6 +301,7 @@ $(document).ready(function() {
 							</a>
 						</div>
 					</div>
+					</c:if>
 					<!-- //페이징이동 -->
 
 					<!-- Btn Area -->
@@ -321,7 +322,6 @@ $(document).ready(function() {
 <script type="text/javascript" src="../js/jquery.fancybox-1.3.4.pack.js"></script>
 <link rel="stylesheet" type="text/css" href="../css/jquery.fancybox-1.3.4.css" />
 <script type="text/javascript">
-
 $(function(){
 	
 	var winWidth = $(window).width();
@@ -348,6 +348,13 @@ $(function(){
 });
 
 
+	
+	
+//	<a href="#none" onclick="location.href='/member/login.html?returnUrl=' + encodeURIComponent(location) ">로그인</a>	
+	
+	
+	
+});
 
 
 </script>

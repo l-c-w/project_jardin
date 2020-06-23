@@ -88,7 +88,7 @@
 				
 				    <li><a href="../mypage/change_info?id=${session_mem}">${session_mem}님</a></li>
 					<li><a href="../member/logout">로그아웃</a></li>
-					<li><a href="../mypage/ordercheck">MY PAGE</a></li>
+					<li><a href="../mypage/change_info?id=${session_mem}">MY PAGE</a></li>
 					<li><a href="../mypage/cart">CART</a></li>
 				
 				</c:if>
@@ -97,10 +97,9 @@
 				
 				    <li><a href="../member/login">LOGIN</a></li>
 					<li><a href="../member/step01">JOIN</a></li>
-					<li><a href="../mypage/ordercheck">MY PAGE</a></li>
-					<li><a href="../mypage/cart">CART</a></li>
 				
 				</c:if>
+				
 				
 					<!-- <li><a href="../member/login">LOGIN</a></li>
 					<li><a href="../member/step01">JOIN</a></li>

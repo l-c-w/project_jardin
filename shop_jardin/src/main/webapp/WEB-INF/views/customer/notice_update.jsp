@@ -65,7 +65,7 @@ $(document).ready(function() {
 			
 				<div id="customer">
 				
-					<h2><strong>공지사항 등록</strong></h2>
+					<h2><strong>공지사항 수정</strong></h2>
 					
 					<div class="checkMt">
 					
@@ -124,8 +124,12 @@ $(document).ready(function() {
 					<!-- //Btn Area -->
 					
 				</div>
+				
 			</div>
+			
+			
 		</div>
+		
 	</div>
 			<!-- //contents -->
 

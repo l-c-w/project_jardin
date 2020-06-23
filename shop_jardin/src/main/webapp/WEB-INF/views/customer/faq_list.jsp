@@ -95,7 +95,7 @@ $(document).ready(function() {
 						
 						
 						<li id="for" class="last"><a href="../customer/faq_list?f_type=order" 
-						<c:if test="${f_type eq 'order'}"> class="on"</c:if>>주문</a></li>
+						<c:if test="${f_type eq 'order'}"> class="on" </c:if>>주문</a></li>
 						
 					
 						<!-- <li><a href="../customer/faq">전체</a></li>

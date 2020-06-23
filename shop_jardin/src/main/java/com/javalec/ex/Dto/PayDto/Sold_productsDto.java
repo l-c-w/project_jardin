@@ -1,12 +1,12 @@
 package com.javalec.ex.Dto.PayDto;
 
-public class Payment_ListDto {
+public class Sold_productsDto {
 
-	public Payment_ListDto() {
+	public Sold_productsDto() {
 
 	}
 
-	public Payment_ListDto(String pay_code, String p_code, String id, int amount) {
+	public Sold_productsDto(String pay_code, String p_code, String id, int amount) {
 
 		this.pay_code = pay_code;
 		this.p_code = p_code;

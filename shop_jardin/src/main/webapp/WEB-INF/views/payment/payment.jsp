@@ -446,19 +446,19 @@ $(document).ready(function() {
 									<td>
 										<ul class="pta">
 											<li>
-												<input type="radio" id="method01" name="method" checked="checked" /><label for="method01">신용카드 결제</label>
+												<input type="radio" id="method01" name="method" value="credit_card" checked="checked" /><label for="method01">신용카드 결제</label>
 											</li>
 											<li>
-												<input type="radio" id="method02" name="method" /><label for="method02">실시간 계좌이체</label>
+												<input type="radio" id="method02" name="method" value="account_transfer"/><label for="method02">실시간 계좌이체</label>
 											</li>
 											<li>
-												<input type="radio" id="method03" name="method" /><label for="method03">가상계좌</label>
+												<input type="radio" id="method03" name="method" value="virtual_account"/><label for="method03">가상계좌</label>
 											</li>
 											<li>
-												<input type="radio" id="method04" name="method" /><label for="method04">가상계좌(에스크로)</label>
+												<input type="radio" id="method04" name="method" value="escrow"/><label for="method04">가상계좌(에스크로)</label>
 											</li>
 											<li>
-												<input type="radio" id="method05" name="method" /><label for="method05">무통장 입금</label>
+												<input type="radio" id="method05" name="method" value="deposit"/><label for="method05">무통장 입금</label>
 											</li>
 										</ul>
 									</td>
@@ -496,13 +496,17 @@ $(document).ready(function() {
 										<th scope="row"><span>입금은행</span></th>
 										<td>
 											<select name="bank">
-												<option value="" >선택하세요.</option>
+												<option value="none" selected="selected">선택하세요.</option>
+												<option value="kookmin" >국민은행</option>
+												<option value="giup" >기업은행</option>
+												<option value="shinhan" >신한은행</option>
+												<option value="nonghyup" >농협</option>
 											</select>
 										</td>
 									</tr>
 									<tr>
 										<th scope="row"><span>입금자 명</span></th>
-										<td><input type="text" class="w134" /></td>
+										<td><input type="text" class="w134" name="payer" /></td>
 									</tr>
 									<tr>
 										<th scope="row"><span>영수증 신청</span></th>
@@ -670,7 +674,6 @@ $(function(){
 	
 	//이메일 도메인 변경
 	$("#introduce").on("change",function() {
-		alert("dkdk");
 		$("#email2").val($(this).val());		
 	});
 	

@@ -118,7 +118,7 @@ $(function() {
 						<c:if test="${cartcode.p_price*amount < coupon_list.cou_limit}"></c:if>
 						<tr>
 							<td class="tnone"><input type="radio" name="select_coupon" id="${coupon_list.cou_reward }" value="${coupon_list.cou_code }"> </td>
-							<td class="tnone">${coupon_list.cou_num }<br/><span>${coupon_list.cou_name }</span></td>
+							<td class="tnone">${coupon_list.cou_num }  /<br/><span>${coupon_list.cou_name }</span></td>
 							<td>${coupon_list.issue_date }<br/><span>(<fmt:formatDate value="${coupon_list.issue_date }" pattern="yyyy/MM/dd"/>  ~
 								<fmt:formatDate value="${coupon_list.exp_date }" pattern="yyyy/MM/dd"/>  )</span></td>
 							<td class="tnone" name="${coupon_list.cou_code }reward" id="${coupon_list.cou_reward }">
@@ -154,6 +154,7 @@ $(function() {
 </div>
 <script>
 
+//가격 계산
 $("input:radio[name='select_coupon']").change(function() {
 	var reward = $(this).attr("id");
 	var total= ${total};
@@ -178,7 +179,7 @@ function uncomma(str) {
     return str.replace(/[^\d]+/g, '');
 }
 
-//할인값 쿠폰코드 보내기
+//부모창으로 할인값 쿠폰코드 보내기
 function send_coupon() {
 	var checked_coupon =$("input:radio[name='select_coupon']:checked").val();
 	var discount = $("#discount").text();

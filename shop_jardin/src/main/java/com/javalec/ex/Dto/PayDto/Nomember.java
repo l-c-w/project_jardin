@@ -1,34 +1,50 @@
 package com.javalec.ex.Dto.PayDto;
 
+import java.sql.Timestamp;
+
 public class Nomember {
 
 	public Nomember() {
 
 	}
 
-	public Nomember(String nom_id, String nom_email, String nom_phone, String nom_post, String nom_address1,
-			String nom_address2, String nom_pmethod, String nom_pinfo, String nom_date) {
-		this.nom_id=nom_id;
-		this.nom_email=nom_email;
-		this.nom_phone=nom_phone;
-		this.nom_post=nom_post;
-		this.nom_address1=nom_address1;
-		this.nom_address2=nom_address2;
-		this.nom_pmethod=nom_pmethod;
-		this.nom_pinfo=nom_pinfo;
-		this.nom_date=nom_date;
+	public Nomember(String pay_code, String nom_id, String nom_name, String nom_email1, String nom_email2,
+			String nom_phone1, String nom_phone2, String nom_phone3, String nom_post, String nom_address1,
+			String nom_address2, String nom_pw, Timestamp nom_date) {
+		this.pay_code = pay_code;
+		this.nom_id = nom_id;
+		this.nom_name = nom_name;
+		this.nom_email1 = nom_email1;
+		this.nom_email2 = nom_email2;
+		this.nom_phone1 = nom_phone1;
+		this.nom_phone2 = nom_phone2;
+		this.nom_phone3 = nom_phone3;
+		this.nom_post = nom_post;
+		this.nom_address1 = nom_address1;
+		this.nom_address2 = nom_address2;
+		this.nom_pw = nom_pw;
+		this.nom_date = nom_date;
 	}
 
+	private String pay_code;
 	private String nom_id;
-	private String nom_email;
-	private String nom_phone;
+	private String nom_name;
+	private String nom_email1, nom_email2;
+	private String nom_phone1, nom_phone2, nom_phone3;
 	private String nom_post;
 	private String nom_address1;
 	private String nom_address2;
-	private String nom_pmethod;
-	private String nom_pinfo;
-	private String nom_date;
-	
+	private Timestamp nom_date;
+	private String nom_pw;
+
+	public String getPay_code() {
+		return pay_code;
+	}
+
+	public void setPay_code(String pay_code) {
+		this.pay_code = pay_code;
+	}
+
 	public String getNom_id() {
 		return nom_id;
 	}
@@ -37,20 +53,52 @@ public class Nomember {
 		this.nom_id = nom_id;
 	}
 
-	public String getNom_email() {
-		return nom_email;
+	public String getNom_name() {
+		return nom_name;
 	}
 
-	public void setNom_email(String nom_email) {
-		this.nom_email = nom_email;
+	public void setNom_name(String nom_name) {
+		this.nom_name = nom_name;
 	}
 
-	public String getNom_phone() {
-		return nom_phone;
+	public String getNom_email1() {
+		return nom_email1;
 	}
 
-	public void setNom_phone(String nom_phone) {
-		this.nom_phone = nom_phone;
+	public void setNom_email1(String nom_email1) {
+		this.nom_email1 = nom_email1;
+	}
+
+	public String getNom_email2() {
+		return nom_email2;
+	}
+
+	public void setNom_email2(String nom_email2) {
+		this.nom_email2 = nom_email2;
+	}
+
+	public String getNom_phone1() {
+		return nom_phone1;
+	}
+
+	public void setNom_phone1(String nom_phone1) {
+		this.nom_phone1 = nom_phone1;
+	}
+
+	public String getNom_phone2() {
+		return nom_phone2;
+	}
+
+	public void setNom_phone2(String nom_phone2) {
+		this.nom_phone2 = nom_phone2;
+	}
+
+	public String getNom_phone3() {
+		return nom_phone3;
+	}
+
+	public void setNom_phone3(String nom_phone3) {
+		this.nom_phone3 = nom_phone3;
 	}
 
 	public String getNom_post() {
@@ -77,28 +125,20 @@ public class Nomember {
 		this.nom_address2 = nom_address2;
 	}
 
-	public String getNom_pmethod() {
-		return nom_pmethod;
-	}
-
-	public void setNom_pmethod(String nom_pmethod) {
-		this.nom_pmethod = nom_pmethod;
-	}
-
-	public String getNom_pinfo() {
-		return nom_pinfo;
-	}
-
-	public void setNom_pinfo(String nom_pinfo) {
-		this.nom_pinfo = nom_pinfo;
-	}
-
-	public String getNom_date() {
+	public Timestamp getNom_date() {
 		return nom_date;
 	}
 
-	public void setNom_date(String nom_date) {
+	public void setNom_date(Timestamp nom_date) {
 		this.nom_date = nom_date;
+	}
+
+	public String getNom_pw() {
+		return nom_pw;
+	}
+
+	public void setNom_pw(String nom_pw) {
+		this.nom_pw = nom_pw;
 	}
 
 }

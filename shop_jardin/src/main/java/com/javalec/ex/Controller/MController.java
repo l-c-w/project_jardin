@@ -28,8 +28,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.javalec.ex.Dao.MDao;
 import com.javalec.ex.Dto.MDto.Member_Dto;
-import com.javalec.ex.Service.MService.MIdSearch;
-import com.javalec.ex.Service.MService.MWithdrawal;
+import com.javalec.ex.Service.MService.MService;
 
 @Controller
 public class MController {
@@ -43,12 +42,15 @@ public class MController {
 
 		String email = request.getParameter("email1") + "@" + request.getParameter("email2");
 
+		
 		/*
 		 * String phone1 = request.getParameter("phone1") +
 		 * request.getParameter("phone2") + request.getParameter("phone3");
 		 * 
 		 * int phone = Integer.parseInt(phone1);
+		 * 
 		 */
+		
 
 		String year = request.getParameter("birth1");
 		String month = request.getParameter("birth2");
@@ -361,16 +363,19 @@ public class MController {
 	
 	
 	
-	
 	// 아이디 찾기
 	@RequestMapping(value = "/member/id_search_go", method = { RequestMethod.GET, RequestMethod.POST })
-	public String sendMailId(HttpSession session, HttpServletResponse response, @RequestParam("name_s") String name,
-			@RequestParam("email_s") String email, Model model) throws IOException {
+	public String sendMailId(HttpSession session, HttpServletResponse response, 
+			@RequestParam("name_s") String name,
+			@RequestParam("email_s") String email, 
+			Model model) throws IOException {
 
-		Member_Dto mdto = MIdSearch.id_check(sqlsession, name, email);
+		
+		Member_Dto mdto = mservice.id_check(name, email);
 
+		
 		if (mdto != null) {
-			String subject = "아이디 찾기 안내 입니다.";
+			String subject = "아이디 찾기 안내 메일 입니다.";
 			StringBuilder sb = new StringBuilder();
 			sb.append("귀하의 아이디는 " + mdto.getId() + " 입니다.");
 			System.out.println(subject);
@@ -417,16 +422,22 @@ public class MController {
 	
 	// 비밀번호 찾기
 	@RequestMapping(value = "/member/pw_search_go", method = { RequestMethod.GET, RequestMethod.POST })
-	public String sendMailPassword(HttpSession session, @RequestParam("id_s") String id,
-			@RequestParam("email_s") String email, HttpServletResponse response, Model model) throws IOException {
+	public String sendMailPassword(HttpSession session, 
+			@RequestParam("id_s") String id,
+			@RequestParam("email_s") String email, 
+			HttpServletResponse response,
+			Model model) throws IOException {
 
-		Member_Dto mdto = MIdSearch.pw_check(sqlsession, id, email);
+		
+		Member_Dto mdto = mservice.pw_check(id, email);
 
+		
 		if (mdto != null) {
 
 			model.addAttribute("pw_search_s", mdto.getPw());
 			return "/email/password";
 
+			
 		} else {
 			response.setContentType("text/html; charset=UTF-8");
 			PrintWriter out = response.getWriter();
@@ -441,8 +452,8 @@ public class MController {
 	
 	
 	
-	
 	@RequestMapping("/mypage/change_info")
+	
 	public String change_info(Model model, HttpServletRequest request) {
 
 		String id = request.getParameter("id");
@@ -484,14 +495,13 @@ public class MController {
 	
 	
 	
-	
 	@RequestMapping("/mypage/change_ok")
 	public String change_ok(Model model, HttpServletRequest request, Member_Dto mdto, HttpServletResponse response)
 			throws IOException {
 
 		MDao dao = sqlsession.getMapper(MDao.class);
 
-		String email = request.getParameter("email1") + "@" + request.getParameter("email2");
+		String email = request.getParameter("email1") + "@" + request.getParameter("email3");
 
 		dao.change_ok(mdto.getPw(), email, mdto.getEmail_agree(), mdto.getSms_agree(), mdto.getAddress1(),
 				mdto.getAddress2(), mdto.getSol_lun(), mdto.getIntroduce(), mdto.getCoffee_favor(), mdto.getPost(),
@@ -512,7 +522,6 @@ public class MController {
 	
 	
 	
-	
 	@RequestMapping("/mypage/get_leave")
 	public String change_ok() {
 		return "/mypage/get_leave";
@@ -521,16 +530,19 @@ public class MController {
 	
 	
 	
+	@Inject
+	MService mservice;
+	
+	
+	
 	@RequestMapping("/mypage/withdrawal")
 	public String withdrawal(Model model, 
 			@RequestParam("w_id") String w_id,
 			@RequestParam("w_pw") String w_pw, 
 			HttpServletResponse response,
-			HttpSession session) throws IOException {
-
-		MWithdrawal mw = new MWithdrawal();
+			HttpSession session) throws Exception {
 		
-		mw.Withdrawal(sqlsession, model, w_id, w_pw, response, session);
+		mservice.Withdrawal(model, w_id, w_pw, response, session);
 		
 		return "/main/main";
 	}
@@ -544,11 +556,7 @@ public class MController {
 			@RequestParam(value = "w_pw", required = false) String w_pw, 
 			Member_Dto mdto) {
 
-		MWithdrawal mw = new MWithdrawal();
-
-		int check = mw.Withdrawal_check(sqlsession, model, mdto, w_id, w_pw);
-
-		return check;
+		return mservice.Withdrawal_check(model, mdto, w_id, w_pw);
 
 	}
 	

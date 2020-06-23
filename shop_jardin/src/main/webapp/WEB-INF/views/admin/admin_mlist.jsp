@@ -11,6 +11,8 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+
+
 <script type="text/javascript" src="../js/jquery-3.4.1.min.js"></script>
 <!-- 제이쿼리 [다운받아서 링크 걸어놓기] -->
 <script type="text/javascript" src="../js/prefixfree.dynamic-dom.min.js"></script>
@@ -25,14 +27,13 @@
 <link rel="stylesheet" type="text/css" href="../css/admin_mlist.css?ver=1">
 
 
-
-
-
 </head>
 <body>
 
 <!-- 헤더 붙여넣기 -->
 	<jsp:include page="admin_header.jsp"/>
+	
+	
 <!-- ***************************************************************************
 
                                   CONTENT AREA
@@ -598,7 +599,7 @@
 
 							<td rowspan="2">
 							${m_list.birth}<br>
-							0${m_list.phone1}-${m_list.phone2}-${m_list.phone3}
+							${m_list.phone1+m.list_phone2+m_list.phone3}
 							</td>
 
 

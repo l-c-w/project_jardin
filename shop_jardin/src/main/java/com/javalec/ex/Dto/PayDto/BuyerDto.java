@@ -7,21 +7,21 @@ public class BuyerDto {
 	}
 
 	public BuyerDto(String pay_code, String id, String name, String del_post, String del_address1, String del_address2,
-			String del_require, int del_phone1, int del_phone2, int del_phone3) {
+			String del_demand, int del_phone1, int del_phone2, int del_phone3) {
 		this.pay_code = pay_code;
 		this.id = id;
 		this.name = name;
 		this.del_post = del_post;
 		this.del_address1 = del_address1;
 		this.del_address2 = del_address2;
-		this.del_require = del_require;
+		this.del_demand = del_demand;
 		this.del_phone1 = del_phone1;
 		this.del_phone2 = del_phone2;
 		this.del_phone3 = del_phone3;
 
 	}
 
-	private String pay_code, id, name, del_post, del_address1, del_address2, del_require;
+	private String pay_code, id, name, email1, email2, del_post, del_address1, del_address2, del_demand;
 	private int del_phone1, del_phone2, del_phone3;
 
 	public String getPay_code() {
@@ -48,6 +48,22 @@ public class BuyerDto {
 		this.name = name;
 	}
 
+	public String getEmail1() {
+		return email1;
+	}
+
+	public void setEmail1(String email1) {
+		this.email1 = email1;
+	}
+
+	public String getEmail2() {
+		return email2;
+	}
+
+	public void setEmail2(String email2) {
+		this.email2 = email2;
+	}
+
 	public String getDel_post() {
 		return del_post;
 	}
@@ -72,12 +88,12 @@ public class BuyerDto {
 		this.del_address2 = del_address2;
 	}
 
-	public String getDel_require() {
-		return del_require;
+	public String getDel_demand() {
+		return del_demand;
 	}
 
-	public void setDel_require(String del_require) {
-		this.del_require = del_require;
+	public void setDel_demand(String del_demand) {
+		this.del_demand = del_demand;
 	}
 
 	public int getDel_phone1() {

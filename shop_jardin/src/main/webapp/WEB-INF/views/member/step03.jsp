@@ -344,7 +344,7 @@ $(document).ready(function() {
 												
 												
 							
-												<script type="text/javascript">
+<script type="text/javascript">
 
 // 이메일 유효성 검사(1 = 중복 / 0 != 중복)
 	$('.w134_2').focusout(function () {
@@ -389,23 +389,12 @@ $(document).ready(function() {
 			});
 		});
 		
-		
 </script>
 												
 												
-												
-												
-												
-												
-												
-												
-												
-												
-												
-												
 
-
-											</ul>
+										</ul>
+										
 									</td>
 									
 								</tr>
@@ -871,7 +860,6 @@ $(document).ready(function() {
 					        }
 					       
 					       
-					       
 					       if(join.email1.value=="" || join.email3.value=="") {
 					           alert("이메일을 입력해 주세요");
 					           join.email1.focus();
@@ -879,9 +867,10 @@ $(document).ready(function() {
 					       }
 					       
 					       
-					        var emailRegExp = /^[a-zA-z]{1,}$/; 
+					       
+					        var emailRegExp = /^[a-zA-z0-9]{1,}$/; 
 					        if (!emailRegExp.test(join.email1.value)) {
-					            alert("이메일은 영어만 입력가능합니다.");
+					            alert("이메일은 영어,숫자만 입력가능합니다.");
 					            join.email1.value = "";
 					            join.email1.focus();
 					            return false;
@@ -894,9 +883,6 @@ $(document).ready(function() {
 								 join.email1.focus();
 								 return false;
 							 }
-					        
-					        
-					        
 					        
 					       
 					       
@@ -950,7 +936,7 @@ $(document).ready(function() {
 
                     <script type="text/javascript" src="../js/jquery.fancybox-1.3.4.pack.js"></script>
                     
-                    <link rel="stylesheet" type="text/css" href="../css/jquery.fancybox-1.3.4.css" />
+                    <link rel="stylesheet" type="text/css" href="../css/jquery.fancybox-1.3.4.css">
 
 				</div>
 			</div>

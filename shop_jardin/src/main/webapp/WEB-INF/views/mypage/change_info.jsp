@@ -84,25 +84,8 @@ $(document).ready(function() {
 		
 		<jsp:include page="mypage1.jsp"></jsp:include>
 		
-			
-			<!-- <div id="left">
-				<div id="title">MY PAGE<span>마이페이지</span></div>
-				<ul>	
-					<li><a href="#" id="leftNavi1">주문/배송 조회</a></li>
-					<li><a href="#" id="leftNavi2">반품/배송 현황</a></li>
-					<li><a href="#" id="leftNavi3">장바구니</a></li>
-					<li><a href="#" id="leftNavi4">위시리스트</a></li>
-					<li><a href="#" id="leftNavi5">나의 쿠폰</a></li>
-					<li><a href="#" id="leftNavi6">나의 포인트</a></li>
-					<li><a href="#" id="leftNavi7">1:1문의</a></li>
-					<li><a href="#" id="leftNavi8">회원정보 수정</a></li>
-					<li class="last"><a href="#" id="leftNavi9">회원 탈퇴</a></li>
-				</ul>			
-			</div>
-			 -->
 			 
-			 
-			 <script type="text/javascript">initSubmenu(8,0);</script>
+		<script type="text/javascript">initSubmenu(8,0);</script>
 
 
 			<!-- contents -->
@@ -130,7 +113,7 @@ $(document).ready(function() {
 					</div>
 
 
-			 <form action="change_ok" id="change_ok" name="change" method="post">
+			 <form action="change_ok" id="change_ok" name="change_ok" method="post">
 			 
 
 					<div class="memberbd">
@@ -174,8 +157,7 @@ $(document).ready(function() {
 									<td>
 										<ul class="pta">
 											<li class="r10">
-											<input type="password" class="w134" name="pw" id="pw1"/></li>
-											<li><span class="mvalign">※ 영문 / 숫자 혼용으로 4~20자 까지 가능.</span></li>
+											<input type="password" class="w134" name="pw" id="pw1" value="${mdto.pw}"/></li>
 										</ul>
 									</td>
 								</tr>
@@ -185,9 +167,11 @@ $(document).ready(function() {
 									<th scope="row"><span>비밀번호 확인 *</span></th>
 									
 									<td>
+									
 										<ul class="pta">
 										
 											<li class="r10"><input type="password" class="w134" id="pw2"/></li>
+											<li><span class="mvalign">※회원정보를 수정하려면 기존 비밀번호를 입력해주세요</span></li>
 											
 											<li>
 												<span class="black" style="display: none;">* 비밀번호가 일치합니다.</span>
@@ -198,6 +182,7 @@ $(document).ready(function() {
 									</td>
 									
 								</tr>
+						
 								
 					
 <script type="text/javascript">
@@ -235,7 +220,7 @@ $(document).ready(function() {
 									<td>
 										<ul class="pta">
 											
-											<li><input type="text" class="w134" name="email1" value="${mail1 }"/></li>
+											<li><input type="text" class="w134" name="email1" value="${mail1}"/></li>
 											
 											<li><span class="valign">&nbsp;@&nbsp;</span></li>
 											
@@ -271,10 +256,9 @@ $(document).ready(function() {
 												
 													function mailcheck() {
 														
-														i = document.change.email2.selectedIndex // 선택항목의 인덱스 번호
-														var mail = document.change.email2.options[i].value // 선택항목 value
-														document.change.email3.value = mail
-														
+														i = document.change_ok.email2.selectedIndex // 선택항목의 인덱스 번호
+														var mail = document.change_ok.email2.options[i].value // 선택항목 value
+														document.change_ok.email3.value = mail
 													}
 													
 												</script>
@@ -333,9 +317,13 @@ $(document).ready(function() {
 													<!-- <span>우편번호 찾기</span> --> <!-- </a> --></li>
 													
 													
-													<div id="layer" style="display:none;position:fixed;overflow:hidden;z-index:1;-webkit-overflow-scrolling:touch;">
-                                         <img src="//i1.daumcdn.net/localimg/localimages/07/postcode/320/close.png" id="btnCloseLayer" style="cursor:pointer;position:absolute;right:-3px;top:-3px;z-index:1" 
-                                         onclick="closeDaumPostcode()" alt="닫기 버튼"></div>
+										 <div id="layer" style="display:none;position:fixed;overflow:hidden;z-index:1;-webkit-overflow-scrolling:touch;">
+                                        
+                                         <img src="//i1.daumcdn.net/localimg/localimages/07/postcode/320/close.png" 
+                                         id="btnCloseLayer" style="cursor:pointer;position:absolute;right:-3px;top:-3px;z-index:1" 
+                                         onclick="closeDaumPostcode()" alt="닫기 버튼">
+                                         
+                                         </div>
 													
 													
 
@@ -360,8 +348,9 @@ $(document).ready(function() {
 
     // 우편번호 찾기 화면을 넣을 element
     var element_layer = document.getElementById('layer');
-    
 
+    
+    
     function closeDaumPostcode() {
         // iframe을 넣은 element를 안보이게 한다.
         element_layer.style.display = 'none';
@@ -372,6 +361,7 @@ $(document).ready(function() {
     function execDaumPostCode() {
     	
         new daum.Postcode({
+        	
             oncomplete: function(data) { // 검색결과 항목을 클릭했을때 실행할 코드를 작성하는 부분.
 
                 // 각 주소의 노출 규칙에 따라 주소를 조합한다.
@@ -402,7 +392,9 @@ $(document).ready(function() {
                     // 조합형주소의 유무에 따라 양쪽에 괄호를 추가하여 최종 주소를 만든다.
                     fullAddr += (extraAddr !== '' ? ' ('+ extraAddr +')' : '');
                     
-                }
+                    
+                    
+                } //if
                 
                 
                 // 우편번호와 주소 정보를 해당 필드에 넣는다.
@@ -411,17 +403,19 @@ $(document).ready(function() {
                 document.getElementById('address2').focus();
                 
                 // iframe을 넣은 element를 안보이게 한다.
-                
                 // (autoClose:false 기능을 이용한다면, 아래 코드를 제거해야 화면에서 사라지지 않는다.)
                 element_layer.style.display = 'none';
-            },
+          
+            }, //oncomplete
             
             
             width : '100%',
             height : '100%'
             
+            
         }).embed(element_layer);
 
+        
         // iframe을 넣은 element를 보이게 한다.
         element_layer.style.display = 'block';
 
@@ -429,9 +423,13 @@ $(document).ready(function() {
         initLayerPosition();
     }
 
+    
     // 브라우저의 크기 변경에 따라 레이어를 가운데로 이동시키고자 하실때에는
     // resize이벤트나, orientationchange이벤트를 이용하여 값이 변경될때마다 아래 함수를 실행 시켜 주시거나,
     // 직접 element_layer의 top,left값을 수정해 주시면 됩니다.
+    
+    
+    
     
     function initLayerPosition(){
     	
@@ -448,6 +446,8 @@ $(document).ready(function() {
         element_layer.style.left = (((window.innerWidth || document.documentElement.clientWidth) - width)/2 - borderWidth) + 'px';
         element_layer.style.top = (((window.innerHeight || document.documentElement.clientHeight) - height)/2 - borderWidth) + 'px';
     }
+    
+    
     
     
 </script>
@@ -625,9 +625,8 @@ $(document).ready(function() {
 								
 								
 								
-								
-								
 								<tr>
+								
 									<th scope="row"><span>커피취향</span></th>
 									
 									
@@ -689,7 +688,7 @@ $(document).ready(function() {
 						<div class="bCenter">
 							<ul>
 								<li><a href="../main/main" class="nbtnbig">취소하기</a></li>
-								<li><a href="#" onclick="document.getElementById('change_ok').submit()" class="sbtnMini">수정하기</a></li>
+								<li><a href="#" onclick="validate()" class="sbtnMini">수정하기</a></li>
 							</ul>
 						</div>
 					</div>
@@ -697,7 +696,107 @@ $(document).ready(function() {
 
 
 
-<script type="text/javascript" src="../js/jquery.fancybox-1.3.4.pack.js"></script>
+    <!--  <script type="text/javascript" src="../js/jquery.fancybox-1.3.4.pack.js"></script> -->
+
+
+
+					<script type="text/javascript">
+					
+					 function validate() {
+						 
+						 var current_pw = "${mdto.pw}";
+						 
+						 
+						   if(change_ok.pw2.value == "") {
+					           alert("비밀번호를 입력해주세요");
+					           change_ok.pw2.value = "";
+					           change_ok.pw2.focus();
+					           return false;
+					       }
+						 
+						
+					       if(change_ok.pw1.value != change_ok.pw2.value) {
+					           alert("비밀번호가 다릅니다. 다시 확인해 주세요.");
+					           change_ok.pw2.value = "";
+					           change_ok.pw2.focus();
+					           return false;
+					       }
+					       
+					       
+					       if(change_ok.pw1.value != current_pw) {
+					           alert("기존 비밀번호를 입력해주세요");
+					           change_ok.pw1.value = "";
+					           change_ok.pw1.focus();
+					           return false;
+					       }
+					       
+					       
+					       
+					       if(change_ok.email1.value=="" || change_ok.email3.value=="") {
+					           alert("이메일을 입력해 주세요");
+					           change_ok.email1.focus();
+					           return false;
+					       }
+					       
+					       
+					        var emailRegExp = /^[a-zA-z0-9]{1,}$/; 
+					        if (!emailRegExp.test(change_ok.email1.value)) {
+					            alert("이메일은 영어,숫자만 입력가능합니다.");
+					            change_ok.email1.value = "";
+					            change_ok.email1.focus();
+					            return false;
+					        }
+					        
+					       
+					       if(change_ok.post.value=="" || change_ok.address1.value=="" || change_ok.address2.value=="") {
+					           alert("주소를 입력해 주세요");
+					           change_ok.address2.focus();
+					           return false;
+					       }
+					       
+					       
+					       
+					       if(change_ok.phone1.value=="" || change_ok.phone2.value=="" || change_ok.phone3.value=="") {
+					           alert("휴대폰번호를 입력해 주세요");
+					           change_ok.phone2.focus();
+					           return false;
+					       }
+					       
+					       
+					       
+					       var  phoneRegExp = /^[0-9]{1,}$/; 
+					        if (!phoneRegExp.test(change_ok.phone2.value)  ||  !phoneRegExp.test(change_ok.phone3.value)  ) {
+					            alert("휴대폰번호는 숫자만 입력가능합니다.");
+					            change_ok.phone2.value = "";
+					            change_ok.phone2.focus();
+					            return false;
+					        }
+					       
+					       
+					       if(change_ok.introduce.value=="") {
+					           alert("자기소개를 적어주세요");
+					           change_ok.introduce.focus();
+					           return false;
+					       }
+					       
+					      
+					       change_ok.submit();
+					       
+					   }
+					 
+					
+					
+					</script>
+					
+
+
+
+
+
+
+
+
+
 
 <link rel="stylesheet" type="text/css" href="../css/jquery.fancybox-1.3.4.css" />
 
@@ -731,13 +830,14 @@ $(function(){
 </script>
  -->
 
-
 				</div>
+				
 			</div>
 			<!-- //contents -->
 
 
 		</div>
+		
 	</div>
 	<!-- //container -->
 	

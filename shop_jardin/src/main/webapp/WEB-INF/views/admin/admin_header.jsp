@@ -46,9 +46,10 @@
 									<span id="icon-plus-minus2" class="icon-list-plus">ListIcon</span>
 							</a></li>
 							<div class="submenu" id="LeftMenuID2" style="display: none;">
-								<li><a href="#"><img src="../images/icon_title_left.png">&nbsp;공지사항 관리</a></li>
-								<li><a href="#"><img src="../images/icon_title_left.png">&nbsp;FAQ관리</a></li>
-								<li><a href="#"><img src="../images/icon_title_left.png">&nbsp;1:1문의</a></li>
+								<li><a href="../notice/admin_noticelist"><img src="../images/icon_title_left.png">&nbsp;공지사항 관리</a></li>
+								<li><a href="../faq/admin_faqlist"><img src="../images/icon_title_left.png">&nbsp;FAQ관리</a></li>
+								<li><a href="../oo/admin_oofnqlist"><img src="../images/icon_title_left.png">&nbsp;1:1문의</a></li>
+								
 								<li><a href="#"><img src="../images/icon_title_left.png">&nbsp;상품문의</a></li>
 							</div>
 							
@@ -106,6 +107,6 @@
 
 			</div>
 		
-</header>
 </body>
+</header>
 </html>

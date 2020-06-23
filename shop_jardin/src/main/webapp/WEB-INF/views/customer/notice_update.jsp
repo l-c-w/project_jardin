@@ -124,8 +124,12 @@ $(document).ready(function() {
 					<!-- //Btn Area -->
 					
 				</div>
+				
 			</div>
+			
+			
 		</div>
+		
 	</div>
 			<!-- //contents -->
 

@@ -88,18 +88,18 @@ $(document).ready(function() {
 								<th scope="col">합계</th>
 							</thead>
 							<tbody>
-								<form action="" method="post" name="product_infos" id="product_infos">
+								<form action="" method="post" name="confirm" id="confirm">
 								<c:set var="total" value="0"/>
 								<c:set var="point_total" value="0"/>
 								<c:forEach var="fromcart" items="${from_cart }">
 								<tr>
-									<input type="hidden" name="cart_code" value="${fromcart.cart_code }">
+									<input type="hidden" name="cart_code" value="${fromcart.cart_code }" readonly="readonly">
 									<td class="left">
 										<p class="img"><img src="../images/img/sample_product.jpg" alt="상품" width="66" height="66" /></p>
 
 										<ul class="goods">
 											<li>
-												<a href="#">${fromcart.p_name }</a>
+												<a href="../product/p_detail?p_code=${fromcart.p_code }&p_category=${fromcart.p_category }">${fromcart.p_name }</a>
 											</li>
 										</ul>
 									</td>
@@ -117,7 +117,7 @@ $(document).ready(function() {
 									<c:set var="total" value="${total+fromcart.p_price*fromcart.amount }"/>
 									<c:set var="point_total" value="${point_total+ (fromcart.p_price/100)*fromcart.amount}"/>
 								</c:forEach>
-								</form>
+								
 							</tbody>
 						</table>
 					</div>
@@ -146,7 +146,6 @@ $(document).ready(function() {
 					
 
 			<!-- 주문자 주소 입력 -->
-			<form name="mem_change" id="mem_change">
 					<h3 class="diviLeft">주문자 주소 입력</h3>
 					<div class="diviRight">
 						<ul>
@@ -190,9 +189,9 @@ $(document).ready(function() {
 										<c:set var="email_end" value="${fn:substringAfter(email,'@') }"/>
 											<li><input type="text" class="w134" value="${email_front }" name="email1"/ id="email1"></li>
 											<li><span class="valign">&nbsp;@&nbsp;</span></li>
-											<li class="r10"><input type="text" class="w134" value="${email_end }" name="introduce" id="email2"/></li>
+											<li class="r10"><input type="text" class="w134" value="${email_end }" name="email2" id="email2"/></li>
 											<li>
-												<select id="introduce" >
+												<select id="introduce" name="introduce">
 													<option value="#" selected="selected">직접입력</option>
 													<option value="naver.com">naver.com</option>
 													<option value="daum.net">daum.net</option>
@@ -237,13 +236,12 @@ $(document).ready(function() {
 								<c:if test="${get_order.nomem_check eq 'Y'}">
 								<tr>
 									<th scope="row"><span>비밀번호</span></th>
-									<td><input type="password" class="w134" name="nom_password"/> *비회원 주문시 입력</td>
+									<td><input type="password" class="w134" name="nom_pw" id="nom_pw"/> *비회원 주문시 입력</td>
 								</tr>
 								</c:if>
 							</tbody>
 						</table>
 					</div>
-					</form>
 			<!-- //주문자 주소 입력 -->
 
 
@@ -262,7 +260,6 @@ $(document).ready(function() {
 							<col width="*" />
 							</colgroup>
 							<tbody>
-								<form action="save_delinfo" method="post" name="save_delinfo">
 								<tr>
 									<th scope="row"><span>이름</span></th>
 									<td><input type="text" class="w134" name="del_name" id="del_name"/></td>
@@ -303,9 +300,8 @@ $(document).ready(function() {
 								</tr>
 								<tr>
 									<th scope="row"><span>배송시 <u>요구사항</u></span></th>
-									<td><textarea class="demandtta" name="del_require"></textarea></td>
+									<td><textarea class="demandtta" name="del_demand" id="del_demand"></textarea></td>
 								</tr>
-								</form>
 							</tbody>
 						</table>
 					</div>
@@ -336,12 +332,13 @@ $(document).ready(function() {
 									<td>
 										<ul class="pta">
 											<li class="r10">
-												<input type="text" class="w134" name="cou_input" id="cou_input" readonly="readonly"/>&nbsp;&nbsp;
-												<input type="hidden" name="cou_code" id="cou_code">
+												<input type="text" class="w134" name="cou_discount" id="cou_discount" readonly="readonly" value="0"/>&nbsp;&nbsp;
+												<input type="hidden" name="cou_num" id="cou_num" readonly="readonly">
+												<input type="hidden" name="cou_code" id="cou_code" readonly="readonly">
 												<span class="valign"><strong>원</strong></span>
 											</li>
 											<li class="r10"><span class="valign">( 보유 쿠폰 내역 : ${usable_coupon }장 )&nbsp;</span></li>
-											<li onclick="get_coupon('product_infos')" class="nbtn" style="cursor: pointer;">쿠폰목록</li>
+											<li onclick="get_coupon('confirm')" class="nbtn" style="cursor: pointer;">쿠폰목록</li>
 											
 										</ul>
 									</td>
@@ -353,7 +350,7 @@ $(document).ready(function() {
 									<td>
 										<ul class="pta">
 											<li class="r10">
-												<input type="number" class="w134" id="point_input"/>&nbsp;&nbsp;
+												<input type="number" class="w134" name="pay_point" id="pay_point" value="0"/>&nbsp;&nbsp;
 												<span class="valign"><strong>Point</strong></span>
 											</li>
 											<li>
@@ -375,7 +372,7 @@ $(document).ready(function() {
 											배송비 <span>${del_price }</span>원
 											<span id="point_wrap">- 포인트 <span id="point_1"></span></span>
 											<span id="cou_wrap">- 쿠폰할인 <span id="cou_1"></span></span>
-											= <spanclass="total_price"><fmt:formatNumber pattern="#,###,###,###">${total+del_price }</fmt:formatNumber></span>원)</li>
+											= <span class="total_price"><fmt:formatNumber pattern="#,###,###,###">${total+del_price }</fmt:formatNumber></span>원)</li>
 										</ul>
 									</td>
 								</tr>
@@ -391,8 +388,9 @@ $(document).ready(function() {
 
 						<!-- 회원 일때 -->
 						<h4 class="member">총 주문금액</h4>
-						<input type="hidden" value="${total }">
-						<input type="hidden" value="${del_price }">
+						<input type="hidden" name="del_price" id="del_price" value="${del_price }" readonly="readonly">
+						<input type="hidden" name="total_price" id="total_price" readonly="readonly">
+						<input type="hidden" name="earn_point" id="earn_point" value="${point_total }" readonly="readonly">
 						<!-- 회원 일때 -->
 						<!-- 비회원 일때  <h4>총 주문금액</h4> //비회원 일때 -->
 
@@ -446,19 +444,19 @@ $(document).ready(function() {
 									<td>
 										<ul class="pta">
 											<li>
-												<input type="radio" id="method01" name="method" value="credit_card" checked="checked" /><label for="method01">신용카드 결제</label>
+												<input type="radio" id="method01" name="pay_method" value="credit_card" checked="checked" /><label for="method01">신용카드 결제</label>
 											</li>
 											<li>
-												<input type="radio" id="method02" name="method" value="account_transfer"/><label for="method02">실시간 계좌이체</label>
+												<input type="radio" id="method02" name="pay_method" value="account_transfer"/><label for="method02">실시간 계좌이체</label>
 											</li>
 											<li>
-												<input type="radio" id="method03" name="method" value="virtual_account"/><label for="method03">가상계좌</label>
+												<input type="radio" id="method03" name="pay_method" value="virtual_account"/><label for="method03">가상계좌</label>
 											</li>
 											<li>
-												<input type="radio" id="method04" name="method" value="escrow"/><label for="method04">가상계좌(에스크로)</label>
+												<input type="radio" id="method04" name="pay_method" value="escrow"/><label for="method04">가상계좌(에스크로)</label>
 											</li>
 											<li>
-												<input type="radio" id="method05" name="method" value="deposit"/><label for="method05">무통장 입금</label>
+												<input type="radio" id="method05" name="pay_method" value="deposit"/><label for="method05">무통장 입금</label>
 											</li>
 										</ul>
 									</td>
@@ -591,18 +589,13 @@ $(document).ready(function() {
 						<!-- //사업자 지출증빙 -->
 
 					</div>
-
-
-						
-				
-					
-
+					</form>
 					<!-- Btn Area -->
 					<div class="btnArea">
 						<div class="orderCenter">
 							<ul>
 								<li><a href="#" class="nbtnbig iw0140">뒤로가기</a></li>
-								<li><a href="#" class="sbtnMini iw0140">주문 / 결제</a></li>								
+								<li onclick="confirmation('confirm')"><a href="#" class="sbtnMini iw0140">주문 / 결제</a></li>								
 							</ul>
 						</div>
 					</div>
@@ -710,7 +703,7 @@ $(function(){
 	$("#cou_wrap").hide();
 
 	//포인트 입력 반영
-	$("#point_input").on("input", function() {
+	$("#pay_point").on("input", function() {
 		var point_max = $("#point_max").text();
 		 
 		if(this.value!=null){
@@ -726,7 +719,7 @@ $(function(){
 	});
 	
 	/* //쿠폰입력반영
-	$("#cou_input").on("input",function() {
+	$("#cou_discount").on("input",function() {
 		if(this.value!=null){
 		$("#cou_1").text(comma(this.value));
 		$("#cou_wrap").show();	
@@ -785,27 +778,38 @@ function get_total() {
 	var del_price=uncomma($("#_del_price").text());
 	var point=uncomma($("#point_2").text());
 	
-	$("#cou_1").text(comma($("#cou_input").val())+"원");
+	$("#cou_1").text(comma($("#cou_discount").val())+"원");
 	$("#cou_wrap").show();	
-	$("#cou_2").text(comma($("#cou_input").val()));
-	var coupon=uncomma($("#cou_input").val());
+	$("#cou_2").text(comma($("#cou_discount").val()));
+	var coupon=$("#cou_discount").val();
 	var tttt=comma(Number(total)+Number(del_price)-Number(point)-Number(coupon));
 	
 	$(".total_price").text(comma(Number(total)+Number(del_price)-Number(point)-Number(coupon)));
+	$("#total_price").val(Number(total)+Number(del_price)-Number(point)-Number(coupon));
 	
 	
 	
 }
-
+//form 쿠폰목록 가져오기로 보내기
 function get_coupon(name) {
-	var popupX = (window.screen.width / 2) - (1000 / 2);
-	var popupY= (window.screen.height /2) - (700 / 2);
+	var popupWidth = 1000;
+	var popupHeight = 700;
+
+	var popupX = (window.screen.width / 2) - (popupWidth / 2);
+	var popupY= (window.screen.height / 2) - (popupHeight / 2);
 	
 	frm = document.getElementById(name);
 	
 	window.open('','viewer', 'width=1000, height=700,left='+ popupX + ', top='+ popupY + ', screenX='+ popupX + ', screenY= '+ popupY);
 	frm.action = "coupon_list";
 	frm.target = "viewer";
+	frm.method = "post";
+	frm.submit();
+}
+//form 주문확정 페이지로 보내기
+function confirmation(name) {
+	frm = document.getElementById(name);
+	frm.action = "order_confirmation";
 	frm.method = "post";
 	frm.submit();
 }

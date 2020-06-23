@@ -8,34 +8,33 @@ public class Nomember {
 
 	}
 
-	public Nomember(String pay_code, String nom_id, String nom_name, String nom_email1, String nom_email2,
-			String nom_phone1, String nom_phone2, String nom_phone3, String nom_post, String nom_address1,
-			String nom_address2, String nom_pw, Timestamp nom_date) {
+	public Nomember(String pay_code, String id, String name, String email1, String email2, String phone1, String phone2,
+			String phone3, String post, String address1, String address2, String nom_pw, Timestamp nom_date) {
 		this.pay_code = pay_code;
-		this.nom_id = nom_id;
-		this.nom_name = nom_name;
-		this.nom_email1 = nom_email1;
-		this.nom_email2 = nom_email2;
-		this.nom_phone1 = nom_phone1;
-		this.nom_phone2 = nom_phone2;
-		this.nom_phone3 = nom_phone3;
-		this.nom_post = nom_post;
-		this.nom_address1 = nom_address1;
-		this.nom_address2 = nom_address2;
+		this.id = id;
+		this.name = name;
+		this.email1 = email1;
+		this.email2 = email2;
+		this.phone1 = phone1;
+		this.phone2 = phone2;
+		this.phone3 = phone3;
+		this.post = post;
+		this.address1 = address1;
+		this.address2 = address2;
 		this.nom_pw = nom_pw;
 		this.nom_date = nom_date;
 	}
 
 	private String pay_code;
-	private String nom_id;
-	private String nom_name;
-	private String nom_email1, nom_email2;
-	private String nom_phone1, nom_phone2, nom_phone3;
-	private String nom_post;
-	private String nom_address1;
-	private String nom_address2;
-	private Timestamp nom_date;
+	private String id;
+	private String name;
+	private String email1, email2;
+	private String phone1, phone2, phone3;
+	private String post;
+	private String address1;
+	private String address2;
 	private String nom_pw;
+	private Timestamp nom_date;
 
 	public String getPay_code() {
 		return pay_code;
@@ -45,92 +44,84 @@ public class Nomember {
 		this.pay_code = pay_code;
 	}
 
-	public String getNom_id() {
-		return nom_id;
+	public String getId() {
+		return id;
 	}
 
-	public void setNom_id(String nom_id) {
-		this.nom_id = nom_id;
+	public void setId(String id) {
+		this.id = id;
 	}
 
-	public String getNom_name() {
-		return nom_name;
+	public String getName() {
+		return name;
 	}
 
-	public void setNom_name(String nom_name) {
-		this.nom_name = nom_name;
+	public void setName(String name) {
+		this.name = name;
 	}
 
-	public String getNom_email1() {
-		return nom_email1;
+	public String getEmail1() {
+		return email1;
 	}
 
-	public void setNom_email1(String nom_email1) {
-		this.nom_email1 = nom_email1;
+	public void setEmail1(String email1) {
+		this.email1 = email1;
 	}
 
-	public String getNom_email2() {
-		return nom_email2;
+	public String getEmail2() {
+		return email2;
 	}
 
-	public void setNom_email2(String nom_email2) {
-		this.nom_email2 = nom_email2;
+	public void setEmail2(String email2) {
+		this.email2 = email2;
 	}
 
-	public String getNom_phone1() {
-		return nom_phone1;
+	public String getPhone1() {
+		return phone1;
 	}
 
-	public void setNom_phone1(String nom_phone1) {
-		this.nom_phone1 = nom_phone1;
+	public void setPhone1(String phone1) {
+		this.phone1 = phone1;
 	}
 
-	public String getNom_phone2() {
-		return nom_phone2;
+	public String getPhone2() {
+		return phone2;
 	}
 
-	public void setNom_phone2(String nom_phone2) {
-		this.nom_phone2 = nom_phone2;
+	public void setPhone2(String phone2) {
+		this.phone2 = phone2;
 	}
 
-	public String getNom_phone3() {
-		return nom_phone3;
+	public String getPhone3() {
+		return phone3;
 	}
 
-	public void setNom_phone3(String nom_phone3) {
-		this.nom_phone3 = nom_phone3;
+	public void setPhone3(String phone3) {
+		this.phone3 = phone3;
 	}
 
-	public String getNom_post() {
-		return nom_post;
+	public String getPost() {
+		return post;
 	}
 
-	public void setNom_post(String nom_post) {
-		this.nom_post = nom_post;
+	public void setPost(String post) {
+		this.post = post;
 	}
 
-	public String getNom_address1() {
-		return nom_address1;
+	public String getAddress1() {
+		return address1;
 	}
 
-	public void setNom_address1(String nom_address1) {
-		this.nom_address1 = nom_address1;
+	public void setAddress1(String address1) {
+		this.address1 = address1;
 	}
 
-	public String getNom_address2() {
-		return nom_address2;
+	public String getAddress2() {
+		return address2;
 	}
 
-	public void setNom_address2(String nom_address2) {
-		this.nom_address2 = nom_address2;
-	}
-
-	public Timestamp getNom_date() {
-		return nom_date;
-	}
-
-	public void setNom_date(Timestamp nom_date) {
-		this.nom_date = nom_date;
+	public void setAddress2(String address2) {
+		this.address2 = address2;
 	}
 
 	public String getNom_pw() {
@@ -139,6 +130,14 @@ public class Nomember {
 
 	public void setNom_pw(String nom_pw) {
 		this.nom_pw = nom_pw;
+	}
+
+	public Timestamp getNom_date() {
+		return nom_date;
+	}
+
+	public void setNom_date(Timestamp nom_date) {
+		this.nom_date = nom_date;
 	}
 
 }

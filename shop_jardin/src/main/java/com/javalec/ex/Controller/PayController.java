@@ -8,17 +8,21 @@ import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.javalec.ex.Dao.PayDao;
 import com.javalec.ex.Dto.MDto.Member_Dto;
+import com.javalec.ex.Dto.PayDto.BuyerDto;
+import com.javalec.ex.Dto.PayDto.PaymentDto;
 import com.javalec.ex.Service.PayService.Cart_delService;
 import com.javalec.ex.Service.PayService.Cart_upddateService;
 import com.javalec.ex.Service.PayService.CouponService;
 import com.javalec.ex.Service.PayService.Get_coupon;
 import com.javalec.ex.Service.PayService.MemCService;
+import com.javalec.ex.Service.PayService.Order_confirmService;
 import com.javalec.ex.Service.PayService.PayService;
 import com.javalec.ex.Service.PayService.Payment;
 import com.javalec.ex.Service.PayService.PointService;
@@ -126,6 +130,23 @@ public class PayController {
 		pays.execute(sqlSession, model);
 
 		return "payment/coupon_list";
+	}
+
+	// 주문 확정
+	@PostMapping("payment/order_confirmation")
+	public String order_confirmation(HttpServletRequest request, BuyerDto buyerDto, PaymentDto paymentDto,
+			Model model) {
+
+		String[] cart_code = request.getParameterValues("cart_code");
+		model.addAttribute("id", "qwer");
+		model.addAttribute("cart_code", cart_code);
+		model.addAttribute("buyer", buyerDto);
+		model.addAttribute("order", paymentDto);
+
+		pays = new Order_confirmService();
+		pays.execute(sqlSession, model);
+
+		return "payment/order_connfirmation";
 	}
 
 }

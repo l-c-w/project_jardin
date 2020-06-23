@@ -18,7 +18,6 @@
 <script type="text/javascript" src="../js/common.js"></script>
 <script type="text/javascript">
 $(function() {
-	$('input:radio[name=select_coupon]').eq(0).attr("checked", true);
 
 });
 </script>
@@ -117,7 +116,7 @@ $(function() {
 						<c:forEach var="coupon_list" items="${ucoupon_list }">
 						<c:if test="${cartcode.p_price*amount < coupon_list.cou_limit}"></c:if>
 						<tr>
-							<td class="tnone"><input type="radio" name="select_coupon" id="${coupon_list.cou_reward }" value="${coupon_list.cou_code }"> </td>
+							<td class="tnone"><input type="radio" name="select_coupon" id="${coupon_list.cou_reward }" value="${coupon_list.cou_code }" class="${coupon_list.cou_num }"> </td>
 							<td class="tnone">${coupon_list.cou_num }  /<br/><span>${coupon_list.cou_name }</span></td>
 							<td>${coupon_list.issue_date }<br/><span>(<fmt:formatDate value="${coupon_list.issue_date }" pattern="yyyy/MM/dd"/>  ~
 								<fmt:formatDate value="${coupon_list.exp_date }" pattern="yyyy/MM/dd"/>  )</span></td>
@@ -168,6 +167,7 @@ $("input:radio[name='select_coupon']").change(function() {
 	}
 });
 
+
 //콤마찍기
 function comma(str) {
     str = String(str);
@@ -182,9 +182,11 @@ function uncomma(str) {
 //부모창으로 할인값 쿠폰코드 보내기
 function send_coupon() {
 	var checked_coupon =$("input:radio[name='select_coupon']:checked").val();
+	var cou_num=$("input:radio[name='select_coupon']:checked").attr("class");
 	var discount = $("#discount").text();
-	 opener.document.getElementById("cou_input").value= comma(discount);
+	 opener.document.getElementById("cou_discount").value= uncomma(discount);
 	 opener.document.getElementById("cou_code").value= checked_coupon;
+	 opener.document.getElementById("cou_num").value= cou_num;
 	 
 	opener.get_total();
 	window.close();

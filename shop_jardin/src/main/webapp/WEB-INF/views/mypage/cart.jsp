@@ -122,7 +122,6 @@ $(document).ready(function() {
 								
 								<form action="../payment/payment" name="cart_order" method="post">
 								<input type="hidden" name="buy_type" value="buy_selected">
-								
 								<c:forEach var="cart_list" items="${list }">
 									<c:set var="init_cost" value="0"/>
 								<tr id="tr${cart_list.cart_code }">
@@ -193,8 +192,8 @@ $(document).ready(function() {
 					<div class="cartarea">
 						<ul>
 							<li style="cursor: pointer;" onclick="buy_select()"><a class="ty1"  >선택상품 <span>주문하기</span></a></li>
-							<li onclick="buy_all()" style="cursor: pointer;"><a href="#" class="ty2">전체상품 <span>주문하기</span></a></li>
-							<li class="last"><a href="#" class="ty3">쇼핑 <span>계속하기</span></a></li>
+							<li onclick="buy_all()" style="cursor: pointer;"><a class="ty2">전체상품 <span>주문하기</span></a></li>
+							<li class="last"><a class="ty3">쇼핑 <span>계속하기</span></a></li>
 						</ul>
 					</div>
 					

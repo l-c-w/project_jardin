@@ -47,8 +47,8 @@
 	
 	<!-- 사용가능포인트-->
 	<select id="usable_point" resultType="int">
-		select pointsum-nvl(upointsum,0) from (select sum(po_point) as pointsum from point where id=#{param1}),
-		(select sum(u_point) as upointsum from use_point where id=#{param1})
+		select pointsum-upointsum from (select nvl(sum(po_point),0) as pointsum from point where id=#{param1}),
+		(select nvl(sum(u_point),0) as upointsum from use_point where id=#{param1})
 	</select>
 	
 	
@@ -75,27 +75,74 @@
 		order by coupon_list.exp_date asc]]>
 	</select>
 	
-	
-	<!-- 주문페이지 주문서 작성--> 
-	<insert id="make_order">
-		insert into payment values(to_char(sysdate,'yyyyMMdd')||-payment_seq.nextval,
-		#{param1},'-',0,'N',sysdate,#{param2},
-		'주문서작성','-',#{param3},'-')
-	</insert>
-	
-	<!-- 주문서 가져오기 -->
-	<select id="get_order" resultType="com.javalec.ex.Dto.PayDto.PaymentDto">
-		select * from(select * from payment where id=#{param1} and pay_state='주문서작성' order by pay_date desc) where ROWNUM=1
-	</select>
-	
-	<!-- 주문서작성중 취소된 주문건 찾아오기 -->
-	<select id="order_check" resultType="String">
-		select pay_state from payment where id='qwer' and pay_state='주문서작성'
-	</select>
-	
 	<!-- 회원정보 반영 -->
 	<update id="update_member" parameterType="com.javalec.ex.Dto.MDto.Member_Dto">
-		update member set email=#{email},post=#{post},address1=#{address1},address2=#{address2},phone1=#{phone1},phone2=#{phone2},phone3=#{phone3} where id=#{id}
+		update member 
+		set email=#{email},post=#{post},address1=#{address1},address2=#{address2},phone1=#{phone1},phone2=#{phone2},phone3=#{phone3} 
+		where id=#{id}
 	</update>
 	
+	<!-- 주문페이지 주문서 작성--> 
+	<insert id="make_order" parameterType="com.javalec.ex.Dto.PayDto.PaymentDto">
+		insert into payment values(to_char(sysdate,'yyyyMMdd')||'-'||PAYMENT_SEQ.nextval,
+		#{id},#{cou_num},#{cou_discount},#{earn_point},#{pay_point},#{del_price},#{total_price},
+		<choose>
+		<when test="pay_method.equals('credit_card')">
+		'신용카드'
+		</when>
+		<when test="pay_method.equals('account_transfer')">
+		'실시간 계좌이체'
+		</when>
+		<when test="pay_method.equals('virtual_account')">
+		'가상계좌'
+		</when>
+		<when test="pay_method.equals('escrow')">
+		'에스크로'
+		</when>
+		<when test="pay_method.equals('deposit')">
+		'무통장 입금'
+		</when>
+		</choose>
+		,'결제완료',sysdate,sysdate)
+	</insert>
+	
+	<!-- 주문번호 가져오기 -->
+	<select id="get_paycode" resultType="String">
+		select * from(select * from payment where id=#{param1} and pay_state=
+		'결제완료' order by init_date desc) where ROWNUM=1
+	</select>
+	
+	<!-- 수취인 등록 -->
+	<insert id="make_buyer" parameterType="com.javalec.ex.Dto.PayDto.BuyerDto">
+		insert into buyer values(#{pay_code},#{id},#{name},'0'||#{del_phone1}||'-'||#{del_phone2}||'-'||#{del_phone3},#{email1}||'@'||#{email2},#{del_post},
+		#{del_address1},#{del_address2},#{del_demand})
+	</insert>
+	
+	<!-- 주문물품 등록 -->
+	<insert id="sold_product">
+		insert into sold_products values(#{param1},#{param2},
+		(select p_code from cart where id=#{param2} and cart_code=#{param3}),
+		(select amount from cart where id=#{param2} and cart_code=#{param3}))
+	
+	</insert>
+	
+	<!-- 쿠폰사용등록 -->
+	<update id="update_coupon">
+		update coupon_list set cou_state=sysdate where cou_num=#{param1}
+	</update>
+	
+	<!-- 포인트 적립 -->
+	<update id="plus_point">
+		insert into point values(POINT_SEQ.nextval,#{param1},'구매 포인트 적립',#{param2},sysdate,#{param3}) 
+	</update>
+	
+	<!-- 사용 포인트 등록 -->
+	<update id="minus_point">
+		insert into use_point values(#{param1},#{param2},sysdate,'상품구매 포인트 사용',#{param3}) 
+	</update>
+	
+	<!-- 재고 차감 -->
+	<update id="update_stock">
+	
+	</update>
 </mapper>

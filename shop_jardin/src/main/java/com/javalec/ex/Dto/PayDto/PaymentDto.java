@@ -7,7 +7,7 @@ public class PaymentDto {
 	}
 
 	public PaymentDto(String pay_code, String id, String cou_num, String pay_method, String pay_state, int cou_discount,
-			int pay_point, int del_price, int total_price, Timestamp init_date, Timestamp up_date) {
+			String earn_point, int pay_point, int del_price, int total_price, Timestamp init_date, Timestamp up_date) {
 
 		this.pay_code = pay_code;
 		this.id = id;
@@ -15,6 +15,7 @@ public class PaymentDto {
 		this.pay_method = pay_method;
 		this.pay_state = pay_state;
 		this.cou_discount = cou_discount;
+		this.earn_point = earn_point;
 		this.pay_point = pay_point;
 		this.del_price = del_price;
 		this.init_date = init_date;
@@ -22,7 +23,7 @@ public class PaymentDto {
 
 	}
 
-	private String pay_code, id, cou_num, pay_method, pay_state;
+	private String pay_code, id, cou_num, pay_method, pay_state, earn_point;
 	private int cou_discount, pay_point, del_price, total_price;
 	private Timestamp init_date, up_date;
 
@@ -112,6 +113,14 @@ public class PaymentDto {
 
 	public void setUp_date(Timestamp up_date) {
 		this.up_date = up_date;
+	}
+
+	public String getEarn_point() {
+		return earn_point;
+	}
+
+	public void setEarn_point(String earn_point) {
+		this.earn_point = earn_point;
 	}
 
 }

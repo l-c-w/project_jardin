@@ -6,11 +6,14 @@ public class BuyerDto {
 
 	}
 
-	public BuyerDto(String pay_code, String id, String name, String del_post, String del_address1, String del_address2,
-			String del_demand, int del_phone1, int del_phone2, int del_phone3) {
+	public BuyerDto(String pay_code, String id, String name, String email1, String email2, String del_post,
+			String del_address1, String del_address2, String del_demand, int del_phone1, int del_phone2,
+			int del_phone3) {
 		this.pay_code = pay_code;
 		this.id = id;
 		this.name = name;
+		this.email1 = email1;
+		this.email2 = email2;
 		this.del_post = del_post;
 		this.del_address1 = del_address1;
 		this.del_address2 = del_address2;

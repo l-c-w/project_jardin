@@ -176,7 +176,7 @@ public class CuController {
 	
 	
 	 
-	// faq  ★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★
+	// faq  ★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★
 	
 	
 	
@@ -189,11 +189,10 @@ public class CuController {
 		
 		CuDao cdao = sqlsession.getMapper(CuDao.class);
 		  
-		/*
-		 * ArrayList<FnqDto> fdtos = cdao.f_list();
-		 * 
-		 * model.addAttribute("f_list", fdtos);
-		 */
+		
+//		 ArrayList<FnqDto> fdtos = cdao.f_list();
+//		 model.addAttribute("f_list", fdtos);
+		 
 		
 		int total = cdao.f_countBoard();
 		
@@ -225,20 +224,14 @@ public class CuController {
 	
 	
 	@RequestMapping("/customer/faq_list")
-	public String faq_list(HttpServletRequest request, Model model) {
+	public String faq_list(Model model, PagingDto pagedto,
+			@RequestParam("f_type") String f_type,
+			@RequestParam(value="nowPage", required=false) String nowPage,
+			@RequestParam(value="cntPerPage", required=false) String cntPerPage) throws Exception {
 		
-		String f_type = request.getParameter("f_type");
-		
-		CuDao cdao = sqlsession.getMapper(CuDao.class);
-		
-		ArrayList<FnqDto> fdtos = cdao.f_type_list(f_type);
-		
-		model.addAttribute("f_type", f_type);
-		
-		model.addAttribute("f_type_list", fdtos);
+		cservice.f_type_paging(model, pagedto, nowPage, cntPerPage, f_type);
 		
 		return "/customer/faq_list";
-		
 		
 	}
 	
@@ -282,9 +275,6 @@ public class CuController {
 	
 	@RequestMapping("/customer/faq_up_ok")
 	public String faq_up_ok(HttpServletRequest request, Model model) {
-		
-		
-		
 		return "redirect:/customer/faq";
 	}
 	
@@ -294,10 +284,6 @@ public class CuController {
 	
 	@RequestMapping("/customer/faq_delete")
 	public String faq_delete(HttpServletRequest request, Model model) {
-		
-		
-		
-		
 		return "redirect:/customer/faq";
 	}
 	
@@ -326,7 +312,7 @@ public class CuController {
 	
 	
 	
-	// 1:1 문의 ★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★
+	// 1:1 문의 ★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★
 	
 	
 	

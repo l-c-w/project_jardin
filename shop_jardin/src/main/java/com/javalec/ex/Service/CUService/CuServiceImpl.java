@@ -162,7 +162,42 @@ public class CuServiceImpl implements CuService {
 		model.addAttribute("viewAll", fdtos);
 		
 		
+		
 	}
+	
+	
+	
+
+	@Override
+	public void f_type_paging(Model model, PagingDto pagedto, String nowPage, String cntPerPage, String f_type) throws Exception {
+		
+        CuDao cudao = sqlsession.getMapper(CuDao.class);
+		
+        ArrayList<FnqDto> fdtos = cudao.f_type_list(f_type);
+		
+		int total = cudao.f_type_list_count(f_type);
+		
+		if (nowPage == null && cntPerPage == null) {
+			nowPage = "1";
+			cntPerPage = "10";
+		}
+
+		else if (nowPage == null) {
+			nowPage = "1";
+		}
+
+		else if (cntPerPage == null) {
+			cntPerPage = "10";
+		}
+
+		pagedto = new PagingDto(total, Integer.parseInt(nowPage), Integer.parseInt(cntPerPage));
+
+		model.addAttribute("paging", pagedto);
+
+		model.addAttribute("f_type_list", fdtos);
+		
+	}
+
 	
 	
 	
@@ -250,6 +285,8 @@ public class CuServiceImpl implements CuService {
 		
 		
 	}
+
+
 
 
 

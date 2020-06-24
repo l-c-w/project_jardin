@@ -77,6 +77,7 @@ public interface CuDao {
      public ArrayList<FnqDto> f_type_list(String f_type);
      
      
+     
      public FnqDto f_view(String f_num);
      
      public void f_write(String f_type, String f_title, String f_content);
@@ -84,10 +85,15 @@ public interface CuDao {
      
      public int f_countBoard();
      
+     public int f_type_list_count(String f_type);
+     
+     
+     
      public ArrayList<FnqDto> f_selectBoard(PagingDto pdto);
      
+     
+     
  	 public ArrayList<FnqDto> f_getBoardList(SearchingDto search) throws Exception;
- 	 
  	
  	 public int f_getBoardListCnt(SearchingDto search) throws Exception;
  	 

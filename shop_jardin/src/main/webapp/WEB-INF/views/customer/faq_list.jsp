@@ -189,6 +189,7 @@ $(document).ready(function() {
 						</ul>
 						
 					</div>
+					
 					<!-- //FAQ -->
 
 
@@ -198,21 +199,67 @@ $(document).ready(function() {
 						
 						
 						<!-- 페이징이동1 -->
+
 						<div class="allPageMoving1">
+						
+						
+							<div style="display: block; text-align: center;">
 
-						
-						<a href="#" class="n"><img src="../images/btn/btn_pre2.gif" alt="처음으로"/></a><a href="#" class="pre"><img src="../images/btn/btn_pre1.gif" alt="앞페이지로"/></a>
-						
-						<strong>1</strong>
-					
-						<a href="#">2</a>
-						<a href="#">3</a>
-						<a href="#">4</a>
-						<a href="#">5</a>
-						
-						<a href="#" class="next"><img src="../images/btn/btn_next1.gif" alt="뒤페이지로"/></a><a href="#" class="n"><img src="../images/btn/btn_next2.gif" alt="마지막페이지로"/></a>
 
+								<!-- 첫페이지 이동 -->
+								
+								<a href="faq_list?nowPage=${paging.startPage}&cntPerPage=${paging.cntPerPage}" class="n">
+								<img src="../images/btn/btn_pre2.gif" alt="처음으로"/>
+								</a>
+
+
+								<!-- 이전페이지로 이동 -->
+								
+								<c:if test="${paging.nowPage != 1}">
+								<a href="faq_list?nowPage=${paging.nowPage - 1}&cntPerPage=${paging.cntPerPage}" class="pre">
+								<img src="../images/btn/btn_pre1.gif" alt="앞페이지로"/><!-- &lt; -->
+								</a>
+								</c:if>
+								
+								
+								<!-- 순차 -->
+								
+								<c:forEach begin="${paging.startPage}" end="${paging.endPage}" var="p">
+									
+									<c:choose>
+									
+										<c:when test="${p == paging.nowPage}">
+											<a href="#" class="reviews"><strong>${p}</strong></a>
+										</c:when>
+										
+										<c:when test="${p != paging.nowPage }">
+											<a href="faq_list?nowPage=${p}&cntPerPage=${paging.cntPerPage}">${p}</a>
+										</c:when>
+										
+									</c:choose>
+									
+								</c:forEach>
+								
+								
+								<!-- 다음페이지 이동 -->
+								
+								<c:if test="${paging.nowPage != paging.lastPage}" >
+								<a href="faq_list?nowPage=${paging.nowPage+1}&cntPerPage=${paging.cntPerPage}" class="next"><!-- &gt; -->
+								<img src="../images/btn/btn_next1.gif" alt="뒤페이지로"/>
+								</a>
+								</c:if>
+
+
+								<!-- 마지막 페이지 이동 -->
+								
+								<a href="faq_list?nowPage=${paging.lastPage}" class="n" >
+								<img src="../images/btn/btn_next2.gif" alt="마지막페이지로"/>
+								</a>
+
+							</div>
+							
 						</div>
+						
 						
 						<!-- //페이징이동1 -->
 						
@@ -250,7 +297,6 @@ $(document).ready(function() {
 						</div>
 						
 					</div>
-					
 					
 					
 

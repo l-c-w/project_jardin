@@ -124,6 +124,7 @@
 
 
 
+
 	<select id="n_getBoardListCnt" resultType="int">
 
 		SELECT count(*) as listCnt
@@ -159,6 +160,20 @@
 	</trim>
 
 	</select>
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 	
 	
     
@@ -288,6 +303,14 @@
     <select id="f_type_list" resultType="com.javalec.ex.Dto.MDto.FnqDto">
     
     select * from fnq where f_type=#{param1} order by f_num desc
+    
+    </select>
+    
+    
+    
+    <select id="f_type_list_count" resultType="int">
+    
+    select count(*) from fnq where f_type=#{param1}
     
     </select>
     

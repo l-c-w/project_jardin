@@ -38,6 +38,9 @@ public interface CuService {
 	public void f_search(Model model, PagingDto pagedto, String nowPage, String cntPerPage,
 			String searchType, String keyword) throws Exception;
 	
+	public void f_type_paging(Model model, PagingDto pagedto, String nowPage, String cntPerPage,
+			String f_type) throws Exception;
+	
 	
 	
 	 // 1:1 문의 ★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★

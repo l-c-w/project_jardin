@@ -83,6 +83,9 @@ public class CuController {
 			@RequestParam(value = "searchType", required = false) String searchType,
 			@RequestParam(value = "keyword", required = false) String keyword) throws Exception{
 		
+		model.addAttribute("searchType", searchType);
+		model.addAttribute("keyword", keyword);
+		
 		cservice.n_search(model, pagedto, nowPage, cntPerPage, searchType, keyword);
 
 		return "/customer/notice_list";

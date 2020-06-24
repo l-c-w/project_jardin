@@ -31,7 +31,6 @@ public class PagingDto {
 	public PagingDto() {}
 	
 	
-	
 	public PagingDto(int total, int nowPage, int cntPerPage) {
 
 		setNowPage(nowPage);
@@ -54,7 +53,6 @@ public class PagingDto {
 		System.out.println("lastpage : "+getLastPage());
 		
 	}
-	
 	
 	
 	public void paging (int total, int nowPage, int cntPerPage) {

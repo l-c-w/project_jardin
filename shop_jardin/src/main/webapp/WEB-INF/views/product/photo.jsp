@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -40,11 +42,14 @@ $(function() {
 						<th scope="row"><span>분류</span></th>
 						<td>
 							<ul class="pta">
-								<li>
-									<select>
-										<option value="">카테고리</option>
-									</select>
-								</li>
+								<li><select name="p_category" id="p_category" onchange="aa(this.value)">
+												<option value="카테고리">카테고리</option>
+												<option value="원두">원두</option>
+												<option value="커피 백">커피 백</option>
+												<option value="아이스 음료">아이스 음료</option>
+												<option value="인스턴트 커피">인스턴트 커피</option>
+												<option value="티 음료">티 음료</option>
+								</select></li>
 							</ul>
 						</td>
 					</tr>					
@@ -57,10 +62,8 @@ $(function() {
 						</td>
 					</tr>
 					<tr>
-						<th scope="row"><span>작은이미지</span></th>
-						<td>
-							<input type="file" class="fileType" />
-						</td>
+						<th scope="row"><span>이미지</span></th>
+						<td><input type="file" id="p_img1" name="file"><div class="select_img" ><img src=""></div></td>
 					</tr>
 					<tr>
 						<th scope="row"><span>평가</span></th>
@@ -133,7 +136,7 @@ $(function() {
 		<div class="btnArea">
 			<div class="bCenter">
 				<ul>								
-					<li><a href="#" class="sbtnMini">확인</a></li>
+					<li><a onclick="" href="#" class="sbtnMini">확인</a></li>
 					<li><a onclick="parent.$.fancybox.close();" href="javascript:;" class="nbtnbig">취소</a></li>
 				</ul>
 			</div>

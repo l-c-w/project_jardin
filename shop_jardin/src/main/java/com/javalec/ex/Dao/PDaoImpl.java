@@ -1,6 +1,7 @@
 package com.javalec.ex.Dao;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 import javax.inject.Inject;
@@ -28,6 +29,13 @@ public class PDaoImpl implements PDao {
 	public List<String> Plist2() throws Exception {
 		
 		return sql.selectList(namespace + ".Plist2");
+	}
+
+	@Override
+	public List<ProductDto> related(String p_category) throws Exception {
+		
+	
+		return sql.selectList(namespace + ".related" , p_category);
 	}
 
 	@Override

@@ -18,6 +18,7 @@
 <script type="text/javascript" src="se2/admin/js/HuskyEZCreator.js" charset="utf-8"></script> 
 <script type="text/javascript" src="admin/js/jquery-3.4.1.min.js"></script>
 <script type="text/javascript" src="//code.jquery.com/jquery-1.11.0.min.js"></script>
+<script src="/resources/ckeditor/ckeditor.js"></script>
 <!-- <!-- 페이지 로딩시 초기화 --> 
 		<script>
 		
@@ -201,6 +202,7 @@
 						<td>재고</td>
 						<td><input type="text" name="p_stock" max="99999"></td>
 					</tr>
+					
 					<tr>
 						<td>제품 대표이미지</td>
 						<td><input type="file" id="p_img1" name="file"><div class="select_img" ><img src=""></div></td>

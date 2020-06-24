@@ -50,7 +50,7 @@
 			<ol>
 				<li><a href="#">HOME</a></li>
 				<li>원두커피</li>
-				<li class="last">원두</li>
+				<li class="last">${productDetail.p_category }</li>
 			</ol>
 		</div>
 
@@ -69,7 +69,7 @@
 
 			<div class="brandTab" id="Tab">
 				<ul>
-				<c:forEach var="c" items="${plist2}"> 
+				<c:forEach var="c" items="${Plist2}"> 
 					<li><a href="p_list?c=${c}">${c}</a></li>
 				</c:forEach>
 				</ul>
@@ -79,7 +79,7 @@
 				<ul>
 					<c:forEach var="dto2" items="${Plist}">
 						<c:if test="${dto2.p_category == pc }"> 
-						<a href="p_detail?p_code=${dto2.p_code }"> 
+						<a href="p_detail?p_code=${dto2.p_code }&p_category=${dto2.p_category}"> 
 							<div class="img"><img src="../${dto2.p_img1}" width="200px;" alt="제품 대표이미지" /></div> 
 							<div class="name">${dto2.p_name}</div> 
 							<div class="price">${dto2.p_price }</div>

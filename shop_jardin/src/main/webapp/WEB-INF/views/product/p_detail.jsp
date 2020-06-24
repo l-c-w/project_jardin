@@ -11,8 +11,8 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge" />
 <meta name="description" content="JARDIN SHOP" />
 <meta name="keywords" content="JARDIN SHOP" />
-<meta name="viewport"
-	content="width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0,user-scaleable=no" />
+<!-- <meta name="viewport" -->
+<!-- 	content="width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0,user-scaleable=no" /> -->
 <link rel="stylesheet" type="text/css" href="../css/reset.css?v=Y" />
 <link rel="stylesheet" type="text/css" href="../css/layout.css?v=Y" />
 <link rel="stylesheet" type="text/css" href="../css/content.css?v=Y" />
@@ -35,6 +35,7 @@ $(document).ready(function() {
 
 });
 </script>
+	
 </head>
 <body>
 
@@ -47,8 +48,9 @@ $(document).ready(function() {
 		<div id="location">
 			<ol>
 				<li><a href="#">HOME</a></li>
+				
 				<li>원두커피</li>
-				<li class="last">원두</li>
+				<li class="last"></li>
 			</ol>
 		</div>
 
@@ -64,20 +66,17 @@ $(document).ready(function() {
 				<div class="imgSlide">
 					<div class="img">
 						<ul>
-							<li><img src="../${productDetail.p_img1}" width="350px;" alt="제품이미지" /></li>
-							<li><img src="../${productDetail.p_img2}" alt="제품이미지" /></li>
-							<li><img src="../${productDetail.p_img3}" alt="제품이미지" /></li>
+							<li><img src="../${productDetail.p_img1}" width="348px;" alt="제품이미지" /></li>
+							<li><img src="../${productDetail.p_img2}" width="348px;" alt="제품이미지" /></li>
+							<li><img src="../${productDetail.p_img3}" width="348px;" alt="제품이미지" /></li>
 						</ul>
 					</div>
 
 					<div class="thum">
 						<ul>
-							<li><img src="../${productDetail.p_img1}"
-								alt="썸네일 제품이미지" /></li>
-							<li><img src="../${productDetail.p_img2}"
-								alt="썸네일 제품이미지" /></li>
-							<li><img src="../${productDetail.p_img3}"
-								alt="썸네일 제품이미지" /></li>
+							<li><img src="../${productDetail.p_img1}"  alt="썸네일 제품이미지" /></li>
+							<li><img src="../${productDetail.p_img2}"  alt="썸네일 제품이미지" /></li>
+							<li><img src="../${productDetail.p_img3}"  alt="썸네일 제품이미지" /></li>
 						</ul>
 					</div>
 				</div>
@@ -103,10 +102,6 @@ $(document).ready(function() {
 								<div class="orange">
 									<strong>${productDetail.p_point }point</strong>
 								</div>
-							</li>
-							<li>
-								<div class="stit">칼로리</div>
-								<div>95kcal</div>
 							</li>
 							<li>
 								<div class="stit">용량</div>
@@ -175,16 +170,15 @@ $(document).ready(function() {
 						onclick="return false;" id="goodsNotice">정책 및 공지</a></li>
 				</ul>
 			</div>
-			<!-- <script type="text/javascript">$(function(){$(".detailTab ul li a:eq(0)").click();});</script> -->
+			 <script type="text/javascript">$(function(){$(".detailTab ul li a:eq(0)").click();});</script>
 			<!-- //tab -->
 
-
-			<script>
-				if( ${tabId } === 'goodsReview'){
-				$(function(){$(".detailTab ul li a:eq(2)").click();});					
+<!-- 	       <script>
+ 				if( ${tabId } === 'goodsReview'){
+ 				$(function(){$(".detailTab ul li a:eq(2)").click();});					
 				} 
 			
-			</script>
+< 			</script> -->
 
 			<!-- detail content -->
 			<div id="detailContent">
@@ -237,12 +231,12 @@ $(document).ready(function() {
 
 								<tr>
 									<th scope="row" class="info"><span>영양성분</span></th>
-									<td colspan="3">원두</td>
+									<td colspan="3">${productDetail.p_category }</td>
 								</tr>
 
 								<tr>
 									<th scope="row" class="info"><span>원재료명 <u>및 함량</u></span></th>
-									<td colspan="3">열량 ${productDetail.p_detail }</td>
+									<td colspan="3">${productDetail.p_detail }</td>
 								</tr>
 
 								<tr>
@@ -263,14 +257,12 @@ $(document).ready(function() {
 
 					<div class="relationList">
 						<ul>
-							<c:forEach var="dto2" items="${Plist}">
-								<li><a href="#">
-										<div class="img">
-											<img src="../${dto2.p_img1 }" alt="제품이미지" />
-										</div>
-										<div class="name">${dto2.p_name}</div>
-										<div class="price">${dto2.p_price }</div>
-								</a></li>
+							<c:forEach var="rel" items="${related}" begin="0" end="5">
+								<li>
+									<div class="img"><img src="../${rel.p_img1}" alt="관련상품 이미지" /></div>
+									<div class="name"><a href="#">${rel.p_name}</a></div>
+									<div class="price">${rel.p_price}원</div>
+								</li>
 							</c:forEach>
 						</ul>
 					</div>
@@ -310,9 +302,7 @@ $(document).ready(function() {
 					<!-- 포토 구매후기 -->
 					<div class="imgListType">
 						<ul>
-
 							<!-- List -->
-							<c:forEach var="p_rev" items="${p_review }">
 								<li>
 									<div class="img">
 										<img src="../images/img/sample_epil.jpg" width="155"
@@ -320,7 +310,7 @@ $(document).ready(function() {
 									</div>
 									<div class="txt">
 										<div class="subject">
-											<a href="#"><span class="orange"></span>${p_rev.pr_title }</a>
+											<a href="#"><span class="orange"></span>${list.pr_title }</a>
 										</div>
 										<div class="conf">${p_rev.pr_content }</div>
 										<div class="data">
@@ -347,7 +337,6 @@ $(document).ready(function() {
 										</div>
 									</div>
 								</li>
-							</c:forEach>
 							<!-- //List -->
 						</ul>
 					</div>
@@ -355,19 +344,24 @@ $(document).ready(function() {
 						<!-- 페이징이동1 -->
 						<div class="allPageMoving1">
 
-						<a href="#" class="n"><img src="../images/btn/btn_pre2.gif" alt="처음으로"/></a><a href="#" class="pre"><img src="../images/btn/btn_pre1.gif" alt="앞페이지로"/></a>
-						
-						<c:forEach var="j" items="${r_list }">
-							<c:choose>
-								<c:when test="${j == page }">
-									<strong>${j }</strong>
-								</c:when>
-							<c:when test="${j != page }">
-							    	<a href="p_detail?p_code=${productDetail.p_code}&p_category=${productDetail.p_category}&page=${j}&tabId='goodsReview'">${j}</a>
-							</c:when>
-							</c:choose>
-						</c:forEach>
-						<a href="#" class="next"><img src="../images/btn/btn_next1.gif" alt="뒤페이지로"/></a><a href="#" class="n"><img src="../images/btn/btn_next2.gif" alt="마지막페이지로"/></a>
+							<a href="#" class="n"><img src="../images/btn/btn_pre2.gif"
+								alt="처음으로" /></a><a href="#" class="pre"><img
+								src="../images/btn/btn_pre1.gif" alt="앞페이지로" /></a>
+<%-- 							<c:forEach var="j" items="${r_list }"> --%>
+<%-- 								<c:choose> --%>
+<%-- 									<c:when test="${j == page }"> --%>
+<%-- 										<strong>${j }</strong> --%>
+<%-- 									</c:when> --%>
+<%-- 									<c:when test="${j != page }"> --%>
+<!-- 										<a -->
+<%-- 											href="p_detail?p_code=${productDetail.p_code}&p_category=${productDetail.p_category}&page=${j}&tabId='goodsReview'">${j}</a> --%>
+<%-- 									</c:when> --%>
+<%-- 								</c:choose> --%>
+<%-- 							</c:forEach> --%>
+							<a href="#" class="next"><img
+								src="../images/btn/btn_next1.gif" alt="뒤페이지로" /></a><a href="#"
+								class="n"><img src="../images/btn/btn_next2.gif"
+								alt="마지막페이지로" /></a>
 
 						</div>
 						<!-- //페이징이동1 -->
@@ -385,7 +379,7 @@ $(document).ready(function() {
 					<div class="accordion">
 						<ul>
 							<!-- 반복 -->
-							<c:forEach var="c_rev" items="${c_review }">
+<%-- 							<c:forEach var="c_rev" items="${c_review }"> --%>
 								<li>
 									<div class="headArea">
 										<div class="subject">
@@ -429,7 +423,6 @@ $(document).ready(function() {
 
 									</div>
 								</li>
-							</c:forEach>
 							<!-- //반복 -->
 
 							<!-- 글 리뷰 참고 -->
@@ -506,24 +499,24 @@ $(document).ready(function() {
 					<div class="headTitle depth">
 						<strong>질문과 답변&nbsp;</strong>상품과 관련된 문의와 답변을 하는 공간입니다.
 						<p class="btn">
-							<a href="p_inquiry" class="popBtn">문의하기</a>
+							<a href="inquiry" class="popBtn">문의하기</a>
 						</p>
 					</div>
 
 					<!-- 질문과 답변 참고 -->
 					<div class="accordion">
 						<ul>
-							<c:forEach var="fnq" items="${fnq_review}">
+<%-- 							<c:forEach var="fnq" items="${fnq_review}"> --%>
 								<li>
 									<div class="headArea">
 										<div class="subject">
-											<a href="javascript:;" class="accbtn">${fnq.pf_title }</a>
+											<a href="javascript:;" class="accbtn"></a>
 										</div>
-										<div class="writer">${fnq.id }</div>
+										<div class="writer"></div>
 										<div class="day">
-										<fmt:formatDate var="pf_wdate" value="${fnq.pf_wdate }"
+											<fmt:formatDate var="pf_wdate" value=""
 												pattern="YYYY/MM/dd" />
-											<p>${pf_wdate}</p>
+											<p></p>
 											<p>
 												<span class="obtnMini iw70">답변완료</span>
 											</p>
@@ -532,29 +525,27 @@ $(document).ready(function() {
 
 									<div class="hideArea">
 										<div class="bodyArea">
-											${fnq.pf_content }<br />
+											<br />
 										</div>
 
-								<!-- 답변 -->
-									<div class="answer">
-										<div class="inbox">
-											<div class="aname">
-												<p>담당자</p>
-											</div>
+										<!-- 답변 -->
+										<div class="answer">
+											<div class="inbox">
+												<div class="aname">
+													<p>담당자</p>
+												</div>
 
-											<div class="atxt">
-												${fnq.pf_answer }
+												<div class="atxt"></div>
 											</div>
 										</div>
-									</div>
-									<!-- //답변 -->
+										<!-- //답변 -->
 										<div class="modify">
 											<a href="#">수정</a> <a href="#">삭제</a>
 										</div>
 									</div>
 
 								</li>
-							</c:forEach>
+<%-- 							</c:forEach> --%>
 							<li>
 								<div class="headArea">
 									<div class="subject">
@@ -801,37 +792,17 @@ $(document).ready(function() {
 
 
 
-			<script type="text/javascript"
-				src="http://code.jquery.com/ui/1.10.4/jquery-ui.js"></script>
-			<script type="text/javascript"
-				src="../js/jquery.fancybox-1.3.4.pack.js"></script>
-			<link rel="stylesheet" type="text/css"
-				href="../css/jquery.fancybox-1.3.4.css" />
-			<link rel="stylesheet"
-				href="http://code.jquery.com/ui/1.10.4/themes/smoothness/jquery-ui.css">
-			<style type="text/css">
-.ui-corner-all {
-	border-bottom-right-radius: 0 !important;
-	border-bottom-left-radius: 0 !important;
-	border-top-left-radius: 0 !important;
-	border-top-right-radius: 0 !important;
-}
-
-.ui-widget-content {
-	border: 0;
-}
-
-.ui-spinner-input {
-	width: 70px;
-	margin: 0;
-	border: 1px #ddd solid;
-	padding: 2px 0 2px 5px;
-	font-family: 'Nanum Gothic' !important;
-	font-size: 12px !important;
-}
+			<script type="text/javascript" src="http://code.jquery.com/ui/1.10.4/jquery-ui.js"></script>
+<script type="text/javascript" src="../js/jquery.fancybox-1.3.4.pack.js"></script>
+<link rel="stylesheet" type="text/css" href="../css/jquery.fancybox-1.3.4.css" />
+<link rel="stylesheet" href="http://code.jquery.com/ui/1.10.4/themes/smoothness/jquery-ui.css">
+<style type="text/css">
+.ui-corner-all{border-bottom-right-radius:0 !important; border-bottom-left-radius:0 !important; border-top-left-radius:0 !important; border-top-right-radius:0 !important;}
+.ui-widget-content{border:0;}
+.ui-spinner-input{width:70px; margin:0; border:1px #ddd solid; padding:2px 0 2px 5px; font-family:'Nanum Gothic' !important; font-size:12px !important;}
 </style>
 
-			<script type="text/javascript">
+<script type="text/javascript">
 $(document).ready(function() {
 
 	// spinner
@@ -926,7 +897,6 @@ $(document).ready(function() {
 	relationChk();
 
 });
-}
 </script>
 
 

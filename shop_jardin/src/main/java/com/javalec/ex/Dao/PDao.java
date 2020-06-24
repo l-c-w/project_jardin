@@ -1,12 +1,8 @@
 package com.javalec.ex.Dao;
 
-import java.sql.Timestamp;
-import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
-import com.javalec.ex.Dto.CDto.C_ReviewDto;
-import com.javalec.ex.Dto.CDto.P_ReviewDto;
-import com.javalec.ex.Dto.PDto.P_FnqDto;
 import com.javalec.ex.Dto.PDto.ProductDto;
 
 public interface PDao {
@@ -18,6 +14,10 @@ public interface PDao {
 	public List<String> Plist2() throws Exception;
 	
 	public ProductDto productDetail(int p_code) throws Exception;
+
+	List<ProductDto> related(String p_category) throws Exception;
+
+	
 	
 
 //	public ArrayList<ProductDto> Plist() throws Exception;

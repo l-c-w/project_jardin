@@ -12,9 +12,12 @@
 		select distinct p_category from product order by length(p_category)
 	</select>
 	
-	<select id="productDetail"
-		resultType="com.javalec.ex.Dto.PDto.ProductDto">
-		select * from PRODUCT where P_CODE=#{param1}
+	<select id="productDetail" resultType="com.javalec.ex.Dto.PDto.ProductDto">
+		select * from PRODUCT where P_code=#{param1}
+	</select>
+	
+	<select id="related" resultType="com.javalec.ex.Dto.PDto.ProductDto">
+		select * from PRODUCT where P_category=#{param1}
 	</select>
 	<select id="p_review" resultType="com.javalec.ex.Dto.CDto.P_ReviewDto">
 		<![CDATA[select * from (select rownum rnum,pr_num,p_code,id,pr_title,pr_content,pr_file,pr_score,pr_hit,pr_wdate

@@ -1,21 +1,14 @@
 package com.javalec.ex.Controller;
 
-import java.util.ArrayList;
-
 import javax.inject.Inject;
 
-import org.apache.ibatis.session.SqlSession;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import com.javalec.ex.Dao.CuDao;
-import com.javalec.ex.Dao.MDao;
 import com.javalec.ex.Dto.CDto.PagingDto;
 import com.javalec.ex.Dto.MDto.FnqDto;
-import com.javalec.ex.Dto.MDto.Member_Dto;
 import com.javalec.ex.Dto.MDto.NoticeDto;
 import com.javalec.ex.Service.AMService.AMService;
 import com.javalec.ex.Service.CUService.CuService;
@@ -23,10 +16,6 @@ import com.javalec.ex.Service.CUService.CuService;
 
 @Controller
 public class AMController {
-	
-	
-	@Autowired
-	private SqlSession sqlsession;
 	
 	
 	@Inject
@@ -37,7 +26,7 @@ public class AMController {
 	
 	
 	
-	//member 멤버 부분 ★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★
+	//member 멤버 부분 ★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★
 	
 	
 	
@@ -52,7 +41,7 @@ public class AMController {
 	
 	
 	
-	//notice 공지사항 부분 ★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★
+	//notice 공지사항 부분 ★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★
 	
 	
 	
@@ -139,7 +128,7 @@ public class AMController {
 	
 	
 	
-	//faq 공지사항 부분 ★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★
+	//faq 공지사항 부분 ★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★
 	
 	
 	
@@ -223,8 +212,7 @@ public class AMController {
 	
 	
 	
-	//1:1문의  부분 ★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★
-	
+	//1:1문의  부분 ★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★
 	
 	
 	
@@ -243,20 +231,18 @@ public class AMController {
 		
 		
 		
-		@RequestMapping("/admin/oo/admin_oofnq_write")
-		public String admin_oofnq_write(Model model) {
-			return "/admin/oo/admin_oofnq_write";
+		@RequestMapping("/admin/oo/admin_oofnq_answer")
+		public String admin_oofnq_answer(Model model) {
+			return "/admin/oo/admin_oofnq_answer";
 		}
 		
 		
-		
-		@RequestMapping("/admin/oo/admin_oofnq_update")
-		public String admin_oofnq_update(Model model) {
-			return "/admin/oo/admin_oofnq_update";
+		@RequestMapping("/admin/oo/admin_oofnq_answer_ok")
+		public String admin_oofnq_answer_ok(Model model) {
+			return "/admin/oo/admin_oofnq_answer_ok";
 		}
 		
-	
-	
+		
 		
 		
 		

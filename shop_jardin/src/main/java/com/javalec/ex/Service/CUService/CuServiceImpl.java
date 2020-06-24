@@ -2,7 +2,6 @@ package com.javalec.ex.Service.CUService;
 
 import java.util.ArrayList;
 
-import javax.inject.Inject;
 import javax.servlet.http.HttpSession;
 
 import org.apache.ibatis.session.SqlSession;
@@ -27,31 +26,26 @@ public class CuServiceImpl implements CuService {
 	
 	
 	
-	
 	// 공지사항 ★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★
 	
 	
-	
-	
-	
-	
-
 	@Override
-	public void notice_search(Model model, PagingDto pagedto, String nowPage, String cntPerPage,
-			String searchType, String keyword) throws Exception {
-
+	public void n_search(Model model, PagingDto pagedto, String nowPage, String cntPerPage, String searchType,
+			String keyword) throws Exception {
+		
 		SearchingDto search = new SearchingDto();
 
 		search.setSearchType(searchType);
 
 		search.setKeyword(keyword);
-
+		
 		CuDao cdao = sqlsession.getMapper(CuDao.class);
+		
+		ArrayList<NoticeDto> ndtos = cdao.n_getBoardList(search);
+		
+		int total = cdao.n_getBoardListCnt(search);
 
-		ArrayList<FnqDto> ndtos = cdao.f_getBoardList(search);
-
-		int total = cdao.f_getBoardListCnt(search);
-
+		
 		if (nowPage == null && cntPerPage == null) {
 			nowPage = "1";
 			cntPerPage = "10";
@@ -70,9 +64,10 @@ public class CuServiceImpl implements CuService {
 		model.addAttribute("paging", pagedto);
 
 		model.addAttribute("viewAll", ndtos);
-
+		
 	}
-
+	
+	
 
 	@Override
 	public void n_update(Model model, String n_title, String n_content, String n_num) {
@@ -83,6 +78,7 @@ public class CuServiceImpl implements CuService {
 
 	}
 
+	
 
 	@Override
 	public void n_update_view(Model model, String n_num) {
@@ -96,6 +92,7 @@ public class CuServiceImpl implements CuService {
 	}
 
 
+	
 	@Override
 	public void n_write(Model model, String n_title, String n_content, int n_hit) {
 		
@@ -127,6 +124,45 @@ public class CuServiceImpl implements CuService {
 	}
 	
 	
+	
+	@Override
+	public void f_search(Model model, PagingDto pagedto, String nowPage, String cntPerPage, String searchType,
+			String keyword) throws Exception {
+		
+		
+		SearchingDto search = new SearchingDto();
+
+		search.setSearchType(searchType);
+
+		search.setKeyword(keyword);
+		
+		CuDao cudao = sqlsession.getMapper(CuDao.class);
+		
+		ArrayList<FnqDto> fdtos = cudao.f_getBoardList(search);
+		
+		int total = cudao.f_getBoardListCnt(search);
+		
+		if (nowPage == null && cntPerPage == null) {
+			nowPage = "1";
+			cntPerPage = "10";
+		}
+
+		else if (nowPage == null) {
+			nowPage = "1";
+		}
+
+		else if (cntPerPage == null) {
+			cntPerPage = "10";
+		}
+
+		pagedto = new PagingDto(total, Integer.parseInt(nowPage), Integer.parseInt(cntPerPage));
+
+		model.addAttribute("paging", pagedto);
+
+		model.addAttribute("viewAll", fdtos);
+		
+		
+	}
 	
 	
 	
@@ -214,6 +250,17 @@ public class CuServiceImpl implements CuService {
 		
 		
 	}
+
+
+
+
+
+
+
+
+
+
+
 	
 	
 	

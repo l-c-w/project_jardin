@@ -5,16 +5,16 @@
 <mapper namespace="com.javalec.ex.Dao.CDao">
 
 
-     <!-- 
-     
-                                                       일반 상품평  
-     
-     -->
+
+     <!--  일반 상품평 ★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★   -->
 
 
-<!-- 	<select id="c_list" resultType="com.javalec.ex.Dto.CDto.C_ReviewDto">
+
+     <!-- 	
+     <select id="c_list" resultType="com.javalec.ex.Dto.CDto.C_ReviewDto">
 		select * from c_review order by cr_num desc
-	</select> -->
+	</select> 
+	-->
 	
 	
 	<select id="c_view" resultType="com.javalec.ex.Dto.CDto.C_ReviewDto">
@@ -106,25 +106,12 @@
 	
 	
 	
+	<!--   포토 상품평  ★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★ ★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★  -->
 	
 	
 	
 	
-	<!-- 
-	
-	                                                                   포토 상품평  
-	
-	-->
-	
-	
-	
-	
-	
-	
-	
-	
-	
-<!-- 	
+     <!-- 	
 	<select id="p_list" resultType="com.javalec.ex.Dto.CDto.P_ReviewDto">
 		select * from p_review order by pr_num desc
 	</select>
@@ -216,6 +203,10 @@
 	update c_review set pr_answer=#{param1} where pr_num=#{param2}
 	
 	</update>
+	
+	
+	
+	
 	
 
 

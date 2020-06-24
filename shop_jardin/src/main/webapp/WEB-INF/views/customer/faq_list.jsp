@@ -167,6 +167,7 @@ $(document).ready(function() {
 										
 										
 									</div>
+									
 								</a>
 								
 
@@ -224,7 +225,6 @@ $(document).ready(function() {
 
 
 
-
 					<div class="searchWrap">
 						
 						<div class="search">
@@ -253,7 +253,6 @@ $(document).ready(function() {
 					
 					
 					
-					
 
 				</div>
 				
@@ -264,11 +263,13 @@ $(document).ready(function() {
 
 		</div>
 		
-	</div>
 	<!-- //container -->
+
 
 <!-- footer 붙여넣기 -->
 	<jsp:include page="../footer.jsp"/>
+	
+	
 
 </body>
 </html>

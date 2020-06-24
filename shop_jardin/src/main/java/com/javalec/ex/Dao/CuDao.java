@@ -13,10 +13,8 @@ import com.javalec.ex.Dto.MDto.Oo_fnqDto;
 public interface CuDao {
 	
 	
-	
-	
-	
 	//notice 공지사항  ★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★
+	
 	
 	public NoticeDto n_view(String n_num);
 	
@@ -36,10 +34,16 @@ public interface CuDao {
     
     public void n_update(String n_title, String n_content, String n_num);
 	
+    public ArrayList<NoticeDto> n_getBoardList(SearchingDto search) throws Exception;
+	
+	public int n_getBoardListCnt(SearchingDto search) throws Exception;
     
     
 	
+	
+	
 	// 1:1문의  ★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★
+    
 	
 	
     public Oo_fnqDto oo_view(String oo_num);
@@ -62,6 +66,8 @@ public interface CuDao {
     
     
 	
+    
+    
 	
 	// faq  ★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★
 	

@@ -10,7 +10,6 @@ import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpRequest;
-import org.springframework.http.client.HttpComponentsAsyncClientHttpRequestFactory;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -74,6 +73,21 @@ public class CuController {
 	}
 	
 	
+	
+	
+	
+	@RequestMapping("/customer/notice_search")
+	public String notice_search(Model model, PagingDto pagedto,
+			@RequestParam(value = "nowPage", required = false) String nowPage,
+			@RequestParam(value = "cntPerPage", required = false) String cntPerPage,
+			@RequestParam(value = "searchType", required = false) String searchType,
+			@RequestParam(value = "keyword", required = false) String keyword) throws Exception{
+		
+		cservice.n_search(model, pagedto, nowPage, cntPerPage, searchType, keyword);
+
+		return "/customer/notice_list";
+
+	}
 	
 	
 	
@@ -161,7 +175,6 @@ public class CuController {
 	
 	
 	
-	
 	 
 	// faq  ★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★
 	
@@ -176,9 +189,11 @@ public class CuController {
 		
 		CuDao cdao = sqlsession.getMapper(CuDao.class);
 		  
-		 ArrayList<FnqDto> fdtos = cdao.f_list();
-		  
-		 model.addAttribute("f_list", fdtos);
+		/*
+		 * ArrayList<FnqDto> fdtos = cdao.f_list();
+		 * 
+		 * model.addAttribute("f_list", fdtos);
+		 */
 		
 		int total = cdao.f_countBoard();
 		
@@ -208,6 +223,7 @@ public class CuController {
 	
 	
 	
+	
 	@RequestMapping("/customer/faq_list")
 	public String faq_list(HttpServletRequest request, Model model) {
 		
@@ -225,6 +241,7 @@ public class CuController {
 		
 		
 	}
+	
 	
 	
 	
@@ -291,6 +308,7 @@ public class CuController {
 	CuService cuservice;
 	
 	
+	
 	@RequestMapping("/customer/faq_search")
 	public String faq_search(HttpServletRequest request, Model model, PagingDto pagedto,
 			@RequestParam(value = "nowPage", required = false) String nowPage,
@@ -298,7 +316,7 @@ public class CuController {
 			@RequestParam(value = "searchType", required = false) String searchType,
 			@RequestParam(value = "keyword", required = false) String keyword) throws Exception {
 		
-		cuservice.notice_search(model, pagedto, nowPage, cntPerPage, searchType, keyword);
+		cuservice.f_search(model, pagedto, nowPage, cntPerPage, searchType, keyword);
 		
 		return "/customer/faq";
 	}

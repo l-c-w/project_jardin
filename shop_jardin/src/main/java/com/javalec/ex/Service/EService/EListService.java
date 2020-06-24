@@ -85,6 +85,7 @@ public class EListService implements EService {
 			endpage = startpage + 10 - 1;
 		
 		
+		
 		model.addAttribute("event_list", list);
 		
 		model.addAttribute("listcount", listcount);
@@ -105,18 +106,6 @@ public class EListService implements EService {
 		System.out.println("maxpage : " + maxpage);
 		System.out.println("startpage : " + startpage);
 		System.out.println("endpage : " + endpage);
-		
-		
-		
-		//------------------------------------------------------------
-		for(int i=0; i<list.size(); i++) {
-			EventDto dto = (EventDto)list.get(i);
-			System.out.println("event_list : " + dto.getE_code());
-			System.out.println("event_list : " + dto.getE_title());
-			System.out.println("event_list : " + dto.getE_content());
-			System.out.println("event_list : " + dto.getE_start());
-			System.out.println("event_list : " + dto.getE_end());
-		}
 		
 		
 	}

@@ -90,7 +90,7 @@ $(document).ready(function() {
 					
 						<table summary="NO, 제목, 등록일, 조회수 순으로 공지사항을 조회 하실수 있습니다." class="orderTable2" border="1" cellspacing="0">
 							
-							<caption>공지사항 보기</caption>
+							<caption>공지사항 보기  </caption>
 							
 							<colgroup>
 							<col width="10%" class="tnone" />
@@ -142,9 +142,73 @@ $(document).ready(function() {
 						
 						
 							<div style="display: block; text-align: center;">
+							
+							
+							
+							<c:choose>
+							
+							
+							<c:when test="${searchType ne null and keyword ne null }">
+						
+							<!-- 첫페이지 이동 -->
+								<a href="notice_search?searchType=${searchType}&keyword=${keyword}&nowPage=${paging.startPage}&cntPerPage=${paging.cntPerPage}" class="n">
+								<img src="../images/btn/btn_pre2.gif" alt="처음으로"/>
+								</a>
 
 
-								<!-- 첫페이지 이동 -->
+								<!-- 이전페이지로 이동 -->
+								
+								<c:if test="${paging.nowPage != 1}">
+								<a href="notice_search?searchType=${searchType}&keyword=${keyword}&nowPage=${paging.nowPage - 1}&cntPerPage=${paging.cntPerPage}" class="pre">
+								<img src="../images/btn/btn_pre1.gif" alt="앞페이지로"/><!-- &lt; -->
+								</a>
+								</c:if>
+								
+								
+								<!-- 순차 -->
+								
+								<c:forEach begin="${paging.startPage}" end="${paging.endPage}" var="p">
+									
+									<c:choose>
+									
+										<c:when test="${p == paging.nowPage}">
+											<a href="#" class="reviews"><strong>${p}</strong></a>
+										</c:when>
+										
+										<c:when test="${p != paging.nowPage }">
+											<a href="notice_search?searchType=${searchType}&keyword=${keyword}&nowPage=${p}&cntPerPage=${paging.cntPerPage}">${p}</a>
+										</c:when>
+										
+									</c:choose>
+									
+								</c:forEach>
+								
+								
+								
+								<!-- 다음페이지 이동 -->
+							
+								
+								<c:if test="${paging.nowPage != paging.lastPage}" >
+								<a href="notice_search?searchType=${searchType}&keyword=${keyword}&nowPage=${paging.nowPage+1}&cntPerPage=${paging.cntPerPage}" class="next"><!-- &gt; -->
+								<img src="../images/btn/btn_next1.gif" alt="뒤페이지로"/>
+								</a>
+								</c:if>
+
+
+								<!-- 마지막 페이지 이동 -->
+								<a href="notice_search?searchType=${searchType}&keyword=${keyword}&nowPage=${paging.lastPage}" class="n" >
+								<img src="../images/btn/btn_next2.gif" alt="마지막페이지로"/>
+								</a>
+							
+							</c:when>
+							
+							
+							
+							
+							
+							<c:otherwise>
+							
+							<!-- 첫페이지 이동 -->
 								<a href="notice_list?nowPage=${paging.startPage}&cntPerPage=${paging.cntPerPage}" class="n">
 								<img src="../images/btn/btn_pre2.gif" alt="처음으로"/>
 								</a>
@@ -193,6 +257,14 @@ $(document).ready(function() {
 								<a href="notice_list?nowPage=${paging.lastPage}" class="n" >
 								<img src="../images/btn/btn_next2.gif" alt="마지막페이지로"/>
 								</a>
+							
+							</c:otherwise>
+							
+							
+							
+							</c:choose>
+							
+							
 
 							</div>
 							

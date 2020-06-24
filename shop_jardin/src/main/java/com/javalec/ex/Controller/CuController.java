@@ -10,7 +10,6 @@ import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpRequest;
-import org.springframework.http.client.HttpComponentsAsyncClientHttpRequestFactory;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -74,6 +73,24 @@ public class CuController {
 	}
 	
 	
+	
+	
+	
+	@RequestMapping("/customer/notice_search")
+	public String notice_search(Model model, PagingDto pagedto,
+			@RequestParam(value = "nowPage", required = false) String nowPage,
+			@RequestParam(value = "cntPerPage", required = false) String cntPerPage,
+			@RequestParam(value = "searchType", required = false) String searchType,
+			@RequestParam(value = "keyword", required = false) String keyword) throws Exception{
+		
+		model.addAttribute("searchType", searchType);
+		model.addAttribute("keyword", keyword);
+		
+		cservice.n_search(model, pagedto, nowPage, cntPerPage, searchType, keyword);
+
+		return "/customer/notice_list";
+
+	}
 	
 	
 	
@@ -161,9 +178,8 @@ public class CuController {
 	
 	
 	
-	
 	 
-	// faq  ★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★
+	// faq  ★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★
 	
 	
 	
@@ -176,9 +192,10 @@ public class CuController {
 		
 		CuDao cdao = sqlsession.getMapper(CuDao.class);
 		  
-		 ArrayList<FnqDto> fdtos = cdao.f_list();
-		  
-		 model.addAttribute("f_list", fdtos);
+		
+//		 ArrayList<FnqDto> fdtos = cdao.f_list();
+//		 model.addAttribute("f_list", fdtos);
+		 
 		
 		int total = cdao.f_countBoard();
 		
@@ -208,23 +225,19 @@ public class CuController {
 	
 	
 	
+	
 	@RequestMapping("/customer/faq_list")
-	public String faq_list(HttpServletRequest request, Model model) {
+	public String faq_list(Model model, PagingDto pagedto,
+			@RequestParam("f_type") String f_type,
+			@RequestParam(value="nowPage", required=false) String nowPage,
+			@RequestParam(value="cntPerPage", required=false) String cntPerPage) throws Exception {
 		
-		String f_type = request.getParameter("f_type");
-		
-		CuDao cdao = sqlsession.getMapper(CuDao.class);
-		
-		ArrayList<FnqDto> fdtos = cdao.f_type_list(f_type);
-		
-		model.addAttribute("f_type", f_type);
-		
-		model.addAttribute("f_type_list", fdtos);
+		cservice.f_type_paging(model, pagedto, nowPage, cntPerPage, f_type);
 		
 		return "/customer/faq_list";
 		
-		
 	}
+	
 	
 	
 	
@@ -265,9 +278,6 @@ public class CuController {
 	
 	@RequestMapping("/customer/faq_up_ok")
 	public String faq_up_ok(HttpServletRequest request, Model model) {
-		
-		
-		
 		return "redirect:/customer/faq";
 	}
 	
@@ -277,10 +287,6 @@ public class CuController {
 	
 	@RequestMapping("/customer/faq_delete")
 	public String faq_delete(HttpServletRequest request, Model model) {
-		
-		
-		
-		
 		return "redirect:/customer/faq";
 	}
 	
@@ -291,6 +297,7 @@ public class CuController {
 	CuService cuservice;
 	
 	
+	
 	@RequestMapping("/customer/faq_search")
 	public String faq_search(HttpServletRequest request, Model model, PagingDto pagedto,
 			@RequestParam(value = "nowPage", required = false) String nowPage,
@@ -298,7 +305,7 @@ public class CuController {
 			@RequestParam(value = "searchType", required = false) String searchType,
 			@RequestParam(value = "keyword", required = false) String keyword) throws Exception {
 		
-		cuservice.notice_search(model, pagedto, nowPage, cntPerPage, searchType, keyword);
+		cuservice.f_search(model, pagedto, nowPage, cntPerPage, searchType, keyword);
 		
 		return "/customer/faq";
 	}
@@ -308,7 +315,7 @@ public class CuController {
 	
 	
 	
-	// 1:1 문의 ★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★
+	// 1:1 문의 ★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★
 	
 	
 	
@@ -329,7 +336,6 @@ public class CuController {
 		String id = (String) session.getAttribute("session_mem");
 		
 		cservice.o_list(model, nowPage, cntPerPage, pagedto, id);
-		
 		
 		return "/mypage/inquiry_list";
 	}
@@ -417,8 +423,6 @@ public class CuController {
 	public String guide() {
 		return "/customer/guide";
 	}
-	
-	
 	
 	
 	

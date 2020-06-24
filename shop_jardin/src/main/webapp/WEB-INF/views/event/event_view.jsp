@@ -22,16 +22,93 @@
 <script type="text/javascript" src="../js/jquery.easing.1.3.js"></script>
 <script type="text/javascript" src="../js/idangerous.swiper-2.1.min.js"></script>
 <script type="text/javascript" src="../js/jquery.anchor.js"></script>
-<script type="text/javascript" src="../js/event_view.js"></script>
 <!--[if lt IE 9]>
 <script type="text/javascript" src="../js/html5.js"></script>
 <script type="text/javascript" src="../js/respond.min.js"></script>
 <![endif]-->
 <script type="text/javascript">
-$(document).ready(function() {
-	
-	
+
+var page = ${page};
+var e_code = ${e_code};
+
+// html 페이지 모두 호출 후에 jquery실행
+$(function(){		
+	getComment_list();
+	getCommentCount();
 });
+
+function getCommentCount(){	//	총 n개의 댓글이 있습니다. 나타내는 스크립트
+	
+	$.ajax({
+		type:'get',
+		url:'./getCommentCount',
+		dataType:'json',
+		data : { "e_code":e_code },
+		contentType:'application/json; charset=UTF-8;',
+		success:function(data){	// data에 값이 담김
+			alert('성공');
+			
+			var html='';
+		
+			console.log(data.ec_date);
+			
+			if(data >= 1){
+				for(var i=0; i<data.length; i++){
+					html += '<li class="in">';
+					html += '<p class="txt">총 <span class="orange">' + data.ec_date + '</span> 개의 댓글이 달려있습니다.</p>';
+					html += '</li>';
+				}
+			}else{
+				html += '<li class="in">';
+				html += '<p class="txt">총 0개의 댓글이 달려있습니다.</p></li></ul>';
+				html += '</li>';
+			}
+			
+			console.log(html);
+			$('#cConut').html(html)
+			
+		},
+		error:function(request, status, error){
+			alert('카운팅 실패' + error);
+		}	
+		
+	});
+	
+}
+	
+// 댓글 리스트 출력
+function getComment_list(){	//	이 스크립트는 댓글 리스트만 불러옵니다. 페이징은 따로 처리
+	
+	$.ajax({
+		type:'get',
+		url:'./event_comment',
+		dataType:'json',
+		data : { "page":page, "e_code":e_code },
+		contentType:'application/json; charset=UTF-8;',
+		success:function(data){	// data에 값이 담김
+			var html="";
+
+			if(data.length>0){
+				for(var i=0; i<data.length; i++){
+					
+					html += "<ul id='coSub' class='comment_modifyV'>";
+					html += "<li class='name'>" + data[i].id + "<span> [" + data[i].ec_date + "]</span></li>";
+					html += "<li class='txt'>test" + data[i].ec_content + "</li>";
+					html += "</ul>";
+				}
+			}else{
+				html += "<li class='name'></li>";
+				html += "<li class='txt'>등록된 댓글이 없습니다.</li>";
+			}
+			
+			$('#commentViewForm').html(html)			
+		},
+		error:function(request, status, error){
+			alert('실패' + error);
+		}			
+	});
+
+}
 </script>
 <style type="text/css">
 	.show {display:block} /*보여주기*/
@@ -41,7 +118,6 @@ $(document).ready(function() {
 </style>
 </head>
 <body>
-
 <!-- header 붙여넣기 -->
 	<jsp:include page="../header.jsp"/>
 	
@@ -62,7 +138,7 @@ $(document).ready(function() {
 				<ul>	
 					<li><a href="event_list" id="leftNavi1">진행중 이벤트</a></li>
 					<li><a href="fin_event_list" id="leftNavi2">종료된 이벤트</a></li>
-					<li class="last"><a href="prizewinner_list" id="leftNavi3">당첨자 발표</span></a></li>
+					<li class="last"><a href="prizewinner_list" id="leftNavi3">당첨자 발표</a></li>
 				</ul>			
 			</div><script type="text/javascript">initSubmenu(1,0);</script>
 
@@ -143,36 +219,14 @@ $(document).ready(function() {
 
 
 					<!-- 댓글 -->
-					<!-- 댓글 등록 - 로그인 되어있을 때-->
-					<c:if test="${not empty sessionScope.session_mem }">
+					<!-- 댓글 등록 - 로그인 되어있지 않을 때-->
 					<div class="replyWrite">
-						<form action="event_eWite" method="post">
-							<input type="hidden" value="${sessionScope.session_mem }" name="requestUser">
+						<form action="" method="post" id="e_param">
 							<input type="hidden" value="${event_view.e_code }" name="e_code">
 							<input type="hidden" value="${page }" name="page">
-							<ul>
+							<ul id="cConut">
 								<li class="in">
-									<p class="txt">총 <span class="orange"></span> 개의 댓글이 달려있습니다.</p>
-									<p class="password">비밀번호&nbsp;&nbsp;
-										<input type="password" class="replynum" name="pw" />
-									</p>
-									<input type="text" class="replyType" name="comment_content" required>
-								</li>
-								<li class="btn">
-									<input type="submit" class="replyBtn" value="등록">
-								</li>
-							</ul>
-						</form>
-						<p class="ntic">※ 비밀번호를 입력하시면 댓글이 비밀글로 등록 됩니다.</p>
-					</div>
-					</c:if>
-					<!-- 댓글 등록 - 로그인 되어있지 않을 때-->
-					<c:if test="${empty sessionScope.session_mem }">
-					<div class="replyWrite">
-						<form action="" method="post">
-							<ul>
-								<li class="in">
-									<p class="txt">총 <span class="orange"></span> 개의 댓글이 달려있습니다.</p>
+									<p class="txt">총 <span class="orange">${cCount }</span> 개의 댓글이 달려있습니다.</p>
 									<p class="password">비밀번호&nbsp;&nbsp;
 										<input type="password" class="replynum" />
 									</p>
@@ -185,7 +239,6 @@ $(document).ready(function() {
 						</form>
 						<p class="ntic">※ 비밀번호를 입력하시면 댓글이 비밀글로 등록 됩니다.</p>
 					</div>
-					</c:if>
 					
 					
 					

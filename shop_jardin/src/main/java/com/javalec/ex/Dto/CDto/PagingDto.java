@@ -3,40 +3,43 @@ package com.javalec.ex.Dto.CDto;
 public class PagingDto {
 	
 
-	             // 현재페이지, 시작페이지, 끝페이지, 게시글 총 갯수, 페이지당 글 갯수, 마지막페이지
-
-	private int nowPage, startPage, endPage, total, cntPerPage, lastPage, start, end;
-
-	private int cntPage = 5; // 출력할 리스트 개수 1~5 , 6~10
+	private int nowPage; //현재페이지
 	
+	private int startPage; //시작페이지
+	private int endPage; //끝페이지
 	
+	private int total; //총 게시글 수
+	private int cntPerPage; //페이지당 표시할 글 개수
+	
+	private int lastPage; //마지막 페이지 
+	
+	private int start, end; //시작~끝[범위]
+
+	private int cntPage = 5; // 출력할 리스트 개수 ex) 5 - 1~5 , 6~10 // 4 - 1~4, 5~8 
 	
 	private String id;
-	
 	
 	public String getId() {
 		return id;
 	}
 
-
-
 	public void setId(String id) {
 		this.id = id;
 	}
 
-
-	
 	
 	public PagingDto() {}
-	
 	
 	
 	public PagingDto(int total, int nowPage, int cntPerPage) {
 
 		setNowPage(nowPage);
+		
 		setCntPerPage(cntPerPage);
+		
 		setTotal(total);
 		
+		//
 
 		calcLastPage(getTotal(), getCntPerPage());
 		
@@ -49,17 +52,45 @@ public class PagingDto {
 		System.out.println("endpage : "+getEndPage());
 		System.out.println("lastpage : "+getLastPage());
 		
+	}
+	
+	
+	public void paging (int total, int nowPage, int cntPerPage) {
+
+		setNowPage(nowPage);
+		
+		setCntPerPage(cntPerPage);
+		
+		setTotal(total);
+		
+		//
+
+		calcLastPage(getTotal(), getCntPerPage());
+		
+		calcStartEndPage(getNowPage(), cntPage);
+		
+		calcStartEnd(getNowPage(), getCntPerPage());
 		
 		
+		System.out.println("startpage : "+getStartPage());
+		System.out.println("endpage : "+getEndPage());
+		System.out.println("lastpage : "+getLastPage());
+		System.out.println("start : "+start);
+		System.out.println("end : "+end);
+		System.out.println("---------------------------");
 		
 	}
-
+	
+	
+	
+	
 	// 제일 마지막 페이지 계산      ex) 10개 있는데 한 페이지에 5개씩이면 마지막페이지는 2
 	public void calcLastPage(int total, int cntPerPage) {
 		setLastPage((int) Math.ceil((double) total / (double) cntPerPage));
 		
 	}
-
+	
+	
 	
 	// 시작, 끝 페이지 계산
 	public void calcStartEndPage(int nowPage, int cntPage) {
@@ -71,9 +102,6 @@ public class PagingDto {
 		if (getLastPage() < getEndPage()) {
 			setEndPage(getLastPage());
 		}
-		
-		
-			
 		
 		
 		//end 끝(단위), last 마지막
@@ -91,6 +119,8 @@ public class PagingDto {
 	}
 	
 	
+	
+	
 	// DB 쿼리에서 사용할 start, end값 계산
 		public void calcStartEnd(int nowPage, int cntPerPage) {
 			
@@ -100,6 +130,8 @@ public class PagingDto {
 			
 		}
 	
+		
+		
 		
 	public int getNowPage() {
 		return nowPage;
@@ -160,10 +192,6 @@ public class PagingDto {
 	}
 	
 	
-	
-	
-	
-
 	public int getStart() {
 		return start;
 	}
@@ -185,11 +213,14 @@ public class PagingDto {
 
 	
 	
-
-	@Override
-	public String toString() {
-		return "PagingDto [nowPage=" + nowPage + ", startPage=" + startPage + ", endPage=" + endPage + ", total="
-				+ total + ", cntPerPage=" + cntPerPage + ", lastPage=" + lastPage + ", cntPage=" + cntPage + "]";
-	}
+//
+//	@Override
+//	public String toString() {
+//		return "PagingDto [nowPage=" + nowPage + ", startPage=" + startPage + ", endPage=" + endPage + ", total="
+//				+ total + ", cntPerPage=" + cntPerPage + ", lastPage=" + lastPage + ", cntPage=" + cntPage + "]";
+//	}
+//	
+//	
+	
 
 }

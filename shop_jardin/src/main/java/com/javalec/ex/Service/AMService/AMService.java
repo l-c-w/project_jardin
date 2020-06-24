@@ -1,5 +1,6 @@
 package com.javalec.ex.Service.AMService;
 
+import java.security.Timestamp;
 import java.util.ArrayList;
 
 import javax.servlet.http.HttpServletRequest;
@@ -26,7 +27,10 @@ public interface AMService {
 	public void a_notice_delete(String num);
 	
 	
+	
 	// faq ★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★
+	
+	
 	
 	public void a_faq_list(Model model, String nowPage, String cntPerPage, PagingDto pagedto);
 	
@@ -37,6 +41,15 @@ public interface AMService {
 	public void a_faq_delete(String num);
 	
 	public void a_faq_update(FnqDto fdto);
+	
+	
+	
+	
+	// 1:1문의 ★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★
+	
+	public void o_list(Model model, String nowPage, String cntPerPage, PagingDto pagedto);
+	
+	public void o_answer(Model model, String oo_num, String oo_answer);
 	
 	
 

@@ -1,11 +1,15 @@
 package com.javalec.ex.Service.CUService;
 
+import java.util.ArrayList;
+
 import javax.servlet.http.HttpSession;
 
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.ui.Model;
 
 import com.javalec.ex.Dto.CDto.PagingDto;
+import com.javalec.ex.Dto.CDto.SearchingDto;
+import com.javalec.ex.Dto.MDto.NoticeDto;
 
 public interface CuService {
 	
@@ -13,8 +17,6 @@ public interface CuService {
 	 // 공지사항 ★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★
 	
 
-	public void notice_search(Model model, PagingDto pagedto, String nowPage, String cntPerPage,
-			String searchType, String keyword) throws Exception;
 	
 	public void n_update(Model model, String n_title, String n_content, String n_num);
 	
@@ -22,16 +24,22 @@ public interface CuService {
 	
 	public void n_write(Model model, String n_title, String n_content, int n_hit);
 	
+	public void n_search(Model model, PagingDto pagedto, String nowPage, String cntPerPage,
+			String searchType, String keyword) throws Exception;
+	
 	
 	
 	
 	 // faq ★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★
 	
+	
 	public void f_view(String f_num, Model model);
+
+	public void f_search(Model model, PagingDto pagedto, String nowPage, String cntPerPage,
+			String searchType, String keyword) throws Exception;
 	
-	
-	
-	
+	public void f_type_paging(Model model, PagingDto pagedto, String nowPage, String cntPerPage,
+			String f_type) throws Exception;
 	
 	
 	

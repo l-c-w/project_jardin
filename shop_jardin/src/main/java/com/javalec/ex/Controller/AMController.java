@@ -1,32 +1,33 @@
 package com.javalec.ex.Controller;
 
-import java.util.ArrayList;
+import java.security.Timestamp;
+import java.sql.Date;
+import java.text.SimpleDateFormat;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.util.Calendar;
+import java.util.GregorianCalendar;
 
 import javax.inject.Inject;
+import javax.servlet.http.HttpSession;
 
-import org.apache.ibatis.session.SqlSession;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import com.javalec.ex.Dao.CuDao;
-import com.javalec.ex.Dao.MDao;
 import com.javalec.ex.Dto.CDto.PagingDto;
 import com.javalec.ex.Dto.MDto.FnqDto;
-import com.javalec.ex.Dto.MDto.Member_Dto;
 import com.javalec.ex.Dto.MDto.NoticeDto;
+import com.javalec.ex.Dto.MDto.Oo_fnqDto;
 import com.javalec.ex.Service.AMService.AMService;
 import com.javalec.ex.Service.CUService.CuService;
+
+import oracle.sql.TIMESTAMP;
 
 
 @Controller
 public class AMController {
-	
-	
-	@Autowired
-	private SqlSession sqlsession;
 	
 	
 	@Inject
@@ -37,7 +38,7 @@ public class AMController {
 	
 	
 	
-	//member 멤버 부분 ★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★
+	//member 멤버 부분 ★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★
 	
 	
 	
@@ -52,7 +53,7 @@ public class AMController {
 	
 	
 	
-	//notice 공지사항 부분 ★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★
+	//notice 공지사항 부분 ★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★
 	
 	
 	
@@ -139,7 +140,7 @@ public class AMController {
 	
 	
 	
-	//faq 공지사항 부분 ★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★
+	//faq 공지사항 부분 ★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★
 	
 	
 	
@@ -223,40 +224,64 @@ public class AMController {
 	
 	
 	
-	//1:1문의  부분 ★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★
-	
+	//1:1문의  부분 ★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★
 	
 	
 	
 	
 		@RequestMapping("/admin/oo/admin_oofnq_list")
-		public String admin_oofnq_list(Model model) {
+		public String admin_oofnq_list(Model model,PagingDto pagedto,
+				@RequestParam(value="nowPage", required=false) String nowPage,
+				@RequestParam(value="cntPerPage", required=false) String cntPerPage) {
+			
+			amservice.o_list(model, nowPage, cntPerPage, pagedto);
+			
 			return "/admin/oo/admin_oofnq_list";
 		}
 		
 		
 		
 		@RequestMapping("/admin/oo/admin_oofnq_view")
-		public String admin_oofnq_view(Model model) {
+		public String admin_oofnq_view(Model model,
+				@RequestParam("oo_num") String oo_num) {
+			
+			cuservice.o_view(model, oo_num);
+			
 			return "/admin/oo/admin_oofnq_view";
 		}
 		
 		
 		
-		@RequestMapping("/admin/oo/admin_oofnq_write")
-		public String admin_oofnq_write(Model model) {
-			return "/admin/oo/admin_oofnq_write";
+		@RequestMapping("/admin/oo/admin_oofnq_answer_delete")
+		public String admin_oofnq_answer_delete(Model model,
+				@RequestParam("oo_num") String oo_num) {
+			
+			cuservice.o_delete(oo_num);
+			
+			return "/admin/oo/admin_oofnq_answer_delete";
 		}
 		
 		
 		
-		@RequestMapping("/admin/oo/admin_oofnq_update")
-		public String admin_oofnq_update(Model model) {
-			return "/admin/oo/admin_oofnq_update";
+		@RequestMapping("/admin/oo/admin_oofnq_answer")
+		public String admin_oofnq_answer(Model model,
+				@RequestParam("oo_num") String oo_num) {
+			
+			cuservice.o_view(model, oo_num);
+			
+			return "/admin/oo/admin_oofnq_answer";
 		}
 		
-	
-	
+		
+		
+		@RequestMapping("/admin/oo/admin_oofnq_answer_ok")
+		public String admin_oofnq_answer_ok(Model model, Oo_fnqDto odto) {
+			
+		amservice.o_answer(model, odto.getOo_num(), odto.getOo_answer());
+			
+		return "/admin/oo/admin_oofnq_answer_ok";
+		
+		}
 		
 		
 		

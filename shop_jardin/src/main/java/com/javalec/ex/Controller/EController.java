@@ -89,9 +89,10 @@ public class EController {
 	@RequestMapping("/event_comment")	// 진행중 이벤트 리스트
 	public ArrayList<Event_commentDto> event_comment(@RequestParam(value = "page")String tempPage,
 			@RequestParam(value = "e_code")String e_code) {
+		
 		System.out.println("--------------------event_comment--------------------");
 		EDao dao = sqlSession.getMapper(EDao.class);
-		int page = page = Integer.parseInt(tempPage); // 리퀘스트에 값이 있으면 page변수에 리퀘스트 값을 할당;
+		int page = Integer.parseInt(tempPage); // 리퀘스트에 값이 있으면 page변수에 리퀘스트 값을 할당;
 		int limit = 3; // 1page = 게시글 10개		
 		System.out.println("e_code : " + e_code);
 		System.out.println("page : " + page);
@@ -112,16 +113,24 @@ public class EController {
 			endpage = startpage + 10 - 1;
 		// EViewService 끝
 		
+		
 		System.out.println("listcount : " + listcount);
 		System.out.println("page : " + page);
 		System.out.println("maxpage : " + maxpage);
 		System.out.println("startpage : " + startpage);
 		System.out.println("endpage : " + endpage);
 		
-		return dao.event_comment(e_code, page, limit);
+		return dao.event_comment(e_code, startrow, endrow);
 	}
-	//public ArrayList<Event_commentDto> event_comment(String e_code, int page, int limit);
+
 	
+	// getCommentCount
+	@RequestMapping("/getCommentCount") // 진행중 이벤트 댓글 등록
+	@ResponseBody
+	public int getCommentCount(@RequestParam(value = "e_code")String e_code) {		
+		EDao dao = sqlSession.getMapper(EDao.class);
+		return dao.getCommentCount(e_code);
+	}
 	
 	
 	@RequestMapping("/event_eWite") // 진행중 이벤트 댓글 등록

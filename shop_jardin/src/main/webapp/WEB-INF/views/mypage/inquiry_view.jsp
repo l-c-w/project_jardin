@@ -255,15 +255,6 @@ $(document).ready(function() {
 						</script>
 					
 					
-					
-					
-					
-					
-					
-					
-					
-					
-					
 				</div>
 				
 			</div>

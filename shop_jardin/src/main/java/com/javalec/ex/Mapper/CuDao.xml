@@ -6,16 +6,13 @@
 <mapper namespace="com.javalec.ex.Dao.CuDao">
 
 
-     <!-- 공지사항   ★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★-->
+     <!--  ; 빼기 -->
 
 
-     <!-- 	
 
-     <select id="c_list" resultType="com.javalec.ex.Dto.CDto.C_ReviewDto">
-		select * from c_review order by cr_num desc
-	</select> 
-	
-	  -->
+     <!-- 공지사항   ★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★-->
+
+	  
 	
 	<select id="n_view" resultType="com.javalec.ex.Dto.MDto.NoticeDto">
 		select * from notice where n_num=#{param1}
@@ -37,17 +34,15 @@
 	</select>
 	
 	
+	
 	<!-- 페이징 처리 후 게시글 조회 -->
     <select id="n_selectBoard" resultType="com.javalec.ex.Dto.MDto.NoticeDto">
     
        SELECT * 
-		FROM (
-			SELECT ROWNUM RN, A.* 
+		FROM ( SELECT ROWNUM RN, A.* 
 				FROM (SELECT * 
-						FROM notice 
-						ORDER BY n_num DESC 
-						) A
-				)
+					  FROM notice 
+					  ORDER BY n_num DESC ) A )
 	WHERE RN BETWEEN #{start} AND #{end}
     </select>
     
@@ -88,18 +83,121 @@
 	update notice set n_title=#{param1}, n_content=#{param2} where n_num=#{param3}
 	 
 	</update>
-	 
+	
+	
+	
+	
+	<select id="n_getBoardList" resultType="com.javalec.ex.Dto.MDto.NoticeDto">
+
+       select * 
+       
+       from ( select ROWNUM RN, a.* 
+       
+                       from (SELECT * FROM notice order by n_num DESC ) a)
+		
+		<trim prefix="WHERE" prefixOverrides="AND|OR">
+
+			<if test="searchType=='title' and keyword != null and keyword != '' ">
+
+				n_TITLE like '%' ||  #{keyword} || '%' 
+
+				
+			</if>
+
+			<if test="searchType=='content' and keyword != null and keyword != '' ">
+
+				n_CONTENT like '%' ||  #{keyword} || '%' 
+
+			</if>
+
+	
+		<!-- 	<if test="searchType=='reg_id' and keyword != null and keyword != '' ">
+
+				AND reg_id like CONCAT('%', #{keyword}, '%')
+
+			</if>	 -->
+			
+
+		</trim>
+		
+		and RN BETWEEN #{start} AND #{end}
+
+	</select>
+
+
+
+
+	<select id="n_getBoardListCnt" resultType="int">
+
+		SELECT count(*) as listCnt
+
+		FROM notice
+
+	<trim prefix="WHERE" prefixOverrides="AND|OR">
+
+
+            <if test="keyword != null and keyword != '' ">
+			
+			<if test="searchType=='title'">
+
+				AND n_TITLE like '%' ||  #{keyword} || '%'
+
+			</if>
+			
+
+			<if test="searchType=='content'">
+
+				AND n_CONTENT like '%' ||  #{keyword} || '%'
+
+			</if>
+			
+			<!-- <if test="searchType=='reg_id'">
+
+				AND reg_id like CONCAT('%', #{keyword}, '%')
+
+			</if> -->
+
+      </if>
+
+	</trim>
+
+	</select>
+	
     
     
     
-    <!-- 1:1 문의  ★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★ ★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★ -->
+    <!-- 1:1 문의  ★★★★★★★★★★★★★★★★★★★★★★★★★★★★★ ★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★ ★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★ -->
+    
     
     
     
     <!-- 총 게시글 갯수 출력 -->
+    
+    <select id="o_countBoard_admin" resultType="int">
+		SELECT COUNT(*) FROM oo_fnq
+	</select>
+    
+    
 	<select id="o_countBoard" resultType="int">
 		SELECT COUNT(*) FROM oo_fnq where id=#{param1}
 	</select>
+	
+	
+	<!-- 페이징 처리 후 게시글 조회 -->
+    <select id="o_selectBoard_admin" resultType="com.javalec.ex.Dto.MDto.Oo_fnqDto">
+    
+       SELECT * 
+		FROM (
+			SELECT ROWNUM RN, A.* 
+				FROM (SELECT * 
+						FROM oo_fnq
+						ORDER BY oo_num DESC 
+						) A
+				)
+	WHERE RN BETWEEN #{start} AND #{end} 
+	
+    </select>
+	
 	
 	
 	
@@ -117,6 +215,7 @@
 	WHERE RN BETWEEN #{start} AND #{end} 
 	
     </select>
+    
     
     
     <select id="oo_view" resultType="com.javalec.ex.Dto.MDto.Oo_fnqDto">
@@ -151,27 +250,27 @@
 	
 	
 	
+	<!-- 1:1문의는 본인만 보니까 조회수 up x -->
+	
 	<update id="oo_answer"> 
 	
-	update oo_fnq set oo_answer=#{param1} oo_udate=#{param2} where oo_num=#{param2}
+	update oo_fnq set oo_answer=#{param1} , oo_udate=sysdate where oo_num=#{param3}
 	 
 	</update>
 	
-	<!-- 1:1문의는 본인만 보니까 조회수 up x -->
     
     
     
+    <!-- FNQ  ★★★★★★★★★★★★★★★★★ ★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★ ★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★ -->
     
     
     
-    <!-- FNQ  ★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★ ★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★ -->
+    <select id="f_view" resultType="com.javalec.ex.Dto.MDto.FnqDto">
+		select * from fnq where f_num=#{param1}
+	</select>
     
     
-    <!--  ; 빼기 -->
-    
-    
-    
-   <!--  
+    <!--  
    
    <select id="f_list" resultType="com.javalec.ex.Dto.MDto.FnqDto">
     
@@ -181,10 +280,6 @@
     
     -->
     
-    
-    <select id="f_view" resultType="com.javalec.ex.Dto.MDto.FnqDto">
-		select * from fnq where f_num=#{param1}
-	</select>
     
     
     
@@ -221,6 +316,14 @@
     
     
     
+    <select id="f_type_list_count" resultType="int">
+    
+    select count(*) from fnq where f_type=#{param1}
+    
+    </select>
+    
+    
+    
     <insert id="f_write">
     
 		insert into fnq (f_num,f_type,f_title,f_content)
@@ -248,23 +351,19 @@
 
 
 
-
 	<select id="f_getBoardList" resultType="com.javalec.ex.Dto.MDto.FnqDto">
 
 		SELECT * FROM fnq
 
 		<trim prefix="WHERE" prefixOverrides="AND|OR">
 
-			<if
-				test="searchType=='title' and keyword != null and keyword != '' ">
+			<if test="searchType=='title' and keyword != null and keyword != '' ">
 
 				AND f_TITLE like '%' || #{keyword} || '%'
 
-
 			</if>
 
-			<if
-				test="searchType=='content' and keyword != null and keyword != '' ">
+			<if test="searchType=='content' and keyword != null and keyword != '' ">
 
 				AND f_CONTENT like '%' || #{keyword} || '%'
 
@@ -281,9 +380,7 @@
 
 	<select id="f_getBoardListCnt" resultType="int">
 
-		SELECT count(*) as listCnt
-
-		FROM fnq
+		SELECT count(*) FROM fnq
 
 		<trim prefix="WHERE" prefixOverrides="AND|OR">
 

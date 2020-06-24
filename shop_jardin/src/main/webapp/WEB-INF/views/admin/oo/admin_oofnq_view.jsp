@@ -26,37 +26,153 @@
 <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/admin_mlist.css?ver=1">
 
 
+<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/reset.css?v=Y" />
+<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/layout.css?v=Y" />
+<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/content.css?v=Y" />
+
+
 </head>
 <body>
 <!-- 리스트 붙여넣기 -->
 	<jsp:include page="../admin_header.jsp"/>
 	<!----------------------------------------------------------------------------------------------------------------------------- -->
-	<section>
 		<div id="contentArea">
-		<table id="nview_table">
-			<tr id="tr02">
-				<td>상품이 이상해요</td>
-				<td>교환/환불(분류)</td>
-			</tr>
-			<tr id="tr02">
-				<td>김씨</td>
-				<td>2020/05/27</td>
-			</tr>
-			<tr id="tr03">
-				<td colspan="2">상품이 이상해요!!</td>
-			</tr>
-			<tr id="tr04" onclick="">
-				<td colspan="2">관리자</td>
-			</tr>
-			<tr id="tr05" onclick="">
-				<td colspan="2">대충 쓰세요</td>
-				</tr>
-		</table>
-			<div id="nivew_btn">
-			<button type="button" onclick="">목록</button>
-			<button type="button" onclick="">답변작성</button>
+		
+
+			<!-- contents -->
+			<div id="contents">
+			
+				<div id="mypage">
+				
+					<h2><strong>1:1문의</strong></h2>
+					
+					<div class="viewDiv">
+					
+						<div class="viewHead">
+						
+							<div class="subject">
+							
+								<ul>
+									<li class="cate">${oo_view.oo_type}</li>
+									<li>${oo_view.oo_title}</li>
+								</ul>
+								
+								
+							</div>
+							
+							
+							<div class="day">
+								<p class="txt">등록일<span>
+                                <fmt:formatDate pattern="yyyy-MM-dd" value="${oo_view.oo_wdate}"/></span></p>
+								
+								
+								
+								
+								<c:if test="${oo_view.oo_answer == null }">
+								
+								<p class="btn"><span class="nbtnMini">답변대기</span></p>
+								
+								</c:if>
+								
+								
+						        <c:if test="${oo_view.oo_answer != null }">
+								
+								<p class="btn"><span class="obtnMini">답변완료</span></p>
+								
+								</c:if>
+								
+								
+							</div>
+							
+							
+						</div>
+						
+
+						<div class="viewContents">
+							${oo_view.oo_content}
+						</div>
+						
+						
+					</div>
+
+
+
+					<!-- 답변 -->
+					
+					<c:if test="${oo_view.oo_answer != null }">
+								
+					<div class="answer">
+					
+						<div class="inbox">
+						
+							<div class="aname">
+								
+								<p>담당자 <span>  <fmt:formatDate pattern="yyyy-MM-dd HH:mm:ss" value="${oo_view.oo_udate}"/></span>
+								
+								<!-- [2014-03-04&nbsp;&nbsp;15:01:59]</span> -->
+								
+								</p>
+								
+							</div>
+
+							<div class="atxt">
+								${oo_view.oo_answer}
+							</div>
+							
+						</div>
+						
+					</div>
+					
+                    </c:if>
+                    
+
+					<!-- Btn Area -->
+					<div class="btnArea">
+						
+						<div class="bRight">
+						
+							<ul>
+								<li><a href="admin_oofnq_answer?oo_num=${oo_view.oo_num}" class="nbtnbig mw">답글달기&수정</a></li>
+								<li><a href="javascript:oo_delete()" class="nbtnbig mw">삭제</a></li>
+								<li><a href="admin_oofnq_list" class="sbtnMini mw">목록</a></li>
+							</ul>
+							
+						</div>
+						
+						
+					</div>
+					<!-- //Btn Area -->
+					
+					
+					<script type="text/javascript">
+						
+						function oo_delete() {
+
+							var result = confirm('삭제 하시겠습니까?');
+							
+							var oo_num = ${oo_view.oo_num};
+
+							if (result == true) {
+
+								alert("삭제하겠습니다");
+								window.location.href = 'admin_oofnq_delete?oo_num=' + oo_num;
+								
+							} else {
+								
+								alert("삭제를 취소합니다");
+							}
+							
+
+						}
+						
+						</script>
+					
+				</div>
+				
 			</div>
+			
+			<!-- //contents -->
+
 		</div>
-		</section>
 </body>
 </html>

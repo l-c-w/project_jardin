@@ -40,7 +40,6 @@ public class PagingDto {
 		
 		setTotal(total);
 		
-		
 		//
 
 		calcLastPage(getTotal(), getCntPerPage());
@@ -55,7 +54,36 @@ public class PagingDto {
 		System.out.println("lastpage : "+getLastPage());
 		
 	}
+	
+	
+	
+	public void paging (int total, int nowPage, int cntPerPage) {
 
+		setNowPage(nowPage);
+		
+		setCntPerPage(cntPerPage);
+		
+		setTotal(total);
+		
+		//
+
+		calcLastPage(getTotal(), getCntPerPage());
+		
+		calcStartEndPage(getNowPage(), cntPage);
+		
+		calcStartEnd(getNowPage(), getCntPerPage());
+		
+		
+		System.out.println("startpage : "+getStartPage());
+		System.out.println("endpage : "+getEndPage());
+		System.out.println("lastpage : "+getLastPage());
+		System.out.println("start : "+start);
+		System.out.println("end : "+end);
+		System.out.println("---------------------------");
+		
+	}
+	
+	
 	
 	
 	// 제일 마지막 페이지 계산      ex) 10개 있는데 한 페이지에 5개씩이면 마지막페이지는 2

@@ -41,11 +41,8 @@ public class CuServiceImpl implements CuService {
 		
 		CuDao cdao = sqlsession.getMapper(CuDao.class);
 		
-		ArrayList<NoticeDto> ndtos = cdao.n_getBoardList(search);
-		
 		int total = cdao.n_getBoardListCnt(search);
 
-		
 		if (nowPage == null && cntPerPage == null) {
 			nowPage = "1";
 			cntPerPage = "10";
@@ -59,11 +56,11 @@ public class CuServiceImpl implements CuService {
 			cntPerPage = "10";
 		}
 
-		pagedto = new PagingDto(total, Integer.parseInt(nowPage), Integer.parseInt(cntPerPage));
+		search.paging(total, Integer.parseInt(nowPage), Integer.parseInt(cntPerPage));
+		
+		model.addAttribute("paging", search);
 
-		model.addAttribute("paging", pagedto);
-
-		model.addAttribute("viewAll", ndtos);
+		model.addAttribute("viewAll", cdao.n_getBoardList(search));
 		
 	}
 	

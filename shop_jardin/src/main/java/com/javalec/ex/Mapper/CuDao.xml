@@ -39,13 +39,10 @@
     <select id="n_selectBoard" resultType="com.javalec.ex.Dto.MDto.NoticeDto">
     
        SELECT * 
-		FROM (
-			SELECT ROWNUM RN, A.* 
+		FROM ( SELECT ROWNUM RN, A.* 
 				FROM (SELECT * 
-						FROM notice 
-						ORDER BY n_num DESC 
-						) A
-				)
+					  FROM notice 
+					  ORDER BY n_num DESC ) A )
 	WHERE RN BETWEEN #{start} AND #{end}
     </select>
     
@@ -92,20 +89,24 @@
 	
 	<select id="n_getBoardList" resultType="com.javalec.ex.Dto.MDto.NoticeDto">
 
-		SELECT n_num, n_title, n_content, n_hit, n_wdate FROM notice
-
+       select * 
+       
+       from ( select ROWNUM RN, a.* 
+       
+                       from (SELECT * FROM notice order by n_num DESC ) a)
+		
 		<trim prefix="WHERE" prefixOverrides="AND|OR">
 
 			<if test="searchType=='title' and keyword != null and keyword != '' ">
 
-				AND n_TITLE like '%' ||  #{keyword} || '%'
+				n_TITLE like '%' ||  #{keyword} || '%' 
 
 				
 			</if>
 
 			<if test="searchType=='content' and keyword != null and keyword != '' ">
 
-				AND n_CONTENT like '%' ||  #{keyword} || '%'
+				n_CONTENT like '%' ||  #{keyword} || '%' 
 
 			</if>
 
@@ -118,7 +119,8 @@
 			
 
 		</trim>
-
+		
+		and RN BETWEEN #{start} AND #{end}
 
 	</select>
 
@@ -372,9 +374,7 @@
 
 	<select id="f_getBoardListCnt" resultType="int">
 
-		SELECT count(*) as listCnt
-
-		FROM fnq
+		SELECT count(*) FROM fnq
 
 		<trim prefix="WHERE" prefixOverrides="AND|OR">
 

@@ -22,86 +22,219 @@
 
 <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/admin_mlist.css?ver=1">
 
+
+<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/reset.css?v=Y" />
+<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/layout.css?v=Y" />
+<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/content.css?v=Y" />
+
+
+
 </head>
 <body>
 <!-- 리스트 붙여넣기 -->
 	<jsp:include page="../admin_header.jsp"/>
 	<!-- --------------------------------------------------------------------------------------------------------------------------- -->
-	<section>
-				<p>1:1문의</p>
+	
+	<p>1:1문의</p>
 	<div class="notice_conts" id="contentArea">
 				
+				<!-- contents -->
+			<div id="contents">
+			
+				<div id="mypage">
 				
-				<div class="searching">
-				
-				<form action="" name="" method="post">
-				
-				<select name="">
-				
-					<option value="all">전체</option>
-					<option value="title">제목</option>
-					<option value="content">내용</option>
-					<option value="reply">답변여부</option>
-					<option value="categry">분류</option>
-				</select>
-				
-				<input type="text" name="" >
-				
-				<input type="submit" value="검색">
-				
-				</form>
-				</div>
-				
-				
-				<div class="tb_row">
-				
-					<table id="notice_list">
-						
-						<colgroup>
-							<col width="5%">
-							<col width="15%">
-							<col width="40%">
-							<col width="10%">
-							<col width="10%">
-							<col width="10%">
-						</colgroup>
-						
-						<thead>
-							<tr>
-								<th>번호</th>
-								<th>분류</th>
-								<th>제목</th>
-								<th>작성자</th>
-								<th>등록일</th>
-								<th>답변여부</th>
-							</tr>
-						</thead>
-						
-						<tr class="notice_tr" onclick="">
-							<td>1</td>						
-							<td>교환/환불</td>
-							<td>상품이 이상해요</td>
-							<td>김씨</td>
-							<td>2020/05/27</td>
-							<td>답변대기</td>
-						</tr>
-						
-					</table>
+					<h2><strong>1:1문의</strong></h2>
 					
-				</div>
-				
-				
-				<div id="write_notice">
-					<button type="button" onclick="">글작성</button>
-				</div>
-				
-				
-				<div class="pagination" id="pagination">
-				
-				
+					<div class="orderDivNm">
+					
+						<table summary="NO, 종류, 적립포인트, 적립날짜, 상태 순으로 현재 적립된 포인트를 조회 하실수 있습니다." class="orderTable2" border="1" cellspacing="0">
+							
+							<colgroup>
+							
+							<col width="9%" class="tnone" />
+							<col width="14%" class="tw20" />
+							<col width="*" />
+							<col width="15%" class="tnone" />
+							<col width="15%" class="tw30" />
+							
+							</colgroup>
+							
+							
+							<thead>
+								<th scope="col" class="tnone">NO.</th>
+								<th scope="col">분류</th>
+								<th scope="col">제목</th>
+								<th scope="col" class="tnone">등록일</th>
+								<th scope="col">처리상태</th>
+							</thead>
+							
+							
+							<tbody>
+							
+						    <c:if test="${not empty viewAll}">
+							
+							<c:forEach var="oo_list" items="${viewAll}">
+							
+								<tr>
+								
+									<td class="tnone">${oo_list.oo_num}</td>
+									
+									<td>${oo_list.oo_type}</td>
+									
+									<td class="left"><a href="admin_oofnq_view?oo_num=${oo_list.oo_num}">${oo_list.oo_title}</a></td>
+									
+									<td class="tnone"><fmt:formatDate pattern="yyyy-MM-dd" value="${oo_list.oo_wdate}"/></td>
+									
+									
+									
+									
+									<c:if test="${oo_list.oo_answer == null }">
+									
+									<td>
+										<ul class="state">
+											<li><div class="nbtnMini iw83">답변대기</div></li>
+										</ul>
+									</td>
+									
+									</c:if>
+									
+									
+									
+									<c:if test="${oo_list.oo_answer != null }">
+									
+									<td>
+										<ul class="state">
+											<li><div class="obtnMini iw83">답변완료</div></li>
+										</ul>
+									</td>
+									
+									</c:if>
+									
+									
+								</tr>
+								
+								
+						     </c:forEach>
+						 
+						 	</c:if>
+						 	
+								
+							<!-- 	
+								<div class="nbtnMini iw83">답변대기</div></li>
+								<div class="obtnMini iw83">답변완료</div></li>
+							 -->
+								 
+
+							</tbody>
+							
+						</table>
+						
+					</div>
+					
+					
+					<c:if test="${empty viewAll}">
+					 
+					<div class="noData">   문의 하신 내용이 없습니다. </div>
+						
+				     </c:if>
+				       
+				       
+				       
+				        <div class="btnAreaList">
+					
+						<div class="bwright">
+						
+							<ul>
+								<li><a href="../mypage/inquiry_write" class="writeBtn" style="color: white;">답글쓰기</a></li>
+							</ul>
+							
+						</div>
+				       
+				       
+				       
+				       <c:if test="${not empty viewAll}">
+
+							<!-- 페이징이동1 -->
+
+						<div class="allPageMoving1">
+						
+						
+							<div style="display: block; text-align: center;">
+
+
+								<!-- 첫페이지 이동 -->
+								<a href="admin_oofnq_list?nowPage=${paging.startPage}&cntPerPage=${paging.cntPerPage}" class="n">
+								<img src="${pageContext.request.contextPath}/images/btn/btn_pre2.gif" alt="처음으로"/>
+								</a>
+
+
+								<!-- 이전페이지로 이동 -->
+								
+								<c:if test="${paging.nowPage != 1}">
+								<a href="admin_oofnq_list?nowPage=${paging.nowPage - 1}&cntPerPage=${paging.cntPerPage}" class="pre">
+								<img src="${pageContext.request.contextPath}/images/btn/btn_pre1.gif" alt="앞페이지로"/><!-- &lt; -->
+								</a>
+								</c:if>
+								
+								
+								<!-- 순차 -->
+								
+								<c:forEach begin="${paging.startPage}" end="${paging.endPage}" var="p">
+									
+									<c:choose>
+									
+										<c:when test="${p == paging.nowPage}">
+											<a href="#" class="reviews"><strong>${p}</strong></a>
+										</c:when>
+										
+										<c:when test="${p != paging.nowPage }">
+											<a href="admin_oofnq_list?nowPage=${p}&cntPerPage=${paging.cntPerPage}">${p}</a>
+										</c:when>
+										
+									</c:choose>
+									
+								</c:forEach>
+								
+								
+								
+								<!-- 다음페이지 이동 -->
+							
+								
+								<c:if test="${paging.nowPage != paging.lastPage}" >
+								<a href="admin_oofnq_list?nowPage=${paging.nowPage+1}&cntPerPage=${paging.cntPerPage}" class="next"><!-- &gt; -->
+								<img src="${pageContext.request.contextPath}/images/btn/btn_next1.gif" alt="뒤페이지로"/>
+								</a>
+								</c:if>
+
+
+								<!-- 마지막 페이지 이동 -->
+								<a href="admin_oofnq_list?nowPage=${paging.lastPage}" class="n" >
+								<img src="${pageContext.request.contextPath}/images/btn/btn_next2.gif" alt="마지막페이지로"/>
+								</a>
+
+							</div>
+							
+						</div>
+						
+						
+						<!-- //페이징이동1 -->
+						
+						
+						</c:if>
+						
+						
+					</div>
+
 				</div>
 				
 			</div>
-			</section>
+			<!-- //contents -->
+				
+				
+				
+			
+				
+	</div>
+			
 </body>
 </html>

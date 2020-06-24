@@ -1,5 +1,6 @@
 package com.javalec.ex.Service.AMService;
 
+import java.security.Timestamp;
 import java.util.ArrayList;
 
 import javax.inject.Inject;
@@ -193,7 +194,46 @@ public class AMServiceImpl implements AMService {
 		cdao.f_update(fdto);
 		
 	}
+
+
+	@Override
+	public void o_list(Model model, String nowPage, String cntPerPage, PagingDto pagedto) {
+		
+        CuDao cdao = sqlsession.getMapper(CuDao.class);
+		
+		int total = cdao.o_countBoard_admin();
+		
+		if (nowPage == null && cntPerPage == null) {
+			nowPage = "1";
+			cntPerPage = "10";
+		} 
+		
+		else if (nowPage == null) {
+			nowPage = "1";
+		} 
+		
+		else if (cntPerPage == null) { 
+			cntPerPage = "10";
+		}
+		
+		pagedto = new PagingDto(total, Integer.parseInt(nowPage), Integer.parseInt(cntPerPage));
+		
+		model.addAttribute("paging", pagedto);
+			
+		model.addAttribute("viewAll", cdao.o_selectBoard_admin(pagedto));
 	
+	}
+
+
+	@Override
+	public void o_answer(Model model, String oo_num, String oo_answer) {
+		
+		CuDao cdao = sqlsession.getMapper(CuDao.class);
+		
+		cdao.oo_answer(oo_answer, oo_num);
+		
+		
+	}
 	
 	
 	

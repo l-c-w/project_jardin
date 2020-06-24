@@ -202,8 +202,6 @@ public class CuServiceImpl implements CuService {
 	// 1:1문의 ★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★
 	
 	
-	
-	
 
 
 	@Override
@@ -216,6 +214,7 @@ public class CuServiceImpl implements CuService {
 	}
 
 
+	
 	
 	@Override
 	public void o_list(Model model, String nowPage, String cntPerPage, PagingDto pagedto, String id) {
@@ -247,6 +246,8 @@ public class CuServiceImpl implements CuService {
 		
 	}
 
+	
+	
 
 	@Override
 	public void o_update(String oo_type, String oo_title, String oo_content, String oo_num) {

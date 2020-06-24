@@ -337,7 +337,6 @@ public class CuController {
 		
 		cservice.o_list(model, nowPage, cntPerPage, pagedto, id);
 		
-		
 		return "/mypage/inquiry_list";
 	}
 	
@@ -424,8 +423,6 @@ public class CuController {
 	public String guide() {
 		return "/customer/guide";
 	}
-	
-	
 	
 	
 	

@@ -13,7 +13,7 @@ import com.javalec.ex.Dto.MDto.Oo_fnqDto;
 public interface CuDao {
 	
 	
-	//notice 공지사항  ★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★
+	//notice 공지사항  ★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★
 	
 	
 	public NoticeDto n_view(String n_num);
@@ -41,16 +41,18 @@ public interface CuDao {
     
 	
 	
-	
-	// 1:1문의  ★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★
+	// 1:1문의  ★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★
     
-	
 	
     public Oo_fnqDto oo_view(String oo_num);
 	
 	public void oo_write(String id, String oo_type, String oo_title, String oo_content);
 
+	public int o_countBoard_admin();
+	
 	public int o_countBoard(String id);
+	
+	public ArrayList<Oo_fnqDto> o_selectBoard_admin(PagingDto pdto);
 	
 	public ArrayList<Oo_fnqDto> o_selectBoard(PagingDto pdto);
 	
@@ -58,18 +60,12 @@ public interface CuDao {
     
     public void oo_update(String oo_type, String oo_title, String oo_content, String oo_num);
     
- 
-    //해야 할 거 
-    
-    
-    public void oo_answer(String oo_answer, Timestamp oo_udate, String oo_num);
+    public void oo_answer(String oo_answer, String oo_num);
     
     
 	
     
-    
-	
-	// faq  ★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★
+	// faq  ★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★
 	
 	
      public ArrayList<FnqDto> f_list();

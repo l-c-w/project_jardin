@@ -163,21 +163,6 @@
 
 	</select>
 	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
     
     
     
@@ -186,11 +171,33 @@
     
     
     
-    
     <!-- 총 게시글 갯수 출력 -->
+    
+    <select id="o_countBoard_admin" resultType="int">
+		SELECT COUNT(*) FROM oo_fnq
+	</select>
+    
+    
 	<select id="o_countBoard" resultType="int">
 		SELECT COUNT(*) FROM oo_fnq where id=#{param1}
 	</select>
+	
+	
+	<!-- 페이징 처리 후 게시글 조회 -->
+    <select id="o_selectBoard_admin" resultType="com.javalec.ex.Dto.MDto.Oo_fnqDto">
+    
+       SELECT * 
+		FROM (
+			SELECT ROWNUM RN, A.* 
+				FROM (SELECT * 
+						FROM oo_fnq
+						ORDER BY oo_num DESC 
+						) A
+				)
+	WHERE RN BETWEEN #{start} AND #{end} 
+	
+    </select>
+	
 	
 	
 	
@@ -208,6 +215,7 @@
 	WHERE RN BETWEEN #{start} AND #{end} 
 	
     </select>
+    
     
     
     <select id="oo_view" resultType="com.javalec.ex.Dto.MDto.Oo_fnqDto">
@@ -242,16 +250,14 @@
 	
 	
 	
+	<!-- 1:1문의는 본인만 보니까 조회수 up x -->
+	
 	<update id="oo_answer"> 
 	
-	update oo_fnq set oo_answer=#{param1} oo_udate=#{param2} where oo_num=#{param2}
+	update oo_fnq set oo_answer=#{param1} , oo_udate=sysdate where oo_num=#{param3}
 	 
 	</update>
 	
-	<!-- 1:1문의는 본인만 보니까 조회수 up x -->
-    
-    
-    
     
     
     
@@ -259,7 +265,12 @@
     
     
     
-   <!--  
+    <select id="f_view" resultType="com.javalec.ex.Dto.MDto.FnqDto">
+		select * from fnq where f_num=#{param1}
+	</select>
+    
+    
+    <!--  
    
    <select id="f_list" resultType="com.javalec.ex.Dto.MDto.FnqDto">
     
@@ -269,11 +280,6 @@
     
     -->
     
-    
-    
-    <select id="f_view" resultType="com.javalec.ex.Dto.MDto.FnqDto">
-		select * from fnq where f_num=#{param1}
-	</select>
     
     
     

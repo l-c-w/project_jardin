@@ -1,6 +1,6 @@
 package com.javalec.ex.Dto.MDto;
 
-import java.sql.Timestamp;
+import java.util.Date;
 
 public class Oo_fnqDto {
 
@@ -9,17 +9,13 @@ public class Oo_fnqDto {
 		
 	}
 
-	public Oo_fnqDto(String oo_num, String id, String oo_type, String oo_title, String oo_content, String oo_file,
-			Timestamp oo_wdate, Timestamp oo_udate, String oo_answer) {
+	public Oo_fnqDto(String oo_num, String id, String oo_type, String oo_title, String oo_content) {
 		this.oo_num=oo_num;
 		this.id=id;
 		this.oo_type=oo_type;
 		this.oo_title=oo_title;
 		this.oo_content=oo_content;
-		this.oo_file=oo_file;
-		this.oo_wdate=oo_wdate;
-		this.oo_udate=oo_udate;
-		this.oo_answer=oo_answer;
+		
 	}
 
 	
@@ -28,9 +24,11 @@ public class Oo_fnqDto {
 	private String oo_type;
 	private String oo_title;
 	private String oo_content;
-	private String oo_file;
-	private Timestamp oo_wdate;
-	private Timestamp oo_udate;
+	
+//	private String oo_file;
+	private Date oo_wdate;
+	private Date oo_udate;
+	
 	private String oo_answer;
 	
 	public String getOo_num() {
@@ -73,27 +71,20 @@ public class Oo_fnqDto {
 		this.oo_content = oo_content;
 	}
 
-	public String getOo_file() {
-		return oo_file;
-	}
 
-	public void setOo_file(String oo_file) {
-		this.oo_file = oo_file;
-	}
-
-	public Timestamp getOo_wdate() {
+	public Date getOo_wdate() {
 		return oo_wdate;
 	}
 
-	public void setOo_wdate(Timestamp oo_wdate) {
+	public void setOo_wdate(Date oo_wdate) {
 		this.oo_wdate = oo_wdate;
 	}
 
-	public Timestamp getOo_udate() {
+	public Date getOo_udate() {
 		return oo_udate;
 	}
 
-	public void setOo_udate(Timestamp oo_udate) {
+	public void setOo_udate(Date oo_udate) {
 		this.oo_udate = oo_udate;
 	}
 

@@ -1,7 +1,6 @@
 package com.javalec.ex.Dto.MDto;
 
-import java.sql.Date;
-import java.sql.Timestamp;
+import java.util.Date;
 
 public class NoticeDto {
 

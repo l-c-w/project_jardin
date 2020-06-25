@@ -254,7 +254,7 @@
 	
 	<update id="oo_answer"> 
 	
-	update oo_fnq set oo_answer=#{param1} , oo_udate=sysdate where oo_num=#{param3}
+	update oo_fnq set oo_answer=#{param1} , oo_udate=sysdate where oo_num=#{param2}
 	 
 	</update>
 	

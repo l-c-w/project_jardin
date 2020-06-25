@@ -113,7 +113,7 @@ $(document).ready(function() {
 							<div class="data">
 								<ul>
 									<li>작성자<span>${c_view.id}</span></li>
-									<li class="tnone">등록일<span><fmt:formatDate pattern="yyyy-MM-dd" value="${c_view.cr_wdate}"/></span></li>
+									<li class="tnone">등록일<span><fmt:formatDate pattern="yyyy-MM-dd hh:mm" value="${c_view.cr_wdate}"/></span></li>
 									<li class="tnone">조회수<span>${c_view.cr_hit}</span></li>
 								
 								

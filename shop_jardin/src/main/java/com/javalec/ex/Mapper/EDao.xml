@@ -144,11 +144,10 @@
 		select * from winner_joiners where w_code=#{param1}
 	</select>
 	<!-- comment ajax-->
-	<select id="event_comment" resultType="com.javalec.ex.Dto.EDto.Event_commentDto">
+	<select id="event_comment" parameterType="com.javalec.ex.Dto.EDto.EventDto" resultType="com.javalec.ex.Dto.EDto.Event_commentDto">
 		<![CDATA[
 		select * from (select rownum rnum, ec_num,e_code,id,ec_content,to_char(ec_wdate, 'YYYY-MM-DD HH24:MI:SS') as ec_date,
-		ec_udate from (select * from event_comment ec where e_code=#{param1} order by ec_wdate desc))
-        event where rnum>=#{param2} and rnum<=#{param3}
+		ec_udate from (select * from event_comment ec where e_code=#{e_code} order by ec_wdate desc)) event
         ]]>
 	</select>
 	

@@ -40,7 +40,7 @@ public interface EDao {
 	
 	// 이벤트 본문과 댓글 뷰 메소드, 댓글 수정 메소드
 	public EventDto event_view(String e_code);
-	public ArrayList<Event_commentDto> event_comment(String e_code, int page, int limit);
+	public ArrayList<Event_commentDto> event_comment(EventDto eventDto);
 	public int eModify_comment(String ec_num, String content);
 	
 	// 당첨자 리스트(all, tit, con은 검색 옵션)

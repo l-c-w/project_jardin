@@ -15,7 +15,7 @@
 <link rel="stylesheet" type="text/css" href="../css/reset.css?v=Y" />
 <link rel="stylesheet" type="text/css" href="../css/layout.css?v=Y" />
 <link rel="stylesheet" type="text/css" href="../css/content.css?v=Y" />
-<script type="text/javascript" src="../js/jquery.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script type="text/javascript" src="../js/top_navi.js"></script>
 <script type="text/javascript" src="../js/left_navi.js"></script>
 <script type="text/javascript" src="../js/main.js"></script>
@@ -28,44 +28,129 @@
 <![endif]-->
 <script type="text/javascript">
 
-var page = ${page};
-var e_code = ${e_code};
+const page = ${page};
+const e_code = ${e_code};
 
 // html 페이지 모두 호출 후에 jquery실행
 $(function(){		
 	getComment_list();
 	getCommentCount();
+	commentPaging();
 });
 
-function getCommentCount(){	//	총 n개의 댓글이 있습니다. 나타내는 스크립트
+
+function commentPaging(){	//	댓글 페이징
+	
+	$.ajax({
+		type: 'get',
+		url: './commentPaging',
+		dataType: 'json',
+		data: { 
+			page: page,
+			e_code: e_code
+		},
+		contentType: 'application/json; charset=UTF-8;',
+		success: function(data){
+			alert('페이징 성공');
+			var html = '';
+			var startpage = 1;
+			console.log(data);
+			console.log('e_code : ' + data.e_code);
+			console.log('page : ' + data.page);
+			console.log('maxpage : ' + data.maxpage);
+			console.log('startpage : ' + data.startpage);
+			console.log('endpage : ' + data.endpage);
+			console.log('startrow : ' + data.startrow);			
+			console.log('endrow : ' + data.endrow);
+			
+			var page = data.page;
+			var maxpage = data.maxpage;
+			var startpage = data.startpage;
+			var endpage = data.endpage;
+			var startrow = data.startrow;
+			var endrow = data.endrow;
+			
+			console.log(typeof `\${data.startpage}`);
+			console.log('var startpage');
+			console.log(typeof startpage);
+			console.log(startpage);
+			console.log(typeof startpage);
+			console.log(startrow);
+			
+			console.log('dfdsfdsf', '<a href="event_view?page=' + (startpage + 10) + '&e_code=' + e_code + '" class="n">');
+			console.log('dfdsfdsf2', `<a href="event_view?maxpage=\${maxpage + 1}&e_code=${e_code + 1}" class="n">`);
+			
+			if(startpage > 0){
+				
+				html += '<div class="allPageMoving1">';
+				html += '<a href="event_view?page=' + startpage + '&e_code=' + e_code + '" class="n">';
+				html += '<img src="../images/btn/btn_pre2.gif" alt="처음으로" /></a>';
+				html += `<c:if test="\${page <= 1 }">`;
+				html += '<img src="../images/btn/btn_pre1.gif" alt="앞페이지로" />';
+				html += `</c:if>`;
+				html += `<c:if test="\${page > 1 }">`;
+				html += `<a href="event_view?page=\${page - 1 }&e_code=${e_code }"class="pre">`;
+				html += '<img src="../images/btn/btn_pre1.gif" alt="앞페이지로" /></a>';
+				html += `</c:if>`;
+				html += `<c:forEach var="a" begin="${startpage }" end="${endpage }" step="1">`;
+				html += '<span class="page_num">';
+				html += `<c:choose><c:when test="\${a == page }">`;
+				html += '<strong id="page_num2">' + ${a} + '</strong>';
+				html += `</c:when></c:choose>`;
+				html += '</span>';
+				html += `</c:forEach>`;
+				
+				html += `<c:if test="\${page >= maxpage }">`;
+				html += '<img src="../images/btn/btn_next1.gif" alt="뒤페이지로"/>';
+				html += `</c:if>`;
+				
+				html += '</div>';
+				
+			}			
+			
+		$('.btnAreaList').html(html);
+		
+		},
+		error: function(request, status, error){
+			alert('페이징 실패');
+		}
+		
+		
+	});
+	
+	
+}
+
+
+
+
+function getCommentCount(){	//	총 n개의 댓글이 있습니다.
 	
 	$.ajax({
 		type:'get',
 		url:'./getCommentCount',
 		dataType:'json',
-		data : { "e_code":e_code },
+		data : {e_code: e_code },
 		contentType:'application/json; charset=UTF-8;',
 		success:function(data){	// data에 값이 담김
-			alert('성공');
 			
 			var html='';
 		
-			console.log(data.ec_date);
-			
-			if(data >= 1){
-				for(var i=0; i<data.length; i++){
-					html += '<li class="in">';
-					html += '<p class="txt">총 <span class="orange">' + data.ec_date + '</span> 개의 댓글이 달려있습니다.</p>';
-					html += '</li>';
-				}
-			}else{
-				html += '<li class="in">';
-				html += '<p class="txt">총 0개의 댓글이 달려있습니다.</p></li></ul>';
-				html += '</li>';
-			}
+			html += '<ul id="cConut">';
+			html += '<li class="in">';
+			html += '<p class="txt">총 <span class="orange">' + data + '</span> 개의 댓글이 달려있습니다.</p>';
+			html += '<p class="password">비밀번호  ';
+			html += '<input type="password" class="replynum" />';
+			html += '</p>';
+			html += '<input type="text" class="replyType emptySe" placeholder=" 댓글을 작성하려면 로그인을 해주세요." readonly>';
+			html += '</li>';
+			html += '<li class="btn">';
+			html += '<input type="button" class="replyBtn emptySe" value="등록">';
+			html += '</li>';
+			html += '</ul>';					
 			
 			console.log(html);
-			$('#cConut').html(html)
+			$('#e_param').html(html);
 			
 		},
 		error:function(request, status, error){
@@ -82,8 +167,8 @@ function getComment_list(){	//	이 스크립트는 댓글 리스트만 불러옵
 	$.ajax({
 		type:'get',
 		url:'./event_comment',
-		dataType:'json',
-		data : { "page":page, "e_code":e_code },
+		/* dataType:'json', */
+		data : {e_code: e_code },
 		contentType:'application/json; charset=UTF-8;',
 		success:function(data){	// data에 값이 담김
 			var html="";
@@ -97,14 +182,15 @@ function getComment_list(){	//	이 스크립트는 댓글 리스트만 불러옵
 					html += "</ul>";
 				}
 			}else{
-				html += "<li class='name'></li>";
+				html += "<li class='name'></li><br>";
 				html += "<li class='txt'>등록된 댓글이 없습니다.</li>";
 			}
 			
-			$('#commentViewForm').html(html)			
+			$('#commentViewForm').html(html)
 		},
 		error:function(request, status, error){
-			alert('실패' + error);
+			alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
+// 			alert('리스트 출력 실패' + error);
 		}			
 	});
 
@@ -312,7 +398,7 @@ function getComment_list(){	//	이 스크립트는 댓글 리스트만 불러옵
 					
 					<!-- 페이징이동 -->
 					<div class="btnAreaList">
-						<div class="allPageMoving1">
+						<%-- <div class="allPageMoving1">
 							<!-- 첫 페이지 이동 -->
 							<a href="event_view?page=${startpage }&e_code=${event_view.e_code }" class="n">
 								<img src="../images/btn/btn_pre2.gif" alt="처음으로"/>
@@ -352,7 +438,7 @@ function getComment_list(){	//	이 스크립트는 댓글 리스트만 불러옵
 							<a href="event_view?page=${maxpage }&e_code=${event_view.e_code }" class="n">
 								<img src="../images/btn/btn_next2.gif" alt="마지막페이지로"/>
 							</a>
-						</div>
+						</div> --%>
 					</div>
 					<!-- //페이징이동 -->
 

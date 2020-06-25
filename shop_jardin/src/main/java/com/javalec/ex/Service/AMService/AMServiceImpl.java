@@ -1,10 +1,6 @@
 package com.javalec.ex.Service.AMService;
 
-import java.security.Timestamp;
 import java.util.ArrayList;
-
-import javax.inject.Inject;
-import javax.servlet.http.HttpServletRequest;
 
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;

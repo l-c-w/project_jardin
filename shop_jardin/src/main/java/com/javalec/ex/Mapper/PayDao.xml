@@ -13,36 +13,45 @@
 	</select>
 	
 	<!-- 장바구니 수량변경 -->
-	<update id="change_amount">
-		update cart set amount=#{p1} where cart_code=#{p2}
+	<update id="change_amount" parameterType="com.javalec.ex.Dto.PayDto.CartDto">
+		update cart set amount=#{amount} where cart_code=#{cart_code}
 	</update>
 	
 	<!-- 장바구니 삭제 -->
 	<delete id="cart_del">
-		delete from cart where cart_code=#{param1}
+		delete from cart where cart_code in( 
+		<foreach collection="array" item="del" separator=",">
+		#{del}
+		</foreach>
+		)
 	</delete>
 	
 	<!-- 장바구니에서 주문페이지로 제품 넘기기-->
 	<select id="go_order" resultType="com.javalec.ex.Dto.PayDto.CartDto">
 		select cart.cart_code, product.p_code, product.p_name, product.p_category, product.p_price, product.p_point, cart.amount 
 		from cart, product
-		where cart.id=#{param1} and cart.cart_code=#{param2} and cart.p_code=product.p_code
+		where cart.cart_code in (
+		<foreach collection="array" item="from_cart" separator=",">
+		#{from_cart}
+		</foreach>
+		)
+		and cart.p_code=product.p_code
 	</select>	
 	
 	<!-- 포인트 적립 리스트,총액 가져오기 -->
 	<select id="point_list" resultType="com.javalec.ex.Dto.PayDto.PointDto">
 		select * from point where id=#{param1} order by po_date desc 
 	</select>
-	<select id="point_sum" resultType="int">
-		select sum(po_point) from point where id=#{param1}
+	<select id="point_sum" resultType="int" >
+		select nvl(sum(po_point),0) from point where id=#{param1}
 	</select>
 	
 	<!-- 포인트 사용 리스트,총액 가져오기 -->
 	<select id="upoint_list" resultType="com.javalec.ex.Dto.PayDto.Use_pointDto">
 		select * from use_point where id=#{param1} order by u_date desc
 	</select>
-	<select id="upoint_sum" resultType="int">
-		select sum(u_point) from use_point where id=#{param1}
+	<select id="upoint_sum" resultType="integer">
+		select nvl(sum(u_point),0) from use_point where id=#{param1}
 	</select>
 	
 	<!-- 사용가능포인트-->
@@ -62,7 +71,7 @@
 	
 	<!-- 사용가능한 쿠폰 갯수 -->
 	<select id="usable_coupon" resultType="Integer">
-		<![CDATA[select count(*) as count
+		<![CDATA[select nvl(count(*),0) as count
 		from coupon, coupon_list 
 		where id=#{param1} and coupon.cou_code=coupon_list.cou_code and (coupon_list.exp_date-sysdate)>0 and coupon_list.cou_state is null]]>
 	</select>
@@ -126,9 +135,13 @@
 	
 	<!-- 주문물품 등록 -->
 	<insert id="sold_product">
-		insert into sold_products values(#{param1},#{param2},
-		(select p_code from cart where id=#{param2} and cart_code=#{param3}),
-		(select amount from cart where id=#{param2} and cart_code=#{param3}))
+		insert into sold_products values
+		<foreach collection="array" item="cart_code" >
+		(#{param1},#{param2},
+		(select p_code from cart where id=#{param2} and cart_code=#{cart_code}),
+		(select amount from cart where id=#{param2} and cart_code=#{cart_code}))
+		
+		</foreach>
 	
 	</insert>
 	

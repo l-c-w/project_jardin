@@ -151,7 +151,7 @@ $(document).ready(function() {
 					<div class="diviRight">
 						<ul>
 							<li>수정 내용을 회원정보에도 반영합니다.&nbsp;&nbsp;</li>
-							<li onclick="change_member()" style="cursor: pointer;"><a >회원정보반영</a></li>
+							<li onclick="change_member('confirm')" style="cursor: pointer;"><a >회원정보반영</a></li>
 						</ul>
 					</div>
 
@@ -190,9 +190,9 @@ $(document).ready(function() {
 										<c:set var="email_end" value="${fn:substringAfter(email,'@') }"/>
 											<li><input type="text" class="w134" value="${email_front }" name="email1"/ id="email1"></li>
 											<li><span class="valign">&nbsp;@&nbsp;</span></li>
-											<li class="r10"><input type="text" class="w134" value="${email_end }" name="email2" id="email2"/></li>
+											<li class="r10"><input type="text" class="w134" value="${email_end }" name="introduce" id="introduce"/></li>
 											<li>
-												<select id="introduce" name="introduce">
+												<select id="email_tail" name="email_tail">
 													<option value="#" selected="selected">직접입력</option>
 													<option value="naver.com">naver.com</option>
 													<option value="daum.net">daum.net</option>
@@ -667,8 +667,8 @@ $(function(){
 	
 	
 	//이메일 도메인 변경
-	$("#introduce").on("change",function() {
-		$("#email2").val($(this).val());		
+	$("#email_tail").on("change",function() {
+		$("#introduce").val($(this).val());		
 	});
 	
 	//회원정보 수취자로 넘기기
@@ -755,23 +755,7 @@ function openDaumZipAddress2() {
 }
 
 
-//회원정보에 반영
-function change_member() {
-	var member = $("form[name=mem_change]").serialize();
-	$.ajax({
-		type:"post",
-		url:"change_member",
-		data:member,
-		dataType:"json",
-		success: function () {
-			alert("정보가 반영되었습니다.");
-		},
-		error: function () {
-			alert("반영에 실패하였습니다.");
-		}
-	})
-	
-}
+
 
 //결제예정금액 구하기
 function get_total() {
@@ -791,6 +775,27 @@ function get_total() {
 	
 	
 }
+
+//회원정보에 반영
+function change_member(name) {
+
+	var member = $("form[name=confirm]").serialize();
+	$.ajax({
+		type:"post",
+		url:"change_member",
+		data:member,
+		dataType:"json",
+		success: function () {
+			alert("정보가 반영되었습니다.");
+		},
+		error: function () {
+			alert("반영에 실패하였습니다.");
+		}
+	})
+	
+}
+
+
 //form 쿠폰목록 가져오기로 보내기
 function get_coupon(name) {
 	var popupWidth = 1000;

@@ -146,7 +146,7 @@ public class PayController {
 		pays = new Order_confirmService();
 		pays.execute(sqlSession, model);
 
-		return "payment/order_connfirmation";
+		return "payment/order_confirmation";
 	}
 
 }

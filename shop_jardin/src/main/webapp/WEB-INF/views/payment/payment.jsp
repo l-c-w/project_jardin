@@ -115,7 +115,8 @@ $(document).ready(function() {
 									<td><fmt:formatNumber pattern="#,###,###,###">${fromcart.p_price*fromcart.amount }</fmt:formatNumber>  원</td>
 								</tr>
 									<c:set var="total" value="${total+fromcart.p_price*fromcart.amount }"/>
-									<c:set var="point_total" value="${point_total+ (fromcart.p_price/100)*fromcart.amount}"/>
+									
+									<c:set var="point_total"><fmt:parseNumber type="number" integerOnly="true" value="${point_total+ (fromcart.p_price/100)*fromcart.amount}"/></c:set>
 								</c:forEach>
 								
 							</tbody>
@@ -293,8 +294,8 @@ $(document).ready(function() {
 												</select>
 											</li>
 											<li>&nbsp;<span class="valign">-</span>&nbsp;</li>
-											<li><input type="text" class="w74" maxlength="4" name="del_phone2" id="del_phone2"/> <span class="valign">-</span>&nbsp;</li>
-											<li class="r10"><input type="text" class="w74" maxlength="4" name="del_phone3" id="del_phone3"/></li>
+											<li><input type="number" class="w74" maxlength="4" name="del_phone2" id="del_phone2"/> <span class="valign">-</span>&nbsp;</li>
+											<li class="r10"><input type="number" class="w74" maxlength="4" name="del_phone3" id="del_phone3"/></li>
 										</ul>
 									</td>
 								</tr>
@@ -388,9 +389,9 @@ $(document).ready(function() {
 
 						<!-- 회원 일때 -->
 						<h4 class="member">총 주문금액</h4>
-						<input type="hidden" name="del_price" id="del_price" value="${del_price }" readonly="readonly">
-						<input type="hidden" name="total_price" id="total_price" readonly="readonly">
-						<input type="hidden" name="earn_point" id="earn_point" value="${point_total }" readonly="readonly">
+						<input type="number" name="del_price" id="del_price" value="${del_price }" readonly="readonly" style="display: none;">
+						<input type="number" name="total_price" id="total_price" value="${total+del_price }" readonly="readonly" style="display: none;">
+						<input type="number" name="earn_point" id="earn_point" value="${point_total }" readonly="readonly" style="display: none;">
 						<!-- 회원 일때 -->
 						<!-- 비회원 일때  <h4>총 주문금액</h4> //비회원 일때 -->
 
@@ -595,7 +596,7 @@ $(document).ready(function() {
 						<div class="orderCenter">
 							<ul>
 								<li><a href="#" class="nbtnbig iw0140">뒤로가기</a></li>
-								<li onclick="confirmation('confirm')"><a href="#" class="sbtnMini iw0140">주문 / 결제</a></li>								
+								<li onclick="confirmation('confirm')"><a class="sbtnMini iw0140">주문 / 결제</a></li>								
 							</ul>
 						</div>
 					</div>

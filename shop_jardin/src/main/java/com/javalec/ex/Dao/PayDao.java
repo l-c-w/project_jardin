@@ -57,6 +57,9 @@ public interface PayDao {
 	// 주문번호 가져오기(작성중인 리스트)
 	public String get_paycode(String id);
 
+	// 주문서 전체 가져오기
+	public PaymentDto get_payment(String pay_code);
+
 	// 수취인 등록
 	public void make_buyer(BuyerDto buyerDto);
 
@@ -67,12 +70,12 @@ public interface PayDao {
 	public void update_coupon(String cou_num);
 
 	// 포인트 적립
-	public void plus_point(String id, String plus_point, String pay_code);
+	public void plus_point(String id, int plus_point, String pay_code);
 
 	// 사용포인트 차감
 	public void minus_point(String id, int minus_pointm, String pay_code);
 
 	// 재고 차감
-	public void update_stock(String cart_code);
+	public void update_stock(String p_code, int amount);
 
 }

@@ -108,8 +108,14 @@
 	
 	<!-- 주문번호 가져오기 -->
 	<select id="get_paycode" resultType="String">
-		select * from(select * from payment where id=#{param1} and pay_state=
+		select pay_code from(select * from payment where id=#{param1} and pay_state=
 		'결제완료' order by init_date desc) where ROWNUM=1
+	</select>
+	
+	<!-- 주문전체 가져오기 -->
+	<select id="get_payment" resultType="com.javalec.ex.Dto.PayDto.PaymentDto">
+		select * from payment where pay_code=#{param1}
+	
 	</select>
 	
 	<!-- 수취인 등록 -->
@@ -143,6 +149,6 @@
 	
 	<!-- 재고 차감 -->
 	<update id="update_stock">
-	
+		update product set p_stock=p_stock-#{param2} where p_code=#{param1}
 	</update>
 </mapper>

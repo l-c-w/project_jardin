@@ -21,6 +21,7 @@ public class NoticeDto {
 	private String n_title;
 	private String n_content;
 	private int n_hit;
+	
 	private Date n_wdate;
 	private Date n_udate;
 

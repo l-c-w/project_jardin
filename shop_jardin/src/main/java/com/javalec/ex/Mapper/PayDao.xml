@@ -42,6 +42,7 @@
 	<select id="point_list" resultType="com.javalec.ex.Dto.PayDto.PointDto">
 		select * from point where id=#{param1} order by po_date desc 
 	</select>
+	
 	<select id="point_sum" resultType="int" >
 		select nvl(sum(po_point),0) from point where id=#{param1}
 	</select>
@@ -50,6 +51,7 @@
 	<select id="upoint_list" resultType="com.javalec.ex.Dto.PayDto.Use_pointDto">
 		select * from use_point where id=#{param1} order by u_date desc
 	</select>
+	
 	<select id="upoint_sum" resultType="integer">
 		select nvl(sum(u_point),0) from use_point where id=#{param1}
 	</select>
@@ -124,7 +126,6 @@
 	<!-- 주문전체 가져오기 -->
 	<select id="get_payment" resultType="com.javalec.ex.Dto.PayDto.PaymentDto">
 		select * from payment where pay_code=#{param1}
-	
 	</select>
 	
 	<!-- 수취인 등록 -->
@@ -133,16 +134,14 @@
 		#{del_address1},#{del_address2},#{del_demand})
 	</insert>
 	
-	<!-- 주문물품 등록 -->
-	<insert id="sold_product">
-		insert into sold_products values
-		<foreach collection="array" item="cart_code" >
-		(#{param1},#{param2},
-		(select p_code from cart where id=#{param2} and cart_code=#{cart_code}),
-		(select amount from cart where id=#{param2} and cart_code=#{cart_code}))
-		
-		</foreach>
+	<!-- 장바구니 코드로 제품코드,수량 가져오기 -->
+	<select id="get_sold_info" resultType="com.javalec.ex.Dto.PayDto.CartDto">
+		select * from cart where cart_code=#{param1} 
+	</select>
 	
+	<!-- 주문물품 등록 -->
+	<insert id="sold_product" parameterType="com.javalec.ex.Dto.PayDto.Sold_productsDto">
+		insert into sold_products values(#{pay_code},#{p_code},#{id},#{amount})
 	</insert>
 	
 	<!-- 쿠폰사용등록 -->
@@ -151,17 +150,17 @@
 	</update>
 	
 	<!-- 포인트 적립 -->
-	<update id="plus_point">
-		insert into point values(POINT_SEQ.nextval,#{param1},'구매 포인트 적립',#{param2},sysdate,#{param3}) 
+	<update id="plus_point" parameterType="com.javalec.ex.Dto.PayDto.PaymentDto">
+		insert into point values(POINT_SEQ.nextval,#{id},'구매 포인트 적립',#{earn_point},sysdate,#{pay_code}) 
 	</update>
 	
 	<!-- 사용 포인트 등록 -->
-	<update id="minus_point">
-		insert into use_point values(#{param1},#{param2},sysdate,'상품구매 포인트 사용',#{param3}) 
+	<update id="minus_point" parameterType="com.javalec.ex.Dto.PayDto.PaymentDto">
+		insert into use_point values(#{id},#{pay_point},sysdate,'상품구매 포인트 사용',#{pay_code}) 
 	</update>
 	
 	<!-- 재고 차감 -->
-	<update id="update_stock">
-		update product set p_stock=p_stock-#{param2} where p_code=#{param1}
+	<update id="update_stock" parameterType="hashMap">
+		update product set p_stock=p_stock-#{p_code} where p_code=#{amount}
 	</update>
 </mapper>

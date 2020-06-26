@@ -1,6 +1,7 @@
 package com.javalec.ex.Dao;
 
 import java.util.List;
+import java.util.Map;
 
 import javax.inject.Inject;
 
@@ -11,6 +12,7 @@ import com.javalec.ex.Dto.MDto.Member_Dto;
 import com.javalec.ex.Dto.PayDto.BuyerDto;
 import com.javalec.ex.Dto.PayDto.CartDto;
 import com.javalec.ex.Dto.PayDto.PaymentDto;
+import com.javalec.ex.Dto.PayDto.Sold_productsDto;
 
 @Repository
 public class PayDaoImpl implements PayDao {
@@ -60,11 +62,17 @@ public class PayDaoImpl implements PayDao {
 		sqlSession.insert(namespace + ".make_buyer", buyerDto);
 	}
 
+	// 장바구니 코드로 정보 가져오기
+	public CartDto get_sold_info(String cart_code) {
+
+		return sqlSession.selectOne(cart_code);
+	}
+
 	// 주문물품 등록
 	@Override
-	public void sold_product(String pay_code, String id, String[] cart_code) throws Exception {
-		sqlSession.insert(namespace, pay_code);
+	public void sold_product(Sold_productsDto sold_productsDto) throws Exception {
 
+		sqlSession.insert(namespace + ".sold_product", sold_productsDto);
 	}
 
 	// 쿠폰사용 등록
@@ -76,23 +84,22 @@ public class PayDaoImpl implements PayDao {
 
 	// 포인트 적립
 	@Override
-	public void plus_point(String id, int plus_point, String pay_code) throws Exception {
-//		sqlSession.insert(namespace+".plus_point", )
+	public void plus_point(PaymentDto paymentDto) throws Exception {
+		sqlSession.insert(namespace + ".plus_point", paymentDto);
 
 	}
 
 	// 사용포인트 차감
 	@Override
-	public void minus_point(String id, int minus_pointm, String pay_code) throws Exception {
-		// TODO Auto-generated method stub
+	public void minus_point(PaymentDto paymentDto) throws Exception {
+		sqlSession.insert(namespace + ".minus_point", paymentDto);
 
 	}
 
 	// 재고 차감
 	@Override
-	public void update_stock(String[] cart_code) throws Exception {
-		// TODO Auto-generated method stub
-
+	public void update_stock(Map<String, Object> map) throws Exception {
+		sqlSession.update(namespace + ".update_stock", map);
 	}
 
 }

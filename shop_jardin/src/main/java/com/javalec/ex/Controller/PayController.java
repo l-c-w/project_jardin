@@ -91,7 +91,8 @@ public class PayController {
 		// 주문번호 가져오기
 		String pay_code = payservice.get_paycode(id);
 		// 주문서 전체 가져오기
-		model.addAttribute("payment", payservice.get_payment(pay_code));
+		paymentDto = payservice.get_payment(pay_code);
+		model.addAttribute("payment", paymentDto);
 		// 수취인 등록
 		payservice.make_buyer(buyerDto);
 		// 주문물품 등록
@@ -101,13 +102,12 @@ public class PayController {
 			payservice.update_coupon(paymentDto.getCou_num());
 		}
 		// 포인트 적립
-		payservice.plus_point(id, paymentDto.getEarn_point(), pay_code);
+		payservice.plus_point(paymentDto);
 		// 사용포인트 차감
-		payservice.minus_point(id, paymentDto.getPay_point(), pay_code);
+		payservice.minus_point(paymentDto);
 		// 재고 차감
 		payservice.update_stock(cart_code);
 
-		model.addAttribute("id", "qwer");
 		model.addAttribute("cart_code", cart_code);
 		model.addAttribute("buyer", buyerDto);
 		model.addAttribute("order", paymentDto);

@@ -9,6 +9,7 @@ import org.springframework.stereotype.Repository;
 
 import com.javalec.ex.Dto.PayDto.CartDto;
 import com.javalec.ex.Dto.PayDto.Coupon_listDto;
+import com.javalec.ex.Dto.PayDto.PaymentDto;
 import com.javalec.ex.Dto.PayDto.PointDto;
 import com.javalec.ex.Dto.PayDto.Use_pointDto;
 
@@ -93,6 +94,12 @@ public class MypageDaoImpl implements MypageDao {
 	public int cart_del(String[] cart_code) throws Exception {
 
 		return sqlSession.delete(namespace + ".cart_del", cart_code);
+	}
+
+	@Override
+	public List<PaymentDto> payment_list(String id) throws Exception {
+
+		return sqlSession.selectList(namespace + ".payment_list", id);
 	}
 
 }

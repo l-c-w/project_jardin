@@ -3,18 +3,17 @@ package com.javalec.ex.Dto.MDto;
 import java.util.Date;
 
 public class Member_Dto {
-	
-	
+
 	public Member_Dto() {
-		
-		
+
 	}
-	
+
 	String id;
 	String m_code;
 	String pw;
 	String name;
 	String email;
+	String email2;
 	String email_agree;
 	String sms_agree;
 	String post;
@@ -24,13 +23,10 @@ public class Member_Dto {
 	String introduce;
 	String coffee_favor;
 
-	
 	int phone1, phone2, phone3;
-	
-	
+
 	Date birth;
 	Date join_date;
-	
 
 	public Date getBirth() {
 		return birth;
@@ -156,9 +152,6 @@ public class Member_Dto {
 		this.coffee_favor = coffee_favor;
 	}
 
-	
-	
-
 	public int getPhone1() {
 		return phone1;
 	}
@@ -183,11 +176,12 @@ public class Member_Dto {
 		this.phone3 = phone3;
 	}
 
-	
-	
-	
-	
-	
-	
+	public String getEmail2() {
+		return email2;
+	}
+
+	public void setEmail2(String email2) {
+		this.email2 = email2;
+	}
 
 }

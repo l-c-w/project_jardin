@@ -129,7 +129,7 @@ $(document).ready(function() {
 					<!-- 판매중 -->
 					<div class="infobtn">
 						<ul>
-							<li><a href="#" class="ty1">바로 <span>구매하기</span></a></li>
+							<li onclick="purchase()"><a  class="ty1">바로 <span>구매하기</span></a></li>
 							<li onclick="go_cart()"><a class="ty2">장바구니 <span>담기</span></a></li>
 							<li class="last"><a href="#" class="ty3">위시 <span>리스트</span></a></li>
 						</ul>
@@ -897,6 +897,13 @@ $(document).ready(function() {
 	relationChk();
 
 });
+//구매 만들다 말았음
+/* function purchase() {
+	var check=confirm("구매페이지로 이동합니다.");
+	if (check) {
+		location.href="../payment/payment?cart_code=${}
+	}
+}
 
 function go_cart() {
 	var get_p_code=${productDetail.p_code};
@@ -927,7 +934,7 @@ function go_cart() {
 		
 	}
 	
-}
+} */
 
 
 </script>

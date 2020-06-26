@@ -19,23 +19,26 @@
 	<select id="related" resultType="com.javalec.ex.Dto.PDto.ProductDto">
 		select * from PRODUCT where P_category=#{param1}
 	</select>
-	<select id="p_review" resultType="com.javalec.ex.Dto.CDto.P_ReviewDto">
-		<![CDATA[select * from (select rownum rnum,pr_num,p_code,id,pr_title,pr_content,pr_file,pr_score,pr_hit,pr_wdate
-		from (select * from p_review ec where p_code=#{param1} order by pr_wdate desc))
-        product where rnum>=#{param2} and rnum<=#{param3}]]>
+	<!-- 댓글  -->
+	
+	<select id="comment_list" resultType="com.javalec.ex.Dto.CDto.C_ReviewDto">
+		select * from C_Review order by CR_WDate desc
 	</select>
-	<select id="c_review" resultType="com.javalec.ex.Dto.CDto.C_ReviewDto">
-		<![CDATA[select * from (select rownum rnum,cr_num,p_code,id,cr_title,cr_content,cr_score,cr_hit,cr_wdate
-		from (select * from c_review ec where p_code=#{param1} order by cr_wdate desc))
-        product where rnum>=#{param2} and rnum<=#{param3}]]>
-	</select>
-	<select id="pfnq_review" resultType="com.javalec.ex.Dto.PDto.P_FnqDto">
-		select id, pf_title, pf_content, pf_secret , pf_answer , pf_wdate from p_fnq
-		where p_code=#{param1} order by pf_wdate asc
-	</select>
-	<select id="getListCount" resultType="Integer">
-		select count(*) as count from p_review where p_code =#{param1}
-	</select>
+	
+	<delete id="comment_delete" parameterType="com.javalec.ex.Dto.CDto.C_ReviewDto">
+		delete from C_Review where Id = #{Id}
+	</delete>
+	
+	<insert id="comment_insert" parameterType="com.javalec.ex.Dto.CDto.C_ReviewDto">
+		<![CDATA[
+		insert into C_Review values (
+		C_review_seq.nextval,#{id},#{p_code},#{CR_title},#{CR_content},#{CR_score},#{CR_hit},sysdate,sysdate,#{CR_group},#{CR_answer})
+		]]>
+	</insert>
+	
+	<update id="comment_update" parameterType="com.javalec.ex.Dto.CDto.C_ReviewDto">
+		update C_Review set CR_content = #{CR_content} where Id = #{id}
+	</update>
 	
 	
 	

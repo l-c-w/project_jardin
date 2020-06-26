@@ -28,14 +28,23 @@
 <script type="text/javascript" src="../js/html5.js"></script>
 <script type="text/javascript" src="../js/respond.min.js"></script>
 <![endif]-->
-<script type="text/javascript">
-$(document).ready(function() {
-	
 
+<style type="text/css">
+#cContent {
+	width: 700px;
+}
 
-});
-</script>
-	
+#commentList {
+	width: 700px;
+}
+
+#commentList tr td {
+	border-collapse: collapse;
+	border: 1px solid black;
+	width: 700px;
+	height: 30px;
+}
+</style>
 </head>
 <body>
 
@@ -48,7 +57,7 @@ $(document).ready(function() {
 		<div id="location">
 			<ol>
 				<li><a href="#">HOME</a></li>
-				
+
 				<li>원두커피</li>
 				<li class="last"></li>
 			</ol>
@@ -66,17 +75,20 @@ $(document).ready(function() {
 				<div class="imgSlide">
 					<div class="img">
 						<ul>
-							<li><img src="../${productDetail.p_img1}" width="348px;" alt="제품이미지" /></li>
-							<li><img src="../${productDetail.p_img2}" width="348px;" alt="제품이미지" /></li>
-							<li><img src="../${productDetail.p_img3}" width="348px;" alt="제품이미지" /></li>
+							<li><img src="../${productDetail.p_img1}" width="348px;"
+								alt="제품이미지" /></li>
+							<li><img src="../${productDetail.p_img2}" width="348px;"
+								alt="제품이미지" /></li>
+							<li><img src="../${productDetail.p_img3}" width="348px;"
+								alt="제품이미지" /></li>
 						</ul>
 					</div>
 
 					<div class="thum">
 						<ul>
-							<li><img src="../${productDetail.p_img1}"  alt="썸네일 제품이미지" /></li>
-							<li><img src="../${productDetail.p_img2}"  alt="썸네일 제품이미지" /></li>
-							<li><img src="../${productDetail.p_img3}"  alt="썸네일 제품이미지" /></li>
+							<li><img src="../${productDetail.p_img1}" alt="썸네일 제품이미지" /></li>
+							<li><img src="../${productDetail.p_img2}" alt="썸네일 제품이미지" /></li>
+							<li><img src="../${productDetail.p_img3}" alt="썸네일 제품이미지" /></li>
 						</ul>
 					</div>
 				</div>
@@ -170,10 +182,10 @@ $(document).ready(function() {
 						onclick="return false;" id="goodsNotice">정책 및 공지</a></li>
 				</ul>
 			</div>
-			 <script type="text/javascript">$(function(){$(".detailTab ul li a:eq(0)").click();});</script>
+			<script type="text/javascript">$(function(){$(".detailTab ul li a:eq(0)").click();});</script>
 			<!-- //tab -->
 
-<!-- 	       <script>
+			<!-- 	       <script>
  				if( ${tabId } === 'goodsReview'){
  				$(function(){$(".detailTab ul li a:eq(2)").click();});					
 				} 
@@ -259,8 +271,12 @@ $(document).ready(function() {
 						<ul>
 							<c:forEach var="rel" items="${related}" begin="0" end="5">
 								<li>
-									<div class="img"><img src="../${rel.p_img1}" alt="관련상품 이미지" /></div>
-									<div class="name"><a href="#">${rel.p_name}</a></div>
+									<div class="img">
+										<img src="../${rel.p_img1}" alt="관련상품 이미지" />
+									</div>
+									<div class="name">
+										<a href="#">${rel.p_name}</a>
+									</div>
 									<div class="price">${rel.p_price}원</div>
 								</li>
 							</c:forEach>
@@ -303,40 +319,40 @@ $(document).ready(function() {
 					<div class="imgListType">
 						<ul>
 							<!-- List -->
-								<li>
-									<div class="img">
-										<img src="../images/img/sample_epil.jpg" width="155"
-											height="160" alt="" />
+							<li>
+								<div class="img">
+									<img src="../images/img/sample_epil.jpg" width="155"
+										height="160" alt="" />
+								</div>
+								<div class="txt">
+									<div class="subject">
+										<a href="#"><span class="orange"></span>${list.pr_title }</a>
 									</div>
-									<div class="txt">
-										<div class="subject">
-											<a href="#"><span class="orange"></span>${list.pr_title }</a>
-										</div>
-										<div class="conf">${p_rev.pr_content }</div>
-										<div class="data">
-											<p>
-												작성자 <span>${p_rev.id }</span>
-											</p>
-											<fmt:formatDate var="pr_wdate" value="${p_rev.pr_wdate }"
-												pattern="YYYY/MM/dd" />
-											<p>
-												등록일 <span>${pr_wdate }</span>
-											</p>
-											<p>
-												조회수 <span>${p_rev.pr_hit }</span>
-											</p>
-											<p>
-												평점 <span class="ty"> <img
-													src="../images/ico/ico_star.gif" alt="별점" /> <img
-													src="../images/ico/ico_star.gif" alt="별점" /> <img
-													src="../images/ico/ico_star.gif" alt="별점" /> <img
-													src="../images/ico/ico_star.gif" alt="별점" /> <img
-													src="../images/ico/ico_star.gif" alt="별점" />
-												</span>
-											</p>
-										</div>
+									<div class="conf">${p_rev.pr_content }</div>
+									<div class="data">
+										<p>
+											작성자 <span>${p_rev.id }</span>
+										</p>
+										<fmt:formatDate var="pr_wdate" value="${p_rev.pr_wdate }"
+											pattern="YYYY/MM/dd" />
+										<p>
+											등록일 <span>${pr_wdate }</span>
+										</p>
+										<p>
+											조회수 <span>${p_rev.pr_hit }</span>
+										</p>
+										<p>
+											평점 <span class="ty"> <img
+												src="../images/ico/ico_star.gif" alt="별점" /> <img
+												src="../images/ico/ico_star.gif" alt="별점" /> <img
+												src="../images/ico/ico_star.gif" alt="별점" /> <img
+												src="../images/ico/ico_star.gif" alt="별점" /> <img
+												src="../images/ico/ico_star.gif" alt="별점" />
+											</span>
+										</p>
 									</div>
-								</li>
+								</div>
+							</li>
 							<!-- //List -->
 						</ul>
 					</div>
@@ -346,18 +362,8 @@ $(document).ready(function() {
 
 							<a href="#" class="n"><img src="../images/btn/btn_pre2.gif"
 								alt="처음으로" /></a><a href="#" class="pre"><img
-								src="../images/btn/btn_pre1.gif" alt="앞페이지로" /></a>
-<%-- 							<c:forEach var="j" items="${r_list }"> --%>
-<%-- 								<c:choose> --%>
-<%-- 									<c:when test="${j == page }"> --%>
-<%-- 										<strong>${j }</strong> --%>
-<%-- 									</c:when> --%>
-<%-- 									<c:when test="${j != page }"> --%>
-<!-- 										<a -->
-<%-- 											href="p_detail?p_code=${productDetail.p_code}&p_category=${productDetail.p_category}&page=${j}&tabId='goodsReview'">${j}</a> --%>
-<%-- 									</c:when> --%>
-<%-- 								</c:choose> --%>
-<%-- 							</c:forEach> --%>
+								src="../images/btn/btn_pre1.gif" alt="앞페이지로" /></a> <strong>1</strong>
+							<a href="#">2</a> <a href="#">3</a> <a href="#">4</a> <a href="#">5</a>
 							<a href="#" class="next"><img
 								src="../images/btn/btn_next1.gif" alt="뒤페이지로" /></a><a href="#"
 								class="n"><img src="../images/btn/btn_next2.gif"
@@ -368,73 +374,185 @@ $(document).ready(function() {
 					</div>
 
 					<!-- //포토 구매후기 -->
+<script type="text/javascript">
+// 댓글 수정
+function comment_update() {
+		
+	   $.ajax({
+		  type:'post',
+		  url:'../comment_update',
+		  data: $("#commentListForm").serialize(), // form에 있는 input값 controller전송
+		  success:function(data){
+				  alert("update 성공" );
+				  
+				  if(data=="success"){
+					  alert("update 성공");
+					  getComment_list();
+				  }
+				  
+		  },
+		  error:function(request,status,error){
+			  alert("실패 : " + error);
+		  }
+		   
+	   });
+	   
+	}
+
+
+	//댓글 수정 폼생성
+function comment_updateForm(id,CR_content) {
+		alert("폼 확인" );
+	    var html ="";
+	   
+	    html += "<input type='text' id='CR_content' name='CR_content' value='"+CR_content+"'/>";
+	    html += "<input type='hidden' id='id' name='id' value='"+id+"'/>";
+	    html += "</td>";
+	    html += "<td><a href='#' onclick='comment_update()'>완료</a>";
+		html += "<a href='#' onclick='comment_cancel()'>취소</a>";
+		html += "</td></tr>";
+		
+		$('#updateForm'+Id).html(html);
+
+	}
+
+	//댓글 수정 취소
+function comment_cancel() {
+		
+	   getComment_list();
+	}
+	
+	//댓글 등록
+function comment_insert() {
+		
+	   $.ajax({
+		  type:'post',
+		  url:'../comment_insert',
+		  data: $("#formtable").serialize(), // form에 있는 input값 controller전송
+		  success:function(data){
+				  alert("성공" );
+				  
+				  if(data=="success"){
+					  alert("insert 성공");
+					  getComment_list();
+					  $("#CR_content").val("");
+				  }
+				  
+		  },
+		  error:function(request,status,error){
+			  alert("실패 : " + error);
+		  }
+		   
+	   });
+	   
+	}
+
+// 댓글 삭제
+function comment_delete(id) {
+		
+	   $.ajax({
+		  type:'post',
+		  url:'../comment_delete',
+		  data:{Id:Id},
+		  success:function(data){
+				  alert("댓글번호 :"+id );
+				  
+				  if(data=="success"){
+					  alert("delete 성공");
+					  getComment_list();
+				  }
+		  },
+		  error:function(request,status,error){
+			  alert("실패 : " + error);
+		  }
+		   
+	   });
+	   
+	}
+$(function(){      
+    getComment_list();      
+ });
+
+// 댓글 리스트 출력
+function getComment_list(){
+   
+   $.ajax({
+      type:'get',
+      url:'../comment_list',
+      dataType:'json',
+//       data: {bId:25}, 특정 값을 넘겨줄때
+//       data: $(#formTable).serialize 폼에 있는 모든 데이터를 넘겨줄때
+      date :$("#formtable").serialize() , //bId:25 bId:${param.bId}
+      contentType:'application/json; charset=UTF-8;',
+      success:function(data){   // data에 값이 담김
+         alert('성공');
+      	var html = "";
+      	if(data.length>0){
+	         	for(var i=0; i<data.length; i++){
+	         		html += "<tr><td colspan='2'><h5>작성자 :"+data[i].id+" </h5></td></tr>";
+	         		html += "<tr id='updateForm"+data[i].id+"'><td>내용 :"+ data[i].CR_content+"</td>";
+	         		html += "<td><a href='#' onclick='comment_updateForm("+data[i].id+",\""+data[i].CR_content+"\")'>수정</a>";
+	         		html += "<a href='#' onclick='comment_delete("+data[i].id+")'>삭제</a>";
+	         		html += "</td></tr>";
+	         	}
+      	}else{
+      		html += "<tr><td colspan='2'><h5>작성자 : 없음</h5></td></tr>";
+      		html += "<tr><td>등록된 댓글이 없습니다.</td>";
+      		html += "</td></tr>";
+      	}
+      	
+      	$('#commentList').html(html);
+      	
+      	/* html = html + data.length; */
+      },
+      error:function(request, status, error){
+         alert('실패' + error);
+      }
+   });
+   
+}
+ 
+</script>
+
 					<div class="headTitle depth">
 						<strong>상품리뷰&nbsp;</strong>상품리뷰는 상품 구매 후 작성하실 수 있습니다.
 						<p class="btn">
-							<a href="review" class="popBtn">구매 후기 작성</a>
+							<a href="javascript:;" class="accbtn">구매 후기 작성</a>
 						</p>
 					</div>
-
+						<form id="formtable" name="formtable" method="post">
+							<table>
+								<tr>
+									<td><textarea rows="3" cols="30" id="CR_content" name=CR_content placeholder="댓글을 입력해주세요."></textarea> <br>
+										<input type="hidden" name="id" value="${productDetail.p_code }">
+										<a href="#" onclick="comment_insert()">등록</a>
+									</td>
+								</tr>
+							</table>
+						</form>
+						<form id="commentListForm" name="commentListForm" method="post">
+							<table id="commentList">
+							<!--ajax데이터를 넣는 곳 -->
+							</table>
+						</form>
+					<%--  <div class="hideArea">
+						<div class="bodyArea">
+						</div>
+					</div> 
 					<!-- 상품리뷰 -->
 					<div class="accordion">
 						<ul>
 							<!-- 반복 -->
-<%-- 							<c:forEach var="c_rev" items="${c_review }"> --%>
-								<li>
-									<div class="headArea">
-										<div class="subject">
-											<a href="javascript:;" class="accbtn">${c_rev.cr_title }</a>
-										</div>
-										<div class="writer">${c_rev.id }</div>
-										<div class="day">
-											<fmt:formatDate var="cr_wdate" value="${c_rev.cr_wdate }"
-												pattern="YYYY/MM/dd" />
-											<p>${cr_wdate }</p>
-											<p>
-												<img src="../images/ico/ico_star.gif" alt="별점" /> <img
-													src="../images/ico/ico_star.gif" alt="별점" /> <img
-													src="../images/ico/ico_star.gif" alt="별점" />
-											</p>
-										</div>
-									</div>
-
-									<div class="hideArea">
-										<div class="bodyArea">${c_rev.cr_title }
-											<p>${c_rev.cr_content }</p>
-										</div>
-
-										<!-- 답변 -->
-										<div class="answer">
-											<div class="inbox">
-												<div class="aname">
-													<p>담당자</p>
-												</div>
-
-												<div class="atxt">쟈뎅 커피를 사랑해주셔서 감사합니다. 앞으로도 노력하는 쟈뎅이
-													되겠습니다. 감사합니다. 쟈뎅 커피를 사랑해주셔서 감사합니다. 앞으로도 노력하는 쟈뎅이 되겠습니다.
-													감사합니다.</div>
-											</div>
-										</div>
-										<!-- //답변 -->
-
-										<div class="modify">
-											<a href="#">수정</a> <a href="#">삭제</a>
-										</div>
-
-									</div>
-								</li>
-							<!-- //반복 -->
-
-							<!-- 글 리뷰 참고 -->
-
 							<li>
 								<div class="headArea">
 									<div class="subject">
-										<a href="javascript:;" class="accbtn">저렴한 가격에 커피맛과 향은 최고!!</a>
+										<a href="javascript:;" class="accbtn"></a>
 									</div>
-									<div class="writer">[ezlin****]</div>
+									<div class="writer"></div>
 									<div class="day">
-										<p>2014-03-24</p>
+										<fmt:formatDate var="cr_wdate" value="${Preview.cr_wdate }"
+											pattern="YYYY/MM/dd" />
+										<p></p>
 										<p>
 											<img src="../images/ico/ico_star.gif" alt="별점" /> <img
 												src="../images/ico/ico_star.gif" alt="별점" /> <img
@@ -445,7 +563,7 @@ $(document).ready(function() {
 
 								<div class="hideArea">
 									<div class="bodyArea">
-										너무 맛있어서 재주문 했습니다!<br />쟈뎅 커피 너무 맛있어요!
+										<p></p>
 									</div>
 
 									<!-- 답변 -->
@@ -465,12 +583,41 @@ $(document).ready(function() {
 									<div class="modify">
 										<a href="#">수정</a> <a href="#">삭제</a>
 									</div>
-
 								</div>
 							</li>
 
+							<!-- //반복 -->
+
+							<!-- 글 리뷰 참고 -->
+							<li>
+								<div class="headArea">
+									<div class="subject">
+										<a href="javascript:;" class="accbtn">저렴한 가격에 커피맛과 향은 최고!!</a>
+									</div>
+									<div class="writer">[ezlin****]</div>
+									<div class="day">
+										<p>2014-03-24</p>
+										<p>
+											<img src="../images/ico/ico_star.gif" alt="별점" /> <img
+												src="../images/ico/ico_star.gif" alt="별점" /> <img
+												src="../images/ico/ico_star.gif" alt="별점" />
+										</p>
+									</div>
+								</div>
+
+								<div class="hideArea">
+									<div class="modify">
+										<a href="#">수정</a> <a href="#">삭제</a>
+									</div>
+								</div>
+							</li>
 						</ul>
 					</div>
+					<form id="commentListForm" name="commentListForm" method="post">
+						<table id="commentList">
+							<!-- ajax데이터를 넣는 곳 -->
+						</table>
+					</form>
 
 					<div class="btnAreaList">
 						<!-- 페이징이동1 -->
@@ -489,6 +636,7 @@ $(document).ready(function() {
 						<!-- //페이징이동1 -->
 					</div>
 					<!-- //상품리뷰 -->
+					 --%>
 
 				</div>
 				<!-- //goods review -->
@@ -506,46 +654,43 @@ $(document).ready(function() {
 					<!-- 질문과 답변 참고 -->
 					<div class="accordion">
 						<ul>
-<%-- 							<c:forEach var="fnq" items="${fnq_review}"> --%>
-								<li>
-									<div class="headArea">
-										<div class="subject">
-											<a href="javascript:;" class="accbtn"></a>
-										</div>
-										<div class="writer"></div>
-										<div class="day">
-											<fmt:formatDate var="pf_wdate" value=""
-												pattern="YYYY/MM/dd" />
-											<p></p>
-											<p>
-												<span class="obtnMini iw70">답변완료</span>
-											</p>
-										</div>
+							<li>
+								<div class="headArea">
+									<div class="subject">
+										<a href="javascript:;" class="accbtn"></a>
+									</div>
+									<div class="writer"></div>
+									<div class="day">
+										<fmt:formatDate var="pf_wdate" value="" pattern="YYYY/MM/dd" />
+										<p></p>
+										<p>
+											<span class="obtnMini iw70">답변완료</span>
+										</p>
+									</div>
+								</div>
+
+								<div class="hideArea">
+									<div class="bodyArea">
+										<br />
 									</div>
 
-									<div class="hideArea">
-										<div class="bodyArea">
-											<br />
-										</div>
-
-										<!-- 답변 -->
-										<div class="answer">
-											<div class="inbox">
-												<div class="aname">
-													<p>담당자</p>
-												</div>
-
-												<div class="atxt"></div>
+									<!-- 답변 -->
+									<div class="answer">
+										<div class="inbox">
+											<div class="aname">
+												<p>담당자</p>
 											</div>
-										</div>
-										<!-- //답변 -->
-										<div class="modify">
-											<a href="#">수정</a> <a href="#">삭제</a>
+
+											<div class="atxt"></div>
 										</div>
 									</div>
+									<!-- //답변 -->
+									<div class="modify">
+										<a href="#">수정</a> <a href="#">삭제</a>
+									</div>
+								</div>
 
-								</li>
-<%-- 							</c:forEach> --%>
+							</li>
 							<li>
 								<div class="headArea">
 									<div class="subject">
@@ -792,17 +937,33 @@ $(document).ready(function() {
 
 
 
-			<script type="text/javascript" src="http://code.jquery.com/ui/1.10.4/jquery-ui.js"></script>
-<script type="text/javascript" src="../js/jquery.fancybox-1.3.4.pack.js"></script>
-<link rel="stylesheet" type="text/css" href="../css/jquery.fancybox-1.3.4.css" />
-<link rel="stylesheet" href="http://code.jquery.com/ui/1.10.4/themes/smoothness/jquery-ui.css">
-<style type="text/css">
-.ui-corner-all{border-bottom-right-radius:0 !important; border-bottom-left-radius:0 !important; border-top-left-radius:0 !important; border-top-right-radius:0 !important;}
-.ui-widget-content{border:0;}
-.ui-spinner-input{width:70px; margin:0; border:1px #ddd solid; padding:2px 0 2px 5px; font-family:'Nanum Gothic' !important; font-size:12px !important;}
+			<script type="text/javascript"	src="http://code.jquery.com/ui/1.10.4/jquery-ui.js"></script>
+			<script type="text/javascript"	src="../js/jquery.fancybox-1.3.4.pack.js"></script>
+			<link rel="stylesheet" type="text/css"	href="../css/jquery.fancybox-1.3.4.css" />
+			<link rel="stylesheet"	href="http://code.jquery.com/ui/1.10.4/themes/smoothness/jquery-ui.css" />
+			<style type="text/css">
+.ui-corner-all {
+	border-bottom-right-radius: 0 !important;
+	border-bottom-left-radius: 0 !important;
+	border-top-left-radius: 0 !important;
+	border-top-right-radius: 0 !important;
+}
+
+.ui-widget-content {
+	border: 0;
+}
+
+.ui-spinner-input {
+	width: 70px;
+	margin: 0;
+	border: 1px #ddd solid;
+	padding: 2px 0 2px 5px;
+	font-family: 'Nanum Gothic' !important;
+	font-size: 12px !important;
+}
 </style>
 
-<script type="text/javascript">
+			<script type="text/javascript">
 $(document).ready(function() {
 
 	// spinner
@@ -848,40 +1009,7 @@ $(document).ready(function() {
 		}
 	}
 
-	// layer popup
-	var winWidth = $(window).width();
-	if(winWidth > 767){
-		var layerCheck = 540;
-		var popCheck = 768;
-	}else{
-		var layerCheck = 320;
-		var popCheck = 320;
-	}
-	$(".passbtn").fancybox({
-		'autoDimensions'    : false,
-		'showCloseButton'	: false,
-		'width' : layerCheck,
-		'padding' : 0,
-		'type'			: 'iframe',
-		'onComplete' : function() {
-			$('#fancybox-frame').load(function() { // wait for frame to load and then gets it's height
-			$('#fancybox-content').height($(this).contents().find('body').height());
-			});
-		}
-	});
 
-	$(".popBtn").fancybox({
-		'autoDimensions'    : false,
-		'showCloseButton'	: false,
-		'width' : popCheck,
-		'padding' : 0,
-		'type'			: 'iframe',
-		'onComplete' : function() {
-			$('#fancybox-frame').load(function() { // wait for frame to load and then gets it's height
-			$('#fancybox-content').height($(this).contents().find('body').height());
-			});
-		}
-	});
 
 
 	// resize

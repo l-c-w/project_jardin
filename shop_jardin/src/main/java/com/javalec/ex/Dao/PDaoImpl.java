@@ -9,6 +9,7 @@ import javax.inject.Inject;
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.stereotype.Repository;
 
+import com.javalec.ex.Dto.CDto.C_ReviewDto;
 import com.javalec.ex.Dto.PDto.ProductDto;
 
 @Repository
@@ -42,6 +43,28 @@ public class PDaoImpl implements PDao {
 	public ProductDto productDetail(int p_code) throws Exception {
 		
 		return sql.selectOne(namespace + ".productDetail" , p_code);
+	}
+
+	@Override
+	public List<C_ReviewDto> comment_list(C_ReviewDto dto) {
+		
+		return sql.selectList(namespace + ".comment_list" , dto);
+	}
+
+	@Override
+	public void comment_delete(C_ReviewDto dto) {
+		
+		sql.delete(namespace + ".comment_delete" + dto);
+	}
+
+	@Override
+	public void comment_insert(C_ReviewDto dto) {
+		sql.insert(namespace + ".comment_insert" + dto);
+	}
+
+	@Override
+	public void comment_update(C_ReviewDto dto) {
+		sql.update(namespace + ".comment_update" + dto);
 	}
 	
 

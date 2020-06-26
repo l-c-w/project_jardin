@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 import com.javalec.ex.Dao.MypageDao;
 import com.javalec.ex.Dto.PayDto.CartDto;
 import com.javalec.ex.Dto.PayDto.Coupon_listDto;
+import com.javalec.ex.Dto.PayDto.PaymentDto;
 import com.javalec.ex.Dto.PayDto.PointDto;
 import com.javalec.ex.Dto.PayDto.Use_pointDto;
 
@@ -90,6 +91,12 @@ public class MypageServiceImpl implements MypageService {
 	public int cart_del(String[] cart_code) throws Exception {
 
 		return mypageDao.cart_del(cart_code);
+	}
+
+	@Override
+	public List<PaymentDto> payment_list(String id) throws Exception {
+
+		return mypageDao.payment_list(id);
 	}
 
 }

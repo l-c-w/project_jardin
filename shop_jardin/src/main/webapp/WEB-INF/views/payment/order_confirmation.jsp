@@ -208,7 +208,7 @@ $(document).ready(function() {
 									<th scope="row" ><span>주소</span></th>
 									<td >${buyer.del_post }<br/>${buyer.del_address1 }<br/>${buyer.del_address2 }</td>
 									<th scope="row" ><span>휴대폰 <u>번호</u></span></th>
-									<td >${buyer.del_phone1 }-${buyer.del_phone2 }-${buyer.del_phone3 }</td>
+									<td >0${buyer.del_phone1 }-${buyer.del_phone2 }-${buyer.del_phone3 }</td>
 								</tr>
 								<tr>
 									<th scope="row"><span>배송시 <u>요구사항</u></span></th>
@@ -307,7 +307,7 @@ $(document).ready(function() {
 
 					<!-- Btn Area -->
 					<div class="btnArea2">
-						<a href="#" class="nbtnbig iw0140">확인</a>
+						<a href="../main/main" class="nbtnbig iw0140">확인</a>
 					</div>
 					<!-- //Btn Area -->
 

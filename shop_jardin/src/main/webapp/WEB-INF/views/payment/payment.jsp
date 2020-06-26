@@ -190,9 +190,9 @@ $(document).ready(function() {
 										<c:set var="email_end" value="${fn:substringAfter(email,'@') }"/>
 											<li><input type="text" class="w134" value="${email_front }" name="email1"/ id="email1"></li>
 											<li><span class="valign">&nbsp;@&nbsp;</span></li>
-											<li class="r10"><input type="text" class="w134" value="${email_end }" name="introduce" id="introduce"/></li>
+											<li class="r10"><input type="text" class="w134" value="${email_end }" name="email2" id="email2"/></li>
 											<li>
-												<select id="email_tail" name="email_tail">
+												<select id="sol_lun" name="sol_lun">
 													<option value="#" selected="selected">직접입력</option>
 													<option value="naver.com">naver.com</option>
 													<option value="daum.net">daum.net</option>
@@ -596,7 +596,7 @@ $(document).ready(function() {
 						<div class="orderCenter">
 							<ul>
 								<li><a href="#" class="nbtnbig iw0140">뒤로가기</a></li>
-								<li onclick="confirmation('confirm')"><a class="sbtnMini iw0140">주문 / 결제</a></li>								
+								<li onclick="confirmation('confirm')" style="cursor: pointer;"><a class="sbtnMini iw0140">주문 / 결제</a></li>								
 							</ul>
 						</div>
 					</div>
@@ -667,8 +667,8 @@ $(function(){
 	
 	
 	//이메일 도메인 변경
-	$("#email_tail").on("change",function() {
-		$("#introduce").val($(this).val());		
+	$("#sol_lun").on("change",function() {
+		$("#email2").val($(this).val());		
 	});
 	
 	//회원정보 수취자로 넘기기
@@ -679,8 +679,8 @@ $(function(){
 			$("#del_address1").val($("#address1").val());
 			$("#del_address2").val($("#address2").val());
 			$("#del_email1").val($("#email1").val());
-			$("#del_email2").val($("#email2").val());
-			var phone1 = $("#phone1 option:selected").val();
+
+var phone1 = $("#phone1 option:selected").val();
 			
 			$("#del_phone1").val($("#phone1 option:selected").val()).change();
 			$("#del_phone2").val($("#phone2").val());

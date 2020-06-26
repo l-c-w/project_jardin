@@ -36,9 +36,8 @@ public class PayServiceImpl implements PayService {
 	// 회원변경정보 반영
 	@Override
 	public int update_member(Member_Dto member_Dto) throws Exception {
-		String email = member_Dto.getEmail() + "@" + member_Dto.getIntroduce();
+		String email = member_Dto.getEmail() + "@" + member_Dto.getEmail2();
 		member_Dto.setEmail(email);
-		System.out.println(member_Dto.getName());
 		return payDao.update_member(member_Dto);
 	}
 

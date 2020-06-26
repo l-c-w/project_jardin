@@ -64,8 +64,7 @@ public class PayDaoImpl implements PayDao {
 
 	// 장바구니 코드로 정보 가져오기
 	public CartDto get_sold_info(String cart_code) {
-
-		return sqlSession.selectOne(cart_code);
+		return sqlSession.selectOne(namespace + ".get_sold_info", cart_code);
 	}
 
 	// 주문물품 등록

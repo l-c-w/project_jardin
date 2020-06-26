@@ -4,6 +4,7 @@ import java.util.List;
 
 import com.javalec.ex.Dto.PayDto.CartDto;
 import com.javalec.ex.Dto.PayDto.Coupon_listDto;
+import com.javalec.ex.Dto.PayDto.PaymentDto;
 import com.javalec.ex.Dto.PayDto.PointDto;
 import com.javalec.ex.Dto.PayDto.Use_pointDto;
 
@@ -39,5 +40,8 @@ public interface MypageService {
 
 	// 장바구니 삭제
 	public int cart_del(String[] cart_code) throws Exception;
+
+	// 주문확인 페이지 리스트
+	public List<PaymentDto> payment_list(String id) throws Exception;
 
 }

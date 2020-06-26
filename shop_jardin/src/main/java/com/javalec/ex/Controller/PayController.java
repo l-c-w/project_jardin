@@ -35,9 +35,21 @@ public class PayController {
 	public String buy_selected(HttpServletRequest request, Model model) throws Exception {
 		HttpSession session = request.getSession();
 		String id = (String) session.getAttribute("session_mem");
+		String buy_type = request.getParameter("buy_type");
 		String[] cart_check = request.getParameterValues("cart_check");
 
-		// 장바구니에서 넘어온 제품정보
+//		switch (buy_type) {
+//		case "from_cart":
+//			cart_check = 
+//			break;
+//		case "from_product":
+//
+//			break;
+//		default:
+//			break;
+//
+//		}
+		// 제품정보
 		model.addAttribute("from_cart", payservice.go_order(cart_check));
 		// 주문자정보
 		MDao mDao = sqlSession.getMapper(MDao.class);
@@ -84,6 +96,8 @@ public class PayController {
 			throws Exception {
 		HttpSession session = request.getSession();
 		String id = (String) session.getAttribute("session_mem");
+		paymentDto.setId(id);
+		buyerDto.setId(id);
 		String[] cart_code = request.getParameterValues("cart_code");
 
 		// 주문서 생성
@@ -94,6 +108,7 @@ public class PayController {
 		paymentDto = payservice.get_payment(pay_code);
 		model.addAttribute("payment", paymentDto);
 		// 수취인 등록
+		buyerDto.setPay_code(pay_code);
 		payservice.make_buyer(buyerDto);
 		// 주문물품 등록
 		payservice.sold_product(pay_code, id, cart_code);
@@ -104,12 +119,21 @@ public class PayController {
 		// 포인트 적립
 		payservice.plus_point(paymentDto);
 		// 사용포인트 차감
-		payservice.minus_point(paymentDto);
+		if (paymentDto.getEarn_point() > 0) {
+			payservice.minus_point(paymentDto);
+		}
 		// 재고 차감
 		payservice.update_stock(cart_code);
 
-		model.addAttribute("cart_code", cart_code);
+		// 구입물품 가져오기
+		model.addAttribute("order_product", payservice.go_order(cart_code));
+		// 주문자정보
+		MDao mDao = sqlSession.getMapper(MDao.class);
+		Member_Dto mDto = mDao.login1(id);
+		model.addAttribute("member_info", mDto);
+		// 수취인정보
 		model.addAttribute("buyer", buyerDto);
+		// 주문정보
 		model.addAttribute("order", paymentDto);
 
 		return "payment/order_confirmation";

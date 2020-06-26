@@ -9,11 +9,14 @@ import javax.servlet.http.HttpServletRequest;
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.support.DaoSupport;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -67,17 +70,16 @@ public class EController {
 	//@RequestParam(value = "page", defaultValue = "0")String page 메모	
 
 	
+	
 	// getCommentCount
 	@RequestMapping("/commentPaging") // 진행중 이벤트 댓글 페이징
 	@ResponseBody
-	public Map<String, Object> commentPaging(@ModelAttribute EPagingDto ePaging,
-			HttpServletRequest request) {		
+	public EPagingDto commentPaging(@RequestParam(value = "page")String tempPage,
+			@RequestParam(value = "e_code")String e_code) {		
 		System.out.println("--------------------commentPaging--------------------");
 		EDao dao = sqlSession.getMapper(EDao.class);
-		String e_code = request.getParameter("e_code");
-		String tempPage = request.getParameter("page");
 		int page = Integer.parseInt(tempPage); // 리퀘스트에 값이 있으면 page변수에 리퀘스트 값을 할당;
-		int limit = 3;
+		int limit = 5;
 		System.out.println("e_code : " + e_code);
 		System.out.println("page : " + page);
 		
@@ -97,24 +99,26 @@ public class EController {
 			endpage = startpage + 10 - 1;
 		// EViewService 끝
 		
-		Map<String, Object> map = new HashMap<String, Object>();
-		map.put("e_code", e_code);
-		map.put("page", page);
-		map.put("maxpage", maxpage);
-		map.put("startrow", startrow);
-		map.put("endrow", endrow);
-		map.put("startpage", startpage);
-		map.put("endpage", endpage);
+		EPagingDto epdto = new EPagingDto(e_code, page, startpage, endpage, maxpage, startrow, endrow);
 		
 		
 		System.out.println("listcount : " + listcount);
-		System.out.println("page : " + page);
 		System.out.println("maxpage : " + maxpage);
 		System.out.println("startpage : " + startpage);
 		System.out.println("endpage : " + endpage);
+		System.out.println("------------------------");
+		System.out.println("get : " + epdto.getE_code());
+		System.out.println("get : " + epdto.getPage());
 		
-		return map;
+		return epdto;
 	}
+
+
+	
+	
+	
+	
+	
 	
 	
 	// getCommentCount
@@ -233,7 +237,51 @@ public class EController {
 
 
 
-
+////getCommentCount
+//@RequestMapping("/commentPaging") // 진행중 이벤트 댓글 페이징
+//@ResponseBody
+//public Map<String, Object> commentPaging(@RequestParam(value = "page")String tempPage,
+//		@RequestParam(value = "e_code")String e_code) {		
+//	System.out.println("--------------------commentPaging--------------------");
+//	EDao dao = sqlSession.getMapper(EDao.class);
+//	int page = Integer.parseInt(tempPage); // 리퀘스트에 값이 있으면 page변수에 리퀘스트 값을 할당;
+//	int limit = 5;
+//	System.out.println("e_code : " + e_code);
+//	System.out.println("page : " + page);
+//	
+//	
+//	// 전체 게시글 count(*)
+//	int listcount = dao.getCommentCount(e_code); // listcount -> 20
+//	// 최대 페이지 수
+//	int maxpage = (int) ((double) listcount / limit + 0.95); // 20/10 -> 2+0.95 -> (int)2.95 -> 2
+//	// 페이지별 리스트 개수 가져오기
+//	int startrow = (page - 1) * limit + 1; // (1 - 1) * 10 + 1 = 1
+//	int endrow = startrow + limit - 1; // 1 + 10 - 1 = 10
+//	// 처음 페이지
+//	int startpage = ((int) ((double) page / 10 + 0.9) - 1) * 10 + 1; // 1/10 -> 0.1+0.9 -> 1-1 -> 0*10 -> 0+1 = 1
+//	// 마지막 페이지
+//	int endpage = maxpage; // 1 ~ 10까지는 maxpage가 endpage가 됨
+//	if (endpage > startpage + 10 - 1)
+//		endpage = startpage + 10 - 1;
+//	// EViewService 끝
+//	
+//	Map<String, Object> map = new HashMap<String, Object>();
+//	map.put("e_code", e_code);
+//	map.put("page", page);
+//	map.put("maxpage", maxpage);
+//	map.put("startrow", startrow);
+//	map.put("endrow", endrow);
+//	map.put("startpage", startpage);
+//	map.put("endpage", endpage);
+//	
+//	
+//	System.out.println("listcount : " + listcount);
+//	System.out.println("maxpage : " + maxpage);
+//	System.out.println("startpage : " + startpage);
+//	System.out.println("endpage : " + endpage);
+//	
+//	return map;
+//}
 
 
 /*

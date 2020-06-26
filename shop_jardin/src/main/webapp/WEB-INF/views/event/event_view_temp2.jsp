@@ -33,34 +33,38 @@ const e_code = ${e_code};
 
 // html 페이지 모두 호출 후에 jquery실행
 $(function(){
-	
+	commentPaging(page);
 });
 
 
 function commentPaging(a_page){	//	댓글 페이징	
 	
 	var obj = new Object();
-// 	obj = {page: a_page, e_code: e_code}; // 아래 방식과 똑같다
-	obj.page = a_page;
-	obj.e_code = e_code;
-// 	JSON.stringify(obj)
+	obj = {a_page: a_page, e_code: e_code};
+	
 	$.ajax({
-		type: 'get',
+		type: 'post',
 		url: './commentPaging',
 		dataType: 'json',
-		data: {page: a_page, e_code: e_code },
+		data: JSON.stringify(obj),
 		contentType: 'application/json; charset=UTF-8;',
 		success: function(data){
 			alert('페이징 성공');
 			var html = '';
 			var html2 = '';
 			
-			console.log(data);
-			console.log(data.page);
+			console.log('dfdsfdsf', '<a href="event_view?page=' + (startpage + 10) + '&e_code=' + e_code + '" class="n">');
+			console.log('dfdsfdsf2', `<a href="event_view?maxpage=\${maxpage + 1}&e_code=${e_code + 1}" class="n">`);
 			
-
+			if(startpage > 0){
+				
+				
+				
+				
+				
+			}			
 			
-		$('#container').html(html);
+		$('#ajaxPaging').html(html);
 		
 		},
 		error: function(request, status, error){
@@ -162,6 +166,7 @@ function getComment_list(){	//	이 스크립트는 댓글 리스트만 불러옵
 	
 	<!-- container -->
 	<div id="container">
+
 		<div id="location">
 			<ol>
 				<li><a href="../main/main">HOME</a></li>
@@ -169,6 +174,7 @@ function getComment_list(){	//	이 스크립트는 댓글 리스트만 불러옵
 				<li class="last">진행중 이벤트</li>
 			</ol>
 		</div>
+		
 		<div id="outbox">		
 			<div id="left">
 				<div id="title2">EVENT<span>이벤트</span></div>
@@ -341,7 +347,8 @@ function getComment_list(){	//	이 스크립트는 댓글 리스트만 불러옵
 					<div class="btnAreaList">
 						<div class="allPageMoving1" id="ajaxPaging">
 							<!-- 첫 페이지 이동 -->
-							<a onclick="commentPaging(1)" class="n">
+<!-- 							<a onclick="commentPaging(1)" class="n"> -->
+							<a href="event_view?page=${startpage }&e_code=${event_view.e_code }" class="n">
 								<img src="../images/btn/btn_pre2.gif" alt="처음으로"/>
 							</a>
 							<!-- 이전 페이지 이동버튼 -->

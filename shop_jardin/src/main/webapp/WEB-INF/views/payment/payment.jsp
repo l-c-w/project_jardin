@@ -115,7 +115,8 @@ $(document).ready(function() {
 									<td><fmt:formatNumber pattern="#,###,###,###">${fromcart.p_price*fromcart.amount }</fmt:formatNumber>  원</td>
 								</tr>
 									<c:set var="total" value="${total+fromcart.p_price*fromcart.amount }"/>
-									<c:set var="point_total" value="${point_total+ (fromcart.p_price/100)*fromcart.amount}"/>
+									
+									<c:set var="point_total"><fmt:parseNumber type="number" integerOnly="true" value="${point_total+ (fromcart.p_price/100)*fromcart.amount}"/></c:set>
 								</c:forEach>
 								
 							</tbody>
@@ -150,7 +151,7 @@ $(document).ready(function() {
 					<div class="diviRight">
 						<ul>
 							<li>수정 내용을 회원정보에도 반영합니다.&nbsp;&nbsp;</li>
-							<li onclick="change_member()" style="cursor: pointer;"><a >회원정보반영</a></li>
+							<li onclick="change_member('confirm')" style="cursor: pointer;"><a >회원정보반영</a></li>
 						</ul>
 					</div>
 
@@ -189,9 +190,9 @@ $(document).ready(function() {
 										<c:set var="email_end" value="${fn:substringAfter(email,'@') }"/>
 											<li><input type="text" class="w134" value="${email_front }" name="email1"/ id="email1"></li>
 											<li><span class="valign">&nbsp;@&nbsp;</span></li>
-											<li class="r10"><input type="text" class="w134" value="${email_end }" name="email2" id="email2"/></li>
+											<li class="r10"><input type="text" class="w134" value="${email_end }" name="introduce" id="introduce"/></li>
 											<li>
-												<select id="introduce" name="introduce">
+												<select id="email_tail" name="email_tail">
 													<option value="#" selected="selected">직접입력</option>
 													<option value="naver.com">naver.com</option>
 													<option value="daum.net">daum.net</option>
@@ -293,8 +294,8 @@ $(document).ready(function() {
 												</select>
 											</li>
 											<li>&nbsp;<span class="valign">-</span>&nbsp;</li>
-											<li><input type="text" class="w74" maxlength="4" name="del_phone2" id="del_phone2"/> <span class="valign">-</span>&nbsp;</li>
-											<li class="r10"><input type="text" class="w74" maxlength="4" name="del_phone3" id="del_phone3"/></li>
+											<li><input type="number" class="w74" maxlength="4" name="del_phone2" id="del_phone2"/> <span class="valign">-</span>&nbsp;</li>
+											<li class="r10"><input type="number" class="w74" maxlength="4" name="del_phone3" id="del_phone3"/></li>
 										</ul>
 									</td>
 								</tr>
@@ -388,9 +389,9 @@ $(document).ready(function() {
 
 						<!-- 회원 일때 -->
 						<h4 class="member">총 주문금액</h4>
-						<input type="hidden" name="del_price" id="del_price" value="${del_price }" readonly="readonly">
-						<input type="hidden" name="total_price" id="total_price" readonly="readonly">
-						<input type="hidden" name="earn_point" id="earn_point" value="${point_total }" readonly="readonly">
+						<input type="number" name="del_price" id="del_price" value="${del_price }" readonly="readonly" style="display: none;">
+						<input type="number" name="total_price" id="total_price" value="${total+del_price }" readonly="readonly" style="display: none;">
+						<input type="number" name="earn_point" id="earn_point" value="${point_total }" readonly="readonly" style="display: none;">
 						<!-- 회원 일때 -->
 						<!-- 비회원 일때  <h4>총 주문금액</h4> //비회원 일때 -->
 
@@ -595,7 +596,7 @@ $(document).ready(function() {
 						<div class="orderCenter">
 							<ul>
 								<li><a href="#" class="nbtnbig iw0140">뒤로가기</a></li>
-								<li onclick="confirmation('confirm')"><a href="#" class="sbtnMini iw0140">주문 / 결제</a></li>								
+								<li onclick="confirmation('confirm')"><a class="sbtnMini iw0140">주문 / 결제</a></li>								
 							</ul>
 						</div>
 					</div>
@@ -666,8 +667,8 @@ $(function(){
 	
 	
 	//이메일 도메인 변경
-	$("#introduce").on("change",function() {
-		$("#email2").val($(this).val());		
+	$("#email_tail").on("change",function() {
+		$("#introduce").val($(this).val());		
 	});
 	
 	//회원정보 수취자로 넘기기
@@ -754,23 +755,7 @@ function openDaumZipAddress2() {
 }
 
 
-//회원정보에 반영
-function change_member() {
-	var member = $("form[name=mem_change]").serialize();
-	$.ajax({
-		type:"post",
-		url:"change_member",
-		data:member,
-		dataType:"json",
-		success: function () {
-			alert("정보가 반영되었습니다.");
-		},
-		error: function () {
-			alert("반영에 실패하였습니다.");
-		}
-	})
-	
-}
+
 
 //결제예정금액 구하기
 function get_total() {
@@ -790,6 +775,27 @@ function get_total() {
 	
 	
 }
+
+//회원정보에 반영
+function change_member(name) {
+
+	var member = $("form[name=confirm]").serialize();
+	$.ajax({
+		type:"post",
+		url:"change_member",
+		data:member,
+		dataType:"json",
+		success: function () {
+			alert("정보가 반영되었습니다.");
+		},
+		error: function () {
+			alert("반영에 실패하였습니다.");
+		}
+	})
+	
+}
+
+
 //form 쿠폰목록 가져오기로 보내기
 function get_coupon(name) {
 	var popupWidth = 1000;

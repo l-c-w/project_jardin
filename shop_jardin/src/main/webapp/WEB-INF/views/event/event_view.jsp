@@ -15,7 +15,7 @@
 <link rel="stylesheet" type="text/css" href="../css/reset.css?v=Y" />
 <link rel="stylesheet" type="text/css" href="../css/layout.css?v=Y" />
 <link rel="stylesheet" type="text/css" href="../css/content.css?v=Y" />
-<script type="text/javascript" src="../js/jquery.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script type="text/javascript" src="../js/top_navi.js"></script>
 <script type="text/javascript" src="../js/left_navi.js"></script>
 <script type="text/javascript" src="../js/main.js"></script>
@@ -28,44 +28,104 @@
 <![endif]-->
 <script type="text/javascript">
 
-var page = ${page};
-var e_code = ${e_code};
+const page = ${page};
+const e_code = ${e_code};
 
 // html 페이지 모두 호출 후에 jquery실행
 $(function(){		
-	getComment_list();
-	getCommentCount();
 });
 
-function getCommentCount(){	//	총 n개의 댓글이 있습니다. 나타내는 스크립트
+
+function commentPaging(){	//	댓글 페이징
+	
+	
+	
+	$.ajax({
+		type: 'get',
+		url: './commentPaging',
+		dataType: 'json',
+		data: { 
+			page: page,
+			e_code: e_code
+		},
+		contentType: 'application/json; charset=UTF-8;',
+		success: function(data){
+			alert('페이징 성공');
+			var html = '';
+			var startpage = 1;
+			console.log(data);
+			console.log('e_code : ' + data.e_code);
+			console.log('page : ' + data.page);
+			console.log('maxpage : ' + data.maxpage);
+			console.log('startpage : ' + data.startpage);
+			console.log('endpage : ' + data.endpage);
+			console.log('startrow : ' + data.startrow);			
+			console.log('endrow : ' + data.endrow);
+			
+			var page = data.page;
+			var maxpage = data.maxpage;
+			var startpage = data.startpage;
+			var endpage = data.endpage;
+			var startrow = data.startrow;
+			var endrow = data.endrow;
+			
+			console.log(typeof `\${data.startpage}`);
+			console.log('var startpage');
+			console.log(typeof startpage);
+			console.log(startpage);
+			console.log(typeof startpage);
+			console.log(startrow);
+			
+			console.log('dfdsfdsf', '<a href="event_view?page=' + (startpage + 10) + '&e_code=' + e_code + '" class="n">');
+			console.log('dfdsfdsf2', `<a href="event_view?maxpage=\${maxpage + 1}&e_code=${e_code + 1}" class="n">`);
+			
+			if(startpage > 0){
+				
+			}			
+			
+		$('#ajaxPaging').html(html);
+		
+		},
+		error: function(request, status, error){
+			alert('페이징 실패');
+		}
+		
+		
+	});
+	
+	
+}
+
+
+
+
+function getCommentCount(){	//	총 n개의 댓글이 있습니다.
 	
 	$.ajax({
 		type:'get',
 		url:'./getCommentCount',
 		dataType:'json',
-		data : { "e_code":e_code },
+		data : {e_code: e_code },
 		contentType:'application/json; charset=UTF-8;',
 		success:function(data){	// data에 값이 담김
-			alert('성공');
 			
 			var html='';
 		
-			console.log(data.ec_date);
-			
-			if(data >= 1){
-				for(var i=0; i<data.length; i++){
-					html += '<li class="in">';
-					html += '<p class="txt">총 <span class="orange">' + data.ec_date + '</span> 개의 댓글이 달려있습니다.</p>';
-					html += '</li>';
-				}
-			}else{
-				html += '<li class="in">';
-				html += '<p class="txt">총 0개의 댓글이 달려있습니다.</p></li></ul>';
-				html += '</li>';
-			}
+			html += '<ul id="cConut">';
+			html += '<li class="in">';
+			html += '<p class="txt">총 <span class="orange">' + data + '</span> 개의 댓글이 달려있습니다.</p>';
+			html += '<p class="password">비밀번호  ';
+			html += '<input type="password" class="replynum" />';
+			html += '</p>';
+			html += '<input type="text" class="replyType emptySe" placeholder=" 댓글을 작성하려면 로그인을 해주세요." readonly>';
+			html += '</li>';
+			html += '<li class="btn">';
+			html += '<input type="button" class="replyBtn emptySe" value="등록">';
+			html += '</li>';
+			html += '</ul>';					
 			
 			console.log(html);
-			$('#cConut').html(html)
+			$('#e_param').html(html);
 			
 		},
 		error:function(request, status, error){
@@ -82,8 +142,8 @@ function getComment_list(){	//	이 스크립트는 댓글 리스트만 불러옵
 	$.ajax({
 		type:'get',
 		url:'./event_comment',
-		dataType:'json',
-		data : { "page":page, "e_code":e_code },
+		/* dataType:'json', */
+		data : {e_code: e_code },
 		contentType:'application/json; charset=UTF-8;',
 		success:function(data){	// data에 값이 담김
 			var html="";
@@ -97,14 +157,15 @@ function getComment_list(){	//	이 스크립트는 댓글 리스트만 불러옵
 					html += "</ul>";
 				}
 			}else{
-				html += "<li class='name'></li>";
+				html += "<li class='name'></li><br>";
 				html += "<li class='txt'>등록된 댓글이 없습니다.</li>";
 			}
 			
-			$('#commentViewForm').html(html)			
+			$('#commentViewForm').html(html)
 		},
 		error:function(request, status, error){
-			alert('실패' + error);
+			alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
+// 			alert('리스트 출력 실패' + error);
 		}			
 	});
 
@@ -226,7 +287,7 @@ function getComment_list(){	//	이 스크립트는 댓글 리스트만 불러옵
 							<input type="hidden" value="${page }" name="page">
 							<ul id="cConut">
 								<li class="in">
-									<p class="txt">총 <span class="orange">${cCount }</span> 개의 댓글이 달려있습니다.</p>
+									<p class="txt">총 <span class="orange">${comment_listcount}</span> 개의 댓글이 달려있습니다.</p>
 									<p class="password">비밀번호&nbsp;&nbsp;
 										<input type="password" class="replynum" />
 									</p>
@@ -246,6 +307,7 @@ function getComment_list(){	//	이 스크립트는 댓글 리스트만 불러옵
 					<!-- 댓글 수정, 삭제 -->
 					<div class="replyBox">
 						<!-- 댓글 수정 -->
+						<c:forEach var="e_com" items="${event_comment }">
 							<form action="event_commentOk" method="post" class="comm_modi">
 								<input type="hidden" value="${sessionScope.session_mem }" name="requestUser">
 								<input type="hidden" value="${e_com.id }" name="authUser">
@@ -253,17 +315,6 @@ function getComment_list(){	//	이 스크립트는 댓글 리스트만 불러옵
 								<input type="hidden" value="${e_com.ec_num }" name="ec_num">
 								<input type="hidden" value="${page }" name="page">
 								
-<!-- 								if(data.length>0){ -->
-			<!-- 					for(var i=0; i<data.length; i++){ -->
-			<%-- 						html += '<tr><td colspan="2"><h5 id="">작성자 : ' + data[i].cName + '</h5></td></tr>'; --%>
-			<!-- 						html += "<tr id='updateForm" + data[i].cId + "'><td>내용 : " + data[i].cContent + "</td>"; -->
-			<!-- 						// 				 updateForm0, updateForm1, updateForm2...... -->
-			<!-- 						html += "<td><a href='#' onclick='comment_updateForm(" + data[i].cId + ",\""  + data[i].cContent + "\")'>수정 </a>"; -->
-			<!-- 						//								  comment_updateForm(1, '댓글을 입력') -->
-			<!-- 						html += "<a href='#' onclick='comment_delete(" + data[i].cId + ")'> 삭제</a></td></tr>"; -->
-			<!-- 					}					 -->
-			<!-- 				} -->
-			
 								<ul id="${e_com.ec_num }" class="comment_modifyM" style="display: none;">
 									<li class="name">${e_com.id }</li>
 									<li class="txt">
@@ -278,13 +329,13 @@ function getComment_list(){	//	이 스크립트는 댓글 리스트만 불러옵
 							</form>
 							
 							<!-- 댓글 표시 -->
-							<form action="event_eDeleteComment" method="post" class="comm_modi2" id="commentViewForm">
+							<form action="event_eDeleteComment" method="post" class="comm_modi2">
 								<input type="hidden" value="${sessionScope.session_mem }" name="requestUser">
 								<input type="hidden" value="${e_com.id }" name="authUser">
 								<input type="hidden" value="${event_view.e_code }" name="e_code">
 								<input type="hidden" value="${e_com.ec_num }" name="ec_num">
 								<input type="hidden" value="${page }" name="page">
-								<ul id="coSub" class="comment_modifyV">
+								<ul id="coSub" class="comment_modifyV"">
 									<fmt:formatDate var="ec_wdate1" value="${e_com.ec_wdate }" pattern="yyyy/MM/dd" />
 									<fmt:formatDate var="ec_wdate2" value="${e_com.ec_wdate }" pattern="HH:mm:ss" />
 									<li class="name">${e_com.id } <span>[${ec_wdate1 }&nbsp;&nbsp;${ec_wdate2 }]</span></li>
@@ -297,7 +348,7 @@ function getComment_list(){	//	이 스크립트는 댓글 리스트만 불러옵
 									</li>
 								</ul>
 							</form>
-						
+						</c:forEach>
 						
 						
 						<!-- 비밀글, 없애기로 한 기능-->
@@ -312,7 +363,7 @@ function getComment_list(){	//	이 스크립트는 댓글 리스트만 불러옵
 					
 					<!-- 페이징이동 -->
 					<div class="btnAreaList">
-						<div class="allPageMoving1">
+						<div class="allPageMoving1" id="ajaxPaging">
 							<!-- 첫 페이지 이동 -->
 							<a href="event_view?page=${startpage }&e_code=${event_view.e_code }" class="n">
 								<img src="../images/btn/btn_pre2.gif" alt="처음으로"/>

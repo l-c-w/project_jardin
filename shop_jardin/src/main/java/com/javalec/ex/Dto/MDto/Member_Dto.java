@@ -1,6 +1,6 @@
 package com.javalec.ex.Dto.MDto;
 
-import java.sql.Date;
+import java.util.Date;
 
 public class Member_Dto {
 	

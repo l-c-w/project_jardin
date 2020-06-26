@@ -107,9 +107,7 @@
 						
 							<div class="aname">
 								
-								<p>담당자 <span>  <fmt:formatDate pattern="yyyy-MM-dd HH:mm:ss" value="${oo_view.oo_udate}"/></span>
-								
-								<!-- [2014-03-04&nbsp;&nbsp;15:01:59]</span> -->
+								<p>담당자 <span> 답변 날짜 : <fmt:formatDate pattern="yyyy-MM-dd HH:mm" value="${oo_view.oo_udate}"/></span>
 								
 								</p>
 								

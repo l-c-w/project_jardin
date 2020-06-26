@@ -10,6 +10,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
+
 <title>Insert title here</title>
 
 
@@ -582,7 +583,7 @@
 							<td rowspan="2"><img src="../images/icon_JoinRouteH.png" title="Homepage"></td>
 
 							<td rowspan="2">
-							${m_list.join_date}<br>
+							<fmt:formatDate pattern="yyyy-MM-dd hh:mm" value="${m_list.join_date}"/><br>
 							 - <br>
 							 (0회)
 							</td>
@@ -598,8 +599,8 @@
 							</td>
 
 							<td rowspan="2">
-							${m_list.birth}<br>
-							${m_list.phone1+m.list_phone2+m_list.phone3}
+							<fmt:formatDate pattern="yyyy-MM-dd" value="${m_list.birth}"/><br>
+							0${m_list.phone1}-${m_list.phone2}-${m_list.phone3}
 							</td>
 
 
@@ -610,7 +611,7 @@
 
 
 							<td rowspan="2">
-							<input type="radio" value="ipin" id="">아이핀<br>
+							<input type="radio" value="ipin" id="">이메일인증<br>
 							<input type="radio" name="" value="hp" id="hp">휴대폰
 							</td>
 

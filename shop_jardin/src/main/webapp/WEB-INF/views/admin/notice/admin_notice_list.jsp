@@ -43,28 +43,8 @@
 	
 	
 	<div class="notice_conts" id="contentArea">
-  <!--   <div class="notice_conts" id="noticeContent"> -->
 				
-				<p>공지사항</p>
-				
-				<div class="searching">
-				
-				<form action="" name="" method="post">
-				
-				<select name="">
-					<option value="all">전체</option>
-					<option value="title">제목</option>
-					<option value="content">내용</option>
-				</select>
-				
-				<input type="text" name="" >
-				
-				<input type="submit" value="검색">
-				
-				</form>
-				
-				</div>
-				
+		<h2><strong>NOTICE</strong></h2>
 				
 				<div class="orderDivMt">
 					
@@ -191,8 +171,45 @@
 						<!-- //페이징이동1 -->
 						
 						
+			    <form action="${pageContext.request.contextPath}/customer/notice_search" method="get" name="notice_search" id="notice_search">
+
+					<div class="searchWrap">
+					
+						<div class="search">
+						
+							<ul>
+								
+								<li class="web"><img src="${pageContext.request.contextPath}/images/txt/txt_search.gif" alt="search" /></li>
+								
+								<li class="se">
+								
+									<select id="searchType" name="searchType">
+									
+									     <option value="title">제목</option>
+									     <option value="content">내용</option>
+									     
+									</select>
+									
+								</li>
+								
+								<li><input type="text" class="searchInput" id="keyword" name="keyword"/></li>
+								
+								<li class="web" id="searchBtn"><a href="#" onclick="document.getElementById('notice_search').submit()"><img src="${pageContext.request.contextPath}/images/btn/btn_search.gif" alt="검색" /></a></li>
+								
+								<li class="mobile"><a href="#" onclick="document.getElementById('notice_search').submit()"><img src="${pageContext.request.contextPath}/images/btn/btn_search_m.gif" alt="검색" /></a></li>
+								
+							</ul>
+							
+						</div>
+						
 					</div>
-				
-			</div>
+					
+			     </form>
+						
+		</div>
+		
+	</div>
+	
 </body>
+
 </html>

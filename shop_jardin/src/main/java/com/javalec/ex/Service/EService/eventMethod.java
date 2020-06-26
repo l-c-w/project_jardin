@@ -22,13 +22,13 @@ public class eventMethod {
 		EventDto edtoPrev = new EventDto(); // 이전글 dto
 		ArrayList<Event_commentDto> list = new ArrayList<Event_commentDto>(); // 댓글 dto
 		EDao dao = sqlSession.getMapper(EDao.class);
-		int limit = 3; // 1page = 게시글 10개
+		int limit = 5; // 1page = 게시글 10개
 
 		// EViewService
 		edto = dao.event_view(e_code);
 		model.addAttribute("event_view", edto);
 		
-
+		
 		// 전체 게시글 count(*)
 		int listcount = dao.getCommentCount(e_code); // listcount -> 20
 		// 최대 페이지 수
@@ -103,7 +103,7 @@ public class eventMethod {
 		EventDto edtoPrev = new EventDto(); // 이전글 dto
 		ArrayList<Event_commentDto> list = new ArrayList<Event_commentDto>(); // 댓글 dto
 		EDao dao = sqlSession.getMapper(EDao.class);
-		int limit = 3; // 1page = 게시글 10개
+		int limit = 5; // 1page = 게시글 10개
 
 		// EViewService
 		edto = dao.event_view(e_code);

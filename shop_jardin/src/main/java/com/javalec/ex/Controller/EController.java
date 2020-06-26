@@ -1,6 +1,8 @@
 package com.javalec.ex.Controller;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -10,11 +12,15 @@ import org.springframework.dao.support.DaoSupport;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.javalec.ex.Dao.EDao;
+import com.javalec.ex.Dto.EDto.EPagingDto;
 import com.javalec.ex.Dto.EDto.EventDto;
 import com.javalec.ex.Dto.EDto.Event_commentDto;
 import com.javalec.ex.Service.EService.EViewService;
@@ -49,13 +55,6 @@ public class EController {
 		return "event/event_list";
 	}
 	
-//	@RequestMapping("/comment_list")	//	
-//	@ResponseBody	//	json 데이터로 페이지를 리턴해서 보내줌
-//	public ArrayList<CommentDto> comment_list() { 
-//		// mybatis에 있는 객체를 가져옴
-//		IDao dao = sqlSession.getMapper(IDao.class);		
-//		return dao.comment_list();
-//	}
 	
 	@RequestMapping("/event_view")	// 진행중 이벤트 뷰 (댓글 뷰 포함)
 	public String event_view(HttpServletRequest request, Model model) {
@@ -64,47 +63,32 @@ public class EController {
 		return "event/event_view";
 	}
 	
-//	<form action="event_eDeleteComment" method="post" class="comm_modi2">
-//	<input type="hidden" value="${sessionScope.session_mem }" name="requestUser">
-//	<input type="hidden" value="${e_com.id }" name="authUser">
-//	<input type="hidden" value="${event_view.e_code }" name="e_code">
-//	<input type="hidden" value="${e_com.ec_num }" name="ec_num">
-//	<input type="hidden" value="${page }" name="page">
-//	<ul id="coSub" class="comment_modifyV">
-//		<fmt:formatDate var="ec_wdate1" value="${e_com.ec_wdate }" pattern="yyyy/MM/dd" />
-//		<fmt:formatDate var="ec_wdate2" value="${e_com.ec_wdate }" pattern="HH:mm:ss" />
-//		<li class="name">${e_com.id } <span>[${ec_wdate1 }&nbsp;&nbsp;${ec_wdate2 }]</span></li>
-//		<li class="txt">${e_com.ec_content }</li>
-//		<li class="btn">
-//			<c:if test="${sessionScope.session_mem eq e_com.id }">
-//				<a class="rebtn ${e_com.ec_num }" style="cursor: pointer;" id="modi_btn">수정</a>
-//				<a class="rebtn delComm" style="cursor: pointer;">삭제</a>
-//			</c:if>
-//		</li>
-//	</ul>
-//	</form>
+
+	//@RequestParam(value = "page", defaultValue = "0")String page 메모	
+
 	
-	//@RequestParam(value = "page", defaultValue = "0")String page 메모
+	// getCommentCount
+	@RequestMapping("/commentPaging") // 진행중 이벤트 댓글 페이징
 	@ResponseBody
-	@RequestMapping("/event_comment")	// 진행중 이벤트 리스트
-	public ArrayList<Event_commentDto> event_comment(@RequestParam(value = "page")String tempPage,
-			@RequestParam(value = "e_code")String e_code) {
-		
-		System.out.println("--------------------event_comment--------------------");
+	public Map<String, Object> commentPaging(@ModelAttribute EPagingDto ePaging,
+			HttpServletRequest request) {		
+		System.out.println("--------------------commentPaging--------------------");
 		EDao dao = sqlSession.getMapper(EDao.class);
+		String e_code = request.getParameter("e_code");
+		String tempPage = request.getParameter("page");
 		int page = Integer.parseInt(tempPage); // 리퀘스트에 값이 있으면 page변수에 리퀘스트 값을 할당;
-		int limit = 3; // 1page = 게시글 10개		
+		int limit = 3;
 		System.out.println("e_code : " + e_code);
 		System.out.println("page : " + page);
 		
-		// 페이지별 리스트 개수 가져오기
-		int startrow = (page - 1) * limit + 1; // (1 - 1) * 10 + 1 = 1
-		int endrow = startrow + limit - 1; // 1 + 10 - 1 = 10
 		
 		// 전체 게시글 count(*)
 		int listcount = dao.getCommentCount(e_code); // listcount -> 20
 		// 최대 페이지 수
 		int maxpage = (int) ((double) listcount / limit + 0.95); // 20/10 -> 2+0.95 -> (int)2.95 -> 2
+		// 페이지별 리스트 개수 가져오기
+		int startrow = (page - 1) * limit + 1; // (1 - 1) * 10 + 1 = 1
+		int endrow = startrow + limit - 1; // 1 + 10 - 1 = 10
 		// 처음 페이지
 		int startpage = ((int) ((double) page / 10 + 0.9) - 1) * 10 + 1; // 1/10 -> 0.1+0.9 -> 1-1 -> 0*10 -> 0+1 = 1
 		// 마지막 페이지
@@ -113,6 +97,15 @@ public class EController {
 			endpage = startpage + 10 - 1;
 		// EViewService 끝
 		
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("e_code", e_code);
+		map.put("page", page);
+		map.put("maxpage", maxpage);
+		map.put("startrow", startrow);
+		map.put("endrow", endrow);
+		map.put("startpage", startpage);
+		map.put("endpage", endpage);
+		
 		
 		System.out.println("listcount : " + listcount);
 		System.out.println("page : " + page);
@@ -120,9 +113,9 @@ public class EController {
 		System.out.println("startpage : " + startpage);
 		System.out.println("endpage : " + endpage);
 		
-		return dao.event_comment(e_code, startrow, endrow);
+		return map;
 	}
-
+	
 	
 	// getCommentCount
 	@RequestMapping("/getCommentCount") // 진행중 이벤트 댓글 등록
@@ -147,6 +140,8 @@ public class EController {
 		return "event/event_view";
 	}
 	
+	
+	@ResponseBody
 	@RequestMapping("/event_eDeleteComment") // 진행중 이벤트 댓글 삭제
 	public String event_eDeleteComment(HttpServletRequest request, Model model) {
 		es = new EDelCommentService();

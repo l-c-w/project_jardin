@@ -106,7 +106,7 @@
 									<th scope="row"><span>답글 달기</span></th>
 									
 									<td>
-										<textarea class="tta" name="oo_answer"></textarea>
+										<textarea class="tta" name="oo_answer">${oo_view.oo_answer}</textarea>
 									</td>
 									
 								</tr>

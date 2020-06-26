@@ -1,7 +1,5 @@
 package com.javalec.ex.Dao;
 
-import java.security.Timestamp;
-import java.sql.Date;
 import java.util.ArrayList;
 
 import com.javalec.ex.Dto.CDto.PagingDto;

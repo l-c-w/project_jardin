@@ -1,12 +1,15 @@
 package com.javalec.ex.Service.PayService;
 
+import java.util.ArrayList;
 import java.util.Map;
 
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.ui.Model;
 
+import com.javalec.ex.Dao.MDao;
 import com.javalec.ex.Dao.PayDao;
 import com.javalec.ex.Dto.PayDto.BuyerDto;
+import com.javalec.ex.Dto.PayDto.CartDto;
 import com.javalec.ex.Dto.PayDto.PaymentDto;
 
 public class Order_confirmService implements PayService {
@@ -15,6 +18,7 @@ public class Order_confirmService implements PayService {
 	public void execute(SqlSession sqlSession, Model model) {
 		Map<String, Object> map = model.asMap();
 		PayDao payDao = sqlSession.getMapper(PayDao.class);
+		MDao mDao = sqlSession.getMapper(MDao.class);
 		String id = (String) map.get("id");
 		String[] cart_code = (String[]) map.get("cart_code");
 		BuyerDto buyerDto = (BuyerDto) map.get("buyer");
@@ -26,6 +30,9 @@ public class Order_confirmService implements PayService {
 		payDao.make_order(paymentDto);
 		// 주문번호 가져오기
 		String pay_code = payDao.get_paycode(id);
+		// 주문서 가져오기
+		paymentDto = payDao.get_payment(pay_code);
+
 		// 수취인 입력
 		buyerDto.setPay_code(pay_code);
 		payDao.make_buyer(buyerDto);
@@ -44,7 +51,20 @@ public class Order_confirmService implements PayService {
 		// 포인트 차감
 		payDao.minus_point(id, paymentDto.getPay_point(), pay_code);
 
-		System.out.println("여기까지 등록 완료");
+		// 재고 차감,장바구니에서 삭제,주문확인 페이지로 이동
+		ArrayList<CartDto> list = new ArrayList<CartDto>();
+		for (int i = 0; i < cart_code.length; i++) {
+			CartDto cartDto = payDao.go_order(id, cart_code[i]);
+			list.add(cartDto);
+			payDao.update_stock(cartDto.getP_code(), cartDto.getAmount());
+			payDao.cart_del(cart_code[i]);
+		}
+
+		model.addAttribute("order_product", list);
+		model.addAttribute("member_info", mDao.login1(id));
+		model.addAttribute("payment", paymentDto);
+
+		System.out.println("여기까지 실행");
 
 //		System.out.println("----------------------------------------------");
 //		System.out.println("<대상제품>");

@@ -89,9 +89,9 @@ $(document).ready(function() {
 					
 					<div class="myInfo">
 						<ul>
-							<li class="info"><strong>가나다</strong> 님의 정보를 한눈에 확인하세요.</li>
-							<li>보유 쿠폰<br/><span class="num">199</span> <span class="unit">장</span></li>
-							<li class="point">내 포인트<br/><span class="num">100,000</span> <span class="unit">P</span></li>
+							<li class="info"><strong>${sessionScope.session_mem }</strong> 님의 정보를 한눈에 확인하세요.</li>
+							<li>보유 쿠폰<br/><span class="num">${usable_coupon }</span> <span class="unit">장</span></li>
+							<li class="point">내 포인트<br/><span class="num">${usable_point }</span> <span class="unit">P</span></li>
 							<li class="last">진행중인 주문<br/><span class="num">199</span> <span class="unit">건</span></li>
 						</ul>
 					</div>
@@ -144,8 +144,8 @@ $(document).ready(function() {
 									
 									<td class="tnone">
 										<ul class="order">	
-											<li id="test"><a href="../payment/payment?buy_type=buy_one&cart_code=${cart_list.cart_code }" class="obtnMini iw70">바로구매</a></li>
-											<li onclick="product_del('${cart_list.cart_code }')" style="cursor: pointer;"><a class="nbtnMini iw70">상품삭제</a></li>
+											<li id="test"><a href="../payment/payment?buy_type=buy_one&cart_check=${cart_list.cart_code }" class="obtnMini iw70">바로구매</a></li>
+											<li onclick="sel_del('${cart_list.cart_code }')" style="cursor: pointer;"><a class="nbtnMini iw70">상품삭제</a></li>
 										</ul>
 									</td>
 								</tr>
@@ -241,7 +241,7 @@ $(function() {
 		$(totalid).text(comma(Number(price)*Number(amount)));
 		get_total();
 		
-		var data =JSON.stringify({cart_code:spinid,amount_:amount});
+		var data =JSON.stringify({cart_code:spinid,amount:amount});
 		console.log(data);
 		$.ajax({
 			method:"POST",
@@ -326,8 +326,14 @@ function select_all2() {
 }
 
 //선택삭제
-function sel_del() {
+function sel_del(code) {
 	var chbArr = new Array;
+	
+	if (code!=null) {
+		var get_id= "#cart"+code;
+		$(get_id).prop("checked",true);
+	}
+	
 	if($("input[name='cart_check']:checked").length==0){
 		alert("선택된 상품이 없습니다.");
 		return;
@@ -358,27 +364,6 @@ function sel_del() {
 		}
 	});
 	}
-}
-
-//상품삭제
-function product_del(code) {
-	var cart_code=JSON.stringify({cart_code:code});
-	
-	$.ajax({
-		type:"POST",
-		url:"cart_del2",
-		data:cart_code,
-		contentType:"application/json;charset=UTF-8",
-		success: function() {
-				var go_text="#cart"+code;
-				var go_hide="#tr"+code;
-				$(go_text).prop("type","text");
-				$(go_hide).hide();
-			},
-		error: function(request,status,error) {
-			alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
-		}
-	});
 }
 
 //선택상품 구매

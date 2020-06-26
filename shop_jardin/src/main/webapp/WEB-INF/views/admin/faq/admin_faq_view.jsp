@@ -50,6 +50,10 @@
 							<div class="subject">
 							
 								<ul>
+							        <li class="cate">  
+							            <c:if test="${fdto.f_type == 'order'}">주문</c:if>
+										<c:if test="${fdto.f_type == 'join'}">회원가입</c:if>
+										<c:if test="${fdto.f_type == 'product'}">상품</c:if></li>
 									<li>${fdto.f_title}</li>
 								</ul>
 							</div>

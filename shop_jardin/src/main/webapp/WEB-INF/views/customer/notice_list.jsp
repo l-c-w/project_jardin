@@ -83,7 +83,9 @@ $(document).ready(function() {
 
 			<!-- contents -->
 			<div id="contents">
+			
 				<div id="customer">
+				
 					<h2><strong>NOTICE</strong><span>쟈뎅샵 소식을 전해드립니다.</span></h2>
 					
 					<div class="orderDivMt">
@@ -312,11 +314,6 @@ $(document).ready(function() {
 					
 					</form>
 					
-					
-					
-					
-<!-- onclick="document.getElementById('notice_search').submit()" -->
-					
 
    <!--  <script type="text/javascript">
     
@@ -346,6 +343,7 @@ $(document).ready(function() {
 			<!-- //contents -->
 
 		</div>
+		
 	</div>
 	<!-- //container -->
 

@@ -1,6 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+    
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -12,6 +14,7 @@
 
 	
 <header>
+
 		<nav>
 				관리자 페이지
 		</nav>		
@@ -32,10 +35,10 @@
 								
 							<div class="submenu" id="LeftMenuID1" style="display: none;">
 							
-								<li><a href=""><img src="../images/icon_title_left.png">&nbsp;회원정보 조회/수정</a></li>
-								<li><a href=""><img src="../images/icon_title_left.png">&nbsp;비회원정보 조회/수정</a></li>
-								<li><a href=""><img src="../images/icon_title_left.png">&nbsp;회원 쿠폰 관리</a></li>
-								<li><a href=""><img src="../images/icon_title_left.png">&nbsp;회원 포인트 관리</a></li>
+								<li><a href="${pageContext.request.contextPath}/admin/admin_mlist"><img src="${pageContext.request.contextPath}/images/icon_title_left.png">&nbsp;회원정보 조회/수정</a></li>
+								<li><a href=""><img src="${pageContext.request.contextPath}/images/icon_title_left.png">&nbsp;비회원정보 조회/수정</a></li>
+								<li><a href=""><img src="${pageContext.request.contextPath}/images/icon_title_left.png">&nbsp;회원 쿠폰 관리</a></li>
+								<li><a href=""><img src="${pageContext.request.contextPath}/images/icon_title_left.png">&nbsp;회원 포인트 관리</a></li>
 								
 							</div>
 							
@@ -46,9 +49,9 @@
 									<span id="icon-plus-minus2" class="icon-list-plus">ListIcon</span>
 							</a></li>
 							<div class="submenu" id="LeftMenuID2" style="display: none;">
-								<li><a href="../notice/admin_noticelist"><img src="../images/icon_title_left.png">&nbsp;공지사항 관리</a></li>
-								<li><a href="../faq/admin_faqlist"><img src="../images/icon_title_left.png">&nbsp;FAQ관리</a></li>
-								<li><a href="../oo/admin_oofnqlist"><img src="../images/icon_title_left.png">&nbsp;1:1문의</a></li>
+								<li><a href="${pageContext.request.contextPath}/admin/notice/admin_notice_list"><img src="${pageContext.request.contextPath}/images/icon_title_left.png">&nbsp;공지사항 관리</a></li>
+								<li><a href="${pageContext.request.contextPath}/admin/faq/admin_faq_list"><img src="${pageContext.request.contextPath}/images/icon_title_left.png">&nbsp;FAQ관리</a></li>
+								<li><a href="${pageContext.request.contextPath}/admin/oo/admin_oofnq_list"><img src="${pageContext.request.contextPath}/images/icon_title_left.png">&nbsp;1:1문의</a></li>
 								
 								<li><a href="#"><img src="../images/icon_title_left.png">&nbsp;상품문의</a></li>
 							</div>
@@ -95,18 +98,17 @@
 							</script>
 						</ul>
 					</div>
+					
 				</div>
+				
+				
 				<div style="float: left">
-					<a href="#" onclick="LeftMenu_OCAll();">
-						<p id="leftmemu_oc" class="leftmemu_close_off"></p>
-					</a> <a href="#" onclick="Submenu_OCAll('5')">
-						<p id="submemu_oc" class="submemu_close_on"
-							style="display: block;"></p>
-					</a>
+					<a href="#" onclick="LeftMenu_OCAll();"><p id="leftmemu_oc" class="leftmemu_close_off"></p></a> 
+					<a href="#" onclick="Submenu_OCAll('5')"><p id="submemu_oc" class="submemu_close_on" style="display: block;"></p></a>
 				</div>
 
 			</div>
 		
-</body>
 </header>
+</body>
 </html>

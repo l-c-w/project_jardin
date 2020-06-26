@@ -258,7 +258,7 @@ public class AMController {
 			
 			cuservice.o_delete(oo_num);
 			
-			return "/admin/oo/admin_oofnq_answer_delete";
+			return "redirect:/admin/oo/admin_oofnq_list";
 		}
 		
 		
@@ -279,7 +279,7 @@ public class AMController {
 			
 		amservice.o_answer(model, odto.getOo_num(), odto.getOo_answer());
 			
-		return "/admin/oo/admin_oofnq_answer_ok";
+		return "redirect:/admin/oo/admin_oofnq_list";
 		
 		}
 		

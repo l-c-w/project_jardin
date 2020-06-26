@@ -121,7 +121,7 @@
 							</li>
 							<li>
 								<div class="stit">수량</div>
-								<div class="num">
+								<div class="num" id="amount">
 									<input id="spinner" value="1" />
 								</div>
 							</li>
@@ -142,7 +142,7 @@
 					<div class="infobtn">
 						<ul>
 							<li><a href="#" class="ty1">바로 <span>구매하기</span></a></li>
-							<li><a href="#" class="ty2">장바구니 <span>담기</span></a></li>
+							<li onclick="go_cart()"><a class="ty2">장바구니 <span>담기</span></a></li>
 							<li class="last"><a href="#" class="ty3">위시 <span>리스트</span></a></li>
 						</ul>
 					</div>
@@ -1025,6 +1025,39 @@ $(document).ready(function() {
 	relationChk();
 
 });
+
+function go_cart() {
+	var get_p_code=${productDetail.p_code};
+	var get_amount=$("#spinner").spinner('value');
+	var get_id = "qwer";
+	
+	$.ajax({
+		method:"post",
+		url:"get_item",
+		data:{p_code:get_p_code,amount:get_amount,id:get_id},
+		dataType:"json",
+		success: function () {
+			alert("전송성공");
+		},
+		error: function(request,status,error) {
+			alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
+		}
+		
+		
+		
+	});
+	
+	
+	
+	var move_cart= confirm("상품을 담았습니다.\n장바구니로 이동하시겠습니까?");
+	
+	if (condition) {
+		
+	}
+	
+}
+
+
 </script>
 
 

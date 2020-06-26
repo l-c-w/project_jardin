@@ -1,110 +1,53 @@
 package com.javalec.ex.Controller;
 
-import java.util.HashMap;
-
+import javax.inject.Inject;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.javalec.ex.Dao.PayDao;
+import com.javalec.ex.Dao.MDao;
 import com.javalec.ex.Dto.MDto.Member_Dto;
 import com.javalec.ex.Dto.PayDto.BuyerDto;
 import com.javalec.ex.Dto.PayDto.PaymentDto;
-import com.javalec.ex.Service.PayService.Cart_delService;
-import com.javalec.ex.Service.PayService.Cart_upddateService;
-import com.javalec.ex.Service.PayService.CouponService;
-import com.javalec.ex.Service.PayService.Get_coupon;
-import com.javalec.ex.Service.PayService.MemCService;
-import com.javalec.ex.Service.PayService.Order_confirmService;
+import com.javalec.ex.Service.MypageService.MypageService;
 import com.javalec.ex.Service.PayService.PayService;
-import com.javalec.ex.Service.PayService.Payment;
-import com.javalec.ex.Service.PayService.PointService;
 
 @Controller
 public class PayController {
 
 	@Autowired
-	private SqlSession sqlSession;
+	SqlSession sqlSession;
 
-	PayService pays = null;
-
-	// 내 포인트 목록보기
-	@RequestMapping("mypage/point")
-	public String point(Model model) {
-		model.addAttribute("id", "test4");
-		pays = new PointService();
-		pays.execute(sqlSession, model);
-
-		return "mypage/point";
-	}
-
-	// 내 쿠폰목록 보기
-	@RequestMapping("mypage/coupon")
-	public String coupon_list(Model model) {
-		model.addAttribute("id", "qwer");
-		pays = new CouponService();
-		pays.execute(sqlSession, model);
-
-		return "mypage/coupon";
-	}
-
-	// 카트 리스트보기
-	@RequestMapping("mypage/cart")
-	public String cart_view(HttpServletRequest request, Model model) {
-
-		String id = "qwer";
-		PayDao payDao = sqlSession.getMapper(PayDao.class);
-		model.addAttribute("list", payDao.cart_view(id));
-
-		return "mypage/cart";
-	}
-
-	// 카트 수량변화 DB적용
-	@RequestMapping("mypage/cart_change")
-	@ResponseBody
-	public void change_amount(@RequestBody HashMap<String, String> map, Model model) {
-		model.addAttribute("cart_code", map.get("cart_code"));
-		model.addAttribute("amount_", map.get("amount_"));
-
-		pays = new Cart_upddateService();
-		pays.execute(sqlSession, model);
-	}
-
-	// 카트 한개 삭제
-	@RequestMapping("mypage/cart_del2")
-	@ResponseBody
-	public void cart_del2(@RequestBody HashMap<String, String> map, Model model) {
-		model.addAttribute("del_type", "del_one");
-		model.addAttribute("cart_code2", map.get("cart_code"));
-		pays = new Cart_delService();
-		pays.execute(sqlSession, model);
-	}
-
-	// 카트 선택목록 삭제
-	@RequestMapping("mypage/cart_del")
-	@ResponseBody
-	public void cart_del(@RequestBody HashMap<String, String[]> map, Model model) {
-		model.addAttribute("del_type", "sel_del");
-		model.addAttribute("cart_code1", map.get("cart_code"));
-		pays = new Cart_delService();
-		pays.execute(sqlSession, model);
-
-	}
+	@Inject
+	PayService payservice;
+	@Inject
+	MypageService mypageService;
 
 	// 상품구매 주문페이지로
 	@RequestMapping("payment/payment")
-	public String buy_selected(HttpServletRequest request, Model model) {
-		model.addAttribute("request", request);
-		model.addAttribute("id", "qwer");
-		pays = new Payment();
-		pays.execute(sqlSession, model);
+	public String buy_selected(HttpServletRequest request, Model model) throws Exception {
+		HttpSession session = request.getSession();
+		String id = (String) session.getAttribute("session_mem");
+		String[] cart_check = request.getParameterValues("cart_check");
+
+		// 장바구니에서 넘어온 제품정보
+		model.addAttribute("from_cart", payservice.go_order(cart_check));
+		// 주문자정보
+		MDao mDao = sqlSession.getMapper(MDao.class);
+		Member_Dto mDto = mDao.login1(id);
+		model.addAttribute("buyer_info", mDto);
+//		model.addAttribute("usable_coupon", payservice.buyer_info(id));
+		// 사용가능한 쿠폰 갯수
+		model.addAttribute("usable_coupon", mypageService.usable_coupon(id));
+		// 포인트정보
+		model.addAttribute("usable_point", mypageService.usable_point(id));
 
 		return "payment/payment";
 	}
@@ -112,41 +55,64 @@ public class PayController {
 	// 주문자 정보 회원정보에 반영
 	@RequestMapping("payment/change_member")
 	@ResponseBody
-	public void change_member(Member_Dto member_Dto, Model model) {
-		model.addAttribute("member_info", member_Dto);
-		model.addAttribute("id", "test10");
+	public void change_member(HttpServletRequest request, Member_Dto member_Dto, Model model) throws Exception {
+		HttpSession session = request.getSession();
+		String id = (String) session.getAttribute("session_mem");
+		member_Dto.setId(id);
 
-		pays = new MemCService();
-		pays.execute(sqlSession, model);
+		model.addAttribute("change_check", payservice.update_member(member_Dto));
+		model.addAttribute("member_info", member_Dto);
+
 	}
 
 	// 쿠폰리스트 가져오기
 	@RequestMapping("payment/coupon_list")
-	public String use_coupon(HttpServletRequest request, Model model) {
-		model.addAttribute("id", "qwer");
+	public String use_coupon(HttpServletRequest request, Model model) throws Exception {
+		HttpSession session = request.getSession();
+		String id = (String) session.getAttribute("session_mem");
+
 		String[] cart_code = request.getParameterValues("cart_code");
-		model.addAttribute("cart_code", cart_code);
-		pays = new Get_coupon();
-		pays.execute(sqlSession, model);
+		model.addAttribute("cart_code", payservice.go_order(cart_code));
+		model.addAttribute("ucoupon_list", mypageService.ucou_list(id));
 
 		return "payment/coupon_list";
 	}
 
 	// 주문 확정
 	@PostMapping("payment/order_confirmation")
-	public String order_confirmation(HttpServletRequest request, BuyerDto buyerDto, PaymentDto paymentDto,
-			Model model) {
-
+	public String order_confirmation(HttpServletRequest request, BuyerDto buyerDto, PaymentDto paymentDto, Model model)
+			throws Exception {
+		HttpSession session = request.getSession();
+		String id = (String) session.getAttribute("session_mem");
 		String[] cart_code = request.getParameterValues("cart_code");
-		model.addAttribute("id", "qwer");
+
+		// 주문서 생성
+		payservice.make_order(paymentDto);
+		// 주문번호 가져오기
+		String pay_code = payservice.get_paycode(id);
+		// 주문서 전체 가져오기
+		paymentDto = payservice.get_payment(pay_code);
+		model.addAttribute("payment", paymentDto);
+		// 수취인 등록
+		payservice.make_buyer(buyerDto);
+		// 주문물품 등록
+		payservice.sold_product(pay_code, id, cart_code);
+		// 쿠폰사용 등록
+		if (paymentDto.getCou_num() != null) {
+			payservice.update_coupon(paymentDto.getCou_num());
+		}
+		// 포인트 적립
+		payservice.plus_point(paymentDto);
+		// 사용포인트 차감
+		payservice.minus_point(paymentDto);
+		// 재고 차감
+		payservice.update_stock(cart_code);
+
 		model.addAttribute("cart_code", cart_code);
 		model.addAttribute("buyer", buyerDto);
 		model.addAttribute("order", paymentDto);
 
-		pays = new Order_confirmService();
-		pays.execute(sqlSession, model);
-
-		return "payment/order_connfirmation";
+		return "payment/order_confirmation";
 	}
 
 }

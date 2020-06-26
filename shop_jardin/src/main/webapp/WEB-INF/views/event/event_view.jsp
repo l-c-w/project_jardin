@@ -33,13 +33,12 @@ const e_code = ${e_code};
 
 // html 페이지 모두 호출 후에 jquery실행
 $(function(){		
-	getComment_list();
-	getCommentCount();
-	commentPaging();
 });
 
 
 function commentPaging(){	//	댓글 페이징
+	
+	
 	
 	$.ajax({
 		type: 'get',
@@ -82,33 +81,9 @@ function commentPaging(){	//	댓글 페이징
 			
 			if(startpage > 0){
 				
-				html += '<div class="allPageMoving1">';
-				html += '<a href="event_view?page=' + startpage + '&e_code=' + e_code + '" class="n">';
-				html += '<img src="../images/btn/btn_pre2.gif" alt="처음으로" /></a>';
-				html += `<c:if test="\${page <= 1 }">`;
-				html += '<img src="../images/btn/btn_pre1.gif" alt="앞페이지로" />';
-				html += `</c:if>`;
-				html += `<c:if test="\${page > 1 }">`;
-				html += `<a href="event_view?page=\${page - 1 }&e_code=${e_code }"class="pre">`;
-				html += '<img src="../images/btn/btn_pre1.gif" alt="앞페이지로" /></a>';
-				html += `</c:if>`;
-				html += `<c:forEach var="a" begin="${startpage }" end="${endpage }" step="1">`;
-				html += '<span class="page_num">';
-				html += `<c:choose><c:when test="\${a == page }">`;
-				html += '<strong id="page_num2">' + ${a} + '</strong>';
-				html += `</c:when></c:choose>`;
-				html += '</span>';
-				html += `</c:forEach>`;
-				
-				html += `<c:if test="\${page >= maxpage }">`;
-				html += '<img src="../images/btn/btn_next1.gif" alt="뒤페이지로"/>';
-				html += `</c:if>`;
-				
-				html += '</div>';
-				
 			}			
 			
-		$('.btnAreaList').html(html);
+		$('#ajaxPaging').html(html);
 		
 		},
 		error: function(request, status, error){
@@ -312,7 +287,7 @@ function getComment_list(){	//	이 스크립트는 댓글 리스트만 불러옵
 							<input type="hidden" value="${page }" name="page">
 							<ul id="cConut">
 								<li class="in">
-									<p class="txt">총 <span class="orange">${cCount }</span> 개의 댓글이 달려있습니다.</p>
+									<p class="txt">총 <span class="orange">${comment_listcount}</span> 개의 댓글이 달려있습니다.</p>
 									<p class="password">비밀번호&nbsp;&nbsp;
 										<input type="password" class="replynum" />
 									</p>
@@ -332,6 +307,7 @@ function getComment_list(){	//	이 스크립트는 댓글 리스트만 불러옵
 					<!-- 댓글 수정, 삭제 -->
 					<div class="replyBox">
 						<!-- 댓글 수정 -->
+						<c:forEach var="e_com" items="${event_comment }">
 							<form action="event_commentOk" method="post" class="comm_modi">
 								<input type="hidden" value="${sessionScope.session_mem }" name="requestUser">
 								<input type="hidden" value="${e_com.id }" name="authUser">
@@ -339,17 +315,6 @@ function getComment_list(){	//	이 스크립트는 댓글 리스트만 불러옵
 								<input type="hidden" value="${e_com.ec_num }" name="ec_num">
 								<input type="hidden" value="${page }" name="page">
 								
-<!-- 								if(data.length>0){ -->
-			<!-- 					for(var i=0; i<data.length; i++){ -->
-			<%-- 						html += '<tr><td colspan="2"><h5 id="">작성자 : ' + data[i].cName + '</h5></td></tr>'; --%>
-			<!-- 						html += "<tr id='updateForm" + data[i].cId + "'><td>내용 : " + data[i].cContent + "</td>"; -->
-			<!-- 						// 				 updateForm0, updateForm1, updateForm2...... -->
-			<!-- 						html += "<td><a href='#' onclick='comment_updateForm(" + data[i].cId + ",\""  + data[i].cContent + "\")'>수정 </a>"; -->
-			<!-- 						//								  comment_updateForm(1, '댓글을 입력') -->
-			<!-- 						html += "<a href='#' onclick='comment_delete(" + data[i].cId + ")'> 삭제</a></td></tr>"; -->
-			<!-- 					}					 -->
-			<!-- 				} -->
-			
 								<ul id="${e_com.ec_num }" class="comment_modifyM" style="display: none;">
 									<li class="name">${e_com.id }</li>
 									<li class="txt">
@@ -364,13 +329,13 @@ function getComment_list(){	//	이 스크립트는 댓글 리스트만 불러옵
 							</form>
 							
 							<!-- 댓글 표시 -->
-							<form action="event_eDeleteComment" method="post" class="comm_modi2" id="commentViewForm">
+							<form action="event_eDeleteComment" method="post" class="comm_modi2">
 								<input type="hidden" value="${sessionScope.session_mem }" name="requestUser">
 								<input type="hidden" value="${e_com.id }" name="authUser">
 								<input type="hidden" value="${event_view.e_code }" name="e_code">
 								<input type="hidden" value="${e_com.ec_num }" name="ec_num">
 								<input type="hidden" value="${page }" name="page">
-								<ul id="coSub" class="comment_modifyV">
+								<ul id="coSub" class="comment_modifyV"">
 									<fmt:formatDate var="ec_wdate1" value="${e_com.ec_wdate }" pattern="yyyy/MM/dd" />
 									<fmt:formatDate var="ec_wdate2" value="${e_com.ec_wdate }" pattern="HH:mm:ss" />
 									<li class="name">${e_com.id } <span>[${ec_wdate1 }&nbsp;&nbsp;${ec_wdate2 }]</span></li>
@@ -383,7 +348,7 @@ function getComment_list(){	//	이 스크립트는 댓글 리스트만 불러옵
 									</li>
 								</ul>
 							</form>
-						
+						</c:forEach>
 						
 						
 						<!-- 비밀글, 없애기로 한 기능-->
@@ -398,7 +363,7 @@ function getComment_list(){	//	이 스크립트는 댓글 리스트만 불러옵
 					
 					<!-- 페이징이동 -->
 					<div class="btnAreaList">
-						<%-- <div class="allPageMoving1">
+						<div class="allPageMoving1" id="ajaxPaging">
 							<!-- 첫 페이지 이동 -->
 							<a href="event_view?page=${startpage }&e_code=${event_view.e_code }" class="n">
 								<img src="../images/btn/btn_pre2.gif" alt="처음으로"/>
@@ -438,7 +403,7 @@ function getComment_list(){	//	이 스크립트는 댓글 리스트만 불러옵
 							<a href="event_view?page=${maxpage }&e_code=${event_view.e_code }" class="n">
 								<img src="../images/btn/btn_next2.gif" alt="마지막페이지로"/>
 							</a>
-						</div> --%>
+						</div>
 					</div>
 					<!-- //페이징이동 -->
 

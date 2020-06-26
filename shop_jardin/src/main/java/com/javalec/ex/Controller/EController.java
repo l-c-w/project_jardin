@@ -64,16 +64,7 @@ public class EController {
 	}
 	
 
-	//@RequestParam(value = "page", defaultValue = "0")String page 메모
-	
-	@RequestMapping("/event_comment")	// 진행중 이벤트 리스트
-	@ResponseBody
-	public ArrayList<Event_commentDto> event_comment(@ModelAttribute EventDto eventDto) {
-		System.out.println("event_comment : "+eventDto.getE_code());
-		EDao dao = sqlSession.getMapper(EDao.class);
-		return dao.event_comment(eventDto);
-	}//ArrayList<Event_commentDto> event_comment
-	
+	//@RequestParam(value = "page", defaultValue = "0")String page 메모	
 
 	
 	// getCommentCount

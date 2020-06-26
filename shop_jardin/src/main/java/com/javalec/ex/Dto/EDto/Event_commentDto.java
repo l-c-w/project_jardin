@@ -9,7 +9,7 @@ public class Event_commentDto {
 	}
 
 	public Event_commentDto(String ec_num, String e_code, String id, String ec_title, String ec_content,
-			Timestamp ec_wdate, Timestamp ec_udate, String ec_date) {
+			Timestamp ec_wdate, Timestamp ec_udate) {
 		this.ec_num=ec_num;
 		this.e_code=e_code;
 		this.id=id;
@@ -17,7 +17,6 @@ public class Event_commentDto {
 		this.ec_content=ec_content;
 		this.ec_wdate=ec_wdate;
 		this.ec_udate=ec_udate;
-		this.ec_date=ec_date;
 	}
 
 	private String ec_num;
@@ -27,16 +26,8 @@ public class Event_commentDto {
 	private String ec_content;
 	private Timestamp ec_wdate;
 	private Timestamp ec_udate;
-	private String ec_date;
 	
-	public String getEc_date() {
-		return ec_date;
-	}
-
-	public void setEc_date(String ec_date) {
-		this.ec_date = ec_date;
-	}
-
+	
 	public String getEc_num() {
 		return ec_num;
 	}

@@ -73,7 +73,7 @@ public class ECommentService implements EService {
 		
 
 		// model
-		model.addAttribute("event_comment", list);
+		model.addAttribute("e_com", list);
 
 		model.addAttribute("comment_listcount", listcount);
 		model.addAttribute("page", page);

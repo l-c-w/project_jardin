@@ -1,15 +1,13 @@
 package com.javalec.ex.Service.PService;
 
-import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 
-import javax.inject.Inject;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.javalec.ex.Dao.PDao;
+import com.javalec.ex.Dto.CDto.C_ReviewDto;
 import com.javalec.ex.Dto.PDto.ProductDto;
 
 @Service
@@ -38,8 +36,27 @@ public class PServiceImpl implements PService {
 
 	@Override
 	public List<ProductDto> related(String p_category) throws Exception {
-		System.out.println("실행1: " + p_category);
 		return dao.related(p_category);
+	}
+
+	@Override
+	public List<C_ReviewDto> comment_list(C_ReviewDto dto) {
+		return dao.comment_list(dto);
+	}
+
+	@Override
+	public void comment_delete(C_ReviewDto dto) {
+		dao.comment_delete(dto);
+	}
+
+	@Override
+	public void comment_insert(C_ReviewDto dto) {
+		dao.comment_insert(dto);
+	}
+
+	@Override
+	public void comment_update(C_ReviewDto dto) {
+		dao.comment_update(dto);
 	}
 	
 }

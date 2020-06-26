@@ -52,7 +52,7 @@
 			<param-value>UTF-8</param-value>
 
 		</init-param>
-		
+
 
 		<init-param>
 
@@ -63,7 +63,7 @@
 		</init-param>
 
 	</filter>
-	
+
 
 	<filter-mapping>
 
@@ -85,25 +85,25 @@
 			<page-encoding>UTF-8</page-encoding>
 			<include-prelude>/WEB-INF/views/include.jsp</include-prelude>
 		</jsp-property-group>
-	</jsp-config> 
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
+	</jsp-config>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 </web-app>

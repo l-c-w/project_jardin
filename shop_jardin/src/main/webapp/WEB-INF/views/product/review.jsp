@@ -19,7 +19,7 @@
 <script type="text/javascript" src="../js/common.js"></script>
 <script type="text/javascript">
 	$(function() {
-
+	
 	});
 </script>
 </head>
@@ -36,6 +36,7 @@
 				</p>
 
 				<div class="checkDivMt">
+				<form action="formtable" name="formtable" method="post">
 					<table summary="분류, 구매여부, 평가, 제목, 상세 내용 순으로 포토 리뷰를 작성 하실수 있습니다."
 						class="checkTable" border="1" cellspacing="0">
 						<caption>구매 후기 작성</caption>
@@ -106,35 +107,32 @@
 									</ul>
 								</td>
 							</tr>
+							
 							<tr>
 								<th scope="row"><span>제목</span></th>
 								<td><input type="text" class="wlong" /></td>
 							</tr>
 							<tr>
 								<th scope="row"><span>내용</span></th>
-								<td><textarea class="tta"></textarea></td>
+								<td><textarea id="tta" class="tta"></textarea></td>
 							</tr>
 						</tbody>
 					</table>
-				</div>
-
-				<!-- Btn Area -->
 				<div class="btnArea">
 					<div class="bCenter">
 						<ul>
-							<li><a href="" class="sbtnMini">확인</a></li>
+							<input type="hidden" name="id" value="${param.id}">
+							<li><a href="#" onclick="comment_insert()" class="sbtnMini">확인</a></li>
 							<li><a onclick="parent.$.fancybox.close();"
 								href="javascript:;" class="nbtnbig">취소</a></li>
 						</ul>
 					</div>
 				</div>
-				<!-- //Btn Area -->
-
+				</form>
 			</div>
-
+				<!-- Btn Area -->
+			</div>
 		</div>
-
-
 	</div>
 </body>
 </html>

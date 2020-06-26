@@ -46,9 +46,9 @@ public class PDaoImpl implements PDao {
 	}
 
 	@Override
-	public List<C_ReviewDto> comment_list(C_ReviewDto dto) {
+	public List<C_ReviewDto> comment_list() {
 		
-		return sql.selectList(namespace + ".comment_list" , dto);
+		return sql.selectList(namespace + ".comment_list");
 	}
 
 	@Override

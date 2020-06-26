@@ -19,7 +19,7 @@ public interface PDao {
 	public List<ProductDto> related(String p_category) throws Exception;
 	
 	// 상품 글 리뷰
-	public List<C_ReviewDto> comment_list(C_ReviewDto dto);
+	public List<C_ReviewDto> comment_list();
 	
 	public void comment_delete(C_ReviewDto dto);
 	

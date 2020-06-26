@@ -11,7 +11,6 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.javalec.ex.Dao.PDao;
 import com.javalec.ex.Dto.CDto.C_ReviewDto;
-import com.javalec.ex.Dto.MDto.CommentDto;
 
 @Controller
 public class PCommentController {
@@ -22,11 +21,11 @@ public class PCommentController {
 	
 	@RequestMapping("/comment_list")
 	@ResponseBody  //json데이터로 페이지 리턴
-	public List<C_ReviewDto> comment_list(@ModelAttribute C_ReviewDto dto){
+	public List<C_ReviewDto> comment_list(){
 		//mybatis 에 있는 객체를 가져 옴.
 		PDao dao = sqlSession.getMapper(PDao.class);
 		
-		return dao.comment_list(dto);
+		return dao.comment_list();
 	}
 	
 	@RequestMapping("/comment_delete")
@@ -42,6 +41,7 @@ public class PCommentController {
 	public String comment_insert(@ModelAttribute C_ReviewDto dto){
 		PDao dao = sqlSession.getMapper(PDao.class);
 		dao.comment_insert(dto);
+		System.out.println("넘버:"+dto.getCr_num());
 		return "success";
 	}
 	

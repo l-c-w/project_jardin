@@ -32,7 +32,7 @@
 	<insert id="comment_insert" parameterType="com.javalec.ex.Dto.CDto.C_ReviewDto">
 		<![CDATA[
 		insert into C_Review values (
-		C_review_seq.nextval,#{id},#{p_code},#{CR_title},#{CR_content},#{CR_score},#{CR_hit},sysdate,sysdate,#{CR_group},#{CR_answer})
+		c_review_seq.nextval,#{id},#{p_code},#{cr_title},#{cr_content},#{cr_score},#{cr_hit},sysdate,sysdate,#{cr_group},#{cr_answer})
 		]]>
 	</insert>
 	

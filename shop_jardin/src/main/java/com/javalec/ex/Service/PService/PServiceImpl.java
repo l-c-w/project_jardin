@@ -40,8 +40,8 @@ public class PServiceImpl implements PService {
 	}
 
 	@Override
-	public List<C_ReviewDto> comment_list(C_ReviewDto dto) {
-		return dao.comment_list(dto);
+	public List<C_ReviewDto> comment_list() {
+		return dao.comment_list();
 	}
 
 	@Override

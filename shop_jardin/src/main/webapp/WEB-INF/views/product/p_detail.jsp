@@ -28,7 +28,145 @@
 <script type="text/javascript" src="../js/html5.js"></script>
 <script type="text/javascript" src="../js/respond.min.js"></script>
 <![endif]-->
+<script type="text/javascript">
+// 댓글 수정
+function comment_update() {
+		
+	   $.ajax({
+		  type:'post',
+		  url:'../comment_update',
+		  data: $("#commentListForm").serialize(), // form에 있는 input값 controller전송
+		  success:function(data){
+				  alert("update 성공" );
+				  
+				  if(data=="success"){
+					  alert("update 성공");
+					  getComment_list();
+				  }
+				  
+		  },
+		  error:function(request,status,error){
+			  alert("실패 : " + error);
+		  }
+		   
+	   });
+	   
+	}
 
+
+	//댓글 수정 폼생성
+function comment_updateForm(id,cr_content) {
+		alert("폼 확인" );
+	    var html ="";
+	   
+	    html += "<input type='text' id='cr_content' name='cr_content' value='"+cr_content+"'/>";
+	    html += "<input type='hidden' id='id' name='id' value='"+id+"'/>";
+	    html += "</td>";
+	    html += "<td><a href='#' onclick='comment_update()'>완료</a>";
+		html += "<a href='#' onclick='comment_cancel()'>취소</a>";
+		html += "</td></tr>";
+		
+		$('#updateForm'+Id).html(html);
+
+	}
+
+	//댓글 수정 취소
+function comment_cancel() {
+		
+	   getComment_list();
+	}
+	
+	//댓글 등록
+function comment_insert() {
+		
+	   $.ajax({
+		  type:'post',
+		  url:'../comment_insert',
+		  data: $("#formtable").serialize(), // form에 있는 input값 controller전송
+		  success:function(data){
+				  alert("성공" );
+				  
+				  if(data=="success"){
+					  alert("insert 성공");
+					  getComment_list();
+					  $("#cr_content").val("");
+				  }
+				  
+		  },
+		  error:function(request,status,error){
+			  alert("실패 : " + error);
+		  }
+		   
+	   });
+	   
+	}
+
+// 댓글 삭제
+function comment_delete(id) {
+		
+	   $.ajax({
+		  type:'post',
+		  url:'../comment_delete',
+		  data:{Id:Id},
+		  success:function(data){
+				  alert("댓글번호 :"+id );
+				  
+				  if(data=="success"){
+					  alert("delete 성공");
+					  getComment_list();
+				  }
+		  },
+		  error:function(request,status,error){
+			  alert("실패 : " + error);
+		  }
+		   
+	   });
+	   
+	}
+$(function(){      
+    getComment_list();      
+ });
+
+// 댓글 리스트 출력
+function getComment_list(){
+   
+   $.ajax({
+      type:'get',
+      url:'../comment_list',
+      dataType:'json',
+//       data: {bId:25}, 특정 값을 넘겨줄때
+//       data: $(#formTable).serialize 폼에 있는 모든 데이터를 넘겨줄때
+      date :$("#formtable").serialize(), //bId:25 bId:${param.bId}
+      contentType:'application/json; charset=UTF-8;',
+      success:function(data){   // data에 값이 담김
+         alert('성공');
+      	var html = "";
+      	if(data.length>0){
+	         	for(var i=0; i<data.length; i++){
+	         		html += "<tr><td colspan='2'><h5>작성자 :"+data[i].id+" </h5></td></tr>";
+	         		html += "<tr id='updateForm"+data[i].id+"'><td>내용 :"+ data[i].cr_content+"</td>";
+	         		html += "<td><a href='#' onclick='comment_updateForm("+data[i].id+",\""+data[i].cr_content+"\")'>수정</a>";
+	         		html += "<a href='#' onclick='comment_delete("+data[i].id+")'>삭제</a>";
+	         		html += "</td></tr>";
+	         	}
+      	}else{
+      		html += "<tr><td colspan='2'><h5>작성자 : 없음</h5></td></tr>";
+      		html += "<tr><td>등록된 댓글이 없습니다.</td>";
+      		html += "</td></tr>";
+      	}
+      	
+      	$('#commentList').html(html);
+      	
+      	/* html = html + data.length; */
+      },
+      error:function(request, status, error){
+         alert('실패' + error);
+      }
+   });
+   
+}
+ 
+</script>
 <style type="text/css">
 #cContent {
 	width: 700px;
@@ -374,145 +512,7 @@
 					</div>
 
 					<!-- //포토 구매후기 -->
-<script type="text/javascript">
-// 댓글 수정
-function comment_update() {
-		
-	   $.ajax({
-		  type:'post',
-		  url:'../comment_update',
-		  data: $("#commentListForm").serialize(), // form에 있는 input값 controller전송
-		  success:function(data){
-				  alert("update 성공" );
-				  
-				  if(data=="success"){
-					  alert("update 성공");
-					  getComment_list();
-				  }
-				  
-		  },
-		  error:function(request,status,error){
-			  alert("실패 : " + error);
-		  }
-		   
-	   });
-	   
-	}
 
-
-	//댓글 수정 폼생성
-function comment_updateForm(id,CR_content) {
-		alert("폼 확인" );
-	    var html ="";
-	   
-	    html += "<input type='text' id='CR_content' name='CR_content' value='"+CR_content+"'/>";
-	    html += "<input type='hidden' id='id' name='id' value='"+id+"'/>";
-	    html += "</td>";
-	    html += "<td><a href='#' onclick='comment_update()'>완료</a>";
-		html += "<a href='#' onclick='comment_cancel()'>취소</a>";
-		html += "</td></tr>";
-		
-		$('#updateForm'+Id).html(html);
-
-	}
-
-	//댓글 수정 취소
-function comment_cancel() {
-		
-	   getComment_list();
-	}
-	
-	//댓글 등록
-function comment_insert() {
-		
-	   $.ajax({
-		  type:'post',
-		  url:'../comment_insert',
-		  data: $("#formtable").serialize(), // form에 있는 input값 controller전송
-		  success:function(data){
-				  alert("성공" );
-				  
-				  if(data=="success"){
-					  alert("insert 성공");
-					  getComment_list();
-					  $("#CR_content").val("");
-				  }
-				  
-		  },
-		  error:function(request,status,error){
-			  alert("실패 : " + error);
-		  }
-		   
-	   });
-	   
-	}
-
-// 댓글 삭제
-function comment_delete(id) {
-		
-	   $.ajax({
-		  type:'post',
-		  url:'../comment_delete',
-		  data:{Id:Id},
-		  success:function(data){
-				  alert("댓글번호 :"+id );
-				  
-				  if(data=="success"){
-					  alert("delete 성공");
-					  getComment_list();
-				  }
-		  },
-		  error:function(request,status,error){
-			  alert("실패 : " + error);
-		  }
-		   
-	   });
-	   
-	}
-$(function(){      
-    getComment_list();      
- });
-
-// 댓글 리스트 출력
-function getComment_list(){
-   
-   $.ajax({
-      type:'get',
-      url:'../comment_list',
-      dataType:'json',
-//       data: {bId:25}, 특정 값을 넘겨줄때
-//       data: $(#formTable).serialize 폼에 있는 모든 데이터를 넘겨줄때
-      date :$("#formtable").serialize() , //bId:25 bId:${param.bId}
-      contentType:'application/json; charset=UTF-8;',
-      success:function(data){   // data에 값이 담김
-         alert('성공');
-      	var html = "";
-      	if(data.length>0){
-	         	for(var i=0; i<data.length; i++){
-	         		html += "<tr><td colspan='2'><h5>작성자 :"+data[i].id+" </h5></td></tr>";
-	         		html += "<tr id='updateForm"+data[i].id+"'><td>내용 :"+ data[i].CR_content+"</td>";
-	         		html += "<td><a href='#' onclick='comment_updateForm("+data[i].id+",\""+data[i].CR_content+"\")'>수정</a>";
-	         		html += "<a href='#' onclick='comment_delete("+data[i].id+")'>삭제</a>";
-	         		html += "</td></tr>";
-	         	}
-      	}else{
-      		html += "<tr><td colspan='2'><h5>작성자 : 없음</h5></td></tr>";
-      		html += "<tr><td>등록된 댓글이 없습니다.</td>";
-      		html += "</td></tr>";
-      	}
-      	
-      	$('#commentList').html(html);
-      	
-      	/* html = html + data.length; */
-      },
-      error:function(request, status, error){
-         alert('실패' + error);
-      }
-   });
-   
-}
- 
-</script>
 
 					<div class="headTitle depth">
 						<strong>상품리뷰&nbsp;</strong>상품리뷰는 상품 구매 후 작성하실 수 있습니다.
@@ -523,7 +523,7 @@ function getComment_list(){
 						<form id="formtable" name="formtable" method="post">
 							<table>
 								<tr>
-									<td><textarea rows="3" cols="30" id="CR_content" name=CR_content placeholder="댓글을 입력해주세요."></textarea> <br>
+									<td><textarea rows="3" cols="30" id="cr_content" name=cr_content placeholder="댓글을 입력해주세요."></textarea> <br>
 										<input type="hidden" name="id" value="${productDetail.p_code }">
 										<a href="#" onclick="comment_insert()">등록</a>
 									</td>

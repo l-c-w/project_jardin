@@ -9,7 +9,7 @@ public class C_ReviewDto {
 	}
 
 	public C_ReviewDto(int cr_num, String id, String p_code, String cr_title, String cr_content, int cr_score,
-			int cr_hit, Timestamp cr_wdate, Timestamp cr_udate, int cr_group) {
+			int cr_hit, Timestamp cr_wdate, Timestamp cr_udate, int cr_group , String cr_answer) {
 
 		this.cr_num = cr_num;
 		this.id = id;
@@ -21,6 +21,7 @@ public class C_ReviewDto {
 		this.cr_wdate = cr_wdate;
 		this.cr_udate = cr_udate;
 		this.cr_group = cr_group;
+		this.cr_answer = cr_answer;
 		
 	}
 

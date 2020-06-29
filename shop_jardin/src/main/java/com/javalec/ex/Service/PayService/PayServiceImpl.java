@@ -8,6 +8,7 @@ import javax.inject.Inject;
 
 import org.springframework.stereotype.Service;
 
+import com.javalec.ex.Dao.MDao;
 import com.javalec.ex.Dao.PayDao;
 import com.javalec.ex.Dto.MDto.Member_Dto;
 import com.javalec.ex.Dto.PayDto.BuyerDto;
@@ -20,18 +21,13 @@ public class PayServiceImpl implements PayService {
 
 	@Inject
 	PayDao payDao;
+	MDao mDao;
 
 	// 장바구니 선택상품 주문페이지로 옮기기
 	@Override
 	public List<CartDto> go_order(String[] cart_code) throws Exception {
 		return payDao.go_order(cart_code);
 	}
-
-//	// 회원정보 가져오기
-//	@Override
-//	public Member_Dto buyer_info(String id) throws Exception {
-//		return mDao.login1(id);
-//	}
 
 	// 회원변경정보 반영
 	@Override

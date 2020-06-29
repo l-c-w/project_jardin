@@ -145,7 +145,6 @@ public class EController {
 	}
 	
 	
-	@ResponseBody
 	@RequestMapping("/event_eDeleteComment") // 진행중 이벤트 댓글 삭제
 	public String event_eDeleteComment(HttpServletRequest request, Model model) {
 		es = new EDelCommentService();

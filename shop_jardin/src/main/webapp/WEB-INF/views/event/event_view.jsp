@@ -22,6 +22,7 @@
 <script type="text/javascript" src="../js/jquery.easing.1.3.js"></script>
 <script type="text/javascript" src="../js/idangerous.swiper-2.1.min.js"></script>
 <script type="text/javascript" src="../js/jquery.anchor.js"></script>
+<script type="text/javascript" src="../js/event_view.js"></script>
 <!--[if lt IE 9]>
 <script type="text/javascript" src="../js/html5.js"></script>
 <script type="text/javascript" src="../js/respond.min.js"></script>
@@ -256,7 +257,33 @@ function getComment_list(){	//	이 스크립트는 댓글 리스트만 불러옵
 
 
 					<!-- 댓글 -->
+					<!-- 댓글 등록 - 로그인 되어있을 때-->
+					<c:if test="${not empty sessionScope.session_mem }">
+					<div class="replyWrite">
+						<form action="event_eWite" method="post">
+							<input type="hidden" value="${event_view.e_code }" name="e_code">
+							<input type="hidden" value="${sessionScope.session_mem }" name="requestUser">
+							<input type="hidden" value="${page }" name="page">
+							<ul>
+								<li class="in">
+									<p class="txt">총 <span class="orange"></span> 개의 댓글이 달려있습니다.</p>
+									<p class="password">비밀번호&nbsp;&nbsp;
+										<input type="password" class="replynum" name="pw"/>
+									</p>
+									<input type="text" class="replyType" name="comment_content" required>
+								</li>
+								<li class="btn">
+									<input type="submit" class="replyBtn" value="등록">
+								</li>
+							</ul>
+						</form>
+						<p class="ntic">※ 비밀번호를 입력하시면 댓글이 비밀글로 등록 됩니다.</p>
+					</div>
+					</c:if>
+					
+					
 					<!-- 댓글 등록 - 로그인 되어있지 않을 때-->
+					<c:if test="${empty sessionScope.session_mem }">
 					<div class="replyWrite">
 						<form action="" method="post" id="e_param">
 							<input type="hidden" value="${event_view.e_code }" name="e_code">
@@ -276,7 +303,7 @@ function getComment_list(){	//	이 스크립트는 댓글 리스트만 불러옵
 						</form>
 						<p class="ntic">※ 비밀번호를 입력하시면 댓글이 비밀글로 등록 됩니다.</p>
 					</div>
-					
+					</c:if>
 					
 					
 					
@@ -318,7 +345,7 @@ function getComment_list(){	//	이 스크립트는 댓글 리스트만 불러옵
 									<li class="txt">${e_com.ec_content }</li>
 									<li class="btn">
 										<c:if test="${sessionScope.session_mem eq e_com.id }">
-											<a class="rebtn ${e_com.ec_num }" style="cursor: pointer;" id="modi_btn">수정</a>
+											<a class="rebtn modi" style="cursor: pointer;" id="modi_btn">수정</a>
 											<a class="rebtn delComm" style="cursor: pointer;">삭제</a>
 										</c:if>
 									</li>
@@ -427,8 +454,59 @@ $(function(){
 
 });
 
+$(document).ready(function(){
+	//댓글수정열기
+	$(".modi").click(function(){
+		var index = $(".modi").index(this);
+		$(this).parents('ul');
+		$(this).parents('ul').hide();
+		$(".comment_modifyM").eq(index).show(); // 0
+//		$(".comment_modifyM").not(index).hide(); // 1, 2
+//		$(".modi").not(index).parent().show();
 
+	});
+	$(".reset_re").click(function(){	
+		var index2 = $(".reset_re").index(this);
+		$(".comment_modifyM").eq(index2).hide();
+		var test2 = $(".modi").eq(index2).parents('ul');
+		$(".modi").eq(index2).parents('ul').show();
+	});	
 
+	// 수정 submit
+	$('.s_modi').click(function() {
+		var index = $(".s_modi").index(this);
+		var form = $(this).parents('form');
+		$(form).submit();
+	});
+	
+	// 삭제 submit
+	$('.delComm').click(function() {
+		var result = confirm('댓글을 삭제 하시겠습니까?');
+		if(result){
+			var index = $(".delComm").index(this);
+			var form = $(this).parents('form');
+			$(form).submit();			
+		}else{
+			
+		}	
+	});
+	
+	// 로그인하지 않고 댓글을 작성하려고 할 때
+	$('.emptySe').click(function(){
+		var result = confirm('댓글을 작성하시려면 로그인 하셔야 합니다. 로그인 하시겠습니까?');
+		if(result){
+//			window.location.replace('/ex/member/login');
+			location.href='../member/login?returnUrl=' + encodeURIComponent(location);
+		}else{
+			
+		}				
+	});
+	
+//	<a href="#none" onclick="location.href='/member/login.html?returnUrl=' + encodeURIComponent(location) ">로그인</a>	
+	
+	
+	
+});
 
 </script>
 

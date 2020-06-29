@@ -8,6 +8,7 @@ import javax.servlet.http.HttpSession;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -20,6 +21,17 @@ public class MypageController {
 
 	@Inject
 	MypageService mypageService;
+
+	// 장바구니 담기
+	@PostMapping("mypage/go_cart")
+	public String go_cart(HttpSession session, CartDto cartDto, Model model) throws Exception {
+		String id = (String) session.getAttribute("session_mem");
+		cartDto.setId(id);
+
+		mypageService.go_cart(cartDto);
+
+		return "redirect:cart";
+	}
 
 	// 내 포인트 목록보기
 	@RequestMapping("mypage/point")

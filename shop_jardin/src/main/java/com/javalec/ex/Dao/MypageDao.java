@@ -32,6 +32,9 @@ public interface MypageDao {
 	// 사용불가능한 쿠폰리스트
 	public List<Coupon_listDto> ncou_list(String id) throws Exception;
 
+	// 장바구니 담기
+	public int go_cart(CartDto cartDto) throws Exception;
+
 	// 장바구니 리스트
 	public List<CartDto> cart_view(String id) throws Exception;
 

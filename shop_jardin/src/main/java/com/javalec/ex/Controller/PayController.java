@@ -31,12 +31,34 @@ public class PayController {
 	@Inject
 	MypageService mypageService;
 
-	// 제품페이지에서 바로구매
+	// 상품페이지구매 주문페이지로
+	@RequestMapping("payment/go_payment")
+	public String go_payment(HttpSession session, CartDto cartDto, Model model) throws Exception {
+		String id = (String) session.getAttribute("session_mem");
+		cartDto.setId(id);
+		mypageService.go_cart(cartDto);
 
-	// 상품구매 주문페이지로
+		// 제품
+
+		model.addAttribute("from_cart", mypageService.cart_view(id));
+
+		System.out.println();
+		// 주문자정보
+		MDao mDao = sqlSession.getMapper(MDao.class);
+		Member_Dto mDto = mDao.login1(id);
+		model.addAttribute("buyer_info", mDto);
+		// 사용가능한 쿠폰 갯수
+		model.addAttribute("usable_coupon", mypageService.usable_coupon(id));
+		// 포인트정보
+		model.addAttribute("usable_point", mypageService.usable_point(id));
+
+		return "payment/payment";
+	}
+
+	// 카트상품구매 주문페이지로
 	@RequestMapping("payment/payment")
-	public String buy_selected(HttpSession session, String[] cart_check, CartDto cartDto, Model model)
-			throws Exception {
+	public String buy_selected(HttpServletRequest request, HttpSession session, String[] cart_check, CartDto cartDto,
+			Model model) throws Exception {
 		String id = (String) session.getAttribute("session_mem");
 
 		// 제품정보
@@ -90,7 +112,7 @@ public class PayController {
 		// 주문번호 가져오기
 		String pay_code = payservice.get_paycode(id);
 		// 주문서 전체 가져오기
-		// paymentDto = payservice.get_payment(pay_code);
+		paymentDto = payservice.get_payment(pay_code);
 		model.addAttribute("payment", payservice.get_payment(pay_code));
 		// 구입물품 가져오기
 		model.addAttribute("order_product", payservice.go_order(cart_code));

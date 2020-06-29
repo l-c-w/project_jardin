@@ -75,6 +75,12 @@ public class MypageDaoImpl implements MypageDao {
 		return sqlSession.selectList(namespace + ".ncou_list", id);
 	}
 
+	// 장바구니 담기
+	@Override
+	public int go_cart(CartDto cartDto) throws Exception {
+		return sqlSession.insert(namespace + ".go_cart", cartDto);
+	}
+
 	// 장바구니 리스트
 	@Override
 	public List<CartDto> cart_view(String id) throws Exception {

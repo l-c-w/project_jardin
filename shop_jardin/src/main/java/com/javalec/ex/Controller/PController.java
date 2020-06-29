@@ -26,11 +26,6 @@ public class PController {
 		List<ProductDto> Plist = null;
 		Plist = ps.Plist();
 
-		
-		
-		List<String> Plist2 = ps.Plist2(); 
-
-		
 		List<String> Plist2 = ps.Plist2();
 
 		if (pc.equals("")) {
@@ -38,9 +33,9 @@ public class PController {
 		}
 
 		model.addAttribute("pc", pc);
-		
+
 		model.addAttribute("Plist2", Plist2);
-		
+
 		model.addAttribute("Plist", Plist);
 
 	}
@@ -51,14 +46,8 @@ public class PController {
 
 		ProductDto productDetail = ps.productDetail(p_code);
 
-		
-		List<ProductDto> list = ps.related(p_category); 
-		
-
-
 		List<ProductDto> list = ps.related(p_category);
 
-	
 		model.addAttribute("productDetail", productDetail);
 		model.addAttribute("related", list);
 	}

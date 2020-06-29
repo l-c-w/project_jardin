@@ -22,6 +22,13 @@ public class PayDaoImpl implements PayDao {
 
 	private static String namespace = "com.javalec.ex.Dao.PayDao";
 
+	// 상품페이지에서 바로 구매
+	@Override
+	public CartDto from_cart(String p_code) throws Exception {
+
+		return sqlSession.selectOne(namespace + ".from_cart", p_code);
+	}
+
 	// 장바구니선택상품 주문페이지로 이동하기
 	@Override
 	public List<CartDto> go_order(String[] cart_code) throws Exception {

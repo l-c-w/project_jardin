@@ -4,6 +4,11 @@
 
 
 <mapper namespace="com.javalec.ex.Dao.PayDao">
+
+	<!-- 장바구니 담기 -->
+	<insert id="go_cart" parameterType="com.javalec.ex.Dto.PayDto.CartDto">
+		insert into cart values('cart'||CART_SEQ.nextval,#{id},#{p_code},#{amount})
+	</insert>
 	
 	<!-- 회원 장바구니 보기 -->
 	<select id="cart_view" resultType="com.javalec.ex.Dto.PayDto.CartDto">
@@ -25,6 +30,13 @@
 		</foreach>
 		)
 	</delete>
+	
+	<!-- 제품페이지에서 주문페이지로 제품 넘기기 -->
+	<select id="from_cart" resultType="com.javalec.ex.Dto.PayDto.CartDto">
+		select product.p_code, product.p_name, product.p_category, product.p_price, product.p_point 
+		from product
+		where p_code=#{param1}
+	</select>
 	
 	<!-- 장바구니에서 주문페이지로 제품 넘기기-->
 	<select id="go_order" resultType="com.javalec.ex.Dto.PayDto.CartDto">

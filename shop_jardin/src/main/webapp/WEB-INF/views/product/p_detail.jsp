@@ -263,8 +263,12 @@ function getComment_list(){
 							</li>
 							<li>
 								<div class="stit">수량</div>
-								<div class="num" id="amount">
-									<input id="spinner" value="1" />
+								<div class="num" >
+								<form action="" method="post" name="from_product" id="from_product">
+						<input type="hidden" value="${productDetail.p_code }" name="p_code">
+									<input name="amount" id="spinner" value="1" />
+										
+								</form>
 								</div>
 							</li>
 							<li>
@@ -282,9 +286,10 @@ function getComment_list(){
 
 					<!-- 판매중 -->
 					<div class="infobtn">
+					
 						<ul>
-							<li onclick="purchase()"><a  class="ty1">바로 <span>구매하기</span></a></li>
-							<li onclick="go_cart()"><a class="ty2">장바구니 <span>담기</span></a></li>
+							<li onclick="go_payment('from_product')"><a  class="ty1">바로 <span>구매하기</span></a></li>
+							<li onclick="go_cart('from_product')"><a class="ty2">장바구니 <span>담기</span></a></li>
 							<li class="last"><a href="#" class="ty3">위시 <span>리스트</span></a></li>
 						</ul>
 					</div>
@@ -1027,8 +1032,43 @@ $(document).ready(function() {
 	$(".thum ul li:eq(0)").click();
 	slideChk();
 	relationChk();
+	
+	/* $("#spinner").change(function() {
+		$("amount").val(this).spinner.val();
+		
+	}); */
 
 });
+
+
+function go_payment(name) {
+	
+	frm = document.getElementById(name);
+	frm.action = "../payment/go_payment";
+	frm.method = "post";
+	alert("상품구매 페이지로 이동합니다.");
+	frm.submit();
+	
+}
+
+function go_cart(name) {
+	alert(name);
+	frm = document.getElementById(name);
+	frm.action = "../mypage/go_cart";
+	frm.method = "post";
+	
+	var check = confirm("장바구니에 상품을 담았습니다.\n장바구니로 이동하시겠습니까?");
+	
+	if(check){
+		frm.submit();
+	}else{
+		
+	}
+	
+	
+	
+	
+}
 
 
 </script>

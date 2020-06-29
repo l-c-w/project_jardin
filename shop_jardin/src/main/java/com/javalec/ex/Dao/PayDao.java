@@ -11,6 +11,9 @@ import com.javalec.ex.Dto.PayDto.Sold_productsDto;
 
 public interface PayDao {
 
+	// 상품페이지에서 바로 구매
+	public CartDto from_cart(String p_code) throws Exception;
+
 	// 장바구니선택상품 주문페이지로 이동하기
 	public List<CartDto> go_order(String[] catr_code) throws Exception;
 

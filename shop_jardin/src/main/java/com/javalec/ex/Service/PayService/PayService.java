@@ -9,6 +9,12 @@ import com.javalec.ex.Dto.PayDto.PaymentDto;
 
 public interface PayService {
 
+	// 상품페이지에서 바로 구매
+	public CartDto from_cart(String p_code) throws Exception;
+
+	// 바로구매 상품 id, amount, tempcart_code 넣기
+	public List<CartDto> get_item(CartDto cartDto) throws Exception;
+
 	// 장바구니 선택상품 주문페이지로 옮기기
 	public List<CartDto> go_order(String[] cart_code) throws Exception;
 

@@ -1,5 +1,6 @@
 package com.javalec.ex.Service.PayService;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -22,6 +23,23 @@ public class PayServiceImpl implements PayService {
 	@Inject
 	PayDao payDao;
 	MDao mDao;
+
+	// 상품페이지에서 바로 구매
+	@Override
+	public CartDto from_cart(String p_code) throws Exception {
+
+		return payDao.from_cart(p_code);
+	}
+
+	// 바로구매 상품 id, amount, tempcart_code 넣기
+	@Override
+	public ArrayList<CartDto> get_item(CartDto cartDto) throws Exception {
+
+		ArrayList<CartDto> list = new ArrayList<CartDto>();
+		list.add(cartDto);
+
+		return list;
+	}
 
 	// 장바구니 선택상품 주문페이지로 옮기기
 	@Override

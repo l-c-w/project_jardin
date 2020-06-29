@@ -73,6 +73,13 @@ public class MypageServiceImpl implements MypageService {
 		return mypageDao.ncou_list(id);
 	}
 
+	// 장바구니 담기
+	@Override
+	public int go_cart(CartDto cartDto) throws Exception {
+
+		return mypageDao.go_cart(cartDto);
+	}
+
 	// 장바구니 리스트
 	@Override
 	public List<CartDto> cart_view(String id) throws Exception {

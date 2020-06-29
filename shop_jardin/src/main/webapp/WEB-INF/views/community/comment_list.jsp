@@ -191,9 +191,8 @@ $(document).ready(function() {
 						</c:if>
 						
 						
-						
 
-							<!-- 페이징이동1 -->
+					<!-- 페이징이동1 -->
 
 						<div class="allPageMoving1">
 						
@@ -288,8 +287,6 @@ $(document).ready(function() {
 						</div>
 
 
-
-
 						<!-- <div class="allPageMoving1">
 
 						<a href="#" class="n"><img src="../images/btn/btn_pre2.gif" alt="처음으로"/></a>
@@ -310,10 +307,6 @@ $(document).ready(function() {
 						 -->
 						
 						<!-- //페이징이동1 -->
-
-
-
-
 
 
 

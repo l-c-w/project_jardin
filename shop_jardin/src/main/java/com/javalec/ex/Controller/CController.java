@@ -334,7 +334,7 @@ public class CController {
         
         
 		
-		dao.p_write(p_id, "2", pdto.getPr_title(), pdto.getPr_content(), originFileName, pdto.getPr_score(), 0);
+		dao.p_write(p_id, "106", pdto.getPr_title(), pdto.getPr_content(), originFileName, pdto.getPr_score(), 0);
 
 		
 		try {

@@ -27,7 +27,6 @@ public interface PDao {
 	
 	public void comment_update(C_ReviewDto dto);
 	
-	public void sss();
 
 	
 	

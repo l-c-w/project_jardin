@@ -5,7 +5,7 @@
 <mapper namespace="com.javalec.ex.Dao.PDao">
 
 	<select id="Plist" resultType="com.javalec.ex.Dto.PDto.ProductDto">
-		select * from product  where p_delflag = 'N' order by p_code desc
+		select * from product  where p_delflag = 'Y' order by p_code desc
 	</select>
 	<select id="Plist2"
 		resultType="string">
@@ -46,7 +46,7 @@
 	
 	<!-- 관리자 상품 리스트 보기 -->
 	<select id="list" resultType="com.javalec.ex.Dto.PDto.ProductDto">
-		select * from product  where p_delflag = 'N' order by p_code desc
+		select * from product  where p_delflag = 'Y' order by p_code desc
 	</select>
 
 	<!-- 관리자 상품 등록 -->

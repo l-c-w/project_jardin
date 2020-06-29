@@ -53,7 +53,7 @@
 								<li><a href="${pageContext.request.contextPath}/admin/faq/admin_faq_list"><img src="${pageContext.request.contextPath}/images/icon_title_left.png">&nbsp;FAQ관리</a></li>
 								<li><a href="${pageContext.request.contextPath}/admin/oo/admin_oofnq_list"><img src="${pageContext.request.contextPath}/images/icon_title_left.png">&nbsp;1:1문의</a></li>
 								
-								<li><a href="#"><img src="../images/icon_title_left.png">&nbsp;상품문의</a></li>
+								<li><a href=""><img src="../images/icon_title_left.png">&nbsp;상품문의</a></li>
 							</div>
 							
 							<!-- 상품관리 탭 -->
@@ -63,7 +63,7 @@
 									<span id="icon-plus-minus3" class="icon-list-plus">ListIcon</span>
 							</a></li>
 							<div class="submenu" id="LeftMenuID3" style="display: none;">
-								<li><a href="#"><img	src="../images/icon_title_left.png">&nbsp;상품관리</a></li>
+								<li><a href="#"><img src="../images/icon_title_left.png">&nbsp;상품관리</a></li>
 								<li><a href="#"><img src="../images/icon_title_left.png">&nbsp;재고관리</a></li>
 								<li><a href="#"><img src="../images/icon_title_left.png">&nbsp;메인노출 상품관리</a></li>
 								<li><a href="#"><img src="../images/icon_title_left.png">&nbsp;상품이벤트관리</a></li>

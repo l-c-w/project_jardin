@@ -27,8 +27,8 @@
 }
 
 #event_list img {
-	width: 400px;
-	height: 250px;
+	width: 200px;
+	height: 100px;
 }
 </style>
 <script type="text/javascript">
@@ -245,14 +245,14 @@
 								<td></td>
 							</tr>
 						</table>
-						<input type="hidden" name="p_delflag" value="N">
+						<input type="hidden" name="p_delflag" value="Y">
 					</form>
 				</div>
 				<div id="search2">
 					<p>
-						검색 <span class="top_cnt">22</span>개 / 
-						전체<span class="top_cnt">22</span>개
-					  | 품절 <span class="top_cnt">1</span>개
+						전체<span class="top_cnt">20</span>개 /
+						검색 <span class="top_cnt">20</span>개 
+					  | 품절 <span class="top_cnt">0</span>개
 					</p>
 					<select name="sort" onchange="에이작스스크립트()">
 						<option value="">등록일 ↑</option>
@@ -287,12 +287,12 @@
 								<td>${pro.p_code}</td>
 								<td>${pro.p_category }</td>
 								<td id="img">
+									<a href="../product/p_detail?p_code=${pro.p_code }&p_category=${pro.p_category}">
 								<img src="../${pro.p_img1}"/>
-								<img src="../${pro.p_img2}"/>
-								<img src="../${pro.p_img3}"/>
 									<%--<img alt="썸네일" src="${pro.p_img1}"> --%>
 									<%--<img alt="상단이미지1" src="${pro.p_img1}"> --%>
 								    <%--<img alt="상단이미지2" src="${pro.p_img2}"> --%>
+									</a>
 								</td>
 								<td>${pro.p_name}</td>
 								<td>${pro.p_price}</td>
@@ -311,6 +311,8 @@
 					</table>
 				</div>
 			</div>
+			<br>
+		<button type="button" onclick="location.href='admin_product_write'">상품 등록</button>
 		</div>
 	</section>
 </body>

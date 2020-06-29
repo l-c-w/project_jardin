@@ -35,7 +35,8 @@ function comment_update() {
 	   $.ajax({
 		  type:'post',
 		  url:'../comment_update',
-		  data: $("#commentListForm").serialize(), // form에 있는 input값 controller전송
+		  data: $("#commentListForm").serialize(),
+		  // form에 있는 input값 controller전송
 		  success:function(data){
 				  alert("update 성공" );
 				  
@@ -82,7 +83,8 @@ function comment_insert() {
 	   $.ajax({
 		  type:'post',
 		  url:'../comment_insert',
-		  data: $("#formtable").serialize(), // form에 있는 input값 controller전송
+		  data: $("#formtable").serialize(), 
+		  // form에 있는 input값 controller전송
 		  success:function(data){
 				  alert("성공" );
 				  
@@ -136,9 +138,11 @@ function getComment_list(){
       dataType:'json',
 //       data: {bId:25}, 특정 값을 넘겨줄때
 //       data: $(#formTable).serialize 폼에 있는 모든 데이터를 넘겨줄때
-      date :$("#formtable").serialize(), //bId:25 bId:${param.bId}
+//		 bId:25 bId:${param.bId}
+      date :$("#formtable").serialize(),
       contentType:'application/json; charset=UTF-8;',
-      success:function(data){   // data에 값이 담김
+      success:function(data){ 
+    	// data에 값이 담김
          alert('성공');
       	var html = "";
       	if(data.length>0){
@@ -1025,44 +1029,6 @@ $(document).ready(function() {
 	relationChk();
 
 });
-//구매 만들다 말았음
-/* function purchase() {
-	var check=confirm("구매페이지로 이동합니다.");
-	if (check) {
-		location.href="../payment/payment?cart_code=${}
-	}
-}
-
-function go_cart() {
-	var get_p_code=${productDetail.p_code};
-	var get_amount=$("#spinner").spinner('value');
-	var get_id = "qwer";
-	
-	$.ajax({
-		method:"post",
-		url:"get_item",
-		data:{p_code:get_p_code,amount:get_amount,id:get_id},
-		dataType:"json",
-		success: function () {
-			alert("전송성공");
-		},
-		error: function(request,status,error) {
-			alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
-		}
-		
-		
-		
-	});
-	
-	
-	
-	var move_cart= confirm("상품을 담았습니다.\n장바구니로 이동하시겠습니까?");
-	
-	if (condition) {
-		
-	}
-	
-} */
 
 
 </script>

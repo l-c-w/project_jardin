@@ -12,9 +12,6 @@ public interface PayService {
 	// 장바구니 선택상품 주문페이지로 옮기기
 	public List<CartDto> go_order(String[] cart_code) throws Exception;
 
-//	// 회원정보 가져오기
-//	public Member_Dto buyer_info(String id) throws Exception;
-
 	// 회원변경정보 반영
 	public int update_member(Member_Dto member_Dto) throws Exception;
 

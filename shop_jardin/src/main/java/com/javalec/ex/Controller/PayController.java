@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.javalec.ex.Dao.MDao;
 import com.javalec.ex.Dto.MDto.Member_Dto;
 import com.javalec.ex.Dto.PayDto.BuyerDto;
+import com.javalec.ex.Dto.PayDto.CartDto;
 import com.javalec.ex.Dto.PayDto.PaymentDto;
 import com.javalec.ex.Service.MypageService.MypageService;
 import com.javalec.ex.Service.PayService.PayService;
@@ -30,25 +31,14 @@ public class PayController {
 	@Inject
 	MypageService mypageService;
 
+	// 제품페이지에서 바로구매
+
 	// 상품구매 주문페이지로
 	@RequestMapping("payment/payment")
-	public String buy_selected(HttpServletRequest request, Model model) throws Exception {
-		HttpSession session = request.getSession();
+	public String buy_selected(HttpSession session, String[] cart_check, CartDto cartDto, Model model)
+			throws Exception {
 		String id = (String) session.getAttribute("session_mem");
-		String buy_type = request.getParameter("buy_type");
-		String[] cart_check = request.getParameterValues("cart_check");
 
-//		switch (buy_type) {
-//		case "from_cart":
-//			cart_check = 
-//			break;
-//		case "from_product":
-//
-//			break;
-//		default:
-//			break;
-//
-//		}
 		// 제품정보
 		model.addAttribute("from_cart", payservice.go_order(cart_check));
 		// 주문자정보
@@ -66,23 +56,20 @@ public class PayController {
 	// 주문자 정보 회원정보에 반영
 	@RequestMapping("payment/change_member")
 	@ResponseBody
-	public void change_member(HttpServletRequest request, Member_Dto member_Dto, Model model) throws Exception {
-		HttpSession session = request.getSession();
+	public void change_member(HttpSession session, HttpServletRequest request, Member_Dto member_Dto, Model model)
+			throws Exception {
 		String id = (String) session.getAttribute("session_mem");
 		member_Dto.setId(id);
 
 		model.addAttribute("change_check", payservice.update_member(member_Dto));
-		model.addAttribute("member_info", member_Dto);
-
 	}
 
 	// 쿠폰리스트 가져오기
 	@RequestMapping("payment/coupon_list")
-	public String use_coupon(HttpServletRequest request, Model model) throws Exception {
-		HttpSession session = request.getSession();
+	public String use_coupon(HttpSession session, String[] cart_code, HttpServletRequest request, Model model)
+			throws Exception {
 		String id = (String) session.getAttribute("session_mem");
 
-		String[] cart_code = request.getParameterValues("cart_code");
 		model.addAttribute("cart_code", payservice.go_order(cart_code));
 		model.addAttribute("ucoupon_list", mypageService.ucou_list(id));
 
@@ -91,9 +78,8 @@ public class PayController {
 
 	// 주문 확정
 	@PostMapping("payment/order_confirmation")
-	public String order_confirmation(HttpServletRequest request, BuyerDto buyerDto, PaymentDto paymentDto, Model model)
-			throws Exception {
-		HttpSession session = request.getSession();
+	public String order_confirmation(HttpSession session, HttpServletRequest request, BuyerDto buyerDto,
+			PaymentDto paymentDto, Model model) throws Exception {
 		String id = (String) session.getAttribute("session_mem");
 		paymentDto.setId(id);
 		buyerDto.setId(id);
@@ -104,8 +90,8 @@ public class PayController {
 		// 주문번호 가져오기
 		String pay_code = payservice.get_paycode(id);
 		// 주문서 전체 가져오기
-		paymentDto = payservice.get_payment(pay_code);
-		model.addAttribute("payment", paymentDto);
+		// paymentDto = payservice.get_payment(pay_code);
+		model.addAttribute("payment", payservice.get_payment(pay_code));
 		// 구입물품 가져오기
 		model.addAttribute("order_product", payservice.go_order(cart_code));
 		// 주문자정보

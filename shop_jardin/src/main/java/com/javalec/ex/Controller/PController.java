@@ -8,9 +8,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.javalec.ex.Dto.CDto.C_ReviewDto;
 import com.javalec.ex.Dto.PDto.ProductDto;
 import com.javalec.ex.Service.PService.PService;
 
@@ -27,7 +25,7 @@ public class PController {
 
 		List<ProductDto> Plist = null;
 		Plist = ps.Plist();
-		System.out.println("Plist"+Plist.toString());
+		System.out.println("Plist" + Plist.toString());
 		List<String> Plist2 = ps.Plist2();
 		if (pc.equals("")) {
 			pc = Plist2.get(0);
@@ -41,16 +39,14 @@ public class PController {
 
 	// 상품 상세정보
 	@RequestMapping(value = "/product/p_detail", method = RequestMethod.GET)
-	public void p_detail(Model model, int p_code , String p_category) throws Exception {
-		
+	public void p_detail(Model model, int p_code, String p_category) throws Exception {
+
 		ProductDto productDetail = ps.productDetail(p_code);
-		
-		List<ProductDto> list =ps.related(p_category); 
-		
+
+		List<ProductDto> list = ps.related(p_category);
+
 		model.addAttribute("productDetail", productDetail);
 		model.addAttribute("related", list);
 	}
-	
-
 
 }

@@ -120,7 +120,7 @@ $(document).ready(function() {
 							</thead>
 							<tbody>
 								
-								<form action="../payment/payment" name="cart_order" method="post">
+								<form action="../payment/payment?buy_type=cart" name="cart_order" method="post">
 								<input type="hidden" name="buy_type" value="buy_selected">
 								<c:forEach var="cart_list" items="${list }">
 									<c:set var="init_cost" value="0"/>

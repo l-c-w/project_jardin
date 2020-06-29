@@ -55,7 +55,6 @@ public class PayController {
 		MDao mDao = sqlSession.getMapper(MDao.class);
 		Member_Dto mDto = mDao.login1(id);
 		model.addAttribute("buyer_info", mDto);
-//		model.addAttribute("usable_coupon", payservice.buyer_info(id));
 		// 사용가능한 쿠폰 갯수
 		model.addAttribute("usable_coupon", mypageService.usable_coupon(id));
 		// 포인트정보
@@ -107,6 +106,17 @@ public class PayController {
 		// 주문서 전체 가져오기
 		paymentDto = payservice.get_payment(pay_code);
 		model.addAttribute("payment", paymentDto);
+		// 구입물품 가져오기
+		model.addAttribute("order_product", payservice.go_order(cart_code));
+		// 주문자정보
+		MDao mDao = sqlSession.getMapper(MDao.class);
+		Member_Dto mDto = mDao.login1(id);
+		model.addAttribute("member_info", mDto);
+		// 수취인정보
+		model.addAttribute("buyer", buyerDto);
+		// 주문정보
+		model.addAttribute("order", paymentDto);
+
 		// 수취인 등록
 		buyerDto.setPay_code(pay_code);
 		payservice.make_buyer(buyerDto);
@@ -124,17 +134,8 @@ public class PayController {
 		}
 		// 재고 차감
 		payservice.update_stock(cart_code);
-
-		// 구입물품 가져오기
-		model.addAttribute("order_product", payservice.go_order(cart_code));
-		// 주문자정보
-		MDao mDao = sqlSession.getMapper(MDao.class);
-		Member_Dto mDto = mDao.login1(id);
-		model.addAttribute("member_info", mDto);
-		// 수취인정보
-		model.addAttribute("buyer", buyerDto);
-		// 주문정보
-		model.addAttribute("order", paymentDto);
+		// 장바구니에서 삭제하기
+		mypageService.cart_del(cart_code);
 
 		return "payment/order_confirmation";
 	}

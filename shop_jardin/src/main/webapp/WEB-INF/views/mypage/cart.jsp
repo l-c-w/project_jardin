@@ -358,12 +358,14 @@ function sel_del(code) {
 				$(go_text).prop("type","text");
 				$(go_hide).hide();
 				
+				
 			}
 		},error: function(request,status,error) {
 			alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
 		}
 	});
 	}
+	alert("삭제되었습니다.");
 }
 
 //선택상품 구매
@@ -372,8 +374,12 @@ function buy_select() {
 		alert("선택된 상품이 없습니다.");
 		return;		
 	}
-	
-	cart_order.submit();
+	var check=confirm("선택 상품을 구매하시겠습니까?");
+	if(check){
+	cart_order.submit();		
+	}else{
+		return;
+	}
 }
 
 //전체구매

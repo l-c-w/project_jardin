@@ -118,7 +118,7 @@ $(function() {
 						<tr>
 							<td class="tnone"><input type="radio" name="select_coupon" id="${coupon_list.cou_reward }" value="${coupon_list.cou_code }" class="${coupon_list.cou_num }"> </td>
 							<td class="tnone">${coupon_list.cou_num }  /<br/><span>${coupon_list.cou_name }</span></td>
-							<td>${coupon_list.issue_date }<br/><span>(<fmt:formatDate value="${coupon_list.issue_date }" pattern="yyyy/MM/dd"/>  ~
+							<td><fmt:formatDate value="${coupon_list.issue_date }" pattern="yyyy/MM/dd"/> <br/><span>(<fmt:formatDate value="${coupon_list.issue_date }" pattern="yyyy/MM/dd"/>  ~
 								<fmt:formatDate value="${coupon_list.exp_date }" pattern="yyyy/MM/dd"/>  )</span></td>
 							<td class="tnone" name="${coupon_list.cou_code }reward" id="${coupon_list.cou_reward }">
 							<c:if test="${coupon_list.cou_reward<1 }"><fmt:parseNumber value="${coupon_list.cou_reward*100 }" integerOnly="true"/>% 할인</c:if>

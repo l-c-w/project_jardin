@@ -7,8 +7,8 @@ public class BuyerDto {
 	}
 
 	public BuyerDto(String pay_code, String id, String name, String email1, String email2, String del_post,
-			String del_address1, String del_address2, String del_demand, int del_phone1, int del_phone2,
-			int del_phone3) {
+			String del_address1, String del_address2, String del_demand, String del_phone1, String del_phone2,
+			String del_phone3) {
 		this.pay_code = pay_code;
 		this.id = id;
 		this.name = name;
@@ -24,8 +24,8 @@ public class BuyerDto {
 
 	}
 
-	private String pay_code, id, name, email1, email2, del_post, del_address1, del_address2, del_demand;
-	private int del_phone1, del_phone2, del_phone3;
+	private String pay_code, id, name, email1, email2, del_post, del_address1, del_address2, del_demand, del_phone1,
+			del_phone2, del_phone3;
 
 	public String getPay_code() {
 		return pay_code;
@@ -99,27 +99,27 @@ public class BuyerDto {
 		this.del_demand = del_demand;
 	}
 
-	public int getDel_phone1() {
+	public String getDel_phone1() {
 		return del_phone1;
 	}
 
-	public void setDel_phone1(int del_phone1) {
+	public void setDel_phone1(String del_phone1) {
 		this.del_phone1 = del_phone1;
 	}
 
-	public int getDel_phone2() {
+	public String getDel_phone2() {
 		return del_phone2;
 	}
 
-	public void setDel_phone2(int del_phone2) {
+	public void setDel_phone2(String del_phone2) {
 		this.del_phone2 = del_phone2;
 	}
 
-	public int getDel_phone3() {
+	public String getDel_phone3() {
 		return del_phone3;
 	}
 
-	public void setDel_phone3(int del_phone3) {
+	public void setDel_phone3(String del_phone3) {
 		this.del_phone3 = del_phone3;
 	}
 

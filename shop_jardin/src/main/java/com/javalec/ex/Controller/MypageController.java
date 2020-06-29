@@ -77,10 +77,6 @@ public class MypageController {
 	@ResponseBody
 	public void cart_del(@RequestBody HashMap<String, String[]> map, Model model) throws Exception {
 		String[] cart_code = map.get("cart_code");
-		for (int i = 0; i < cart_code.length; i++) {
-			System.out.println(cart_code[i]);
-		}
-
 		model.addAttribute("del_check", mypageService.cart_del(cart_code));
 	}
 }

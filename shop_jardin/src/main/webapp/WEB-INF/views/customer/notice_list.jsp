@@ -1,3 +1,4 @@
+<%@page import="java.util.Date"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
     
@@ -118,7 +119,30 @@ $(document).ready(function() {
 									<td class="tnone">${no.n_num}</td>
 									<td class="left">
 										<a href="notice_view?n_num=${no.n_num}">${no.n_title}</a>
-										<img src="../images/ico/ico_new.gif" alt="NEW" />
+										
+										
+									
+									 <c:set var="ago" value="<%=new Date(new Date().getTime() - 60*60*24*1000)%>"/>
+									 <fmt:formatDate value="${ago}" pattern="yyyy-MM-dd" var="ago"/>
+									 
+									 <c:set var="wdate" value="${no.n_wdate}"/>
+									 <fmt:formatDate value="${wdate}" pattern="yyyy-MM-dd" var="wdate"/>
+									 
+									
+									   <c:choose>
+										
+										<c:when test="${wdate <= ago}">
+										</c:when>
+										
+										<c:when test="${wdate > ago}">
+										<img src="../images/ico/ico_new.gif" alt="NEW" /> 
+										</c:when>
+										
+										</c:choose>
+										
+										
+										<!-- <img src="../images/ico/ico_new.gif" alt="NEW" /> -->
+										
 									</td>
 									<td><fmt:formatDate pattern="yyyy-MM-dd" value="${no.n_wdate}" /></td>
 									<td class="tnone right" style="text-align: center;">${no.n_hit}</td>

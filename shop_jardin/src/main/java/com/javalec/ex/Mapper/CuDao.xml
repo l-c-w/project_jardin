@@ -42,7 +42,7 @@
 		FROM ( SELECT ROWNUM RN, A.* 
 				FROM (SELECT * 
 					  FROM notice 
-					  ORDER BY n_num DESC ) A )
+					  ORDER BY n_wdate DESC ) A )
 	WHERE RN BETWEEN #{start} AND #{end}
     </select>
     

@@ -17,5 +17,5 @@ public interface ACDao {
 	public int coupon_write(String e_code, String cou_name, double cou_reward, 
 			int cou_limit, String cou_start, String cou_end, int cou_exp);
 	
-	public void eWriteDo(EventDto edto);
+	public void eWriteDo(EventDto eventDto);
 }

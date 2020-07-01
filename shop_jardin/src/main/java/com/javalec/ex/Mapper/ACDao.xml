@@ -15,9 +15,9 @@
 		to_date(#{param5}, 'yyyymmddhh24miss'), to_date(#{param6}, 'yyyymmddhh24miss'), #{param7})
 	</insert>
 	<insert id="eWriteDo" parameterType="com.javalec.ex.Dto.EDto.EventDto">
-		INSERT INTO EVENT VALUES (EVENT_SEQ.nextval, #{e_type}, #{e_apply}, #{e_title},
-		#{e_content}, #{e_file1}, #{e_file2}, #{e_file3}, TO_DATE(#{e_start}, 'YYYYMMDDHH24MISS'), 
-		TO_DATE(#{e_end}, 'YYYYMMDDHH24MISS'), sysdate, sysdate)
+		INSERT INTO EVENT VALUES (EVENT_SEQ.nextval, #{e_type}, #{e_apply}, #{e_title}, #{e_content}, 
+		#{e_file1}, #{e_file2}, #{e_file3}, 
+		to_date(#{e_start}, 'yyyy/MM/DD'), to_date(#{e_end}, 'yyyy/MM/DD'), sysdate, sysdate)
 	</insert>
 
 

@@ -1052,7 +1052,6 @@ function go_payment(name) {
 }
 
 function go_cart(name) {
-	alert(name);
 	frm = document.getElementById(name);
 	frm.action = "../mypage/go_cart";
 	frm.method = "post";
@@ -1062,7 +1061,7 @@ function go_cart(name) {
 	if(check){
 		frm.submit();
 	}else{
-		
+		//ajax 만들것
 	}
 	
 	

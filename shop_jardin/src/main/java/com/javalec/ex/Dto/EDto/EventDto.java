@@ -85,18 +85,23 @@ public class EventDto {
 	public void setE_file3(String e_file3) {
 		this.e_file3 = e_file3;
 	}
+
 	public Timestamp getE_start() {
 		return e_start;
 	}
+
 	public void setE_start(Timestamp e_start) {
 		this.e_start = e_start;
 	}
+
 	public Timestamp getE_end() {
 		return e_end;
 	}
+
 	public void setE_end(Timestamp e_end) {
 		this.e_end = e_end;
 	}
+
 	public Timestamp getE_wdate() {
 		return e_wdate;
 	}

@@ -103,7 +103,29 @@ $(document).ready(function() {
 			</div>
 			<div id="e_calender">
 				<label for="e_sdate" id=e_sdatel>시작일<input type="date" name="e_start1" id="e_sdate"></label>
+				<select name="e_start2">
+				<c:forEach var="time" begin="00" end="24" step="1">
+					<c:if test="${time < 10 }">
+						<option value="0${time }:00:00">0${time } : 00</option>
+					</c:if>
+					<c:if test="${time > 10 }">
+						<option value="${time }:00:00">${time } : 00</option>
+					</c:if>
+				</c:forEach>
+				</select>
+				
 				<label for="e_edate" id=e_edatel>&nbsp;~&nbsp;종료일<input type="date" name="e_end1" id="e_edate"></label>
+				<span>종료시간 : </span><select name="e_end2">
+				<c:forEach var="time" begin="00" end="24" step="1">
+					<c:if test="${time < 10 }">
+						<option value="0${time }:00:00">0${time } : 00</option>
+					</c:if>
+					<c:if test="${time > 10 }">
+						<option value="${time }:00:00">${time } : 00</option>
+					</c:if>
+				</c:forEach>
+				</select>
+				
 			</div>
 			<div id="e_files">
 				<label for="e_file1">썸네일: <input type="file" name="e_file01" id="e_file1" ></label><br>

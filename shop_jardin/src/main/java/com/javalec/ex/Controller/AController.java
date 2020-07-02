@@ -73,18 +73,29 @@ public class AController {
 		
 		System.out.println("-----admin_ewriteDo-----");
 		
+		ACDao dao = sqlSession.getMapper(ACDao.class);
 		List<MultipartFile> file = new ArrayList<MultipartFile>();
 		String e_start1 = request.getParameter("e_start1");
 		String e_end1 = request.getParameter("e_end1");
 		
+//		String e_start2 = " 00:00:00";
+//		String e_end2 = " 00:00:00";
+		String e_start2 = request.getParameter("e_start2");
+		String e_end2 = request.getParameter("e_end2");
+		String e_start3 = e_start1 + " " + e_start2;
+		String e_end3 = e_end1 + " " + e_end2;
+		System.out.println("e_start3 : " + e_start3);
+		System.out.println("e_end3 : " + e_end3);
+		
+		java.sql.Timestamp e_start = java.sql.Timestamp.valueOf(e_start3);
+		java.sql.Timestamp e_end = java.sql.Timestamp.valueOf(e_end3);
+		
+		edto.setE_start(e_start);
+		edto.setE_end(e_end);
+		
 		file.add(multi1);
 		file.add(multi2);
 		file.add(multi3);
-		
-		System.out.println("e_start1 : " + e_start1);
-		System.out.println("e_end1 : " + e_end1);		
-		
-		ACDao dao = sqlSession.getMapper(ACDao.class);
 		
 		String uploadPath = request.getSession().getServletContext().getRealPath("/resources/imgUpload");
 		// ↓ 이미지를 업로드할 폴더를 설정 = /uploadPath/imgUpload 
@@ -116,30 +127,9 @@ public class AController {
 		edto.setE_file3(File.separator + "imgUpload" + ymdPath + File.separator + fileName.get(2));
 //		eventDto.setP_content_img(File.separator + "imgUpload" + ymdPath + File.separator + "s" + File.separator + "s_"+ fileName.get(3));
 
-//		aps.write(eventDto);
 		
 //		MultipartRequest multi = new MultipartRequest(request,path,size,"utf-8",new DefaultFileRenamePolicy());
 		
-//		String e_type = request.getParameter("e_type");
-//		String e_apply = request.getParameter("e_apply");
-//		String e_title = request.getParameter("e_title");
-//		String e_content = request.getParameter("e_content");
-		
-//		String e_start1 = request.getParameter("e_start1");
-//		String e_end1 = request.getParameter("e_end1");
-		
-		
-//		edto.setE_type(e_type);
-//		edto.setE_apply(e_apply);
-//		edto.setE_title(e_title);
-//		edto.setE_content(e_content);
-		edto.setE_start(e_start1);
-		edto.setE_end(e_end1);
-		
-		System.out.println("e_start1 : " + e_start1);
-		System.out.println("e_end1 : " + e_end1);
-//		java.sql.Timestamp e_start2 = java.sql.Timestamp.valueOf(e_start1);
-//		java.sql.Timestamp e_end2 = java.sql.Timestamp.valueOf(e_end1);
 		
 		System.out.println("e_type : " + edto.getE_type());
 		System.out.println("e_apply : " + edto.getE_apply());
@@ -158,36 +148,5 @@ public class AController {
 	
 	
 	
-	
-	
-	// 상품 작성. 지워야하는것(참고용이기떄문)
-	@RequestMapping(value = "/admin_product_write", method = RequestMethod.POST)
-	public String posttWirte(HttpServletRequest request, List<MultipartFile> file,ProductDto dto) throws Exception {
-
-		String uploadPath = request.getSession().getServletContext().getRealPath("/resources/imgUpload");
-		String imgUploadPath = uploadPath + File.separator;
-		String ymdPath = UploadFileUtils.calcPath(imgUploadPath);
-
-		ArrayList<String> fileName = new ArrayList<>();
-
-		for (int i = 0; i < 4; i++) {
-			if (file != null) {
-				fileName.add(UploadFileUtils.fileUpload(imgUploadPath, file.get(i).getOriginalFilename(),
-						file.get(i).getBytes(), ymdPath));
-			} else {
-				fileName.add(uploadPath + File.separator + "images" + File.separator + "none.png");
-			}
-
-		}
-		dto.setP_img1(File.separator + "imgUpload" + ymdPath + File.separator + fileName.get(0));
-		dto.setP_img2(File.separator + "imgUpload" + ymdPath + File.separator + fileName.get(1));
-		dto.setP_img3(File.separator + "imgUpload" + ymdPath + File.separator + fileName.get(2));
-		dto.setP_content_img(File.separator + "imgUpload" + ymdPath + File.separator + "s" + File.separator + "s_"+ fileName.get(3));
-
-//		aps.write(dto);
-
-		//
-		return "redirect:admin_product_list";
-	}
 	
 }

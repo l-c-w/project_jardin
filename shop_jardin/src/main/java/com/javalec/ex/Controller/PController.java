@@ -49,28 +49,28 @@ public class PController {
 
 	// 상품 상세정보
 	@RequestMapping(value = "/product/p_detail", method = RequestMethod.GET)
-	public void p_detail(Model model, int p_code, String p_category , int cr_num , Criteria cri) throws Exception {
+	public void p_detail(Model model, int p_code, String p_category) throws Exception {
 
 		ProductDto productDetail = ps.productDetail(p_code);
 
 		List<ProductDto> list = ps.related(p_category);
 		
-		model.addAttribute("list", list);
-		 
 		model.addAttribute("productDetail", productDetail);
 		model.addAttribute("related", list);
 	}
 	
 	// 글 목록 + 페이징
-	@RequestMapping(value = "/review" , method = RequestMethod.GET)
-	public void listPage(@ModelAttribute("cri") Criteria cri, Model model) {
+	@RequestMapping(value = "/listPage" , method = RequestMethod.GET)
+	public void listPage(Criteria cri, Model model) {
 		
-		 List<C_ReviewDto> c_rev = ps.listPage(cri);
-		 model.addAttribute("list", c_rev);
+		 List<C_ReviewDto> list = ps.listPage(cri);
+		 model.addAttribute("list", list);
 		 
 		 PageMaker pageMaker = new PageMaker();
 		 pageMaker.setCri(cri);
+		 
 		 pageMaker.setTotalCount(ps.listCount());
+		 
 		 model.addAttribute("pageMaker", pageMaker);
 	}
 	// 포토 리뷰

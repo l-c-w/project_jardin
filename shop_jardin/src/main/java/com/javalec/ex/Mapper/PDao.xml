@@ -26,7 +26,7 @@
 	<!-- 댓글 -->
 
 	<select id="listPage" resultType="com.javalec.ex.Dto.CDto.C_ReviewDto"
-		parameterType="com.javalec.ex.CDto.Criteria">
+		parameterType="com.javalec.ex.Dto.CDto.Criteria">
 		select cr_num,id,p_code,cr_title,cr_content,cr_score,cr_hit,cr_wdate,cr_udate,cr_group
 		from (
 			select cr_num,id,p_code,cr_title,cr_content,cr_score,cr_hit,cr_wdate,cr_udate,cr_group,

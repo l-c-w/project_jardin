@@ -5,13 +5,13 @@ import org.springframework.web.util.UriComponentsBuilder;
 
 public class PageMaker {
 
-	 private int totalCount;
-	 private int startPage;
-	 private int endPage;
-	 private boolean prev;
-	 private boolean next;
+	 private int totalCount; //게시물 총 개수
+	 private int startPage; // 현재 페이지 시작 번호
+	 private int endPage; // 현재 페이지 끝 번호 
+	 private boolean prev; // 이전 페이지로 이동하는 링크의 존재 여부
+	 private boolean next; // 다음 페이지로 이동하는 링크의 존재 여부
 
-	 private int displayPageNum = 5;
+	 private int displayPageNum = 10;
 
 	 private Criteria cri;
 	 

@@ -263,12 +263,14 @@ function getComment_list(){
 							</li>
 							<li>
 								<div class="stit">수량</div>
-								<div class="num" >
-								<form action="" method="post" name="from_product" id="from_product">
-						<input type="hidden" value="${productDetail.p_code }" name="p_code">
-									<input name="amount" id="spinner" value="1" />
-										
-								</form>
+								<div class="num">
+									<form action="" method="post" name="from_product"
+										id="from_product">
+										<input type="hidden" value="${productDetail.p_code }"
+											name="p_code"> <input name="amount" id="spinner"
+											value="1" />
+
+									</form>
 								</div>
 							</li>
 							<li>
@@ -286,10 +288,14 @@ function getComment_list(){
 
 					<!-- 판매중 -->
 					<div class="infobtn">
-					
+
 						<ul>
-							<li onclick="go_payment('from_product')"><a  class="ty1">바로 <span>구매하기</span></a></li>
-							<li onclick="go_cart('from_product')"><a class="ty2">장바구니 <span>담기</span></a></li>
+							<li onclick="go_payment('from_product')"><a class="ty1">바로
+									<span>구매하기</span>
+							</a></li>
+							<li onclick="go_cart('from_product')"><a class="ty2">장바구니
+									<span>담기</span>
+							</a></li>
 							<li class="last"><a href="#" class="ty3">위시 <span>리스트</span></a></li>
 						</ul>
 					</div>
@@ -315,7 +321,7 @@ function getComment_list(){
 
 
 			<!-- tab -->
-			
+
 			<div class="detailTab">
 				<ul>
 					<li class="dep"><a href="javascript:;" onclick="return false;"
@@ -483,15 +489,19 @@ function getComment_list(){
 										</p>
 										<fmt:formatDate var="pr_wdate" value="${p_rev.pr_wdate }"
 											pattern="YYYY/MM/dd" />
-										<p>등록일 <span>${pr_wdate }</span></p>
-										<p>조회수 <span>${p_rev.pr_hit }</span></p>
-										<p>평점 
-										<span class="ty"> 
-										<img src="../images/ico/ico_star.gif" alt="별점" /> 
-										<img src="../images/ico/ico_star.gif" alt="별점" /> 
-										<img src="../images/ico/ico_star.gif" alt="별점" /> 
-										<img src="../images/ico/ico_star.gif" alt="별점" /> 
-										<img src="../images/ico/ico_star.gif" alt="별점" />
+										<p>
+											등록일 <span>${pr_wdate }</span>
+										</p>
+										<p>
+											조회수 <span>${p_rev.pr_hit }</span>
+										</p>
+										<p>
+											평점 <span class="ty"> <img
+												src="../images/ico/ico_star.gif" alt="별점" /> <img
+												src="../images/ico/ico_star.gif" alt="별점" /> <img
+												src="../images/ico/ico_star.gif" alt="별점" /> <img
+												src="../images/ico/ico_star.gif" alt="별점" /> <img
+												src="../images/ico/ico_star.gif" alt="별점" />
 											</span>
 										</p>
 									</div>
@@ -526,415 +536,333 @@ function getComment_list(){
 							<a href="javascript:;" class="accbtn">구매 후기 작성</a>
 						</p>
 					</div>
-						<form id="formtable" name="formtable" method="post">
-							<table>
-								<tr>
-									<td><textarea rows="3" cols="30" id="cr_content" name=cr_content placeholder="댓글을 입력해주세요."></textarea> <br>
-										<input type="hidden" name="id" value="${productDetail.p_code }">
-										<a href="#" onclick="comment_insert()">등록</a>
-									</td>
-								</tr>
-							</table>
-						</form>
-						<form id="commentListForm" name="commentListForm" method="post">
-							<table id="commentList">
-							<!--ajax데이터를 넣는 곳 -->
-							</table>
-						</form>
-					<%--  <div class="hideArea">
-						<div class="bodyArea">
-						</div>
-					</div> 
-					<!-- 상품리뷰 -->
-					<div class="accordion">
-						<ul>
-							<!-- 반복 -->
-							<li>
-								<div class="headArea">
-									<div class="subject">
-										<a href="javascript:;" class="accbtn"></a>
-									</div>
-									<div class="writer"></div>
-									<div class="day">
-										<fmt:formatDate var="cr_wdate" value="${Preview.cr_wdate }"
-											pattern="YYYY/MM/dd" />
-										<p></p>
-										<p>
-											<img src="../images/ico/ico_star.gif" alt="별점" /> <img
-												src="../images/ico/ico_star.gif" alt="별점" /> <img
-												src="../images/ico/ico_star.gif" alt="별점" />
-										</p>
-									</div>
-								</div>
-
-								<div class="hideArea">
-									<div class="bodyArea">
-										<p></p>
-									</div>
-
-									<!-- 답변 -->
-									<div class="answer">
-										<div class="inbox">
-											<div class="aname">
-												<p>담당자</p>
-											</div>
-
-											<div class="atxt">쟈뎅 커피를 사랑해주셔서 감사합니다. 앞으로도 노력하는 쟈뎅이
-												되겠습니다. 감사합니다. 쟈뎅 커피를 사랑해주셔서 감사합니다. 앞으로도 노력하는 쟈뎅이 되겠습니다.
-												감사합니다.</div>
-										</div>
-									</div>
-									<!-- //답변 -->
-
-									<div class="modify">
-										<a href="#">수정</a> <a href="#">삭제</a>
-									</div>
-								</div>
-							</li>
-
-							<!-- //반복 -->
-
-							<!-- 글 리뷰 참고 -->
-							<li>
-								<div class="headArea">
-									<div class="subject">
-										<a href="javascript:;" class="accbtn">저렴한 가격에 커피맛과 향은 최고!!</a>
-									</div>
-									<div class="writer">[ezlin****]</div>
-									<div class="day">
-										<p>2014-03-24</p>
-										<p>
-											<img src="../images/ico/ico_star.gif" alt="별점" /> <img
-												src="../images/ico/ico_star.gif" alt="별점" /> <img
-												src="../images/ico/ico_star.gif" alt="별점" />
-										</p>
-									</div>
-								</div>
-
-								<div class="hideArea">
-									<div class="modify">
-										<a href="#">수정</a> <a href="#">삭제</a>
-									</div>
-								</div>
-							</li>
-						</ul>
-					</div>
-					<form id="commentListForm" name="commentListForm" method="post">
-						<table id="commentList">
-							<!-- ajax데이터를 넣는 곳 -->
+					<form id="formtable" name="formtable" method="post">
+						<table>
+							<tr>
+								<td><textarea rows="3" cols="30" id="cr_content"
+										name=cr_content placeholder="댓글을 입력해주세요."></textarea> <br>
+									<input type="hidden" name="id" value="${productDetail.p_code }">
+									<a href="#" onclick="comment_insert()">등록</a></td>
+							</tr>
 						</table>
 					</form>
-
-					<div class="btnAreaList">
-						<!-- 페이징이동1 -->
-						<div class="allPageMoving1">
-
-							<a href="#" class="n"><img src="../images/btn/btn_pre2.gif"
-								alt="처음으로" /></a><a href="#" class="pre"><img
-								src="../images/btn/btn_pre1.gif" alt="앞페이지로" /></a> <strong>1</strong>
-							<a href="#">2</a> <a href="#">3</a> <a href="#">4</a> <a href="#">5</a>
-							<a href="#" class="next"><img
-								src="../images/btn/btn_next1.gif" alt="뒤페이지로" /></a><a href="#"
-								class="n"><img src="../images/btn/btn_next2.gif"
-								alt="마지막페이지로" /></a>
-
-						</div>
-						<!-- //페이징이동1 -->
-					</div>
-					<!-- //상품리뷰 -->
-					 --%>
-
-				</div>
-				<!-- //goods review -->
-
-
-				<!-- goods qna -->
-				<div class="goodsQna disnone">
-					<div class="headTitle depth">
-						<strong>질문과 답변&nbsp;</strong>상품과 관련된 문의와 답변을 하는 공간입니다.
-						<p class="btn">
-							<a href="inquiry" class="popBtn">문의하기</a>
-						</p>
-					</div>
-
-					<!-- 질문과 답변 참고 -->
-					<div class="accordion">
-						<ul>
-							<li>
-								<div class="headArea">
-									<div class="subject">
-										<a href="javascript:;" class="accbtn"></a>
-									</div>
-									<div class="writer"></div>
-									<div class="day">
-										<fmt:formatDate var="pf_wdate" value="" pattern="YYYY/MM/dd" />
-										<p></p>
-										<p>
-											<span class="obtnMini iw70">답변완료</span>
-										</p>
-									</div>
-								</div>
-
-								<div class="hideArea">
-									<div class="bodyArea">
-										<br />
-									</div>
-
-									<!-- 답변 -->
-									<div class="answer">
-										<div class="inbox">
-											<div class="aname">
-												<p>담당자</p>
-											</div>
-
-											<div class="atxt"></div>
-										</div>
-									</div>
-									<!-- //답변 -->
-									<div class="modify">
-										<a href="#">수정</a> <a href="#">삭제</a>
-									</div>
-								</div>
-
-							</li>
-							<li>
-								<div class="headArea">
-									<div class="subject">
-										<a href="javascript:;" class="accbtn">배송기간은 얼마나 걸리나요?</a>
-									</div>
-									<div class="writer">[ezlin****]</div>
-									<div class="day">
-										<p>2014-03-24</p>
-										<p>
-											<span class="nbtnMini iw70">답변대기</span>
-										</p>
-									</div>
-								</div>
-
-								<div class="hideArea">
-									<div class="bodyArea">
-										배송일은 얼마나 걸리나요?<br />빨리 받아보고 싶습니다.
-									</div>
-
-									<div class="modify">
-										<a href="#">수정</a> <a href="#">삭제</a>
-									</div>
-								</div>
-
-							</li>
-
-
-							<li>
-								<div class="headArea">
-									<div class="subject">
-										<a href="javascript:;" class="accbtn">배송기간은 얼마나 걸리나요?</a>
-									</div>
-									<div class="writer">[ezlin****]</div>
-									<div class="day">
-										<p>2014-03-24</p>
-										<p>
-											<span class="obtnMini iw70">답변완료</span>
-										</p>
-									</div>
-								</div>
-
-								<div class="hideArea">
-									<div class="bodyArea">
-										배송일은 얼마나 걸리나요?<br />빨리 받아보고 싶습니다.
-									</div>
-
-									<!-- 답변 -->
-									<div class="answer">
-										<div class="inbox">
-											<div class="aname">
-												<p>담당자</p>
-											</div>
-
-											<div class="atxt">
-												쟈뎅 커피를 사랑해주셔서 감사합니다.<br />배송은 결제 후 평군 2~3일 정도 소요됩니다. (공휴일 및
-												휴일 제외) 산간 도서지방은 배송기간이 더 소요될 수 있으므로 미리 양해 부탁드립니다.
-											</div>
-										</div>
-									</div>
-									<!-- //답변 -->
-
-									<div class="modify">
-										<a href="#">수정</a> <a href="#">삭제</a>
-									</div>
-
-								</div>
-							</li>
-
-
-
-							<li>
-								<div class="headArea">
-									<div class="subject">
-										<a href="../event/password.html" class="passbtn"> 배송기간은
-											얼마나 걸리나요? <img src="../images/ico/ico_lock.gif" alt="비밀글" />
-										</a>
-									</div>
-									<div class="writer">[ezlin****]</div>
-									<div class="day">
-										<p>2014-03-24</p>
-										<p>
-											<span class="obtnMini iw70">답변완료</span>
-										</p>
-									</div>
-								</div>
-
-								<div class="hideArea">
-									<div class="bodyArea">
-										배송일은 얼마나 걸리나요?<br />빨리 받아보고 싶습니다.
-									</div>
-
-									<!-- 답변 -->
-									<div class="answer">
-										<div class="inbox">
-											<div class="aname">
-												<p>담당자</p>
-											</div>
-
-											<div class="atxt">
-												쟈뎅 커피를 사랑해주셔서 감사합니다.<br />배송은 결제 후 평군 2~3일 정도 소요됩니다. (공휴일 및
-												휴일 제외) 산간 도서지방은 배송기간이 더 소요될 수 있으므로 미리 양해 부탁드립니다.
-											</div>
-										</div>
-									</div>
-									<!-- //답변 -->
-
-									<div class="modify">
-										<a href="#">수정</a> <a href="#">삭제</a>
-									</div>
-								</div>
-							</li>
-
-
-
-						</ul>
-					</div>
-					<!-- //질문과 답변  참고-->
-
-					<div class="btnAreaList">
-						<!-- 페이징이동1 -->
-						<div class="allPageMoving1">
-
-							<a href="#" class="n"><img src="../images/btn/btn_pre2.gif"
-								alt="처음으로" /></a><a href="#" class="pre"><img
-								src="../images/btn/btn_pre1.gif" alt="앞페이지로" /></a> <strong>1</strong>
-							<a href="#">2</a> <a href="#">3</a> <a href="#">4</a> <a href="#">5</a>
-							<a href="#" class="next"><img
-								src="../images/btn/btn_next1.gif" alt="뒤페이지로" /></a><a href="#"
-								class="n"><img src="../images/btn/btn_next2.gif"
-								alt="마지막페이지로" /></a>
-
-						</div>
-						<!-- //페이징이동1 -->
-					</div>
-				</div>
-				<!-- //goods qna -->
-
-
-				<!-- goods notice -->
-				<div class="goodsNotice disnone">
-					<div class="headTitle depth">
-						<strong>정책 및 공지&nbsp;</strong>주문 전 필독 사항입니다.
-					</div>
-
-					<div class="detailDiv">
-						<table
-							summary="정책 및 공지 알림 게시판으로 회원가입안내, 주문안내, 결제안내, 배송안내, 교환/반품안내, 환불안내 순으로 조회 하실수 있습니다. "
-							class="detailTable" border="1" cellspacing="0">
-							<caption>정책 및 공지</caption>
-							<colgroup>
-								<col width="22%" class="tw30" />
-								<col width="*" />
-							</colgroup>
-							<tbody>
-								<tr>
-									<th scope="row"><span>회원가입<br />안내
-									</span></th>
-									<td>
-										<ul>
-											<li>저희 쇼핑몰은 회원제로 운영합니다.</li>
-											<li>회원가입비나 월회비, 연회비 등 어떠한 비용도 청구하지 않는 100% 무료입니다.</li>
-											<li>회원님들께는 구매 시 포인트 혜택을 드립니다.</li>
-										</ul>
-									</td>
-								</tr>
-
-								<tr>
-									<th scope="row"><span>주문 안내</span></th>
-									<td>
-										<ul>
-											<li>Step 1 : 상품 검색</li>
-											<li>Step 2 : 장바구니에 담기</li>
-											<li>Step 3 : 회원 ID 로그인 또는 비회원으로 주문하기</li>
-											<li>Step 4 : 주문 성공 화면(주문번호)</li>
-										</ul>
-
-										<p class="fn12">
-											※비회원 주문인 경우 주문번호와 승인번호(카드 결제 시)를 꼭 메모해 두시기 바랍니다.<br />&nbsp;&nbsp;&nbsp;단,
-											회원의 경우 자동으로 저장되므로 따로 관리하실 필요가 없습니다.
-										</p>
-									</td>
-								</tr>
-
-								<tr>
-									<th scope="row"><span>결제 안내</span></th>
-									<td>
-										<ul>
-											<li>카드 결제나 무통장 입금을 하시는 경우 입금/결제 확인 후 상품이 배송됩니다.</li>
-											<li>무통장 입금 시 주문자와 입금자가 다른 경우 배송이 지연될 수 있습니다. 게시판에 정보를
-												남겨주셔야 합니다.</li>
-										</ul>
-									</td>
-								</tr>
-
-								<tr>
-									<th scope="row"><span>배송 안내</span></th>
-									<td>
-										<ul>
-											<li>배송 방법 : 택배</li>
-											<li>배송 지역 : 전국 지역 (제주 도서/산간지역 별도)</li>
-											<li>배송 비용 : 총 결제금액이 100,000원 미만일 경우 2,500원 추가됩니다.</li>
-											<li>배송 안내 : 재고가 없거나 재입고 될 경우 7~14일이 소요됩니다.</li>
-										</ul>
-									</td>
-								</tr>
-
-								<tr>
-									<th scope="row"><span>교환/반품<br />안내
-									</span></th>
-									<td>
-										<ul>
-											<li>저희 쇼핑몰은 교환/반품 정책을 운영하고 있습니다.</li>
-											<li>사이즈 교환에 한하여는 1회 교환이 가능합니다. (단, 택배비는 고객 부담입니다.)</li>
-											<li>교환 시 제품을 수령한 날로부터 24시간 이내 1:1문의 게시판 혹은 고객센터로 연락을 주시고
-												3일 이내에 보내주신 상품에 한하여 교환됩니다.</li>
-											<li>제품에 하자가 있는 경우에는 동일 사이즈, 동일 디자인으로 재교환 해 드립니다.</li>
-										</ul>
-									</td>
-								</tr>
-
-								<tr>
-									<th scope="row"><span>환불 안내</span></th>
-									<td>
-										<ul>
-											<li>환불 시 반품 확인 여부를 확인 한 후 3일 이내에 결제금액을 환불해 드립니다.</li>
-											<li>신용카드로 결제하신 경우, 신용카드 승인을 취소하면 결제 대금이 청구되지 않습니다.</li>
-										</ul>
-									</td>
-								</tr>
-							</tbody>
+					<form id="commentListForm" name="commentListForm" method="post">
+						<table id="commentList">
+							<!--ajax데이터를 넣는 곳 -->
 						</table>
+					</form>
+					<div class="btnAreaList">
+						<!-- 페이징이동1 -->
+						<div class="allPageMoving1">
+							<ul>
+								<c:if test="${pageMaker.prev}">
+									<li><a
+										href="listPage${pageMaker.makeQuery(pageMaker.startPage - 1)}">이전</a></li>
+								</c:if>
+
+								<c:forEach begin="${pageMaker.startPage}"
+									end="${pageMaker.endPage}" var="idx">
+									<li><a href="listPage${pageMaker.makeQuery(idx)}">${idx}</a></li>
+								</c:forEach>
+
+								<c:if test="${pageMaker.next && pageMaker.endPage > 0}">
+									<li><a
+										href="listPage${pageMaker.makeQuery(pageMaker.endPage + 1)}">다음</a></li>
+								</c:if>
+							</ul>
+						</div>
+						<!-- //페이징이동1 -->
 					</div>
+					<!-- //goods review -->
+
+
+					<!-- goods qna -->
+					<div class="goodsQna disnone">
+						<div class="headTitle depth">
+							<strong>질문과 답변&nbsp;</strong>상품과 관련된 문의와 답변을 하는 공간입니다.
+							<p class="btn">
+								<a href="inquiry" class="popBtn">문의하기</a>
+							</p>
+						</div>
+
+						<!-- 질문과 답변 참고 -->
+						<div class="accordion">
+							<ul>
+								<li>
+									<div class="headArea">
+										<div class="subject">
+											<a href="javascript:;" class="accbtn"></a>
+										</div>
+										<div class="writer"></div>
+										<div class="day">
+											<fmt:formatDate var="pf_wdate" value="" pattern="YYYY/MM/dd" />
+											<p></p>
+											<p>
+												<span class="obtnMini iw70">답변완료</span>
+											</p>
+										</div>
+									</div>
+
+									<div class="hideArea">
+										<div class="bodyArea">
+											<br />
+										</div>
+
+										<!-- 답변 -->
+										<div class="answer">
+											<div class="inbox">
+												<div class="aname">
+													<p>담당자</p>
+												</div>
+
+												<div class="atxt"></div>
+											</div>
+										</div>
+										<!-- //답변 -->
+										<div class="modify">
+											<a href="#">수정</a> <a href="#">삭제</a>
+										</div>
+									</div>
+
+								</li>
+								<li>
+									<div class="headArea">
+										<div class="subject">
+											<a href="javascript:;" class="accbtn">배송기간은 얼마나 걸리나요?</a>
+										</div>
+										<div class="writer">[ezlin****]</div>
+										<div class="day">
+											<p>2014-03-24</p>
+											<p>
+												<span class="nbtnMini iw70">답변대기</span>
+											</p>
+										</div>
+									</div>
+
+									<div class="hideArea">
+										<div class="bodyArea">
+											배송일은 얼마나 걸리나요?<br />빨리 받아보고 싶습니다.
+										</div>
+
+										<div class="modify">
+											<a href="#">수정</a> <a href="#">삭제</a>
+										</div>
+									</div>
+
+								</li>
+
+
+								<li>
+									<div class="headArea">
+										<div class="subject">
+											<a href="javascript:;" class="accbtn">배송기간은 얼마나 걸리나요?</a>
+										</div>
+										<div class="writer">[ezlin****]</div>
+										<div class="day">
+											<p>2014-03-24</p>
+											<p>
+												<span class="obtnMini iw70">답변완료</span>
+											</p>
+										</div>
+									</div>
+
+									<div class="hideArea">
+										<div class="bodyArea">
+											배송일은 얼마나 걸리나요?<br />빨리 받아보고 싶습니다.
+										</div>
+
+										<!-- 답변 -->
+										<div class="answer">
+											<div class="inbox">
+												<div class="aname">
+													<p>담당자</p>
+												</div>
+
+												<div class="atxt">
+													쟈뎅 커피를 사랑해주셔서 감사합니다.<br />배송은 결제 후 평군 2~3일 정도 소요됩니다. (공휴일
+													및 휴일 제외) 산간 도서지방은 배송기간이 더 소요될 수 있으므로 미리 양해 부탁드립니다.
+												</div>
+											</div>
+										</div>
+										<!-- //답변 -->
+
+										<div class="modify">
+											<a href="#">수정</a> <a href="#">삭제</a>
+										</div>
+
+									</div>
+								</li>
+
+
+
+								<li>
+									<div class="headArea">
+										<div class="subject">
+											<a href="../event/password.html" class="passbtn"> 배송기간은
+												얼마나 걸리나요? <img src="../images/ico/ico_lock.gif" alt="비밀글" />
+											</a>
+										</div>
+										<div class="writer">[ezlin****]</div>
+										<div class="day">
+											<p>2014-03-24</p>
+											<p>
+												<span class="obtnMini iw70">답변완료</span>
+											</p>
+										</div>
+									</div>
+
+									<div class="hideArea">
+										<div class="bodyArea">
+											배송일은 얼마나 걸리나요?<br />빨리 받아보고 싶습니다.
+										</div>
+
+										<!-- 답변 -->
+										<div class="answer">
+											<div class="inbox">
+												<div class="aname">
+													<p>담당자</p>
+												</div>
+
+												<div class="atxt">
+													쟈뎅 커피를 사랑해주셔서 감사합니다.<br />배송은 결제 후 평군 2~3일 정도 소요됩니다. (공휴일
+													및 휴일 제외) 산간 도서지방은 배송기간이 더 소요될 수 있으므로 미리 양해 부탁드립니다.
+												</div>
+											</div>
+										</div>
+										<!-- //답변 -->
+
+										<div class="modify">
+											<a href="#">수정</a> <a href="#">삭제</a>
+										</div>
+									</div>
+								</li>
+
+
+
+							</ul>
+						</div>
+						<!-- //질문과 답변  참고-->
+
+						<div class="btnAreaList">
+							<!-- 페이징이동1 -->
+							<div class="allPageMoving1">
+
+								<a href="#" class="n"><img src="../images/btn/btn_pre2.gif"
+									alt="처음으로" /></a><a href="#" class="pre"><img
+									src="../images/btn/btn_pre1.gif" alt="앞페이지로" /></a> <strong>1</strong>
+								<a href="#">2</a> <a href="#">3</a> <a href="#">4</a> <a
+									href="#">5</a> <a href="#" class="next"><img
+									src="../images/btn/btn_next1.gif" alt="뒤페이지로" /></a><a href="#"
+									class="n"><img src="../images/btn/btn_next2.gif"
+									alt="마지막페이지로" /></a>
+
+							</div>
+							<!-- //페이징이동1 -->
+						</div>
+					</div>
+					<!-- //goods qna -->
+
+
+					<!-- goods notice -->
+					<div class="goodsNotice disnone">
+						<div class="headTitle depth">
+							<strong>정책 및 공지&nbsp;</strong>주문 전 필독 사항입니다.
+						</div>
+
+						<div class="detailDiv">
+							<table
+								summary="정책 및 공지 알림 게시판으로 회원가입안내, 주문안내, 결제안내, 배송안내, 교환/반품안내, 환불안내 순으로 조회 하실수 있습니다. "
+								class="detailTable" border="1" cellspacing="0">
+								<caption>정책 및 공지</caption>
+								<colgroup>
+									<col width="22%" class="tw30" />
+									<col width="*" />
+								</colgroup>
+								<tbody>
+									<tr>
+										<th scope="row"><span>회원가입<br />안내
+										</span></th>
+										<td>
+											<ul>
+												<li>저희 쇼핑몰은 회원제로 운영합니다.</li>
+												<li>회원가입비나 월회비, 연회비 등 어떠한 비용도 청구하지 않는 100% 무료입니다.</li>
+												<li>회원님들께는 구매 시 포인트 혜택을 드립니다.</li>
+											</ul>
+										</td>
+									</tr>
+
+									<tr>
+										<th scope="row"><span>주문 안내</span></th>
+										<td>
+											<ul>
+												<li>Step 1 : 상품 검색</li>
+												<li>Step 2 : 장바구니에 담기</li>
+												<li>Step 3 : 회원 ID 로그인 또는 비회원으로 주문하기</li>
+												<li>Step 4 : 주문 성공 화면(주문번호)</li>
+											</ul>
+
+											<p class="fn12">
+												※비회원 주문인 경우 주문번호와 승인번호(카드 결제 시)를 꼭 메모해 두시기 바랍니다.<br />&nbsp;&nbsp;&nbsp;단,
+												회원의 경우 자동으로 저장되므로 따로 관리하실 필요가 없습니다.
+											</p>
+										</td>
+									</tr>
+
+									<tr>
+										<th scope="row"><span>결제 안내</span></th>
+										<td>
+											<ul>
+												<li>카드 결제나 무통장 입금을 하시는 경우 입금/결제 확인 후 상품이 배송됩니다.</li>
+												<li>무통장 입금 시 주문자와 입금자가 다른 경우 배송이 지연될 수 있습니다. 게시판에 정보를
+													남겨주셔야 합니다.</li>
+											</ul>
+										</td>
+									</tr>
+
+									<tr>
+										<th scope="row"><span>배송 안내</span></th>
+										<td>
+											<ul>
+												<li>배송 방법 : 택배</li>
+												<li>배송 지역 : 전국 지역 (제주 도서/산간지역 별도)</li>
+												<li>배송 비용 : 총 결제금액이 100,000원 미만일 경우 2,500원 추가됩니다.</li>
+												<li>배송 안내 : 재고가 없거나 재입고 될 경우 7~14일이 소요됩니다.</li>
+											</ul>
+										</td>
+									</tr>
+
+									<tr>
+										<th scope="row"><span>교환/반품<br />안내
+										</span></th>
+										<td>
+											<ul>
+												<li>저희 쇼핑몰은 교환/반품 정책을 운영하고 있습니다.</li>
+												<li>사이즈 교환에 한하여는 1회 교환이 가능합니다. (단, 택배비는 고객 부담입니다.)</li>
+												<li>교환 시 제품을 수령한 날로부터 24시간 이내 1:1문의 게시판 혹은 고객센터로 연락을
+													주시고 3일 이내에 보내주신 상품에 한하여 교환됩니다.</li>
+												<li>제품에 하자가 있는 경우에는 동일 사이즈, 동일 디자인으로 재교환 해 드립니다.</li>
+											</ul>
+										</td>
+									</tr>
+
+									<tr>
+										<th scope="row"><span>환불 안내</span></th>
+										<td>
+											<ul>
+												<li>환불 시 반품 확인 여부를 확인 한 후 3일 이내에 결제금액을 환불해 드립니다.</li>
+												<li>신용카드로 결제하신 경우, 신용카드 승인을 취소하면 결제 대금이 청구되지 않습니다.</li>
+											</ul>
+										</td>
+									</tr>
+								</tbody>
+							</table>
+						</div>
+					</div>
+					<!-- //goods notice -->
+
+
 				</div>
-				<!-- //goods notice -->
-
-
-			</div>
-			<!-- //detail content -->
+				<!-- //detail content -->
 
 
 
@@ -943,11 +871,15 @@ function getComment_list(){
 
 
 
-			<script type="text/javascript"	src="http://code.jquery.com/ui/1.10.4/jquery-ui.js"></script>
-			<script type="text/javascript"	src="../js/jquery.fancybox-1.3.4.pack.js"></script>
-			<link rel="stylesheet" type="text/css"	href="../css/jquery.fancybox-1.3.4.css" />
-			<link rel="stylesheet"	href="http://code.jquery.com/ui/1.10.4/themes/smoothness/jquery-ui.css" />
-			<style type="text/css">
+				<script type="text/javascript"
+					src="http://code.jquery.com/ui/1.10.4/jquery-ui.js"></script>
+				<script type="text/javascript"
+					src="../js/jquery.fancybox-1.3.4.pack.js"></script>
+				<link rel="stylesheet" type="text/css"
+					href="../css/jquery.fancybox-1.3.4.css" />
+				<link rel="stylesheet"
+					href="http://code.jquery.com/ui/1.10.4/themes/smoothness/jquery-ui.css" />
+				<style type="text/css">
 .ui-corner-all {
 	border-bottom-right-radius: 0 !important;
 	border-bottom-left-radius: 0 !important;
@@ -969,7 +901,7 @@ function getComment_list(){
 }
 </style>
 
-			<script type="text/javascript">
+				<script type="text/javascript">
 $(document).ready(function() {
 
 	// spinner
@@ -1072,15 +1004,14 @@ function go_cart(name) {
 
 
 
+			</div>
+			<!-- //maxcontents -->
+
 		</div>
-		<!-- //maxcontents -->
-
-	</div>
-	<!-- //container -->
+		<!-- //container -->
 
 
-	<!-- footer 붙여넣기 -->
-	<jsp:include page="../footer.jsp" />
-
+		<!-- footer 붙여넣기 -->
+		<jsp:include page="../footer.jsp" />
 </body>
 </html>

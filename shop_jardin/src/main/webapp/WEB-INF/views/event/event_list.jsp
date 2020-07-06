@@ -169,7 +169,7 @@ $(document).ready(function() {
 									   	 	</c:choose>			   	 		   	 	
 								   	 	</span>
 							   	 	</c:forEach>
-									<!-- 다음 페이지 이동버튼 -->
+									<!-- 다음 페이지 이동버튼 --> 
 									<c:if test="${page >= maxpage }">
 										<img src="../images/btn/btn_next1.gif" alt="뒤페이지로"/>
 									</c:if>

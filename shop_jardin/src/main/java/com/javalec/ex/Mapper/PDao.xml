@@ -4,67 +4,96 @@
 
 <mapper namespace="com.javalec.ex.Dao.PDao">
 
-	<select id="Plist" resultType="com.javalec.ex.Dto.PDto.ProductDto">
-		select * from product  where p_delflag = 'Y' order by p_code desc
+	<select id="Plist"
+		resultType="com.javalec.ex.Dto.PDto.ProductDto">
+		select * from product where p_delflag = 'Y' order by p_code
+		desc
 	</select>
-	<select id="Plist2"
-		resultType="string">
-		select distinct p_category from product order by length(p_category)
+	<select id="Plist2" resultType="string">
+		select distinct p_category from
+		product order by length(p_category)
 	</select>
-	
-	<select id="productDetail" resultType="com.javalec.ex.Dto.PDto.ProductDto">
+
+	<select id="productDetail"
+		resultType="com.javalec.ex.Dto.PDto.ProductDto">
 		select * from PRODUCT where P_code=#{param1}
 	</select>
-	
-	<select id="related" resultType="com.javalec.ex.Dto.PDto.ProductDto">
+
+	<select id="related"
+		resultType="com.javalec.ex.Dto.PDto.ProductDto">
 		select * from PRODUCT where P_category=#{param1}
 	</select>
-	<!-- 댓글  -->
-	
-	<select id="comment_list" resultType="com.javalec.ex.Dto.CDto.C_ReviewDto">
-		select * from C_Review order by CR_WDate desc
+	<!-- 댓글 -->
+
+	<select id="listPage" resultType="com.javalec.ex.Dto.CDto.C_ReviewDto"
+		parameterType="com.javalec.ex.CDto.Criteria">
+		select cr_num,id,p_code,cr_title,cr_content,cr_score,cr_hit,cr_wdate,cr_udate,cr_group
+		from (
+			select cr_num,id,p_code,cr_title,cr_content,cr_score,cr_hit,cr_wdate,cr_udate,cr_group,
+				row_number() over(order by cr_num desc) as rNum
+			from c_review
+			) cr
+		where rNum between #{rowStart} and #{rowEnd}
+			order by cr_num desc
 	</select>
 	
-	<delete id="comment_delete" parameterType="com.javalec.ex.Dto.CDto.C_ReviewDto">
+	<select id="listCount" resultType="int">
+		<![CDATA[select count(cr_num) from c_review where cr_num>0]]>
+	</select>
+
+	<delete id="comment_delete"
+		parameterType="com.javalec.ex.Dto.CDto.C_ReviewDto">
 		delete from C_Review where Id = #{Id}
 	</delete>
-	
-	<insert id="comment_insert" parameterType="com.javalec.ex.Dto.CDto.C_ReviewDto">
+
+	<insert id="comment_insert"
+		parameterType="com.javalec.ex.Dto.CDto.C_ReviewDto">
 		<![CDATA[
 		insert into C_Review values (
 		c_review_seq.nextval,#{id},#{p_code},#{cr_title},#{cr_content},#{cr_score},#{cr_hit},sysdate,sysdate,#{cr_group},#{cr_answer})
 		]]>
 	</insert>
-	
-	<update id="comment_update" parameterType="com.javalec.ex.Dto.CDto.C_ReviewDto">
-		update C_Review set CR_content = #{CR_content} where Id = #{id}
+
+	<update id="comment_update"
+		parameterType="com.javalec.ex.Dto.CDto.C_ReviewDto">
+		update C_Review set CR_content = #{CR_content} where Id
+		= #{id}
 	</update>
-	
-	
-	
-	<!-- 관리자   -->
-	
+
+
+
+	<!-- 관리자 -->
+
 	<!-- 관리자 상품 리스트 보기 -->
-	<select id="list" resultType="com.javalec.ex.Dto.PDto.ProductDto">
-		select * from product  where p_delflag = 'Y' order by p_code desc
+	<select id="list"
+		resultType="com.javalec.ex.Dto.PDto.ProductDto">
+		select * from product where p_delflag = 'Y' order by p_code
+		desc
 	</select>
 
 	<!-- 관리자 상품 등록 -->
-	<insert id="write" parameterType="com.javalec.ex.Dto.PDto.ProductDto">
-		insert into product	values(PRODUCT_SEQ.nextval,#{p_category},#{p_case},#{p_case2},#{p_name},#{p_price},#{p_point},#{p_producer},#{p_expiry},#{p_type},#{p_capacity},
+	<insert id="write"
+		parameterType="com.javalec.ex.Dto.PDto.ProductDto">
+		insert into product
+		values(PRODUCT_SEQ.nextval,#{p_category},#{p_case},#{p_case2},#{p_name},#{p_price},#{p_point},#{p_producer},#{p_expiry},#{p_type},#{p_capacity},
 		#{p_detail},#{p_location},#{p_gene},#{p_import},#{p_stock},#{p_img1},#{p_img2},#{p_img3},#{p_content_img},sysdate,sysdate,#{p_delflag})
 	</insert>
-	 
-	<!-- 제품 하나의 정보  -->
-	<select id="getProductInfo" resultType="com.javalec.ex.Dto.PDto.ProductDto" parameterType="Integer">
+
+	<!-- 제품 하나의 정보 -->
+	<select id="getProductInfo"
+		resultType="com.javalec.ex.Dto.PDto.ProductDto"
+		parameterType="Integer">
 		select * from product where p_code = #{p_code}
 	</select>
-	
+
 	<!-- 관리자 상품 수정 -->
-	<update id="modify" parameterType="com.javalec.ex.Dto.PDto.ProductDto">
-		update product set p_category=#{p_category},p_case=#{p_case},p_case2=#{p_case2},p_name=#{p_name},p_price=#{p_price},p_point=#{p_point},p_producer=#{p_producer},p_expiry=#{p_expiry},p_type=#{p_type},
+	<update id="modify"
+		parameterType="com.javalec.ex.Dto.PDto.ProductDto">
+		update product set
+		p_category=#{p_category},p_case=#{p_case},p_case2=#{p_case2},p_name=#{p_name},p_price=#{p_price},p_point=#{p_point},p_producer=#{p_producer},p_expiry=#{p_expiry},p_type=#{p_type},
 		p_capacity=#{p_capacity},p_detail=#{p_detail},p_location=#{p_location},p_gene=#{p_gene},p_import=#{p_import},p_stock=#{p_stock},
-		p_img1=#{p_img1},p_img2=#{p_img2},p_img3=#{p_img3},p_content_img=#{p_content_img},p_udate=sysdate where p_code = #{p_code}
+		p_img1=#{p_img1},p_img2=#{p_img2},p_img3=#{p_img3},p_content_img=#{p_content_img},p_udate=sysdate
+		where p_code = #{p_code}
 	</update>
 
 	<!-- 상품 삭제처리 -->

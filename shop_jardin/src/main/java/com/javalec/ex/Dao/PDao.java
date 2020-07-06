@@ -4,6 +4,7 @@ import java.util.HashMap;
 import java.util.List;
 
 import com.javalec.ex.Dto.CDto.C_ReviewDto;
+import com.javalec.ex.Dto.CDto.Criteria;
 import com.javalec.ex.Dto.PDto.ProductDto;
 
 public interface PDao {
@@ -18,14 +19,20 @@ public interface PDao {
 
 	public List<ProductDto> related(String p_category) throws Exception;
 	
-	// 상품 글 리뷰
-	public List<C_ReviewDto> comment_list();
+	// 글 리뷰 목록 + 페이징
+	public List<C_ReviewDto> listPage(Criteria cri);
+	
+	// 게시물 총 개수
+	public int listCount(); 
 	
 	public void comment_delete(C_ReviewDto dto);
 	
 	public void comment_insert(C_ReviewDto dto);
 	
 	public void comment_update(C_ReviewDto dto);
+
+
+
 	
 
 	

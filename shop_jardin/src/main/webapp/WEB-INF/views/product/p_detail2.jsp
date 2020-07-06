@@ -315,6 +315,7 @@ function getComment_list(){
 
 
 			<!-- tab -->
+			
 			<div class="detailTab">
 				<ul>
 					<li class="dep"><a href="javascript:;" onclick="return false;"
@@ -322,9 +323,9 @@ function getComment_list(){
 					<li><a href="javascript:;" onclick="return false;"
 						id="goodsRelation">관련상품</a></li>
 					<li class="dep"><a href="javascript:;" onclick="return false;"
-						id="goodsReview">상품리뷰 <span>(3)</span></a></li>
+						id="goodsReview">상품리뷰</a></li>
 					<li><a href="javascript:;" onclick="return false;"
-						id="goodsQna">질문과 답변 <span>(1)</span></a></li>
+						id="goodsQna">질문과 답변</a></li>
 					<li class="last"><a href="javascript:;"
 						onclick="return false;" id="goodsNotice">정책 및 공지</a></li>
 				</ul>
@@ -482,19 +483,15 @@ function getComment_list(){
 										</p>
 										<fmt:formatDate var="pr_wdate" value="${p_rev.pr_wdate }"
 											pattern="YYYY/MM/dd" />
-										<p>
-											등록일 <span>${pr_wdate }</span>
-										</p>
-										<p>
-											조회수 <span>${p_rev.pr_hit }</span>
-										</p>
-										<p>
-											평점 <span class="ty"> <img
-												src="../images/ico/ico_star.gif" alt="별점" /> <img
-												src="../images/ico/ico_star.gif" alt="별점" /> <img
-												src="../images/ico/ico_star.gif" alt="별점" /> <img
-												src="../images/ico/ico_star.gif" alt="별점" /> <img
-												src="../images/ico/ico_star.gif" alt="별점" />
+										<p>등록일 <span>${pr_wdate }</span></p>
+										<p>조회수 <span>${p_rev.pr_hit }</span></p>
+										<p>평점 
+										<span class="ty"> 
+										<img src="../images/ico/ico_star.gif" alt="별점" /> 
+										<img src="../images/ico/ico_star.gif" alt="별점" /> 
+										<img src="../images/ico/ico_star.gif" alt="별점" /> 
+										<img src="../images/ico/ico_star.gif" alt="별점" /> 
+										<img src="../images/ico/ico_star.gif" alt="별점" />
 											</span>
 										</p>
 									</div>

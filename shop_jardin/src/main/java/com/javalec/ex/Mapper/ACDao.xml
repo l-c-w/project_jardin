@@ -16,8 +16,7 @@
 	</insert>
 	<insert id="eWriteDo" parameterType="com.javalec.ex.Dto.EDto.EventDto">
 		INSERT INTO EVENT VALUES (EVENT_SEQ.nextval, #{e_type}, #{e_apply}, #{e_title}, #{e_content}, 
-		#{e_file1}, #{e_file2}, #{e_file3}, 
-		to_date(#{e_start}, 'yyyy/MM/DD'), to_date(#{e_end}, 'yyyy/MM/DD'), sysdate, sysdate)
+		#{e_file1}, #{e_file2}, #{e_file3}, #{e_start}, #{e_end}, sysdate, sysdate)
 	</insert>
 
 

@@ -368,7 +368,7 @@ function getComment_list(){	//	이 스크립트는 댓글 리스트만 불러옵
 					<div class="btnAreaList">
 						<div class="allPageMoving1" id="ajaxPaging">
 							<!-- 첫 페이지 이동 -->
-							<a onclick="commentPaging(1)" class="n">
+							<a href="event_view?page=${startpage }&e_code=${event_view.e_code }" class="n">
 								<img src="../images/btn/btn_pre2.gif" alt="처음으로"/>
 							</a>
 							<!-- 이전 페이지 이동버튼 -->

@@ -136,6 +136,7 @@ $(document).ready(function() {
 						<table summary="이름, 아이디, 비밀번호, 비밀번호 확인, 이메일, 이메일수신여부, 주소, 휴대폰, 유선전화, 생년월일 순으로 회원가입 정보를 등록할수 있습니다." class="memberWrite" border="1" cellspacing="0">
 							
 							<caption>회원가입 입력</caption>
+							
 							<colgroup>
 							<col width="22%" class="tw30" />
 							<col width="*" />

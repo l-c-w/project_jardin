@@ -79,5 +79,22 @@ public class MServiceImpl implements MService {
   		
 	}
 
+
+
+	@Override
+	public Member_Dto pw_change(String id) {
+		MDao mdao = sqlsession.getMapper(MDao.class);
+  		Member_Dto mdto = mdao.member_change(id);
+		return mdto;
+	}
+
+
+
+	@Override
+	public void password_change(String pw, String id) {
+		MDao mdao = sqlsession.getMapper(MDao.class);
+		mdao.password_change(pw,id);
+	}
+
 	
 }

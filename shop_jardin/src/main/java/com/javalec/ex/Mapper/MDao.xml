@@ -76,6 +76,13 @@
 	</select>
 	
 	
+    <select id="password_change" resultType="com.javalec.ex.Dto.MDto.Member_Dto">
+	
+	update member set pw=#{param1} where id=#{param1}
+	
+	</select>
+	
+	
 	
 	<update id="change_ok">
 	

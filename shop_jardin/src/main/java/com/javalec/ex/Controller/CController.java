@@ -135,7 +135,6 @@ public class CController {
 		
 		return "redirect:/community/comment_list";
 		
-		
 	}
 	
 	

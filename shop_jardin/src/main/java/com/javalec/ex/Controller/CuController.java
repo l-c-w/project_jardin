@@ -234,6 +234,8 @@ public class CuController {
 		
 		cservice.f_type_paging(model, pagedto, nowPage, cntPerPage, f_type);
 		
+		model.addAttribute("f_type", f_type);
+		
 		return "/customer/faq_list";
 		
 	}

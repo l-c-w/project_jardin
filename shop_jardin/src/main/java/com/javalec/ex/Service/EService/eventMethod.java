@@ -38,6 +38,11 @@ public class eventMethod {
 			page -= 1; // 맨 뒷 페이지에서 하나만 남은 댓글을 삭제할 경우에 삭제 한 후 아무것도 표시되지 않는 문제점 때문
 		}
 		
+		if(listcount >= 0) {
+			listcount = 0;
+			page = 1;	//	이렇게 안하면 DB에 댓글이 아예 없을 경우에 페이징 오류가 난다.
+		}
+		
 		// 페이지별 리스트 개수 가져오기
 		int startrow = (page - 1) * limit + 1; // (1 - 1) * 10 + 1 = 1
 		int endrow = startrow + limit - 1; // 1 + 10 - 1 = 10
@@ -116,6 +121,11 @@ public class eventMethod {
 		
 		if(page > maxpage) {
 			page -= 1; // 맨 뒷 페이지에서 하나만 남은 댓글을 삭제할 경우에 삭제 한 후 아무것도 표시되지 않는 문제점 때문
+		}
+		
+		if(listcount >= 0) {
+			listcount = 0;
+			page = 1;	//	이렇게 안하면 DB에 댓글이 아예 없을 경우에 페이징 오류가 난다.
 		}
 		
 		// 페이지별 리스트 개수 가져오기

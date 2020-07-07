@@ -29,6 +29,11 @@ $(function() {
     	check=2;
         readURL(this);
     });
+    
+    $("#e_file3").on('change', function(){
+    	check=3;
+        readURL(this);
+    });
 });
 
 function readURL(input) {
@@ -44,6 +49,10 @@ function readURL(input) {
             $('#file2_pre').attr('src', e.target.result);
             $("#file2_pre").show();
         }
+    	if(check==3){
+            $('#file3_pre').attr('src', e.target.result);
+            $("#file3_pre").show();
+        }
     		
     	}
 
@@ -54,7 +63,7 @@ function readURL(input) {
 $(document).ready(function() {
 	$("#file1_pre").hide();
 	$("#file2_pre").hide();
-	
+	$("#file3_pre").hide();
 });
 
 
@@ -67,7 +76,7 @@ $(document).ready(function() {
 	<section id="ew_section">
 		<div id="n_write">
 		<p>이벤트 작성</p><hr><br><br>
-		<form action="admin_ewriteDo" name="s_event" method="post">
+		<form action="admin_ewriteDo" name="s_event" method="post" enctype="multipart/form-data">
 		
 <!-- 			<label for="n_writer">작성자<input type="text" name="e_writer" id="n_writer"></label><br> -->
 			<label for="n_title" class="sub_title">제목<input type="text" name="e_title" id="n_title"></label><br>
@@ -88,17 +97,40 @@ $(document).ready(function() {
 			
 			<div id="content_wrap">
 				<img src="#" id="file1_pre"><br>
-				<img src="#" id="file2_pre">
+				<img src="#" id="file2_pre"><br>
+				<img src="#" id="file3_pre">
 				<label for="n_content"><textarea rows="50" cols="120" name="e_content" id=n_content></textarea></label><br>
 			</div>
 			<div id="e_calender">
-				<label for="e_sdate" id=e_sdatel>시작일<input type="date" name="e_start" id="e_sdate"></label>
-				<label for="e_edate" id=e_edatel>&nbsp;~&nbsp;종료일<input type="date" name="e_end" id="e_edate"></label>
+				<label for="e_sdate" id=e_sdatel>시작일<input type="date" name="e_start1" id="e_sdate"></label>
+				<select name="e_start2">
+				<c:forEach var="time" begin="00" end="24" step="1">
+					<c:if test="${time < 10 }">
+						<option value="0${time }:00:00">0${time } : 00</option>
+					</c:if>
+					<c:if test="${time > 10 }">
+						<option value="${time }:00:00">${time } : 00</option>
+					</c:if>
+				</c:forEach>
+				</select>
+				
+				<label for="e_edate" id=e_edatel>&nbsp;~&nbsp;종료일<input type="date" name="e_end1" id="e_edate"></label>
+				<span>종료시간 : </span><select name="e_end2">
+				<c:forEach var="time" begin="00" end="24" step="1">
+					<c:if test="${time < 10 }">
+						<option value="0${time }:00:00">0${time } : 00</option>
+					</c:if>
+					<c:if test="${time > 10 }">
+						<option value="${time }:00:00">${time } : 00</option>
+					</c:if>
+				</c:forEach>
+				</select>
+				
 			</div>
 			<div id="e_files">
-				<label for="e_file1">썸네일: <input type="file" name="e_file1" id="e_file1"  ></label><br>
-				<label for="e_file2">본문: <input type="file" name="e_file2" id="e_file2"  ></label><br>
-				<label for="e_file3">본문2: <input type="file" name="e_file3" id="e_file3"  ></label><br>
+				<label for="e_file1">썸네일: <input type="file" name="e_file01" id="e_file1" ></label><br>
+				<label for="e_file2">본문: <input type="file" name="e_file02" id="e_file2" ></label><br>
+				<label for="e_file3">본문2: <input type="file" name="e_file03" id="e_file3" ></label><br>
 			</div>
 			<div id="n_write_btn">
 				<input type="submit" value="작성" >

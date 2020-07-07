@@ -32,21 +32,26 @@ public class EViewService implements EService {
 		
 		// EViewService
 		edto = dao.event_view(e_code);
-		model.addAttribute("event_view", edto);	
+		model.addAttribute("event_view", edto);
 		
 		if(tempPage == null) {
 			page = 1;
 		}else {
 			page = Integer.parseInt(tempPage);
 		}
-		
 		// 전체 게시글 count(*)
-		int listcount = dao.getCommentCount(e_code); // listcount -> 20
+		int listcount = dao.getCommentCount(e_code); // listcount -> 20	
+		
 		// 최대 페이지 수
 		int maxpage = (int) ((double) listcount / limit + 0.95); // 20/10 -> 2+0.95 -> (int)2.95 -> 2
 		
 		if(page > maxpage) {
 			page -= 1; // 맨 뒷 페이지에서 하나만 남은 댓글을 삭제할 경우에 삭제 한 후 아무것도 표시되지 않는 문제점 때문
+		}
+		
+		if(listcount >= 0) {
+			listcount = 0;
+			page = 1;	//	이렇게 안하면 DB에 댓글이 아예 없을 경우에 페이징 오류가 난다.
 		}
 		
 		// 페이지별 리스트 개수 가져오기
@@ -67,7 +72,6 @@ public class EViewService implements EService {
 		// eNextView, ePrevView
 		edtoNext = dao.eNextView(e_code);
 		edtoPrev = dao.ePrevView(e_code);
-		
 		// model
 		model.addAttribute("e_code", e_code);
 		model.addAttribute("page", page);

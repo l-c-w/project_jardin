@@ -10,6 +10,7 @@ import org.apache.ibatis.session.SqlSession;
 import org.springframework.stereotype.Repository;
 
 import com.javalec.ex.Dto.CDto.C_ReviewDto;
+import com.javalec.ex.Dto.CDto.Criteria;
 import com.javalec.ex.Dto.PDto.ProductDto;
 
 @Repository
@@ -46,25 +47,31 @@ public class PDaoImpl implements PDao {
 	}
 
 	@Override
-	public List<C_ReviewDto> comment_list() {
+	public List<C_ReviewDto> listPage(Criteria cri) {
 		
-		return sql.selectList(namespace + ".comment_list");
+		return sql.selectList(namespace + ".listPage", cri);
 	}
 
 	@Override
 	public void comment_delete(C_ReviewDto dto) {
 		
-		sql.delete(namespace + ".comment_delete" + dto);
+		sql.delete(namespace + ".comment_delete", dto);
 	}
 
 	@Override
 	public void comment_insert(C_ReviewDto dto) {
-		sql.insert(namespace + ".comment_insert" + dto);
+		sql.insert(namespace + ".comment_insert", dto);
 	}
 
 	@Override
 	public void comment_update(C_ReviewDto dto) {
-		sql.update(namespace + ".comment_update" + dto);
+		sql.update(namespace + ".comment_update", dto);
+	}
+
+	@Override
+	public int listCount() {
+		
+		return sql.selectOne(namespace + ".listCount");
 	}
 	
 

@@ -2,6 +2,7 @@
     pageEncoding="UTF-8"%>
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
+<%@taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -72,13 +73,17 @@ $(document).ready(function() {
 							<c:forEach var="dto" items="${event_list }">
 							<li>
 								<div class="img">
-									<a href="event_view?e_code=${dto.e_code }"><img src="../images/img/sample_event.jpg" alt="진행중 이벤트" /></a>
+									<a href="event_view?e_code=${dto.e_code }&page=1"><img src="../${dto.e_file1 }" alt="진행중 이벤트" /></a>
 								</div>
 								<div class="txt">
 									<div class="subject">${dto.e_title}</div>
-									<fmt:formatDate var="e_start" value="${dto.e_start }" pattern="yyyy/MM/dd" />
+<!-- 									${fn:split(dto.e_start,' ')[0]} -->
+<%--  									${dto.e_start.split()[0]} --%>
+<%--  									${dto.e_end.split()[1]} --%>
+ 									<fmt:formatDate var="e_start" value="${dto.e_start }" pattern="yyyy/MM/dd" />
 									<fmt:formatDate var="e_end" value="${dto.e_end }" pattern="yyyy/MM/dd" />
-									<div class="day">이벤트 기간 : ${e_start } ~ ${e_end }</div>
+<%-- 								<div class="day">이벤트 기간 : ${fn:split(dto.e_start,' ')[0]} ~ ${fn:split(dto.e_end,' ')[0]}</div> --%>
+									<div class="day">이벤트 기간 : ${e_start} ~ ${e_end}</div>
 								</div>
 							</li>
 							</c:forEach>
@@ -164,7 +169,7 @@ $(document).ready(function() {
 									   	 	</c:choose>			   	 		   	 	
 								   	 	</span>
 							   	 	</c:forEach>
-									<!-- 다음 페이지 이동버튼 -->
+									<!-- 다음 페이지 이동버튼 --> 
 									<c:if test="${page >= maxpage }">
 										<img src="../images/btn/btn_next1.gif" alt="뒤페이지로"/>
 									</c:if>

@@ -2,8 +2,7 @@ package com.javalec.ex.Controller;
 
 import java.util.List;
 
-import javax.servlet.http.HttpSession;
-
+import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -11,11 +10,11 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.javalec.ex.Dao.PDao;
 import com.javalec.ex.Dto.CDto.C_ReviewDto;
-import com.javalec.ex.Dto.CDto.Criteria;
-import com.javalec.ex.Dto.CDto.P_ReviewDto;
-import com.javalec.ex.Dto.CDto.PageMaker;
+import com.javalec.ex.Dto.MDto.CommentDto;
 import com.javalec.ex.Dto.PDto.ProductDto;
 import com.javalec.ex.Service.PService.PService;
 
@@ -25,6 +24,9 @@ public class PController {
 
 	@Autowired
 	PService ps;
+	
+	@Autowired
+	private SqlSession sqlSession;
 
 	// 상품 리스트
 	@RequestMapping(value = "/product/p_list", method = RequestMethod.GET)
@@ -54,38 +56,57 @@ public class PController {
 		ProductDto productDetail = ps.productDetail(p_code);
 
 		List<ProductDto> list = ps.related(p_category);
-		
+
 		model.addAttribute("productDetail", productDetail);
 		model.addAttribute("related", list);
-	}
-	
-	// 글 목록 + 페이징
-	@RequestMapping(value = "/listPage" , method = RequestMethod.GET)
-	public void listPage(Criteria cri, Model model) {
 		
-		 List<C_ReviewDto> list = ps.listPage(cri);
-		 model.addAttribute("list", list);
-		 
-		 PageMaker pageMaker = new PageMaker();
-		 pageMaker.setCri(cri);
-		 
-		 pageMaker.setTotalCount(ps.listCount());
-		 
-		 model.addAttribute("pageMaker", pageMaker);
-	}
-	// 포토 리뷰
-	@RequestMapping("photo") //detail 페이지에서 포토 리뷰 페이지 띄우기
-    public String writePhotoReview(Model model, int p_code) {
+		List<C_ReviewDto> rlist = ps.comment_list();
+		model.addAttribute("rlist",rlist);
 
-        model.addAttribute("p_code", p_code);
-
-        return "product/photo";
-    }
-	@RequestMapping("review")   //detail 페이지에서 상품 리뷰 페이지 띄우기
-    public String writeReview(Model model, int p_code,HttpSession session) {
-		
-		model.addAttribute("p_code", p_code);
-		
-	return "product/review";
 	}
+
+
+	@RequestMapping("/comment") // 댓글 달기 페이지
+	public String comment() {
+		return "comment";
+	}
+
+	@RequestMapping("/comment_list")
+	@ResponseBody // json데이터로 페이지 리턴
+	public List<C_ReviewDto> comment_list() {
+		// mybatis 에 있는 객체를 가져 옴.
+		PDao dao = sqlSession.getMapper(PDao.class);
+
+		for(C_ReviewDto li: dao.comment_list()) {
+			System.out.println(li);
+		}
+		
+		return dao.comment_list();
+	}
+
+	@RequestMapping("/comment_delete")
+	@ResponseBody // json데이터로 페이지 리턴
+	public String comment_delete(@ModelAttribute C_ReviewDto cdto) {
+		PDao dao = sqlSession.getMapper(PDao.class);
+		dao.comment_delete(cdto);
+		return "success";
+	}
+
+	@RequestMapping("/comment_insert")
+	@ResponseBody // json데이터로 페이지 리턴
+	public String comment_insert(@ModelAttribute C_ReviewDto cdto) {
+		PDao dao = sqlSession.getMapper(PDao.class);
+		dao.comment_insert(cdto);
+		return "success";
+	}
+
+	@RequestMapping("/comment_update")
+	@ResponseBody // json데이터로 페이지 리턴
+	public String comment_update(@ModelAttribute C_ReviewDto cdto) {
+		PDao dao = sqlSession.getMapper(PDao.class);
+		dao.comment_update(cdto);
+		return "success";
+	}
+
+
 }

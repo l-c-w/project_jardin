@@ -1,7 +1,5 @@
 package com.javalec.ex.Dao;
 
-import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 
 import javax.inject.Inject;
@@ -10,8 +8,9 @@ import org.apache.ibatis.session.SqlSession;
 import org.springframework.stereotype.Repository;
 
 import com.javalec.ex.Dto.CDto.C_ReviewDto;
-import com.javalec.ex.Dto.CDto.Criteria;
 import com.javalec.ex.Dto.PDto.ProductDto;
+import com.javalec.ex.Dto.PDto.ReplyDto;
+import com.javalec.ex.Dto.PDto.ReplyListDto;
 
 @Repository
 public class PDaoImpl implements PDao {
@@ -47,32 +46,32 @@ public class PDaoImpl implements PDao {
 	}
 
 	@Override
-	public List<C_ReviewDto> listPage(Criteria cri) {
-		
-		return sql.selectList(namespace + ".listPage", cri);
-	}
-
-	@Override
-	public void comment_delete(C_ReviewDto dto) {
-		
-		sql.delete(namespace + ".comment_delete", dto);
-	}
-
-	@Override
-	public void comment_insert(C_ReviewDto dto) {
-		sql.insert(namespace + ".comment_insert", dto);
-	}
-
-	@Override
-	public void comment_update(C_ReviewDto dto) {
-		sql.update(namespace + ".comment_update", dto);
-	}
-
-	@Override
-	public int listCount() {
+	public int listCount() throws Exception{
 		
 		return sql.selectOne(namespace + ".listCount");
 	}
-	
+
+	@Override
+	public List<C_ReviewDto> comment_list() {
+		List<C_ReviewDto> tddd = sql.selectList(namespace+".comment_list");
+		System.out.println(tddd);
+		return tddd;
+	}
+
+	@Override
+	public void comment_delete(C_ReviewDto cdto) {
+		sql.delete(namespace + ".comment_delete" , cdto);
+	}
+
+	@Override
+	public void comment_insert(C_ReviewDto cdto) {
+		sql.insert(namespace+".comment_insert" , cdto);
+	}
+
+	@Override
+	public void comment_update(C_ReviewDto cdto) {
+		sql.update(namespace+".comment_update" , cdto);
+	}
+
 
 }

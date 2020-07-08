@@ -1,42 +1,35 @@
 package com.javalec.ex.Dao;
 
-import java.util.HashMap;
 import java.util.List;
 
 import com.javalec.ex.Dto.CDto.C_ReviewDto;
-import com.javalec.ex.Dto.CDto.Criteria;
 import com.javalec.ex.Dto.PDto.ProductDto;
+import com.javalec.ex.Dto.PDto.ReplyDto;
+import com.javalec.ex.Dto.PDto.ReplyListDto;
 
 public interface PDao {
-	
-	//상품 전체 리스트
-		
+
+	// 상품 전체 리스트
+
 	public List<ProductDto> Plist() throws Exception;
 
 	public List<String> Plist2() throws Exception;
-	
+
 	public ProductDto productDetail(int p_code) throws Exception;
 
 	public List<ProductDto> related(String p_category) throws Exception;
-	
-	// 글 리뷰 목록 + 페이징
-	public List<C_ReviewDto> listPage(Criteria cri);
-	
+
 	// 게시물 총 개수
-	public int listCount(); 
-	
-	public void comment_delete(C_ReviewDto dto);
-	
-	public void comment_insert(C_ReviewDto dto);
-	
-	public void comment_update(C_ReviewDto dto);
+	public int listCount() throws Exception;
 
+	// 댓글
+	public List<C_ReviewDto> comment_list();
 
+	public void comment_delete(C_ReviewDto cdto);
 
-	
+	public void comment_insert(C_ReviewDto cdto);
 
-	
-	
+	public void comment_update(C_ReviewDto cdto);
 
 //	public ArrayList<ProductDto> Plist() throws Exception;
 //
@@ -55,8 +48,5 @@ public interface PDao {
 //	
 //	//해당 상품에 대한 모든 리뷰 카운트
 //	public int getListCount(String p_code) throws Exception;
-	
-
-
 
 }

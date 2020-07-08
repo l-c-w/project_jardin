@@ -9,20 +9,7 @@ public class C_ReviewDto {
 	}
 
 	public C_ReviewDto(int cr_num, String id, String p_code, String cr_title, String cr_content, int cr_score,
-			int cr_hit, Timestamp cr_wdate, Timestamp cr_udate, int cr_group , String cr_answer) {
-
-		this.cr_num = cr_num;
-		this.id = id;
-		this.p_code = p_code;
-		this.cr_title = cr_title;
-		this.cr_content = cr_content;
-		this.cr_score = cr_score;
-		this.cr_hit = cr_hit;
-		this.cr_wdate = cr_wdate;
-		this.cr_udate = cr_udate;
-		this.cr_group = cr_group;
-		this.cr_answer = cr_answer;
-		
+			int cr_hit, Timestamp cr_wdate, Timestamp cr_udate, int cr_group) {
 	}
 
 	private int cr_num;
@@ -38,18 +25,7 @@ public class C_ReviewDto {
 	private Timestamp cr_udate;
 	
 	private int cr_group;
-	
-	private String cr_answer;
-	
 
-	public String getCr_answer() {
-		return cr_answer;
-	}
-
-	public void setCr_answer(String cr_answer) {
-		this.cr_answer = cr_answer;
-	}
-	
 	
 
 	public int getCr_num() {

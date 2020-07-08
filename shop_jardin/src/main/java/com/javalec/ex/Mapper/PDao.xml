@@ -23,42 +23,28 @@
 		resultType="com.javalec.ex.Dto.PDto.ProductDto">
 		select * from PRODUCT where P_category=#{param1}
 	</select>
+	
 	<!-- 댓글 -->
-
-	<select id="listPage" resultType="com.javalec.ex.Dto.CDto.C_ReviewDto"
-		parameterType="com.javalec.ex.Dto.CDto.Criteria">
-		select cr_num,id,p_code,cr_title,cr_content,cr_score,cr_hit,cr_wdate,cr_udate,cr_group
-		from (
-			select cr_num,id,p_code,cr_title,cr_content,cr_score,cr_hit,cr_wdate,cr_udate,cr_group,
-				row_number() over(order by cr_num desc) as rNum
-			from c_review
-			) cr
-		where rNum between #{rowStart} and #{rowEnd}
-			order by cr_num desc
+	<!--댓글  -->
+	<select id="comment_list" resultType="com.javalec.ex.Dto.CDto.C_ReviewDto">
+		select * from C_REVIEW
 	</select>
 	
-	<select id="listCount" resultType="int">
-		<![CDATA[select count(cr_num) from c_review where cr_num>0]]>
-	</select>
-
-	<delete id="comment_delete"
-		parameterType="com.javalec.ex.Dto.CDto.C_ReviewDto">
-		delete from C_Review where Id = #{Id}
+	<delete id="comment_delete" parameterType="com.javalec.ex.Dto.CDto.C_ReviewDto">
+		delete from C_REVIEW where cr_num = #{cr_num}
 	</delete>
-
-	<insert id="comment_insert"
-		parameterType="com.javalec.ex.Dto.CDto.C_ReviewDto">
+	
+	<insert id="comment_insert" parameterType="com.javalec.ex.Dto.CDto.C_ReviewDto">
 		<![CDATA[
-		insert into C_Review values (
-		c_review_seq.nextval,#{id},#{p_code},#{cr_title},#{cr_content},#{cr_score},#{cr_hit},sysdate,sysdate,#{cr_group},#{cr_answer})
+		insert into C_REVIEW values (
+		C_REVIEW_seq.nextval,#{id},#{p_code},#{cr_title},#{cr_content},#{cr_score},#{cr_hit},sysdate,sysdate,#{cr_group})
 		]]>
 	</insert>
-
-	<update id="comment_update"
-		parameterType="com.javalec.ex.Dto.CDto.C_ReviewDto">
-		update C_Review set CR_content = #{CR_content} where Id
-		= #{id}
+	
+	<update id="comment_update" parameterType="com.javalec.ex.Dto.CDto.C_ReviewDto">
+		update C_REVIEW set cr_content = #{cr_content} where cr_num = #{cr_num}
 	</update>
+
 
 
 

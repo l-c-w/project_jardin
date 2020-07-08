@@ -18,6 +18,9 @@ public interface MService {
 	
 	public Member_Dto pw_check(String id, String email);
 	
+	public Member_Dto pw_change(String id);
+	
+	public void password_change(String pw, String id);
 	
 
 }

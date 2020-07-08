@@ -294,7 +294,7 @@ public class MController {
 	
 
 	@RequestMapping("/member/login_ok")
-	public String login_ok(HttpServletRequest request, Model model, HttpServletResponse response) throws IOException {
+	public void login_ok(HttpServletRequest request, Model model, HttpServletResponse response) throws IOException {
 
 		String id = request.getParameter("id");
 		String pw = request.getParameter("pw");
@@ -311,11 +311,13 @@ public class MController {
 
 			/* model.addAttribute("idfail", "idfail"); */
 
-			out.println("<script>alert('일치하는 아이디가 없습니다');</script>");
+			out.print("<script>");
+    		out.print("alert('일치하는 아이디가 없습니다');");
+    		out.print("history.back();");
+    		out.print("</script>");
 
 			out.flush();
 
-			return "/member/login";
 
 		} else {
 
@@ -325,11 +327,13 @@ public class MController {
 
 				/* model.addAttribute("pwfail", "pwfail"); */
 
-				out.println("<script>alert('비밀번호가 틀렸습니다');</script>");
+				out.print("<script>");
+	    		out.print("alert('비밀번호가 틀렸습니다.');");
+	    		out.print("history.back();");
+	    		out.print("</script>");
 
 				out.flush();
 
-				return "/member/login";
 
 			}
 
@@ -337,13 +341,15 @@ public class MController {
 
 				HttpSession session = request.getSession();
 
-				out.println("<script>alert('로그인에 성공하였습니다');</script>");
+				out.print("<script>");
+	    		out.print("alert('로그인 되었습니다.');");
+	    		out.print("location.href = '../main/main';");
+	    		out.print("</script>");
 
 				out.flush();
 
 				session.setAttribute("session_mem", mdto2.getId());
 
-				return "/main/main";
 			}
 
 		}
@@ -525,6 +531,50 @@ public class MController {
 	@RequestMapping("/mypage/get_leave")
 	public String change_ok() {
 		return "/mypage/get_leave";
+	}
+
+	
+	
+	
+	@RequestMapping("/mypage/password_change")
+	public String password_change(Model model, HttpSession session) {
+		
+		String id = (String) session.getAttribute("s_n");
+		model.addAttribute("member", mservice.pw_change(id));
+		
+		return "/mypage/password_change";
+	}
+	
+	
+	
+	
+	@RequestMapping("/mypage/password_change_ok")
+	public void password_change_ok(
+			@RequestParam("pw1") String pw,
+			@RequestParam("id") String id, 
+			HttpServletResponse response
+			) {
+		
+		mservice.password_change(pw, id);
+		
+		response.setContentType("text/html; charset=UTF-8");
+
+		PrintWriter out;
+		
+		try {
+			
+			out = response.getWriter();
+			
+			out.print("<script>");
+    		out.print("alert('비밀번호가 변경되었습니다.');");
+    		out.print("location.href = '../main/main';");
+    		out.print("</script>");
+			out.flush();
+			
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		
 	}
 
 	

@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import com.javalec.ex.Dao.PDao;
 import com.javalec.ex.Dto.CDto.C_ReviewDto;
+import com.javalec.ex.Dto.PDto.P_FnqDto;
 import com.javalec.ex.Dto.PDto.ProductDto;
 import com.javalec.ex.Dto.PDto.ReplyDto;
 import com.javalec.ex.Dto.PDto.ReplyListDto;
@@ -65,6 +66,29 @@ public class PServiceImpl implements PService {
 	public void comment_update(C_ReviewDto cdto) {
 		dao.comment_update(cdto);
 	}
+
+//	@Override
+//	public List<P_FnqDto> p_Fnq_List() {
+//		return dao.p_Fnq_List();
+//	}
+//
+//	@Override
+//	public void p_Fnq_delete(P_FnqDto fdto) {
+//		dao.p_Fnq_delete(fdto);
+//		
+//	}
+//
+//	@Override
+//	public void p_Fnq_insert(P_FnqDto fdto) {
+//		dao.p_Fnq_insert(fdto);
+//		
+//	}
+//
+//	@Override
+//	public void p_Fnq_update(P_FnqDto fdto) {
+//		dao.p_Fnq_update(fdto);
+//		
+//	}
 
 
 }

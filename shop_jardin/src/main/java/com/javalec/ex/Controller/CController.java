@@ -2,10 +2,6 @@ package com.javalec.ex.Controller;
 
 import java.io.File;
 import java.io.IOException;
-import java.security.Provider.Service;
-import java.util.ArrayList;
-import java.util.Locale;
-import java.util.logging.Logger;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -17,7 +13,6 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 
@@ -25,7 +20,6 @@ import com.javalec.ex.Dao.CDao;
 import com.javalec.ex.Dto.CDto.C_ReviewDto;
 import com.javalec.ex.Dto.CDto.P_ReviewDto;
 import com.javalec.ex.Dto.CDto.PagingDto;
-import com.javalec.ex.Dto.MDto.NoticeDto;
 
 @Controller
 public class CController {

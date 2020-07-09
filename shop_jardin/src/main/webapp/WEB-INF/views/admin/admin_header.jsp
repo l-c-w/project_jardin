@@ -63,7 +63,7 @@
 									<span id="icon-plus-minus3" class="icon-list-plus">ListIcon</span>
 							</a></li>
 							<div class="submenu" id="LeftMenuID3" style="display: none;">
-								<li><a href="#"><img src="../images/icon_title_left.png">&nbsp;상품관리</a></li>
+								<li><a href="./admin/admin_product_list"><img src="../images/icon_title_left.png">&nbsp;상품관리</a></li>
 								<li><a href="#"><img src="../images/icon_title_left.png">&nbsp;재고관리</a></li>
 								<li><a href="#"><img src="../images/icon_title_left.png">&nbsp;메인노출 상품관리</a></li>
 								<li><a href="#"><img src="../images/icon_title_left.png">&nbsp;상품이벤트관리</a></li>

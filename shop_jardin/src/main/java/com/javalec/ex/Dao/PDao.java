@@ -3,6 +3,7 @@ package com.javalec.ex.Dao;
 import java.util.List;
 
 import com.javalec.ex.Dto.CDto.C_ReviewDto;
+import com.javalec.ex.Dto.PDto.P_FnqDto;
 import com.javalec.ex.Dto.PDto.ProductDto;
 import com.javalec.ex.Dto.PDto.ReplyDto;
 import com.javalec.ex.Dto.PDto.ReplyListDto;
@@ -30,6 +31,16 @@ public interface PDao {
 	public void comment_insert(C_ReviewDto cdto);
 
 	public void comment_update(C_ReviewDto cdto);
+	
+	// 질문 답변
+	
+//	public List<P_FnqDto> p_Fnq_List();
+//
+//	public void p_Fnq_delete(P_FnqDto fdto);
+//
+//	public void p_Fnq_insert(P_FnqDto fdto);
+//
+//	public void p_Fnq_update(P_FnqDto fdto);
 
 //	public ArrayList<ProductDto> Plist() throws Exception;
 //

@@ -24,10 +24,9 @@
 		select * from PRODUCT where P_category=#{param1}
 	</select>
 	
-	<!-- 댓글 -->
 	<!--댓글  -->
 	<select id="comment_list" resultType="com.javalec.ex.Dto.CDto.C_ReviewDto">
-		select * from C_REVIEW
+		select * from C_REVIEW order by cr_wdate desc
 	</select>
 	
 	<delete id="comment_delete" parameterType="com.javalec.ex.Dto.CDto.C_ReviewDto">
@@ -37,15 +36,33 @@
 	<insert id="comment_insert" parameterType="com.javalec.ex.Dto.CDto.C_ReviewDto">
 		<![CDATA[
 		insert into C_REVIEW values (
-		C_REVIEW_seq.nextval,#{id},#{p_code},#{cr_title},#{cr_content},#{cr_score},#{cr_hit},sysdate,sysdate,#{cr_group})
+		C_REVIEW_seq.nextval,#{id},#{p_code},#{cr_title},#{cr_content},sysdate,sysdate)
 		]]>
 	</insert>
 	
 	<update id="comment_update" parameterType="com.javalec.ex.Dto.CDto.C_ReviewDto">
 		update C_REVIEW set cr_content = #{cr_content} where cr_num = #{cr_num}
 	</update>
-
-
+	
+ 	<!-- 질문 답변 -->
+<!-- 	<select id="p_Fnq_List" resultType="com.javalec.ex.Dto.PDto.P_FnqDto"> -->
+<!-- 		select * from P_Fnq order by pf_wdate desc -->
+<!-- 	</select> -->
+	
+<!-- 	<delete id="p_Fnq_delete" parameterType="com.javalec.ex.Dto.PDto.P_FnqDto"> -->
+<!-- 		delete from P_Fnq where pf_num = #{pf_num} -->
+<!-- 	</delete> -->
+	
+<!-- 	<insert id="p_Fnq_insert" parameterType="com.javalec.ex.Dto.PDto.P_FnqDto"> -->
+<!-- 		<![CDATA[ -->
+<!-- 		insert into P_Fnq values ( -->
+<!-- 		P_Fnq_seq.nextval,#{id},#{p_code},#{pf_title},#{pf_content},sysdate,sysdate) -->
+<!-- 		]]> -->
+<!-- 	</insert> -->
+	
+<!-- 	<update id="p_Fnq_update" parameterType="com.javalec.ex.Dto.PDto.P_FnqDto"> -->
+<!-- 		update P_Fnq set pf_content = #{pf_content} where pf_num = #{pf_num} -->
+<!-- 	</update> -->
 
 
 	<!-- 관리자 -->

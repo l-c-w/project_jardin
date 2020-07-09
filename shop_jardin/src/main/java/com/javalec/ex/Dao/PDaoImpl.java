@@ -8,6 +8,7 @@ import org.apache.ibatis.session.SqlSession;
 import org.springframework.stereotype.Repository;
 
 import com.javalec.ex.Dto.CDto.C_ReviewDto;
+import com.javalec.ex.Dto.PDto.P_FnqDto;
 import com.javalec.ex.Dto.PDto.ProductDto;
 import com.javalec.ex.Dto.PDto.ReplyDto;
 import com.javalec.ex.Dto.PDto.ReplyListDto;
@@ -72,6 +73,28 @@ public class PDaoImpl implements PDao {
 	public void comment_update(C_ReviewDto cdto) {
 		sql.update(namespace+".comment_update" , cdto);
 	}
+
+//	@Override
+//	public List<P_FnqDto> p_Fnq_List() {
+//		List<P_FnqDto> flist = sql.selectList(namespace+".p_Fnq_List");
+//		System.out.println(flist);
+//		return flist;
+//	}
+//
+//	@Override
+//	public void p_Fnq_delete(P_FnqDto fdto) {
+//		sql.delete(namespace + ".p_Fnq_delete" , fdto);
+//	}
+//
+//	@Override
+//	public void p_Fnq_insert(P_FnqDto fdto) {
+//		sql.insert(namespace+".p_Fnq_insert" , fdto);
+//	}
+//
+//	@Override
+//	public void p_Fnq_update(P_FnqDto fdto) {
+//		sql.update(namespace+".p_Fnq_update" , fdto);
+//	}
 
 
 }

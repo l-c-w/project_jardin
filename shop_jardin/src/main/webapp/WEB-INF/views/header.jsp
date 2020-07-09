@@ -124,7 +124,7 @@
 		
 		<div id="top">
 			<ul>
-				<li class="brand t1"><a href="#" id="topNavi1">JARDIN’s BRAND</a>
+				<li class="brand t1"><a href="../product/p_list" id="topNavi1">JARDIN’s BRAND</a>
 					<ul id="topSubm1">
 						<li><a href="#">클래스</a></li>
 						<li><a href="#">바리스타</a></li>
@@ -142,34 +142,34 @@
 						<li><a href="#">아워 티</a></li>
 					</ul>
 				</li>
-				<li class="t2"><a href="../product/p_list" id="topNavi2">원두</a>
+				<li class="t2"><a href="../product/p_list?c=원두" id="topNavi2">원두</a>
 					<ul id="topSubm2">
  						<li><a href="#">클래스</a></li>
 						<li><a href="#">바리스타</a></li>
 						<li><a href="#">마스터즈</a></li>
 						<li><a href="#">데일리 로스팅</a></li>
 					</ul>
-				<li class="t2"><a href="../product/p_list" id="topNavi6">티 음료</a>
+				<li class="t2"><a href="../product/p_list?c=티%20음료" id="topNavi6">티 음료</a>
 					<ul id="topSubm6">
 						<li><a href="#">아워 티</a></li>
 						<li><a href="#">아워 티 pet</a></li>
 						<li><a href="#">카페리얼 티 라떼</a></li>
 					</ul>
 				</li>
-				<li class="t1"><a href="../product/p_list" id="topNavi3">커피백</a>
+				<li class="t1"><a href="../product/p_list?c=커피%20백" id="topNavi3">커피백</a>
 					<ul id="topSubm3">
 						<li><a href="#">핸드 드립</a></li>
 						<li><a href="#">커피 백</a></li>
 						<li><a href="#">마일드 커피 백</a></li>
 					</ul>
 				</li>
-				<li class="t2"><a href="../product/p_list" id="topNavi4">아이스 음료</a>
+				<li class="t2"><a href="../product/p_list?c=아이스%20음료" id="topNavi4">아이스 음료</a>
 					<ul id="topSubm4">
 						<li><a href="#">시그니처</a></li>
 						<li><a href="#">카페리얼</a></li>
 					</ul>
 				</li>
-				<li class="t1"><a href="../product/p_list" id="topNavi5">인스턴트 커피</a>
+				<li class="t1"><a href="../product/p_list?c=인스턴트%20커피" id="topNavi5">인스턴트 커피</a>
 					<ul id="topSubm5">
 						<li><a href="#">카페 모리</a></li>
 						<li><a href="#">에스프레소 스틱</a></li>

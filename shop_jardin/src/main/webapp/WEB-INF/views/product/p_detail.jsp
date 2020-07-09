@@ -28,9 +28,16 @@
 #cContent {
 	width: 800px;
 }
-.re{width: 300px;
-	height: 30px;}
 
+.re {
+	width: 500px;
+	height: 30px;
+}
+
+.form {
+	width: 370px;
+	height: 45px;
+}
 
 #commentList {
 	width: 800px;
@@ -41,6 +48,7 @@
 	border: 1px solid black;
 	width: 800px;
 	height: 50px;
+	font-size: 12px;
 }
 </style>
 </head>
@@ -172,8 +180,6 @@
 
 			</div>
 			<!-- //product -->
-
-
 
 
 			<!-- tab -->
@@ -314,9 +320,13 @@
 				<!-- goods review -->
 				<div class="goodsReview disnone">
 					<div class="headTitle depth">
-						<strong>상품리뷰&nbsp;</strong>상품리뷰는 상품 구매 후 작성하실 수 있습니다.
+						<strong>상품리뷰&nbsp;
+							<p>
+						</strong>상품리뷰는 상품 구매 후 작성하실 수 있습니다.</br>
 						<p class="btn">
-							<a href="review.html" class="popBtn">구매 후기 작성</a>
+						<p>
+							댓글 개수 : <span id="cCnt"></span>
+						</p>
 						</p>
 					</div>
 					<!-- 상품리뷰 -->
@@ -352,13 +362,12 @@
 	   
 	}
    
-   
  	//댓글 수정 폼생성
    function comment_updateForm(cr_num,cr_content) {
 		alert("폼 확인" );
 	    var html ="";
-	   
-	    html += "<input type='text' id='cr_content' name='cr_content' value='"+cr_content+"'/>";
+	   	
+	    html += "<input type='text' class='form' id='cr_content' name='cr_content' value='"+cr_content+"'/>";
 	    html += "<input type='hidden' id='cr_num' name='cr_num' value='"+cr_num+"'/>";
 	    html += "</td>";
 	    html += "<td><a href='#' onclick='comment_update()'>완료</a>";
@@ -426,7 +435,6 @@
 	   
 	}
    
-   
    // 댓글 리스트 출력
    function getComment_list(){
       
@@ -440,7 +448,7 @@
          contentType:'application/json; charset=UTF-8;',
          success:function(data){   // data에 값이 담김
         	 console.log(data);
-            alert('성공');
+//             alert('성공');
          	var html = "";
          	var cCnt = data.length; // list 개수를 확인할수 있음
         	 $("#cCnt").html(cCnt);
@@ -449,7 +457,7 @@
 	         	for(var i=0; i<data.length; i++){
 	         		html += "<tr><td colspan='2'><h5>제목 :"+data[i].cr_title+" </h5></td></tr>";
 	         		html += "<tr id='updateForm"+data[i].cr_num+"'><td>내용 :"+ data[i].cr_content+"</td>";
-	         		html += `<td><a href=# onclick="comment_updateForm('\${data[i].cr_num}', '\${data[i].cr_content}')">수정</a>`;
+	         		html += `<td><a href=# onclick="comment_updateForm('\${data[i].cr_num}','\${data[i].cr_content}')">수정</a>`;
 	         		html += "&nbsp&nbsp&nbsp&nbsp&nbsp";
 	         		html += "<a href='#' onclick='comment_delete("+data[i].cr_num+")'>삭제</a>";
 	         		html += "</td></tr>";
@@ -472,27 +480,28 @@
    }
 
 </script>
-
-						</head>
-						<body>
-							<form id="formtable" name="formtable" method="post">
-								<h3>
-									댓글 개수 : <span id="cCnt"></span>
-								</h3>
-								<table>
-									<tr>
-										<td><textarea rows="4" cols="110" class="re" id="cr_content" name="cr_content" placeholder="댓글을 입력해주세요."></textarea> <br>
-										<input type="hidden" name="id" value="${id}">
-										<input type="hidden" name="cr_num" value="${cr_num}">
-										<a href="#"	onclick="comment_insert()">등록</a></td>
-									</tr>
-								</table>
-							</form>
-							<form id="commentListForm" name="commentListForm" method="post">
-								<table id="commentList">
-									<!-- ajax데이터를 넣는 곳 -->
-								</table>
-							</form>
+						<form id="formtable" name="formtable" method="post">
+							<table>
+								<tr>
+									<td><input type="text" name="cr_title" value="${cr_title}"
+										placeholder="제목을 입력해주세요."></td>
+								</tr>
+								<tr>
+									<td><textarea rows="4" cols="110" class="re"
+											id="cr_content" name="cr_content" placeholder="댓글을 입력해주세요."></textarea>
+										<br> <input type="hidden" name="id"
+										value="${session_mem}"><br> <input type="hidden"
+										name="p_code" value="${p_code}"> <input type="button"
+										onclick="comment_insert()" value="댓글 등록"><br></td>
+								</tr>
+							</table>
+						</form>
+						<br>
+						<form id="commentListForm" name="commentListForm" method="post">
+							<table id="commentList">
+								<!-- ajax데이터를 넣는 곳 -->
+							</table>
+						</form>
 					</div>
 
 					<div class="btnAreaList">
@@ -808,27 +817,27 @@ $(document).ready(function() {
 	
 
 	// rolling
-	function widthChk(){
-		var winWidth = $(window).width();
-		if(winWidth > 983){var twidth = 348;
-		}else if(winWidth < 983 && winWidth > 767){var twidth = 298;
-		}else{var twidth = 248;}
-		return twidth
-	}
+    function widthChk(){
+        var winWidth = $(window).width();
+        if(winWidth > 983){var twidth = 348;
+        }else if(winWidth < 983 && winWidth > 767){var twidth = 298;
+        }else{var twidth = 248;}
+        return twidth
+    }
 
-	function slideChk(){
-		var ulchk = widthChk() * $(".img ul li").size();
-		$(".img ul").css("width",ulchk);
-	}
-	
-	$(".thum ul li").click(function(){
-		var winWidth = $(window).width();
-		var thumNum = $(".thum ul li").index(this);	
-		var ulLeft = widthChk() * thumNum ;
-		$(".thum ul li").removeClass("hover");
-		$(this).addClass("hover");
-		$(".img ul").stop().animate({"left": - ulLeft}, 500);
-	});
+    function slideChk(){
+        var ulchk = widthChk() * $(".img ul li").size();
+        $(".img ul").css("width",ulchk);
+    }
+
+    $(".thum ul li").click(function(){
+        var winWidth = $(window).width();
+        var thumNum = $(".thum ul li").index(this);
+        var ulLeft = widthChk() * thumNum ;
+        $(".thum ul li").removeClass("hover");
+        $(this).addClass("hover");
+        $(".img ul").stop().animate({"left": - ulLeft}, 500);
+    });
 	
 
 	// goods relation last margin

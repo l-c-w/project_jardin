@@ -1,6 +1,8 @@
 package com.javalec.ex.Dao;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.inject.Inject;
 
@@ -8,10 +10,12 @@ import org.apache.ibatis.session.SqlSession;
 import org.springframework.stereotype.Repository;
 
 import com.javalec.ex.Dto.CDto.C_ReviewDto;
+import com.javalec.ex.Dto.PDto.Criteria;
 import com.javalec.ex.Dto.PDto.P_FnqDto;
 import com.javalec.ex.Dto.PDto.ProductDto;
 import com.javalec.ex.Dto.PDto.ReplyDto;
 import com.javalec.ex.Dto.PDto.ReplyListDto;
+import com.javalec.ex.Dto.PDto.SearchValue;
 
 @Repository
 public class PDaoImpl implements PDao {
@@ -47,16 +51,14 @@ public class PDaoImpl implements PDao {
 	}
 
 	@Override
-	public int listCount() throws Exception{
+	public List<C_ReviewDto> comment_list(int startrow, int endrow, String search) {
 		
-		return sql.selectOne(namespace + ".listCount");
-	}
-
-	@Override
-	public List<C_ReviewDto> comment_list() {
-		List<C_ReviewDto> tddd = sql.selectList(namespace+".comment_list");
-		System.out.println(tddd);
-		return tddd;
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("startrow", startrow);
+		map.put("endrow", endrow);
+		map.put("search", search);
+		
+		return  sql.selectList(namespace+".comment_list" , map);
 	}
 
 	@Override
@@ -74,27 +76,52 @@ public class PDaoImpl implements PDao {
 		sql.update(namespace+".comment_update" , cdto);
 	}
 
-//	@Override
-//	public List<P_FnqDto> p_Fnq_List() {
-//		List<P_FnqDto> flist = sql.selectList(namespace+".p_Fnq_List");
-//		System.out.println(flist);
-//		return flist;
-//	}
-//
-//	@Override
-//	public void p_Fnq_delete(P_FnqDto fdto) {
-//		sql.delete(namespace + ".p_Fnq_delete" , fdto);
-//	}
-//
-//	@Override
-//	public void p_Fnq_insert(P_FnqDto fdto) {
-//		sql.insert(namespace+".p_Fnq_insert" , fdto);
-//	}
-//
-//	@Override
-//	public void p_Fnq_update(P_FnqDto fdto) {
-//		sql.update(namespace+".p_Fnq_update" , fdto);
-//	}
+	@Override
+	public List<P_FnqDto> p_Fnq_List() {
+		
+		return sql.selectList(namespace+".p_Fnq_List");
+		
+	}
+
+	@Override
+	public void p_Fnq_delete(P_FnqDto fdto) {
+		sql.delete(namespace + ".p_Fnq_delete" , fdto);
+	}
+
+	@Override
+	public void p_Fnq_insert(P_FnqDto fdto) {
+		sql.insert(namespace+".p_Fnq_insert" , fdto);
+	}
+
+	@Override
+	public void p_Fnq_update(P_FnqDto fdto) {
+		sql.update(namespace+".p_Fnq_update" , fdto);
+	}
+
+	@Override
+	public List<C_ReviewDto> listPage(Criteria cri) throws Exception {
+		
+		return sql.selectList(namespace + ".listPage" , cri);
+	}
+
+	@Override
+	public List<P_FnqDto> listPage2(Criteria cri) throws Exception {
+		
+		return sql.selectList(namespace + ".listPage2" , cri);
+	}
+
+	@Override
+	public int listCount() throws Exception {
+		
+		return sql.selectOne(namespace+".listCount");
+	}
+
+	@Override
+	public int listCount2() throws Exception {
+		
+		return sql.selectOne(namespace+".listCount2");
+	}
+
 
 
 }

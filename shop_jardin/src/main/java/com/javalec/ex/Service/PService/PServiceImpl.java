@@ -7,10 +7,12 @@ import org.springframework.stereotype.Service;
 
 import com.javalec.ex.Dao.PDao;
 import com.javalec.ex.Dto.CDto.C_ReviewDto;
+import com.javalec.ex.Dto.PDto.Criteria;
 import com.javalec.ex.Dto.PDto.P_FnqDto;
 import com.javalec.ex.Dto.PDto.ProductDto;
 import com.javalec.ex.Dto.PDto.ReplyDto;
 import com.javalec.ex.Dto.PDto.ReplyListDto;
+import com.javalec.ex.Dto.PDto.SearchValue;
 
 @Service
 public class PServiceImpl implements PService {
@@ -42,14 +44,9 @@ public class PServiceImpl implements PService {
 	}
 
 	@Override
-	public int listCount() throws Exception{
+	public List<C_ReviewDto> comment_list(int page, int limit, String search) {
 		
-		return dao.listCount();
-	}
-
-	@Override
-	public List<C_ReviewDto> comment_list() {
-		return dao.comment_list();
+		return dao.comment_list(page,limit,search);
 	}
 
 	@Override
@@ -67,28 +64,49 @@ public class PServiceImpl implements PService {
 		dao.comment_update(cdto);
 	}
 
-//	@Override
-//	public List<P_FnqDto> p_Fnq_List() {
-//		return dao.p_Fnq_List();
-//	}
-//
-//	@Override
-//	public void p_Fnq_delete(P_FnqDto fdto) {
-//		dao.p_Fnq_delete(fdto);
-//		
-//	}
-//
-//	@Override
-//	public void p_Fnq_insert(P_FnqDto fdto) {
-//		dao.p_Fnq_insert(fdto);
-//		
-//	}
-//
-//	@Override
-//	public void p_Fnq_update(P_FnqDto fdto) {
-//		dao.p_Fnq_update(fdto);
-//		
-//	}
+	@Override
+	public List<P_FnqDto> p_Fnq_List() {
+		return dao.p_Fnq_List();
+	}
+
+	@Override
+	public void p_Fnq_delete(P_FnqDto fdto) {
+		dao.p_Fnq_delete(fdto);
+	}
+
+	@Override
+	public void p_Fnq_insert(P_FnqDto fdto) {
+		dao.p_Fnq_insert(fdto);
+	}
+
+	@Override
+	public void p_Fnq_update(P_FnqDto fdto) {
+		dao.p_Fnq_update(fdto);
+	}
+
+	@Override
+	public List<C_ReviewDto> listPage(Criteria cri) throws Exception {
+		
+		return dao.listPage(cri);
+	}
+
+	@Override
+	public List<P_FnqDto> listPage2(Criteria cri) throws Exception {
+		
+		return dao.listPage2(cri);
+	}
+
+	@Override
+	public int listCount() throws Exception {
+		
+		return dao.listCount();
+	}
+
+	@Override
+	public int listCount2() throws Exception {
+		
+		return dao.listCount2();
+	}
 
 
 }

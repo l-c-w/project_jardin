@@ -50,56 +50,66 @@ public class PController {
 
 		model.addAttribute("pc", pc);
 
-		model.addAttribute("Plist2", Plist2);
+		model.addAttribute("Plist2", Plist2); // 상품 카테고리
 
-		model.addAttribute("Plist", Plist);
+		model.addAttribute("Plist", Plist); // 상품 리스트
 
 	}
 
-	@RequestMapping("/comment_list")
-	   public String comment_list(HttpServletRequest request, Model model) throws Exception {
-	      
-	      System.out.println("--------------------event_list--------------------");
+	
+	// 상품 상세정보
+	@RequestMapping(value = "/product/p_detail", method = RequestMethod.GET)
+	public String p_detail(@ModelAttribute("cri") Criteria cri, Model model, int p_code, String p_category,
+			HttpServletRequest request) throws Exception {
 
-	      int page1 = 0;
-	      int listcount = 0;
-	      
-	      String temp = request.getParameter("page1"); // 페이지 임시변수
-//	      String opt = request.getParameter("opt"); // 전체 제목 내용
-//	      String searchFlag = request.getParameter("searchFlag"); // 검색체크
-//	      String search = request.getParameter("search"); // 검색어 
-	      
-//	      System.out.println("search value : " + search);
-	      System.out.println("temp : " + temp);
-	      
-//	      if(opt == null) {
-//	         opt = "";
-//	      }
-//	      if(search == null) {
-//	         search = "";
-//	      }
-	      
-	      
-	      if(temp == null) {
-	         page1 = 1;      // 최초 기본 1페이지 세팅
-	      }else {
-	         page1 = Integer.parseInt(temp);
-	      }
-	      System.out.println("page : " + page1);
-	      
-	      int limit = 3;      // limit = 10 : 게시글 10개
-	      
-	      
-	      // 페이지별 리스트 개수 가져오기
-	      List<C_ReviewDto> list = new ArrayList<C_ReviewDto>();
-	      int startrow = (page1 - 1) * limit + 1;   // (1 - 1) * 10 + 1 = 1
-	      int endrow = startrow + limit - 1;   //   1 + 10 - 1 = 10
-	      
-	      if(opt.equals("")) {
-	         list = ps.comment_list(startrow, endrow, search);
-	         listcount = ps.listCount();
-	      }
-	      
+		ProductDto productDetail = ps.productDetail(p_code);
+
+		List<ProductDto> list = ps.related(p_category);
+
+		model.addAttribute("productDetail", productDetail);
+		model.addAttribute("related", list);
+
+		List<C_ReviewDto> clist = ps.comment_list();
+
+		List<P_FnqDto> flist = ps.p_Fnq_List();
+		
+		
+		int page = 0;
+		int listcount = 0;
+
+		String temp = request.getParameter("page"); // 페이지 임시변수
+		String opt = request.getParameter("opt"); // 전체 제목 내용
+		String searchFlag = request.getParameter("searchFlag"); // 검색체크
+		String search = request.getParameter("search"); // 검색어
+
+		System.out.println("search value : " + search);
+		System.out.println("temp : " + temp);
+
+		if (opt == null) {
+			opt = "";
+		}
+		if (search == null) {
+			search = "";
+		}
+		
+		if (temp == null) {
+			page = 1; // 최초 기본 1페이지 세팅
+		} else {
+			page = Integer.parseInt(temp);
+		}
+		System.out.println("page : " + page);
+
+		int limit = 3; // limit = 10 : 게시글 10개
+
+		// 페이지별 리스트 개수 가져오기
+		int startrow = (page - 1) * limit + 1; // (1 - 1) * 10 + 1 = 1
+		int endrow = startrow + limit - 1; // 1 + 10 - 1 = 10
+
+		if (opt.equals("")) {
+			clist = ps.comment_list(startrow, endrow, search);
+			listcount = ps.listCount();
+		}
+
 //	      switch (opt) {
 //	      case "":
 //	         list = dao.event_list(startrow, endrow, search);
@@ -120,73 +130,39 @@ public class PController {
 //	      default:
 //	         break;
 //	      }
-	            
-	      
-	      // 최대 페이지 수
-	      int maxpage = (int)((double)listcount / limit + 0.95); // 20/10 -> 2+0.95 -> (int)2.95 -> 2
-	      // 처음 페이지
-	      int startpage = ((int)((double)page / 10 + 0.9) - 1) * 10 + 1; //1/10 -> 0.1+0.9 -> 1-1 -> 0*10 -> 0+1 = 1
-	      // 마지막 페이지
-	      int endpage = maxpage; // 1 ~ 10까지는 maxpage가 endpage가 됨
-	      if(endpage > startpage + 10 - 1)
-	         endpage = startpage + 10 - 1;
-	      
-	      
-	      
-	      model.addAttribute("event_list", list);
-	      
-	      model.addAttribute("listcount", listcount);
-	      model.addAttribute("page", page);
-	      model.addAttribute("maxpage", maxpage);
-	      model.addAttribute("startpage", startpage);
-	      model.addAttribute("endpage", endpage);
-	      
-	      if(search != null) {
-	         searchFlag = "1";
-	         request.setAttribute("searchFlag", searchFlag);
-	         request.setAttribute("opt", opt);
-	         request.setAttribute("search", search);
-	      }
-	      
-	      System.out.println("listcount : " + listcount);
-	      System.out.println("page : " + page);
-	      System.out.println("maxpage : " + maxpage);
-	      System.out.println("startpage : " + startpage);
-	      System.out.println("endpage : " + endpage);
-	      
-	      
-	      return "study/event_list";
-	   }
-	
-	// 상품 상세정보
-	@RequestMapping(value = "/product/p_detail", method = RequestMethod.GET)
-	public void p_detail(@ModelAttribute("cri") Criteria cri,Model model, int p_code, String p_category) throws Exception {
 
-		ProductDto productDetail = ps.productDetail(p_code);
+		// 최대 페이지 수
+		int maxpage = (int) ((double) listcount / limit + 0.95); // 20/10 -> 2+0.95 -> (int)2.95 -> 2
+		// 처음 페이지
+		int startpage = ((int) ((double) page / 10 + 0.9) - 1) * 10 + 1; // 1/10 -> 0.1+0.9 -> 1-1 -> 0*10 -> 0+1 = 1
+		// 마지막 페이지
+		int endpage = maxpage; // 1 ~ 10까지는 maxpage가 endpage가 됨
+		if (endpage > startpage + 10 - 1)
+			endpage = startpage + 10 - 1;
 
-		List<ProductDto> list = ps.related(p_category);
+		model.addAttribute("clist", clist);
 
-		model.addAttribute("productDetail", productDetail);
-		model.addAttribute("related", list);
-
-		List<C_ReviewDto> rlist = ps.comment_list();
-		PageMaker pageMaker = new PageMaker();
-		pageMaker.setCri(cri);
-		pageMaker.setTotalCount(ps.listCount());
-		
-		model.addAttribute("rlist", rlist);
-		model.addAttribute("p_code", p_code);
-		model.addAttribute("pageMaker", pageMaker);
+		model.addAttribute("listcount", listcount);
+		model.addAttribute("page", page);
+		model.addAttribute("maxpage", maxpage);
+		model.addAttribute("startpage", startpage);
+		model.addAttribute("endpage", endpage);
 		
 
-		List<P_FnqDto> flist = ps.p_Fnq_List();
-		PageMaker pageMaker2 = new PageMaker();
-		pageMaker2.setCri(cri);
-		pageMaker2.setTotalCount(ps.listCount2());
-		
-		model.addAttribute("flist", flist);
-		model.addAttribute("p_code", p_code);
-		model.addAttribute("pageMaker2", pageMaker2);
+		if (search != null) {
+			searchFlag = "1";
+			request.setAttribute("searchFlag", searchFlag);
+			request.setAttribute("opt", opt);
+			request.setAttribute("search", search);
+		}
+
+		System.out.println("listcount : " + listcount);
+		System.out.println("page : " + page);
+		System.out.println("maxpage : " + maxpage);
+		System.out.println("startpage : " + startpage);
+		System.out.println("endpage : " + endpage);
+
+		return "product/p_detail";
 	}
 
 	// 상품 리뷰
@@ -195,18 +171,18 @@ public class PController {
 		return "comment";
 	}
 
-//	@RequestMapping("/comment_list")
-//	@ResponseBody // json데이터로 페이지 리턴
-//	public List<C_ReviewDto> comment_list() {
-//		// mybatis 에 있는 객체를 가져 옴.
-//		PDao dao = sqlSession.getMapper(PDao.class);
-//
-//		for (C_ReviewDto li : dao.comment_list()) {
-//			System.out.println(li);
-//		}
-//
-//		return dao.comment_list();
-//	}
+	@RequestMapping("/comment_list")
+	@ResponseBody // json데이터로 페이지 리턴
+	public List<C_ReviewDto> comment_list() {
+		// mybatis 에 있는 객체를 가져 옴.
+		PDao dao = sqlSession.getMapper(PDao.class);
+
+		for (C_ReviewDto li : dao.comment_list()) {
+			System.out.println(li);
+		}
+
+		return dao.comment_list();
+	}
 
 	@RequestMapping("/comment_delete")
 	@ResponseBody // json데이터로 페이지 리턴

@@ -122,6 +122,12 @@ public class PDaoImpl implements PDao {
 		return sql.selectOne(namespace+".listCount2");
 	}
 
+	@Override
+	public List<C_ReviewDto> comment_list() {
+		
+		return sql.selectList(namespace + ".comment_list");
+	}
+
 
 
 }

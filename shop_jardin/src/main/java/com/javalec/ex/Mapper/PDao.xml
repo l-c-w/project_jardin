@@ -24,7 +24,7 @@
 	<select id="related"
 		resultType="com.javalec.ex.Dto.PDto.ProductDto">
 		select * from PRODUCT where P_category=#{param1}
-	</select>	
+	</select>
 	<!-- =========================================================== -->
 
 	<!--댓글 -->
@@ -80,7 +80,7 @@
 		= #{pf_num}
 	</update>
 	<!-- =========================================================== -->
-	
+
 	<!-- 관리자 -->
 	<!-- =========================================================== -->
 	<!-- 관리자 상품 리스트 보기 -->
@@ -128,18 +128,6 @@
 		]]>
 	</select>
 
-	<!-- 상품 리뷰 페이징 -->
-	<select id="listPage"
-		resultType="com.javalec.ex.Dto.CDto.C_ReviewDto"
-		parameterType="com.javalec.ex.Dto.PDto.Criteria">
-		select cr_num,id,p_code, cr_title, cr_content, cr_wdate,
-		cr_udate from
-		(select cr_num,id,p_code, cr_title, cr_content,
-		cr_wdate,cr_udate,row_number() over(order by cr_num desc) as rNum from
-		C_REVIEW)cr where rNum between #{rowStart} and #{rowEnd} order by
-		cr_num desc
-	</select>
-
 	<!-- 질문 답변 리스트 총개수 -->
 	<select id="listCount2" resultType="int">
 		<![CDATA[
@@ -147,20 +135,6 @@
 		]]>
 	</select>
 
-	<!-- 질문 답변 페이징 -->
-	<select id="listPage2"
-		resultType="com.javalec.ex.Dto.PDto.P_FnqDto"
-		parameterType="com.javalec.ex.Dto.PDto.Criteria">
-		select pf_num,p_code,id, pf_title, pf_content, pf_wdate,
-		pf_udate
-		  from (select pf_num,p_code,id, pf_title, pf_content,
-		pf_wdate,pf_udate,
-		row_number() over(order by pf_num desc) as rNum from
-		P_Fnq)pf
-		where rNum between #{rowStart} and #{rowEnd}
-		        order by
-		pf_num desc
-	</select>
 
 
 </mapper>

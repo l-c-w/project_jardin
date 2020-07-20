@@ -2,6 +2,8 @@ package com.javalec.ex.Service.PService;
 
 import java.util.List;
 
+import javax.inject.Inject;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -17,24 +19,24 @@ import com.javalec.ex.Dto.PDto.SearchValue;
 @Service
 public class PServiceImpl implements PService {
 
-	@Autowired
+	@Inject
 	private PDao dao;
 
 	@Override
 	public List<ProductDto> Plist() throws Exception {
-		
+
 		return dao.Plist();
 	}
 
 	@Override
 	public List<String> Plist2() throws Exception {
-		
+
 		return dao.Plist2();
 	}
 
 	@Override
 	public ProductDto productDetail(int p_code) throws Exception {
-	
+
 		return dao.productDetail(p_code);
 	}
 
@@ -45,8 +47,13 @@ public class PServiceImpl implements PService {
 
 	@Override
 	public List<C_ReviewDto> comment_list(int page, int limit, String search) {
-		
-		return dao.comment_list(page,limit,search);
+
+		return dao.comment_list(page, limit, search);
+	}
+	@Override
+	public List<C_ReviewDto> comment_list() {
+
+		return dao.comment_list();
 	}
 
 	@Override
@@ -86,27 +93,26 @@ public class PServiceImpl implements PService {
 
 	@Override
 	public List<C_ReviewDto> listPage(Criteria cri) throws Exception {
-		
+
 		return dao.listPage(cri);
 	}
 
 	@Override
 	public List<P_FnqDto> listPage2(Criteria cri) throws Exception {
-		
+
 		return dao.listPage2(cri);
 	}
 
 	@Override
 	public int listCount() throws Exception {
-		
+
 		return dao.listCount();
 	}
 
 	@Override
 	public int listCount2() throws Exception {
-		
+
 		return dao.listCount2();
 	}
-
 
 }

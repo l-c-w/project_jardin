@@ -25,6 +25,8 @@ public interface PDao {
 
 	// 댓글
 	public List<C_ReviewDto> comment_list(int page,int limit,String search);
+	
+	public List<C_ReviewDto> comment_list();
 
 	public void comment_delete(C_ReviewDto cdto);
 
@@ -43,6 +45,7 @@ public interface PDao {
 
 	public void p_Fnq_update(P_FnqDto fdto);
 
+	
 	// 페이징
 	public List<C_ReviewDto> listPage(Criteria cri) throws Exception;
 	

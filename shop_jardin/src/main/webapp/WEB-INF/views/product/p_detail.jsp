@@ -579,20 +579,52 @@
 					</div>
 
 					<div class="btnAreaList">
-						<!-- 페이징이동1 -->
-						<div class="allPageMoving1">
-
-							<a href="#" class="n"><img src="../images/btn/btn_pre2.gif"
-								alt="처음으로" /></a><a href="#" class="pre"><img
-								src="../images/btn/btn_pre1.gif" alt="앞페이지로" /></a> <strong>1</strong>
-							<a href="#">2</a> <a href="#">3</a> <a href="#">4</a> <a href="#">5</a>
-							<a href="#" class="next"><img
-								src="../images/btn/btn_next1.gif" alt="뒤페이지로" /></a><a href="#"
-								class="n"><img src="../images/btn/btn_next2.gif"
-								alt="마지막페이지로" /></a>
-
+						<!-- 페이징이동 -->
+						<!-- searchFlag가 없을때 -->
+						<div class="btnAreaList">
+							<div class="allPageMoving1">
+								<!-- 첫 페이지 이동 -->
+								<a href="p_detail?p_code=${p_code }&p_category=${p_category}&page=${startpage1 }" class="n"> <img
+									src="../images/btn/btn_pre2.gif" alt="처음으로" />
+								</a>
+								<!-- 이전 페이지 이동버튼 -->
+								<c:if test="${page <= 1 }">
+									<img src="../images/btn/btn_pre1.gif" alt="앞페이지로" />
+								</c:if>
+								<c:if test="${page > 1 }">
+									<a href="p_detail?p_code=${p_code }&p_category=${p_category}&page=${page - 1 }" class="pre"> <img
+										src="../images/btn/btn_pre1.gif" alt="앞페이지로" />
+									</a>
+								</c:if>
+								<!-- 순차적으로 페이지 출력 -->
+								<c:forEach var="a" begin="${startpage }" end="${endpage }"
+									step="1">
+									<span class="page_num"> <c:choose>
+											<c:when test="${a == page }">
+												<strong id="page_num2">${a}</strong>
+											</c:when>
+											<c:when test="${a != page }">
+												<a href="p_detail?p_code=${p_code }&p_category=${p_category}&page=${a}">${a}</a>
+											</c:when>
+										</c:choose>
+									</span>
+								</c:forEach>
+								<!-- 다음 페이지 이동버튼 -->
+								<c:if test="${page >= maxpage }">
+									<img src="../images/btn/btn_next1.gif" alt="뒤페이지로" />
+								</c:if>
+								<c:if test="${page < maxpage }">
+									<a href="p_detail?p_code=${p_code }&p_category=${p_category}&page=${page + 1 }" class="next"> <img
+										src="../images/btn/btn_next1.gif" alt="뒤페이지로" />
+									</a>
+								</c:if>
+								<!-- 마지막 페이지 이동 -->
+								<a href="p_detail?p_code=${p_code }&p_category=${p_category}&page=${maxpage }" class="n"> <img
+									src="../images/btn/btn_next2.gif" alt="마지막페이지로" />
+								</a>
+							</div>
 						</div>
-						<!-- //페이징이동1 -->
+						<!-- //페이징이동 -->
 					</div>
 
 
@@ -746,67 +778,45 @@
 					</div>
 
 					<div class="btnAreaList">
-						<!-- 							페이징이동1 -->
-						<!-- 							<div class="allPageMoving1"> -->
-						<!-- 								<ul> -->
-						<%-- 									<c:if test="${pageMaker.prev}"> --%>
-						<!-- 										<li><a -->
-						<%-- 											href="p_detail?p_code=${p_code}&p_category=${p_category}&${pageMaker.makeQuery(pageMaker.startPage - 1)}">이전</a></li> --%>
-						<%-- 									</c:if> --%>
-
-						<%-- 									<c:forEach begin="${pageMaker.startPage}" --%>
-						<%-- 										end="${pageMaker.endPage}" var="idx"> --%>
-						<!-- 										<li><a -->
-						<%-- 											href="p_detail?p_code=${p_code}&p_category=${p_category}&${pageMaker.makeQuery(idx)}">${idx}</a></li> --%>
-						<%-- 									</c:forEach> --%>
-
-						<%-- 									<c:if test="${pageMaker.next && pageMaker.endPage > 0}"> --%>
-						<!-- 										<li><a -->
-						<%-- 											href="p_detail?p_code=${p_code}&p_category=${p_category}&${pageMaker.makeQuery(pageMaker.endPage + 1)}">다음</a></li> --%>
-						<%-- 									</c:if> --%>
-						<!-- 								</ul> -->
-						<!-- 							</div> -->
-						<!-- 페이징이동 -->
-						<!-- searchFlag가 없을때 -->
 						<div class="btnAreaList">
 							<div class="allPageMoving1">
 								<!-- 첫 페이지 이동 -->
-								<a href="p_detail?page=${startpage1 }" class="n"> <img
+								<a href="p_detail?p_code=${p_code }&p_category=${p_category}&page=${startpage1 }" class="n"> <img
 									src="../images/btn/btn_pre2.gif" alt="처음으로" />
 								</a>
 								<!-- 이전 페이지 이동버튼 -->
-								<c:if test="${page1 <= 1 }">
+								<c:if test="${page <= 1 }">
 									<img src="../images/btn/btn_pre1.gif" alt="앞페이지로" />
 								</c:if>
-								<c:if test="${page1 > 1 }">
-									<a href="p_detail?page=${page1 - 1 }" class="pre"> <img
+								<c:if test="${page > 1 }">
+									<a href="p_detail?p_code=${p_code }&p_category=${p_category}&page=${page - 1 }" class="pre"> <img
 										src="../images/btn/btn_pre1.gif" alt="앞페이지로" />
 									</a>
 								</c:if>
 								<!-- 순차적으로 페이지 출력 -->
-								<c:forEach var="a" begin="${startpage1 }" end="${endpage1 }"
+								<c:forEach var="a" begin="${startpage }" end="${endpage }"
 									step="1">
 									<span class="page_num"> <c:choose>
-											<c:when test="${a == page1 }">
+											<c:when test="${a == page }">
 												<strong id="page_num2">${a}</strong>
 											</c:when>
-											<c:when test="${a != page1 }">
-												<a href="p_detail?page=${a}">${a}</a>
+											<c:when test="${a != page }">
+												<a href="p_detail?p_code=${p_code }&p_category=${p_category}&page=${a}">${a}</a>
 											</c:when>
 										</c:choose>
 									</span>
 								</c:forEach>
 								<!-- 다음 페이지 이동버튼 -->
-								<c:if test="${page1 >= maxpage1 }">
+								<c:if test="${page >= maxpage }">
 									<img src="../images/btn/btn_next1.gif" alt="뒤페이지로" />
 								</c:if>
-								<c:if test="${page1 < maxpage1 }">
-									<a href="p_detail?page=${page1 + 1 }" class="next"> <img
+								<c:if test="${page < maxpage }">
+									<a href="p_detail?p_code=${p_code }&p_category=${p_category}&page=${page + 1 }" class="next"> <img
 										src="../images/btn/btn_next1.gif" alt="뒤페이지로" />
 									</a>
 								</c:if>
 								<!-- 마지막 페이지 이동 -->
-								<a href="p_detail?page=${maxpage1 }" class="n"> <img
+								<a href="p_detail?p_code=${p_code }&p_category=${p_category}&page=${maxpage }" class="n"> <img
 									src="../images/btn/btn_next2.gif" alt="마지막페이지로" />
 								</a>
 							</div>

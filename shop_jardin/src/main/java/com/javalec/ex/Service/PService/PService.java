@@ -28,6 +28,8 @@ public interface PService {
 	// 댓글
 	public List<C_ReviewDto> comment_list(int page, int limit, String search);
 
+	public List<C_ReviewDto> comment_list();
+	
 	public void comment_delete(C_ReviewDto cdto);
 
 	public void comment_insert(C_ReviewDto cdto);
@@ -52,6 +54,7 @@ public interface PService {
 	public List<P_FnqDto> listPage2(Criteria cri) throws Exception;
 	
 	public int listCount2() throws Exception;
+
 
 
 }

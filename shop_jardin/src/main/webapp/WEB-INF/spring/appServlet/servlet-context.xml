@@ -28,7 +28,8 @@
 	<resources mapping="/img/**" location="/img/" />
 	<resources mapping="/admin/css/**" location="/admin/css/" />
 	<resources mapping="/admin/js/**" location="/admin/js/" />
-	<resources mapping="/admin/images/**" location="/admin/images/" />
+	<resources mapping="/admin/images/**"
+		location="/admin/images/" />
 
 
 
@@ -101,62 +102,67 @@
 
 	<!-- 업로드 패스 설정 -->
 	<beans:bean class="java.lang.String" id="uploadPath">
-		<beans:constructor-arg	value="D:\workspace\.metadata\.plugins\org.eclipse.wst.server.core\tmp0\wtpwebapps\shop_jardin\resources" />
+		<beans:constructor-arg
+			value="D:\workspace\.metadata\.plugins\org.eclipse.wst.server.core\tmp0\wtpwebapps\shop_jardin\resources" />
 	</beans:bean>
 
 	<!-- 일반 파일 업로드 경로 -->
-	<resources mapping="/imgUpload/**"	location="/resources/imgUpload/" />
+	<resources mapping="/imgUpload/**"
+		location="/resources/imgUpload/" />
 
-	<beans:bean	class="org.springframework.web.multipart.commons.CommonsMultipartResolver"	id="multipartResolver1">
+	<beans:bean
+		class="org.springframework.web.multipart.commons.CommonsMultipartResolver"
+		id="multipartResolver1">
 		<beans:property name="maxUploadSize" value="10485760" />
 	</beans:bean>
-	
-		<beans:bean id="multipartResolver"	class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
-			<!-- max upload size in bytes -->
-			<beans:property name="maxUploadSize" value="5242880" /> <!-- 5MB -->
-			<!-- max size of file in memory (in bytes) -->
-			<beans:property name="maxInMemorySize" value="1048576" /> <!-- 1MB -->
-		</beans:bean>
+
+	<beans:bean id="multipartResolver"
+		class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
+		<!-- max upload size in bytes -->
+		<beans:property name="maxUploadSize" value="5242880" /> <!-- 5MB -->
+		<!-- max size of file in memory (in bytes) -->
+		<beans:property name="maxInMemorySize" value="1048576" /> <!-- 1MB -->
+	</beans:bean>
 
 
 
-		<!-- 파일업로드에 필요한 bean <beans:bean id="mulitpartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver"> 
-			<beans:property name="maxUploadSize" value="10485760"/> <beans:property name="maxInMemorySize" 
-			value="10485760"/> <beans:property name="defaultEncoding" value="utf-8" /> 
-			이 부분 빼기 넣으면 에러남! </beans:bean> -->
+	<!-- 파일업로드에 필요한 bean <beans:bean id="mulitpartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver"> 
+		<beans:property name="maxUploadSize" value="10485760"/> <beans:property name="maxInMemorySize" 
+		value="10485760"/> <beans:property name="defaultEncoding" value="utf-8" /> 
+		이 부분 빼기 넣으면 에러남! </beans:bean> -->
 
 
-		<!-- 이메일 관련 -->
-		<beans:bean id="mailSender"
-			class="org.springframework.mail.javamail.JavaMailSenderImpl">
-			<beans:property name="host" value="smtp.gmail.com" />
-			<beans:property name="port" value="587" />
-			<beans:property name="username"
-				value="anseongjo34@gmail.com" />
-			<beans:property name="password" value="koitt@06" />
-			<beans:property name="javaMailProperties">
-				<beans:props>
-					<beans:prop key="mail.transport.protocol">smtp</beans:prop>
-					<beans:prop key="mail.smtp.auth">true</beans:prop>
-					<beans:prop key="mail.smtp.starttls.enable">true</beans:prop>
-					<beans:prop key="mail.debug">true</beans:prop>
-				</beans:props>
-			</beans:property>
+	<!-- 이메일 관련 -->
+	<beans:bean id="mailSender"
+		class="org.springframework.mail.javamail.JavaMailSenderImpl">
+		<beans:property name="host" value="smtp.gmail.com" />
+		<beans:property name="port" value="587" />
+		<beans:property name="username"
+			value="testqudwnd@gmail.com" />
+		<beans:property name="password" value="koitt01a" />
+		<beans:property name="javaMailProperties">
+			<beans:props>
+				<beans:prop key="mail.transport.protocol">smtp</beans:prop>
+				<beans:prop key="mail.smtp.auth">true</beans:prop>
+				<beans:prop key="mail.smtp.starttls.enable">true</beans:prop>
+				<beans:prop key="mail.debug">true</beans:prop>
+			</beans:props>
+		</beans:property>
 
-		</beans:bean>
+	</beans:bean>
 
 
 
-		<mvc:interceptors>
-			<mvc:interceptor>
-				<mvc:mapping path="/**" />
+	<mvc:interceptors>
+		<mvc:interceptor>
+			<mvc:mapping path="/**" />
 
-				<beans:bean id="Interceptor"
-					class="com.javalec.ex.Interceptor"></beans:bean>
-			</mvc:interceptor>
-		</mvc:interceptors>
+			<beans:bean id="Interceptor"
+				class="com.javalec.ex.Interceptor"></beans:bean>
+		</mvc:interceptor>
+	</mvc:interceptors>
 
-		<!-- <mvc:exclude-mapping path="/add/**"/> -->
+	<!-- <mvc:exclude-mapping path="/add/**"/> -->
 
 
 

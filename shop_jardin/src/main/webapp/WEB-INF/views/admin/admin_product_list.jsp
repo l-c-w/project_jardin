@@ -34,7 +34,7 @@
 <script type="text/javascript">
 		function delProduct(num){
 	
-			if(confirm("해당 상품을 삭제처리 하시겠습니까? (해당 데이터는 삭제제품에서 확인/변경 가능합니다.)")){
+			if(confirm("해당 상품을 삭제처리 하시겠습니까?")){
 				$.ajax({
 				      url : 'product_delete?num='+num,
 				      method : "POST",
@@ -151,7 +151,7 @@
 }
 
 #list_div {
-	height: 500px;
+	height: 1000px;
 	overflow: scroll;
 }
 
@@ -204,6 +204,7 @@
 								<td>분류</td>
 								<td>
 								<select name="category" id="category"	onchange="aa(this.value)">
+										<option value="카테고리">카테고리</option>
 										<option value="원두">원두</option>
 										<option value="커피 백">커피 백</option>
 										<option value="아이스 음료">아이스 음료</option>
@@ -250,8 +251,7 @@
 				</div>
 				<div id="search2">
 					<p>
-						전체<span class="top_cnt">20</span>개 /
-						검색 <span class="top_cnt">20</span>개 
+						전체<span class="top_cnt">18</span>개 /
 					  | 품절 <span class="top_cnt">0</span>개
 					</p>
 					<select name="sort" onchange="에이작스스크립트()">

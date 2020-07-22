@@ -260,7 +260,7 @@
 			 <%=request.getSession().getServletContext().getRealPath("/resources/imgUpload") %>
 				<div id="btn_div">
 						<button type="button" onclick="history.back(-1)">취소</button>
-						<button type="submit" value="등록">등록</button>
+						<button type="submit" value="수정">수정</button>
 				</div>
 			</div>
 		</form>
